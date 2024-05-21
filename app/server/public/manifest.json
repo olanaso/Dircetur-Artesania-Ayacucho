@@ -1,0 +1,162 @@
+{
+  "_init-35cba5cd.js": {
+    "file": "assets/init-35cba5cd.js"
+  },
+  "_path-6610c907.js": {
+    "file": "assets/path-6610c907.js"
+  },
+  "_toast-8abe4fe9.js": {
+    "file": "assets/toast-8abe4fe9.js"
+  },
+  "_validateForm-1578b31b.js": {
+    "file": "assets/validateForm-1578b31b.js"
+  },
+  "_viewpartials-7a86f681.js": {
+    "file": "assets/viewpartials-7a86f681.js"
+  },
+  "admin-programas.html": {
+    "dynamicImports": [
+      "src/utils/common.js"
+    ],
+    "file": "assets/admin-programas-9b2fe2f6.js",
+    "imports": [
+      "_init-35cba5cd.js",
+      "_viewpartials-7a86f681.js"
+    ],
+    "isEntry": true,
+    "src": "admin-programas.html"
+  },
+  "admin-usuarios.html": {
+    "dynamicImports": [
+      "src/utils/common.js"
+    ],
+    "file": "assets/admin-usuarios-8e7f2792.js",
+    "imports": [
+      "_init-35cba5cd.js",
+      "_viewpartials-7a86f681.js",
+      "_toast-8abe4fe9.js"
+    ],
+    "isEntry": true,
+    "src": "admin-usuarios.html"
+  },
+  "biblioteca.html": {
+    "dynamicImports": [
+      "src/utils/common.js"
+    ],
+    "file": "assets/biblioteca-62e11ba0.js",
+    "imports": [
+      "_init-35cba5cd.js",
+      "_viewpartials-7a86f681.js"
+    ],
+    "isEntry": true,
+    "src": "biblioteca.html"
+  },
+  "detailbook.html": {
+    "dynamicImports": [
+      "src/utils/common.js"
+    ],
+    "file": "assets/detailbook-df17c347.js",
+    "imports": [
+      "_init-35cba5cd.js",
+      "_viewpartials-7a86f681.js",
+      "_path-6610c907.js",
+      "_toast-8abe4fe9.js"
+    ],
+    "isEntry": true,
+    "src": "detailbook.html"
+  },
+  "index.css": {
+    "file": "assets/index-5acc3ec5.css",
+    "src": "index.css"
+  },
+  "index.html": {
+    "css": [
+      "assets/index-5acc3ec5.css"
+    ],
+    "file": "assets/index-a2373f9c.js",
+    "imports": [
+      "_init-35cba5cd.js",
+      "_validateForm-1578b31b.js",
+      "_path-6610c907.js"
+    ],
+    "isEntry": true,
+    "src": "index.html"
+  },
+  "inicio.html": {
+    "dynamicImports": [
+      "src/utils/common.js"
+    ],
+    "file": "assets/inicio-2c01242d.js",
+    "imports": [
+      "_init-35cba5cd.js",
+      "_viewpartials-7a86f681.js"
+    ],
+    "isEntry": true,
+    "src": "inicio.html"
+  },
+  "leer-libro.html": {
+    "dynamicImports": [
+      "src/utils/common.js"
+    ],
+    "file": "assets/leer-libro-6d5e53c4.js",
+    "imports": [
+      "_init-35cba5cd.js",
+      "_viewpartials-7a86f681.js",
+      "_path-6610c907.js"
+    ],
+    "isEntry": true,
+    "src": "leer-libro.html"
+  },
+  "miperfil.html": {
+    "dynamicImports": [
+      "src/utils/common.js"
+    ],
+    "file": "assets/miperfil-47705371.js",
+    "imports": [
+      "_init-35cba5cd.js",
+      "_viewpartials-7a86f681.js",
+      "_toast-8abe4fe9.js"
+    ],
+    "isEntry": true,
+    "src": "miperfil.html"
+  },
+  "mislibros.html": {
+    "dynamicImports": [
+      "src/utils/common.js"
+    ],
+    "file": "assets/mislibros-5279f820.js",
+    "imports": [
+      "_init-35cba5cd.js",
+      "_viewpartials-7a86f681.js"
+    ],
+    "isEntry": true,
+    "src": "mislibros.html"
+  },
+  "recuperar-cuenta.html": {
+    "file": "assets/recuperar-cuenta-8eccf7a4.js",
+    "imports": [
+      "_init-35cba5cd.js",
+      "_validateForm-1578b31b.js",
+      "_toast-8abe4fe9.js"
+    ],
+    "isEntry": true,
+    "src": "recuperar-cuenta.html"
+  },
+  "reportes.html": {
+    "dynamicImports": [
+      "src/utils/common.js"
+    ],
+    "file": "assets/reportes-cfda968a.js",
+    "imports": [
+      "_init-35cba5cd.js",
+      "_viewpartials-7a86f681.js"
+    ],
+    "isEntry": true,
+    "src": "reportes.html"
+  },
+  "src/utils/common.js": {
+    "file": "assets/common-8d3221b9.js",
+    "isDynamicEntry": true,
+    "src": "src/utils/common.js"
+  }
+}

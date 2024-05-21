@@ -1,0 +1,138 @@
+<style>
+    .w-350 {
+        width: 100%;
+    }
+
+    .form-control {
+        height: 25px !important;
+        padding: 2px 5px !important;
+        font-size: 12px !important;
+    }
+</style>
+<div class=" w-350">
+    <div>
+        <h4>Registro de Proforma</h4>
+    </div>
+    <hr>
+    <table class="table">
+        <tr>
+            <td></td><b>Cliente</b></td>
+        </tr>
+        <tr>
+            <td>
+                <h5>Tipo de documento</h5>
+            </td>
+            <td>
+                <select id="tipodocumentosel" class="selectform form-control-sm" id="exampleFormControlSelect1">
+                    <option value="0" selected>--SELECCIONE--</option>
+                    <option value="1">DNI</option>
+                    <option value="2">RUC</option>
+
+                </select>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <h5>Nro. de documento</h5>
+            </td>
+            <td>
+                <input type="text" class="form-control form-control-sm" id="txtnrodocumento">
+
+            </td>
+            <td>
+
+                <button id="btnBuscardoc" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h5>Cliente</h5>
+            </td>
+            <td>
+                <input disabled type="text" class="form-control form-control-sm" id="txtcliente">
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <h5>Dirección</h5>
+            </td>
+            <td>
+                <input disabled type="text" class="form-control form-control-sm" id="txtdireccion">
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <h5>Ubigeo</h5>
+            </td>
+            <td>
+                <input disabled type="text" class="form-control form-control-sm" id="txtubigeo">
+            </td>
+
+        </tr>
+
+        <tr>
+            <td><b>Local</b></td>
+        </tr>
+
+        <tr>
+            <td>
+                <h5>Tienda</h5>
+            </td>
+            <td>
+                <input disabled type="text" class="form-control form-control-sm" id="txttienda">
+            </td>
+            <td>
+
+                <button id="btnBuscardoc" type="button" class="btn btn-default" title="Seleccione un local en el Mapa."><i class="fa fa-info"></i></button>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <h5>Área</h5>
+            </td>
+            <td>
+                <input type="text" class="form-control form-control-sm" id="fecha">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h5>Frontis</h5>
+            </td>
+            <td>
+                <input type="text" class="form-control form-control-sm" id="fecha">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h5>Fondo</h5>
+            </td>
+            <td>
+                <input type="text" class="form-control form-control-sm" id="fecha">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h5>Color</h5>
+            </td>
+            <td>
+                <input type="color" class="form-control form-control-sm" style="width: 30px; height: 30px;">
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button id="btnatrasreg" type="button" class="btn btn-default">Atras</button>
+            </td>
+            <td>
+                <button id="btnregistro" type="button" class="btn btn-danger pull-right">Registrar</button>
+            </td>
+        </tr>
+
+
+
+    </table>

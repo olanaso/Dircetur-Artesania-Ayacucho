@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Lead Admin Panel" />
+	<meta name="keywords"
+		content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+	<meta name="author" content="Bootstrap Gallery" />
+	<link rel="shortcut icon" href="/img/fav.png" />
+	<title>Lectura de libro - BiblioIDEAS</title>
+
+	<!-- Common CSS -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="/css/main.css" />
+
+	<!-- Lobipanel css -->
+	<link rel="stylesheet" href="vendor/lobipanel/lobipanel.css">
+
+  <script type="module" crossorigin src="/assets/leer-libro-6d5e53c4.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/init-35cba5cd.js">
+  <link rel="modulepreload" crossorigin href="/assets/viewpartials-7a86f681.js">
+  <link rel="modulepreload" crossorigin href="/assets/path-6610c907.js">
+</head>
+
+<body>
+	 <!-- Loading starts -->
+	 <div class="loading-wrapper">
+		<div class="loading">
+			<div class="img"></div>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div> 
+
+	<!-- BEGIN .app-wrap -->
+	<div class="app-wrap">
+		<!-- Headerg -->
+		<header class="app-header" id="app-header">
+		</header>
+
+		<!-- END: .app-heading -->
+		<!-- BEGIN .app-container -->
+		<div class="app-container">
+			<!-- Menu -->
+			<aside class="app-side" id="app-side"></aside>
+			<!-- END: .app-side -->
+
+			<!-- BEGIN .app-main -->
+			<div class="app-main">
+				<!-- BEGIN .main-heading -->
+				<header class="main-heading">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+								<div class="page-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56"
+										fill="none">
+										<path
+											d="M36.6104 28.2719V36.2927M39.9505 28.2719V36.2927M48.0787 20.3875C48.0612 22.4817 48.1114 24.5794 48.0519 26.6724C47.864 27.7317 46.7102 27.734 45.8679 27.6897H13.3762C12.2095 27.7095 12.0054 26.4612 12.1022 25.5582C12.1185 23.7499 12.0684 21.9369 12.1279 20.1297C12.3157 19.0704 13.4695 19.068 14.3119 19.1124H46.8035C47.1414 19.1133 47.465 19.248 47.7038 19.4869C47.9425 19.7259 48.0781 20.0497 48.0787 20.3875Z"
+											stroke="#E7282A" stroke-linecap="round" stroke-linejoin="round" />
+										<path
+											d="M46.1078 28.9917C46.0915 31.0858 46.1428 33.1835 46.0822 35.2765C45.8943 36.3346 44.7405 36.337 43.8982 36.2927H11.4065C10.2398 36.3137 10.0357 35.0653 10.1325 34.1612C10.1488 32.3528 10.0987 30.5398 10.1582 28.7338C10.346 27.6745 11.4998 27.6721 12.3422 27.7165H44.8338C45.1714 27.7174 45.4949 27.8519 45.7337 28.0907C45.9724 28.3294 46.1069 28.654 46.1078 28.9917Z"
+											stroke="#E7282A" stroke-linecap="round" stroke-linejoin="round" />
+										<path
+											d="M42.0813 37.695C42.0592 39.3925 42.1047 41.0935 42.0393 42.7887C41.855 43.8235 40.7315 43.8504 39.902 43.799L9.20818 43.7045C8.06601 43.7232 7.83735 42.5064 7.94001 41.6139C7.96101 40.187 7.91668 38.7555 7.97968 37.3322C8.16401 36.2974 9.28751 36.2705 10.117 36.3219L40.8108 36.4164C41.1486 36.4182 41.472 36.5538 41.7101 36.7934C41.9482 37.033 42.0817 37.3572 42.0813 37.695Z"
+											stroke="#E7282A" stroke-linecap="round" stroke-linejoin="round" />
+										<path
+											d="M25.1279 27.7166V36.2927M17.891 27.7166V36.2927M18.9235 19.1136V27.6897M22.9439 19.1136V27.6897M21.4342 47.2816H34.299M43.2345 45.1022C43.2182 46.6411 43.2672 48.1822 43.2089 49.7199C43.0385 50.7151 41.9652 50.7932 41.1555 50.7361H13.7774C12.6784 50.7629 12.3995 49.6009 12.5022 48.7259C12.5185 47.4321 12.4695 46.1359 12.5279 44.8444C12.6982 43.8492 13.7715 43.7711 14.58 43.8271H41.9617C42.2995 43.828 42.6232 43.9627 42.862 44.2016C43.1007 44.4406 43.2339 44.7644 43.2345 45.1022ZM40.8685 13.4657C40.851 15.0046 40.9012 16.5457 40.8417 18.0834C40.6702 19.0786 39.598 19.1567 38.7884 19.0996L11.4102 19.0961C10.31 19.1217 10.0324 17.9609 10.135 17.0847C10.1514 15.7909 10.1024 14.4947 10.1619 13.2032C10.3322 12.2081 11.4055 12.1299 12.214 12.1871L39.5945 12.1906C39.9323 12.1915 40.256 12.3262 40.4948 12.5651C40.7335 12.8041 40.8679 13.1279 40.8685 13.4657Z"
+											stroke="#E7282A" stroke-linecap="round" stroke-linejoin="round" />
+										<path
+											d="M19.0679 15.6427L31.9327 15.6439M43.5749 6.52169C43.5609 8.06053 43.6099 9.60286 43.5516 11.1394C43.3952 12.0809 42.3896 12.2279 41.6091 12.1579C33.0364 12.1579 24.4626 12.1777 15.8911 12.1684C14.9169 12.1019 14.6509 11.074 14.7454 10.2679C14.7606 8.94019 14.7104 7.60786 14.7687 6.28253C14.9262 5.34219 15.9331 5.19519 16.7136 5.26519C25.2862 5.26403 33.8589 5.24536 42.4304 5.25352C42.7443 5.28609 43.035 5.43367 43.2465 5.66782C43.4581 5.90198 43.5755 6.20614 43.5761 6.52169H43.5749Z"
+											stroke="#E7282A" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</div>
+								<div class="page-title">
+									<h5>Biblioteca</h5>
+									<h6 class="sub-heading">Visor del libro</h6>
+								</div>
+							</div>
+							<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+								<div class="right-actions">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<!-- END: .main-heading -->
+				<!-- BEGIN .main-content -->
+				<div class="main-content">
+					<!-- Row start -->
+					<div class="row gutters">
+						<div class="col-12 col-md-12">
+							<div class="card">
+								<div class="row">
+									<div class="col-12 col-md-10">
+										<h5 class="m-3" id="txt-titulo"> - </h5>
+									</div>
+									<div class="col-12 col-md-2 d-flex justify-content-around">
+
+										<button data-toggle="modal" data-target="#exampleModal2"
+											title="Descargar para lectura" type="button" class="btn ">
+											<svg width="88" height="32" viewBox="0 0 88 32" fill="none"
+												xmlns="http://www.w3.org/2000/svg">
+												<path
+													d="M27.4998 17.55L31.2498 21.25L14.5998 29.2001C14.5998 29.2001 12.3998 30.2 11.3498 28.6C7.24979 22.2 27.4998 17.55 27.4998 17.55Z"
+													fill="#AB1515" />
+												<path
+													d="M14.2003 24.55C14.2003 24.55 11.0003 25.65 11.6003 27.8C12.2003 30 14.7503 28.65 14.7503 28.65L30.5503 21.3C30.5503 21.3 29.6503 18.95 31.2503 17.4L14.2003 24.55Z"
+													fill="#D9E3E8" />
+												<path
+													d="M16.8496 2.5L31.9996 17.25L14.0996 24.25L2.59961 6.35L16.8496 2.5Z"
+													fill="#DF0202" />
+												<path
+													d="M17.2998 5.84998L20.1998 8.94998L9.3498 12.85L6.7998 8.89998L17.2998 5.84998Z"
+													fill="white" />
+												<path
+													d="M30.4996 19L19.9496 23.3L30.3496 18.55L30.4996 19ZM30.3496 20.3L19.0996 24.9501L30.1496 19.8L30.3496 20.3ZM30.4496 21L16.0996 27.25L30.2496 20.55L30.4496 21Z"
+													fill="#94989B" />
+												<path
+													d="M11.35 28.6C9.6 24.95 14.1 24.3 14.1 24.3L2.6 6.35004C2.6 6.35004 0 6.30004 0 9.00004C0 10.1 0.5 10.95 0.5 10.95L11.35 28.6Z"
+													fill="#963535" />
+												<path
+													d="M21 11C23.75 11 26 13.25 26 16C26 18.75 23.75 21 21 21C18.25 21 16 18.75 16 16C16 13.25 18.25 11 21 11ZM19 18.5H23V17.5H19V18.5ZM23 15H21.75V13H20.25V15H19L21 17L23 15Z"
+													fill="white" />
+												<path
+													d="M34.8328 11.28H35.2648C37.6968 11.28 38.9128 10.192 38.9128 8.016C38.9128 5.912 37.8728 4.86 35.7928 4.86H34.8328V11.28ZM33.5248 3.636H35.7928C37.2968 3.636 38.4288 4.052 39.1888 4.884C39.8688 5.636 40.2088 6.692 40.2088 8.052C40.2088 9.588 39.7208 10.736 38.7448 11.496C37.8888 12.176 36.7008 12.516 35.1808 12.516H33.5248V3.636ZM47.1035 9.744H43.0595C43.0835 10.32 43.2395 10.768 43.5275 11.088C43.8235 11.432 44.2315 11.604 44.7515 11.604C45.4715 11.604 46.1075 11.448 46.6595 11.136V12.348C46.0195 12.588 45.3715 12.708 44.7155 12.708C43.6835 12.708 42.9155 12.38 42.4115 11.724C41.9715 11.14 41.7515 10.324 41.7515 9.276C41.7515 8.268 41.9955 7.448 42.4835 6.816C42.9715 6.184 43.6275 5.868 44.4515 5.868C45.3715 5.868 46.0595 6.196 46.5155 6.852C46.9075 7.412 47.1035 8.152 47.1035 9.072V9.744ZM45.7955 8.604C45.7955 8.156 45.6795 7.78 45.4475 7.476C45.2075 7.156 44.8915 6.996 44.4995 6.996C44.0995 6.996 43.7595 7.16 43.4795 7.488C43.1995 7.816 43.0595 8.188 43.0595 8.604H45.7955ZM51.9386 7.32C51.4106 7.096 50.9106 6.984 50.4386 6.984C49.7746 6.984 49.4426 7.244 49.4426 7.764C49.4426 7.996 49.6946 8.236 50.1986 8.484C50.9266 8.844 51.3946 9.108 51.6026 9.276C52.0986 9.684 52.3466 10.188 52.3466 10.788C52.3466 11.46 52.0786 11.968 51.5426 12.312C51.1186 12.576 50.6106 12.708 50.0186 12.708C49.2986 12.708 48.6746 12.6 48.1466 12.384L48.2666 11.148C48.8506 11.436 49.4226 11.58 49.9826 11.58C50.3026 11.58 50.5666 11.496 50.7746 11.328C50.9666 11.176 51.0626 10.976 51.0626 10.728C51.0626 10.408 50.8186 10.112 50.3306 9.84C49.8746 9.592 49.5346 9.404 49.3106 9.276C49.0866 9.148 48.9706 9.08 48.9626 9.072C48.4746 8.704 48.2306 8.252 48.2306 7.716C48.2306 7.06 48.4746 6.572 48.9626 6.252C49.3546 5.996 49.8306 5.868 50.3906 5.868C51.0146 5.868 51.5746 5.976 52.0706 6.192L51.9386 7.32ZM58.1885 12.456C57.7405 12.6 57.1685 12.672 56.4725 12.672C55.4885 12.672 54.7125 12.328 54.1445 11.64C53.6325 11.024 53.3765 10.236 53.3765 9.276C53.3765 8.292 53.6725 7.48 54.2645 6.84C54.8645 6.208 55.6205 5.892 56.5325 5.892C57.1405 5.892 57.6925 5.976 58.1885 6.144L58.0925 7.308C57.6205 7.116 57.1285 7.02 56.6165 7.02C55.9925 7.02 55.5045 7.228 55.1525 7.644C54.8085 8.052 54.6365 8.596 54.6365 9.276C54.6365 9.916 54.8125 10.456 55.1645 10.896C55.5085 11.328 55.9645 11.544 56.5325 11.544C57.0525 11.544 57.5725 11.448 58.0925 11.256L58.1885 12.456ZM63.029 12.576V11.94C62.637 12.452 62.073 12.708 61.337 12.708C60.537 12.708 59.945 12.484 59.561 12.036C59.289 11.708 59.153 11.308 59.153 10.836C59.153 9.204 60.353 8.388 62.753 8.388H62.933V8.172C62.933 7.388 62.569 6.996 61.841 6.996C61.185 6.996 60.537 7.168 59.897 7.512V6.336C60.505 6.024 61.177 5.868 61.913 5.868C62.681 5.868 63.241 6.048 63.593 6.408C63.969 6.8 64.157 7.408 64.157 8.232V11.028C64.157 11.764 64.181 12.28 64.229 12.576H63.029ZM62.933 9.504H62.681C62.057 9.504 61.577 9.56 61.241 9.672C60.705 9.848 60.437 10.196 60.437 10.716C60.437 11.292 60.769 11.58 61.433 11.58C62.433 11.58 62.933 10.972 62.933 9.756V9.504ZM69.2201 7.2C69.1161 7.184 69.0201 7.172 68.9321 7.164C68.8441 7.148 68.7561 7.14 68.6681 7.14C68.2041 7.14 67.8601 7.368 67.6361 7.824C67.4281 8.224 67.3241 8.72 67.3241 9.312V12.564H66.0401V7.62C66.0401 7.316 66.0321 7.032 66.0161 6.768C66.0081 6.496 65.9961 6.244 65.9801 6.012H67.2761V6.816C67.6441 6.184 68.1121 5.868 68.6801 5.868C68.8561 5.868 69.0361 5.892 69.2201 5.94V7.2ZM72.9915 7.056C71.9755 7.056 71.4675 7.764 71.4675 9.18C71.4675 10.492 71.9595 11.148 72.9435 11.148C73.4715 11.148 73.8715 10.964 74.1435 10.596C74.3915 10.252 74.5155 9.78 74.5155 9.18C74.5155 8.428 74.3915 7.888 74.1435 7.56C73.9035 7.224 73.5195 7.056 72.9915 7.056ZM75.7275 6.036V11.172C75.7275 13.244 74.7195 14.28 72.7035 14.28C71.9595 14.28 71.2835 14.16 70.6755 13.92L70.7835 12.696C71.3755 12.992 72.0195 13.14 72.7155 13.14C73.8595 13.14 74.4515 12.636 74.4915 11.628L74.5035 11.568C74.1515 12.064 73.6315 12.312 72.9435 12.312C72.0075 12.312 71.2915 11.968 70.7955 11.28C70.3795 10.712 70.1715 10 70.1715 9.144C70.1715 8.128 70.3915 7.34 70.8315 6.78C71.3035 6.188 71.9835 5.892 72.8715 5.892C73.5995 5.892 74.1475 6.076 74.5155 6.444V6.036H75.7275ZM81.2048 12.576V11.94C80.8128 12.452 80.2488 12.708 79.5128 12.708C78.7128 12.708 78.1208 12.484 77.7368 12.036C77.4648 11.708 77.3288 11.308 77.3288 10.836C77.3288 9.204 78.5288 8.388 80.9288 8.388H81.1088V8.172C81.1088 7.388 80.7448 6.996 80.0168 6.996C79.3608 6.996 78.7128 7.168 78.0728 7.512V6.336C78.6808 6.024 79.3528 5.868 80.0888 5.868C80.8568 5.868 81.4168 6.048 81.7688 6.408C82.1448 6.8 82.3328 7.408 82.3328 8.232V11.028C82.3328 11.764 82.3568 12.28 82.4048 12.576H81.2048ZM81.1088 9.504H80.8568C80.2328 9.504 79.7528 9.56 79.4168 9.672C78.8808 9.848 78.6128 10.196 78.6128 10.716C78.6128 11.292 78.9448 11.58 79.6088 11.58C80.6088 11.58 81.1088 10.972 81.1088 9.756V9.504ZM87.3959 7.2C87.2919 7.184 87.1959 7.172 87.1079 7.164C87.0199 7.148 86.9319 7.14 86.8439 7.14C86.3799 7.14 86.0359 7.368 85.8119 7.824C85.6039 8.224 85.4999 8.72 85.4999 9.312V12.564H84.2159V7.62C84.2159 7.316 84.2079 7.032 84.1919 6.768C84.1839 6.496 84.1719 6.244 84.1559 6.012H85.4519V6.816C85.8199 6.184 86.2879 5.868 86.8559 5.868C87.0319 5.868 87.2119 5.892 87.3959 5.94V7.2ZM51.6821 25.516H47.1701V16.636H48.4661V24.28H51.6821V25.516ZM54.1706 25.564H52.8866V18.844H54.1706V25.564ZM54.1706 17.692H52.8866V16.192H54.1706V17.692ZM58.7998 19.876C58.2958 19.876 57.9038 20.124 57.6238 20.62C57.3918 21.044 57.2758 21.572 57.2758 22.204C57.2758 22.82 57.3958 23.344 57.6358 23.776C57.9078 24.264 58.2958 24.508 58.7998 24.508C59.8318 24.508 60.3478 23.748 60.3478 22.228C60.3478 20.66 59.8318 19.876 58.7998 19.876ZM57.2758 15.964V19.492C57.7638 18.98 58.3158 18.724 58.9318 18.724C59.8518 18.724 60.5438 19.064 61.0078 19.744C61.4238 20.336 61.6318 21.164 61.6318 22.228C61.6318 23.26 61.4078 24.084 60.9598 24.7C60.4638 25.348 59.7878 25.672 58.9318 25.672C58.2038 25.672 57.6518 25.436 57.2758 24.964V25.516H56.0638V15.964H57.2758ZM66.4252 20.2C66.3212 20.184 66.2252 20.172 66.1372 20.164C66.0492 20.148 65.9612 20.14 65.8732 20.14C65.4092 20.14 65.0652 20.368 64.8412 20.824C64.6332 21.224 64.5292 21.72 64.5292 22.312V25.564H63.2452V20.62C63.2452 20.316 63.2372 20.032 63.2212 19.768C63.2132 19.496 63.2012 19.244 63.1852 19.012H64.4812V19.816C64.8492 19.184 65.3172 18.868 65.8852 18.868C66.0612 18.868 66.2412 18.892 66.4252 18.94V20.2ZM70.3285 19.996C69.7845 19.996 69.3525 20.212 69.0325 20.644C68.7285 21.068 68.5765 21.616 68.5765 22.288C68.5765 22.96 68.7285 23.508 69.0325 23.932C69.3525 24.364 69.7845 24.58 70.3285 24.58C70.8725 24.58 71.3005 24.364 71.6125 23.932C71.9245 23.516 72.0805 22.968 72.0805 22.288C72.0805 21.616 71.9245 21.068 71.6125 20.644C71.3005 20.212 70.8725 19.996 70.3285 19.996ZM70.3285 18.868C71.3205 18.868 72.0925 19.224 72.6445 19.936C73.1405 20.568 73.3885 21.352 73.3885 22.288C73.3885 23.224 73.1405 24.008 72.6445 24.64C72.0925 25.352 71.3205 25.708 70.3285 25.708C69.3285 25.708 68.5525 25.352 68.0005 24.64C67.5125 24.024 67.2685 23.24 67.2685 22.288C67.2685 21.336 67.5125 20.552 68.0005 19.936C68.5525 19.224 69.3285 18.868 70.3285 18.868Z"
+													fill="#FF0E0E" />
+											</svg>
+
+										</button>
+										<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+											aria-labelledby="exampleModalLabel2" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel2">Descarga del
+															libro Maximo 30 páginas</h5>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<form id="form">
+															<div class="form-group">
+																<label for="recipient-name"
+																	class="col-form-label">Pagina inicio:</label>
+																<input type="number" placeholder="1"
+																	class="form-control" id="pagina-inicio">
+															</div>
+															<div class="form-group">
+																<label for="recipient-name"
+																	class="col-form-label">Pagina fin:</label>
+																<input type="number" placeholder="30"
+																	class="form-control" id="pagina-fin">
+															</div>
+														</form>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">Cancelar</button>
+														<button id="btnDescargarlibro" type="button"
+															class="btn btn-primary">Descargar</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-body mt--10">
+
+										<div >
+											<ul class="nav nav-tabs" id="myTab" role="tablist">
+												<li class="nav-item">
+													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+													
+														<button id="toggleButton1" title="Pantalla completa" class="btncopytext"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" viewBox="0 0 19 17" fill="none">
+															<path d="M3 0H16C16.7956 0 17.5587 0.316071 18.1213 0.87868C18.6839 1.44129 19 2.20435 19 3V14C19 14.7956 18.6839 15.5587 18.1213 16.1213C17.5587 16.6839 16.7956 17 16 17H3C2.20435 17 1.44129 16.6839 0.87868 16.1213C0.316071 15.5587 0 14.7956 0 14V3C0 2.20435 0.316071 1.44129 0.87868 0.87868C1.44129 0.316071 2.20435 0 3 0ZM3 1C2.46957 1 1.96086 1.21071 1.58579 1.58579C1.21071 1.96086 1 2.46957 1 3V14C1 14.5304 1.21071 15.0391 1.58579 15.4142C1.96086 15.7893 2.46957 16 3 16H16C16.5304 16 17.0391 15.7893 17.4142 15.4142C17.7893 15.0391 18 14.5304 18 14V3C18 2.46957 17.7893 1.96086 17.4142 1.58579C17.0391 1.21071 16.5304 1 16 1H3ZM8 4H15V11H14V5.71L6.85 12.85L6.15 12.15L13.29 5H8V4Z" fill="#D90303"/>
+															</svg> </button> 	Visor 1
+													</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+														<button id="toggleButton2" title="Pantalla completa" class="btncopytext"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" viewBox="0 0 19 17" fill="none">
+															<path d="M3 0H16C16.7956 0 17.5587 0.316071 18.1213 0.87868C18.6839 1.44129 19 2.20435 19 3V14C19 14.7956 18.6839 15.5587 18.1213 16.1213C17.5587 16.6839 16.7956 17 16 17H3C2.20435 17 1.44129 16.6839 0.87868 16.1213C0.316071 15.5587 0 14.7956 0 14V3C0 2.20435 0.316071 1.44129 0.87868 0.87868C1.44129 0.316071 2.20435 0 3 0ZM3 1C2.46957 1 1.96086 1.21071 1.58579 1.58579C1.21071 1.96086 1 2.46957 1 3V14C1 14.5304 1.21071 15.0391 1.58579 15.4142C1.96086 15.7893 2.46957 16 3 16H16C16.5304 16 17.0391 15.7893 17.4142 15.4142C17.7893 15.0391 18 14.5304 18 14V3C18 2.46957 17.7893 1.96086 17.4142 1.58579C17.0391 1.21071 16.5304 1 16 1H3ZM8 4H15V11H14V5.71L6.85 12.85L6.15 12.15L13.29 5H8V4Z" fill="#D90303"/>
+															</svg> </button> 
+															Visor 2
+													</a>
+												</li>
+											</ul>
+											<div class="tab-content" id="myTabContent">
+												<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+													
+													
+													<div class="bg-info" title="Reportar este libro">
+														<div class="btnssocial containrreport"><div id="iconreport" class="popup-trigger" data-popup-trigger="modalrepor">
+															<i class="icomoon icon-flag" style="color: brown;font-size: 30px;"></i>
+														</div>
+													</div>
+													
+														<iframe id="visorLibro"
+															style="width:100%;height:700px;border:none;overflow:auto;" src="" h
+															frameborder="0"></iframe>
+
+													</div>
+												   
+												</div>
+												<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+												   
+													
+													<div class="bg-info">
+														<iframe id="visorLibro2"
+															style="width:100%;height:700px;border:none;overflow:auto;" src="" h
+															frameborder="0"></iframe>
+													</div>
+													
+													
+													
+												</div>
+											</div>
+										</div>
+										
+
+
+
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+<!-- 
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ui-sortable"
+							data-lobipanel-child-inner-id="cwsfVCpyKq">
+							<div class="card lobipanel-fullscreen lobipanel" data-inner-id="cwsfVCpyKq" data-index="0"
+								style="display: block;">
+								<div class="card-header">
+									<div class="card-title" style="max-width: calc(100% - 30px);">Fullscreen</div>
+									<div class="dropdown">
+										<div class="dropdown-menu dropdown-menu-right">
+											<a data-func="expand"
+												class="dropdown-item" data-tooltip="Fullscreen">
+												<i
+													class="panel-control-icon icon-fullscreen"></i>
+													<span
+													class="control-title">Fullscreen</span>
+												</a>
+											</div>
+										<div class="dropdown-toggle" data-toggle="dropdown">
+											<span class="panel-control-icon icon-cog"></span>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+
+								</div>
+							</div>
+						</div> -->
+					</div>
+					<!-- Row end -->
+				</div>
+				<!-- END: .main-content -->
+			</div>
+			<!-- END: .app-main -->
+
+		</div>
+		<!-- END: .app-container -->
+		<!-- BEGIN .main-footer -->
+		<footer class="main-footer fixed-btm">
+			Copyright BiblioIDEAS 2023.
+		</footer>
+		<!-- END: .main-footer -->
+	</div>
+	<!-- END: .app-wrap -->
+
+	<!-- jQuery first, then Tether, then other JS. -->
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="vendor/leadMenu/leadMenu.js"></script>
+	<script src="vendor/onoffcanvas/onoffcanvas.js"></script>
+	<script src="js/moment.js"></script>
+
+	<!-- jQuery UI -->
+	<script src="js/jquery-ui.min.js"></script>
+
+	<!-- Lobipanel -->
+	<script src="vendor/lobipanel/lobipanel.js"></script>
+	<script src="vendor/lobipanel/lobipanel-custom.js"></script>
+
+	<!-- Common JS -->
+	<script src="js/common.js"></script>
+
+	<!-- Common JS -->
+
+	
+</body>
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
+
+</html>

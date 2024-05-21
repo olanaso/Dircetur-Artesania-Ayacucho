@@ -1,0 +1,137 @@
+<style>
+  #transientLens {
+    font-family: 'Segoe UI','San Francisco',Helvetica,Arial,Sans-Serif !important;
+    font-size: 15px;
+    text-decoration: none;
+    display: block;
+}
+.transientLensImg {
+    position: absolute;
+    left: -16px;
+    top: -16px;
+    width: 28.2px;
+    height: 28.2px;
+    border: 1.9px solid #6d6d71;
+    border-radius: 50%;
+    background-color: rgba(230,230,230,.5);
+}
+#transientLens .transientLensActions {
+    background-color: #fff;
+    border: solid 1px #d2d2d2;
+}
+
+.MicrosoftMap #transientLens .transientLensActions {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    z-index: 1110;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.MicrosoftMap #transientLens {
+    font-family: 'Segoe UI','San Francisco',Helvetica,Arial,Sans-Serif !important;
+    font-size: 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.maplibregl-map {
+    font: 12px/20px 'Helvetica Neue',Arial,Helvetica,sans-serif;
+    overflow: hidden;
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+</style>
+
+<div id="transientLens" data-tag="transientLens" style="visibility: visible;">
+    <div class="transientLensImg"></div>
+    <div class="transientLensActions" style="position: relative; top: -326px;">
+        <ul>
+            <li><a href="#" class="directionsTo" data-tag="directionsTo">
+                    <div class="icon"></div>
+                    <div class="actionText">Indicaciones hasta</div>
+                    <div style="display: none;"></div>
+                    <div class="arrow" style="display: none;"></div>
+                </a>
+                <div class="transientLensSeparator" style="display: none;"></div>
+            </li>
+            <li><a href="#" class="directionsFrom" data-tag="directionsFrom">
+                    <div class="icon"></div>
+                    <div class="actionText">Indicaciones desde</div>
+                    <div style="display: none;"></div>
+                    <div class="arrow" style="display: none;"></div>
+                </a>
+                <div class="transientLensSeparator" style=""></div>
+            </li>
+            <li><a href="#" class="nearby" data-tag="nearby">
+                    <div class="icon"></div>
+                    <div class="actionText">Cerca</div>
+                    <div style="display: none;"></div>
+                    <div class="arrow" style=""></div>
+                </a>
+                <div class="transientLensSeparator" style=""></div>
+            </li>
+            <li><a href="#" class="savefavorite" data-tag="savefavorite">
+                    <div class="icon"></div>
+                    <div class="actionText">Guardar...</div>
+                    <div style="display: none;"></div>
+                    <div class="arrow" style="display: none;"></div>
+                </a>
+                <div class="transientLensSeparator" style=""></div>
+            </li>
+            <li><a href="#" class="opencard" data-tag="opencard">
+                    <div class="icon"></div>
+                    <div class="actionText">Agregar marcador</div>
+                    <div style="display: none;"></div>
+                    <div class="arrow" style="display: none;"></div>
+                </a>
+                <div class="transientLensSeparator" style="display: none;"></div>
+            </li>
+            <li><a href="#" class="streetside" data-tag="streetside">
+                    <div class="icon"></div>
+                    <div class="actionText">Ver Streetside</div>
+                    <div style="display: none;"></div>
+                    <div class="arrow" style="display: none;"></div>
+                </a>
+                <div class="transientLensSeparator" style="display: none;"></div>
+            </li>
+            <li><a href="#" class="birdseyeV2" data-tag="birdseyeV2">
+                    <div class="icon"></div>
+                    <div class="actionText">Ver vista de pájaro</div>
+                    <div style="display: none;"></div>
+                    <div class="arrow" style="display: none;"></div>
+                </a>
+                <div class="transientLensSeparator" style="display: none;"></div>
+            </li>
+            <li><a href="#" class="zoomEnabled" data-tag="zoomEnabled">
+                    <div class="icon"></div>
+                    <div class="actionText">Acercar</div>
+                    <div style="display: none;"></div>
+                    <div class="arrow" style="display: none;"></div>
+                </a>
+                <div class="transientLensSeparator" style=""></div>
+            </li>
+            <li><a href="#" class="measure" data-tag="measure">
+                    <div class="icon"></div>
+                    <div class="actionText">Medir distancia</div>
+                    <div style="display: none;"></div>
+                    <div class="arrow" style="display: none;"></div>
+                </a>
+                <div class="transientLensSeparator" style="display: none;"></div>
+            </li>
+            <li><a href="#" class="coordinates" data-tag="coordinates">
+                    <div class="icon"></div>
+                    <div class="actionText">-12,037184, -77,061465</div>
+                    <div class="secTextLink" data-tag="secTextLink" style="">Copiar</div>
+                    <div class="arrow" style="display: none;"></div>
+                </a>
+                <div class="transientLensSeparator" style="display: none;"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="directionsPopOut" data-tag="directionsPopOut" style="top: -268px; left: 216px;"></div>
+    <div class="travelPopOut" data-tag="travelPopOut" style="left: 216px;"></div>
+    <div class="collectionsPopOut" data-tag="collectionsPopOut" style="left: 216px;"></div>
+    <div class="nearbyPopOut" data-tag="nearbyPopOut" style="top: -248px; left: 216px;"></div>
+</div>

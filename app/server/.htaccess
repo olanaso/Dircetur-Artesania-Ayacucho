@@ -1,0 +1,7 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/jhzokngp/api-certificados.centrodegestion.org"
+PassengerBaseURI "/"
+PassengerNodejs "/home/jhzokngp/nodevenv/api-certificados.centrodegestion.org/16/bin/node"
+PassengerAppType node
+PassengerStartupFile app.js
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END

@@ -1,0 +1,6 @@
+/**
+ * Elektron - An Admin Toolkit
+ * @version 0.3.1
+ * @license MIT
+ * @link https://github.com/onokumus/elektron#readme
+ */$(function(){$(window).width()<992?$("#app-side").onoffcanvas("hide"):$("#app-side").onoffcanvas("show"),$(".side-nav .unifyMenu").unifyMenu({toggle:!0}),$("#app-side-hoverable-toggler").on("click",function(){$(".app-side").toggleClass("is-hoverable"),$(void 0).children("i.fa").toggleClass("fa-angle-right fa-angle-left")}),$("#app-side-mini-toggler").on("click",function(){$(".app-side").toggleClass("is-mini"),$("#app-side-mini-toggler i").toggleClass("icon-menu5 icon-sort")}),$("#onoffcanvas-nav").on("click",function(){$(".app-side").toggleClass("left-toggle"),$(".app-main").toggleClass("left-toggle"),$("#onoffcanvas-nav i").toggleClass("icon-menu5 icon-sort")}),$(".onoffcanvas-toggler").on("click",function(){$(".onoffcanvas-toggler").trigger("click")})});$(function(){$('[data-toggle="tooltip"]').tooltip()});$(function(){$('[data-toggle="popover"]').popover()});$(".popover-dismiss").popover({trigger:"focus"});$(function(){setInterval(function(){var o=moment();$("#today-date").html(o.format("MMMM . DD")+" "+o.format(". dddd").substring(0,5).toUpperCase())},100)});$(".task-list").on("click","li.list",function(){$(this).toggleClass("completed")});$(function(){$(".loading-wrapper").fadeOut(2e3)});

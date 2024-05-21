@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Lead Admin Panel" />
+	<meta name="keywords"
+		content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+	<meta name="author" content="Bootstrap Gallery" />
+	<link rel="shortcut icon" href="/img/fav.png" />
+	<title>Administración de capacitaciones </title>
+
+	<!-- Common CSS -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="/css/main.css" />
+
+</head>
+
+<body>
+	<!-- Loading starts -->
+	<div class="loading-wrapper">
+		<div class="loading">
+			<div class="img"></div>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+
+	<!-- BEGIN .app-wrap -->
+	<div class="app-wrap">
+		<!-- Headerg -->
+		<header class="app-header" id="app-header">
+		</header>
+
+		<!-- END: .app-heading -->
+		<!-- BEGIN .app-container -->
+		<div class="app-container">
+			<!-- Menu -->
+			<aside class="app-side" id="app-side"></aside>
+			<!-- END: .app-side -->
+
+			<!-- BEGIN .app-main -->
+			<div class="app-main">
+				<!-- BEGIN .main-heading -->
+				<header class="main-heading">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+								<div class="page-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="33" height="35" viewBox="0 0 20 15"
+										fill="none">
+										<path
+											d="M14 13.0001V15.0001H0V13.0001C0 13.0001 0 9.00005 7 9.00005C14 9.00005 14 13.0001 14 13.0001ZM10.5 3.50005C10.5 2.80782 10.2947 2.13113 9.91014 1.55556C9.52556 0.979985 8.97893 0.531381 8.33939 0.266474C7.69985 0.00156766 6.99612 -0.067744 6.31718 0.0673043C5.63825 0.202353 5.01461 0.535695 4.52513 1.02518C4.03564 1.51466 3.7023 2.1383 3.56725 2.81724C3.4322 3.49617 3.50152 4.1999 3.76642 4.83944C4.03133 5.47899 4.47993 6.02561 5.0555 6.4102C5.63108 6.79478 6.30777 7.00005 7 7.00005C7.92826 7.00005 8.8185 6.6313 9.47487 5.97493C10.1313 5.31855 10.5 4.42831 10.5 3.50005ZM13.94 9.00005C14.5547 9.4758 15.0578 10.0805 15.4137 10.7716C15.7696 11.4626 15.9697 12.2233 16 13.0001V15.0001H20V13.0001C20 13.0001 20 9.37005 13.94 9.00005ZM13 5.2579e-05C12.3117 -0.00378014 11.6385 0.202008 11.07 0.590053C11.6774 1.43879 12.0041 2.45634 12.0041 3.50005C12.0041 4.54377 11.6774 5.56132 11.07 6.41005C11.6385 6.7981 12.3117 7.00389 13 7.00005C13.9283 7.00005 14.8185 6.6313 15.4749 5.97493C16.1313 5.31855 16.5 4.42831 16.5 3.50005C16.5 2.57179 16.1313 1.68156 15.4749 1.02518C14.8185 0.368802 13.9283 5.2579e-05 13 5.2579e-05Z"
+											fill="#E80000" />
+									</svg>
+								</div>
+								<div class="page-title">
+									<h5>Listado de Capacitaciones</h5>
+									<h6 class="sub-heading">Se podrá actualizar los datos de las diferentes
+										capacitaciones</h6>
+								</div>
+							</div>
+							<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+								<div class="right-actions">
+									<span class="last-login"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<!-- END: .main-heading -->
+				<!-- BEGIN .main-content -->
+				<div class="main-content">
+
+
+
+					<!-- Row start -->
+					<div class="row gutters">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="card" style="border: solid 1px #E4E7F2;">
+
+								<div class="card-body">
+									<div>
+										<ul class="nav nav-tabs" id="myTab" role="tablist">
+											<li class="nav-item">
+												<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
+													role="tab" aria-controls="home" aria-selected="true">Generación de
+													certificados</a>
+											</li>
+										</ul>
+
+										<div class="tab-content" id="myTabContent">
+											<form id="form" action="javascript:void(0)">
+												<div class="row mt-3">
+													<div class="col-9 col-md-6">
+														<input id="searchBox" class="form-control form-control-sm"
+															type="text"
+															placeholder="Ingrese código de certificado o el Nombre del estudiante">
+													</div>
+													<div class="col-9 col-md-2">
+														<a id="btnbuscar" style="cursor: pointer;"
+															class="btn btn-primary" title="Buscar en el sistema">
+															<svg xmlns="http://www.w3.org/2000/svg" width="25"
+																height="25" viewBox="0 0 13 13" fill="none">
+																<path
+																	d="M12 12L9.34597 9.34597M9.34597 9.34597C9.79996 8.89199 10.1601 8.35304 10.4058 7.75988C10.6515 7.16673 10.7779 6.53099 10.7779 5.88896C10.7779 5.24693 10.6515 4.61119 10.4058 4.01804C10.1601 3.42488 9.79996 2.88592 9.34597 2.43194C8.89199 1.97796 8.35304 1.61784 7.75988 1.37215C7.16673 1.12646 6.53099 1 5.88896 1C5.24693 1 4.61119 1.12646 4.01804 1.37215C3.42488 1.61784 2.88592 1.97796 2.43194 2.43194C1.51509 3.3488 1 4.59233 1 5.88896C1 7.18559 1.51509 8.42912 2.43194 9.34597C3.3488 10.2628 4.59233 10.7779 5.88896 10.7779C7.18559 10.7779 8.42912 10.2628 9.34597 9.34597Z"
+																	stroke="white" stroke-linecap="round"
+																	stroke-linejoin="round" />
+															</svg>
+														</a>
+													</div>
+
+
+													<div class="col-12 col-md-4">
+														<a id="btnNuevoRegistro" href="#" class=" boton-azul"> Nuevo
+														</a>
+														<a id="btnDescargar" href="#" class="boton-verde"> Exportar a
+															excel
+														</a>
+													</div>
+												</div>
+											</form>
+											<table id="tablaCertificados">
+												<tr>
+													<th>N°</th>
+													<th>Nombres Completos</th>
+													<th>Curso</th>
+													<th>Fecha Emisión</th>
+													<th>Código</th>
+													<th>Certificado</th>
+												</tr>
+												<tr>
+													<td colspan="6" style="text-align: center;">Buscar información...
+													</td>
+												</tr>
+											</table>
+
+										</div>
+									</div>
+									<!-- Grid Admin Usuarios -->
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- Row end -->
+
+					<!-- Row start -->
+
+					<!-- Row end -->
+
+
+
+				</div>
+				<!-- END: .main-content -->
+			</div>
+			<!-- END: .app-main -->
+
+		</div>
+		<!-- END: .app-container -->
+		<!-- BEGIN .main-footer -->
+		<footer class="main-footer fixed-btm">
+			Copyright CENGEST 2023.
+		</footer>
+		<!-- END: .main-footer -->
+	</div>
+
+	<!-- El Modal -->
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Editar Certificados</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<form id="form">
+						<div class="row mt-3">
+							<!-- Columna izquierda -->
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-dni" class="col-md-4 col-form-label font-weight-bold">DNI</label>
+									<div class="col-md-8">
+										<input required id="txt-dni" class="form-control form-control-sm" type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-12">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-nombres"
+										class="col-md-2 col-form-label font-weight-bold">Nombres</label>
+									<div class="col-md-10">
+										<input required id="txt-nombres" class="form-control form-control-sm"
+											type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-cod_curso" class="col-md-4 col-form-label font-weight-bold">Código
+										Curso</label>
+									<div class="col-md-8">
+										<input required id="txt-cod_curso" class="form-control form-control-sm"
+											type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-12">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-curso"
+										class="col-md-2 col-form-label font-weight-bold">Curso</label>
+									<div class="col-md-10">
+										<input required id="txt-curso" class="form-control form-control-sm" type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-nota" class="col-md-4 col-form-label font-weight-bold">Nota</label>
+									<div class="col-md-8">
+										<input required id="txt-nota" maxlength="20"
+											class="form-control form-control-sm" type="number">
+									</div>
+								</div>
+							</div>
+
+							<!-- Columna derecha -->
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-cant_horas"
+										class="col-md-4 col-form-label font-weight-bold">Cantidad Horas</label>
+									<div class="col-md-8">
+										<input required id="txt-cant_horas" class="form-control form-control-sm"
+											type="number">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-fecha_inicio" class="col-md-4 col-form-label font-weight-bold">Fecha
+										Inicio</label>
+									<div class="col-md-8">
+										<input required id="txt-fecha_inicio" class="form-control form-control-sm"
+											type="date">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-fecha_fin" class="col-md-4 col-form-label font-weight-bold">Fecha
+										Fin</label>
+									<div class="col-md-8">
+										<input required id="txt-fecha_fin" class="form-control form-control-sm"
+											type="date">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-fecha_fin" class="col-md-4 col-form-label font-weight-bold">Fecha
+										emisión</label>
+									<div class="col-md-8">
+										<input required id="txt-fecha_emision" class="form-control form-control-sm"
+											type="date">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-instructor"
+										class="col-md-4 col-form-label font-weight-bold">Instructor</label>
+									<div class="col-md-8">
+										<input required id="txt-instructor" class="form-control form-control-sm"
+											type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-ubicacion"
+										class="col-md-4 col-form-label font-weight-bold">Ubicación</label>
+									<div class="col-md-8">
+										<input required id="txt-ubicacion" class="form-control form-control-sm"
+											type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-institucion_solicitante"
+										class="col-md-4 col-form-label font-weight-bold">Institución</label>
+									<div class="col-md-8">
+										<input required id="txt-institucion_solicitante"
+											class="form-control form-control-sm" type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-12">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-temario"
+										class="col-md-2 col-form-label font-weight-bold">Temario</label>
+									<div class="col-md-10">
+										<textarea required id="txt-temario"
+											class="form-control form-control-sm"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+
+			<div class="modal-footer">
+				<button id="btnactualizar" type="button" class="btn btn-primary">Guardar</button>
+				<button id="closeButton" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<!-- El Modal -->
+	<div id="myModalNuevo" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Nuevo Certificado</h5>
+
+			</div>
+
+			<div class="modal-body">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<form id="form2">
+						<div class="row mt-3">
+							<!-- Columna izquierda -->
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-dni1" class="col-md-4 col-form-label font-weight-bold">DNI</label>
+									<div class="col-md-8">
+										<input required id="txt-dni1" class="form-control form-control-sm" type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-12">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-nombres1"
+										class="col-md-2 col-form-label font-weight-bold">Nombres</label>
+									<div class="col-md-10">
+										<input required id="txt-nombres1" class="form-control form-control-sm"
+											type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-cod_curso1" class="col-md-4 col-form-label font-weight-bold">Código
+										Curso</label>
+									<div class="col-md-8">
+										<input required id="txt-cod_curso1" class="form-control form-control-sm"
+											type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-12">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-curso1"
+										class="col-md-2 col-form-label font-weight-bold">Curso</label>
+									<div class="col-md-10">
+										<input required id="txt-curso1" class="form-control form-control-sm"
+											type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-nota1" class="col-md-4 col-form-label font-weight-bold">Nota</label>
+									<div class="col-md-8">
+										<input required id="txt-nota1" maxlength="20"
+											class="form-control form-control-sm" type="number">
+									</div>
+								</div>
+							</div>
+
+							<!-- Columna derecha -->
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-cant_horas1"
+										class="col-md-4 col-form-label font-weight-bold">Cantidad Horas</label>
+									<div class="col-md-8">
+										<input required id="txt-cant_horas1" class="form-control form-control-sm"
+											type="number">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-fecha_inicio1"
+										class="col-md-4 col-form-label font-weight-bold">Fecha Inicio</label>
+									<div class="col-md-8">
+										<input required id="txt-fecha_inicio1" class="form-control form-control-sm"
+											type="date">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-fecha_fin1" class="col-md-4 col-form-label font-weight-bold">Fecha
+										Fin</label>
+									<div class="col-md-8">
+										<input required id="txt-fecha_fin1" class="form-control form-control-sm"
+											type="date">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-fecha_fin1" class="col-md-4 col-form-label font-weight-bold">Fecha
+										emisión</label>
+									<div class="col-md-8">
+										<input required id="txt-fecha_emision1" class="form-control form-control-sm"
+											type="date">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-instructor1"
+										class="col-md-4 col-form-label font-weight-bold">Instructor</label>
+									<div class="col-md-8">
+										<input required id="txt-instructor1" class="form-control form-control-sm"
+											type="text">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-ubicacion1"
+										class="col-md-4 col-form-label font-weight-bold">Ubicación</label>
+									<div class="col-md-8">
+										<input required id="txt-ubicacion1" class="form-control form-control-sm"
+											type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-institucion_solicitante1"
+										class="col-md-4 col-form-label font-weight-bold">Institución</label>
+									<div class="col-md-8">
+										<input required id="txt-institucion_solicitante1"
+											class="form-control form-control-sm" type="text">
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-12">
+								<div class="form-group row" style="margin-bottom: 0.1rem;">
+									<label for="txt-temario1"
+										class="col-md-2 col-form-label font-weight-bold">Temario</label>
+									<div class="col-md-10">
+										<textarea required id="txt-temario1"
+											class="form-control form-control-sm"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+
+			<div class="modal-footer">
+				<button id="btnuevo" type="button" class="btn btn-primary">Guardar</button>
+				<button id="closeButtonNuevo" type="button" class="btn btn-secondary"
+					data-dismiss="modal">Cerrar</button>
+			</div>
+
+
+		</div>
+	</div>
+	<!-- END: .app-wrap -->
+
+	<!-- jQuery first, then Tether, then other JS. -->
+	<script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/vendor/leadMenu/leadMenu.js"></script>
+	<script src="/vendor/onoffcanvas/onoffcanvas.js"></script>
+	<script src="/js/moment.js"></script>
+	<script src="/js/jquery.twbsPagination.min.js"></script>
+	<script src="/js/alasql.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+
+
+	<!-- Common JS -->
+	<script src="/js/common.js"></script>
+	<script type="module" src="/src/lista-capacitaciones/index.js"></script>
+
+
+
+</body>
+
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
+
+</html>
