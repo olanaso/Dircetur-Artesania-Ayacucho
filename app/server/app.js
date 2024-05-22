@@ -30,8 +30,8 @@ const sessionStore = new MySQLStore({
 app.use(logger('dev'));
 //app.use(cors)
 app.use(require('express-status-monitor')());
-app.use(bodyParser.json({limit: '50mb', extended: true}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({ limit: '50mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(cookieParser());
 /*Uso de las sessiones*/

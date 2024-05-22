@@ -1,18 +1,18 @@
 
 const { Sequelize } = require('sequelize');
 const sequelize =
-    new Sequelize("jhzokngp_certificados", "jhzokngp_ucertificados", "ehxq2apf;-~j", {
-        host: "localhost",
+    new Sequelize("artesania", "admin", "$ideas2024*$", {
+        host: "database-1.ctm6s248ayce.us-east-1.rds.amazonaws.com",
         dialect: "mysql",
-        port:"3306"//Tipo de base de dato a la cual esta conectado
+        port: "3306"//Tipo de base de dato a la cual esta conectado
 
     });
 
- //new Sequelize('postgres://corllkus_user:&pu@NkNFl6?E@localhost:5432/corllkus_bdcolegiados')
+//new Sequelize('postgres://corllkus_user:&pu@NkNFl6?E@localhost:5432/corllkus_bdcolegiados')
 var db = {};
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-module.exports=db;
+module.exports = db;
 
 
 /*
