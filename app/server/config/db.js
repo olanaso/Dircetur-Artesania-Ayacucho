@@ -1,5 +1,5 @@
 
-const { Sequelize } = require('sequelize');
+const { Sequelize  } = require('sequelize');
 const sequelize =
     new Sequelize("artesania", "admin", "$ideas2024*$", {
         host: "database-1.ctm6s248ayce.us-east-1.rds.amazonaws.com",
