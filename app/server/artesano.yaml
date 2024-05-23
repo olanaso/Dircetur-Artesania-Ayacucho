@@ -1,0 +1,151 @@
+
+openapi: 3.0.0
+info:
+  title: CENGEST
+  version: 1.0.0
+servers:
+  - url: https://api-certificados.centrodegestion.org
+paths:
+  /api/nota:
+    post:
+      tags:
+        - default
+      summary: Registrar una nota
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                dni: '70021899'
+                nombres: 'JOSE MENDOZA '
+                cod_curso: IH06-09-2024-01
+                nota: 18
+                cant_horas: 8
+                fecha_inicio: 03/03/2024
+                fecha_fin: 30/03/2024
+                instructor: Ing. Daniel Antonio Villalobos Pinzón
+                temario: "Referencias Legales\n\t\tReglas de oro de la prevención de caídas\r\n\t\tCiclo PDCA\r\n\t\tInfraestructura dinámica\r\n\t\tTipos de arnés de cuerpo entero dependiendo del uso\r\n\t\tDispositivos para la prevención de caídas\r\n\t\tUso de los anillos tipo D para la prevención de caídas\r\n\t\tPunto de anclaje\r\n\t\tLíneas de vida\r\n\t\tProceso y planeamiento\r\n\t\tÁreas de trabajo y montaje\r\n\t\tEscaleras\r\n\t\tAndamios\r\n\t\tÁreas de trabajo\r\n\t\tRecomendaciones de seguridad\r\n\t\tManejo de emergencia\r\n\t\t"
+                ubicacion: Cerro de pasco
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - default
+      summary: Eliminar
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/nota_save:
+    post:
+      tags:
+        - default
+      summary: Actualizar
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                dni: '81047225'
+                nombres: 'ENCARNACIÓN ALEJO JORGEs '
+                cod_curso: IH06-09-2024-01
+                nota: 18
+                cant_horas: 8
+                fecha_inicio: 03/03/2024
+                fecha_fin: 30/03/2024
+                instructor: Ing. Daniel Antonio Villalobos Pinzón
+                temario: "Referencias Legales\n\t\tReglas de oro de la prevención de caídas\r\n\t\tCiclo PDCA\r\n\t\tInfraestructura dinámica\r\n\t\tTipos de arnés de cuerpo entero dependiendo del uso\r\n\t\tDispositivos para la prevención de caídas\r\n\t\tUso de los anillos tipo D para la prevención de caídas\r\n\t\tPunto de anclaje\r\n\t\tLíneas de vida\r\n\t\tProceso y planeamiento\r\n\t\tÁreas de trabajo y montaje\r\n\t\tEscaleras\r\n\t\tAndamios\r\n\t\tÁreas de trabajo\r\n\t\tRecomendaciones de seguridad\r\n\t\tManejo de emergencia\r\n\t\t"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/importarNotas:
+    post:
+      tags:
+        - default
+      summary: Importar Notas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                listanotas:
+                  - dni: '81047225'
+                    nombres: 'ENCARNACIÓN ALEJO JORGEs '
+                    cod_curso: IH06-09-2024-01
+                    nota: 18
+                    cant_horas: 8
+                    fecha_inicio: 03/03/2024
+                    fecha_fin: 30/03/2024
+                    instructor: Ing. Daniel Antonio Villalobos Pinzón
+                    temario: "Referencias Legales\n\t\tReglas de oro de la prevención de caídas\r\n\t\tCiclo PDCA\r\n\t\tInfraestructura dinámica\r\n\t\tTipos de arnés de cuerpo entero dependiendo del uso\r\n\t\tDispositivos para la prevención de caídas\r\n\t\tUso de los anillos tipo D para la prevención de caídas\r\n\t\tPunto de anclaje\r\n\t\tLíneas de vida\r\n\t\tProceso y planeamiento\r\n\t\tÁreas de trabajo y montaje\r\n\t\tEscaleras\r\n\t\tAndamios\r\n\t\tÁreas de trabajo\r\n\t\tRecomendaciones de seguridad\r\n\t\tManejo de emergencia\r\n\t\t"
+                    ubicacion: Cerro de pasco
+                  - dni: '81047225'
+                    nombres: 'ENCARNACIÓN ALEJO JORGEs '
+                    cod_curso: IH06-09-2024-01
+                    nota: 18
+                    cant_horas: 8
+                    fecha_inicio: 03/03/2024
+                    fecha_fin: 30/03/2024
+                    instructor: Ing. Daniel Antonio Villalobos Pinzón
+                    temario: "Referencias Legales\n\t\tReglas de oro de la prevención de caídas\r\n\t\tCiclo PDCA\r\n\t\tInfraestructura dinámica\r\n\t\tTipos de arnés de cuerpo entero dependiendo del uso\r\n\t\tDispositivos para la prevención de caídas\r\n\t\tUso de los anillos tipo D para la prevención de caídas\r\n\t\tPunto de anclaje\r\n\t\tLíneas de vida\r\n\t\tProceso y planeamiento\r\n\t\tÁreas de trabajo y montaje\r\n\t\tEscaleras\r\n\t\tAndamios\r\n\t\tÁreas de trabajo\r\n\t\tRecomendaciones de seguridad\r\n\t\tManejo de emergencia\r\n\t\t"
+                    ubicacion: Cerro de pasco
+                  - dni: '81047225'
+                    nombres: 'ENCARNACIÓN ALEJO JORGEs '
+                    cod_curso: IH06-09-2024-01
+                    nota: 18
+                    cant_horas: 8
+                    fecha_inicio: 03/03/2024
+                    fecha_fin: 30/03/2024
+                    instructor: Ing. Daniel Antonio Villalobos Pinzón
+                    temario: "Referencias Legales\n\t\tReglas de oro de la prevención de caídas\r\n\t\tCiclo PDCA\r\n\t\tInfraestructura dinámica\r\n\t\tTipos de arnés de cuerpo entero dependiendo del uso\r\n\t\tDispositivos para la prevención de caídas\r\n\t\tUso de los anillos tipo D para la prevención de caídas\r\n\t\tPunto de anclaje\r\n\t\tLíneas de vida\r\n\t\tProceso y planeamiento\r\n\t\tÁreas de trabajo y montaje\r\n\t\tEscaleras\r\n\t\tAndamios\r\n\t\tÁreas de trabajo\r\n\t\tRecomendaciones de seguridad\r\n\t\tManejo de emergencia\r\n\t\t"
+                    ubicacion: Cerro de pasco
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/search:
+    get:
+      tags:
+        - default
+      summary: Buscar (nombre o codigo_certificado o cod_curso)
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
+          example: alejo
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/nota/10:
+    get:
+      tags:
+        - default
+      summary: Obtener por Id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/nota-cert/97d8c7d4:
+    get:
+      tags:
+        - default
+      summary: Obtener cod. certificado
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
