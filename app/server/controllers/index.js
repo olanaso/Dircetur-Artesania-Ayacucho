@@ -9,9 +9,8 @@ const iestps = require('./iestps');
 const programas = require('./programas');
 const notas = require('./notas');
 const artesano = require('./artesano');
-
 const categoria = require('./categoria');
-
+const producto = require('./producto');
 
 
 module.exports = {
@@ -26,5 +25,6 @@ module.exports = {
     programas,
     notas,
     artesano,
+    producto,
     categoria
 };

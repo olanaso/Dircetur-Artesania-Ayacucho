@@ -2,6 +2,7 @@
 const db = require('../config/db');
 sequelize = db.sequelize;
 Sequelize = db.Sequelize;
+
 module.exports = sequelize.define('artesano', {
     id: {
         type: Sequelize.INTEGER,

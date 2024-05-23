@@ -9,8 +9,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const router = require('./routes');
-
+const router = require('./routes'); 
 /*Define la ruta de los archivos dentro del servidor*/
 app.use(express.static(path.join(__dirname, 'public')));
 
