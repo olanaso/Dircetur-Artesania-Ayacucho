@@ -58,7 +58,7 @@ function eliminar (req, res) {
 function obtener (req, res) {
 
     model.findOne({
-        where: { serie: req.params.id }
+        where: { id: req.params.id }
     })
         .then(resultset => {
             res.status(200).json(resultset)
