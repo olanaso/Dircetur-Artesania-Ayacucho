@@ -5,7 +5,6 @@ const sequelize =
         host: "database-1.ctm6s248ayce.us-east-1.rds.amazonaws.com",
         dialect: "mysql",
         port: "3306"//Tipo de base de dato a la cual esta conectado
-
     });
 
 //new Sequelize('postgres://corllkus_user:&pu@NkNFl6?E@localhost:5432/corllkus_bdcolegiados')
