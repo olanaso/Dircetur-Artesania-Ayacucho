@@ -13,6 +13,7 @@ const notas = require('./notas');
 const artesano = require('./artesano');
 const cliente = require('./cliente');
 const slider = require('./slider');
+const producto = require('./producto');
 
 module.exports = (app) => {
     app.use('/api', mantenimiento);
@@ -29,4 +30,5 @@ module.exports = (app) => {
     app.use('/api', artesano);
     app.use('/api', slider);
     app.use('/api', cliente);
+    app.use('/api', producto);
 };

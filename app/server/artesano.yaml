@@ -1,0 +1,701 @@
+---
+openapi: 3.0.1
+info:
+  title: Servicio Web API - Geovisor SGBI
+  description: Servicio Web API - Geovisor sgbi
+  contact:
+    name: Sistemas MINEDU
+    email: gestor@minedu.gob.pe
+  version: v1
+paths:
+  "/api/V1/get-capas":
+    get:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de datos de los códigos modulares
+      description: "Resumen:\r\n-\r\nLista los datos de los códigos modulares según
+        parámetro de entrada\r\n-\r\n<table border=\"1\"><tr><td>nada</td><td>Valor(es)</td><td>Descripción</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n-listado\r\n-  \"id_capa_interoperabilidad\": id de la
+        capa\r\n- \"codigo_categoria\":  codigo de categoria\r\n- \"codigo_entidad\":
+        codigo de entidad\r\n-  \"codigo_tipo_servidor\": codigo de tipo servidor\r\n-
+        \"orden\": orden\r\n- \"tipo_servidor\": tipo de servidor\r\n- \"nombre_categoria\":
+        nombre de categoria\r\n- \"nombre_entidad\": nombre de entidad \r\n- \"nombre_capa\":
+        nombre de la capa\r\n- \"url_wms\": url del servidor wms\r\n- \"url_wfs\":
+        url del servidor wms\r\n- \"token_capa\": token de la capa\r\n- \"color_linea\":
+        color de linea de la capa\r\n- \"color_relleno\": color relleno de la capa\r\n-
+        \"tipo_linea\":tipo de linea de la capa\r\n- \"activo\": flag de estado de
+        la capa"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-inmuebles-poligonos":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de datos de los polígonos
+      description: "Resumen:\r\n-\r\nLista los datos de los poligonos según parámetro
+        de entrada\r\n-\r\n<table border=\"1\"><tr><td>Campo</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>tipo_uso</td><td>Valor
+        numérico</td><td>tipo de uso del inmueble</td></tr><tr><td>nombre_institucion</td><td>valor
+        string</td><td>nombre de la institución educativa</td></tr><tr><td>ubigeo</td><td>valor
+        string</td><td>ubigeo del inmueble</td></tr><tr><td>codigo_inmueble</td><td>Valor
+        string</td><td>código de inmueble</td></tr><tr><td>numero_registral</td><td>Valor
+        string</td><td>numero de partida registral</td></tr><tr><td>codigo_local</td><td>Valor
+        string</td><td>codigo de local</td></tr><tr><td>codigo_modular</td><td>valor
+        string</td><td>codigo modular de colegio</td></tr><tr><td>poligono</td><td>Valor
+        string</td><td>polígono para buscar en el mapa</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n-listado\r\n-  \"id_inmueble_geo_data\": id del poligono\r\n-
+        \"id_tipo_inmueble\":  id de tipo de inmueble\r\n- \"id_inmueble\": id de
+        inmueble\r\n-  \"codigo_inmueble\": codigo de inmueble\r\n- \"nombre_direccion\":
+        nombre de dirección\r\n- \"poligono\": polígono del inmueble\r\n- \"id_estado\":
+        id del estado\r\n- \"estado\":  estado de titulación"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetPoligonosRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetPoligonosRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetPoligonosRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-inmueble-poligono":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de datos de los polígonos
+      description: "Resumen:\r\n-\r\nLista los datos de los poligonos según parámetro
+        de entrada\r\n-\r\n<table border=\"1\"><tr><td>Campo</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>id_tipo_inmueble</td><td>Valor
+        numérico</td><td>id de tipo de inmueble: 1 - Registrado, 2-no registrado</td></tr><tr><td>id</td><td>valor
+        entero</td><td>id del inmueble</td></tr><tr><td>codigo_modular</td><td>valor
+        string</td><td>codigo modular del colegio</td></tr><tr><td>anexo</td><td>Valor
+        string</td><td>anexo del colegio</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n-listado\r\n-  \"id_inmueble_geo_data\": id del poligono\r\n-
+        \"id_tipo_inmueble\":  id de tipo de inmueble\r\n- \"id_inmueble\": id de
+        inmueble\r\n- \"id_estado\": id del estado\r\n- \"estado\":  estado de titulación
+        \r\n- \"id_region_enum\": id del estado\r\n-  \"codigo_inmueble\": codigo
+        de inmueble\r\n-  \"codigo_ubigeo\": ubigeo\r\n-  \"departamento\": departamento\r\n-
+        \ \"provincia\": provincia\r\n-  \"distrito\": distrito\r\n-  \"nombre_institucion_educativa\":
+        nombre de institucion\r\n- \"area\": nombre de dirección\r\n-  \"poligono\":polígono
+        de inmueble\r\n-  \"ruta_foto_izquierdo\": ruta de foto lado izquierdo\r\n-
+        \ \"ruta_foto_derecho\": ruta de foto lado derecho\r\n-  \"ruta_foto_frontal\":
+        ruta de foto parte frontal\r\n-  \"ruta_foto_fondo\": ruta de foto parte fondo\r\n-
+        \ \"ruta_foto_panoramica\": ruta de foto panorámica\r\n-  \"tiene_fotografias\":
+        flag  indicador de tiene fotos\r\n-  \"tiene_plano_perimetrico\": flag indicador
+        de tiene plano perimétrico\r\n-  \"tiene_partida_registral\": flag indicador
+        de tiene partida registral\r\n-  \"tiene_ficha_resumen\": flag indicador de
+        tiene ficha resumen\r\n-  \"tiene_ficha_escale\": flag indicador de tiene
+        ficha escale\r\n-  \"codigo_departamento\": codigo de departamento\r\n-  \"codigo_provincia\":
+        codigo de provincia\r\n-  \"codigo_distrito\": codigo de distrito\r\n-  \"imagen_fotografia_documento\":
+        ruta de iname de fotografía\r\n-  \"plano_perimetrico_ubicacion_documento\":
+        ruta de  plano perimétrico\r\n-  \"partida_registral_documento\": ruta de
+        partida registral\r\n-  \"ficha_resumen_documento\": ruta de  ficha resumen\r\n-
+        \ \"ficha_escale_documento\": ruta de  ficha escale\r\n-  \"codigo_fuente_inf\":
+        codigo de fuente de información\r\n-  \"codigo_epsg\": codigo de epsg\r\n-
+        \ \"nombre_ing_responsable\": nombre del responsable\r\n- \"nombre_archivo\":
+        nombre del archivo\r\n- \"chk_poligono_definitivo\": flag indicador de polígono
+        definitivo\r\n- \"Observacion\": observaciones del polígono\r\n- \"id_inmueble_imagenes_institucion\":
+        id de imagenes de inmueble\r\n- \"codigo_modular_institucion_educativa\":
+        codigo modular de institucion"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetPoligonoRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetPoligonoRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetPoligonoRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-lista-saneamiento":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de datos titulación de los inmuebles
+      description: "Resumen:\r\n-\r\nLista los datos resumen de titulación por región
+        \r\n-\r\n<table border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>anio
+        </td><td>numérico</td><td>año del reporte a cconsultar</td></tr><tr><td>tipo_filtro
+        </td><td>numérico</td><td>tipo de reporte ( 1 para departamento/provincia/distrito
+        , 2 para DRE/ugel)</td></tr><tr><td>codigo_ubigeo </td><td>string de 6 caracteres</td><td>
+        codigo ubigeo, provincia o distrito</td></tr><tr><td>codigo_ugel</td><td>string
+        de 6 caracteres</td><td> codigo ugel o dre</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n-listado \r\n-  \"codigo_ugel\":  codigo de ugel,\r\n-
+        \"nombre_ugel\":  nombre de ugel,\r\n- \"codigo_departamento\": codigo de
+        departamento/provincia/distrito,\r\n-  \"departamento\": nombre de departamento/provincia/distrito\r\n-
+        \"porcentaje\": porcentaje de avance\r\n- \"color\": color indicador,\r\n-
+        \"estado\": estado de saneamiento,\r\n- \"cantidad\": cantidad total de inmuebles,\r\n-
+        \"titulado\": cantidad de inmuebles titulados,\r\n- \"no_titulado\": cantidad
+        de inmuebles no titulados\r\n- \"no_registrado\": cantidad de inmuebles no
+        registrados"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetEstadoTitulacionRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetEstadoTitulacionRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetEstadoTitulacionRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-data-grafico-titulacion":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de datos titulación de los inmuebles resumen para
+        chart
+      description: "Resumen:\r\n-\r\nLista los datos resumen de titulación para una
+        region  \r\n-\r\n<table border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>anio
+        </td><td>numérico</td><td>año del reporte a cconsultar</td></tr><tr><td>tipo_filtro
+        </td><td>numérico</td><td>tipo de reporte ( 1 para departamento/provincia/distrito
+        , 2 para DRE/ugel)</td></tr><tr><td>codigo_ubigeo </td><td>string de 6 caracteres</td><td>
+        codigo ubigeo, provincia o distrito</td></tr><tr><td>codigo_ugel</td><td>string
+        de 6 caracteres</td><td> codigo ugel o dre</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n- labels : lista de etiquetas de los grupos\r\n- datasets\r\n-
+        \ \"label\": estado,\r\n- \"data\": valores numéricos,\r\n- \"fill\": flag
+        de llenado,\r\n-  \"backgroundColor\": color de fondo\r\n- \"borderColor\":
+        color de borde\r\n- \"borderWidth\": ancho de borde"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetGraficoTitulacionRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetGraficoTitulacionRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetGraficoTitulacionRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-lista-saneamiento-mensual":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de datos titulación de los inmuebles por mes
+      description: "Resumen:\r\n-\r\nLista los datos mensuales de titulación para
+        una region  \r\n-\r\n<table border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>anio
+        </td><td>numérico</td><td>año del reporte a consultar</td></tr><tr><td>codigo_ubigeo
+        </td><td>string de 6 caracteres</td><td> codigo ubigeo, provincia o distrito</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n- labels : lista de etiquetas de los grupos\r\n- datasets\r\n-
+        \ \"label\": estado,\r\n- \"data\": valores numéricos,\r\n- \"fill\": flag
+        de llenado,\r\n- \"backgroundColor\": color de fondo\r\n- \"borderColor\":
+        color de borde\r\n- \"borderWidth\": ancho de borde"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetEstadoTitulacionMensualRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetEstadoTitulacionMensualRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetEstadoTitulacionMensualRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-dres":
+    get:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de dres
+      description: "Resumen:\r\n-\r\nLista los datos de las DRE\r\n-\r\n<table border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n-  \"id\": id de la dre\r\n- \"nombre\":  nombre de la
+        dre"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-ugeles":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de dres
+      description: "Resumen:\r\n-\r\nLista los datos de las DRE\r\n-\r\n<table border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>cod_dre</td><td>valor
+        string 6 caracteres</td><td>codigo de la dre a filtrar</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n-  \"id\": id de la ugel\r\n- \"nombre\":  nombre de
+        la ugel"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetUgelesRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetUgelesRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetUgelesRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-tipo-uso":
+    get:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de dres
+      description: "Resumen:\r\n-\r\nLista los datos de las DRE\r\n-\r\n<table border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n-  \"id\": id del tipo de uso\r\n- \"nombre\":  nombre
+        del tipo uso"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-regiones":
+    get:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de dres
+      description: "Resumen:\r\n-\r\nLista los datos de las DRE\r\n-\r\n<table border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n-  \"id\": id de la región\r\n- \"nombre\":  nombre de
+        la región"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-departamentos":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de departamentos
+      description: "Resumen:\r\n-\r\nLista los datos de los departamentos\r\n-\r\n<table
+        border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>id_region</td><td>valor
+        numérico</td><td>codigo de la región a filtrar</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n-  \"id\": id de la región\r\n- \"nombre\":  nombre de
+        la región"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetDepartamentosRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetDepartamentosRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetDepartamentosRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-provincias":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de provincias
+      description: "Resumen:\r\n-\r\nLista los datos de las provincias\r\n-\r\n<table
+        border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>cod_</td><td>valor
+        string 6 caracteres</td><td>codigo de la dre a filtrar</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n-  \"id\": id de la provincia\r\n- \"nombre\":  nombre
+        de la provincia"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetProvinciasRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetProvinciasRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetProvinciasRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-distritos":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de distritos
+      description: "Resumen:\r\n-\r\nLista los datos de los distritos\r\n-\r\n<table
+        border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>cod_provincia</td><td>valor
+        string 6 caracteres</td><td>codigo de la provincia a filtrar</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        { \"success\": bool, \"status\": [{ \"message\": string }],\"data\": { [\"object\"]
+        } }\r\n \r\ndata:\r\n-  \"id\": id del distrito\r\n- \"nombre\":  nombre del
+        distrito"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetDistritosRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetDistritosRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetDistritosRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-ficha-resumen":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de descarga de ficha resumen
+      description: "Resumen:\r\n-\r\nobtiene el archivo de la ficha resumen\r\n-\r\n<table
+        border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>filename</td><td>valor
+        string</td><td>nombre del archivo a buscar</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        formato blob"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetArchivoRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetArchivoRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetArchivoRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-ficha-escale":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de descarga de ficha escale
+      description: "Resumen:\r\n-\r\nobtiene el archivo de la ficha escale\r\n-\r\n<table
+        border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>filename</td><td>valor
+        string</td><td>nombre del archivo a buscar</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        formato blob"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetArchivoRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetArchivoRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetArchivoRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-partida-registral":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de consulta de descarga de partida registral
+      description: "Resumen:\r\n-\r\nobtiene el archivo de la partida registral\r\n-\r\n<table
+        border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>filename</td><td>valor
+        string</td><td>nombre del archivo a buscar</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        formato blob"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetArchivoRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetArchivoRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetArchivoRequest"
+      responses:
+        '200':
+          description: Success
+  "/api/V1/get-impresion-mapa":
+    post:
+      tags:
+      - Geovisor
+      summary: Servicio de subida de imagen temporal del mapa para el servicio de
+        impresion de mapa
+      description: "Resumen:\r\n-\r\nsube el archivo en base64 temporalmente para
+        la descarga\r\n-\r\n<table border=\"1\"><tr><td>Nombre</td><td>Valor(es)</td><td>Descripción</td></tr><tr><td>id_tamanio_pagina</td><td>valor
+        numérico</td><td>id de tamaño de pagina</td></tr><tr><td>id_orientacion_pagina</td><td>valor
+        numérico</td><td>id de orientación de página</td></tr><tr><td>margen</td><td>valor
+        numérico</td><td>margen de la página sobre el contenido</td></tr><tr><td>titulo</td><td>valor
+        string</td><td>Título del mapa</td></tr><tr><td>coordenada</td><td>valor string</td><td>coordenada
+        del mapa (punto en formato wkt) en base64</td></tr><tr><td>imagen</td><td>valor
+        string</td><td>Archivo en base64</td></tr></table>\r\n\r\nRestricciones:\r\n-\r\n-
+        Generar autorización token para realizar consultas al servicio Web API \r\n\r\nReglas
+        de negocio:\r\n-\r\n- Ninguno\r\n\r\nCódigos de respuesta:\r\n-\r\n- 200:
+        Se ha consultado la información solicitada\r\n- 400: Ocurrió error de validación
+        en el modelo\r\n- 500: Ocurrió un error en el servicio web\r\n\r\nRespuesta:\r\n-\r\n
+        formato blob"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GetImpresionMapaRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/GetImpresionMapaRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/GetImpresionMapaRequest"
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    GetArchivoRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GetDepartamentosRequest:
+      type: object
+      properties:
+        id_region:
+          type: integer
+          format: int32
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GetDistritosRequest:
+      type: object
+      properties:
+        cod_provincia:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GetEstadoTitulacionMensualRequest:
+      type: object
+      properties:
+        anio:
+          type: integer
+          format: int32
+        codigo_ubigeo:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GetEstadoTitulacionRequest:
+      type: object
+      properties:
+        anio:
+          type: integer
+          format: int32
+        tipo_filtro:
+          type: integer
+          format: int32
+        codigo_ugel:
+          type: string
+          nullable: true
+        codigo_ubigeo:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GetGraficoTitulacionRequest:
+      type: object
+      properties:
+        tipo_filtro:
+          type: integer
+          format: int32
+        anio:
+          type: integer
+          format: int32
+        codigo_ubigeo:
+          type: string
+          nullable: true
+        codigo_ugel:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GetImpresionMapaRequest:
+      type: object
+      properties:
+        id_tamanio_pagina:
+          type: integer
+          format: int32
+        id_orientacion_pagina:
+          type: integer
+          format: int32
+        margen:
+          type: integer
+          format: int32
+        titulo:
+          type: string
+          nullable: true
+        coordenada:
+          type: string
+          nullable: true
+        imagen:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GetPoligonoRequest:
+      type: object
+      properties:
+        id_tipo_inmueble:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        codigo_modular:
+          type: string
+          nullable: true
+        anexo:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GetPoligonosRequest:
+      type: object
+      properties:
+        tipo_uso:
+          type: string
+          nullable: true
+        nombre_institucion:
+          type: string
+          nullable: true
+        ubigeo:
+          type: string
+          nullable: true
+        codigo_inmueble:
+          type: string
+          nullable: true
+        numero_registral:
+          type: string
+          nullable: true
+        codigo_local:
+          type: string
+          nullable: true
+        codigo_modular:
+          type: string
+          nullable: true
+        poligono:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GetProvinciasRequest:
+      type: object
+      properties:
+        cod_departamento:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GetUgelesRequest:
+      type: object
+      properties:
+        cod_dre:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: Jwt Authorization
+      name: Authorization
+      in: header
+security:
+- Bearer: []
