@@ -13,23 +13,33 @@ module.exports = sequelize.define('categoria', {
     },
     abreviatura: {
         type: Sequelize.STRING(10),
-        allowNull: true,  // Es NULL según la imagen
+        allowNull: true,  
         field: 'abreviatura'
     },
     denominacion: {
         type: Sequelize.STRING(255),
-        allowNull: true,  // Es NULL según la imagen
+        allowNull: true,  
         field: 'denominacion'
     },
     descripcion: {
-        type: Sequelize.STRING(255),  // Cambiado de TEXT a STRING(255)
-        allowNull: true,  // Es NULL según la imagen
+        type: Sequelize.STRING(255),
+        allowNull: true,  
         field: 'descripcion'
     },
     foto_referente: {
         type: Sequelize.STRING(255),
-        allowNull: true,  // Es NULL según la imagen
+        allowNull: true, 
         field: 'foto_referente'
+    },
+    usuariocreacion_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        field: 'usuariocreacion_id'
+    },
+    usuariomodificion_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        field: 'usuariomodificion_id'
     },
     createdAt: {
         type: Sequelize.DATE,
