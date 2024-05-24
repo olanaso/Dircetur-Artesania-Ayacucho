@@ -8,6 +8,6 @@ router.delete('/categoria', controller.eliminar);
 router.get('/categoria/:id', controller.obtener);
 router.get('/categoria', controller.listar);
 router.post('/categoria/save/', controller.save);
-
+router.get('/categorias', controller.filtrar);
 
 module.exports = router;
