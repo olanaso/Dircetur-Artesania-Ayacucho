@@ -168,63 +168,29 @@
 					<!-- BEGIN .main-content -->
 					<div class="main-content">
 						<div class="card">
-							<div class="card-header">Filtrar clientes</div>
-							<div class="card-body">
-								<div class="row gutters">
-									<div class="col">
-										<input type="text" class="form-control" placeholder="Nombre">
-									</div>
-									<div class="col">
-										<input type="text" class="form-control" placeholder="Correo">
-									</div>
-									<div class="col">
-										<button class="btn btn-primary">Filtrar</button>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-header">Lista de Clientes</div>
-									
-									<div class="card-body">
-										<table class="table m-0">
-											<thead class="thead-default">
-												<tr>
-													<th>Id Usuario</th>
-													<th>Nombres y Apellidos</th>
-													<th>Correo</th>
-													<th>Estado</th>
-													<th>Acciones</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td><button type="button" class="btn btn-primary btn-sm"><i class="icon icon-bin"></i></button>
-														<button type="button" class="btn btn-light btn-sm"><a href="/detalle-cliente.html"><i class="icon icon-eye2"></i></a></i></button></td>
-												</tr>
-												<tr>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td><button type="button" class="btn btn-primary btn-sm"><i class="icon icon-bin"></i></button>
-														<button type="button" class="btn btn-light btn-sm"><i class="icon icon-eye2"></i></button></td>
-												</tr>
-												<tr>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td><button type="button" class="btn btn-primary btn-sm"><i class="icon icon-bin"></i></button>
-														<button type="button" class="btn btn-light btn-sm"><i class="icon icon-eye2"></i></button></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
+							<div class="card-header">Cliente</div>
+
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                      <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Información</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Cuenta</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Reclamo del Cliente</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Activa / Desactiva</a>
+                                      </li>
+                                    </ul>
+                                    <div class="tab-content" id="myTabContent">
+                                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">You may think that this is just yet an other charting library. But Chartist.js is the product of a community that was disappointed about the abilities provided by other charting libraries. Of course there are hundreds of other great charting libraries but after using them there were always tweaks you would have wished for that were not included.</div>
+                                      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">With the clear separation of concerns within Chartist.js, you're able to style your charts with CSS in @media queries. However, sometimes you also need to conditionally control the behavior of your charts. For this purpose, Chartist.js provides you with a simple configuration override mechanism based on media queries.</div>
+                                      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Specifying the style of your chart in CSS is not only cleaner but also enables you to use awesome CSS animations and transitions to be applied to your SVG elements!</div>
+                                    </div>
+                                </div>
 						</div>
 						
 

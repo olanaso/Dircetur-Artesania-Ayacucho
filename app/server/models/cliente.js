@@ -77,20 +77,17 @@ module.exports = sequelize.define('cliente', {
         field: 'direccion_envio',
     },
     foto_perfil: {
-        type: Sequelize.STRING(150),
+        type: Sequelize.JSON,
         allowNull: true,
         defaultValue: null,
         field: 'foto_perfil',
     },
     list_reclamos: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true,
         defaultValue: null,
         field: 'list_reclamos',
         collate: 'utf8mb4_bin',
-        validate: {
-            isJSON: true
-        }
     },
     usuario_id: {
         type: Sequelize.INTEGER,
