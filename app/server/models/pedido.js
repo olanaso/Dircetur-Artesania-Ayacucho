@@ -3,43 +3,58 @@ const db = require('../config/db');
 const sequelize = db.sequelize;
 const Sequelize = db.Sequelize;
 
-module.exports = sequelize.define('categoria', {
-    id: {
+module.exports = sequelize.define('pedido', {
+    num_pedido: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
-        field: 'id'
+        field: 'num_pedido'
     },
-    abreviatura: {
-        type: Sequelize.STRING(10),
+    artesano_id: {
+        type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'abreviatura'
+        field: 'artesano_id'
     },
-    denominacion: {
+    cliente_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        field: 'cliente_id'
+    },
+    fecha_pedido: {
+        type: Sequelize.DATE(6),
+        allowNull: true,
+        field: 'fecha_pedido'
+    },
+    list_productos: {
+        type: Sequelize.JSON,
+        allowNull: true,
+        field: 'list_productos'
+    },
+    imagen_pago: {
         type: Sequelize.STRING(155),
         allowNull: true,
-        field: 'denominacion'
+        field: 'imagen_pago'
     },
-    descripcion: {
-        type: Sequelize.STRING(255),
+    list_reclamo: {
+        type: Sequelize.JSON,
         allowNull: true,
-        field: 'descripcion'
+        field: 'list_reclamo'
     },
-    foto_referente: {
-        type: Sequelize.STRING(155),
+    comprobante_solic: {
+        type: Sequelize.STRING(50),
         allowNull: true,
-        field: 'foto_referente'
+        field: 'comprobante_solic'
     },
     usuariocreacion_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         field: 'usuariocreacion_id'
     },
-    usuariomodificion_id: {
+    usuariomodificacion_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'usuariomodificion_id'
+        field: 'usuariomodificacion_id'
     },
     createdAt: {
         type: Sequelize.DATE,
@@ -53,6 +68,6 @@ module.exports = sequelize.define('categoria', {
         field: 'updatedAt'
     }
 }, {
-    tableName: 'categoria',
+    tableName: 'pedido',
     timestamps: true
 });

@@ -1,19 +1,18 @@
 const sequelize = require('sequelize');
-const model = require('../models/producto');
+const model = require('../models/cliente');
 const { Op } = require('sequelize');
-const PARAMETROS = require("../helpers/parametros");
-const moment = require('moment');
 
 module.exports = {
     guardar,
     actualizar,
     eliminar,
     obtener,
-    listar, 
+    listar,
+    buscar,
     save
 };
 
-function guardar (req, res) {
+function guardar(req, res) {
 
     model.create(req.body)
         .then(object => {
@@ -25,40 +24,40 @@ function guardar (req, res) {
 
 }
 
-function actualizar (req, res) {
+function actualizar(req, res) {
 
     model.findOne({
-        where: { id: req.params.id }
+        where: {id: req.params.id}
 
     })
         .then(object => {
-            object.update(req.body)
-                .then(object => res.status(200).json(object))
-                .catch(error => res.status(400).send(error))
-        }
+                object.update(req.body)
+                    .then(object => res.status(200).json(object))
+                    .catch(error => res.status(400).send(error))
+            }
         )
         .catch(error => res.status(400).send(error));
 }
 
-function eliminar (req, res) {
+function eliminar(req, res) {
 
     model
         .findOne({
-            where: { id: req.body.id }
+            where: {id: req.body.id}
         })
         .then(object => {
-            object.destroy();
-            res.status(200).json(object);
-        }
+                object.destroy();
+                res.status(200).json(object);
+            }
         )
         .catch(error => res.status(400).send(error));
 }
 
 
-function obtener (req, res) {
+function obtener(req, res) {
 
     model.findOne({
-        where: { id: req.params.id }
+        where: {id: req.params.id}
     })
         .then(resultset => {
             res.status(200).json(resultset)
@@ -69,8 +68,21 @@ function obtener (req, res) {
 }
 
 
+function buscar(req, res) {
+    let sql = ``;
+    // if(!req.query.fechainicio && !req.query.fechafin){
 
-function listar (req, res) {
+
+    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+        .then(resultset => {
+            res.status(200).json(resultset)
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}
+
+function listar(req, res) {
 
     model.findAll()
         .then(resultset => {
@@ -83,8 +95,7 @@ function listar (req, res) {
 
 
 /*Guarda los datos generales de un predio*/
-async function save (req, res, next) {
-
+async function save(req, res, next) {
     const t = await model.sequelize.transaction();
     try {
 
@@ -95,14 +106,14 @@ async function save (req, res, next) {
         });
 
         if (object != null) {
-            let obj = { ...object.dataValues, ...req.body }
+            let obj = {...object.dataValues, ...req.body}
             for (const prop in obj) {
                 object[prop] = obj[prop]
             }
-            object.usuaregistra_id = req.userId;
-            await object.save({ t });
+            object.id= req.id;
+            await object.save({t});
         } else {
-            // object = await model.create({ ...req.body, usuaregistra_id: req.userId }, { t });
+            //object = await model.create({...req.body, usuaregistra_id: req.userId}, {t});
             object = await model.create({ ...req.body }, { t });
         }
         t.commit().then();

@@ -11,100 +11,111 @@ module.exports = sequelize.define('artesano', {
         autoIncrement: true,
         field: 'id'
     },
-    DNI: {
-        type: Sequelize.STRING(8),
+    usuario_id: {
+        type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'DNI'
+        field: 'usuario_id'
     },
-    RUC: {
-        type: Sequelize.STRING(11),
+    ruc: {
+        type: Sequelize.CHAR(11),
         allowNull: true,
-        field: 'RUC'
+        field: 'ruc'
     },
-    NOMBRES: {
+    foto1: {
         type: Sequelize.STRING(150),
         allowNull: true,
-        field: 'NOMBRES'
+        field: 'foto1'
     },
-    APELLIDOS: {
+    foto2: {
         type: Sequelize.STRING(150),
         allowNull: true,
-        field: 'APELLIDOS'
+        field: 'foto2'
     },
-    CORREO: {
-        type: Sequelize.STRING(150),
-        allowNull: true,
-        field: 'CORREO'
-    },
-    CELULAR: {
-        type: Sequelize.STRING(20),
-        allowNull: true,
-        field: 'CELULAR'
-    },
-    FOTO1: {
-        type: Sequelize.STRING(150),
-        allowNull: true,
-        field: 'FOTO1'
-    },
-    FOTO2: {
-        type: Sequelize.STRING(150),
-        allowNull: true,
-        field: 'FOTO2'
-    },
-    UBIGEO: {
+    ubigeo: {
         type: Sequelize.STRING(6),
         allowNull: true,
-        field: 'UBIGEO'
+        field: 'ubigeo'
     },
-    LUGARNACIMIENTO: {
-        type: Sequelize.STRING(300),
+    lugar_nacimiento: {
+        type: Sequelize.STRING(150),
         allowNull: true,
-        field: 'LUGARNACIMIENTO'
+        field: 'lugar_nacimiento'
     },
-    TIPOLENGUA: {
-        type: Sequelize.INTEGER,
+    region: {
+        type: Sequelize.STRING(150),
         allowNull: true,
-        field: 'TIPOLENGUA'
+        field: 'region'
     },
-    LOGINID: {
-        type: Sequelize.INTEGER,
+    distrito: {
+        type: Sequelize.STRING(150),
         allowNull: true,
-        field: 'LOGINID'
+        field: 'distrito'
+    },
+    provincia: {
+        type: Sequelize.STRING(150),
+        allowNull: true,
+        field: 'provincia'
+    },
+    lengua_materna: {
+        type: Sequelize.STRING(150),
+        allowNull: true,
+        field: 'lengua_materna'
+    },
+    info_taller: {
+        type: Sequelize.JSON,
+        allowNull: true,
+        field: 'info_taller',
+    },
+    list_videos: {
+        type: Sequelize.JSON,
+        allowNull: true,
+        field: 'list_videos',
     },
     list_especialidadtecnicas: {
         type: Sequelize.JSON,
         allowNull: true,
-        field: 'list_especialidadtecnicas'
+        field: 'list_especialidadtecnicas',
     },
     list_contactos: {
         type: Sequelize.JSON,
         allowNull: true,
-        field: 'list_contactos'
+        field: 'list_contactos',
     },
     list_reconocimientos: {
         type: Sequelize.JSON,
         allowNull: true,
-        field: 'list_reconocimientos'
+        field: 'list_reconocimientos',
     },
     list_medios_pago: {
         type: Sequelize.JSON,
         allowNull: true,
-        field: 'list_medios_pago'
+        field: 'list_medios_pago',
     },
-    ESTADO: {
+    estado: {
+        type: Sequelize.TINYINT(1),
+        allowNull: true,
+        field: 'estado'
+    },
+    usuariocreacion_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'ESTADO'
+        field: 'usuariocreacion_id'
     },
-    USUARIOCREACION_id: {
+    usuariomodificacion_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'USUARIOCREACION_id'
+        field: 'usuariomodificacion_id'
     },
-    USUARIOMODIFICACION_id: {
-        type: Sequelize.INTEGER,
+    createdAt: {
+        type: Sequelize.DATE,
         allowNull: true,
-        field: 'USUARIOMODIFICACION_id'
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        field: 'createdAt'
+    },
+    updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: true,
+        field: 'updatedAt'
     }
 
 }, {

@@ -11,140 +11,140 @@ module.exports = sequelize.define('producto', {
         autoIncrement: true,
         field: 'id'  
     },
-    LoginID: {
+    login_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'LoginID'
+        field: 'login_id'
     },
-    ArtesanoID: {
+    artesano_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'ArtesanoID'
+        field: 'artesano_id'
     },
-    Nombres_es: {
+    nombres_es: {
         type: Sequelize.STRING,
         allowNull: true,
-        field: 'Nombres_es'
+        field: 'nombres_es'
     },
-    Nombres_eng: {
+    nombres_eng: {
         type: Sequelize.STRING,
         allowNull: true,
-        field: 'Nombres_eng'
+        field: 'nombres_eng'
     },
-    Resumen_es: {
-        type: Sequelize.TEXT,
-        allowNull: false,
-        field: 'Resumen_es'
-    },
-    Resumen_eng: {
+    resumen_es: {
         type: Sequelize.TEXT,
         allowNull: true,
-        field: 'Resumen_eng'
+        field: 'resumen_es'
     },
-    Descripcion_es: {
+    resumen_eng: {
         type: Sequelize.TEXT,
         allowNull: true,
-        field: 'Descripcion_es'
+        field: 'resumen_eng'
     },
-    Descripcion_eng: {
+    descripcion_es: {
         type: Sequelize.TEXT,
         allowNull: true,
-        field: 'Descripcion_eng'
+        field: 'descripcion_es'
     },
-    Cualidades_es: {
+    descripcion_eng: {
         type: Sequelize.TEXT,
         allowNull: true,
-        field: 'Cualidades_es'
+        field: 'descripcion_eng'
     },
-    Cualidades_eng: {
+    cualidades_es: {
         type: Sequelize.TEXT,
         allowNull: true,
-        field: 'Cualidades_eng'
+        field: 'cualidades_es'
     },
-    PalabraClave_es: {
+    cualidades_eng: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+        field: 'cualidades_eng'
+    },
+    palabra_clave_es: {
         type: Sequelize.STRING,
         allowNull: true,
-        field: 'PalabraClave_es'
+        field: 'palabra_clave_es'
     },
-    PalabraClave_eng: {
+    palabra_clave_eng: {
         type: Sequelize.STRING,
         allowNull: true,
-        field: 'PalabraClave_eng'
+        field: 'palabra_clave_eng'
     },
-    NumeroPiezas_es: {
+    numero_piezas_es: {
         type: Sequelize.STRING,
         allowNull: true,
-        field: 'NumeroPiezas_es'
+        field: 'numero_piezas_es'
     },
-    NumeroPiezas_eng: {
+    numero_piezas_eng: {
         type: Sequelize.STRING,
         allowNull: true,
-        field: 'NumeroPiezas_eng'
+        field: 'numero_piezas_eng'
     },
-    Alto: {
+    alto: {
         type: Sequelize.DECIMAL(6,2),
         allowNull: true,
-        field: 'Alto'
+        field: 'alto'
     },
-    Ancho: {
+    ancho: {
         type: Sequelize.DECIMAL(6,2),
         allowNull: true,
-        field: 'Ancho'
+        field: 'ancho'
     },
-    Materiales_es: {
+    materiales_es: {
         type: Sequelize.TEXT,
         allowNull: true,
-        field: 'Materiales_es'
+        field: 'materiales_es'
     },
-    Materiales_eng: {
+    materiales_eng: {
         type: Sequelize.TEXT,
         allowNull: true,
-        field: 'Materiales_eng'
+        field: 'materiales_eng'
     },
-    Precio: {
+    precio: {
         type: Sequelize.DECIMAL(6,2),
         allowNull: true,
-        field: 'Precio'
+        field: 'precio'
     },
-    Peso: {
+    peso: {
         type: Sequelize.DECIMAL(6,2),
         allowNull: true,
-        field: 'Peso'
+        field: 'peso'
     },
-    Tecnicas_es: {
+    tecnicas_es: {
         type: Sequelize.TEXT,
         allowNull: true,
-        field: 'Tecnicas_es'
+        field: 'tecnicas_es'
     },
-    Tecnicas_eng: {
+    tecnicas_eng: {
         type: Sequelize.TEXT,
         allowNull: true,
-        field: 'Tecnicas_eng'
+        field: 'tecnicas_eng'
     },
-    Cantidad: {
+    cantidad: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'Cantidad'
+        field: 'cantidad'
     },
-    CantidadMinima: {
+    cantidad_minima: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'CantidadMinima'
+        field: 'cantidad_minima'
     },
-    RestarStock: {
+    restar_stock: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'RestarStock'
+        field: 'restar_stock'
     },
-    TipoEstado: {
+    tipo_estado: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'TipoEstado'
+        field: 'tipo_estado'
     },
-    FechaDisponible: {
+    fecha_disponible: {
         type: Sequelize.DATEONLY,
         allowNull: true,
-        field: 'FechaDisponible'
+        field: 'fecha_disponible'
     },
     lst_imagenes: {
         type: Sequelize.JSON,
@@ -156,15 +156,15 @@ module.exports = sequelize.define('producto', {
         allowNull: true,
         field: 'lst_videos'
     },
-    lst_Colores: {
+    lst_colores: {
         type: Sequelize.JSON,
         allowNull: true,
-        field: 'lst_Colores'
+        field: 'lst_colores'
     },
-    lst_Talla: {
+    lst_talla: {
         type: Sequelize.JSON,
         allowNull: true,
-        field: 'lst_Talla'
+        field: 'lst_talla'
     },
     lst_ofertas: {
         type: Sequelize.JSON,
@@ -176,57 +176,57 @@ module.exports = sequelize.define('producto', {
         allowNull: true,
         field: 'lst_otros_costos'
     },
-    Igv: {
+    igv: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'Igv'
+        field: 'igv'
     },
-    Precio_local: {
+    precio_local: {
         type: Sequelize.DECIMAL(6,2),
         allowNull: true,
-        field: 'Precio_local'
+        field: 'precio_local'
     },
-    Precio_nacional: {
+    precio_nacional: {
         type: Sequelize.DECIMAL(6,2),
         allowNull: true,
-        field: 'Precio_nacional'
+        field: 'precio_nacional'
     },
-    Precio_extranjero: {
+    precio_extranjero: {
         type: Sequelize.DECIMAL(6,2),
         allowNull: true,
-        field: 'Precio_extranjero'
+        field: 'precio_extranjero'
     },
-    Tiempo_elaboracion: {
+    tiempo_elaboracion: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'Tiempo_elaboracion'
+        field: 'tiempo_elaboracion'
     },
-    Tiempo_envio: {
+    tiempo_envio: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'Tiempo_envio'
+        field: 'tiempo_envio'
     },
-    Preventas: {
+    preventas: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'Preventas'
+        field: 'preventas'
     },
-    UsuarioCreacion: {
+    usuariocreacion_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'UsuarioCreacion'
+        field: 'usuariocreacion_id'
     },
-    UsuarioModificacion: {
+    usuariomodificacion_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'UsuarioModificacion'
+        field: 'usuariomodificacion_id'
     },
-    createdAt: {
+    createdat: {
         type: Sequelize.DATE,
         allowNull: true,
         field: 'createdat'
     },
-    updatedAt: {
+    updatedat: {
         type: Sequelize.DATE,
         allowNull: true,
         field: 'updatedat'

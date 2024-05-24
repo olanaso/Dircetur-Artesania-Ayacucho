@@ -3,7 +3,7 @@ const db = require('../config/db');
 const sequelize = db.sequelize;
 const Sequelize = db.Sequelize;
 
-module.exports = sequelize.define('categoria', {
+module.exports = sequelize.define('historial_atencion', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -11,35 +11,45 @@ module.exports = sequelize.define('categoria', {
         autoIncrement: true,
         field: 'id'
     },
-    abreviatura: {
-        type: Sequelize.STRING(10),
+    pedido_id: {
+        type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'abreviatura'
+        field: 'pedido_id'
     },
-    denominacion: {
+    comentario: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+        field: 'comentario'
+    },
+    estado_atencion: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        field: 'estado_atencion'
+    },
+    notificar_cliente: {
+        type: Sequelize.TINYINT(1),
+        allowNull: true,
+        field: 'notificar_cliente'
+    },
+    subida_archivo: {
         type: Sequelize.STRING(155),
         allowNull: true,
-        field: 'denominacion'
+        field: 'subida_archivo'
     },
-    descripcion: {
-        type: Sequelize.STRING(255),
+    fecha_atencion: {
+        type: Sequelize.DATE(6),
         allowNull: true,
-        field: 'descripcion'
-    },
-    foto_referente: {
-        type: Sequelize.STRING(155),
-        allowNull: true,
-        field: 'foto_referente'
+        field: 'fecha_atencion'
     },
     usuariocreacion_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         field: 'usuariocreacion_id'
     },
-    usuariomodificion_id: {
+    usuariomodificacion: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'usuariomodificion_id'
+        field: 'usuariomodificacion'
     },
     createdAt: {
         type: Sequelize.DATE,
@@ -53,6 +63,6 @@ module.exports = sequelize.define('categoria', {
         field: 'updatedAt'
     }
 }, {
-    tableName: 'categoria',
+    tableName: 'historial atencion',
     timestamps: true
 });

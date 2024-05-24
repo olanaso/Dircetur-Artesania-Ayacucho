@@ -11,6 +11,10 @@ const notas = require('./notas');
 const artesano = require('./artesano');
 const categoria = require('./categoria');
 const producto = require('./producto');
+const cliente = require('./cliente');
+const slider = require('./slider');
+const pedido = require('./pedido');
+const historial_atencion = require('./historial_atencion');
 
 
 module.exports = {
@@ -26,5 +30,10 @@ module.exports = {
     notas,
     artesano,
     producto,
-    categoria
+    categoria,
+    cliente,
+    slider,
+    producto,
+    pedido,
+    historial_atencion
 };

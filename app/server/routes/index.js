@@ -11,8 +11,12 @@ const iestp = require('./iestp');
 const programas = require('./programas');
 const notas = require('./notas');
 const artesano = require('./artesano');
+const cliente = require('./cliente');
+const slider = require('./slider');
 const producto = require('./producto');
 const categoria = require('./categoria');
+const pedido = require('./pedido');
+const historial_atencion = require('./historial_atencion')
 
 module.exports = (app) => {
     app.use('/api', mantenimiento);
@@ -27,6 +31,10 @@ module.exports = (app) => {
     app.use('/api', programas);
     app.use('/api', notas);
     app.use('/api', artesano);
+    app.use('/api', slider);
+    app.use('/api', cliente);
     app.use('/api', producto);
     app.use('/api', categoria);
+    app.use('/api', pedido);
+    app.use('/api', historial_atencion);
 };
