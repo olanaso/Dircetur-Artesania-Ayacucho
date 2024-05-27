@@ -32,7 +32,7 @@ module.exports = sequelize.define('pedido', {
         field: 'list_productos'
     },
     imagen_pago: {
-        type: Sequelize.STRING(155),
+        type: Sequelize.JSON,
         allowNull: true,
         field: 'imagen_pago'
     },
