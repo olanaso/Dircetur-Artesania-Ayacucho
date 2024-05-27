@@ -12,7 +12,7 @@ async function uploadarchivoDDP (req, res, next) {
     try {
         // Verificar si la carpeta existe, si no, crearla
         //     
-        const folder = req.query.folder || 'all';
+        const folder = 'files-app/' + (req.query.folder || '');
         if (!folder) {
             return res.status(400).json({
                 error: "Falta el parámetro 'folder' en la solicitud.",
