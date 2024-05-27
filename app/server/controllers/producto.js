@@ -3,6 +3,7 @@ const model = require('../models/producto');
 const { Op } = require('sequelize');
 const PARAMETROS = require("../helpers/parametros");
 const moment = require('moment');
+const { DECIMAL } = require('sequelize');
 
 module.exports = {
     guardar,
@@ -10,7 +11,8 @@ module.exports = {
     eliminar,
     obtener,
     listar, 
-    save
+    save,
+    buscar
 };
 
 function guardar (req, res) {
@@ -70,9 +72,105 @@ function obtener (req, res) {
 
 
 
-function listar (req, res) {
+/*function listar (req, res) {
 
     model.findAll()
+        .then(resultset => {
+            res.status(200).json(resultset)
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}*/
+
+ 
+function listar(req, res) {
+    let sql = ``; 
+        sql = 
+        `
+        SELECT 
+        a.id,
+        a.imagen_principal,
+        a.nombres_es,
+        c.nombre_completo,
+        a.precio,
+        a.cantidad
+    FROM producto a
+    INNER JOIN artesano b ON a.artesano_id = b.id
+    INNER JOIN usuario c ON c.id = a.login_id 
+    order by a.id desc
+    limit 50
+    `    
+    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+        .then(resultset => {
+            res.status(200).json(resultset)
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}
+
+
+function buscar(req, res) {
+
+    
+    const { 
+        nombres_es = '',
+        nombre_completo = '',
+        precio = null,
+        cantidad = null,
+    } = req.query;
+    
+    
+
+    
+    let sql = ``; 
+        sql = 
+        `
+        SELECT 
+        a.id,
+        a.imagen_principal,
+        a.nombres_es,
+        c.nombre_completo,
+        a.precio,
+        a.cantidad
+    FROM producto a
+    INNER JOIN artesano b ON a.artesano_id = b.id
+    INNER JOIN usuario c ON c.id = a.login_id
+    WHERE 1=1 
+    `;
+    
+   /* if (nombres_es !== '') {
+        sql += ` AND a.nombres_es LIKE '%${req.body.nombres_es}%'`;
+    }
+    if (nombre_completo !== '') {
+        sql += ` AND c.nombre_completo LIKE '%${req.body.nombres_es}%'`;
+    }*/
+
+    if (nombres_es !== '') {
+        sql += ` AND a.nombres_es LIKE '%${nombres_es}%'`;
+    }
+    if (nombre_completo !== '') {
+        sql += ` AND c.nombre_completo LIKE '%${nombre_completo}%'`;
+    }
+
+    if (!isNaN(precio) && precio !== '') {
+    sql += ` AND a.precio <= '${req.query.precio}'`; 
+    }
+
+    if (!isNaN(cantidad) && cantidad !== '') {
+        sql += ` AND a.cantidad <= '${req.query.cantidad}'`;  
+    }
+
+
+ 
+    sql += `
+        ORDER BY a.id DESC
+        LIMIT 50;
+    `;
+
+    
+    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -112,3 +210,4 @@ async function save (req, res, next) {
         return next(e);
     }
 }
+
