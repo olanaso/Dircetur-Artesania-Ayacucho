@@ -103,7 +103,7 @@ async function buscarUsuario () {
       tabla.innerHTML = '';
 
       // Crear una fila para los encabezados de la tabla
-      let encabezados = '<tr><th>N°</th><th>Imagen</th><th>Producto</th><th>Nombre Artesano</th><th>Precio S/.</th><th>Stock</th> <th colspan="3" style="text-align: center;">Certificado</th></tr>';
+      let encabezados = '<tr><th>N°</th><th>Imagen</th><th>Producto</th><th>Nombre Artesano</th><th>Precio S/.</th><th>Stock</th> <th  style="text-align: center;">Acciones</th></tr>';
 
       // Agregar los encabezados a la tabla
       tabla.innerHTML += encabezados;
@@ -118,30 +118,15 @@ async function buscarUsuario () {
         let fila = '<tr>';
         // Agregar las celdas con los datos del certificado
         fila += `<td>${correlativo}</td>`; 
-        fila += `<td><img src="${prog.imagen_principal}" alt="Imagen" style="width: 100px; height: auto;"></td>`;
+        fila += `<td style="text-align: center;"><img src="${prog.imagen_principal}" alt="Imagen" style="width: 150px;ali height: auto;"></td>`;
         fila += `<td>${prog.nombres_es}</td>`;
         fila += `<td>${prog.nombre_completo}</td>`;
         fila += `<td>${prog.precio}</td>`;
         fila += `<td>${prog.cantidad}</td>`;
-        fila += `<td><a href="javascript:void(0);"   class="open-modal" data-toggle="tooltip" title="Editar" data-id="${prog.id}" style="color: blue; text-decoration: underline;"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px;">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-            </svg></a></td>`;
-
-        fila += `<td><a href="javascript:void(0);" class="btn_Eliminar" data-toggle="tooltip" title="Eliminar" data-id="${prog.id}" style="color: blue; text-decoration: underline;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px;">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-            <line x1="9" y1="9" x2="15" y2="15"/>
-            <line x1="15" y1="9" x2="9" y2="15"/>
-          </svg></a></td>`;
-
-
-
-        fila += `<td><a href="${prog.certificado}" target="_blank" data-toggle="tooltip" title="Ver certificado" style="color: blue; text-decoration: underline;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px;">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg></a></td>`;
-
+        fila += `<td style="text-align: center;"><a href="javascript:void(0);" data-toggle="tooltip" title="Editar" data-id="${prog.id}" class="btn btn-info btn-sm" > <i class="icon icon-edit2"></i></a> `;
+        fila += `<a href="javascript:void(0);"  data-toggle="tooltip" title="Eliminar" data-id="${prog.id}" class="btn btn-primary btn-sm">  <i class="icon icon-bin"></i></a>`;
+        fila += `</td>`;
+   
 
         fila += '</tr>';
         // Agregar la fila a la tabla
