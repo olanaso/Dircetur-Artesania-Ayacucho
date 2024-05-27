@@ -32,7 +32,7 @@ module.exports = sequelize.define('historial_atencion', {
         field: 'notificar_cliente'
     },
     subida_archivo: {
-        type: Sequelize.STRING(155),
+        type: Sequelize.JSON,
         allowNull: true,
         field: 'subida_archivo'
     },

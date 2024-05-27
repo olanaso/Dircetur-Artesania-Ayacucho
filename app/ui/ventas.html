@@ -81,7 +81,7 @@
 						<nav class="side-nav">
 							<!-- BEGIN: side-nav-content -->
 							<ul class="unifyMenu" id="unifyMenu">
-								<li class="active selected">
+								<li>
 									<a href="/">
 										<span class="has-icon">
 											<i class="icon-home"></i>
@@ -108,7 +108,7 @@
 										</li>
 									</ul>
 								</li>
-								<li>
+								<li class="active selected">
 									<a href="/ventas.html">
 										<span class="has-icon">
 											<i class="icon-shopping-cart"></i>
@@ -154,12 +154,11 @@
 					<!-- BEGIN .main-heading -->
 					<header class="main-heading">
 						<div class="container-fluid">
-							<h5>Categoría</h5>
+							<h5>Pedidos</h5>
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="#">Home</a></li>
-									<li class="breadcrumb-item"><a href="#">Analytics</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Reports</li>
+									<li class="breadcrumb-item"><a href="/">Administrador</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Ventas</li>
 								</ol>
 							</nav>
 						</div>
@@ -168,26 +167,78 @@
 					<!-- BEGIN .main-content -->
 					<div class="main-content">
 						<div class="card">
-							<div class="card-header">Filtrar categoría</div>
+							<div class="card-header">Filtrar pedido</div>
 							<div class="card-body">
-								<div class="row gutters">
-									<div class="col">
-										<input type="text" class="form-control" placeholder="ID de categoría">
+								<form id="filtrarPedido">
+									<div class="row gutters mb-4">
+										<div class="col-md-4 col-sm-6 mb-3">
+											<label for="num-pedido">Número de pedido</label>
+											<input type="number" class="form-control" placeholder="Número de pedido" id="num-pedido">
+										</div>
+										<div class="col-md-4 col-sm-6 mb-3">
+											<label for="nombre-artesano">Nombre del artesano</label>
+											<input type="text" class="form-control" placeholder="Nombre del artesano" id="nombre-artesano">
+										</div>
+										<div class="col-md-4 col-sm-6 mb-3">
+											<label for="nombre-cliente">Nombre del cliente</label>
+											<input type="text" class="form-control" placeholder="Nombre del cliente" id="nombre-cliente">
+										</div>
+										<div class="col-md-4 col-sm-6 mb-3 date-placeholder" data-placeholder="Fecha del pedido">
+											<label for="fecha-pedido">Fecha del pedido</label>
+											<input type="date" class="form-control" id="fecha-pedido">
+										</div>
+										<div class="col-md-4 col-sm-6 mb-3">
+											<label for="estado">Estado</label>
+											<select id="estado" class="form-control" name="estado">
+												<option value="" selected disabled hidden>Seleccione estado...</option>
+												<option value="pendiente">Pendiente</option>
+												<option value="pagado">Pagado</option>
+												<option value="envio">Envío</option>
+												<option value="finalizado">Finalizado</option>
+												<option value="anulado">Anulado</option>
+											</select>
+										</div>
+										<div class="col-md-12 text-right">
+											<button id="filtrar-pedido" type="submit" class="btn btn-primary">Filtrar</button>
+										</div>
 									</div>
-									<div class="col">
-										<input type="text" class="form-control" placeholder="Abreviatura">
-									</div>
-									<div class="col">
-										<input type="text" class="form-control" placeholder="Nombre/Denominación">
-									</div>
-									<div class="col">
-										<button class="btn btn-primary">Filtrar</button>
+								</form>
+								
+								<div class="card">
+									<div class="card-header">Lista de pedidos</div>
+									<div class="card-body">
+										<table class="table m-0" id="tablaCategoria">
+											<thead class="thead-default">
+												<tr>
+													<th>N°  Pedido</th>
+													<th>Cliente</th>
+													<th>Artesano</th>
+													<th>Fecha pedido</th>													<th>Monto</th>
+													<th>Estado</th>
+													<th>Acciones</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">1</th>
+													<td>undefined</td>
+													<td>undefined</td>
+													<td>undefined</td>
+													<td>undefined</td>
+													<td>undefined</td>
+													<td>
+														<button type="button" class="btn btn-info btn-sm"><i class="icon icon-eye"></i></button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
+	
 							</div>
 						</div>
-						
-
+	
+	
 					</div>
 					<!-- END: .main-content -->
 				</div>
@@ -225,6 +276,7 @@
 		<!-- Common JS -->
 		<script src="js/common.js"></script>
 		
+		<script type="module" src="src/pedidos/index.js"></script>
 	</body>
 
 <!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->

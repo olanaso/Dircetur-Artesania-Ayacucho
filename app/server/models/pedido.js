@@ -22,7 +22,7 @@ module.exports = sequelize.define('pedido', {
         field: 'cliente_id'
     },
     fecha_pedido: {
-        type: Sequelize.DATE(6),
+        type: Sequelize.DATE,
         allowNull: true,
         field: 'fecha_pedido'
     },
