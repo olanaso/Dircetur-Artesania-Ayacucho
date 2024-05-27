@@ -8,8 +8,8 @@ module.exports = {
     eliminar,
     obtener,
     listar,
-    buscar,
-    save
+    save,
+    filtrar
 };
 
 function guardar(req, res) {
@@ -28,19 +28,16 @@ function actualizar(req, res) {
 
     model.findOne({
         where: {id: req.params.id}
-
     })
         .then(object => {
-                object.update(req.body)
-                    .then(object => res.status(200).json(object))
-                    .catch(error => res.status(400).send(error))
-            }
-        )
+            object.update(req.body)
+                .then(object => res.status(200).json(object))
+                .catch(error => res.status(400).send(error))
+        })
         .catch(error => res.status(400).send(error));
 }
 
 function eliminar(req, res) {
-
     model
         .findOne({
             where: {id: req.body.id}
@@ -48,8 +45,7 @@ function eliminar(req, res) {
         .then(object => {
                 object.destroy();
                 res.status(200).json(object);
-            }
-        )
+        })
         .catch(error => res.status(400).send(error));
 }
 
@@ -59,21 +55,6 @@ function obtener(req, res) {
     model.findOne({
         where: {id: req.params.id}
     })
-        .then(resultset => {
-            res.status(200).json(resultset)
-        })
-        .catch(error => {
-            res.status(400).send(error)
-        })
-}
-
-
-function buscar(req, res) {
-    let sql = ``;
-    // if(!req.query.fechainicio && !req.query.fechafin){
-
-
-    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -94,7 +75,6 @@ function listar(req, res) {
 }
 
 
-/*Guarda los datos generales de un predio*/
 async function save(req, res, next) {
     const t = await model.sequelize.transaction();
     try {
@@ -113,7 +93,6 @@ async function save(req, res, next) {
             object.id= req.id;
             await object.save({t});
         } else {
-            //object = await model.create({...req.body, usuaregistra_id: req.userId}, {t});
             object = await model.create({ ...req.body }, { t });
         }
         t.commit().then();
@@ -123,3 +102,28 @@ async function save(req, res, next) {
         return next(e);
     }
 }
+
+async function filtrar(req, res) {
+    try {
+        const whereCondition = {};
+
+        for (const [key, value] of Object.entries(req.query)) {
+            if (value) {
+                if (typeof value === 'string' && key !== 'id') {
+                    // Si el valor es una cadena y la clave no es 'id', usar Op.like para búsquedas parciales
+                    whereCondition[key] = { [Op.like]: `%${value}%` };
+                } else {
+                    // Si no, hacer una coincidencia exacta
+                    whereCondition[key] = value;
+                }
+            }
+        }
+
+        const clientes = await model.findAll({ where: whereCondition });
+
+        res.json(clientes);
+    } catch (error) {
+        console.error('Error al buscar clientes:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
