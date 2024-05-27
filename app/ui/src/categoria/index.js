@@ -113,8 +113,7 @@ async function editarCategoria(categoria) {
       categoria.descripcion = descripcionInput.value;
 
       try {
-          const result = await actualizarCategoria(categoria.id, 
-            {
+          const result = await actualizarCategoria(categoria.id, {
               abreviatura: categoria.abreviatura,
               denominacion: categoria.denominacion,
               descripcion: categoria.descripcion

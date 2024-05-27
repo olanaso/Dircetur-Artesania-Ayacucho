@@ -1,4 +1,6 @@
 const model = require('../models/pedido');
+const { Op } = require('sequelize');
+
 
 module.exports = {
     guardar,
@@ -97,21 +99,32 @@ async function filtrar(req, res) {
 
         for (const [key, value] of Object.entries(req.query)) {
             if (value) {
-                if (typeof value === 'string' && key !== 'id') {
-                    // Si el valor es una cadena y la clave no es 'id', usar Op.like para búsquedas parciales
-                    whereCondition[key] = { [Op.like]: `%${value}%` };
-                } else {
-                    // Si no, hacer una coincidencia exacta
-                    whereCondition[key] = value;
+                switch (key) {
+                    case 'fecha_pedido':
+                        // Filtrar por fecha exacta sin considerar la hora
+                        whereCondition[key] = {
+                            [Op.and]: [
+                                Sequelize.where(Sequelize.fn('DATE', Sequelize.col('fecha_pedido')), value)
+                            ]
+                        };
+                        break;
+                    default:
+                        // Para otros campos de búsqueda parcial o exacta según el tipo de dato
+                        if (typeof value === 'string' && key !== 'id') {
+                            whereCondition[key] = { [Op.like]: `%${value}%` };
+                        } else {
+                            whereCondition[key] = value;
+                        }
+                        break;
                 }
             }
         }
 
-        const categorias = await model.findAll({ where: whereCondition });
+        const result = await model.findAll({ where: whereCondition });
 
-        res.json(categorias);
+        res.json(result);
     } catch (error) {
-        console.error('Error al buscar categorías:', error);
+        console.error('Error al buscar pedidos:', error);
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
