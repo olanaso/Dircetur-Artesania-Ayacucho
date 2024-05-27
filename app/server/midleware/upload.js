@@ -11,6 +11,7 @@ function generateFinalName (originalfilename) {
 async function uploadarchivoDDP (req, res, next) {
     try {
         // Verificar si la carpeta existe, si no, crearla
+        //     
         const folder = req.query.folder || 'all';
         if (!folder) {
             return res.status(400).json({
