@@ -15,6 +15,7 @@ const cliente = require('./cliente');
 const slider = require('./slider');
 const pedido = require('./pedido');
 const historial_atencion = require('./historial_atencion');
+const upload = require('./upload');
 
 
 module.exports = {
@@ -35,5 +36,6 @@ module.exports = {
     slider,
     producto,
     pedido,
-    historial_atencion
+    historial_atencion,
+    upload
 };
