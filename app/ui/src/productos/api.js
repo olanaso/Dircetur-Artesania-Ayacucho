@@ -59,6 +59,23 @@ export async function buscarProducto(filtro) {
   }
 }
 
+export async function deleteProducto (usuario) {
+  const settings = {
+      method: "DELETE",
+      headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(usuario),
+  };
+
+  try {
+      const response = await fetch(baseUrl + "/producto", settings);
+      const data = await response.json();
+      return data
+  } catch (error) {
+      console.error("Error:", error);
+  }
+}
 
 
 

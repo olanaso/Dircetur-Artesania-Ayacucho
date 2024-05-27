@@ -60,6 +60,28 @@ export async function buscarProducto(filtro) {
 }
 
 
+export async function guardarProducto (producto) {
+  if(producto.id==0){
+    producto.id=null;
+  }
+
+  const settings = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(producto),
+  };
+
+  try {
+      const response = await fetch(baseUrl + "/producto/save", settings);
+      const data = await response.json();
+      return data
+  } catch (error) {
+      console.error("Error:", error);
+  }
+}
+
 
 
 
@@ -104,27 +126,8 @@ export async function deleteUserCapacitacion (usuario) {
   }
 }
 
-export async function saveUserCapacitacion (usuario) {
-  if(usuario.programaid==0){
-      usuario.programaid=null;
-  }
 
-  const settings = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams(usuario),
-  };
 
-  try {
-      const response = await fetch(baseUrl + "/api/nota_save", settings);
-      const data = await response.json();
-      return data
-  } catch (error) {
-      console.error("Error:", error);
-  }
-}
 
 
 export async function nuevoUserCapacitacion (usuario) {

@@ -1,6 +1,6 @@
 import { loadPartials } from '../utils/viewpartials';
 import { validarHTML5 } from '../utils/validateForm';
-import { buscarProducto, getusuariocapacitacion, deleteUserCapacitacion, saveUserCapacitacion, nuevoUserCapacitacion } from './api';
+import { buscarProducto, getusuariocapacitacion, deleteUserCapacitacion, guardarProducto, nuevoUserCapacitacion } from './api';
 import { showLoading, hideLoading, checkSession } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
@@ -199,8 +199,8 @@ async function buscarUsuario () {
 
 
 
-
-  $('#btnactualizar').on('click', async function (e) {
+/*********** */
+  $('#btnguardarcambio').on('click', async function (e) {
 
     e.preventDefault();
     var isValid = true;
@@ -219,26 +219,49 @@ async function buscarUsuario () {
     } else {
       //$("#btnactualizar").prop("disabled", true).text("Actualizando..."); 
 
-      let dni = $('#txt-dni').val()
-      let nombres = $('#txt-nombres').val()
-      let cod_curso = $('#txt-cod_curso').val()
-      let nota = $('#txt-nota').val()
-      let cant_horas = $('#txt-cant_horas').val()
-      let fecha_inicio = $('#txt-fecha_inicio').val()
-      let fecha_fin = $('#txt-fecha_fin').val()
-      let fecha_emision = $('#txt-fecha_emision').val()
-      let instructor = $('#txt-instructor').val()
-      let temario = $('#txt-temario').val()
-      let curso = $('#txt-curso').val()
 
-      let ubicacion = $('#txt-ubicacion').val()
-      let institucion_solicitante = $('#txt-institucion_solicitante').val()
+      let nombres_es = $('#idespanolNombre').val()  
+      let nombres_eng = $('#idinglesNombre').val() 
+      let resumen_es = $('#idespanolResumen').val() 
+      let resumen_eng = $('#idinglesResumen').val() 
+      let descripcion_es = $('#idespanolDescripcion').val() 
+      let descripcion_eng = $('#idinglesDescripcion').val() 
+      let cualidades_es = $('#idespanolCualidades').val() 
+      let cualidades_eng = $('#idinglesCualidades').val() 
+      let palabra_clave_es = $('#idespanolPalabras').val() 
+      let palabra_clave_eng = $('#idinglesPalabras').val() 
+      let numero_piezas_es = $('#idespanolPiezas').val() 
+      let numero_piezas_eng = $('#idinglesPiezas').val() 
+      let alto = $('#idalto').val() 
+      let ancho = $('#idancho').val() 
+      let materiales_es = $('#idespanolMateriales').val() 
+      let materiales_eng = $('#idinglesMateriales').val() 
+      let precio = $('#precioproducto').val() 
+      let peso = $('#pesokilogramos').val() 
+      let tecnicas_es = $('#idespanolTecnicas').val() 
+      let tecnicas_eng = $('#idinglesTecnicas').val() 
+      
+      let cantidad = $('#cantidad').val() 
+      let cantidad_minima = $('#cantidadMinima').val()  
+      let restar_stock = $('#restarStock').is(':checked') ? 1 : 0;
+      let tipo_estado = $('#estadoAgotado').val() 
+      let fecha_disponible = $('#fechaDisponible').val()  
+      let imagen_principal = "/img/olla.jpg"  
+ 
+      alto = alto === "" ? 0 : (isInteger(alto) ? parseInt(alto, 10) : NaN);
+      ancho = ancho === "" ? 0 : (isInteger(ancho) ? parseInt(ancho, 10) : NaN);
+      precio = precio === "" ? 0 : (isDecimal(precio) ? parseFloat(precio) : NaN);
+      peso = peso === "" ? 0 : (isDecimal(peso) ? parseFloat(peso) : NaN);
+      cantidad = cantidad === "" ? 0 : (isInteger(cantidad) ? parseInt(cantidad, 10) : NaN);
+      cantidad_minima = cantidad_minima === "" ? 0 : (isInteger(cantidad_minima) ? parseInt(cantidad_minima, 10) : NaN);
+      fecha_disponible = fecha_disponible === "" ? null : fecha_disponible;
+      tipo_estado = parseInt(tipo_estado, 10);
+ 
 
-
-      let result = await saveUserCapacitacion({ fecha_emision, id: idactualizar, dni, nombres, cod_curso, curso, nota, cant_horas, fecha_inicio, fecha_fin, instructor, temario, ubicacion, institucion_solicitante });
+      let result = await guardarProducto({ nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal  });
       if (result) {
         showToast('Se actualizo los datos correctamente')
-        buscarUsuario2();
+        buscarUsuario();
         $('#myModal').css('display', 'none');
       } else {
         showToast('Ocurrio un error.')

@@ -141,8 +141,7 @@
 													<div class="col-9 col-md-6">
 														<input type="text" class="form-control" placeholder="Nombre del artesano" id="dni" readonly>
 													</div>
-												</div>
-											</form>  
+												</div> 
 											<hr>
 											<div class="row mt-2">
 												<div class="col-1 col-md-2">
@@ -159,11 +158,10 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolNombre" role="tabpanel" aria-labelledby="espanol-tab">
-															<textarea type="text" class="form-control" placeholder="Ingrese el nombre del producto" value="Guerrero wari"></textarea>
+															<textarea type="text" id="idespanolNombre" class="form-control" placeholder="Ingrese el nombre del producto" ></textarea>
 														</div>
-														<div class="tab-pane fade" id="inglesNombre" role="tabpanel" aria-labelledby="ingles-tab">
-															<textarea type="text" class="form-control" placeholder="Enter the product name"></textarea>
-																 
+														<div class="tab-pane fade"  id="inglesNombre" role="tabpanel" aria-labelledby="ingles-tab">
+															<textarea type="text" id="idinglesNombre" class="form-control" placeholder="Enter the product name"></textarea> 
 														</div>
 													</div>
 												</div> 
@@ -183,11 +181,11 @@
 														</li>
 													</ul>
 													<div class="tab-content">
-														<div class="tab-pane fade show active" id="espanolResumen" role="tabpanel" aria-labelledby="espanol-tab-resumen">
-															<textarea type="text" class="form-control" placeholder="Ingrese el resumen del producto" value="Figura de carácter decorativo coleccionable"></textarea>
+														<div class="tab-pane fade show active" id="espanolResumen"  role="tabpanel" aria-labelledby="espanol-tab-resumen">
+															<textarea type="text" id="idespanolResumen" class="form-control" placeholder="Ingrese el resumen del producto"></textarea>
 														</div>
-														<div class="tab-pane fade" id="inglesResumen" role="tabpanel" aria-labelledby="ingles-tab-resumen">
-															<textarea type="text" class="form-control" placeholder="Enter the product summary"></textarea>
+														<div class="tab-pane fade"  id="inglesResumen" role="tabpanel" aria-labelledby="ingles-tab-resumen">
+															<textarea type="text" id="idinglesResumen" class="form-control" placeholder="Enter the product summary"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -208,10 +206,10 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolDescripcion" role="tabpanel" aria-labelledby="espanol-tab-descripcion">
-															<textarea class="form-control" rows="3" placeholder="Ingrese la descripción del producto">Pieza representativa de la cultura wari considerado como un personaje importante de su época fuerte y aguerrido conquistador de pueblos.</textarea>
+															<textarea type="text" id="idespanolDescripcion" class="form-control"   placeholder="Ingrese la descripción del producto"></textarea>
 														</div>
-														<div class="tab-pane fade" id="inglesDescripcion" role="tabpanel" aria-labelledby="ingles-tab-descripcion">
-															<textarea class="form-control" rows="3" placeholder="Enter the product description"></textarea>
+														<div class="tab-pane fade"  id="inglesDescripcion" role="tabpanel" aria-labelledby="ingles-tab-descripcion">
+															<textarea type="text" id="idinglesDescripcion" class="form-control"    placeholder="Enter the product description"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -232,11 +230,11 @@
 														</li>
 													</ul>
 													<div class="tab-content">
-														<div class="tab-pane fade show active" id="espanolCualidades" role="tabpanel" aria-labelledby="espanol-tab-cualidades">
-															<textarea class="form-control" rows="3" placeholder="Ingrese las cualidades del producto">Figura elaborada en arcilla, que recrea al guerrero de la cultura Wari y toma como inspiración para la adaptación de esta pieza artística, decorada con engobes naturales extraídos de las zonas de Tartarníyuq, Molla y Patampampa del distrito de Quinua. Para su limpieza utilizar franela seca evitar el contacto con el agua.</textarea>
+														<div class="tab-pane fade show active"  id="espanolCualidades" role="tabpanel" aria-labelledby="espanol-tab-cualidades">
+															<textarea class="form-control" id="idespanolCualidades" rows="3" placeholder="Ingrese las cualidades del producto"></textarea>
 														</div>
-														<div class="tab-pane fade" id="inglesCualidades" role="tabpanel" aria-labelledby="ingles-tab-cualidades">
-															<textarea class="form-control" rows="3" placeholder="Enter the product qualities"></textarea>
+														<div class="tab-pane fade"  role="tabpanel" id="inglesCualidades" aria-labelledby="ingles-tab-cualidades">
+															<textarea class="form-control" id="idinglesCualidades" rows="3" placeholder="Enter the product qualities"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -257,11 +255,11 @@
 														</li>
 													</ul>
 													<div class="tab-content">
-														<div class="tab-pane fade show active" id="espanolPalabras" role="tabpanel" aria-labelledby="espanol-tab-palabras">
-															<textarea type="text" class="form-control" placeholder="Ingrese las palabras clave" value="Guerrero wari"></textarea>
+														<div class="tab-pane fade show active"  id="espanolPalabras" role="tabpanel" aria-labelledby="espanol-tab-palabras">
+															<textarea type="text" id="idespanolPalabras" class="form-control" placeholder="Ingrese las palabras clave" value="Guerrero wari"></textarea>
 														</div>
-														<div class="tab-pane fade" id="inglesPalabras" role="tabpanel" aria-labelledby="ingles-tab-palabras">
-															<textarea type="text" class="form-control" placeholder="Enter the keywords"></textarea>
+														<div class="tab-pane fade" id="inglesPalabras"  role="tabpanel" aria-labelledby="ingles-tab-palabras">
+															<textarea type="text" id="idinglesPalabras" class="form-control" placeholder="Enter the keywords"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -281,11 +279,11 @@
 														</li>
 													</ul>
 													<div class="tab-content">
-														<div class="tab-pane fade show active" id="espanolPiezas" role="tabpanel" aria-labelledby="espanol-tab-piezas">
-															<textarea type="text" class="form-control" placeholder="Ingrese el número de piezas" value="Pieza única, etc"></textarea>
+														<div class="tab-pane fade show active" id="espanolPiezas"  role="tabpanel" aria-labelledby="espanol-tab-piezas">
+															<textarea type="text" id="idespanolPiezas" class="form-control" placeholder="Ingrese el número de piezas" ></textarea>
 														</div>
-														<div class="tab-pane fade" id="inglesPiezas" role="tabpanel" aria-labelledby="ingles-tab-piezas">
-															<textarea type="text" class="form-control" placeholder="Enter the number of pieces"></textarea>
+														<div class="tab-pane fade"  id="inglesPiezas" role="tabpanel" aria-labelledby="ingles-tab-piezas">
+															<textarea type="text" id="idinglesPiezas" class="form-control" placeholder="Enter the number of pieces"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -299,10 +297,10 @@
 												<div class="col-9 col-md-10"> 
 													<div class="form-row">
 														<div class="col">
-															<input type="text" class="form-control" placeholder="Alto">
+															<input type="text"  id="idalto" class="form-control" placeholder="Alto">
 														</div>
 														<div class="col">
-															<input type="text" class="form-control" placeholder="Ancho">
+															<input type="text" id="idancho" class="form-control" placeholder="Ancho">
 														</div>
 													</div>
 												</div> 
@@ -323,14 +321,10 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolMateriales" role="tabpanel" aria-labelledby="espanol-tab-materiales">
-															<textarea class="form-control" rows="3" placeholder="Ingrese la descripción de los materiales">Arcilla
-									Torno
-									Engobes naturales extraídos de las zonas de Tartarníyuq, Molla y Patampampa del distrito de Quinua y aplica la técnica del envejecido
-									Pinceles
-									Cuchillas</textarea>
+															<textarea type="text" id="idespanolMateriales"  class="form-control" rows="3" placeholder="Ingrese la descripción de los materiales"></textarea> 
 														</div>
-														<div class="tab-pane fade" id="inglesMateriales" role="tabpanel" aria-labelledby="ingles-tab-materiales">
-															<textarea class="form-control" rows="3" placeholder="Enter the material description"></textarea>
+														<div class="tab-pane fade" id="inglesMateriales"  role="tabpanel" aria-labelledby="ingles-tab-materiales">
+															<textarea class="form-control" id="idinglesMateriales" rows="3" placeholder="Enter the material description"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -340,12 +334,15 @@
 												<div class="col-1 col-md-2">
 													<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Precio del producto:</h5>
 												</div>
-												<div class="col-9 col-md-10"> 
+												<div class="col-9 col-md-5"> 
 													<div class="input-group">
-														<input type="text" class="form-control" placeholder="Ingrese el precio del producto" value="12.00">
-														<div class="input-group-append">
-															<span class="input-group-text">S/ en soles</span>
-														</div>
+														<input type="text" id="precioproducto" class="form-control" placeholder="Ingrese el precio del producto"  > 
+													</div>
+													 
+												</div> 
+												<div class="col-9 col-md-2" style="padding: 0px; margin-top: 10px;font-size: 1.0rem;">  
+													<div class="input-group-append">
+														<span class="input-group-text">S/. en soles</span>
 													</div>
 												</div> 
 											</div>
@@ -356,7 +353,7 @@
 													<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Peso en kilogramos:</h5>
 												</div>
 												<div class="col-9 col-md-10"> 
-													<input type="text" class="form-control" placeholder="Ingrese el peso del producto" value="0.2">
+													<input type="text" id="pesokilogramos" class="form-control" placeholder="Ingrese el peso del producto"  >
 												</div> 
 											</div>
 											<hr>
@@ -375,27 +372,240 @@
 														</li>
 													</ul>
 													<div class="tab-content">
-														<div class="tab-pane fade show active" id="espanolTecnicas" role="tabpanel" aria-labelledby="espanol-tab-tecnicas">
-															<textarea class="form-control" rows="3" placeholder="Ingrese las técnicas empleadas">Moldeado, prensado y modelado</textarea>
+														<div class="tab-pane fade show active"  id="espanolTecnicas" role="tabpanel" aria-labelledby="espanol-tab-tecnicas">
+															<textarea type="text"   id="idespanolTecnicas"   class="form-control" rows="3" placeholder="Ingrese las técnicas empleadas"></textarea>
 														</div>
 														<div class="tab-pane fade" id="inglesTecnicas" role="tabpanel" aria-labelledby="ingles-tab-tecnicas">
-															<textarea class="form-control" rows="3" placeholder="Enter the techniques used"></textarea>
+															<textarea type="text" id="idinglesTecnicas" class="form-control" rows="3" placeholder="Enter the techniques used"></textarea>
 														</div>
 													</div>
 												</div> 
 											</div>
-										
+										</form> 
 										
 										</div>
-										<div class="tab-pane fade" id="home2" role="tabpanel" aria-labelledby="home-tab2">Stock</div>
+										<div class="tab-pane fade" id="home2" role="tabpanel" aria-labelledby="home-tab2"> 
+											<form id="form" action="javascript:void(0)">
+												<h5>Stock</h5>
+
+												<div class="row mt-2">
+													<div class="col-1 col-md-2">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Cantidad:</h5>
+													</div>
+													<div class="col-9 col-md-10"> 
+														<div class="form-row">
+															<div class="col">
+																<input type="text"   class="form-control" id="cantidad" placeholder="Ingrese la cantidad">
+															</div> 
+														</div>
+													</div> 
+													<div class="col-1 col-md-2">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Cantidad mínima:</h5>
+													</div>
+													<div class="col-9 col-md-10"> 
+														<div class="form-row">
+															<div class="col">
+																<input type="text" class="form-control" id="cantidadMinima" placeholder="Ingrese la cantidad mínima">
+															</div> 
+														</div>
+													</div> 
+												</div>
+												<hr> 
+												<div class="row mt-2">
+													<div class="col-1 col-md-2">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Restar Stock:</h5>
+													</div>
+													<div class="col-9 col-md-10"> 
+														<div class="form-row">
+															<div class="col">
+																<div class="custom-switch">
+																	<input type="checkbox" class="custom-control-input" id="restarStock">
+																	<label class="custom-control-label" for="restarStock" style="padding: 10px;margin-top: 10px;"></label>
+																</div>
+															</div> 
+														</div>
+													</div>  
+												</div> 
+												<hr>
+												<div class="row mt-2">
+													<div class="col-1 col-md-2">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Estado agotado:</h5>
+													</div>
+													<div class="col-9 col-md-10"> 
+														<div class="form-row">
+															<div class="col">
+																<select class="form-control" id="estadoAgotado">
+																	<option value="0">Seleccionar</option> 	
+																	<option value="1">Agotado</option> 	 
+
+																</select>
+															</div> 
+														</div>
+													</div> 
+													<div class="col-1 col-md-2">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Fecha Disponible:</h5>
+													</div>
+													<div class="col-9 col-md-10"> 
+														<div class="form-row">
+															<div class="col">
+																<input type="date" class="form-control" id="fechaDisponible" placeholder="DD / MM / YYYY">
+														 
+															</div> 
+														</div>
+													</div> 
+												</div> 
+											</form> 
+
+
+										</div>
 										<div class="tab-pane fade" id="home3" role="tabpanel" aria-labelledby="home-tab3">Imagenes</div>
 										<div class="tab-pane fade" id="home4" role="tabpanel" aria-labelledby="home-tab4">Videos</div>
 										<div class="tab-pane fade" id="home5" role="tabpanel" aria-labelledby="home-tab5">Colores y Tallas</div>
 										<div class="tab-pane fade" id="home6" role="tabpanel" aria-labelledby="home-tab6">Ofertas</div>
 										<div class="tab-pane fade" id="home7" role="tabpanel" aria-labelledby="home-tab7">Otros Costos</div>
-										<div class="tab-pane fade" id="home8" role="tabpanel" aria-labelledby="home-tab8">Condiciones del producto</div>
+										<div class="tab-pane fade" id="home8" role="tabpanel" aria-labelledby="home-tab8">
+											<form id="form" action="javascript:void(0)">
+												<h5>Condiciones del producto</h5>
+
+												<!-- Precios de impuesto de IGV --> 
+												<div class="row mt-2">
+													<div class="col-1 col-md-3">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Precios de impuesto de IGV:</h5>
+													</div>
+													<div class="col-9 col-md-9"> 
+														<div class="form-row">
+															<div class="col">
+																<div class="custom-switch">
+																	<input type="checkbox" class="custom-control-input" id="impuestoIGV">
+																	<label class="custom-control-label" for="impuestoIGV" style="padding: 10px;margin-top: 17px;"></label>
+																</div>
+															</div> 
+														</div>
+													</div>  
+												</div>    
+									
+												<hr>
+												<div class="row mt-2">
+													<div class="col-1 col-md-3">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Precios de envío en soles:</h5>
+													</div>
+													<div class="col-9 col-md-9"> 
+														<div class="form-row">
+															<div class="col">
+																<div class="custom-switch"> 
+																	<input type="checkbox" class="custom-control-input" id="precioEnvio">
+																	<label class="custom-control-label" for="precioEnvio" style="padding: 10px;margin-top: 17px;"></label>
+																</div>
+															</div> 
+														</div>
+													</div>  
+												</div>  
+												<div class="row mt-2">
+													<div class="col-1 col-md-3">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"></h5>
+													</div>
+													<div class="col-9 col-md-9"> 
+														<div class="form-row">
+															<div class="col">
+																<label for="envioLocal">Local:</label>
+																<input type="text" class="form-control" id="envioLocal" placeholder="Precio de envío local">
+															</div> 
+														</div>
+													</div> 
+													<div class="col-1 col-md-3">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> </h5>
+													</div>
+													<div class="col-9 col-md-9"> 
+														<div class="form-row">
+															<div class="col">
+																<label for="envioNacional">Nacional:</label>
+																<input type="text" class="form-control" id="envioNacional" placeholder="Precio de envío nacional">
+															</div> 
+														</div>
+													</div> 
+													<div class="col-1 col-md-3">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> </h5>
+													</div>
+													<div class="col-9 col-md-9"> 
+														<div class="form-row">
+															<div class="col">
+																<label for="envioExtranjero">Extranjero:</label>
+																<input type="text" class="form-control" id="envioExtranjero" placeholder="Precio de envío extranjero">
+															</div> 
+														</div>
+													</div> 
+												</div> 
+												<hr>
+												<div class="row mt-2">
+													<div class="col-1 col-md-3">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Tiempos de elaboración (en días):</h5>
+													</div>
+													<div class="col-9 col-md-9"> 
+														<div class="form-row">
+															<div class="col">
+																<input type="text" class="form-control" id="tiemposElaboracion" placeholder="Ingrese los tiempos de elaboración">
+															</div> 
+														</div>
+													</div>  
+												</div>
+												<hr>
+												<div class="row mt-2">
+													<div class="col-1 col-md-3">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">iempos estimado de envío (en días):</h5>
+													</div>
+													<div class="col-9 col-md-9"> 
+														<div class="form-row">
+															<div class="col">
+																<input type="text" class="form-control" id="tiemposEnvio" placeholder="Ingrese los tiempos estimados de envío">
+															</div> 
+														</div>
+													</div>  
+												</div>
+
+									 
+												<hr>
+												<div class="row mt-2">
+													<div class="col-1 col-md-3">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">iempos estimado de envío (en días):</h5>
+													</div>
+													<div class="col-9 col-md-9"> 
+														<div class="form-row">
+															<div class="col">
+																<input type="text" class="form-control" id="tiemposEnvio" placeholder="Ingrese los tiempos estimados de envío">
+															</div> 
+														</div>
+													</div>  
+												</div>  
+												<hr>
+												<div class="row mt-2">
+													<div class="col-1 col-md-3">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Preventas:</h5>
+													</div>
+													<div class="col-9 col-md-9"> 
+														<div class="form-row">
+															<div class="col">
+																<div class="custom-switch"> 																	
+																	<input type="checkbox" class="custom-control-input" id="preventas">
+																	<label class="custom-control-label" for="preventas" style="padding: 10px;margin-top: 17px;"></label>
+																</div>
+															</div> 
+														</div>
+													</div>  
+												</div>   
+											
+											 
+											</form> 
+										
+										</div>
 									</div>
 									
+									<hr> 
+									<div class="d-flex justify-content-end mb-3">  
+										<button id="btnguardarcambio" type="submit" class="btn btn-info btn-sm">Guardar cambios</button>
+										<div >  
+											<a href="/productos.html" class="btn btn-primary" style="padding: 10px; margin-top: 10px;">salir</a>
+										</div> 
+									</div> 	
 
 								</div>
 							</div>
