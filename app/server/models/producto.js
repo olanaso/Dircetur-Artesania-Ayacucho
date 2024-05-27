@@ -142,9 +142,15 @@ module.exports = sequelize.define('producto', {
         field: 'tipo_estado'
     },
     fecha_disponible: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.STRING,
         allowNull: true,
         field: 'fecha_disponible'
+    },
+ 
+    imagen_principal: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        field: 'imagen_principal'
     },
     lst_imagenes: {
         type: Sequelize.JSON,

@@ -2,7 +2,7 @@ const db = require('../config/db');
 sequelize = db.sequelize;
 Sequelize = db.Sequelize;
 
-module.exports = sequelize.define('usuarios', {
+module.exports = sequelize.define('usuario', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
