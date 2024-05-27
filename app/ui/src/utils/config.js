@@ -1,6 +1,6 @@
 
-export const baseUrl = 'https://api-certificados.centrodegestion.org'; 
-//export const baseUrl='http://localhost:3001';
+//export const baseUrl = 'https://api-certificados.centrodegestion.org'; 
+export const baseUrl = 'http://localhost:3001';
 //} Function to save data in localStorage
 export function saveDataToLocalStorage (key, data) {
   try {
