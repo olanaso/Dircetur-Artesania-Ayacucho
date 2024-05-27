@@ -168,27 +168,29 @@
 					<!-- BEGIN .main-content -->
 					<div class="main-content">
 						<div class="card">
-							<div class="card-header">Filtrar clientes</div>
 							<div class="card-body">
-								<div class="row gutters">
-									<div class="col">
-										<input type="text" class="form-control" placeholder="Nombre">
+								<h5 class="">Filtrar clientes</h5>
+								<form id="filtrarCliente">
+									<div class="row gutters">
+										<div class="col">
+											<input type="text" class="form-control" placeholder="Nombre" id="nombre-Cliente">
+										</div>
+										<div class="col">
+											<input type="text" class="form-control" placeholder="Correo" id="correo-Cliente">
+										</div>
+										<div class="col">
+											<button class="btn btn-primary" id="filtrar-Cliente">Filtrar</button>
+										</div>
 									</div>
-									<div class="col">
-										<input type="text" class="form-control" placeholder="Correo">
-									</div>
-									<div class="col">
-										<button class="btn btn-primary">Filtrar</button>
-									</div>
-								</div>
+								</form>
+								
 								<div class="card">
 									<div class="card-header">Lista de Clientes</div>
-									
 									<div class="card-body">
-										<table class="table m-0">
+										<table class="table m-0" id="tablaCliente">
 											<thead class="thead-default">
 												<tr>
-													<th>Id Usuario</th>
+													<th>ID</th>
 													<th>Nombres y Apellidos</th>
 													<th>Correo</th>
 													<th>Estado</th>
@@ -196,30 +198,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td><button type="button" class="btn btn-primary btn-sm"><i class="icon icon-bin"></i></button>
-														<button type="button" class="btn btn-light btn-sm"><a href="/detalle-cliente.html"><i class="icon icon-eye2"></i></a></i></button></td>
-												</tr>
-												<tr>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td><button type="button" class="btn btn-primary btn-sm"><i class="icon icon-bin"></i></button>
-														<button type="button" class="btn btn-light btn-sm"><i class="icon icon-eye2"></i></button></td>
-												</tr>
-												<tr>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td><button type="button" class="btn btn-primary btn-sm"><i class="icon icon-bin"></i></button>
-														<button type="button" class="btn btn-light btn-sm"><i class="icon icon-eye2"></i></button></td>
-												</tr>
+												
 											</tbody>
 										</table>
 									</div>
@@ -264,7 +243,7 @@
 
 		<!-- Common JS -->
 		<script src="js/common.js"></script>
-		
+		<script type="module" src="src/Clientes/index.js"></script>
 	</body>
 
 <!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
