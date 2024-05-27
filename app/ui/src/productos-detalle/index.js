@@ -4,7 +4,7 @@ import { buscarProducto, getusuariocapacitacion, deleteUserCapacitacion, saveUse
 import { showLoading, hideLoading, checkSession } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
-import '../productos/style.css'
+import '../productos-detalle/style.css'
 hideLoading();
 // Uso de la función
 (async function () {
