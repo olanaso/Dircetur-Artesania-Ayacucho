@@ -460,9 +460,191 @@
 										</div>
 										<div class="tab-pane fade" id="home3" role="tabpanel" aria-labelledby="home-tab3">Imagenes</div>
 										<div class="tab-pane fade" id="home4" role="tabpanel" aria-labelledby="home-tab4">Videos</div>
-										<div class="tab-pane fade" id="home5" role="tabpanel" aria-labelledby="home-tab5">Colores y Tallas</div>
-										<div class="tab-pane fade" id="home6" role="tabpanel" aria-labelledby="home-tab6">Ofertas</div>
-										<div class="tab-pane fade" id="home7" role="tabpanel" aria-labelledby="home-tab7">Otros Costos</div>
+										<div class="tab-pane fade" id="home5" role="tabpanel" aria-labelledby="home-tab5"> 
+											<form id="form" action="javascript:void(0)"> 
+											<h5>Colores</h5>
+
+												<div class="card" style="min-height: 70px;"> 
+													<div class="card-body"> 
+
+														<div class="row mt-4">
+															<div class="col-1 col-md-2">
+																<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Añade un color:</h5>
+															</div>
+															<div class="col-9 col-md-3">  
+																<input type="color" id="color-input" placeholder="#9900FF">
+															</div>  
+															<div class="col-md-7 text-right">
+																<button type="button" class="btn btn-primary btn-add-offer" id="add-color-btn">
+																	<i class="fas fa-plus-circle"></i> Añadir color
+																</button>
+															</div>
+														</div> 
+														<hr>
+														<h5>Lista de colores</h5>  
+														<table class="table table-bordered offer-table">
+															<thead>
+																<tr>
+																	<th>N°</th>
+																	<th>Color</th>
+																	<th>Acción</th>
+																</tr>
+															</thead>
+															<tbody id="color-table-body">
+																
+															</tbody>
+														</table>
+													</div> 
+												</div> 
+
+												<h5>Talla</h5>
+
+												<div class="card" style="min-height: 70px;"> 
+													<div class="card-body"> 
+
+														<div class="row mt-4">
+															<div class="col-1 col-md-2">
+																<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Añade una talla:</h5>
+															</div>
+															<div class="col-9 col-md-3">  
+																<input type="text" id="talla-input"  class="form-control" placeholder="Mediano (M)"> 
+														
+															</div>  
+															<div class="col-md-7 text-right">
+																<button type="button" class="btn btn-primary btn-add-offer" id="add-talla-btn">
+																	<i class="fas fa-plus-circle"></i> Añadir talla
+																</button>
+															</div>
+														</div> 
+														<hr>
+														<h5>Lista de colores</h5>  
+														<table class="table table-bordered offer-table">
+															<thead>
+																<tr>
+																	<th>N°</th>
+																	<th>Talla</th>
+																	<th>Acción</th>
+																</tr>
+															</thead>
+															<tbody id="talla-table-body">
+																 
+															</tbody>
+														</table>
+													</div> 
+												</div>  
+											</form> 
+										</div>   
+											 
+										<div class="tab-pane fade" id="home6" role="tabpanel" aria-labelledby="home-tab6">
+											<form id="form" action="javascript:void(0)">
+												<h5>Ofertas</h5>
+
+												<div class="card" style="min-height: 70px;">
+													<div class="card-header" style="text-align: center;"> Precio actual: S/ 10.00</div>
+													<div class="card-body"> 
+
+														<div class="row mt-4">
+															<div class="col-1 col-md-2">
+																<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">(% de descuento):</h5>
+															</div>
+															<div class="col-9 col-md-4">  
+																<input type="text" class="form-control" id="porcentajeDescuento" placeholder="Ingrese el porcentaje de descuento">
+														
+															</div> 
+															<div class="col-1 col-md-2">
+																<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Precio:</h5>
+															</div>
+															<div class="col-9 col-md-4">
+																<input type="text" class="form-control" id="precioOfertado" placeholder="Ingrese el precio ofertado">
+															</div>
+
+															<div class="col-1 col-md-2">
+																<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Fecha de Inicio::</h5>
+															</div>
+															<div class="col-9 col-md-4">   
+																<input type="date" class="form-control" id="fechaInicio" >
+															</div> 
+															<div class="col-1 col-md-2">
+																<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Fecha de Fin:</h5>
+															</div>
+															<div class="col-9 col-md-4"> 
+															<input type="date" class="form-control" id="fechaFin"  >
+															</div>
+															<div class="col-md-12 text-right">
+																<button type="button" class="btn btn-primary btn-add-offer" id="addOfferButton">
+																	<i class="fas fa-plus-circle"></i> Añadir
+																</button>
+															</div>
+														</div> 
+													</div> 
+												</div>  
+												<h5>Lista de ofertas</h5>
+												<table class="table table-bordered offer-table">
+													<thead>
+														<tr>
+															<th>Número</th>
+															<th>Porcentaje de descuento (%)</th>
+															<th>Precio ofertado</th>
+															<th>Fecha de inicio</th>
+															<th>Fecha de fin</th>
+															<th>Acciones</th>
+														</tr>
+													</thead>
+													<tbody id="listaOfertas">
+														<!-- Filas de ofertas se agregarán aquí -->
+													</tbody>
+												</table> 
+  
+
+											</form> 
+
+
+										</div>
+										<div class="tab-pane fade" id="home7" role="tabpanel" aria-labelledby="home-tab7">
+
+											<form id="form" action="javascript:void(0)">
+												<h5>Añade otros costos</h5>
+
+												<div class="row mt-3">
+													<div class="col-1 col-md-2">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nombre del Costo:</h5>
+													</div>
+													<div class="col-9 col-md-6"> 
+														<input type="text" class="form-control" id="nombreCosto" placeholder="Ingrese el nombre del costo">
+													</div>
+														
+													<div class="col-10 col-md-3"> 
+														<button type="button" class="btn btn-primary btn-add-cost" id="addCostoButton">
+															<i class="fas fa-plus-circle"></i> Añadir costo
+														</button>
+													</div> 
+													<div class="col-1 col-md-2">
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Precio:</h5>
+													</div>
+													<div class="col-9 col-md-6">
+														<input type="text" class="form-control" id="precioCosto" placeholder="Ingrese el precio">
+													</div>
+												</div> 
+											<hr>
+ 
+												<h5>Lista de costos</h5>
+												<table class="table table-bordered cost-table">
+													<thead>
+														<tr>
+															<th>N°</th>
+															<th>Nombre del costo</th>
+															<th>Precio en S/. (soles)</th>
+															<th>Acción</th>
+														</tr>
+													</thead>
+													<tbody id="listaCostos">
+														<!-- Filas de costos se agregarán aquí -->
+													</tbody>
+												</table> 
+
+											</form> 
+
+										</div>
 										<div class="tab-pane fade" id="home8" role="tabpanel" aria-labelledby="home-tab8">
 											<form id="form" action="javascript:void(0)">
 												<h5>Condiciones del producto</h5>
@@ -551,7 +733,7 @@
 												<hr>
 												<div class="row mt-2">
 													<div class="col-1 col-md-3">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">iempos estimado de envío (en días):</h5>
+														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Tiempos estimado de envío (en días):</h5>
 													</div>
 													<div class="col-9 col-md-9"> 
 														<div class="form-row">
@@ -560,22 +742,8 @@
 															</div> 
 														</div>
 													</div>  
-												</div>
-
-									 
-												<hr>
-												<div class="row mt-2">
-													<div class="col-1 col-md-3">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">iempos estimado de envío (en días):</h5>
-													</div>
-													<div class="col-9 col-md-9"> 
-														<div class="form-row">
-															<div class="col">
-																<input type="text" class="form-control" id="tiemposEnvio" placeholder="Ingrese los tiempos estimados de envío">
-															</div> 
-														</div>
-													</div>  
-												</div>  
+												</div> 
+												 
 												<hr>
 												<div class="row mt-2">
 													<div class="col-1 col-md-3">
@@ -592,7 +760,7 @@
 														</div>
 													</div>  
 												</div>   
-											
+											</div> 
 											 
 											</form> 
 										
