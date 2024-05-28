@@ -173,22 +173,192 @@
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                       <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Información</a>
+                                        <a class="nav-link active" id="infC-tab" data-toggle="tab" href="#infC" role="tab" aria-controls="infC" aria-selected="true">Información</a>
                                       </li>
                                       <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Cuenta</a>
+                                        <a class="nav-link" id="cuentaC-tab" data-toggle="tab" href="#cuentaC" role="tab" aria-controls="cuentaC" aria-selected="false">Cuenta</a>
                                       </li>
                                       <li class="nav-item">
-                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Reclamo del Cliente</a>
+                                        <a class="nav-link" id="reclamoC-tab" data-toggle="tab" href="#reclamoC" role="tab" aria-controls="reclamoC" aria-selected="false">Reclamo del Cliente</a>
                                       </li>
                                       <li class="nav-item">
-                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Activa / Desactiva</a>
+                                        <a class="nav-link" id="activa-desactiva-tab" data-toggle="tab" href="#activa-desactiva" role="tab" aria-controls="activa-desactiva" aria-selected="false">Activa / Desactiva</a>
                                       </li>
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
-                                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">You may think that this is just yet an other charting library. But Chartist.js is the product of a community that was disappointed about the abilities provided by other charting libraries. Of course there are hundreds of other great charting libraries but after using them there were always tweaks you would have wished for that were not included.</div>
-                                      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">With the clear separation of concerns within Chartist.js, you're able to style your charts with CSS in @media queries. However, sometimes you also need to conditionally control the behavior of your charts. For this purpose, Chartist.js provides you with a simple configuration override mechanism based on media queries.</div>
-                                      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Specifying the style of your chart in CSS is not only cleaner but also enables you to use awesome CSS animations and transitions to be applied to your SVG elements!</div>
+                                      	<div class="tab-pane fade show active" id="infC" role="tabpanel" aria-labelledby="infC-tab">
+											<form class="">
+												<div class="row">
+													<div class="modal-body col-md-6 ">
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Nombre</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="nombreC" placeholder="Nombre">
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Apellidos</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="apellidosC" placeholder="Apellidos">
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Correo</label>
+															<div class="col-sm-9">
+																<input type="email" class="form-control" id="correoC" placeholder="Correo">
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Teléfono</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="telefonoC" placeholder="Teléfono">
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Dirección</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="direccionC" placeholder="Dirección">
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">País</label>
+															<div class="col-sm-9">
+																<select class="form-control">
+																	<option>Seleccione su País</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Región</label>
+															<div class="col-sm-9">
+																<select class="form-control">
+																	<option>Seleccione su Región</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Ciudad</label>
+															<div class="col-sm-9">
+																<select class="form-control">
+																	<option>Seleccione su Ciudad</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Tipo de Documento</label>
+															<div class="col-sm-9">
+																<div class="form-row">
+																	<div class="form-group col-md-6">
+																		<select id="inputState" class="form-control">
+																			<option>DNI</option>
+																			<option>Carnet de Extranjería</option>
+																		</select>
+																	</div>
+																	<div class="form-group col-md-6">
+																		<input type="text" class="form-control" placeholder="Número de Documento" id="inputDocumentoTipo">
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Dirección (Para envío)</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="dirEnvio" placeholder="Dirección de Envío">
+															</div>
+														</div>
+													</div>
+	
+													<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+														<a class="block-300 center-text">
+															<div class="user-profile">
+																<img src="img/avatar1.svg" class="profile-thumb" alt="User Thumb">
+																<input type="file" class="form-control" id="imgPerfilC" required>
+															</div>
+														</a>
+													</div>
+												</div>
+												
+												<div class="modal-footer">
+													<button type="submit" id="actualizar-informacion"
+														class="btn btn-primary">Guardar</button>
+												</div>
+												
+											</form>
+										</div>
+                                      	<div class="tab-pane fade" id="cuentaC" role="tabpanel" aria-labelledby="cuentaC-tab">
+											<form action="" class="col-md-6">
+												<div class="form-group row gutters">
+													<label for="inputEmail3" class="col-sm-3 col-form-label">Usuario</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" id="usuarioC" placeholder="">
+													</div>
+												</div>
+												<div class="form-group row gutters">
+													<label for="inputPassword3" class="col-sm-3 col-form-label">Contraseña</label>
+													<div class="col-sm-9">
+														<input type="password" class="form-control" id="contraseñaC" placeholder="">
+													</div>
+												</div>
+												<div class="form-group row gutters">
+													<label for="inputPassword3" class="col-sm-3 col-form-label">Repita Contraseña</label>
+													<div class="col-sm-9">
+														<input type="password" class="form-control" id="rContraseñaC" placeholder="Password">
+													</div>
+												</div>
+												<div class="form-group row gutters">
+													<div class="col-sm-10">
+														<button type="submit" class="btn btn-primary" id="actualizar-cuenta">reestablecer</button>
+													</div>
+												</div>
+											</form>
+											
+										</div>
+                                      <div class="tab-pane fade" id="reclamoC" role="tabpanel" aria-labelledby="reclamoC-tab">
+										<table class="table m-0" id="tablaCategoria">
+											<thead class="thead-default">
+												<tr>
+													<th>ID</th>
+													<th>Descripción</th>
+													<th>Acciones</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">1</th>
+													<td>Mark</td>
+													<td>
+														<button type="button" class="btn btn-light btn-sm"><i class="icon icon-eye2"></i></button>
+														<button type="button" class="btn btn-primary btn-sm"><i class="icon icon-bin"></i></button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									  </div>
+									  <div class="tab-pane fade" id="activa-desactiva" role="tabpanel" aria-labelledby="activa-desactiva-tab">
+										<div class="col-md-6">
+											<div class="form-group row gutters">
+												<label for="inputEmail3" class="col-sm-3 col-form-label">Activa / Desactiva</label>
+												<div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">
+													<div class="toggle-switch">
+														<input type="checkbox" class="check">
+														<b class="b switch"></b>
+														<b class="b track"></b>
+													</div>
+												</div>
+											</div>
+											<div class="form-group row gutters">
+												<label for="inputEmail3" class="col-sm-3 col-form-label">Mensaje</label>
+												<div class="col-sm-9">
+													<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+												</div>
+											</div>
+											<div class="form-group row gutters">
+												<div class="col-sm-10">
+													<button type="submit" class="btn btn-primary">Notificar</button>
+												</div>
+											</div>
+										</div>
+									  </div>
                                     </div>
                                 </div>
 						</div>
@@ -230,6 +400,7 @@
 
 		<!-- Common JS -->
 		<script src="js/common.js"></script>
+		<script type="module" src="src/Detalle-Cliente/index.js"></script>
 		
 	</body>
 
