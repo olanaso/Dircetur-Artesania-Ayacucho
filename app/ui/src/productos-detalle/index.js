@@ -198,6 +198,13 @@ async function buscarUsuario () {
   }
 
 
+  function isInteger(value) {
+    return /^\d+$/.test(value);
+  }
+
+  function isDecimal(value) {
+      return /^\d+(\.\d+)?$/.test(value);
+  }
 
 /*********** */
   $('#btnguardarcambio').on('click', async function (e) {
@@ -247,7 +254,7 @@ async function buscarUsuario () {
       let tipo_estado = $('#estadoAgotado').val() 
       let fecha_disponible = $('#fechaDisponible').val()  
       let imagen_principal = "/img/olla.jpg"  
- 
+   
       alto = alto === "" ? 0 : (isInteger(alto) ? parseInt(alto, 10) : NaN);
       ancho = ancho === "" ? 0 : (isInteger(ancho) ? parseInt(ancho, 10) : NaN);
       precio = precio === "" ? 0 : (isDecimal(precio) ? parseFloat(precio) : NaN);
@@ -256,9 +263,68 @@ async function buscarUsuario () {
       cantidad_minima = cantidad_minima === "" ? 0 : (isInteger(cantidad_minima) ? parseInt(cantidad_minima, 10) : NaN);
       fecha_disponible = fecha_disponible === "" ? null : fecha_disponible;
       tipo_estado = parseInt(tipo_estado, 10);
- 
 
-      let result = await guardarProducto({ nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal  });
+ 
+      let igv = $('#impuestoIGV').is(':checked') ? 1 : 0;      
+      let precios_envio = $('#precioEnvio').is(':checked') ? 1 : 0;
+      let precio_local = parseFloat($('#envioLocal').val() )
+      let precio_nacional = parseFloat($('#envioNacional').val() )
+      let precio_extranjero =  parseFloat($('#envioExtranjero').val()  )
+      let tiempo_elaboracion = parseInt($('#tiemposElaboracion').val() )
+      let tiempo_envio = parseInt($('#tiemposEnvio').val()   )
+      let preventas = $('#preventas').is(':checked') ? 1 : 0;
+
+
+
+      precio_local = precio_local === "" ? null : (isDecimal(precio_local) ? parseFloat(precio_local) : NaN);
+      precio_nacional = precio_nacional === "" ? null : (isDecimal(precio_nacional) ? parseFloat(precio_nacional) : NaN);
+      precio_extranjero = precio_extranjero === "" ? null : (isDecimal(precio_extranjero) ? parseFloat(precio_extranjero) : NaN);      
+      tiempo_elaboracion = tiempo_elaboracion === "" ? null : (isInteger(tiempo_elaboracion) ? parseInt(tiempo_elaboracion, 10) : NaN);
+      tiempo_envio = tiempo_envio === "" ? null : (isInteger(tiempo_envio) ? parseInt(tiempo_envio, 10) : NaN); 
+      /***otros costos */
+
+      let listaCostos = [];
+
+      $('#listaCostos tr').each(function() {
+          let fila = $(this);
+          let costo = {
+              numero: fila.find('td').eq(0).text(),
+              nombre: fila.find('td').eq(1).text(),
+              precio: fila.find('td').eq(2).text()
+          };
+          listaCostos.push(costo);
+      });
+
+      let costosJSON = JSON.stringify(listaCostos);
+      
+      let lst_otros_costos = costosJSON;
+
+      // Aquí puedes enviar costosJSON al servidor o hacer algo con él
+      //alert('Costos guardados en JSON:\n' + costosJSON);
+      /****fin */
+      let listaOfertas = [];
+
+      $('#listaOfertas tr').each(function() {
+          let fila = $(this);
+          let oferta = {
+              numero: fila.find('td').eq(0).text(),
+              porcentajeDescuento: parseInt(fila.find('td').eq(1).text(), 10),
+              precioOfertado: parseFloat(fila.find('td').eq(2).text()),
+              fechaInicio: fila.find('td').eq(3).text(),
+              fechaFin: fila.find('td').eq(4).text()
+          };
+          listaOfertas.push(oferta);
+      });
+
+      let ofertasJSON = JSON.stringify(listaOfertas);
+      let lst_ofertas = ofertasJSON;
+
+
+
+ 
+       
+
+      let result = await guardarProducto({ nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal,lst_otros_costos,lst_ofertas   });
       if (result) {
         showToast('Se actualizo los datos correctamente')
         buscarUsuario();
@@ -334,6 +400,8 @@ async function buscarUsuario () {
 
 $(document).on('click', '.btn_Eliminar', async function (e) {
 
+
+  
   async function buscarUser () {
     // Inicializar el contador
 
@@ -424,105 +492,7 @@ $(document).on('click', '.btn_Eliminar', async function (e) {
 
 });
 
-
-$(document).on('click', '.open-modal', async function () {
-
-  var id = $(this).data('id'); // Obtén el ID
-  idactualizar = $(this).data('id');
-
-  openModal(id); // Llama a la función que abre el modal y pasa el ID
-
-  let usuario = await getusuariocapacitacion(id)
-
-  if (usuario) {
-    $('#txt-dni').val(usuario.dni)
-    $('#txt-nombres').val(usuario.nombres)
-    $('#txt-cod_curso').val(usuario.cod_curso)
-    $('#txt-nota').val(usuario.nota)
-    $('#txt-cant_horas').val(usuario.cant_horas)
-
-    $('#txt-fecha_inicio').val(usuario.fecha_inicio)
-
-    $('#txt-fecha_fin').val(usuario.fecha_fin)
-    $('#txt-fecha_emision').val(usuario.fecha_emision)
-
-    $('#txt-instructor').val(usuario.instructor)
-    $('#txt-temario').val(usuario.temario)
-    $('#txt-curso').val(usuario.curso)
-    $('#txt-ubicacion').val(usuario.ubicacion)
-    $('#txt-institucion_solicitante').val(usuario.institucion_solicitante)
-  }
-  else {
-    $('#txt-dni').val('')
-    $('#txt-nombres').val('')
-    $('#txt-cod_curso').val('')
-    $('#txt-nota').val('')
-    $('#txt-cant_horas').val('')
-    $('#txt-fecha_inicio').val('')
-    $('#txt-fecha_fin').val('')
-    $('#txt-instructor').val('')
-    $('#txt-temario').val('')
-    $('#txt-curso').val('')
-    $('#txt-ubicacion').val('')
-    $('#txt-institucion_solicitante').val('')
-
-  }
-
-});
-
-
-
-
-
-function openModal (id) {
-  // Aquí puedes configurar los datos en el modal basado en el ID
-  console.log("Abrir modal para el ID:", id);
-  $('#myModal').find('.modal-content p');
-
-  // Muestra el modal
-  $('#myModal').css('display', 'block');
-
-  // Configura el cierre del modal al hacer clic en el span de cierre
-  $('#closeButton').click(function () {
-    $('#myModal').css('display', 'none');
-  });
-
-  // También cierra el modal si se hace clic fuera de él
-  $(window).click(function (event) {
-    if (event.target.id == 'myModal') {
-      $('#myModal').css('display', 'none');
-    }
-  });
-}
-
-
-function openModalNuevo (id) {
-  // Aquí puedes configurar los datos en el modal basado en el ID
-  console.log("Abrir modal para el ID:", id);
-  $('#myModalNuevo').find('.modal-content p');
-
-  // Muestra el modal
-  $('#myModalNuevo').css('display', 'block');
-
-  // Configura el cierre del modal al hacer clic en el span de cierre
-  $('#closeButtonNuevo').click(function () {
-    $('#myModalNuevo').css('display', 'none');
-  });
-
-  // También cierra el modal si se hace clic fuera de él
-  $(window).click(function (event) {
-    if (event.target.id == 'myModalNuevo') {
-      $('#myModalNuevo').css('display', 'none');
-    }
-  });
-}
-
-
-
-
-
-
-
+   
 
 
 function createXLS (data, reportfilename) {
@@ -538,7 +508,191 @@ function createXLS (data, reportfilename) {
 
 
 
+$(document).ready(function() {
 
 
+   /******otros costos */
+  let contadorCostos = 0;
 
+  $('#addCostoButton').on('click', function() {
+      let nombreCosto = $('#nombreCosto').val();
+      let precioCosto = $('#precioCosto').val();
+
+      if (nombreCosto === "" || precioCosto === "") {
+          alert("Por favor, complete todos los campos.");
+          return;
+      }
+
+      contadorCostos++;
+
+      let nuevaFila = `
+          <tr>
+              <td>${contadorCostos}</td>
+              <td>${nombreCosto}</td>
+              <td>${precioCosto}</td>
+              <td>
+                  <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-cost">
+                  <i class="icon icon-bin"></i>
+                  </button> 
+
+              </td>
+          </tr>
+      `;
+
+      $('#listaCostos').append(nuevaFila);
+
+      $('#nombreCosto').val('');
+      $('#precioCosto').val('');
+  });
+
+  $(document).on('click', '.btn-delete-cost', function() {
+      $(this).closest('tr').remove();
+      contadorCostos--;
+
+      // Reordenar los números de la lista
+      $('#listaCostos tr').each(function(index, tr) {
+          $(tr).find('td:first').text(index + 1);
+      });
+  });
+
+
+    /******ofertas */
+    let contadorOfertas = 0;
+
+    function isInteger(value) {
+        return /^\d+$/.test(value);
+    }
+
+    function isDecimal(value) {
+        return /^\d+(\.\d+)?$/.test(value);
+    }
+    
+    $('#addOfferButton').on('click', function() {
+      let porcentajeDescuento = $('#porcentajeDescuento').val();
+      let precioOfertado = $('#precioOfertado').val();
+      let fechaInicio = $('#fechaInicio').val();
+      let fechaFin = $('#fechaFin').val();
+
+      if (porcentajeDescuento === "" || precioOfertado === "" || fechaInicio === "" || fechaFin === "") {
+          alert("Por favor, complete todos los campos.");
+          return;
+      }
+
+      porcentajeDescuento = porcentajeDescuento === "" ? 0 : (isInteger(porcentajeDescuento) ? parseInt(porcentajeDescuento, 10) : NaN);
+      precioOfertado = precioOfertado === "" ? 0 : (isDecimal(precioOfertado) ? parseFloat(precioOfertado) : NaN);
+
+      if (isNaN(porcentajeDescuento) || isNaN(precioOfertado)) {
+          alert("Por favor, ingrese valores válidos.");
+          return;
+      }
+
+      contadorOfertas++;
+
+      let nuevaFila = `
+          <tr>
+              <td>${contadorOfertas}</td>
+              <td>${porcentajeDescuento}</td>
+              <td>${precioOfertado.toFixed(2)}</td>
+              <td>${fechaInicio}</td>
+              <td>${fechaFin}</td>
+              <td>
+                  <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm  btn-delete-offer">
+                  <i class="icon icon-bin"></i>
+                  </button>
+              </td>
+          </tr>
+      `;
+ 
+
+      $('#listaOfertas').append(nuevaFila);
+
+      $('#porcentajeDescuento').val('');
+      $('#precioOfertado').val('');
+      $('#fechaInicio').val('');
+      $('#fechaFin').val('');
+  });
+
+  $(document).on('click', '.btn-delete-offer', function() {
+      $(this).closest('tr').remove();
+      contadorOfertas--;
+
+      // Reordenar los números de la lista
+      $('#listaOfertas tr').each(function(index, tr) {
+          $(tr).find('td:first').text(index + 1);
+      });
+  });
+ 
+
+
+});
+
+
+ document.getElementById('add-color-btn').addEventListener('click', function() {
+            const colorInput = document.getElementById('color-input').value;
+            const colorTableBody = document.getElementById('color-table-body');
+            const rowCount = colorTableBody.rows.length + 1;
+
+            const row = colorTableBody.insertRow();
+            row.insertCell(0).innerText = rowCount < 10 ? `0${rowCount}` : rowCount;
+            row.insertCell(1).innerHTML = `<span class="color-box" style="background-color: ${colorInput};"></span>${colorInput}`;
+            row.insertCell(2).innerHTML = '<button type="button" data-toggle="tooltip" title="Eliminar"  class="btn btn-primary btn-sm action-btn"><i class="icon icon-bin"></i></button>';
+
+            
+
+            addDeleteEventListener(row.querySelector('.action-btn'));
+        });
+
+document.getElementById('add-talla-btn').addEventListener('click', function() {
+    const tallaInput = document.getElementById('talla-input').value;
+    const tallaTableBody = document.getElementById('talla-table-body');
+    const rowCount = tallaTableBody.rows.length + 1;
+
+    const row = tallaTableBody.insertRow();
+    row.insertCell(0).innerText = rowCount < 10 ? `0${rowCount}` : rowCount;
+    row.insertCell(1).innerText = tallaInput; 
+    row.insertCell(2).innerHTML = '<button type="button" data-toggle="tooltip" title="Eliminar"  class="btn btn-primary btn-sm action-btn"><i class="icon icon-bin"></i></button>';
+
+
+    addDeleteEventListener(row.querySelector('.action-btn'));
+});
+
+document.querySelectorAll('.action-btn').forEach(button => {
+    addDeleteEventListener(button);
+});
+
+function addDeleteEventListener(button) {
+    button.addEventListener('click', function() {
+        const row = button.parentElement.parentElement;
+        row.remove();
+    });
+}
+
+document.getElementById('save-btn').addEventListener('click', function() {
+    const colors = [];
+    const sizes = [];
+
+    document.querySelectorAll('#color-table-body tr').forEach(row => {
+        colors.push(row.cells[1].innerText);
+    });
+
+    document.querySelectorAll('#talla-table-body tr').forEach(row => {
+        sizes.push(row.cells[1].innerText);
+    });
+
+    const data = { colors, sizes };
+    const jsonData = JSON.stringify(data, null, 2);
+    downloadJSON(jsonData, 'colores_tallas.json');
+});
+
+function downloadJSON(data, filename) {
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
 

@@ -187,6 +187,11 @@ module.exports = sequelize.define('producto', {
         allowNull: true,
         field: 'igv'
     },
+    precios_envio: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        field: 'precios_envio'
+    },
     precio_local: {
         type: Sequelize.DECIMAL(6,2),
         allowNull: true,
