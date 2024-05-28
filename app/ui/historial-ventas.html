@@ -203,27 +203,31 @@
 											<div class="card">
 												<div class="card-body">
 													<h6 class="border-bottom pb-2">Datos del pedido</h6>
-													<div class="row gutters mb-4">
-														<div class="col-lg-4 col-md-6 col-sm-12">
-															<label for="num-pedido">Número de pedido</label>
-															<input type="number" class="form-control" placeholder=" N°"
-																id="num-pedido">
-														</div>
-														<div class="col-lg-4 col-md-6 col-sm-12">
-															<label for="nombre-artesano">Artesano</label>
-															<input type="text" class="form-control"
-																placeholder="nombre del artesano" id="nombre-artesano">
-														</div>
-														<div class="col-lg-4 col-md-6 col-sm-12 date-placeholder"
-															data-placeholder="Fecha del pedido">
-															<label for="fecha-pedido">Fecha del pedido</label>
-															<input type="date" class="form-control" id="fecha-pedido">
+													<div class="container mt-4">
+														<div class="row gutters mb-4">
+															<div class="col-lg-4 col-md-6 col-sm-12">
+																<label for="num-pedido">Número de pedido</label>
+																<input type="number" class="form-control"
+																	placeholder=" N°" id="num-pedido" readonly>
+															</div>
+															<div class="col-lg-4 col-md-6 col-sm-12">
+																<label for="nombre-artesano">Artesano</label>
+																<input type="text" class="form-control"
+																	placeholder="nombre del artesano"
+																	id="nombre-artesano" readonly>
+															</div>
+															<div class="col-lg-4 col-md-6 col-sm-12 date-placeholder"
+																data-placeholder="Fecha del pedido">
+																<label for="fecha-pedido">Fecha del pedido</label>
+																<input type="date" class="form-control"
+																	id="fecha-pedido" readonly>
+															</div>
 														</div>
 													</div>
 													<h6 class="border-bottom pb-2">Datos del producto</h6>
 													<div class="container mt-4">
-														<table class="table table-bordered">
-															<thead>
+														<table class="table">
+															<thead class="thead-default">
 																<tr>
 																	<th>Cantidad</th>
 																	<th>Producto</th>
@@ -248,60 +252,177 @@
 
 													</div>
 													<h6 class="border-bottom pb-2">Datos del cliente</h6>
-													<div>
-														<div class="form-group">
-															<label for="nombre-cliente">Nombres</label>
-															<input type="text" class="form-control" id="nombre-cliente"
-																placeholder="">
+													<div class="container mt-4 mb-4">
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="nombre-cliente">Nombres</label>
+																	<input type="text" class="form-control"
+																		id="nombre-cliente" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="dni-cliente">DNI</label>
+																	<input type="text" class="form-control"
+																		id="dni-cliente" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="correo-cliente">Correo</label>
+																	<input type="email" class="form-control"
+																		id="correo-cliente" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="telefono-cliente">Teléfono</label>
+																	<input type="tel" class="form-control"
+																		id="telefono-cliente" placeholder="" readonly>
+																</div>
+															</div>
 														</div>
-														<div class="form-group">
-															<label for="dni-cliente">DNI</label>
-															<input type="text" class="form-control" id="dni-cliente"
-																placeholder="">
-														</div>
-														<div class="form-group">
-															<label for="correo-cliente">Correo</label>
-															<input type="email" class="form-control" id="correo-cliente"
-																placeholder="">
-														</div>
-														<div class="form-group">
-															<label for="telefono-cliente">Teléfono</label>
-															<input type="tel" class="form-control" id="telefono-cliente"
-																placeholder="">
+														<div class="row mt-3">
+															<div class="col-12">
+																<a id="wsp-cliente" href="https://wa.me/1234567890"
+																	class="btn btn-success" target="_blank">Contactar
+																	por WhatsApp</a>
+															</div>
 														</div>
 													</div>
 													<h6 class="border-bottom pb-2">Datos de Pago</h6>
-													<div>
-														Ver captura de pago
+													<div class="container mt-4 mb-4">
+														<div class="col-lg-4 col-md-6 col-sm-12">
+															<label for="imagen-compra">Imagen de la compra</label>
+															<div class="input-group">
+																<input type="text" class="form-control"
+																	placeholder="URL de la imagen" id="imagen-compra"
+																	readonly>
+																<div class="input-group-append">
+																	<button class="btn btn-primary" type="button"
+																		id="button-imagen-compra">Ver Imagen</button>
+																</div>
+															</div>
+														</div>
 													</div>
 													<h6 class="border-bottom pb-2">Datos de Envío</h6>
-													<div class="form-group">
-														<label for="destinatario">Destinatario</label>
-														<input type="text" class="form-control" id="destinatario"
-															placeholder="Artesano 1">
+													<div class="container mt-4">
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="pais-recepcion">País</label>
+																	<input type="text" class="form-control"
+																		id="pais-recepcion" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="region-recepcion">Región</label>
+																	<input type="text" class="form-control"
+																		id="region-recepcion" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="ciudad-recepcion">Ciudad</label>
+																	<input type="text" class="form-control"
+																		id="ciudad-recepcion" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="direccion-recepcion">Dirección</label>
+																	<input type="text" class="form-control"
+																		id="direccion-recepcion" placeholder=""
+																		readonly>
+																</div>
+															</div>
+														</div>
 													</div>
-													<div class="form-group">
-														<label for="lugar_procedencia">Lugar Procedencia</label>
-														<input type="text" class="form-control" id="lugar_procedencia"
-															placeholder="Artesano 1">
-													</div>
-													<div class="form-group">
-														<label for="lugar_recepcion">Lugar Recepción</label>
-														<input type="text" class="form-control" id="lugar_recepcion"
-															placeholder="Artesano 1">
-													</div>
-													<div class="form-group">
-														<label for="precio_envio">Precio de envío</label>
-														<input type="text" class="form-control" id="precio_envio"
-															placeholder="Artesano 1">
-													</div>
+
 												</div>
 											</div>
 										</div>
 										<div class="tab-pane fade" id="atencion" role="tabpanel"
-											aria-labelledby="atencion-tab">Contenido de Atención</div>
+											aria-labelledby="atencion-tab">
+											<div class="container mt-2">
+												<h6 class="border-bottom pb-2">Historia de pedidos</h6>
+												<table class="table mt-4">
+													<thead class="thead-default">
+														<tr>
+															<th>Fecha</th>
+															<th>Comentario</th>
+															<th>Estado</th>
+															<th>Notificación cliente</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>12/03/2024</td>
+															<td></td>
+															<td></td>
+															<td>
+																<button class="btn btn-primary btn-sm">Notificar
+																	email</button>
+																<button class="btn btn-success btn-sm">Notificar
+																	WhatsApp</button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+												<h6 class="border-bottom mt-5 pb-2">Añadir historia de atención</h6>
+												<div class="card">
+													<div class="card-body">
+														<form>
+															<div class="form-group">
+																<label for="estado">Estado</label>
+																<select id="estado" class="form-control" name="estado" required>
+																	<option value="" selected disabled hidden>Seleccione
+																		estado...</option>
+																	<option value="pendiente">Pendiente</option>
+																	<option value="pagado">Pagado</option>
+																	<option value="envio">Envío</option>
+																	<option value="finalizado">Finalizado</option>
+																	<option value="anulado">Anulado</option>
+																</select>
+															</div>
+															<div class="form-group custom-switch">
+																<input type="checkbox" class="custom-control-input"
+																	id="notificarCliente" checked>
+																<label class="custom-control-label"
+																	for="notificarCliente">Notificar cliente</label><br>
+															</div>
+															<div class="form-group">
+																<label for="enlaceSeguimiento">Enlace de Seguimiento</label>
+																<input type="text" class="form-control" id="enlaceSeguimiento"
+																	placeholder="Ingrese el enlace de seguimiento">
+															</div>
+															<div class="form-group">
+																<label for="comentario">Comentario</label>
+																<textarea class="form-control" id="comentario"
+																	rows="2" required></textarea>
+															</div>
+															<div class="form-group">
+																<label for="medioPrueba">Medio de Prueba</label>
+																<input type="file" class="form-control" id="medioPrueba">
+															</div>
+															<button type="submit" class="btn btn-primary">Añadir Historia</button>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
 										<div class="tab-pane fade" id="reclamos" role="tabpanel"
-											aria-labelledby="reclamos-tab">Contenido de Reclamos de pedidos</div>
+											aria-labelledby="reclamos-tab">
+											<h6 class="border-bottom pb-2">Reclamos / Comentario</h6>
+											<textarea type="text" id="id-reclamo" class="form-control" readonly>
+											</textarea>
+											<div class="mt-4">
+												<a href="https://wa.me/1234567890" class="btn btn-success"
+													target="_blank">Contactar por WhatsApp</a>
+											</div>
+										</div>
 									</div>
 
 
@@ -349,7 +470,7 @@
 	<!-- Common JS -->
 	<script src="js/common.js"></script>
 
-	<script type="module" src="src/pedidos/index.js"></script>
+	<script type="module" src="src/historial-atencion/index.js"></script>
 </body>
 
 <!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->

@@ -28,22 +28,24 @@ function cargarTabla(pedidos) {
 
 
         cellNumPedido.textContent = pedido.num_pedido;
-        cellCliente.textContent = pedido.cliente;
-        cellArtesano.textContent = pedido.artesano;
+        cellCliente.textContent = pedido.cliente_id;
+        cellArtesano.textContent = pedido.artesano_id;
         cellFechaPedido.textContent = formatearFecha(pedido.fecha_pedido);
         cellFechaModificacion.textContent = formatearFecha(pedido.fecha_modificacion);
         cellMonto.textContent = pedido.monto;
-        cellEstado.textContent = "Pendiente";
+        cellEstado.textContent = pedido.estado;
 
 
         //botones de editar y eliminar con eventos asociados
         const editarBtn = document.createElement('button');
         editarBtn.type = 'button';
-        editarBtn.className = 'btn btn-info btn-sm';
-        editarBtn.innerHTML = '<i class="icon icon-eye"></i>';
-        //   editarBtn.addEventListener('click', () => editarCategoria(categoria));
+        editarBtn.className = 'btn btn-light btn-sm';
+        editarBtn.innerHTML = '<a href="/historial-ventas.html"><i class="icon icon-eye2"></i></a>';
+        editarBtn.addEventListener('click', (event) =>  {
+            event.preventDefault();
+            window.location.href = `/historial-ventas.html?id=${pedido.num_pedido}`
+        });
         cellAcciones.appendChild(editarBtn);
-
     });
 }
 

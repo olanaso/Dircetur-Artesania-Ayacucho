@@ -24,7 +24,7 @@ function guardar(req, res) {
 
 function actualizar(req, res) {
     model.findOne({
-        where: { id: req.params.id }
+        where: { num_pedido: req.params.id }
     })
         .then(object => {
             object.update(req.body)
@@ -36,7 +36,7 @@ function actualizar(req, res) {
 
 function eliminar(req, res) {
     model.findOne({
-        where: { id: req.body.id }
+        where: { num_pedido: req.body.id }
     })
         .then(object => {
             object.destroy();
@@ -47,7 +47,7 @@ function eliminar(req, res) {
 
 function obtener(req, res) {
     model.findOne({
-        where: { id: req.params.id }
+        where: { num_pedido: req.params.id }
     })
         .then(resultset => {
             res.status(200).json(resultset);
@@ -72,7 +72,7 @@ async function save(req, res, next) {
     try {
         let object = await model.findOne({
             where: {
-                id: req.body.id ? req.body.id : 0
+                num_pedido: req.body.id ? req.body.id : 0
             }
         });
 

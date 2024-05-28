@@ -46,6 +46,11 @@ module.exports = sequelize.define('pedido', {
         allowNull: true,
         field: 'comprobante_solic'
     },
+    estado: {
+        type: Sequelize.STRING(50),
+        allowNull: true,
+        field: 'estado'
+    },
     usuariocreacion_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
