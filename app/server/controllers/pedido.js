@@ -1,15 +1,31 @@
 const model = require('../models/pedido');
 const { Op } = require('sequelize');
+const modelPedido = require('../models/pedido');
+const modelCliente = require('../models/cliente');
+const modelArtesano = require('../models/artesano');
+
+modelPedido.belongsTo(modelCliente, { foreignKey: 'cliente_id' });
+modelPedido.belongsTo(modelArtesano, { foreignKey: 'artesano_id' });
 
 
 module.exports = {
     guardar,
     actualizar,
     eliminar,
-    obtener,
     listar,
     save,
-    filtrar
+    filtrar,
+    obtener: async (req, res) => {
+        const idPedido = req.params.id;
+
+        try {
+            const pedido = await obtenerPedido(idPedido);
+            res.json(pedido);
+        } catch (error) {
+            console.error(error);
+            res.status(error.status || 500).json({ error: error.message || 'Error al obtener el pedido' });
+        }
+    }
 };
 
 function guardar(req, res) {
@@ -45,27 +61,90 @@ function eliminar(req, res) {
         .catch(error => res.status(400).send(error));
 }
 
-function obtener(req, res) {
-    model.findOne({
-        where: { num_pedido: req.params.id }
+// function obtener(req, res) {
+//     model.findOne({
+//         where: { num_pedido: req.params.id }
+//     })
+//         .then(resultset => {
+//             res.status(200).json(resultset);
+//         })
+//         .catch(error => {
+//             res.status(400).send(error);
+//         });
+// }
+async function obtenerPedido(idPedido) {
+    try {
+        const pedidoResult = await modelPedido.findOne({
+            where: { num_pedido: idPedido },
+            attributes: {
+                exclude: ['cliente_id', 'artesano_id'] // Excluir los campos cliente_id y artesano_id
+            },
+            include: [
+                {
+                    model: modelCliente,
+                    attributes: [
+                        'nombres',
+                        'apellidos',
+                        'numero_documento',
+                        'correo',
+                        'telefono',
+                        'tipo_documento',
+                        'numero_documento',
+                        'direccion',
+                        'pais',
+                        'region',
+                        'ciudad'
+                    ]
+                },
+                {
+                    model: modelArtesano,
+                    attributes: ['nombres', 'apellidos']
+                }
+            ]
+        });
+
+        if (!pedidoResult) {
+            throw {
+                error: new Error("pedido no encontrado"),
+                message: "pedido no encontrado",
+                status: 404
+            };
+        }
+
+        return pedidoResult;
+    } catch (error) {
+        throw error;
+    }
+}
+
+function listar(req, res) {
+    modelPedido.findAll({
+        attributes: {
+            exclude: ['cliente_id', 'artesano_id']
+        },
+        include: [
+            {
+                model: modelCliente,
+                attributes: [
+                    'nombres',
+                    'apellidos'
+                ]
+            },
+            {
+                model: modelArtesano,
+                attributes: ['nombres', 'apellidos']
+            }
+        ]
     })
         .then(resultset => {
             res.status(200).json(resultset);
         })
         .catch(error => {
-            res.status(400).send(error);
+            console.error('Error al listar pedidos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
         });
 }
 
-function listar(req, res) {
-    model.findAll()
-        .then(resultset => {
-            res.status(200).json(resultset);
-        })
-        .catch(error => {
-            res.status(400).send(error);
-        });
-}
 
 async function save(req, res, next) {
     const t = await model.sequelize.transaction();

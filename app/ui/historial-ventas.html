@@ -216,17 +216,17 @@
 																	placeholder="nombre del artesano"
 																	id="nombre-artesano" readonly>
 															</div>
-															<div class="col-lg-4 col-md-6 col-sm-12 date-placeholder"
+															<div class="col-lg-4 col-md-6 col-sm-12"
 																data-placeholder="Fecha del pedido">
 																<label for="fecha-pedido">Fecha del pedido</label>
-																<input type="date" class="form-control"
+																<input type="text" class="form-control"
 																	id="fecha-pedido" readonly>
 															</div>
 														</div>
 													</div>
 													<h6 class="border-bottom pb-2">Datos del producto</h6>
 													<div class="container mt-4">
-														<table class="table">
+														<table class="table" id="tablaDatosPedido">
 															<thead class="thead-default">
 																<tr>
 																	<th>Cantidad</th>
@@ -246,7 +246,7 @@
 																</tr>
 															</tbody>
 														</table>
-														<div class="text-right">
+														<div class="text-right" id="total-pedido">
 															<strong>Total: S/ 80.00</strong>
 														</div>
 
@@ -263,9 +263,9 @@
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
-																	<label for="dni-cliente">DNI</label>
+																	<label for="numDocum-cliente" id="tipo-doc-cliente">N</label>
 																	<input type="text" class="form-control"
-																		id="dni-cliente" placeholder="" readonly>
+																		id="numDocum-cliente" placeholder="" readonly>
 																</div>
 															</div>
 															<div class="col-md-6">

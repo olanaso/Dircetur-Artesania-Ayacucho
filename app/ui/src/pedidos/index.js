@@ -28,8 +28,8 @@ function cargarTabla(pedidos) {
 
 
         cellNumPedido.textContent = pedido.num_pedido;
-        cellCliente.textContent = pedido.cliente_id;
-        cellArtesano.textContent = pedido.artesano_id;
+        cellCliente.textContent = pedido.cliente['nombres'] + ' ' + pedido.cliente['apellidos'];
+        cellArtesano.textContent = pedido.artesano['nombres'] + ' ' + pedido.artesano['apellidos'];
         cellFechaPedido.textContent = formatearFecha(pedido.fecha_pedido);
         cellFechaModificacion.textContent = formatearFecha(pedido.fecha_modificacion);
         cellMonto.textContent = pedido.monto;
