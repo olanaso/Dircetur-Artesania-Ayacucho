@@ -132,8 +132,8 @@ async function editarCategoria(categoria) {
 
 
 async function registrarCategoria() {
-  const btnRegistrar = document.getElementById('modalCategoria');
-  const modal = document.getElementById('modalCategoriaEditar');
+  const btnRegistrar = document.getElementById('registrar-categoria');
+  const modal = document.getElementById('modalCategoria');
 
   btnRegistrar.addEventListener('click', async (event) => {
     try {

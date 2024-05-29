@@ -11,6 +11,16 @@ module.exports = sequelize.define('artesano', {
         autoIncrement: true,
         field: 'id'
     },
+    nombres: {
+        type: Sequelize.STRING(150),
+        allowNull: true,
+        field: 'nombres'
+    },
+    apellidos: {
+        type: Sequelize.STRING(150),
+        allowNull: true,
+        field: 'apellidos'
+    },
     usuario_id: {
         type: Sequelize.INTEGER,
         allowNull: true,

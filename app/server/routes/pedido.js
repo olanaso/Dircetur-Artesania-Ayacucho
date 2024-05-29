@@ -4,10 +4,11 @@ const router = Router();
 
 router.post('/pedido', controller.guardar);
 router.put('/pedido/:id', controller.actualizar);
-router.delete('/pedido:id', controller.eliminar);
+router.delete('/pedido', controller.eliminar);
 router.get('/pedido/:id', controller.obtener);
 router.get('/pedido', controller.listar);
 router.post('/pedido/save/', controller.save);
+router.get('/pedidos', controller.filtrar);
 
 
 module.exports = router;
