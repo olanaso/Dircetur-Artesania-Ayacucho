@@ -162,6 +162,11 @@ module.exports = sequelize.define('producto', {
         allowNull: true,
         field: 'lst_videos'
     },
+    lst_videoenlace: {
+        type: Sequelize.JSON,
+        allowNull: true,
+        field: 'lst_videoenlace'
+    }, 
     lst_colores: {
         type: Sequelize.JSON,
         allowNull: true,

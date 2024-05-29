@@ -872,6 +872,151 @@ $(document).ready(function() {
 
 
 
+  
+  /******  videos */
+  let videoCounter = 0; 
+  let videoStorage = {}; // Almacena los videos cargados
+
+  $('#addVideoLink').on('click', function() {
+      let videoName = $('#linkVideoName').val();
+      let videoLink = $('#videoLink').val();
+
+      if (!videoName || !videoLink) {
+          alert("Por favor, complete todos los campos.");
+          return;
+      }
+
+      videoCounter++;
+
+      let newRow = `
+          <tr>
+              <td>${videoCounter}</td>
+              <td>${videoName}</td>
+              <td><a href="${videoLink}" target="_blank">${videoLink}</a></td>
+              <td>
+                  <button type="button" class="btn btn-info btn-sm btn-view-video" data-link="${videoLink}">Ver</button> 
+                  
+                  <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-video1">
+                  <i class="icon icon-bin"></i> 
+              </td>
+          </tr>
+      `;
+
+      $('#videoList2').append(newRow);
+      $('#linkForm')[0].reset();
+  });
+
+  $(document).on('click', '.btn-delete-video1', function() {
+    
+    $(this).closest('tr').remove();
+    contadorImagenes--;
+
+    // Reordenar los números de la lista
+    $('#videoList2 tr').each(function(index, tr) {
+        $(tr).find('td:first').text(index + 1);
+    });
+});
+
+
+  $(document).on('click', '.btn-view-video', function() {
+      let videoLink = $(this).data('link');
+      let embedLink = videoLink;
+
+      if (videoLink.includes('youtube.com/watch')) {
+          const urlParams = new URLSearchParams(new URL(videoLink).search);
+          const videoId = urlParams.get('v');
+          embedLink = `https://www.youtube.com/embed/${videoId}`;
+      } else if (videoLink.includes('youtu.be')) {
+          const videoId = videoLink.split('/').pop();
+          embedLink = `https://www.youtube.com/embed/${videoId}`;
+      }
+
+      $('#videoPlayer').attr('src', embedLink);
+      $('#videoModal').modal('show');
+  });
+
+  $('#videoModal').on('hidden.bs.modal', function() {
+      $('#videoPlayer').attr('src', ''); // Limpiar el src del iframe cuando se cierre el modal
+  });
+
+  $('#uploadVideo').on('change', function() {
+      let file = $(this).prop('files')[0];
+      if (file) {
+          let fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+          $('#fileSize').text(`${fileSizeMB}mb`);
+          if (file.size > 100 * 1024 * 1024) { // 100MB
+              $('#uploadProgress').addClass('bg-danger').text('100%');
+              $('#uploadProgress').css('width', '100%');
+          } else {
+              let progress = (file.size / (100 * 1024 * 1024) * 100).toFixed(0); // Percentage
+              $('#uploadProgress').removeClass('bg-danger').addClass('bg-success').text(`${progress}%`);
+              $('#uploadProgress').css('width', `${progress}%`);
+          }
+      } else {
+          $('#fileSize').text('100mb');
+          $('#uploadProgress').removeClass('bg-danger bg-success').text('0%');
+          $('#uploadProgress').css('width', '0%');
+      }
+  });
+
+  $('#cancelUpload').on('click', function() {
+      $('#uploadVideo').val('');
+      $('#fileSize').text('100mb');
+      $('#uploadProgress').removeClass('bg-danger bg-success').text('0%');
+      $('#uploadProgress').css('width', '0%');
+  });
+
+  $('#registerVideo').on('click', function() {
+      let videoName = $('#videoName').val();
+      let videoFile = $('#uploadVideo').prop('files')[0];
+
+      if (!videoName || !videoFile) {
+          alert("Por favor, complete todos los campos.");
+          return;
+      }
+
+      if (videoFile.size > 100 * 1024 * 1024) { // 100MB
+          alert("El archivo no debe pesar más de 100mb");
+          return;
+      }
+
+      videoCounter++;
+      let videoURL = URL.createObjectURL(videoFile);
+      videoStorage[videoCounter] = videoURL; // Almacena la URL del video
+
+      let newRow = `
+          <tr>
+              <td>${videoCounter}</td>
+              <td>${videoName}</td>
+              <td><a href="${videoURL}" target="_blank">Video subido</a></td>
+              <td>
+                  <button type="button" class="btn btn-info btn-sm btn-view-video" data-link="${videoURL}">Ver</button>  
+                  <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-video">
+                  <i class="icon icon-bin"></i> 
+              </td>
+          </tr>
+      `;
+
+      $('#videoList').append(newRow);
+      $('#videoForm')[0].reset();
+      $('#fileSize').text('100mb');
+      $('#uploadProgress').removeClass('bg-danger bg-success').text('0%');
+      $('#uploadProgress').css('width', '0%');
+  });
+
+
+  $(document).on('click', '.btn-delete-video', function() {
+    $(this).closest('tr').remove();
+    contadorImagenes--;
+
+    // Reordenar los números de la lista
+    $('#videoList tr').each(function(index, tr) {
+        $(tr).find('td:first').text(index + 1);
+    });
+}); 
+
+
+
 });
 
  
