@@ -458,7 +458,125 @@
 
 
 										</div>
-										<div class="tab-pane fade" id="home3" role="tabpanel" aria-labelledby="home-tab3">Imagenes</div>
+										<div class="tab-pane fade" id="home3" role="tabpanel" aria-labelledby="home-tab3">
+
+											<form id="form" action="javascript:void(0)">
+												<h5>Imagen principal</h5>   
+												<div class="mb-4">
+													<div class="d-flex">
+														<img id="imagenPrincipal" src="placeholder.png" alt="Imagen principal" class="img-thumbnail" style="width: 200px; height: 150px;">
+													</div>
+													<div class="d-flex mt-2">
+														<button class="btn btn-primary mr-2" data-toggle="modal" data-target="#imagenPrincipalModal">Editar</button>
+														<button class="btn btn-warning" id="limpiarPrincipalBtn">Limpiar</button>
+													</div>
+												</div>
+												<hr>
+
+												<h5>Imagen adicionales</h5>  
+												<table class="table table-bordered">
+													<thead class="thead-dark">
+														<tr>
+															<th style="width: 5%;">N°</th>
+															<th style="width: 35%;">Imagen</th>
+															<th style="width: 45%;">Denominación</th>
+															<th style="width: 15%;">Acciones</th>
+														</tr>
+													</thead>
+													<tbody id="listaImagenes">
+														<!-- Filas dinámicas aquí -->
+													</tbody>
+												</table>
+												<button class="btn btn-primary" id="addImagenButton" data-toggle="modal" data-target="#imagenModal">Añadir nuevo</button>
+											
+												
+											</form> 
+
+
+											<!-- Modal Imagen Principal -->
+											<div class="modal fade" id="imagenPrincipalModal" tabindex="-1" aria-labelledby="imagenPrincipalModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-xl">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="imagenPrincipalModalLabel">Editar Imagen Principal</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form id="imagenPrincipalForm">
+																<div class="form-group">
+																	<label for="uploadPrincipalImage">Subir imagen:</label>
+																	<div class="d-flex align-items-center">
+																		<input type="file" class="form-control-file mr-2" id="uploadPrincipalImage">
+																		<input type="text" class="form-control mr-2" id="principalImageName">
+																		<button type="button" class="btn btn-warning" id="visualizarPrincipalBtn">Visualizar</button>
+																	</div>
+																</div>
+																<div class="form-group">
+																	<img id="principalImagePreview" src="" alt="Vista previa de la imagen principal" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
+																</div>
+															</form>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+															<button type="button" class="btn btn-primary" id="guardarPrincipalBtn">Guardar</button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+												<!-- Modal -->
+												<div class="modal fade" id="imagenModal" tabindex="-1" aria-labelledby="imagenModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-xl">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="imagenModalLabel">Imagen</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<form id="imagenForm">
+																	<div class="form-group">
+																		<label for="uploadImage">Subir imagen:</label>
+																		<div class="d-flex align-items-center">
+																			<input type="file" class="form-control-file mr-2" id="uploadImage">
+																			<input type="text" class="form-control mr-2" id="imageName">
+																			<button type="button" class="btn btn-warning" id="visualizarBtn">Visualizar</button>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<img id="imagePreview" src="" alt="Vista previa de la imagen" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
+																	</div>
+																</form>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+																<button type="button" class="btn btn-primary" id="guardarBtn">Guardar</button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+										</div>
 										<div class="tab-pane fade" id="home4" role="tabpanel" aria-labelledby="home-tab4">Videos</div>
 										<div class="tab-pane fade" id="home5" role="tabpanel" aria-labelledby="home-tab5"> 
 											<form id="form" action="javascript:void(0)"> 
@@ -475,7 +593,7 @@
 																<input type="color" id="color-input" placeholder="#9900FF">
 															</div>  
 															<div class="col-md-7 text-right">
-																<button type="button" class="btn btn-primary btn-add-offer" id="add-color-btn">
+																<button type="button" class="btn btn-primary btn-add-offer" id="addcolorbtn">
 																	<i class="fas fa-plus-circle"></i> Añadir color
 																</button>
 															</div>
@@ -489,8 +607,8 @@
 																	<th>Color</th>
 																	<th>Acción</th>
 																</tr>
-															</thead>
-															<tbody id="color-table-body">
+															</thead> 
+															<tbody id="listaColores">
 																
 															</tbody>
 														</table>
@@ -511,7 +629,7 @@
 														
 															</div>  
 															<div class="col-md-7 text-right">
-																<button type="button" class="btn btn-primary btn-add-offer" id="add-talla-btn">
+																<button type="button" class="btn btn-primary btn-add-offer" id="addtallabtn">
 																	<i class="fas fa-plus-circle"></i> Añadir talla
 																</button>
 															</div>
@@ -525,8 +643,8 @@
 																	<th>Talla</th>
 																	<th>Acción</th>
 																</tr>
-															</thead>
-															<tbody id="talla-table-body">
+															</thead> 
+															<tbody id="listaTalla">
 																 
 															</tbody>
 														</table>

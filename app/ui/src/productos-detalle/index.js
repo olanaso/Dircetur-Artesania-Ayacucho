@@ -288,7 +288,7 @@ async function buscarUsuario () {
       $('#listaCostos tr').each(function() {
           let fila = $(this);
           let costo = {
-              numero: fila.find('td').eq(0).text(),
+              id: fila.find('td').eq(0).text(),
               nombre: fila.find('td').eq(1).text(),
               precio: fila.find('td').eq(2).text()
           };
@@ -307,7 +307,7 @@ async function buscarUsuario () {
       $('#listaOfertas tr').each(function() {
           let fila = $(this);
           let oferta = {
-              numero: fila.find('td').eq(0).text(),
+              id: fila.find('td').eq(0).text(),
               porcentajeDescuento: parseInt(fila.find('td').eq(1).text(), 10),
               precioOfertado: parseFloat(fila.find('td').eq(2).text()),
               fechaInicio: fila.find('td').eq(3).text(),
@@ -320,11 +320,66 @@ async function buscarUsuario () {
       let lst_ofertas = ofertasJSON;
 
 
+    // Aquí puedes enviar coloresJSON al servidor o hacer algo con él
+      //alert('Costos guardados en JSON:\n' + costosJSON);
+      /****fin */
+         
+      let listaColores = [];
 
- 
+      $('#listaColores tr').each(function() {
+          let fila = $(this);
+          let oferta = {
+              id: fila.find('td').eq(0).text(), 
+              color: fila.find('td').eq(1).text() 
+          };
+          listaColores.push(oferta);
+      });
+
+      let ColoresJSON = JSON.stringify(listaColores);
+      let lst_colores = ColoresJSON;
+
+       // Aquí puedes enviar tallaJSON al servidor o hacer algo con él
+      //alert('Costos guardados en JSON:\n' + costosJSON);
+      /****fin */
+         
+      let listaTalla = [];
+
+      $('#listaTalla tr').each(function() {
+          let fila = $(this);
+          let talla = {
+              id: fila.find('td').eq(0).text(), 
+              talla: parseInt(fila.find('td').eq(1).text(), 10)
+          };
+          listaTalla.push(talla);
+      });
+
+      let TallaJSON = JSON.stringify(listaTalla);
+      let lst_talla = TallaJSON;
+
+   // Aquí puedes enviar imagenesJSON al servidor o hacer algo con él
+      //alert('Costos guardados en JSON:\n' + costosJSON);
+      /****fin */
+      let listaImagenes = []; 
+      $('#listaImagenes tr').each(function() {
+          let fila = $(this);
+          let imagen = {
+              id: fila.find('td').eq(0).text(),
+              src: fila.find('img').attr('src'),
+              srcv: fila.find('img').attr('src'),
+              nombre: fila.find('td').eq(2).text()
+          }; 
+          listaImagenes.push(imagen);
+      });
+
+      let imagenesJSON = JSON.stringify(listaImagenes);
+      console.log(imagenesJSON); // Aquí puedes usar el JSON según tus necesidades
        
+      
 
-      let result = await guardarProducto({ nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal,lst_otros_costos,lst_ofertas   });
+    
+      
+
+      let result = await guardarProducto({ nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal,lst_otros_costos,lst_ofertas,lst_colores,lst_talla   });
       if (result) {
         showToast('Se actualizo los datos correctamente')
         buscarUsuario();
@@ -395,9 +450,7 @@ async function buscarUsuario () {
 
 
 
-
-
-
+ 
 $(document).on('click', '.btn_Eliminar', async function (e) {
 
 
@@ -621,78 +674,204 @@ $(document).ready(function() {
           $(tr).find('td:first').text(index + 1);
       });
   });
+
+
+  /******otros Colores */
+  let contadorColores = 0;
+
+  $('#addcolorbtn').on('click', function() { 
+      let colorinput = $('#color-input').val(); 
+
+      if (colorinput === "" ) {
+          alert("Por favor, complete todos los campos.");
+          return;
+      }
+
+      contadorColores++;
+
+      let nuevaFila = `
+          <tr>
+              <td>${contadorColores}</td>
+              <td>${colorinput}</td> 
+              <td>
+                  <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-colores">
+                  <i class="icon icon-bin"></i>
+                  </button> 
+
+              </td>
+          </tr>
+      `;
+
+      $('#listaColores').append(nuevaFila);
+
+      $('#color-input').val(''); 
+  });
+
+  $(document).on('click', '.btn-delete-colores', function() {
+      $(this).closest('tr').remove();
+      contadorColores--;
+
+      // Reordenar los números de la lista
+      $('#listaColores tr').each(function(index, tr) {
+          $(tr).find('td:first').text(index + 1);
+      });
+  });
+
+
+  
+  /****** Talla */
+  let contadorTalla = 0;
+
+  $('#addtallabtn').on('click', function() { 
+      let tallainput = $('#talla-input').val(); 
+
+      if (tallainput === "" ) {
+          alert("Por favor, complete todos los campos.");
+          return;
+      }
+
+      tallainput = tallainput === "" ? 0 : (isInteger(tallainput) ? parseInt(tallainput, 10) : NaN); 
+
+      if (isNaN(tallainput)) {
+          alert("Por favor, ingrese valores válidos.");
+          return;
+      }
+
+      contadorTalla++;
+
+      let nuevaFila = `
+          <tr>
+              <td>${contadorTalla}</td>
+              <td>${tallainput}</td> 
+              <td>
+                  <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-Talla">
+                  <i class="icon icon-bin"></i>
+                  </button> 
+
+              </td>
+          </tr>
+      `;
+
+      $('#listaTalla').append(nuevaFila);
+
+      $('#talla-input').val(''); 
+  });
+
+  $(document).on('click', '.btn-delete-Talla', function() {
+      $(this).closest('tr').remove();
+      contadorTalla--;
+
+      // Reordenar los números de la lista
+      $('#listaTalla tr').each(function(index, tr) {
+          $(tr).find('td:first').text(index + 1);
+      });
+  });
+ 
  
 
 
-});
+  /******  Imagenes */
+   
+  let contadorImagenes = 0;
 
+            $('#guardarBtn').on('click', function() {
+                let imageName = $('#imageName').val();
+                let imageSrc = $('#imagePreview').attr('src');
 
- document.getElementById('add-color-btn').addEventListener('click', function() {
-            const colorInput = document.getElementById('color-input').value;
-            const colorTableBody = document.getElementById('color-table-body');
-            const rowCount = colorTableBody.rows.length + 1;
+                if (!imageName || !imageSrc) {
+                    alert("Por favor, suba una imagen.");
+                    return;
+                }
 
-            const row = colorTableBody.insertRow();
-            row.insertCell(0).innerText = rowCount < 10 ? `0${rowCount}` : rowCount;
-            row.insertCell(1).innerHTML = `<span class="color-box" style="background-color: ${colorInput};"></span>${colorInput}`;
-            row.insertCell(2).innerHTML = '<button type="button" data-toggle="tooltip" title="Eliminar"  class="btn btn-primary btn-sm action-btn"><i class="icon icon-bin"></i></button>';
+                contadorImagenes++;
 
-            
+                let nuevaFila = `
+                    <tr>
+                        <td>${contadorImagenes}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="${imageSrc}" alt="Imagen ${contadorImagenes}" class="img-thumbnail" style="width: 100px; height: 75px;"> 
+                            </div>
+                        </td>
+                        <td>${imageName}</td>
+                        <td>
+                        <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-imagen">
+                          <i class="icon icon-bin"></i> 
+                    </tr>
+                `;
 
-            addDeleteEventListener(row.querySelector('.action-btn'));
-        });
+                $('#listaImagenes').append(nuevaFila);
+                $('#imagenModal').modal('hide');
+                $('#imagenForm')[0].reset();
+                $('#imagePreview').hide();
+            });
 
-document.getElementById('add-talla-btn').addEventListener('click', function() {
-    const tallaInput = document.getElementById('talla-input').value;
-    const tallaTableBody = document.getElementById('talla-table-body');
-    const rowCount = tallaTableBody.rows.length + 1;
+  $(document).on('click', '.btn-delete-imagen', function() {
 
-    const row = tallaTableBody.insertRow();
-    row.insertCell(0).innerText = rowCount < 10 ? `0${rowCount}` : rowCount;
-    row.insertCell(1).innerText = tallaInput; 
-    row.insertCell(2).innerHTML = '<button type="button" data-toggle="tooltip" title="Eliminar"  class="btn btn-primary btn-sm action-btn"><i class="icon icon-bin"></i></button>';
+    $(this).closest('tr').remove();
+    contadorImagenes--;
 
-
-    addDeleteEventListener(row.querySelector('.action-btn'));
-});
-
-document.querySelectorAll('.action-btn').forEach(button => {
-    addDeleteEventListener(button);
-});
-
-function addDeleteEventListener(button) {
-    button.addEventListener('click', function() {
-        const row = button.parentElement.parentElement;
-        row.remove();
+    // Reordenar los números de la lista
+    $('#listaImagenes tr').each(function(index, tr) {
+        $(tr).find('td:first').text(index + 1);
     });
-}
+     
+  });
 
-document.getElementById('save-btn').addEventListener('click', function() {
-    const colors = [];
-    const sizes = [];
-
-    document.querySelectorAll('#color-table-body tr').forEach(row => {
-        colors.push(row.cells[1].innerText);
-    });
-
-    document.querySelectorAll('#talla-table-body tr').forEach(row => {
-        sizes.push(row.cells[1].innerText);
-    });
-
-    const data = { colors, sizes };
-    const jsonData = JSON.stringify(data, null, 2);
-    downloadJSON(jsonData, 'colores_tallas.json');
+  $('#visualizarBtn').on('click', function() {
+    let file = $('#uploadImage').prop('files')[0];
+    if (file) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').attr('src', e.target.result).show();
+            $('#imageName').val(file.name);
+        }
+        reader.readAsDataURL(file);
+    } else {
+        alert("Por favor, seleccione un archivo para visualizar.");
+    }
 });
 
-function downloadJSON(data, filename) {
-    const blob = new Blob([data], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}
 
+  $('#guardarPrincipalBtn').on('click', function() {
+    let principalImageSrc = $('#principalImagePreview').attr('src');
+    let principalImageName = $('#principalImageName').val();
+
+    let imageName = $('#imageName').val();
+    let imageSrc = $('#imagePreview').attr('src'); 
+    
+
+    if (!principalImageSrc || !principalImageName) {
+        alert("Por favor, suba una imagen.");
+        return;
+    }
+
+    $('#imagenPrincipal').attr('src', principalImageSrc);
+    $('#imagenPrincipalModal').modal('hide');
+    $('#imagenPrincipalForm')[0].reset();
+    $('#principalImagePreview').hide();
+  });
+
+  $('#visualizarPrincipalBtn').on('click', function() {
+    let file = $('#uploadPrincipalImage').prop('files')[0];
+    if (file) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            $('#principalImagePreview').attr('src', e.target.result).show();
+            $('#principalImageName').val(file.name);
+        }
+        reader.readAsDataURL(file);
+    } else {
+        alert("Por favor, seleccione un archivo para visualizar.");
+    }
+  });
+
+  $('#limpiarPrincipalBtn').on('click', function() {
+    $('#imagenPrincipal').attr('src', 'placeholder.png');
+  });
+
+
+
+});
+
+ 
