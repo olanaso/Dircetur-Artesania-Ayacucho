@@ -27,7 +27,19 @@ function cargarTabla(Clientes){
     cellID.textContent = Cliente.id;
     cellNombreyApellido.textContent = Cliente.nombres + " " + Cliente.apellidos;
     cellCorreo.textContent = Cliente.correo;
-    cellEstado.textContent = Cliente.estado;
+    //coso de estado
+    const estado = document.createElement('span');
+    if (Cliente.estado) {
+      estado.className = 'badge badge-pill badge-success'
+      estado.innerHTML = 'activo'
+      cellEstado.appendChild(estado);
+    } else{
+      estado.className = 'badge badge-pill badge-danger'
+      estado.innerHTML = 'Desactivo'
+      cellEstado.appendChild(estado);
+    }
+    
+    //cellEstado.textContent = Cliente.estado;
 
     //botones de ver y eliminar con eventos asociados
     const detalleCliente = document.createElement('button');

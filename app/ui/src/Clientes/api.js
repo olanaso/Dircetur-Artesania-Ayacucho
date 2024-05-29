@@ -1,8 +1,9 @@
-const baseUrl = 'http://localhost:3001';
+import { baseUrl, getDataFromLocalStorage } from '../utils/config';
+//const baseUrl = 'http://localhost:3001';
 
 export async function listarClientes() {
     try {
-        const response = await fetch(baseUrl + "/api/cliente");
+        const response = await fetch(baseUrl + "/cliente");
         const result = await response.json();
         return result;
     } catch (error) {
@@ -13,7 +14,7 @@ export async function listarClientes() {
 export async function filtrarClientes(filtro) {
     try {
         const params = new URLSearchParams(filtro);
-        const response = await fetch(baseUrl + `/api/clientes?${params}`);
+        const response = await fetch(baseUrl + `/clientes?${params}`);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -29,7 +30,7 @@ export async function borrarCliente(id) {
             body: JSON.stringify({ id })
         };
 
-        const response = await fetch(baseUrl+'/api/cliente', requestOptions);
+        const response = await fetch(baseUrl+'/cliente', requestOptions);
         const result = await response.json();
 
         return result;
@@ -46,7 +47,7 @@ export async function actualizarCliente(id, data) {
             body: JSON.stringify(data)
         };
 
-        const response = await fetch(`${baseUrl}/api/cliente/${id}`, requestOptions);
+        const response = await fetch(`${baseUrl}/cliente/${id}`, requestOptions);
 
         if (!response.ok) {
             throw new Error(`Error al actualizar la categoría: ${response.statusText}`);
@@ -69,7 +70,7 @@ export async function guardarcliente(data) {
             body: JSON.stringify(data)
         };
 
-        const response = await fetch(baseUrl + '/api/cliente', requestOptions);
+        const response = await fetch(baseUrl + '/cliente', requestOptions);
         const result = await response.json();
 
         return result;
@@ -80,7 +81,7 @@ export async function guardarcliente(data) {
 
 export async function obtenerCliente(id) {
     try {
-        const response = await fetch(baseUrl+ `/api/cliente/${id}`, { method: 'GET' });
+        const response = await fetch(baseUrl+ `/cliente/${id}`, { method: 'GET' });
         const result = await response.json();
         
         return result;
