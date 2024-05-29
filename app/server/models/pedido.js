@@ -22,7 +22,7 @@ module.exports = sequelize.define('pedido', {
         field: 'cliente_id'
     },
     fecha_pedido: {
-        type: Sequelize.DATE(6),
+        type: Sequelize.DATE,
         allowNull: true,
         field: 'fecha_pedido'
     },
@@ -45,6 +45,11 @@ module.exports = sequelize.define('pedido', {
         type: Sequelize.STRING(50),
         allowNull: true,
         field: 'comprobante_solic'
+    },
+    estado: {
+        type: Sequelize.STRING(50),
+        allowNull: true,
+        field: 'estado'
     },
     usuariocreacion_id: {
         type: Sequelize.INTEGER,

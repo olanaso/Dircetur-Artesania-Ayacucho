@@ -6,7 +6,8 @@ router.post('/cliente', controller.guardar);
 router.put('/cliente/:id', controller.actualizar);
 router.delete('/cliente', controller.eliminar);
 router.get('/cliente/:id', controller.obtener);
-router.get('/clientes', controller.listar);
+router.get('/cliente', controller.listar);
 router.post('/cliente/save/', controller.save);
+router.get('/clientes', controller.filtrar);
 
 module.exports = router;

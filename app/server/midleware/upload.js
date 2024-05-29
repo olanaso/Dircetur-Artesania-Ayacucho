@@ -1,220 +1,99 @@
 const multer = require('multer');
 const moment = require('moment');
-var path = require('path');
+const path = require('path');
 const fs = require('fs');
 
-const pdf = require('pdf-parse');
-const { fromPath } = require("pdf2pic");
-//const { fileserverpath } = require('../config/fileServer');
-const fileserverpath = "D:/MTC/fileserverDDP/public/files/";
-
-
 function generateFinalName (originalfilename) {
-    // return `${originalfilename}_${moment().unix()}.${originalfilename.split('.').pop()} `
-    return `${moment().unix()}-${originalfilename}`
+    return `${moment().unix()}-${originalfilename}`;
 }
 
-
-async function uploadarchivo (req, res, next) {
-    var storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            //    cb(null, path.join(__dirname, '/../../public/uploads/'));
-            cb(null, fileserverpath);
-        },
-        filename: function (req, file, cb) {
-            let filename = generateFinalName(file.originalname);
-            req.filenamesaved = filename;
-            req.originalname = file.originalname;
-
-            cb(null, filename);
-        }
-    })
-
-    var upload = multer({ storage: storage }).array("myfile", 1)
-    upload(req, res, function (err) {
-
-        console.log(req.body);
-
-        if (err) {
-            return next({
-                error: err,
-                message: "OCURRIO UN ERROR LA SUBIR EL ARCHIVO",
-                status: 401
-            });
-        }
-        next();
-    })
-}
-
-async function uploadarchivoMultiple (req, res, next) {
-
-    var storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            //    cb(null, path.join(__dirname, '/../../public/uploads/'));
-            cb(null, fileserverpath);
-        },
-        filename: function (req, file, cb) {
-            let filename = generateFinalName(file.originalname);
-            req.filenamesaved = filename;
-            req.originalname = file.originalname;
-            req.denominacionFile = req.body.denominacionFile;
-            cb(null, filename);
-        }
-    })
-
-    var upload = multer({ storage: storage }).array("myfile", 1)
-    upload(req, res, function (err) {
-
-        console.log(req.body);
-        req.denominacion = req.body.denominacion;
-
-        if (err) {
-            return next({
-                error: err,
-                message: "OCURRIO UN ERROR LA SUBIR EL ARCHIVO",
-                status: 401
-            });
-        }
-
-
-        next();
-    })
-
-}
-
-
-
-
-/*Midleware que permite subir un archivo a una Ruta dada, es necesario que te permitea realizar */
+/* Middleware que permite subir un archivo a una Ruta dada */
 async function uploadarchivoDDP (req, res, next) {
-    /*Busco si existe la carpeta para el procesmiento del shape*/
-    var dir = path.join(__dirname, '../public/' + req.query.folder) //__dirname+gdalConfig.path_file;
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-    }
-    var storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, dir);
-        },
-        filename: async function (req, file, cb) {
-            //genenra el nombre en funcion al momento actual
-            let fileuploadname = moment().unix() + '-' + file.originalname;
-            req.filenamesaved = fileuploadname;
-            req.originalname = file.originalname;
-            cb(null, fileuploadname);
-        }
-    })
-
-    var upload = multer({ storage: storage }).array("myfile", 1)
-
-    await upload(req, res, async function (err) {
-        if (err) {
-            return next({
-                error: err,
-                message: "OCURRIO UN ERROR LA SUBIR EL ARCHIVO",
-                status: 401
+    try {
+        // Verificar si la carpeta existe, si no, crearla
+        //     
+        const folder = 'files-app/' + (req.query.folder || '');
+        if (!folder) {
+            return res.status(400).json({
+                error: "Falta el parámetro 'folder' en la solicitud.",
+                message: "OCURRIÓ UN ERROR AL SUBIR EL ARCHIVO",
+                status: 400
             });
         }
-        next();
-    });
-}
 
+        const dir = path.join(__dirname, '../public/', folder);
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
 
-
-async function extraerJsonDePDF (data) {
-    try {
-        // Utilizamos una expresión regular para extraer el texto desde 'CUI' hasta 'Huella Derecha'
-        const regex = /(CUI:.+?Huella Derecha)/s;
-        const resultado = data.text.match(regex);
-
-        // Extraemos el texto coincidente si existe
-        const textoExtraido = resultado ? resultado[1] : "Texto no encontrado";
-
-
-
-        // Dividimos el texto en líneas
-        const lineas = textoExtraido.split('\n');
-
-        let jsonResult = {};
-        lineas.forEach(linea => {
-            // Dividimos cada línea en clave y valor
-            let partes = linea.split(':');
-            if (partes.length > 1) {
-                let clave = partes[0].trim();
-                let valor = partes.slice(1).join(':').trim(); // En caso de que haya más de un ':' en la línea
-                jsonResult[clave] = valor;
+        // Configurar el almacenamiento de Multer
+        const storage = multer.diskStorage({
+            destination: function (req, file, cb) {
+                cb(null, dir);
+            },
+            filename: function (req, file, cb) {
+                const fileuploadname = generateFinalName(file.originalname);
+                req.filenamesaved = fileuploadname;
+                req.originalname = file.originalname;
+                cb(null, fileuploadname);
             }
         });
 
-        jsonResult.dni = jsonResult["CUI"].split(' - ')[0]
-        return jsonResult;
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
-}
+        // Configuración dinámica para el campo de archivo y el número máximo de archivos
+        const fieldName = req.query.inputName || 'myfile';  // Nombre del campo de archivo, por defecto 'myfile'
+        const maxCount = parseInt(req.query.maxCount) || 1; // Número máximo de archivos, por defecto 1
 
-/*Midleware que permite subir un archivo a una Ruta dada, es necesario que te permitea realizar */
-async function uploadarchivoDNI (req, res, next) {
-    /*Busco si existe la carpeta para el procesmiento del shape*/
-    var dir = path.join(__dirname, '../public/' + req.query.folder) //__dirname+gdalConfig.path_file;
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-    }
-    var storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, dir);
-        },
-        filename: async function (req, file, cb) {
-            //genenra el nombre en funcion al momento actual
+        console.log(`Esperando campo de archivo: ${fieldName} con máximo de archivos: ${maxCount}`);
 
-            // const jsonResult = await extraerJsonDePDF(file);
-            //         console.log(jsonResult);
+        // Crear el middleware de Multer
+        const upload = multer({
+            storage: storage,
+            limits: { fileSize: 1024 * 1024 * 150 } // Limitar el tamaño del archivo a 10MB
+        }).array(fieldName, maxCount);
 
-
-            console.log(req.ciudadano)
-            let fileuploadname = moment().unix() + '-' + file.originalname;
-            req.filenamesaved = fileuploadname;
-            req.originalname = file.originalname;
-            //req.ciudadano = jsonResult;
-            cb(null, fileuploadname);
-        }
-    })
-
-    var upload = multer({ storage: storage }).array("myfile", 1)
-
-    await upload(req, res, async function (err) {
-        if (err) {
-            return next({
-                error: err,
-                message: "OCURRIO UN ERROR LA SUBIR EL ARCHIVO",
-                status: 401
-            });
-        }
-
-        // Aquí se procesa el archivo PDF para extraer el texto
-        if (req.files && req.files.length > 0) {
-            const fileData = fs.readFileSync(req.files[0].path);
-            try {
-                const data = await pdf(fileData);
-
-                req.ciudadano = await extraerJsonDePDF(data); // Aquí se almacena el texto extraído del PDF
-            } catch (error) {
-                return next({
-                    error: error,
-                    message: "ERROR AL PROCESAR EL ARCHIVO PDF",
-                    status: 500
-                });
+        // Ejecutar el middleware de Multer
+        upload(req, res, function (err) {
+            if (err) {
+                if (err instanceof multer.MulterError) {
+                    // Un error de Multer ocurrió al subir.
+                    console.error("MulterError:", err);
+                    if (err.code === 'LIMIT_UNEXPECTED_FILE') {
+                        return res.status(400).json({
+                            error: `Campo inesperado: ${err.field}`,
+                            message: "OCURRIÓ UN ERROR AL SUBIR EL ARCHIVO",
+                            status: 400
+                        });
+                    } else {
+                        return res.status(400).json({
+                            error: err.message,
+                            message: "OCURRIÓ UN ERROR AL SUBIR EL ARCHIVO",
+                            status: 400
+                        });
+                    }
+                } else {
+                    // Un error desconocido ocurrió al subir.
+                    console.error("Error desconocido:", err);
+                    return res.status(500).json({
+                        error: err.message,
+                        message: "OCURRIÓ UN ERROR AL SUBIR EL ARCHIVO",
+                        status: 500
+                    });
+                }
             }
-        }
-        next();
-    });
+            // Si no hay errores, pasar al siguiente middleware
+            next();
+        });
+    } catch (err) {
+        // Manejo de errores fuera del proceso de Multer
+        console.error("Error del servidor:", err);
+        return res.status(500).json({
+            error: err.message,
+            message: "OCURRIÓ UN ERROR EN EL SERVIDOR",
+            status: 500
+        });
+    }
 }
-
 
 module.exports = {
-    uploadarchivo,
-    uploadarchivoMultiple,
-    uploadarchivoDDP,
-    uploadarchivoDNI
-}
+    uploadarchivoDDP
+};

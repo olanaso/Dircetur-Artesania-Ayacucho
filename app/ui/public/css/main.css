@@ -2311,6 +2311,7 @@ ul.order-list li:last-child {
 }
 
 .toggle-switch .switch:after {
+  
   position: absolute;
   content: "\e901";
   font-size: .75rem;
