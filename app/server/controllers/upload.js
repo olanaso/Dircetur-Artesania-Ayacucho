@@ -35,6 +35,7 @@ async function uploadFilevideo (req, res, next) {
         }
         //console.log(req.ciudadano)
         let file = folder + '/' + req.filenamesaved
+        
         return res.status(200).send({
             nombrearchuvo: req.originalname, ruta: file
         });

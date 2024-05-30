@@ -187,11 +187,17 @@
 															placeholder="frase" required>
 													</div>
 													<div class="form-group">
-														<label for="fotoReferente">Imagen</label>
-														<input type="file" class="form-control" id="imgSlider" required>
+														<!-- <label for="fotoReferente">Imagen</label>
+														<input type="file" class="form-control" id="imgSlider" required> -->
+														<input type="file" id="myfile" name="myfile">
+														<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+														<div id="status"></div>
 													</div>
-													<button type="button" class="btn btn-secondary"
-														id="visualizar">Visualizar</button>
+													<div class="form-group">
+														<img id="principalImagePreview" src="" alt="Vista previa de la imagen principal" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
+													</div>
+													<!-- <button type="button" class="btn btn-secondary"
+														id="visualizar">Visualizar</button> -->
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary"
@@ -222,9 +228,10 @@
 															placeholder="frase" required>
 													</div>
 													<div class="form-group">
-														<label for="fotoReferente">Imagen</label>
-														<input type="file" class="form-control" id="imgSliderE" required>
+														<!-- <label for="fotoReferente">Imagen</label>
+														<input type="file" class="form-control" id="imgSliderE" required> -->
 													</div>
+													
 													<button type="button" class="btn btn-secondary"
 														id="visualizar">Visualizar</button>
 												</div>
@@ -244,7 +251,7 @@
 									<div class="d-flex justify-content-end mb-3">
 										<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalSliderC">añadir nuevo <i class="icon icon-circle-with-plus"></i></button>
 									</div>
-									<div class="card-body">
+									<div class="card-body" id="listaSlider">
 										<table class="table m-0" id="tablaSlider">
 											<thead class="thead-default">
 												<tr>

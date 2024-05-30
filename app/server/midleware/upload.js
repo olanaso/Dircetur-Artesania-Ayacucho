@@ -44,7 +44,6 @@ async function uploadarchivoDDP (req, res, next) {
         const maxCount = parseInt(req.query.maxCount) || 1; // Número máximo de archivos, por defecto 1
 
         console.log(`Esperando campo de archivo: ${fieldName} con máximo de archivos: ${maxCount}`);
-
         // Crear el middleware de Multer
         const upload = multer({
             storage: storage,

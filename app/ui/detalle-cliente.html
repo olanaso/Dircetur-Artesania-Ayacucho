@@ -168,7 +168,10 @@
 					<!-- BEGIN .main-content -->
 					<div class="main-content">
 						<div class="card">
-							<div class="card-header">Cliente</div>
+							<div class="card-header d-flex justify-content-between">
+								Cliente
+								<a href="/clientes.html"><i class="icon-arrow_back"></i></a>
+							</div>
 
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -272,8 +275,16 @@
 													<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
 														<a class="block-300 center-text">
 															<div class="user-profile">
-																<img src="img/avatar1.svg" class="profile-thumb" alt="User Thumb">
-																<input type="file" class="form-control" id="imgPerfilC" name="foto_perfil" required>
+																<div class="form-group">
+																	<img id="principalImagePreview" src="" alt="Vista previa de la imagen principal" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
+																</div>
+																<div class="form-group">
+																	<input type="file" id="myfile" name="myfile">
+																	<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+																	<div id="status"></div>
+																</div>
+																<!-- <img src="img/avatar1.svg" class="profile-thumb" alt="User Thumb">
+																<input type="file" class="form-control" id="imgPerfilC" name="foto_perfil" required> -->
 															</div>
 														</a>
 													</div>
@@ -311,27 +322,73 @@
 												</div>
 											</form>
 										</div>
-
+										<!-- ModalverReclamo -->
+										<div class="modal fade" id="modalverReclamo" tabindex="-1" role="dialog" aria-hidden="true">
+											<div class="modal-dialog modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Reclamo</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<form id="formReclamo" data-id="">
+														<div class="modal-body">
+															<div class="form-group">
+																<label for="codVenta">Código de venta</label>
+																<input type="text" class="form-control" id="codVenta"
+																	placeholder="" required>
+															</div>
+															<div class="form-group">
+																<label for="fechaReclamo">fecha de reclamo</label>
+																<input type="text" class="form-control" id="fechaReclamo"
+																	placeholder="" required>
+															</div>
+															<div class="form-group">
+																<label for="descripcionR">Descripción</label>
+																<input type="text" class="form-control" id="descripcionR"
+																	placeholder="" required>
+															</div>
+															<div class="form-group">
+																<label for="estadoR">Estado</label>
+																<input type="text" class="form-control" id="estadoR"
+																	placeholder="" required>
+															</div>
+															
+														</div>
+														<div class="modal-footer">
+															<button type="submit" id="registrar-categoria" class="btn btn-primary">
+																Guardar
+															</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Fin ModalVer Reclamo-->
 										<div class="tab-pane fade" id="reclamoC" role="tabpanel" aria-labelledby="reclamoC-tab">
-											<table class="table m-0" id="tablaCategoria">
-												<thead class="thead-default" id="tablaReclamos">
-													<tr>
-														<th>ID</th>
-														<th>Descripción</th>
-														<th>Acciones</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<th scope="row">1</th>
-														<td>Mark</td>
-														<td>
-															<button type="button" class="btn btn-light btn-sm"><i class="icon icon-eye2"></i></button>
-															<button type="button" class="btn btn-primary btn-sm"><i class="icon icon-bin"></i></button>
-														</td>
-													</tr>
-												</tbody>
-											</table>
+											<div class="" id="listReclamos">
+												<table class="table m-0" id="tablaReclamos">
+													<thead class="thead-default" id="tablaReclamos">
+														<tr>
+															<th>ID</th>
+															<th>Descripción</th>
+															<th>Acciones</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<th scope="row">1</th>
+															<td>Me no me llegó el pedido</td>
+															<td>
+																<button type="button" class="btn btn-light btn-sm"><i class="icon icon-eye2"></i></button>
+																<button type="button" class="btn btn-primary btn-sm"><i class="icon icon-bin"></i></button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											
 										</div>
 
 										<div class="tab-pane fade" id="activa-desactiva" role="tabpanel" aria-labelledby="activa-desactiva-tab">

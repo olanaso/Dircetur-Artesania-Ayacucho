@@ -32,7 +32,7 @@ function populateCountries() {
     countrySelect.addEventListener('change', handleCountryChange);
 }
 
-function handleCountryChange(event) {
+export function handleCountryChange(event) {
     const countryId = parseInt(event.target.value);
     populateStates(countryId);
 }
@@ -52,7 +52,7 @@ function populateStates(countryId) {
     stateSelect.addEventListener('change', handleStateChange);
 }
 
-function handleStateChange(event) {
+export function handleStateChange(event) {
     const stateId = parseInt(event.target.value);
     populateCities(stateId);
 }
