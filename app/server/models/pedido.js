@@ -51,6 +51,11 @@ module.exports = sequelize.define('pedido', {
         allowNull: true,
         field: 'estado'
     },
+    list_atencion: {
+        type: Sequelize.JSON,
+        allowNull: true,
+        field: 'list_atencion'
+    },
     usuariocreacion_id: {
         type: Sequelize.INTEGER,
         allowNull: true,

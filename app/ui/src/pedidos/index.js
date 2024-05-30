@@ -10,43 +10,32 @@ async function cargarPedidos() {
 }
 
 function cargarTabla(pedidos) {
-    const tablaCategoriaBody = document.getElementById('tablaCategoria').getElementsByTagName('tbody')[0];
+  const tablaCategoria = document.getElementById('tablaCategoria');
+  const tablaCategoriaBody = tablaCategoria.getElementsByTagName('tbody')[0];
 
-    // Limpiar el contenido existente del tbody
-    tablaCategoriaBody.innerHTML = '';
-    pedidos.forEach(pedido => {
-        const row = tablaCategoriaBody.insertRow();
+  // Limpiar el contenido existente del tbody
+  tablaCategoriaBody.innerHTML = '';
 
-        const cellNumPedido = row.insertCell(0);
-        const cellCliente = row.insertCell(1);
-        const cellArtesano = row.insertCell(2);
-        const cellFechaPedido = row.insertCell(3);
-        const cellFechaModificacion = row.insertCell(4);
-        const cellMonto = row.insertCell(5);
-        const cellEstado = row.insertCell(6);
-        const cellAcciones = row.insertCell(7);
+  pedidos.forEach(pedido => {
+      const row = document.createElement('tr');
 
-
-        cellNumPedido.textContent = pedido.num_pedido;
-        cellCliente.textContent = pedido.cliente['nombres'] + ' ' + pedido.cliente['apellidos'];
-        cellArtesano.textContent = pedido.artesano['nombres'] + ' ' + pedido.artesano['apellidos'];
-        cellFechaPedido.textContent = formatearFecha(pedido.fecha_pedido);
-        cellFechaModificacion.textContent = formatearFecha(pedido.fecha_modificacion);
-        cellMonto.textContent = pedido.monto;
-        cellEstado.textContent = pedido.estado;
-
-
-        //botones de editar y eliminar con eventos asociados
-        const editarBtn = document.createElement('button');
-        editarBtn.type = 'button';
-        editarBtn.className = 'btn btn-light btn-sm';
-        editarBtn.innerHTML = '<a href="/historial-ventas.html"><i class="icon icon-eye2"></i></a>';
-        editarBtn.addEventListener('click', (event) =>  {
-            event.preventDefault();
-            window.location.href = `/historial-ventas.html?id=${pedido.num_pedido}`
-        });
-        cellAcciones.appendChild(editarBtn);
-    });
+      row.innerHTML = `
+          <td>${pedido.num_pedido}</td>
+          <td>${pedido.cliente.nombres} ${pedido.cliente.apellidos}</td>
+          <td>${pedido.artesano.nombres} ${pedido.artesano.apellidos}</td>
+          <td>${formatearFecha(pedido.fecha_pedido)}</td>
+          <td>${formatearFecha(pedido.updatedAt)}</td>
+          <td>${pedido.estado}</td>
+          <td>
+              <button type="button" class="btn btn-light btn-sm">
+                  <a href="/historial-ventas.html?id=${pedido.num_pedido}">
+                      <i class="icon icon-eye2"></i>
+                  </a>
+              </button>
+          </td>
+      `;
+      tablaCategoriaBody.appendChild(row);
+  });
 }
 
 async function filtrarPedidosAction() {

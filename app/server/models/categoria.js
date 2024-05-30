@@ -27,7 +27,7 @@ module.exports = sequelize.define('categoria', {
         field: 'descripcion'
     },
     foto_referente: {
-        type: Sequelize.JSON,
+        type: Sequelize.STRING(155),
         allowNull: true,
         field: 'foto_referente'
     },

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInputId: 'myfile',
         progressBarId: 'progressBar',
         statusElementId: 'status',
-        uploadUrl: 'http://localhost:3001/api/fileuploadDNI',
+        uploadUrl: 'http://localhost:3001/api/fileupload2',
         callback: handleUploadResponse
     });
 });

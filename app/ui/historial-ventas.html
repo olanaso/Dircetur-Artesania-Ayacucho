@@ -179,7 +179,7 @@
 							<div class="card">
 								<div class="card-header">Orden N°</div>
 								<div class="card-body">
-
+									<!-- Tab Pestañas -->
 									<ul class="nav nav-tabs" id="pestañasPersonalizadas" role="tablist">
 										<li class="nav-item">
 											<a class="nav-link active" id="informacion-tab" data-toggle="tab"
@@ -196,8 +196,8 @@
 												pedidos</a>
 										</li>
 									</ul>
-
 									<div class="tab-content" id="contenidoPestañas">
+										<!-- Tab Información -->
 										<div class="tab-pane fade show active" id="informacion" role="tabpanel"
 											aria-labelledby="informacion-tab">
 											<div class="card">
@@ -246,8 +246,8 @@
 																</tr>
 															</tbody>
 														</table>
-														<div class="text-right" id="total-pedido">
-															<strong>Total: S/ 80.00</strong>
+														<div class="text-right">
+															<strong id="total-pedido">Total: S/ 80.00</strong>
 														</div>
 
 													</div>
@@ -344,14 +344,15 @@
 												</div>
 											</div>
 										</div>
+										<!-- Tab Atención -->
 										<div class="tab-pane fade" id="atencion" role="tabpanel"
 											aria-labelledby="atencion-tab">
 											<div class="container mt-2">
 												<h6 class="border-bottom pb-2">Historia de pedidos</h6>
-												<table class="table mt-4">
+												<table class="table mt-4" id="tablaHistoriaPedidos">
 													<thead class="thead-default">
 														<tr>
-															<th>Fecha</th>
+															<th>Fecha atención </th>
 															<th>Comentario</th>
 															<th>Estado</th>
 															<th>Notificación cliente</th>
@@ -374,7 +375,7 @@
 												<h6 class="border-bottom mt-5 pb-2">Añadir historia de atención</h6>
 												<div class="card">
 													<div class="card-body">
-														<form>
+														<form id="form-actualizar-historia">
 															<div class="form-group">
 																<label for="estado">Estado</label>
 																<select id="estado" class="form-control" name="estado" required>
@@ -389,30 +390,31 @@
 															</div>
 															<div class="form-group custom-switch">
 																<input type="checkbox" class="custom-control-input"
-																	id="notificarCliente" checked>
+																	id="notificarCliente" name="notificarCliente" checked>
 																<label class="custom-control-label"
 																	for="notificarCliente">Notificar cliente</label><br>
 															</div>
 															<div class="form-group">
 																<label for="enlaceSeguimiento">Enlace de Seguimiento</label>
-																<input type="text" class="form-control" id="enlaceSeguimiento"
+																<input type="text" class="form-control" id="enlaceSeguimiento" name="enlaceSeguimiento"
 																	placeholder="Ingrese el enlace de seguimiento">
 															</div>
 															<div class="form-group">
 																<label for="comentario">Comentario</label>
-																<textarea class="form-control" id="comentario"
+																<textarea class="form-control" id="comentario" name="comentario"
 																	rows="2" required></textarea>
 															</div>
 															<div class="form-group">
 																<label for="medioPrueba">Medio de Prueba</label>
-																<input type="file" class="form-control" id="medioPrueba">
+																<input type="file" class="form-control" id="medioPrueba" name="medioPrueba">
 															</div>
-															<button type="submit" class="btn btn-primary">Añadir Historia</button>
+															<button type="submit" id="btnActualizarHistoria" class="btn btn-primary">Añadir Historia</button>
 														</form>
 													</div>
 												</div>
 											</div>
 										</div>
+										<!-- Tab Reclamos -->
 										<div class="tab-pane fade" id="reclamos" role="tabpanel"
 											aria-labelledby="reclamos-tab">
 											<h6 class="border-bottom pb-2">Reclamos / Comentario</h6>

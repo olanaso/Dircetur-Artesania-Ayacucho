@@ -77,7 +77,7 @@
 			</div>
 		</header>
 		<!-- END: .app-heading -->
-		<!-- BEGIN .app-container --> 
+		<!-- BEGIN .app-container -->
 		<div class="app-container">
 			<!-- BEGIN .app-side -->
 			<aside class="app-side" id="app-side">
@@ -180,23 +180,27 @@
 								<div class="row gutters mb-4">
 									<div class="col-lg-3 col-md-6 col-sm-12">
 										<label for="id-categoria">ID de categoría</label>
-										<input type="number" class="form-control" placeholder="ID de categoría" id="id-categoria">
+										<input type="number" class="form-control" placeholder="ID de categoría"
+											id="id-categoria">
 									</div>
 									<div class="col-lg-3 col-md-6 col-sm-12">
 										<label for="abreviatura-categoria">Abreviatura</label>
-										<input type="text" class="form-control" placeholder="Abreviatura" id="abreviatura-categoria">
+										<input type="text" class="form-control" placeholder="Abreviatura"
+											id="abreviatura-categoria">
 									</div>
 									<div class="col-lg-3 col-md-6 col-sm-12">
 										<label for="denominacion-categoria">Nombre / Denominación</label>
-										<input type="text" class="form-control" placeholder="Nombre/Denominación" id="denominacion-categoria">
+										<input type="text" class="form-control" placeholder="Nombre/Denominación"
+											id="denominacion-categoria">
 									</div>
 									<div class="col-lg-3 col-md-6 col-sm-12 d-flex align-items-end justify-content-end">
-										<button id="filtrar-categoria" type="submit" class="btn btn-primary">Filtrar categoría</button>
+										<button id="filtrar-categoria" type="submit" class="btn btn-primary">Filtrar
+											categoría</button>
 									</div>
 								</div>
 							</form>
-							
-							
+
+
 							<div class="d-flex justify-content-end mb-3">
 								<button type="button" class="btn btn-info btn-sm" data-toggle="modal"
 									data-target="#modalCategoria">añadir <i
@@ -213,8 +217,8 @@
 												<span aria-hidden="true">&times;</span>
 											</button>
 										</div>
-										<form>
-											<div class="modal-body">
+										<div class="modal-body">
+											<form id="">
 												<div class="form-group">
 													<label for="abreviatura">Abreviatura</label>
 													<input type="text" class="form-control" id="abreviatura"
@@ -231,24 +235,34 @@
 														placeholder="Descripción" required></textarea>
 												</div>
 												<div class="form-group">
-													<label for="fotoReferente">Foto Referente</label>
-													<input type="file" class="form-control" id="fotoReferente" required>
+													<label for="myfile">Foto Referente</label>
+													<input type="file" id="myfile" name="myfile">
+													<progress id="progressBar" value="0" max="100"
+														style="width: 100%;"></progress>
+													<div id="status"></div>
 												</div>
-												<button type="button" class="btn btn-secondary"
-													id="visualizar">Visualizar</button>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-dismiss="modal">Cancelar</button>
-												<button type="submit" id="registrar-categoria"
-													class="btn btn-primary">Registrar categoría</button>
-											</div>
-										</form>
+
+												<!-- visualizar la imagen -->
+												<div class="form-group">
+													<img id="principalImagePreview"
+														alt="Vista previa de la imagen principal" class="img-thumbnail"
+														style="display: none; width: 200px; height: 150px;">
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Cancelar</button>
+											<button type="submit" id="registrar-categoria"
+												class="btn btn-primary">Registrar categoría</button>
+										</div>
 									</div>
 								</div>
 							</div>
 							<!-- Modal editar -->
-							<div class="modal fade" id="modalCategoriaEditar" tabindex="-1" role="dialog" aria-hidden="true">
+							<!-- Modal editar -->
+							<div class="modal fade" id="modalCategoriaEditar" tabindex="-1" role="dialog"
+								aria-hidden="true">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -260,32 +274,47 @@
 										<form>
 											<div class="modal-body">
 												<div class="form-group">
-													<label for="abreviatura">Abreviatura</label>
-													<input type="text" class="form-control" id="abreviatura-editar" placeholder="Abreviatura" required>
+													<label for="abreviatura-editar">Abreviatura</label>
+													<input type="text" class="form-control" id="abreviatura-editar"
+														placeholder="Abreviatura" required>
 												</div>
 												<div class="form-group">
-													<label for="denominacion">Denominación</label>
-													<input type="text" class="form-control" id="denominacion-editar" placeholder="Denominación" required>
+													<label for="denominacion-editar">Denominación</label>
+													<input type="text" class="form-control" id="denominacion-editar"
+														placeholder="Denominación" required>
 												</div>
 												<div class="form-group">
-													<label for="descripcion">Descripción</label>
-													<textarea class="form-control" id="descripcion-editar" placeholder="Descripción" required></textarea>
+													<label for="descripcion-editar">Descripción</label>
+													<textarea class="form-control" id="descripcion-editar"
+														placeholder="Descripción" required></textarea>
 												</div>
 												<div class="form-group">
-													<label for="fotoReferente">Foto Referente</label>
-													<input type="file" class="form-control" id="fotoReferente-editar">
+													<label for="myfile-editar">Actualizar imagen</label>
+													<input type="file" id="myfile-editar" name="myfile-editar">
+													<progress id="progressBar-editar" value="0" max="100"
+														style="width: 100%;"></progress>
+													<div id="status-editar"></div>
 												</div>
-												<button type="button" class="btn btn-secondary" id="visualizar-editar">Visualizar</button>
+
+												<!-- visualizar la imagen -->
+												<div class="form-group">
+													<img id="CategoriaImagePreviewEdit" alt="Vista previa de la imagen"
+														class="img-thumbnail"
+														style="display: none; width: 200px; height: 150px;">
+												</div>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-												<button type="submit" id="guardarCambios" class="btn btn-primary">Guardar Cambios</button>
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Cancelar</button>
+												<button type="submit" id="guardarCambios"
+													class="btn btn-primary">Guardar Cambios</button>
 											</div>
 										</form>
 									</div>
 								</div>
 							</div>
-							
+
+
 							<div class="card">
 								<div class="card-header">Lista de categorías</div>
 								<div class="card-body">
@@ -308,8 +337,10 @@
 												<td></td>
 												<td></td>
 												<td>
-													<button type="button" class="btn btn-info btn-sm"><i class="icon icon-edit2"></i></button>
-													<button type="button" class="btn btn-primary btn-sm"><i class="icon icon-bin"></i></button>
+													<button type="button" class="btn btn-info btn-sm"><i
+															class="icon icon-edit2"></i></button>
+													<button type="button" class="btn btn-primary btn-sm"><i
+															class="icon icon-bin"></i></button>
 												</td>
 											</tr>
 										</tbody>
