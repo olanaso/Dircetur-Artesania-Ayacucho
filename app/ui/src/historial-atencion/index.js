@@ -1,4 +1,4 @@
-import { obtenerPedido } from '../historial-atencion/api';
+import { obtenerPedido, actualizarPedido } from '../historial-atencion/api';
 
 
 // Tab Información
@@ -23,15 +23,17 @@ const ciudadRecepcion = document.getElementById('ciudad-recepcion');
 const direccionRecepcion = document.getElementById('direccion-recepcion');
 
 const montoTotal = document.getElementById('total-pedido');
+
 // Tab Atención
-
-
+const formAtencion = document.getElementById('form-actualizar-historia');
 // Tab Reclamo
 
 
 async function cargarCampos(idPedido) {
     const pedido = await obtenerPedido(idPedido);
-    cargarTabla(pedido);
+
+    cargarTablaProductos(pedido);
+    // cargarTablaHistoriaPedido(pedido);
     // Tab Información
     numPedido.value = pedido.num_pedido;
     fechaPedido.value = formatearFecha(pedido.fecha_pedido);
@@ -47,33 +49,80 @@ async function cargarCampos(idPedido) {
     direccionRecepcion.value = pedido.cliente['direccion'];
     wspCliente.setAttribute('href', `https://wa.me/${pedido.cliente['telefono']}`);
 
+
+    // Tab Atención
+
+
+
+
+    // Tab Reclamo
+
 }
-function cargarTabla(pedidos) {
+function cargarTablaProductos(pedidos) {
     var sumaSubtotal = 0;
-    const tablaDatosPedidoBody = document.getElementById('tablaDatosPedido').getElementsByTagName('tbody')[0];
-
+    const tablaDatosPedido = document.getElementById('tablaDatosPedido');
+    const tablaDatosPedidoBody = tablaDatosPedido.getElementsByTagName('tbody')[0];
     const listaPedidos = JSON.parse(pedidos.list_productos);
-    // Limpiar el contenido existente del tbody
+
     tablaDatosPedidoBody.innerHTML = '';
+
     listaPedidos.forEach(pedido => {
-        const row = tablaDatosPedidoBody.insertRow();
+        const row = document.createElement('tr');
 
-        const cellCantidad = row.insertCell(0);
-        const cellProducto = row.insertCell(1);
-        const cellDescripcionCompra = row.insertCell(2);
-        const cellValorUnitario = row.insertCell(3);
-        const cellPrecio = row.insertCell(4);
+        row.innerHTML = `
+            <td>${pedido.cantidad}</td>
+            <td>${pedido.nombre}</td>
+            <td>${pedido.descripcion}</td>
+            <td>${pedido.precio_unitario}</td>
+            <td>${pedido.subtotal}</td>
+        `;
 
-        cellCantidad.textContent = pedido.cantidad;
-        cellProducto.textContent = pedido.nombre;
-        cellDescripcionCompra.textContent = pedido.descripcion;
-        cellValorUnitario.textContent = pedido.precio_unitario;
-        cellPrecio.textContent = pedido.subtotal;
-
+        tablaDatosPedidoBody.appendChild(row);
         sumaSubtotal += pedido.subtotal;
     });
-    montoTotal.innerHTML = `<strong>Total: S/ ${sumaSubtotal}</strong>`; 
+    montoTotal.innerHTML = `Total: S/ ${sumaSubtotal}`;
 }
+function cargarTablaHistoriaPedido(pedidos) {
+    const tablaDatosPedido = document.getElementById('tablaHistoriaPedidos');
+    const tablaHistoriaPedido = tablaDatosPedido.getElementsByTagName('tbody')[0];
+    if (pedidos.list_atencion == null) {
+        return "No hay historial de pedidos";
+    }
+    const listaAtencion = JSON.parse(pedidos.list_atencion);
+
+    tablaHistoriaPedido.innerHTML = '';
+
+    listaAtencion.forEach(pedido => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>${formatearFecha(pedido.fecha_atencion)}</td>
+            <td>${pedido.comentario}</td>
+            <td>${pedido.estado}</td>
+            <td>${pedido.estado}</td>
+            <td>
+				<button class="btn btn-primary btn-notificar-email btn-sm">Notificar email</button>
+				<button class="btn btn-success btn-notificar-wsp btn-sm">Notificar WhatsApp</button>
+			</td>
+        `;
+        const btnNotificarEmail = row.querySelector('.btn-notificar-email');
+        btnNotificarEmail.addEventListener('click', () => notificarEmail(pedido.id));
+
+        const btnNotificarWsp = row.querySelector('.btn-notificar-wsp');
+        btnNotificarWsp.addEventListener('click', () => notificarWsp(pedido.id));
+        tablaHistoriaPedido.appendChild(row);
+    });
+
+}
+
+function notificarEmail(id) {
+    console.log("notificar email");
+}
+
+function notificarWsp(id) {
+    console.log("notificar wsp");
+}
+
 function getQueryParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
@@ -86,11 +135,99 @@ function formatearFecha(fecha) {
     const mes = ('0' + (date.getUTCMonth() + 1)).slice(-2); // Obtener el mes (ej. 05)
     const dia = ('0' + date.getUTCDate()).slice(-2); // Obtener el día (ej. 27)
 
-    // Formar la fecha en el formato deseado (YYYY-MM-DD)
     return `${dia}/${mes}/${anio}`;
 }
-document.addEventListener('DOMContentLoaded', ()=> {
+
+function generarID() {
+    let id = '';
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (let i = 0; i < 5; i++) {
+        const aleatorio = Math.floor(Math.random() * caracteres.length);
+        id += caracteres.charAt(aleatorio);
+    }
+
+    return id;
+}
+
+// Tab atención
+const initialState = {
+    id: generarID(),
+    estado: "",
+    notificarCliente: true,
+    enlaceSeguimiento: "",
+    comentario: "",
+    medioPrueba: null,
+    fecha_atencion: new Date()
+};
+
+function useFormState(initialState) {
+    let state = { ...initialState };
+
+    function handleChange(event) {
+        const { name, type, value, checked, files } = event.target;
+        const newValue = type === 'checkbox' ? checked : (type === 'file' ? files[0] : value);
+
+        state = {
+            ...state,
+            [name]: newValue
+        };
+
+        console.log(state);
+    }
+
+    function loadInitialData(form) {
+        for (const key in state) {
+            if (state.hasOwnProperty(key)) {
+                const input = form.querySelector(`[name=${key}]`);
+
+                if (input) {
+                    if (input.type === 'checkbox') {
+                        input.checked = state[key];
+                    } else if (input.type === 'radio') {
+                        input.checked = input.value === state[key];
+                    } else if (input.type === 'file') {
+                        // No se puede establecer un valor predeterminado para un input de tipo 'file'
+                    } else {
+                        input.value = state[key];
+                    }
+                }
+            }
+        }
+    }
+
+    return { handleChange, loadInitialData };
+}
+
+async function editarPedido(idPedido) {
+    const btnActualizar = document.getElementById('btnActualizarHistoria');
+    btnActualizar.addEventListener('click', async (event) => {
+        event.preventDefault();
+        
+    })
+    // const btnActualizar = document.getElementById('btnActualizarHistoria');
+    // btnActualizar.addEventListener('click', async (event) => {
+    //     event.preventDefault(); 
+    //     try {
+    //         const result = await actualizarPedido(idPedido, {
+    //             list_atencion: {...list_atencion, initialState},
+    //             estado: initialState.estado
+    //         });
+    //         console.log('Categoría actualizada:', result);
+    //     } catch (error) {
+    //         console.error('Error al actualizar la categoría:', error);
+    //     }
+    // })
+   
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     const pedidoId = getQueryParameter('id');
     cargarCampos(pedidoId);
-    
+
+
+    const { handleChange, loadInitialData } = useFormState(initialState);
+    loadInitialData(formAtencion);
+
+    formAtencion.addEventListener("change", handleChange);
 });

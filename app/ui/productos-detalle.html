@@ -458,8 +458,255 @@
 
 
 										</div>
-										<div class="tab-pane fade" id="home3" role="tabpanel" aria-labelledby="home-tab3">Imagenes</div>
-										<div class="tab-pane fade" id="home4" role="tabpanel" aria-labelledby="home-tab4">Videos</div>
+										<div class="tab-pane fade" id="home3" role="tabpanel" aria-labelledby="home-tab3">
+
+											<form id="form" action="javascript:void(0)">
+												<h5>Imagen principal</h5>   
+												<div class="mb-4">
+													<div class="d-flex">
+														<img id="imagenPrincipal" src="placeholder.png" alt="Imagen principal" class="img-thumbnail" style="width: 200px; height: 150px;">
+													</div>
+													<div class="d-flex mt-2"> 
+
+														<button type="button" class="btn btn-primary btn-add-offer" data-toggle="modal" data-target="#imagenPrincipalModal"><i class="fas fa-plus-circle"></i>Editar</button>
+														<button type="button" class="btn btn-warning btn-add-offer" id="limpiarPrincipalBtn"><i class="fas fa-plus-tash"></i>Limpiar</button>
+																		
+
+
+													</div>
+												</div>
+												<hr>
+
+												<h5>Imagen adicionales</h5>  
+												<table class="table table-bordered offer-table">
+													<thead >
+														<tr>
+															<th style="width: 5%;">N°</th>
+															<th style="width: 35%;">Imagen</th>
+															<th style="width: 45%;">Denominación</th>
+															<th style="width: 15%;">Acciones</th>
+														</tr>
+													</thead>
+													<tbody id="listaImagenes">
+														<!-- Filas dinámicas aquí -->
+													</tbody>
+												</table> 
+												<button type="button" class="btn btn-primary btn-add-offer" id="addImagenButton" data-toggle="modal" data-target="#imagenModal"><i class="fas fa-plus-circle"></i>Añadir</button>
+													
+												
+											</form> 
+
+
+											<!-- Modal Imagen Principal -->
+											<div class="modal fade" id="imagenPrincipalModal" tabindex="-1" aria-labelledby="imagenPrincipalModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-xl">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="imagenPrincipalModalLabel">Editar Imagen Principal</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form id="imagenPrincipalForm">
+																<div class="form-group">
+																	<label for="uploadPrincipalImage">Subir imagen:</label>
+																	<div class="d-flex align-items-center">
+																		<input type="file" class="form-control-file mr-2" id="uploadPrincipalImage">
+																		<input type="text" class="form-control mr-2" id="principalImageName">
+																		<button type="button" class="btn btn-warning" id="visualizarPrincipalBtn">Visualizar</button>
+																	</div>
+																</div>
+																<div class="form-group">
+																	<img id="principalImagePreview" src="" alt="Vista previa de la imagen principal" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
+																</div>
+															</form>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+															<button type="button" class="btn btn-primary" id="guardarPrincipalBtn">Guardar</button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+												<!-- Modal -->
+												<div class="modal fade" id="imagenModal" tabindex="-1" aria-labelledby="imagenModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-xl">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="imagenModalLabel">Imagen</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<form id="imagenForm">
+																	<div class="form-group">
+																		<label for="uploadImage">Subir imagen:</label>
+																		<div class="d-flex align-items-center">
+																			<input type="file" class="form-control-file mr-2" id="uploadImage">
+																			<input type="text" class="form-control mr-2" id="imageName">
+																			<button type="button" class="btn btn-warning" id="visualizarBtn">Visualizar</button>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<img id="imagePreview" src="" alt="Vista previa de la imagen" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
+																	</div>
+																</form>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+																<button type="button" class="btn btn-primary" id="guardarBtn">Guardar</button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+  
+
+										</div>
+										<div class="tab-pane fade" id="home4" role="tabpanel" aria-labelledby="home-tab4">  
+											 
+												<h5>Escoge una opción para subir el video:</h5>
+												<ul class="nav nav-tabs" id="myTab" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" id="upload-tab" data-toggle="tab" href="#upload" role="tab" aria-controls="upload" aria-selected="true">Sube el video</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" id="link-tab" data-toggle="tab" href="#link" role="tab" aria-controls="link" aria-selected="false">Sube el enlace del video</a>
+													</li>
+												</ul>
+												<div class="tab-content" id="myTabContent">
+													<div class="tab-pane fade show active" id="upload" role="tabpanel" aria-labelledby="upload-tab">
+
+														<h5>Sube el video del producto</h5>
+														<form id="videoForm">
+															<div class="card" style="min-height: 70px;"> 
+																<div class="card-body"> 
+			
+																	<div class="row mt-4">
+																		<div class="col-1 col-md-2">
+																			<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nombre del video:</h5>
+																		</div>
+																		<div class="col-9 col-md-9">   
+																			<input type="text" class="form-control" id="videoName" placeholder="Ingrese el nombre del video">
+																		</div>  
+																		<div class="col-1 col-md-2">
+																			<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Selecciona:</h5>
+																		</div>
+																		<div class="col-9 col-md-9">   
+																			<div class="d-flex align-items-center">
+																				<!--  <input type="file"  class="form-control-file mr-2" id="uploadVideo"> -->
+																				<input type="file"  id="uploadVideo">
+																				<span id="fileSize" class="mr-2"></span>
+																				<div class="progress mr-2" style="flex-grow: 1;">
+																					<div id="uploadProgress" class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+																				</div>
+																				<button type="button" class="btn btn-danger btn-sm" id="cancelUpload">&times;</button>
+																			</div>
+																			<small class="text-danger">El archivo no debe pesar más de 100mb</small>
+																		</div>   
+
+																		<div class="col-md-12 text-right"> 
+
+																			<button type="button" class="btn btn-primary btn-add-offer" id="registerVideo"><i class="fas fa-plus-circle"></i>Registrar</button>
+																		</div>
+																	</div> 
+																</form>
+																	<hr>
+																	<h5>Lista de videos</h5>  
+																	<table class="table table-bordered offer-table">
+																		<thead>
+																			<tr>
+																				<th style="width: 5%;">N°</th>
+																				<th style="width: 30%;">Nombre del video</th>
+																				<th style="width: 45%;">Enlace del video</th>
+																				<th style="width: 20%;">Acción</th>
+																			</tr>
+																		</thead> 
+																		<tbody id="videoList">
+																			
+																		</tbody>
+																	</table>
+																</div> 
+															</div>  
+
+  
+   
+
+													</div>
+													<div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab">
+														<h5>Sube el enlace del video</h5> 
+														<form id="linkForm">
+
+															<div class="card" style="min-height: 70px;"> 
+																<div class="card-body"> 
+			
+																	<div class="row mt-4">
+																		<div class="col-1 col-md-2">
+																			<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nombre del video:</h5>
+																		</div>
+																		<div class="col-9 col-md-9">   
+																			<input type="text" class="form-control" id="linkVideoName" placeholder="Ingrese el nombre del video">  
+																		</div>  
+																		<div class="col-1 col-md-2">
+																			<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Enlace del video:</h5>
+																		</div>
+																		<div class="col-9 col-md-9">   
+																			<input type="text" class="form-control" id="videoLink" placeholder="Ingrese el enlace del video">
+																		</div>  
+																		<div class="col-md-7 text-right">
+																			<button type="button" class="btn btn-primary btn-add-offer" id="addVideoLink">
+																				<i class="fas fa-plus-circle"></i> Añadir video
+																			</button> 
+																		</div>
+																	</div> 
+																	
+														</form>
+																	<hr>
+																	<h5>Lista de colores</h5>  
+																	<table class="table table-bordered offer-table">
+																		<thead>
+																			<tr>
+																				<th style="width: 5%;">N°</th>
+																				<th style="width: 30%;">Nombre del video</th>
+																				<th style="width: 45%;">Enlace del video</th>
+																				<th style="width: 20%;">Acción</th>
+																			</tr>
+																		</thead> 
+																		<tbody id="videoList2">
+																			 
+																		</tbody>
+																	</table>
+																</div> 
+															</div>   
+ 
+													</div>
+												</div> 
+										
+											<!-- Modal para ver video -->
+											<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-lg">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="videoModalLabel">Ver Video</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<iframe id="videoPlayer" style="width: 100%; height: 500px;" frameborder="0" allowfullscreen></iframe>
+														</div>
+													</div>
+												</div>
+											</div>
+ 
+
+
+										</div> 
+
 										<div class="tab-pane fade" id="home5" role="tabpanel" aria-labelledby="home-tab5"> 
 											<form id="form" action="javascript:void(0)"> 
 											<h5>Colores</h5>
@@ -475,7 +722,7 @@
 																<input type="color" id="color-input" placeholder="#9900FF">
 															</div>  
 															<div class="col-md-7 text-right">
-																<button type="button" class="btn btn-primary btn-add-offer" id="add-color-btn">
+																<button type="button" class="btn btn-primary btn-add-offer" id="addcolorbtn">
 																	<i class="fas fa-plus-circle"></i> Añadir color
 																</button>
 															</div>
@@ -489,8 +736,8 @@
 																	<th>Color</th>
 																	<th>Acción</th>
 																</tr>
-															</thead>
-															<tbody id="color-table-body">
+															</thead> 
+															<tbody id="listaColores">
 																
 															</tbody>
 														</table>
@@ -511,7 +758,7 @@
 														
 															</div>  
 															<div class="col-md-7 text-right">
-																<button type="button" class="btn btn-primary btn-add-offer" id="add-talla-btn">
+																<button type="button" class="btn btn-primary btn-add-offer" id="addtallabtn">
 																	<i class="fas fa-plus-circle"></i> Añadir talla
 																</button>
 															</div>
@@ -525,8 +772,8 @@
 																	<th>Talla</th>
 																	<th>Acción</th>
 																</tr>
-															</thead>
-															<tbody id="talla-table-body">
+															</thead> 
+															<tbody id="listaTalla">
 																 
 															</tbody>
 														</table>

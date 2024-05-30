@@ -16,7 +16,6 @@ const slider = require('./slider');
 const producto = require('./producto');
 const categoria = require('./categoria');
 const pedido = require('./pedido');
-const historial_atencion = require('./historial_atencion')
 const upload = require('./upload')
 
 module.exports = (app) => {
@@ -37,6 +36,5 @@ module.exports = (app) => {
     app.use('/api', producto);
     app.use('/api', categoria);
     app.use('/api', pedido);
-    app.use('/api', historial_atencion);
     app.use('/api', upload);
 };

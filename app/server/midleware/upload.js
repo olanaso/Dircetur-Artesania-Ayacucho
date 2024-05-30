@@ -12,7 +12,7 @@ async function uploadarchivoDDP (req, res, next) {
     try {
         // Verificar si la carpeta existe, si no, crearla
         //     
-        const folder = 'files-app/' + (req.query.folder || '');
+        const folder = 'img/' + (req.query.folder || '');
         if (!folder) {
             return res.status(400).json({
                 error: "Falta el parámetro 'folder' en la solicitud.",
@@ -21,7 +21,7 @@ async function uploadarchivoDDP (req, res, next) {
             });
         }
 
-        const dir = path.join(__dirname, '../public/', folder);
+        const dir = path.join(__dirname, '../public/categorias/', folder);
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
         }

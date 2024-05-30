@@ -4078,39 +4078,44 @@ a.blog-sm p.blog-date:after {
   position: absolute;
   left: 114px;
   top: 45px;
-  background: #3c3c3c;
+  background: #1558d3;
   animation: loading 1s infinite alternate;
 }
 
 .loading-wrapper .loading span:nth-of-type(1) {
-  background: #da1113;
+  background: #c611da;
   animation-delay: 0.1s;
   left: 128px;
 }
 
 .loading-wrapper .loading span:nth-of-type(2) {
-  background: #3c3c3c;
+  background: #0bed13;
   animation-delay: 0.2s;
   left: 142px;
 }
 
 .loading-wrapper .loading span:nth-of-type(3) {
-  background: #da1113;
+  background: #5900ff;
   animation-delay: 0.4s;
   left: 156px;
 }
 
 .loading-wrapper .loading span:nth-of-type(4) {
-  background: #3c3c3c;
+  background: #ff6111;
   animation-delay: 0.6s;
   left: 170px;
 }
 
 .loading-wrapper .img {
-  width: 180px;
-  height: 50px;
+  width: 200px;
+  height: 200px;
   background: url("../img/lead.svg") no-repeat;
   background-size: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -83px;
+  margin-top: -100px;
 }
 
 /************************************************

@@ -1,27 +1,7 @@
 import { listarCategorias, guardarCategoria, filtrarCategorias, borrarCategoria, actualizarCategoria } from './api';
+import { FileUploader } from '../utils/upload.js';
 
-
-document.getElementById('fotoReferente').addEventListener('change', function () {
-  var file = this.files[0];
-  var fileType = file.type;
-  var allowedTypes = ['image/png', 'image/jpeg'];
-
-  if (!allowedTypes.includes(fileType)) {
-    alert('Solo se permiten archivos PNG o JPG');
-    this.value = '';
-  }
-});
-document.getElementById('visualizar').addEventListener('click', function () {
-  var imagen = document.getElementById('fotoReferente').files[0];
-  var reader = new FileReader();
-  reader.onload = function (event) {
-    var imagenSrc = event.target.result;
-    var newTab = window.open();
-    newTab.document.write('<img src="' + imagenSrc + '">');
-  };
-  reader.readAsDataURL(imagen);
-});
-
+let imagen_principal = "";
 async function cargarCategoria() {
   try {
     const categorias = await listarCategorias();
@@ -31,43 +11,42 @@ async function cargarCategoria() {
   }
 }
 
-function cargarTabla(categorias){
-  const tablaCategoriaBody = document.getElementById('tablaCategoria').getElementsByTagName('tbody')[0];
+function cargarTabla(categorias) {
+  const tablaCategoria = document.getElementById('tablaCategoria');
+  const tablaCategoriaBody = tablaCategoria.getElementsByTagName('tbody')[0];
 
-  // Limpiar el contenido existente del tbody
   tablaCategoriaBody.innerHTML = '';
+
   categorias.forEach(categoria => {
-    const row = tablaCategoriaBody.insertRow();
+    const row = document.createElement('tr');
 
-    const cellID = row.insertCell(0);
-    const cellImagen = row.insertCell(1);
-    const cellDenominacion = row.insertCell(2);
-    const cellAbreviatura = row.insertCell(3);
-    const cellDescripcion = row.insertCell(4);
-    const cellAcciones = row.insertCell(5);
+    row.innerHTML = `
+      <td>${categoria.id}</td>
+      <td><img src="${categoria.foto_referente}" alt="${categoria.denominacion}" width="100"></td>
+      <td>${categoria.denominacion}</td>
+      <td>${categoria.abreviatura}</td>
+      <td>${categoria.descripcion}</td>
+      <td>
+        <button type="button" class="btn btn-info btn-editar-categoria btn-sm">
+          <i class="icon icon-edit2"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-eliminar-categoria btn-sm ml-2">
+          <i class="icon icon-bin"></i>
+        </button>
+      </td>
+    `;
 
-    cellID.textContent = categoria.id;
-    cellImagen.innerHTML = `<img src="${categoria.imagen}" alt="${categoria.denominacion}" width="100">`;
-    cellDenominacion.textContent = categoria.denominacion;
-    cellAbreviatura.textContent = categoria.abreviatura;
-    cellDescripcion.textContent = categoria.descripcion;
+    // Agregar eventos a los botones
+    const btnEditar = row.querySelector('.btn-editar-categoria');
+    btnEditar.addEventListener('click', () => editarCategoria(categoria));
 
-    //botones de editar y eliminar con eventos asociados
-    const editarBtn = document.createElement('button');
-    editarBtn.type = 'button';
-    editarBtn.className = 'btn btn-info btn-sm';
-    editarBtn.innerHTML = '<i class="icon icon-edit2"></i>';
-    editarBtn.addEventListener('click', () => editarCategoria(categoria));
-    
-    const eliminarBtn = document.createElement('button');
-    eliminarBtn.type = 'button';
-    eliminarBtn.className = 'btn btn-primary btn-sm ml-2';
-    eliminarBtn.innerHTML = '<i class="icon icon-bin"></i>';
-    eliminarBtn.addEventListener('click', () => eliminarCategoria(categoria.id));
-    cellAcciones.appendChild(editarBtn);
-    cellAcciones.appendChild(eliminarBtn);
+    const btnEliminar = row.querySelector('.btn-eliminar-categoria');
+    btnEliminar.addEventListener('click', () => eliminarCategoria(categoria.id));
+
+    tablaCategoriaBody.appendChild(row);
   });
 }
+
 async function eliminarCategoria(id) {
   var respuesta = confirm("¿Estás seguro de que deseas eliminar?");
   if (respuesta) {
@@ -75,14 +54,14 @@ async function eliminarCategoria(id) {
       const result = await borrarCategoria(id);
       if (result) {
 
-          console.log("categoria eliminado exitosamente");
-          // Recargar la tabla de categorias
-          await cargarCategoria();
+        console.log("categoria eliminado exitosamente");
+        // Recargar la tabla de categorias
+        await cargarCategoria();
       } else {
-          console.error("Error al eliminar la categoria");
+        console.error("Error al eliminar la categoria");
       }
     } catch (error) {
-        console.error('Error:', error);
+      console.error('Error:', error);
     }
   } else {
     console.log("El usuario canceló la acción.");
@@ -91,63 +70,72 @@ async function eliminarCategoria(id) {
 }
 
 async function editarCategoria(categoria) {
-  // Llenar el modal con los datos de la categoría seleccionada
   const modal = document.getElementById('modalCategoriaEditar');
   const abreviaturaInput = document.getElementById('abreviatura-editar');
   const denominacionInput = document.getElementById('denominacion-editar');
   const descripcionInput = document.getElementById('descripcion-editar');
+  const fileInput = document.getElementById('myfile-editar');
 
   abreviaturaInput.value = categoria.abreviatura;
   denominacionInput.value = categoria.denominacion;
   descripcionInput.value = categoria.descripcion;
+  $('#CategoriaImagePreviewEdit').attr('src', categoria.foto_referente).show();
 
-  // Mostrar el modal
   $(modal).modal('show');
 
   const guardarBtn = document.getElementById('guardarCambios');
   guardarBtn.addEventListener('click', async (event) => {
-      event.preventDefault();
-      // Actualizar los datos de la categoría en tu estructura de datos
-      categoria.abreviatura = abreviaturaInput.value;
-      categoria.denominacion = denominacionInput.value;
-      categoria.descripcion = descripcionInput.value;
+    event.preventDefault();
 
-      try {
-          const result = await actualizarCategoria(categoria.id, {
-              abreviatura: categoria.abreviatura,
-              denominacion: categoria.denominacion,
-              descripcion: categoria.descripcion
-              // agregar después el campo para actualizar la imagen
-          });
+    const formData = {
+      abreviatura: abreviaturaInput.value,
+      denominacion: denominacionInput.value,
+      descripcion: descripcionInput.value
+    }
+    
+    if (fileInput.files[0]) {
+      formData.foto_referente = imagen_principal
+    } else {
+      formData.foto_referente = categoria.foto_referente;
+    }
 
-          console.log('Categoría actualizada:', result);
-          await cargarCategoria();
-          $(modal).modal('hide');
-
-      } catch (error) {
-          console.error('Error al actualizar la categoría:', error);
-      }
+    try {
+      const result = await actualizarCategoria(categoria.id, formData);
+      console.log('Categoría actualizada:', result);
+      await cargarCategoria();
+      $(modal).modal('hide');
+    } catch (error) {
+      console.error('Error al actualizar la categoría:', error);
+    }
   });
 }
 
 
 async function registrarCategoria() {
   const btnRegistrar = document.getElementById('registrar-categoria');
+
+
   const modal = document.getElementById('modalCategoria');
 
   btnRegistrar.addEventListener('click', async (event) => {
+    event.preventDefault();
     try {
       // Obtener los valores del formulario
       const abreviatura = document.getElementById('abreviatura').value;
       const denominacion = document.getElementById('denominacion').value;
       const descripcion = document.getElementById('descripcion').value;
-      const fotoReferente = document.getElementById('fotoReferente').value;
+
+
+      var principalImagePreview = document.getElementById('principalImagePreview');
+
+      // Obtener el valor del atributo src
+      var foto_referente = principalImagePreview.src;
 
       const formData = {
         abreviatura: abreviatura,
         denominacion: denominacion,
         descripcion: descripcion,
-        // foto_referente: fotoReferente
+        foto_referente: foto_referente
       }
       const response = await guardarCategoria(formData);
       console.log(response)
@@ -168,16 +156,88 @@ async function filtrarCategoriasAction() {
     const abreviatura = document.getElementById('abreviatura-categoria').value;
     const denominacion = document.getElementById('denominacion-categoria').value;
     const filtro = {
-      id:id,
-      abreviatura:abreviatura,
-      denominacion:denominacion
+      id: id,
+      abreviatura: abreviatura,
+      denominacion: denominacion
     };
     const categorias = await filtrarCategorias(filtro);
     cargarTabla(categorias);
   });
 }
 document.addEventListener('DOMContentLoaded', () => {
+
+  initializeFileUploader({
+    fileInputId: 'myfile',
+    progressBarId: 'progressBar',
+    statusElementId: 'status',
+    uploadUrl: 'http://localhost:3001/api/fileupload2',
+    callback: handleUploadResponse
+  });
+  initializeFileUploader({
+    fileInputId: 'myfile-editar',
+    progressBarId: 'progressBar-editar',
+    statusElementId: 'status-editar',
+    uploadUrl: 'http://localhost:3001/api/fileupload2',
+    callback: handleEditUploadResponse
+  });
+
+
   cargarCategoria();
   registrarCategoria();
   filtrarCategoriasAction();
+
+
 });
+
+
+function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
+
+  const fileInput = document.getElementById(fileInputId);
+  const inputName = fileInput.name;
+  const progressBar = document.getElementById(progressBarId);
+  const statusElement = document.getElementById(statusElementId);
+
+  if (fileInput && progressBar && statusElement) {
+    const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName);
+    uploader.attachToFileInput(fileInput);
+  } else {
+    console.error('Initialization failed: One or more elements not found.');
+  }
+}
+
+function handleUploadResponse(response) {
+  
+  let file = $('#myfile').prop('files')[0];
+  if (file) {
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      $('#principalImagePreview').attr('src', 'http://localhost:3001/' + response.ruta).show();
+      $('#principalImageName').val(file.name);
+    }
+    reader.readAsDataURL(file);
+
+    imagen_principal = 'http://localhost:3001/' + response.ruta;
+
+    alert('registro de la imagen correctamente')
+  } else {
+    alert("Por favor, seleccione un archivo para visualizar.");
+  }
+
+}
+
+function handleEditUploadResponse(response) {
+  let file = $('#myfile-editar').prop('files')[0];
+  if (file) {
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      $('#CategoriaImagePreviewEdit').attr('src', 'http://localhost:3001/' + response.ruta).show();
+    }
+    reader.readAsDataURL(file);
+
+    imagen_principal = 'http://localhost:3001/' + response.ruta;
+
+    alert('Actualización de la imagen correctamente');
+  } else {
+    alert("Por favor, seleccione un archivo para visualizar.");
+  }
+}
