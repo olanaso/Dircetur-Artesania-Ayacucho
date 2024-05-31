@@ -9,34 +9,85 @@ async function cargarPedidos() {
     }
 }
 
+// function cargarTabla(pedidos) {
+//     const tablaCategoria = document.getElementById('tablaCategoria');
+//     const tablaCategoriaBody = tablaCategoria.getElementsByTagName('tbody')[0];
+
+//     // Limpiar el contenido existente del tbody
+//     tablaCategoriaBody.innerHTML = '';
+
+//     pedidos.forEach(pedido => {
+//         const row = document.createElement('tr');
+
+//         row.innerHTML = `
+//           <td>${pedido.num_pedido}</td>
+//           <td>${pedido.cliente.nombres} ${pedido.cliente.apellidos}</td>
+//           <td>${pedido.artesano.nombres} ${pedido.artesano.apellidos}</td>
+//           <td>${formatearFecha(pedido.fecha_pedido)}</td>
+//           <td>${formatearFecha(pedido.updatedAt)}</td>
+//           <td>${pedido.estado}</td>
+//           <td>
+//               <button type="button" class="btn btn-light btn-sm">
+//                   <a href="/historial-ventas.html?id=${pedido.num_pedido}">
+//                       <i class="icon icon-eye2"></i>
+//                   </a>
+//               </button>
+//           </td>
+//       `;
+//         tablaCategoriaBody.appendChild(row);
+//     });
+// }
 function cargarTabla(pedidos) {
-  const tablaCategoria = document.getElementById('tablaCategoria');
-  const tablaCategoriaBody = tablaCategoria.getElementsByTagName('tbody')[0];
+    const tablaCategoria = document.getElementById('tablaCategoria');
+    const tablaCategoriaBody = tablaCategoria.getElementsByTagName('tbody')[0];
 
-  // Limpiar el contenido existente del tbody
-  tablaCategoriaBody.innerHTML = '';
+    tablaCategoriaBody.innerHTML = '';
 
-  pedidos.forEach(pedido => {
-      const row = document.createElement('tr');
+    pedidos.forEach(pedido => {
+        const row = document.createElement('tr');
 
-      row.innerHTML = `
-          <td>${pedido.num_pedido}</td>
-          <td>${pedido.cliente.nombres} ${pedido.cliente.apellidos}</td>
-          <td>${pedido.artesano.nombres} ${pedido.artesano.apellidos}</td>
-          <td>${formatearFecha(pedido.fecha_pedido)}</td>
-          <td>${formatearFecha(pedido.updatedAt)}</td>
-          <td>${pedido.estado}</td>
-          <td>
-              <button type="button" class="btn btn-light btn-sm">
-                  <a href="/historial-ventas.html?id=${pedido.num_pedido}">
-                      <i class="icon icon-eye2"></i>
-                  </a>
-              </button>
-          </td>
-      `;
-      tablaCategoriaBody.appendChild(row);
-  });
+        // Agregar clase badge dependiendo del estado del pedido
+        let estadoClass = '';
+        switch (pedido.estado) {
+            case 'pendiente':
+                estadoClass = 'badge badge-pill badge-warning text-white'; 
+                break;
+            case 'pagado':
+                estadoClass = 'badge badge-pill badge-success'; 
+                break;
+            case 'envio':
+                estadoClass = 'badge badge-pill badge-info'; 
+                break;
+            case 'finalizado':
+                estadoClass = 'badge badge-pill badge-primary'; 
+                break;
+            case 'anulado':
+                estadoClass = 'badge badge-pill badge-danger';
+                break;
+            default:
+                estadoClass = ''; 
+        }
+
+        row.innerHTML = `
+            <td>${pedido.num_pedido}</td>
+            <td>${pedido.cliente.nombres} ${pedido.cliente.apellidos}</td>
+            <td>${pedido.artesano.nombres} ${pedido.artesano.apellidos}</td>
+            <td>${formatearFecha(pedido.fecha_pedido)}</td>
+            <td>${formatearFecha(pedido.updatedAt)}</td>
+            <td><span class="${estadoClass}">${pedido.estado}</span></td>
+            <td>
+                <button type="button" class="btn btn-light btn-sm">
+                    <a href="/historial-ventas.html?id=${pedido.num_pedido}">
+                        <i class="icon icon-eye2"></i>
+                    </a>
+                </button>
+            </td>
+        `;
+
+        tablaCategoriaBody.appendChild(row);
+    });
 }
+
 
 async function filtrarPedidosAction() {
     const btnFiltrar = document.getElementById('filtrar-pedido');
@@ -45,13 +96,17 @@ async function filtrarPedidosAction() {
         event.preventDefault();
 
         const numPedido = document.getElementById('num-pedido').value;
-        //   const artesano = document.getElementById('nombre-artesano').value;
-        //   const cliente = document.getElementById('nombre-cliente').value;
+        const artesano = document.getElementById('nombre-artesano').value;
+        const cliente = document.getElementById('nombre-cliente').value;
         const fecha = document.getElementById('fecha-pedido').value;
+        const estado = document.getElementById('estado').value;
 
         const filtro = {
             num_pedido: numPedido,
-            fecha_pedido: fecha
+            nombre_artesano: artesano,
+            nombre_cliente: cliente,
+            fecha_pedido: fecha,
+            estado: estado
         };
 
         const pedidos = await filtrarPedidos(filtro);

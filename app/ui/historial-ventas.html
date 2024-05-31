@@ -164,7 +164,8 @@
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="/">Administrador</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Ventas</li>
+								<li class="breadcrumb-item"><a href="/ventas.html">Ventas</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Orden</li>
 							</ol>
 						</nav>
 					</div>
@@ -177,7 +178,7 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="card">
-								<div class="card-header">Orden N°</div>
+								<div class="card-header"><span id="id-orden-pedido">Orden #</span></div>
 								<div class="card-body">
 									<!-- Tab Pestañas -->
 									<ul class="nav nav-tabs" id="pestañasPersonalizadas" role="tablist">
@@ -205,22 +206,29 @@
 													<h6 class="border-bottom pb-2">Datos del pedido</h6>
 													<div class="container mt-4">
 														<div class="row gutters mb-4">
-															<div class="col-lg-4 col-md-6 col-sm-12">
+															<div class="col-md-6 col-sm-12">
 																<label for="num-pedido">Número de pedido</label>
 																<input type="number" class="form-control"
 																	placeholder=" N°" id="num-pedido" readonly>
 															</div>
-															<div class="col-lg-4 col-md-6 col-sm-12">
+															<div class="col-md-6 col-sm-12">
 																<label for="nombre-artesano">Artesano</label>
 																<input type="text" class="form-control"
 																	placeholder="nombre del artesano"
 																	id="nombre-artesano" readonly>
 															</div>
-															<div class="col-lg-4 col-md-6 col-sm-12"
+															<div class="col-md-6 col-sm-12 mt-3"
 																data-placeholder="Fecha del pedido">
 																<label for="fecha-pedido">Fecha del pedido</label>
 																<input type="text" class="form-control"
 																	id="fecha-pedido" readonly>
+															</div>
+															<div class="col-md-6 col-sm-12 mt-3"
+																data-placeholder="Fecha del pedido">
+																<label for="comprobante-solicitado">Comprobante
+																	solicitado</label>
+																<input type="text" class="form-control"
+																	id="comprobante-solicitado" readonly>
 															</div>
 														</div>
 													</div>
@@ -263,7 +271,8 @@
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
-																	<label for="numDocum-cliente" id="tipo-doc-cliente">N</label>
+																	<label for="numDocum-cliente"
+																		id="tipo-doc-cliente">N</label>
 																	<input type="text" class="form-control"
 																		id="numDocum-cliente" placeholder="" readonly>
 																</div>
@@ -293,15 +302,28 @@
 													</div>
 													<h6 class="border-bottom pb-2">Datos de Pago</h6>
 													<div class="container mt-4 mb-4">
-														<div class="col-lg-4 col-md-6 col-sm-12">
-															<label for="imagen-compra">Imagen de la compra</label>
-															<div class="input-group">
-																<input type="text" class="form-control"
-																	placeholder="URL de la imagen" id="imagen-compra"
-																	readonly>
-																<div class="input-group-append">
-																	<button class="btn btn-primary" type="button"
-																		id="button-imagen-compra">Ver Imagen</button>
+														<p>Imagen de pago</p>
+														<button class="btn btn-primary" type="button"
+															data-toggle="modal" data-target="#modalCategoria">
+															Ver Imagen
+														</button>
+														<!-- Modal -->
+														<div class="modal fade" id="modalCategoria" tabindex="-1"
+															role="dialog" aria-hidden="true">
+															<div class="modal-dialog modal-lg">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title">Imagen del pago
+																			realizado</h5>
+																		<button type="button" class="close"
+																			data-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body">
+																		<img id="imagen-compra" src=" "
+																			alt="Imagen de la compra" class="img-fluid">
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -347,28 +369,27 @@
 										<!-- Tab Atención -->
 										<div class="tab-pane fade" id="atencion" role="tabpanel"
 											aria-labelledby="atencion-tab">
-											<div class="container mt-2">
-												<h6 class="border-bottom pb-2">Historia de pedidos</h6>
+											<div class="mt-2">
+												<h6 class="border-bottom pb-2">Historial de atención</h6>
 												<table class="table mt-4" id="tablaHistoriaPedidos">
 													<thead class="thead-default">
 														<tr>
 															<th>Fecha atención </th>
 															<th>Comentario</th>
 															<th>Estado</th>
+															<th>Enlace</th>
+															<th>Medio de prueba</th>
 															<th>Notificación cliente</th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
-															<td>12/03/2024</td>
 															<td></td>
 															<td></td>
-															<td>
-																<button class="btn btn-primary btn-sm">Notificar
-																	email</button>
-																<button class="btn btn-success btn-sm">Notificar
-																	WhatsApp</button>
-															</td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
 														</tr>
 													</tbody>
 												</table>
@@ -378,7 +399,8 @@
 														<form id="form-actualizar-historia">
 															<div class="form-group">
 																<label for="estado">Estado</label>
-																<select id="estado" class="form-control" name="estado" required>
+																<select id="estado" class="form-control" name="estado"
+																	required>
 																	<option value="" selected disabled hidden>Seleccione
 																		estado...</option>
 																	<option value="pendiente">Pendiente</option>
@@ -390,38 +412,66 @@
 															</div>
 															<div class="form-group custom-switch">
 																<input type="checkbox" class="custom-control-input"
-																	id="notificarCliente" name="notificarCliente" checked>
+																	id="notificarCliente" name="notificarCliente"
+																	checked>
 																<label class="custom-control-label"
 																	for="notificarCliente">Notificar cliente</label><br>
 															</div>
 															<div class="form-group">
-																<label for="enlaceSeguimiento">Enlace de Seguimiento</label>
-																<input type="text" class="form-control" id="enlaceSeguimiento" name="enlaceSeguimiento"
+																<label for="enlaceSeguimiento">Enlace de
+																	Seguimiento</label>
+																<input type="text" class="form-control"
+																	id="enlaceSeguimiento" name="enlaceSeguimiento"
 																	placeholder="Ingrese el enlace de seguimiento">
 															</div>
 															<div class="form-group">
 																<label for="comentario">Comentario</label>
-																<textarea class="form-control" id="comentario" name="comentario"
-																	rows="2" required></textarea>
+																<textarea class="form-control" id="comentario"
+																	name="comentario" rows="2" required></textarea>
 															</div>
 															<div class="form-group">
-																<label for="medioPrueba">Medio de Prueba</label>
-																<input type="file" class="form-control" id="medioPrueba" name="medioPrueba">
+																<label for="myfile">Selecciona Archivo</label>
+																<input type="file" id="myfile" name="myfile">
+																<progress id="progressBar" value="0" max="100"
+																	style="width: 100%;"></progress>
+																<div id="status"></div>
 															</div>
-															<button type="submit" id="btnActualizarHistoria" class="btn btn-primary">Añadir Historia</button>
+
+															<!-- visualizar la imagen -->
+															<div class="form-group">
+																<img id="principalImagePreview"
+																	alt="Vista previa de la imagen principal"
+																	class="img-thumbnail"
+																	style="display: none; width: 200px; height: 150px;">
+															</div>
+															<button type="submit" id="btnActualizarHistoria"
+																class="btn btn-primary">Añadir Historia</button>
 														</form>
 													</div>
 												</div>
+
 											</div>
 										</div>
 										<!-- Tab Reclamos -->
 										<div class="tab-pane fade" id="reclamos" role="tabpanel"
 											aria-labelledby="reclamos-tab">
 											<h6 class="border-bottom pb-2">Reclamos / Comentario</h6>
-											<textarea type="text" id="id-reclamo" class="form-control" readonly>
-											</textarea>
+											<table class="table mt-4" id="tablaHistoriaReclamos">
+												<thead class="thead-default">
+													<tr>
+														<th>Fecha de reclamo</th>
+														<th>Reclamo / Comentario</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>12/03/2024</td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
 											<div class="mt-4">
-												<a href="https://wa.me/1234567890" class="btn btn-success"
+												<a id="wsp-reclamos" href="https://wa.me/" class="btn btn-success"
 													target="_blank">Contactar por WhatsApp</a>
 											</div>
 										</div>

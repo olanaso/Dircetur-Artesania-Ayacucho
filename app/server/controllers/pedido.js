@@ -174,32 +174,68 @@ async function save(req, res, next) {
 }
 async function filtrar(req, res) {
     try {
+        const { fecha_pedido, num_pedido, nombre_artesano, nombre_cliente, estado } = req.query;
         const whereCondition = {};
 
-        for (const [key, value] of Object.entries(req.query)) {
-            if (value) {
-                switch (key) {
-                    case 'fecha_pedido':
-                        // Filtrar por fecha exacta sin considerar la hora
-                        whereCondition[key] = {
-                            [Op.and]: [
-                                Sequelize.where(Sequelize.fn('DATE', Sequelize.col('fecha_pedido')), value)
-                            ]
-                        };
-                        break;
-                    default:
-                        // Para otros campos de búsqueda parcial o exacta según el tipo de dato
-                        if (typeof value === 'string' && key !== 'id') {
-                            whereCondition[key] = { [Op.like]: `%${value}%` };
-                        } else {
-                            whereCondition[key] = value;
-                        }
-                        break;
-                }
-            }
+        if (fecha_pedido) {
+            whereCondition.fecha_pedido = {
+                [Op.and]: [
+                    Sequelize.where(Sequelize.fn('DATE', Sequelize.col('fecha_pedido')), fecha_pedido)
+                ]
+            };
         }
 
-        const result = await model.findAll({ where: whereCondition });
+        if (num_pedido) {
+            whereCondition.num_pedido = num_pedido;
+        }
+
+        if (estado) {
+            whereCondition.estado = estado;
+        }
+
+        const includeCondition = [];
+
+        if (nombre_cliente) {
+            includeCondition.push({
+                model: modelCliente,
+                where: {
+                    [Op.or]: [
+                        { nombres: { [Op.like]: `%${nombre_cliente}%` } },
+                        { apellidos: { [Op.like]: `%${nombre_cliente}%` } }
+                    ]
+                }
+            });
+        } else {
+            includeCondition.push({
+                model: modelCliente,
+                attributes: ['nombres', 'apellidos']
+            });
+        }
+
+        if (nombre_artesano) {
+            includeCondition.push({
+                model: modelArtesano,
+                where: {
+                    [Op.or]: [
+                        { nombres: { [Op.like]: `%${nombre_artesano}%` } },
+                        { apellidos: { [Op.like]: `%${nombre_artesano}%` } }
+                    ]
+                }
+            });
+        } else {
+            includeCondition.push({
+                model: modelArtesano,
+                attributes: ['nombres', 'apellidos']
+            });
+        }
+
+        const result = await modelPedido.findAll({
+            where: whereCondition,
+            include: includeCondition,
+            attributes: {
+                exclude: ['cliente_id', 'artesano_id']
+            }
+        });
 
         res.json(result);
     } catch (error) {

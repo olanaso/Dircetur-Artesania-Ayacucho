@@ -29,16 +29,18 @@ module.exports = sequelize.define('pedido', {
     list_productos: {
         type: Sequelize.JSON,
         allowNull: true,
+        defaultValue: [],
         field: 'list_productos'
     },
     imagen_pago: {
-        type: Sequelize.JSON,
+        type: Sequelize.STRING(155),
         allowNull: true,
         field: 'imagen_pago'
     },
     list_reclamo: {
         type: Sequelize.JSON,
         allowNull: true,
+        defaultValue: [],
         field: 'list_reclamo'
     },
     comprobante_solic: {
@@ -54,6 +56,7 @@ module.exports = sequelize.define('pedido', {
     list_atencion: {
         type: Sequelize.JSON,
         allowNull: true,
+        defaultValue: [],
         field: 'list_atencion'
     },
     usuariocreacion_id: {
