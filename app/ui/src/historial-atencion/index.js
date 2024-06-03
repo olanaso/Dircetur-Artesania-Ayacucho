@@ -86,30 +86,29 @@ function cargarTablaHistoriaPedido(pedidos) {
 
     tablaHistoriaPedido.innerHTML = '';
 
-    // Agregar clase badge dependiendo del estado del pedido
-    let estadoClass = '';
-    switch (pedidos.estado) {
-        case 'pendiente':
-            estadoClass = 'badge badge-pill badge-warning text-white'; 
-            break;
-        case 'pagado':
-            estadoClass = 'badge badge-pill badge-success'; 
-            break;
-        case 'envio':
-            estadoClass = 'badge badge-pill badge-info'; 
-            break;
-        case 'finalizado':
-            estadoClass = 'badge badge-pill badge-primary'; 
-            break;
-        case 'anulado':
-            estadoClass = 'badge badge-pill badge-danger';
-            break;
-        default:
-            estadoClass = ''; 
-    }
     listaAtencion.forEach(pedido => {
         const row = document.createElement('tr');
-
+        // Agregar clase badge dependiendo del estado del pedido
+        let estadoClass = '';
+        switch (pedido.estado) {
+            case 'pendiente':
+                estadoClass = 'badge badge-pill badge-warning text-white';
+                break;
+            case 'pagado':
+                estadoClass = 'badge badge-pill badge-success';
+                break;
+            case 'envio':
+                estadoClass = 'badge badge-pill badge-info';
+                break;
+            case 'finalizado':
+                estadoClass = 'badge badge-pill badge-primary';
+                break;
+            case 'anulado':
+                estadoClass = 'badge badge-pill badge-danger';
+                break;
+            default:
+                estadoClass = '';
+        }
         row.innerHTML = `
             <td>${formatearFecha(pedido.fecha_atencion)}</td>
             <td>${pedido.comentario}</td>
@@ -134,7 +133,7 @@ function cargarTablaHistoriaPedido(pedidos) {
 function cargarTablaHistoriaReclamos(pedidos) {
     const tablaHistoriaReclamos = document.getElementById('tablaHistoriaReclamos');
     const tablaDatosHistoria = tablaHistoriaReclamos.getElementsByTagName('tbody')[0];
-    
+
     // Limpiar el contenido actual de la tabla
     tablaDatosHistoria.innerHTML = '';
 
@@ -195,7 +194,7 @@ function generarID() {
 
 async function actualizarHistorialPedido(numPedido) {
     const form = document.getElementById('form-actualizar-historia');
-    
+
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -219,7 +218,7 @@ async function actualizarHistorialPedido(numPedido) {
                 medioPrueba: ruta_archivo,
                 fecha_atencion: new Date().toISOString()
             };
-            
+
             listAtencion.push(nuevaAtencion);
 
             const data = {
