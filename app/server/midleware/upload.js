@@ -22,7 +22,7 @@ async function uploadarchivoDDP (req, res, next) {
             });
         }
 
-        const dir = path.join(__dirname, '../public/categorias/', folder);
+        const dir = path.join(__dirname, '../public', req.query.folder);
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
         }

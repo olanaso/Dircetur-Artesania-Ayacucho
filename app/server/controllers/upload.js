@@ -76,7 +76,8 @@ async function uploadImgSlider (req, res, next) {
             status: 400
         }
         //console.log(req.ciudadano)
-        let file = 'slider/img/' + req.filenamesaved
+        //let file = 'slider/img/' + req.filenamesaved
+        let file = folder + req.filenamesaved
         return res.status(200).send({
             nombrearchuvo: req.originalname, ruta: file
         });
@@ -96,7 +97,8 @@ async function uploadImgCliente (req, res, next) {
             status: 400
         }
         //console.log(req.ciudadano)
-        let file = 'cliente/img/' + req.filenamesaved
+        //let file = 'cliente/img/' + req.filenamesaved
+        let file = folder + req.filenamesaved
         return res.status(200).send({
             nombrearchuvo: req.originalname, ruta: file
         });

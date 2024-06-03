@@ -208,7 +208,7 @@ async function mostrarDataModal(clienteID) {
 
 
 //carga de imagen de perfil de cliente
-function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
+function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
 
     const fileInput = document.getElementById(fileInputId);
     const inputName = fileInput.name;
@@ -216,7 +216,7 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
     const statusElement = document.getElementById(statusElementId);
   
     if (fileInput && progressBar && statusElement) {
-        const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName);
+        const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
         uploader.attachToFileInput(fileInput);
     } else {
         console.error('Initialization failed: One or more elements not found.');
@@ -268,6 +268,7 @@ document.addEventListener('DOMContentLoaded', (event)=> {
         progressBarId: 'progressBar',
         statusElementId: 'status',
         uploadUrl: 'http://localhost:3001/api/fileupload4',
+        folder: '/cliente/img/',
         callback: handleUploadResponse
     });
     
