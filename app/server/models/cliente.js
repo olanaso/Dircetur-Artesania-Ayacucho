@@ -77,7 +77,7 @@ module.exports = sequelize.define('cliente', {
         field: 'direccion_envio',
     },
     foto_perfil: {
-        type: Sequelize.JSON,
+        type: Sequelize.STRING(255),
         allowNull: true,
         defaultValue: null,
         field: 'foto_perfil',

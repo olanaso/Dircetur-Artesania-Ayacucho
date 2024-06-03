@@ -9,6 +9,7 @@ function generateFinalName (originalfilename) {
 
 /* Middleware que permite subir un archivo a una Ruta dada */
 async function uploadarchivoDDP (req, res, next) {
+    
     try {
         // Verificar si la carpeta existe, si no, crearla
         //     
@@ -25,7 +26,7 @@ async function uploadarchivoDDP (req, res, next) {
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
         }
-
+        
         // Configurar el almacenamiento de Multer
         const storage = multer.diskStorage({
             destination: function (req, file, cb) {
@@ -45,6 +46,7 @@ async function uploadarchivoDDP (req, res, next) {
 
         console.log(`Esperando campo de archivo: ${fieldName} con máximo de archivos: ${maxCount}`);
         // Crear el middleware de Multer
+        
         const upload = multer({
             storage: storage,
             limits: { fileSize: 1024 * 1024 * 150 } // Limitar el tamaño del archivo a 10MB
