@@ -9,34 +9,6 @@ async function cargarPedidos() {
     }
 }
 
-// function cargarTabla(pedidos) {
-//     const tablaCategoria = document.getElementById('tablaCategoria');
-//     const tablaCategoriaBody = tablaCategoria.getElementsByTagName('tbody')[0];
-
-//     // Limpiar el contenido existente del tbody
-//     tablaCategoriaBody.innerHTML = '';
-
-//     pedidos.forEach(pedido => {
-//         const row = document.createElement('tr');
-
-//         row.innerHTML = `
-//           <td>${pedido.num_pedido}</td>
-//           <td>${pedido.cliente.nombres} ${pedido.cliente.apellidos}</td>
-//           <td>${pedido.artesano.nombres} ${pedido.artesano.apellidos}</td>
-//           <td>${formatearFecha(pedido.fecha_pedido)}</td>
-//           <td>${formatearFecha(pedido.updatedAt)}</td>
-//           <td>${pedido.estado}</td>
-//           <td>
-//               <button type="button" class="btn btn-light btn-sm">
-//                   <a href="/historial-ventas.html?id=${pedido.num_pedido}">
-//                       <i class="icon icon-eye2"></i>
-//                   </a>
-//               </button>
-//           </td>
-//       `;
-//         tablaCategoriaBody.appendChild(row);
-//     });
-// }
 function cargarTabla(pedidos) {
     const tablaCategoria = document.getElementById('tablaCategoria');
     const tablaCategoriaBody = tablaCategoria.getElementsByTagName('tbody')[0];

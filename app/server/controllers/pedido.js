@@ -117,6 +117,7 @@ async function obtenerPedido(idPedido) {
     }
 }
 
+
 function listar(req, res) {
     modelPedido.findAll({
         attributes: {
@@ -172,6 +173,9 @@ async function save(req, res, next) {
         return next(e);
     }
 }
+
+
+
 async function filtrar(req, res) {
     try {
         const { fecha_pedido, num_pedido, nombre_artesano, nombre_cliente, estado } = req.query;

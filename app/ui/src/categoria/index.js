@@ -92,7 +92,7 @@ async function editarCategoria(categoria) {
       denominacion: denominacionInput.value,
       descripcion: descripcionInput.value
     }
-    
+
     if (fileInput.files[0]) {
       formData.foto_referente = imagen_principal
     } else {
@@ -113,12 +113,17 @@ async function editarCategoria(categoria) {
 
 async function registrarCategoria() {
   const btnRegistrar = document.getElementById('registrar-categoria');
-
+  const form = document.getElementById('registrar-categoria-form');
 
   const modal = document.getElementById('modalCategoria');
 
   btnRegistrar.addEventListener('click', async (event) => {
     event.preventDefault();
+    // Verificar si el formulario es válido antes de continuar
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
     try {
       // Obtener los valores del formulario
       const abreviatura = document.getElementById('abreviatura').value;
@@ -206,7 +211,7 @@ function initializeFileUploader({ fileInputId, progressBarId, statusElementId, u
 }
 
 function handleUploadResponse(response) {
-  
+
   let file = $('#myfile').prop('files')[0];
   if (file) {
     let reader = new FileReader();
