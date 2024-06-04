@@ -1,0 +1,120 @@
+<div id="widget" class="widget" style="display: none;">
+    <div id="widget-header" class="widget-header">
+    <button href="#" id="close">x</button>
+      
+       <b>Herramienta de dibujo</b> 
+    </div>
+
+    <div id="widget-content" class="widget-content widget-body">
+
+        <table class="table">
+            <tbody><tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="width: 150px;">
+                    <h6>Formas del dibujo</h6>
+                </td>
+                <td>
+                    <div class="mt-2 leaflet-pm-toolbar">
+             
+                       
+        
+                            <button id="btnPolyline" type="button" class="btn-sm btn-info control-button">
+                                <div class="control-icon leaflet-pm-icon-polyline" title="Dibujar Polilínea"></div>
+                            </button>
+                      
+                        
+                            <button id="btnRectangle" type="button" class="btn-sm btn-info control-button">
+                                <div class="control-icon leaflet-pm-icon-rectangle" title="Dibujar Rectangulo"></div>
+                            </button>
+                        
+                   
+                            <button id="btnPolygon" type="button" class="btn-sm btn-info control-button">
+                                <div class="control-icon leaflet-pm-icon-polygon" title="Dibujar Polígono"></div>
+                            </button>
+                     
+                    
+                            <button id="btnCircle" type="button" class="btn-sm btn-info control-button">
+                                <div class="control-icon leaflet-pm-icon-circle" title="Dibujar Círculo"></div>
+                            </button>
+                       
+                        
+                            <button id="btnEdit" type="button" class="btn-sm btn-info control-button">
+                                <div class="control-icon leaflet-pm-icon-edit" title="Editar Capas"></div>
+                            </button>
+                      
+                      
+                            <button id="btnMove" type="button" class="btn-sm btn-info control-button">
+                                <div class="control-icon leaflet-pm-icon-drag" title="Mover Geometrías"></div>
+                            </button>
+                      
+                       
+                            <button id="btnDelete" type="button" class="btn-sm btn-info control-button">
+                                <div class="control-icon leaflet-pm-icon-delete" title="Remover Capas"></div>
+                            </button>
+                        
+                    </div>
+                </td>
+    
+            </tr>
+            <tr>
+                <td>
+                    <h6>Agregar texto al Mapa</h6>
+                </td>
+                <td>
+                    <input type="text" id="textoEtiqueta" class="form-control form-control-sm" style="width: 150PX;">
+                </td>
+                    <td>
+                    <input id="tamanoTexto" type="number" min="12" max="24" value="12" class="form-control form-control-sm" style="width: 30px;">
+    
+                </td>
+                
+                <td >
+                    <div class=" leaflet-pm-toolbar ">
+                    <button id="btnAddText" type="button" class="btn-sm btn-info control-button ">
+                        <div class="control-icon leaflet-pm-icon-label" title="Añadir Texto al Mapa"></div>
+                    </button>
+                </div>
+                </td>
+            </tr>
+
+            
+
+            <tr>
+                <td > <h6> Color de linea</h6></td>
+                <td > <input id="colorLinea" type="color" value="#ffa500"></td>
+                   
+               
+            </tr>
+            <tr>
+                <td ><h6> Color de relleno</h6></td>
+                <td > <input id="colorArea" type="color" value="#ffa500"></td>
+                   
+               
+            </tr>
+            <tr>
+                <td ><h6>  Grosor</h6></td>
+                <td > 
+                    <input id="grosorLinea" type="number" min="1" max="10" value="3" class="form-control form-control-sm" style="width: 70px;">
+                </td>
+                   
+               
+            </tr>
+
+            <tr>
+                <td > 
+                    <h6> Mostrar medidas </h6> </td>
+                <td > <input id="chkMedidas" type="checkbox" checked=""></td>
+               
+                   
+               
+            </tr>
+    
+    
+    
+    
+        </tbody></table>
+       
+    </div>
+</div>

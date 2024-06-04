@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Lead Admin Panel" />
+	<meta name="keywords"
+		content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+	<meta name="author" content="Bootstrap Gallery" />
+	<link rel="shortcut icon" href="img/fav.png" />
+	<title>Lead Admin Dashboard</title>
+
+	<!-- Common CSS -->
+	<link rel="stylesheet" href="public/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="public/css/main.css" />
+
+	<!-- Other CSS includes plugins - Cleanedup unnecessary CSS -->
+	<!-- Chartist css -->
+	<link href="vendor/chartist/css/chartist.min.css" rel="stylesheet" />
+	<link href="vendor/chartist/css/chartist-custom.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+	<!-- Loading starts -->
+	<div class="loading-wrapper">
+		<div class="loading">
+			<div class="img"></div>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<!-- Loading ends -->
+
+	<!-- BEGIN .app-wrap -->
+	<div class="app-wrap">
+		<!-- BEGIN .app-heading -->
+		<header class="app-header">
+			<div class="container-fluid">
+				<div class="row gutters">
+					<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+						<a class="mini-nav-btn" href="#" id="app-side-mini-toggler">
+							<i class="icon-menu5"></i>
+						</a>
+						<a href="#app-side" data-toggle="onoffcanvas" class="onoffcanvas-toggler" aria-expanded="true">
+							<i class="icon-chevron-thin-left"></i>
+						</a>
+					</div>
+					<div
+						class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11 m-auto d-flex justify-content-end gap-3 flex-wrap">
+						<div class="d-flex align-items-center">
+							<p class="mb-1">Bienvenido <span id="userName">Juan perez</span></p>
+							<p class="mb-1 ml-2"> Último acceso:<span id="lastLogin">13/09/2021</span></p>
+						</div>
+						<div class="d-flex align-items-center ml-3">
+							<p class="mb-1">rol <span>Administrador</span></p>
+						</div>
+						<div class="ml-3">
+							<button type="button" class="btn btn-outline-secondary btn-rounded btn-sm">Cambiar
+								contraseña</button>
+							<button type="button" class="btn btn-outline-primary btn-rounded btn-sm">Cerrar
+								sesión</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- END: .app-heading -->
+		<!-- BEGIN .app-container -->
+		<div class="app-container">
+			<!-- BEGIN .app-side -->
+			<aside class="app-side" id="app-side">
+				<!-- BEGIN .side-content -->
+				<div class="side-content ">
+					<!-- BEGIN .side-nav -->
+					<nav class="side-nav">
+						<!-- BEGIN: side-nav-content -->
+						<ul class="unifyMenu" id="unifyMenu">
+							<li>
+								<a href="/">
+									<span class="has-icon">
+										<i class="icon-home"></i>
+									</span>
+									<span class="nav-title">Administrador</span>
+								</a>
+							</li>
+							<li class="active selected">
+								<a href="" class="has-arrow" aria-expanded="false">
+									<span class="has-icon">
+										<i class="icon-tag"></i>
+									</span>
+									<span class="nav-title">Catálogo</span>
+								</a>
+								<ul aria-expanded="false">
+									<li>
+										<a href="/categorias.html" class="current-page">Categorías</a>
+									</li>
+									<li>
+										<a href="/productos.html">Productos</a>
+									</li>
+									<li>
+										<a href="/slider.html">Slider</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="/ventas.html">
+									<span class="has-icon">
+										<i class="icon-shopping-cart"></i>
+									</span>
+									<span class="nav-title">Ventas</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="has-arrow" aria-expanded="false">
+									<span class="has-icon">
+										<i class="icon-user2"></i>
+									</span>
+									<span class="nav-title">Usuarios</span>
+								</a>
+								<ul aria-expanded="false">
+									<li>
+										<a href="/artesanos.html">Artesano</a>
+									</li>
+									<li>
+										<a href="/clientes.html">Cliente</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="/reportes.html">
+									<span class="has-icon">
+										<i class="icon-file-text"></i>
+									</span>
+									<span class="nav-title">Reportes</span>
+								</a>
+							</li>
+						</ul>
+						<!-- END: side-nav-content -->
+					</nav>
+					<!-- END: .side-nav -->
+				</div>
+				<!-- END: .side-content -->
+			</aside>
+			<!-- END: .app-side -->
+
+			<!-- BEGIN .app-main -->
+			<div class="app-main">
+				<!-- BEGIN .main-heading -->
+				<header class="main-heading">
+					<div class="container-fluid">
+						<h5>Categoría</h5>
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="/">Administrador</a></li>
+								<li class="breadcrumb-item"><a href="#">Catálogo</a></li>
+								<li class="breadcrumb-item active" aria-current="page">categorías</li>
+							</ol>
+						</nav>
+					</div>
+				</header>
+				<!-- END: .main-heading -->
+				<!-- BEGIN .main-content -->
+				<div class="main-content">
+					<div class="card">
+						<div class="card-header">Filtrar categoría</div>
+						<div class="card-body">
+							<form id="filtrarCategoria">
+								<div class="row gutters mb-4">
+									<div class="col-lg-3 col-md-6 col-sm-12">
+										<label for="id-categoria">ID de categoría</label>
+										<input type="number" class="form-control" placeholder="ID de categoría"
+											id="id-categoria">
+									</div>
+									<div class="col-lg-3 col-md-6 col-sm-12">
+										<label for="abreviatura-categoria">Abreviatura</label>
+										<input type="text" class="form-control" placeholder="Abreviatura"
+											id="abreviatura-categoria">
+									</div>
+									<div class="col-lg-3 col-md-6 col-sm-12">
+										<label for="denominacion-categoria">Nombre / Denominación</label>
+										<input type="text" class="form-control" placeholder="Nombre/Denominación"
+											id="denominacion-categoria">
+									</div>
+									<div class="col-lg-3 col-md-6 col-sm-12 d-flex align-items-end justify-content-end">
+										<button id="filtrar-categoria" type="submit" class="btn btn-primary">Filtrar
+											categoría</button>
+									</div>
+								</div>
+							</form>
+
+
+							<div class="d-flex justify-content-end mb-3">
+								<button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+									data-target="#modalCategoria">añadir <i
+										class="icon icon-circle-with-plus"></i></button>
+							</div>
+
+							<!-- Modal -->
+							<div class="modal fade" id="modalCategoria" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title">Añadir categoría</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<form id="registrar-categoria-form">
+												<div class="form-group">
+													<label for="abreviatura">Abreviatura</label>
+													<input type="text" class="form-control" id="abreviatura"
+														placeholder="Abreviatura" required>
+												</div>
+												<div class="form-group">
+													<label for="denominacion">Denominación</label>
+													<input type="text" class="form-control" id="denominacion"
+														placeholder="Denominación" required>
+												</div>
+												<div class="form-group">
+													<label for="descripcion">Descripción</label>
+													<textarea class="form-control" id="descripcion"
+														placeholder="Descripción" required></textarea>
+												</div>
+												<div class="form-group">
+													<label for="myfile">Foto Referente</label>
+													<input type="file" id="myfile" name="myfile" required>
+													<progress id="progressBar" value="0" max="100"
+														style="width: 100%;"></progress>
+													<div id="status"></div>
+												</div>
+
+												<!-- visualizar la imagen -->
+												<div class="form-group">
+													<img id="principalImagePreview"
+														alt="Vista previa de la imagen principal" class="img-thumbnail"
+														style="display: none; width: 200px; height: 150px;">
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Cancelar</button>
+											<button type="submit" id="registrar-categoria"
+												class="btn btn-primary">Registrar categoría</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Modal editar -->
+							<!-- Modal editar -->
+							<div class="modal fade" id="modalCategoriaEditar" tabindex="-1" role="dialog"
+								aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Editar categoría</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<form>
+											<div class="modal-body">
+												<div class="form-group">
+													<label for="abreviatura-editar">Abreviatura</label>
+													<input type="text" class="form-control" id="abreviatura-editar"
+														placeholder="Abreviatura" required>
+												</div>
+												<div class="form-group">
+													<label for="denominacion-editar">Denominación</label>
+													<input type="text" class="form-control" id="denominacion-editar"
+														placeholder="Denominación" required>
+												</div>
+												<div class="form-group">
+													<label for="descripcion-editar">Descripción</label>
+													<textarea class="form-control" id="descripcion-editar"
+														placeholder="Descripción" required></textarea>
+												</div>
+												<div class="form-group">
+													<label for="myfile-editar">Actualizar imagen</label>
+													<input type="file" id="myfile-editar" name="myfile-editar">
+													<progress id="progressBar-editar" value="0" max="100"
+														style="width: 100%;"></progress>
+													<div id="status-editar"></div>
+												</div>
+
+												<!-- visualizar la imagen -->
+												<div class="form-group">
+													<img id="CategoriaImagePreviewEdit" alt="Vista previa de la imagen"
+														class="img-thumbnail"
+														style="display: none; width: 200px; height: 150px;">
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Cancelar</button>
+												<button type="submit" id="guardarCambios"
+													class="btn btn-primary">Guardar Cambios</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="card">
+								<div class="card-header">Lista de categorías</div>
+								<div class="card-body">
+									<table class="table m-0" id="tablaCategoria">
+										<thead class="thead-default">
+											<tr>
+												<th>ID</th>
+												<th>Imagen</th>
+												<th>Denominación</th>
+												<th>Abreviatura</th>
+												<th>Descripción</th>
+												<th>Acciones</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row">1</th>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td>
+													<button type="button" class="btn btn-info btn-sm"><i
+															class="icon icon-edit2"></i></button>
+													<button type="button" class="btn btn-primary btn-sm"><i
+															class="icon icon-bin"></i></button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+				</div>
+				<!-- END: .main-content -->
+			</div>
+			<!-- END: .app-main -->
+		</div>
+		<!-- END: .app-container -->
+		<!-- BEGIN .main-footer -->
+		<footer class="main-footer fixed-btm">
+			Copyright Lead Admin 2019.
+		</footer>
+		<!-- END: .main-footer -->
+	</div>
+	<!-- END: .app-wrap -->
+
+	<!-- jQuery first, then Tether, then other JS. -->
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="vendor/leadMenu/leadMenu.js"></script>
+	<script src="vendor/onoffcanvas/onoffcanvas.js"></script>
+	<script src="js/moment.js"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="vendor/slimscroll/slimscroll.min.js"></script>
+	<script src="vendor/slimscroll/custom-scrollbar.js"></script>
+
+	<!-- Chartist JS -->
+	<script src="vendor/chartist/js/chartist.min.js"></script>
+	<script src="vendor/chartist/js/chartist-tooltip.js"></script>
+	<script src="vendor/chartist/js/custom/custom-line-chart.js"></script>
+	<script src="vendor/chartist/js/custom/custom-line-chart1.js"></script>
+	<script src="vendor/chartist/js/custom/custom-area-chart.js"></script>
+	<script src="vendor/chartist/js/custom/donut-chart2.js"></script>
+	<script src="vendor/chartist/js/custom/custom-line-chart4.js"></script>
+
+	<!-- Common JS -->
+	<script src="js/common.js"></script>
+
+	<script type="module" src="src/categoria/index.js"></script>
+
+</body>
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+
+</html>

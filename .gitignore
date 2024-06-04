@@ -1,0 +1,19 @@
+# Ignorar todos los directorios node_modules en cualquier lugar del proyecto
+**/node_modules/
+
+**/public/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Entorno de producción
+build/
+dist/
+
+# Directorios del sistema operativo
+.DS_Store
+
+# Otros archivos de configuración
+.env

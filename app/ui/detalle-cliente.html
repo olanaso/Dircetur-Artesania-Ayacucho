@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+	
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="Lead Admin Panel" />
+		<meta name="keywords" content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="shortcut icon" href="img/fav.png" />
+		<title>Lead Admin Dashboard</title>
+		
+		<!-- Common CSS -->
+		<link rel="stylesheet" href="public/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
+		<link rel="stylesheet" href="public/css/main.css" />
+
+		<!-- Other CSS includes plugins - Cleanedup unnecessary CSS -->
+		<!-- Chartist css -->
+		<link href="vendor/chartist/css/chartist.min.css" rel="stylesheet" />
+		<link href="vendor/chartist/css/chartist-custom.css" rel="stylesheet" />
+
+	</head>
+	<body>
+
+		<!-- Loading starts -->
+		<div class="loading-wrapper">
+			<div class="loading">
+				<div class="img"></div>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<!-- Loading ends -->
+
+		<!-- BEGIN .app-wrap -->
+		<div class="app-wrap">
+			<!-- BEGIN .app-heading -->
+			<header class="app-header">
+				<div class="container-fluid">
+					<div class="row gutters">
+						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+							<a class="mini-nav-btn" href="#" id="app-side-mini-toggler">
+								<i class="icon-menu5"></i>
+							</a>
+							<a href="#app-side" data-toggle="onoffcanvas" class="onoffcanvas-toggler" aria-expanded="true">
+								<i class="icon-chevron-thin-left"></i>
+							</a>
+						</div>
+						<div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11 m-auto d-flex justify-content-end gap-3 flex-wrap">
+							<div class="d-flex align-items-center">
+								<p class="mb-1">Bienvenido <span id="userName">Juan perez</span></p>
+								<p class="mb-1 ml-2"> Último acceso:<span id="lastLogin">13/09/2021</span></p>
+							</div>
+							<div class="d-flex align-items-center ml-3">
+								<p class="mb-1">rol <span>Administrador</span></p>
+							</div>
+							<div class="ml-3">
+								<button type="button" class="btn btn-outline-secondary btn-rounded btn-sm">Cambiar contraseña</button>
+								<button type="button" class="btn btn-outline-primary btn-rounded btn-sm">Cerrar sesión</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<!-- END: .app-heading -->
+			<!-- BEGIN .app-container -->
+			<div class="app-container">
+				<!-- BEGIN .app-side -->
+				<aside class="app-side" id="app-side">
+					<!-- BEGIN .side-content -->
+					<div class="side-content ">
+						<!-- BEGIN .side-nav -->
+						<nav class="side-nav">
+							<!-- BEGIN: side-nav-content -->
+							<ul class="unifyMenu" id="unifyMenu">
+								<li >
+									<a href="/">
+										<span class="has-icon">
+											<i class="icon-home"></i>
+										</span>
+										<span class="nav-title">Administrador</span>
+									</a>
+								</li>
+								<li>
+									<a href="" class="has-arrow" aria-expanded="false">
+										<span class="has-icon">
+											<i class="icon-tag"></i>
+										</span>
+										<span class="nav-title">Catálogo</span>
+									</a>
+									<ul aria-expanded="false">
+										<li>
+											<a href="/categorias.html">Categorías</a>
+										</li>
+										<li>
+											<a href="/productos.html">Productos</a>
+										</li>
+										<li>
+											<a href="/slider.html">Slider</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/ventas.html">
+										<span class="has-icon">
+											<i class="icon-shopping-cart"></i>
+										</span>
+										<span class="nav-title">Ventas</span>
+									</a>
+								</li>
+								<li class="active selected">
+									<a href="#" class="has-arrow" aria-expanded="false">
+										<span class="has-icon">
+											<i class="icon-user2"></i>
+										</span>
+										<span class="nav-title">Usuarios</span>
+									</a>
+									<ul aria-expanded="false">
+										<li>
+											<a href="/artesanos.html">Artesano</a>
+										</li>
+										<li>
+											<a href="/clientes.html" class="current-page">Cliente</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/reportes.html">
+										<span class="has-icon">
+											<i class="icon-file-text"></i>
+										</span>
+										<span class="nav-title">Reportes</span>
+									</a>
+								</li>								
+							</ul>
+							<!-- END: side-nav-content -->
+						</nav>
+						<!-- END: .side-nav -->
+					</div>
+					<!-- END: .side-content -->
+				</aside>
+				<!-- END: .app-side -->
+
+				<!-- BEGIN .app-main -->
+				<div class="app-main">
+					<!-- BEGIN .main-heading -->
+					<header class="main-heading">
+						<div class="container-fluid">
+							<h5>Clientes</h5>
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">Home</a></li>
+									<li class="breadcrumb-item"><a href="#">Usuarios</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Clientes</li>
+								</ol>
+							</nav>
+						</div>
+					</header>
+					<!-- END: .main-heading -->
+					<!-- BEGIN .main-content -->
+					<div class="main-content">
+						<div class="card">
+							<div class="card-header d-flex justify-content-between">
+								Cliente
+								<a href="/clientes.html"><i class="icon-arrow_back"></i></a>
+							</div>
+
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                      <li class="nav-item">
+                                        <a class="nav-link active" id="infC-tab" data-toggle="tab" href="#infC" role="tab" aria-controls="infC" aria-selected="true">Información</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="cuentaC-tab" data-toggle="tab" href="#cuentaC" role="tab" aria-controls="cuentaC" aria-selected="false">Cuenta</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="reclamoC-tab" data-toggle="tab" href="#reclamoC" role="tab" aria-controls="reclamoC" aria-selected="false">Reclamo del Cliente</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="activa-desactiva-tab" data-toggle="tab" href="#activa-desactiva" role="tab" aria-controls="activa-desactiva" aria-selected="false">Activa / Desactiva</a>
+                                      </li>
+                                    </ul>
+                                    <div class="tab-content" id="myTabContent">
+                                      	<div class="tab-pane fade show active" id="infC" role="tabpanel" aria-labelledby="infC-tab">
+											<form class="">
+												<div class="row">
+													<div class="modal-body col-md-6 ">
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Nombre</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="nombreC" placeholder="" name="nombres">
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Apellidos</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="apellidosC" placeholder="" name="apellidos">
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Correo</label>
+															<div class="col-sm-9">
+																<input type="email" class="form-control" id="correoC" placeholder="" name="correo">
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Teléfono</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="telefonoC" placeholder="" name="telefono">
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Dirección</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="direccionC" placeholder="" name="direccion">
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">País</label>
+															<div class="col-sm-9">
+																<select class="form-control" id="pais" name="pais">
+																	<option>Seleccione su País</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Región</label>
+															<div class="col-sm-9">
+																<select class="form-control" id="region" name="region">
+																	<option>Seleccione su Región</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Ciudad</label>
+															<div class="col-sm-9">
+																<select class="form-control" id="ciudad" name="ciudad">
+																	<option>Seleccione su Ciudad</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Tipo de Documento</label>
+															<div class="col-sm-9">
+																<div class="form-row">
+																	<div class="form-group col-md-6">
+																		<select id="tipo_documento" class="form-control" name="tipo_documento">
+																			<option value="DNI">DNI</option>
+																			<option value="Pasaporte">Pasaporte</option>
+																			<option value="Carnet de Extranjería">Carnet de Extranjería</option>
+																		</select>
+																	</div>
+																	<div class="form-group col-md-6">
+																		<input type="text" class="form-control" placeholder="" id="inputDocumentoTipo" name="numero_documento">
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row gutters">
+															<label for="inputEmail3" class="col-sm-3 col-form-label">Dirección envío</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="dirEnvio" placeholder="" name="direccion_envio">
+															</div>
+														</div>
+													</div>
+	
+													<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+														<div class="mb-4">
+															<div class="d-flex justify-content-center">
+																<img id="imagenPrincipal" src="" alt="Imagen principal" class="img-thumbnail" style="width: 200px; height: 150px;">
+															</div>
+															<div class="d-flex mt-1 justify-content-center"> 
+																<button type="button" class="btn btn-info mr-1 btn-editarF" data-toggle="modal" data-target="#imagenPrincipalModal"><i class="icon icon-edit2"></i></button>
+																<button type="button" class="btn btn-primary btn-eliminarF" id="limpiarPrincipalBtn"><i class="icon icon-bin"></i></button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<!-- modal Foto cliente -->
+												<div class="modal fade" id="imagenPrincipalModal" tabindex="-1" aria-labelledby="imagenPrincipalModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-lg">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="imagenPrincipalModalLabel">Editar Imagen Principal</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<form id="imagenPrincipalForm">
+																	<div class="form-group">
+																		<input type="file" id="myfile" name="myfile">
+																		<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+																		<div id="status"></div>
+																	</div>
+																	<div class="form-group">
+																		<img id="ClienteImagePreview" src="" alt="Vista previa de la imagen" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
+																	</div>
+																</form>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary"
+																	data-dismiss="modal">Cancelar</button>
+																<button type="submit" id="btn-actualizarFoto"
+																	class="btn btn-primary">Actualizar</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- fin modal foto cliente -->
+												<div class="modal-footer">
+													<button type="submit" id="actualizar-informacion" class="btn btn-primary">Guardar</button>
+												</div>
+											</form>
+										</div>
+
+                                      	<div class="tab-pane fade" id="cuentaC" role="tabpanel" aria-labelledby="cuentaC-tab">
+											<form action="" class="col-md-8">
+												<div class="form-group row gutters">
+													<label for="inputEmail3" class="col-sm-3 col-form-label">Usuario</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" id="usuarioC" placeholder="" name="usuarioC">
+													</div>
+												</div>
+												<div class="form-group row gutters">
+													<label for="inputPassword3" class="col-sm-3 col-form-label">Contraseña</label>
+													<div class="col-sm-9">
+														<input type="password" class="form-control" id="contraseñaC" placeholder="" name="contraseñaC">
+													</div>
+												</div>
+												<div class="form-group row gutters">
+													<label for="inputPassword3" class="col-sm-3 col-form-label">Repita Contraseña</label>
+													<div class="col-sm-9">
+														<input type="password" class="form-control" id="rContraseñaC" placeholder="" name="rContraseñaC">
+													</div>
+												</div>
+												<div class="form-group row gutters">
+													<div class="col-sm-10">
+														<button type="submit" class="btn btn-primary" id="actualizar-cuenta">reestablecer</button>
+													</div>
+												</div>
+											</form>
+										</div>
+										<!-- ModalverReclamo -->
+										<div class="modal fade" id="modalverReclamo" tabindex="-1" role="dialog" aria-hidden="true">
+											<div class="modal-dialog modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Reclamo</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<form id="formReclamo" data-id="">
+														<div class="modal-body">
+															<div class="form-group">
+																<label for="codVenta">Código de venta</label>
+																<input type="text" class="form-control" id="codVenta"
+																	placeholder="" required>
+															</div>
+															<div class="form-group">
+																<label for="fechaReclamo">fecha de reclamo</label>
+																<input type="text" class="form-control" id="fechaReclamo"
+																	placeholder="" required>
+															</div>
+															<div class="form-group">
+																<label for="descripcionR">Descripción</label>
+																<input type="text" class="form-control" id="descripcionR"
+																	placeholder="" required>
+															</div>
+															<div class="form-group">
+																<label for="estadoR">Estado</label>
+																<input type="text" class="form-control" id="estadoR"
+																	placeholder="" required>
+															</div>
+															
+														</div>
+														<div class="modal-footer">
+															<button type="submit" id="registrar-categoria" class="btn btn-primary">
+																Guardar
+															</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Fin ModalVer Reclamo-->
+										<div class="tab-pane fade" id="reclamoC" role="tabpanel" aria-labelledby="reclamoC-tab">
+											<div class="" id="listReclamos">
+												<table class="table m-0" id="tablaReclamos">
+													<thead class="thead-default" id="tablaReclamos">
+														<tr>
+															<th>ID</th>
+															<th>Descripción</th>
+															<th>Acciones</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<th scope="row">1</th>
+															<td>Me no me llegó el pedido</td>
+															<td>
+																<button type="button" class="btn btn-light btn-sm"><i class="icon icon-eye2"></i></button>
+																<button type="button" class="btn btn-primary btn-sm"><i class="icon icon-bin"></i></button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											
+										</div>
+
+										<div class="tab-pane fade" id="activa-desactiva" role="tabpanel" aria-labelledby="activa-desactiva-tab">
+											<div class="col-md-6">
+												<div class="form-group row gutters">
+													<label for="inputEmail3" class="col-sm-3 col-form-label">Activa / Desactiva</label>
+													<div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">
+														<div class="toggle-switch">
+															<input type="checkbox" class="check" id="estado" name="estado">
+															<b class="b switch"></b>
+															<b class="b track"></b>
+														</div>
+													</div>
+												</div>
+												<div class="form-group row gutters">
+													<label for="inputEmail3" class="col-sm-3 col-form-label">Mensaje</label>
+													<div class="col-sm-9">
+														<textarea name="mensajeEstado" id="mensajeEstado" class="form-control"></textarea>
+													</div>
+												</div>
+												<div class="form-group row gutters">
+													<div class="col-sm-10">
+														<button type="submit" class="btn btn-primary">Notificar</button>
+													</div>
+												</div>
+											</div>
+										</div>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+						<!-- END: .main-content -->
+					</div>
+					<!-- END: .app-main -->
+				</div>
+				<!-- END: .app-container -->
+			<!-- BEGIN .main-footer -->
+			<footer class="main-footer fixed-btm">
+				Copyright Lead Admin 2019.
+			</footer>
+			<!-- END: .main-footer -->
+		</div>
+		<!-- END: .app-wrap -->
+
+		<!-- jQuery first, then Tether, then other JS. -->
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="vendor/leadMenu/leadMenu.js"></script>
+		<script src="vendor/onoffcanvas/onoffcanvas.js"></script>
+		<script src="js/moment.js"></script>
+
+		<!-- Slimscroll JS -->
+		<script src="vendor/slimscroll/slimscroll.min.js"></script>
+		<script src="vendor/slimscroll/custom-scrollbar.js"></script>
+
+		<!-- Chartist JS -->
+		<script src="vendor/chartist/js/chartist.min.js"></script>
+		<script src="vendor/chartist/js/chartist-tooltip.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart1.js"></script>
+		<script src="vendor/chartist/js/custom/custom-area-chart.js"></script>
+		<script src="vendor/chartist/js/custom/donut-chart2.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart4.js"></script>
+
+		<!-- Common JS -->
+		<script src="js/common.js"></script>
+		<script type="module" src="src/Detalle-Cliente/index.js"></script>
+
+		
+	</body>
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+</html>

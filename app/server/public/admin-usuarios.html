@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Lead Admin Panel" />
+	<meta name="keywords"
+		content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+	<meta name="author" content="Bootstrap Gallery" />
+	<link rel="shortcut icon" href="/img/fav.png" />
+	<title>Administración de usuarios - BiblioIdeas</title>
+
+	<!-- Common CSS -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="/css/main.css" />
+
+  <script type="module" crossorigin src="/assets/admin-usuarios-8e7f2792.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/init-35cba5cd.js">
+  <link rel="modulepreload" crossorigin href="/assets/viewpartials-7a86f681.js">
+  <link rel="modulepreload" crossorigin href="/assets/toast-8abe4fe9.js">
+</head>
+
+<body>
+	<!-- Loading starts -->
+	<div class="loading-wrapper">
+		<div class="loading">
+			<div class="img"></div>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+
+	<!-- BEGIN .app-wrap -->
+	<div class="app-wrap">
+		<!-- Headerg -->
+		<header class="app-header" id="app-header">
+		</header>
+
+		<!-- END: .app-heading -->
+		<!-- BEGIN .app-container -->
+		<div class="app-container">
+			<!-- Menu -->
+			<aside class="app-side" id="app-side"></aside>
+			<!-- END: .app-side -->
+
+			<!-- BEGIN .app-main -->
+			<div class="app-main">
+				<!-- BEGIN .main-heading -->
+				<header class="main-heading">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+								<div class="page-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="33" height="35" viewBox="0 0 20 15"
+										fill="none">
+										<path
+											d="M14 13.0001V15.0001H0V13.0001C0 13.0001 0 9.00005 7 9.00005C14 9.00005 14 13.0001 14 13.0001ZM10.5 3.50005C10.5 2.80782 10.2947 2.13113 9.91014 1.55556C9.52556 0.979985 8.97893 0.531381 8.33939 0.266474C7.69985 0.00156766 6.99612 -0.067744 6.31718 0.0673043C5.63825 0.202353 5.01461 0.535695 4.52513 1.02518C4.03564 1.51466 3.7023 2.1383 3.56725 2.81724C3.4322 3.49617 3.50152 4.1999 3.76642 4.83944C4.03133 5.47899 4.47993 6.02561 5.0555 6.4102C5.63108 6.79478 6.30777 7.00005 7 7.00005C7.92826 7.00005 8.8185 6.6313 9.47487 5.97493C10.1313 5.31855 10.5 4.42831 10.5 3.50005ZM13.94 9.00005C14.5547 9.4758 15.0578 10.0805 15.4137 10.7716C15.7696 11.4626 15.9697 12.2233 16 13.0001V15.0001H20V13.0001C20 13.0001 20 9.37005 13.94 9.00005ZM13 5.2579e-05C12.3117 -0.00378014 11.6385 0.202008 11.07 0.590053C11.6774 1.43879 12.0041 2.45634 12.0041 3.50005C12.0041 4.54377 11.6774 5.56132 11.07 6.41005C11.6385 6.7981 12.3117 7.00389 13 7.00005C13.9283 7.00005 14.8185 6.6313 15.4749 5.97493C16.1313 5.31855 16.5 4.42831 16.5 3.50005C16.5 2.57179 16.1313 1.68156 15.4749 1.02518C14.8185 0.368802 13.9283 5.2579e-05 13 5.2579e-05Z"
+											fill="#E80000" />
+									</svg>
+								</div>
+								<div class="page-title">
+									<h5>Administración de usuarios</h5>
+									<h6 class="sub-heading">Se podrá actualizar los datos básicos del usuario</h6>
+								</div>
+							</div>
+							<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+								<div class="right-actions">
+									<span class="last-login"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<!-- END: .main-heading -->
+				<!-- BEGIN .main-content -->
+				<div class="main-content">
+
+
+
+					<!-- Row start -->
+					<div class="row gutters">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="card" style="border: solid 1px #E4E7F2;">
+
+								<div class="card-body">
+
+
+
+
+									<div>
+										<ul class="nav nav-tabs" id="myTab" role="tablist">
+											<li class="nav-item">
+												<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
+													role="tab" aria-controls="home" aria-selected="true">Administración
+													de usuarios</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+													role="tab" aria-controls="profile" aria-selected="false">Importación
+													de usuarios</a>
+											</li>
+
+										</ul>
+
+										<div class="tab-content" id="myTabContent">
+											<div class="tab-pane fade show active" id="home" role="tabpanel"
+												aria-labelledby="home-tab">
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p> DNI </p>
+													</div>
+													<div class="col-9 col-md-4">
+														<input id="txt-dni" class="form-control form-control-sm"
+															type="text">
+													</div>
+													<div class="col-9 col-md-4">
+														<a id="btn_buscar_usuario" style="cursor: pointer;"
+															class="btn btn-primary" title="Buscar en el sistema">
+															<svg xmlns="http://www.w3.org/2000/svg" width="25"
+																height="25" viewBox="0 0 13 13" fill="none">
+																<path
+																	d="M12 12L9.34597 9.34597M9.34597 9.34597C9.79996 8.89199 10.1601 8.35304 10.4058 7.75988C10.6515 7.16673 10.7779 6.53099 10.7779 5.88896C10.7779 5.24693 10.6515 4.61119 10.4058 4.01804C10.1601 3.42488 9.79996 2.88592 9.34597 2.43194C8.89199 1.97796 8.35304 1.61784 7.75988 1.37215C7.16673 1.12646 6.53099 1 5.88896 1C5.24693 1 4.61119 1.12646 4.01804 1.37215C3.42488 1.61784 2.88592 1.97796 2.43194 2.43194C1.51509 3.3488 1 4.59233 1 5.88896C1 7.18559 1.51509 8.42912 2.43194 9.34597C3.3488 10.2628 4.59233 10.7779 5.88896 10.7779C7.18559 10.7779 8.42912 10.2628 9.34597 9.34597Z"
+																	stroke="white" stroke-linecap="round"
+																	stroke-linejoin="round" />
+															</svg>
+														</a>
+													</div>
+
+												</div>
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p> Nombres </p>
+													</div>
+													<div class="col-12 col-md-4">
+														<input id="txt-nombres" class="form-control form-control-sm"
+															type="text">
+													</div>
+												</div>
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p> Apellidos </p>
+													</div>
+													<div class="col-12 col-md-4">
+														<input id="txt-apellidos" class="form-control form-control-sm"
+															type="text">
+													</div>
+												</div>
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p> Correos </p>
+													</div>
+													<div class="col-12 col-md-4">
+														<input id="txt-correo" class="form-control form-control-sm"
+															type="text">
+													</div>
+												</div>
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p> Telefonos </p>
+													</div>
+													<div class="col-12 col-md-4">
+														<input id="txt-telefonos" class="form-control form-control-sm"
+															type="text">
+													</div>
+												</div>
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p> Programa de estudios </p>
+													</div>
+													<div class="col-12 col-md-4">
+														<div class="form-group">
+															<select id="drpprogramas"
+																class="form-control form-control-sm">
+																<option>Default select</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p> Rol </p>
+													</div>
+													<div class="col-12 col-md-4">
+														<div class="form-group">
+															<select id="drprol" class="form-control form-control-sm">
+																<option value="3">ESTUDIANTE</option>
+																<option value="2">DOCENTE</option>
+																<option value="1">ADMINISTRADOR</option>
+															</select>
+														</div>
+													</div>
+												</div>
+
+												<div class="row mt-3">
+
+													<div class="col-12 col-md-2">
+														<button id="btnguardar" type="button"
+															class="btn btn-primary">Registrar</button>
+													</div>
+													<div class="col-12 col-md-2">
+														<button id="btnactualizar" disabled type="button"
+															class="btn btn-primary">Actualizar</button>
+													</div>
+													<div class="col-12 col-md-2">
+														<button id="btneliminar" disabled type="button"
+															class="btn btn-primary">Eliminar</button>
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="profile" role="tabpanel"
+												aria-labelledby="profile-tab">
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p> Descargar Plantilla </p>
+													</div>
+													<div class="col-9 col-md-4">
+
+														<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,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"
+															id="txt_clave_ant" class="btn btn-primary"
+															title="Descargar">
+															<svg xmlns="http://www.w3.org/2000/svg" width="30"
+																height="30" viewBox="0 0 15 15" fill="none">
+																<path
+																	d="M2.5 3.5V1.5C2.5 1.23478 2.60536 0.98043 2.79289 0.792893C2.98043 0.605357 3.23478 0.5 3.5 0.5H13.5C13.7652 0.5 14.0196 0.605357 14.2071 0.792893C14.3946 0.98043 14.5 1.23478 14.5 1.5V13.5C14.5 13.7652 14.3946 14.0196 14.2071 14.2071C14.0196 14.3946 13.7652 14.5 13.5 14.5H3.5C3.23478 14.5 2.98043 14.3946 2.79289 14.2071C2.60536 14.0196 2.5 13.7652 2.5 13.5V11.5M2.5 5.5L6.5 9.5M2.5 9.5L6.5 5.5M1.5 3.5H7.5C7.76522 3.5 8.01957 3.60536 8.20711 3.79289C8.39464 3.98043 8.5 4.23478 8.5 4.5V10.5C8.5 10.7652 8.39464 11.0196 8.20711 11.2071C8.01957 11.3946 7.76522 11.5 7.5 11.5H1.5C1.23478 11.5 0.98043 11.3946 0.792893 11.2071C0.605357 11.0196 0.5 10.7652 0.5 10.5V4.5C0.5 4.23478 0.605357 3.98043 0.792893 3.79289C0.98043 3.60536 1.23478 3.5 1.5 3.5Z"
+																	stroke="white" />
+															</svg>
+														</a>
+													</div>
+
+												</div>
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p>Codigo de los programas de estudios <b>(programaid)</b></p>
+													</div>
+													<div class="col-12 col-md-4">
+														<div class="form-group">
+															<select id="drpprogramascodigo"
+																class="form-control form-control-sm">
+																<option>Default select</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-12 col-md-4">
+														<div class="form-group" style="color: blueviolet;">
+															* Este codigo sera ingresados en la plantilla en el campo
+															programaid
+														</div>
+													</div>
+												</div>
+
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p>Codigo para llenado de Roles <b>(rolid)</b> </p>
+													</div>
+
+													<div class="col-12 col-md-4">
+														<div class="form-group" style="color: blueviolet;">
+															<b>1:</b>Administrador, <b>2:</b>Docente<b>,
+																3:</b>Estudiante
+														</div>
+													</div>
+													<div class="col-12 col-md-4">
+														<div class="form-group" style="color: blueviolet;">
+															* Este codigo sera ingresados en la plantilla en el campo
+															rolid
+														</div>
+													</div>
+												</div>
+
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p>Codigo para IESTP <b>(iestpid)</b> </p>
+													</div>
+
+													<div class="col-12 col-md-4">
+														<div class="form-group" style="color: blueviolet;">
+															<span id="txt_iestpid_upload"></span>
+														</div>
+													</div>
+
+													<div class="col-12 col-md-4">
+														<div class="form-group" style="color: blueviolet;">
+															* Este codigo sera ingresados en la plantilla en el campo
+															iestpid
+														</div>
+													</div>
+												</div>
+												<hr>
+												<div class="row mt-3">
+													<div class="col-12 col-md-2 font-weight-bold">
+														<p> Subir plantilla llenada </p>
+													</div>
+													<div class="col-9 col-md-4">
+														<div class="custom-file">
+															<input type="file" 
+																id="inputGroupFile02">
+															
+														</div>
+													</div>
+
+												</div>
+
+												
+											
+												<div class="row mt-3">
+
+													<div class="col-12 col-md-2">
+														<button id="btnimportarusuarios" type="button"
+															class="btn btn-primary">Importar</button>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+
+
+									</div>
+									<!-- Grid Admin Usuarios -->
+
+
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- Row end -->
+
+					<!-- Row start -->
+
+					<!-- Row end -->
+
+
+
+
+				</div>
+				<!-- END: .main-content -->
+			</div>
+			<!-- END: .app-main -->
+
+		</div>
+		<!-- END: .app-container -->
+		<!-- BEGIN .main-footer -->
+		<footer class="main-footer fixed-btm">
+			Copyright BiblioIDEAS 2023.
+		</footer>
+		<!-- END: .main-footer -->
+	</div>
+	<!-- END: .app-wrap -->
+
+	<!-- jQuery first, then Tether, then other JS. -->
+	<script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/vendor/leadMenu/leadMenu.js"></script>
+	<script src="/vendor/onoffcanvas/onoffcanvas.js"></script>
+	<script src="/js/moment.js"></script>
+	<script src="/js/jquery.twbsPagination.min.js"></script>
+	<script src="/js/alasql.js"></script>
+	<script src="/js/xlsx.core.min.js"></script>
+	<script src="/js/xlsx.full.min.js"></script>
+	
+	
+	<!-- Common JS -->
+	<script src="/js/common.js"></script>
+	
+</body>
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
+
+</html>

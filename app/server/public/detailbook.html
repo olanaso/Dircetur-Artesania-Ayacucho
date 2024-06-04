@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Lead Admin Panel" />
+	<meta name="keywords"
+		content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+	<meta name="author" content="Bootstrap Gallery" />
+	<link rel="shortcut icon" href="/img/fav.png" />
+	<title>Detalle de libro - BiblioIDEAS</title>
+
+	<!-- Common CSS -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="/css/main.css" />
+	
+  <script type="module" crossorigin src="/assets/detailbook-df17c347.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/init-35cba5cd.js">
+  <link rel="modulepreload" crossorigin href="/assets/viewpartials-7a86f681.js">
+  <link rel="modulepreload" crossorigin href="/assets/path-6610c907.js">
+  <link rel="modulepreload" crossorigin href="/assets/toast-8abe4fe9.js">
+</head>
+
+<body>
+	     <!-- Loading starts -->
+		 <div class="loading-wrapper">
+			<div class="loading">
+				<div class="img"></div>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div> 
+
+	<!-- BEGIN .app-wrap -->
+	<div class="app-wrap">
+		<!-- Headerg -->
+		<header class="app-header" id="app-header">
+		</header>
+
+		<!-- END: .app-heading -->
+		<!-- BEGIN .app-container -->
+		<div class="app-container">
+			<!-- Menu -->
+			<aside class="app-side" id="app-side"></aside>
+			<!-- END: .app-side -->
+
+			<!-- BEGIN .app-main -->
+			<div class="app-main">
+				<!-- BEGIN .main-heading -->
+				<header class="main-heading">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+								<div class="page-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56"
+										fill="none">
+										<path
+											d="M36.6104 28.2719V36.2927M39.9505 28.2719V36.2927M48.0787 20.3875C48.0612 22.4817 48.1114 24.5794 48.0519 26.6724C47.864 27.7317 46.7102 27.734 45.8679 27.6897H13.3762C12.2095 27.7095 12.0054 26.4612 12.1022 25.5582C12.1185 23.7499 12.0684 21.9369 12.1279 20.1297C12.3157 19.0704 13.4695 19.068 14.3119 19.1124H46.8035C47.1414 19.1133 47.465 19.248 47.7038 19.4869C47.9425 19.7259 48.0781 20.0497 48.0787 20.3875Z"
+											stroke="#E7282A" stroke-linecap="round" stroke-linejoin="round" />
+										<path
+											d="M46.1078 28.9917C46.0915 31.0858 46.1428 33.1835 46.0822 35.2765C45.8943 36.3346 44.7405 36.337 43.8982 36.2927H11.4065C10.2398 36.3137 10.0357 35.0653 10.1325 34.1612C10.1488 32.3528 10.0987 30.5398 10.1582 28.7338C10.346 27.6745 11.4998 27.6721 12.3422 27.7165H44.8338C45.1714 27.7174 45.4949 27.8519 45.7337 28.0907C45.9724 28.3294 46.1069 28.654 46.1078 28.9917Z"
+											stroke="#E7282A" stroke-linecap="round" stroke-linejoin="round" />
+										<path
+											d="M42.0813 37.695C42.0592 39.3925 42.1047 41.0935 42.0393 42.7887C41.855 43.8235 40.7315 43.8504 39.902 43.799L9.20818 43.7045C8.06601 43.7232 7.83735 42.5064 7.94001 41.6139C7.96101 40.187 7.91668 38.7555 7.97968 37.3322C8.16401 36.2974 9.28751 36.2705 10.117 36.3219L40.8108 36.4164C41.1486 36.4182 41.472 36.5538 41.7101 36.7934C41.9482 37.033 42.0817 37.3572 42.0813 37.695Z"
+											stroke="#E7282A" stroke-linecap="round" stroke-linejoin="round" />
+										<path
+											d="M25.1279 27.7166V36.2927M17.891 27.7166V36.2927M18.9235 19.1136V27.6897M22.9439 19.1136V27.6897M21.4342 47.2816H34.299M43.2345 45.1022C43.2182 46.6411 43.2672 48.1822 43.2089 49.7199C43.0385 50.7151 41.9652 50.7932 41.1555 50.7361H13.7774C12.6784 50.7629 12.3995 49.6009 12.5022 48.7259C12.5185 47.4321 12.4695 46.1359 12.5279 44.8444C12.6982 43.8492 13.7715 43.7711 14.58 43.8271H41.9617C42.2995 43.828 42.6232 43.9627 42.862 44.2016C43.1007 44.4406 43.2339 44.7644 43.2345 45.1022ZM40.8685 13.4657C40.851 15.0046 40.9012 16.5457 40.8417 18.0834C40.6702 19.0786 39.598 19.1567 38.7884 19.0996L11.4102 19.0961C10.31 19.1217 10.0324 17.9609 10.135 17.0847C10.1514 15.7909 10.1024 14.4947 10.1619 13.2032C10.3322 12.2081 11.4055 12.1299 12.214 12.1871L39.5945 12.1906C39.9323 12.1915 40.256 12.3262 40.4948 12.5651C40.7335 12.8041 40.8679 13.1279 40.8685 13.4657Z"
+											stroke="#E7282A" stroke-linecap="round" stroke-linejoin="round" />
+										<path
+											d="M19.0679 15.6427L31.9327 15.6439M43.5749 6.52169C43.5609 8.06053 43.6099 9.60286 43.5516 11.1394C43.3952 12.0809 42.3896 12.2279 41.6091 12.1579C33.0364 12.1579 24.4626 12.1777 15.8911 12.1684C14.9169 12.1019 14.6509 11.074 14.7454 10.2679C14.7606 8.94019 14.7104 7.60786 14.7687 6.28253C14.9262 5.34219 15.9331 5.19519 16.7136 5.26519C25.2862 5.26403 33.8589 5.24536 42.4304 5.25352C42.7443 5.28609 43.035 5.43367 43.2465 5.66782C43.4581 5.90198 43.5755 6.20614 43.5761 6.52169H43.5749Z"
+											stroke="#E7282A" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</div>
+								<div class="page-title">
+									<h5>Biblioteca</h5>
+									<h6 class="sub-heading">Detalle del libro</h6>
+								</div>
+							</div>
+							<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+								<div class="right-actions">
+									<span class="last-login"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<!-- END: .main-heading -->
+				<!-- BEGIN .main-content -->
+				<div class="main-content">
+					<!-- Row start -->
+					<div class="row gutters">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+							<!-- Datos Libro start -->
+							<div class="card">
+								<div class="card-body">
+
+									<div class="page-title">
+										<h5>Datos del libro</h5>
+										<h6 class="sub-heading sutitle-body">Detalle de los datos del libro</h6>
+									</div>
+
+									<div class="mt-2">
+										<div class="row">
+											<div class="col-md-7">
+												<h5 class="black bold" id="txt-titulo">STORY BOOK - THE JUNGLE </h5>
+												<p class="text-secondary mt--5" id="txt-autores"> Autor(es): Juan Jose
+													Mendoza Quispe</p>
+												<hr>
+												<div class="mt-4">
+													<div class="row mt-1">
+														<div class="col-6 col-md-6">
+															<p> Categoría </p>
+														</div>
+														<div class="col-6 col-md-6">
+															<p class="font-weight-bold">: <span>Ebook</span></p>
+														</div>
+													</div>
+													<div class="row mt-1">
+														<div class="col-6 col-md-6">
+															<p> Editorial </p>
+														</div>
+														<div class="col-6 col-md-6">
+															<p class="font-weight-bold">: <span
+																	id="txt-editorial">-</span></p>
+														</div>
+													</div>
+													<div class="row mt-1">
+														<div class="col-6 col-md-6">
+															<p> Número de páginas </p>
+														</div>
+														<div class="col-6 col-md-6">
+															<p class="font-weight-bold">: <span id="txt-nropaginas">-</span>
+															</p>
+														</div>
+													</div>
+													<div class="row mt-1">
+														<div class="col-6 col-md-6">
+															<p> Edición </p>
+														</div>
+														<div class="col-6 col-md-6">
+															<p class="font-weight-bold">: <span
+																	id="txt-anioedicion">-</span></p>
+														</div>
+													</div>
+													<div class="row mt-1">
+														<div class="col-6 col-md-6">
+															<p> Tomo </p>
+														</div>
+														<div class="col-6 col-md-6">
+															<p class="font-weight-bold">: <span id="txt-tomo">-</span></p>
+														</div>
+													</div>
+													<div class="row mt-1">
+														<div class="col-6 col-md-6">
+															<p> Ciudad </p>
+														</div>
+														<div class="col-6 col-md-6">
+															<p class="font-weight-bold">: <span id="txt-ciudad">-</span>
+														</div>
+													</div>
+
+													<div class="row mt-1">
+														<div class="col-6 col-md-6">
+															<p> ISBN </p>
+														</div>
+														<div class="col-6 col-md-6">
+															<p class="font-weight-bold">: <span id="txt-isbn">-</span>
+														</div>
+													</div>
+
+													<div class="row mt-1">
+														<div class="col-6 col-md-6">
+															<p> Temas relacionados  </p>
+														</div>
+														<div class="col-6 col-md-6">
+															<p class="font-weight-bold">: <span id="txt-temas">-</span>
+														</div>
+													</div>
+													<hr>
+													<div class="row mt-1">
+														<div class="col-6 col-md-6">
+															<p> Agregar mis libros </p>
+														</div>
+														<div class="col-6 col-md-6">
+															<button id="btn-save-mislibros" class="btncopytext">
+															<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16" fill="none">
+																<path d="M8.5 1.5C8.5 1.10218 8.65804 0.720644 8.93934 0.43934C9.22064 0.158035 9.60218 0 10 0L14 0C14.5304 0 15.0391 0.210714 15.4142 0.585786C15.7893 0.960859 16 1.46957 16 2V14C16 14.5304 15.7893 15.0391 15.4142 15.4142C15.0391 15.7893 14.5304 16 14 16H2C1.46957 16 0.960859 15.7893 0.585786 15.4142C0.210714 15.0391 0 14.5304 0 14V2C0 1.46957 0.210714 0.960859 0.585786 0.585786C0.960859 0.210714 1.46957 0 2 0L8 0C7.686 0.418 7.5 0.937 7.5 1.5V9.293L4.854 6.646C4.80751 6.59951 4.75232 6.56264 4.69158 6.53748C4.63084 6.51232 4.56574 6.49937 4.5 6.49937C4.43426 6.49937 4.36916 6.51232 4.30842 6.53748C4.24768 6.56264 4.19249 6.59951 4.146 6.646C4.09951 6.69249 4.06264 6.74768 4.03748 6.80842C4.01232 6.86916 3.99937 6.93426 3.99937 7C3.99937 7.06574 4.01232 7.13084 4.03748 7.19158C4.06264 7.25232 4.09951 7.30751 4.146 7.354L7.646 10.854C7.69245 10.9006 7.74762 10.9375 7.80837 10.9627C7.86911 10.9879 7.93423 11.0009 8 11.0009C8.06577 11.0009 8.13089 10.9879 8.19163 10.9627C8.25238 10.9375 8.30755 10.9006 8.354 10.854L11.854 7.354C11.9479 7.26011 12.0006 7.13278 12.0006 7C12.0006 6.86722 11.9479 6.73989 11.854 6.646C11.7601 6.55211 11.6328 6.49937 11.5 6.49937C11.3672 6.49937 11.2399 6.55211 11.146 6.646L8.5 9.293V1.5Z" fill="red"/>
+																</svg>	
+															</button>
+															</div>
+													</div>
+
+													
+
+												</div>
+											</div>
+											<div class="col-md-5">
+												<div class="row">
+													<div class="col-8 col-md-3 ">
+														<div class="col-sm-2-4">
+															<div class="card card-book" style="width: 14rem;">
+																<img id="card-url_portada" class="card-img-top lecturabook"
+																	height="195"
+																	src="https://placehold.co/199x220"
+																	alt="Card image cap">
+																<div class="card-body">
+																	<h5 class="card-title long-text lecturabook" id="card-titulo">-</h5>
+																	<p class="card-text" id="card-autores">-</p>
+																	<div
+																		class="d-flex flex-column align-items-center mt--5">
+																		<p class="card-text black"><b> Valorar este
+																				libro</b> </p>
+																		<div class="star-rating">
+																			<input class="rating" type="radio" id="star5" name="rating"
+																				value="5" />
+																			<label for="star5"
+																				title="5 estrellas">&#9733;</label>
+																			<input class="rating" type="radio" id="star4" name="rating"
+																				value="4" />
+																			<label for="star4"
+																				title="4 estrellas">&#9733;</label>
+																			<input class="rating" type="radio" id="star3" name="rating"
+																				value="3" />
+																			<label for="star3"
+																				title="3 estrellas">&#9733;</label>
+																			<input class="rating" type="radio" id="star2" name="rating"
+																				value="2" />
+																			<label for="star2"
+																				title="2 estrellas">&#9733;</label>
+																			<input class="rating" type="radio" id="star1" name="rating"
+																				value="1" />
+																			<label for="star1"
+																				title="1 estrella">&#9733;</label>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+
+														</div>
+														<button id="btn-leerlibro" type="button" class="btn btn-block custom-btn lecturabook">
+															<span class="icon-open-book"></span>
+															<span>Leer</span>
+														</button>
+
+
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="mt-3 lineh20">
+										<ul class="nav nav-tabs" id="myTab2" role="tablist">
+											<li class="nav-item">
+												<a class="nav-link active" id="home-tab1" data-toggle="tab"
+													href="#home1" role="tab" aria-controls="home1"
+													aria-selected="true">Descripción</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" id="profile-tab1" data-toggle="tab" href="#profile1"
+													role="tab" aria-controls="profile1" aria-selected="false">Citas
+													Bibliograficas</a>
+											</li>
+										</ul>
+										<div class="tab-content" id="myTabContent1">
+											<div class="tab-pane fade show active" id="home1" role="tabpanel"
+												aria-labelledby="home-tab1"> 
+											<p id="txt-resenia"></p>
+											</div>
+											<div class="tab-pane fade" id="profile1" role="tabpanel"
+												aria-labelledby="profile-tab1">
+												<div class="row mt-2">
+													<div class="col-5 col-md-2">
+														<p class="font-weight-bold"> Apa 7° ed. </p>
+													</div>
+													<div class="col-5 col-md-6">
+														<p id="txt-ref-apa7"> - </p>
+													</div>
+													<div class="col-1 col-md-1">
+														<button id="btn-ref-apa7" class="btncopytext">
+															<svg xmlns="http://www.w3.org/2000/svg" width="26"
+																height="28" viewBox="0 0 26 28" fill="none">
+																<rect x="5" y="7" width="21" height="21" rx="6"
+																	fill="#E40707" />
+																<rect x="0.5" y="0.5" width="20" height="20" rx="5.5"
+																	fill="#E40707" stroke="white" />
+															</svg>
+														</button>
+													</div>
+												</div>
+												<div class="row mt-2">
+													<div class="col-5 col-md-2">
+														<p class="font-weight-bold"> IEE </p>
+													</div>
+													<div class="col-5 col-md-6">
+														<p id="txt-ref-ieee"> - </p>
+													</div>
+													<div class="col-1 col-md-1">
+														<button id="btn-ref-ieee" class="btncopytext">
+															<svg xmlns="http://www.w3.org/2000/svg" width="26"
+																height="28" viewBox="0 0 26 28" fill="none">
+																<rect x="5" y="7" width="21" height="21" rx="6"
+																	fill="#E40707" />
+																<rect x="0.5" y="0.5" width="20" height="20" rx="5.5"
+																	fill="#E40707" stroke="white" />
+															</svg>
+														</button>	
+													</div>
+												</div>
+												<div class="row  mt-2">
+													<div class="col-5 col-md-2">
+														<p class="font-weight-bold"> Vancouver </p>
+													</div>
+													<div class="col-5 col-md-6">
+														<p id="txt-ref-vancuver"> - </p>
+													</div>
+													<div class="col-1 col-md-1"> 
+														<button id="btn-ref-vancuver" class="btncopytext">
+															<svg xmlns="http://www.w3.org/2000/svg" width="26"
+																height="28" viewBox="0 0 26 28" fill="none">
+																<rect x="5" y="7" width="21" height="21" rx="6"
+																	fill="#E40707" />
+																<rect x="0.5" y="0.5" width="20" height="20" rx="5.5"
+																	fill="#E40707" stroke="white" />
+															</svg>
+														</button>
+													</div>
+												</div>
+												<div class="row  mt-2">
+													<div class="col-5 col-md-2">
+														<p class="font-weight-bold"> UNE-ISO 690 </p>
+													</div>
+													<div class="col-5 col-md-6">
+														<p id="txt-ref-iso"> - </p>
+													</div>
+													<div class="col-1 col-md-1"> 
+														<button id="btn-ref-iso" class="btncopytext">
+															<svg xmlns="http://www.w3.org/2000/svg" width="26"
+																height="28" viewBox="0 0 26 28" fill="none">
+																<rect x="5" y="7" width="21" height="21" rx="6"
+																	fill="#E40707" />
+																<rect x="0.5" y="0.5" width="20" height="20" rx="5.5"
+																	fill="#E40707" stroke="white" />
+															</svg>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Datos Libro end -->
+						</div>
+					</div>
+					<!-- Row end -->
+				</div>
+				<!-- END: .main-content -->
+			</div>
+			<!-- END: .app-main -->
+
+		</div>
+		<!-- END: .app-container -->
+		<!-- BEGIN .main-footer -->
+		<footer class="main-footer fixed-btm">
+			Copyright BiblioIDEAS 2023.
+		</footer>
+		<!-- END: .main-footer -->
+	</div>
+	<!-- END: .app-wrap -->
+
+	<!-- jQuery first, then Tether, then other JS. -->
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="vendor/leadMenu/leadMenu.js"></script>
+	<script src="vendor/onoffcanvas/onoffcanvas.js"></script>
+	<script src="js/moment.js"></script>
+
+	<!-- Common JS -->
+
+	
+</body>
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
+
+</html>

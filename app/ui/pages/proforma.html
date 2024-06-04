@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="es">
+
+
+<head>
+  <meta charset="character_set" />
+  <title>Elaboracion de la Proforma</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- The jQuery library is a prerequisite for all jqSuite products -->
+  <script type="text/ecmascript" src="https://www.guriddo.net/demo/js/jquery.min.js"></script>
+  <!-- We support more than 40 localizations -->
+  <script type="text/ecmascript" src="https://www.guriddo.net/demo/js/trirand/i18n/grid.locale-es.js"></script>
+  <!-- This is the Javascript file of jqGrid -->
+  <script type="text/ecmascript" src="https://www.guriddo.net/demo/js/trirand/jquery.jqGrid.min.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" rel="stylesheet" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.css" rel="stylesheet" />
+  <!-- This is the localization file of the grid controlling messages, labels, etc.-->
+
+  <script src="
+https://cdn.jsdelivr.net/npm/@geoman-io/leaflet-geoman-free@2.14.2/dist/leaflet-geoman.min.js
+"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@geoman-io/leaflet-geoman-free@2.14.2/dist/leaflet-geoman.min.css">
+
+  <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+
+  <!-- The link to the CSS that the grid needs -->
+  <link rel="stylesheet" href="https://www.guriddo.net/demo/css/trirand/ui.jqgrid-bootstrap.css" />
+  <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css" />
+  <style>
+    #loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .spinner {
+      border: 10px solid #f3f3f3;
+      border-top: 10px solid #f02121;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+ 
+  <div id="map">
+    <div id="loading">
+      <div class="spinner"></div>
+       Cargando...</div>
+   
+  </div>
+ <div class="wrappermain">
+    <div id="container-proformas"> </div>
+    <div id="container-controles"></div>
+    <div id="container-capasderecha"></div>
+    <div id="container-toolsdraw"></div>
+    <div id="container-toolsdraw-2"></div>
+    <div id="container-modal"></div>
+    
+  
+  </div>
+  <script src="../public/recursos/libddp/leaflet/leaflet-src.js"></script>
+  <script src="../public/recursos/ImageDistorcionable/ImageDistorcionable.js"></script>
+  <script type="module" src="/src/proforma/proforma.js"></script>
+</body>
+
+</html>
