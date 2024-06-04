@@ -1,10 +1,11 @@
 export class FileUploader {
-    constructor(uploadUrl, progressBar, statusElement, callback, inputName) {
+    constructor(uploadUrl, progressBar, statusElement, callback, inputName, folder) {
         this.uploadUrl = uploadUrl;
         this.progressBar = progressBar;
         this.statusElement = statusElement;
         this.callback = callback;
         this.inputName = inputName;
+        this.folder = folder; //guarda valor de folder
     }
 
     attachToFileInput (fileInput) {
@@ -39,7 +40,8 @@ export class FileUploader {
             xhr.addEventListener('error', () => reject('Upload failed!'));
             xhr.addEventListener('abort', () => reject('Upload canceled!'));
 
-            xhr.open('POST', this.uploadUrl + '?inputName=' + sinputName, true);
+            const uploadUrlWithParams = `${this.uploadUrl}?inputName=${sinputName}&folder=${this.folder}`; // <-- Incluir folder en la URL
+            xhr.open('POST', uploadUrlWithParams, true);
             xhr.send(formData);
         });
     }
