@@ -1,24 +1,29 @@
 import { baseUrl, getDataFromLocalStorage } from '../utils/config';
 //const baseUrl = 'http://localhost:3001';
 
-export async function listarClientes() {
+
+
+export async function listarClientes(page, limit) {
     try {
-        const response = await fetch(baseUrl + "/cliente");
+        const response = await fetch(`${baseUrl}/cliente?page=${page}&limit=${limit}`);
         const result = await response.json();
         return result;
     } catch (error) {
         console.error("Error al encontrar las clientes:", error);
+        throw error;
     }
 }
 
 export async function filtrarClientes(filtro) {
     try {
         const params = new URLSearchParams(filtro);
+        console.log(`aaaaaaaa: ${params} y ${baseUrl} /clientes?${params}`)
         const response = await fetch(baseUrl + `/clientes?${params}`);
         const result = await response.json();
         return result;
     } catch (error) {
         console.error("Error al buscar las clientes:", error);
+        throw error; 
     }
 }
 
