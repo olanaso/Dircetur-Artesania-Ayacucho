@@ -1,7 +1,7 @@
-const baseUrl = 'http://localhost:3001';
+import { baseUrl} from '../utils/config';
 export async function obtenerPedido(id) {
     try {
-        const response = await fetch(baseUrl+ `/api/pedido/${id}`, { method: 'GET' });
+        const response = await fetch(baseUrl+ `/pedido/${id}`, { method: 'GET' });
         const result = await response.json();
         
         return result;
@@ -18,7 +18,7 @@ export async function actualizarPedido(id, data) {
             body: JSON.stringify(data)
         };
 
-        const response = await fetch(`${baseUrl}/api/pedido/${id}`, requestOptions);
+        const response = await fetch(`${baseUrl}/pedido/${id}`, requestOptions);
 
         if (!response.ok) {
             throw new Error(`Error al actualizar la categoría: ${response.statusText}`);

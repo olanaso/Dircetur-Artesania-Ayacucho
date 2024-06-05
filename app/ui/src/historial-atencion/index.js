@@ -158,11 +158,11 @@ function cargarTablaHistoriaReclamos(pedidos) {
 
 
 function notificarEmail(id) {
-    console.log("notificar email");
+    console.log("notificar email", id);
 }
 
 function notificarWsp(id) {
-    console.log("notificar wsp");
+    console.log("notificar wsp", id);
 }
 
 function getQueryParameter(name) {
@@ -230,12 +230,74 @@ async function actualizarHistorialPedido(numPedido) {
             await cargarCampos(numPedido);
             form.reset();
             console.log('Pedido actualizado:', result);
+
+            if (form.notificarCliente.checked) {
+                await enviarCorreoCliente(pedidoActual.cliente.correo, nuevaAtencion);
+                enviarMensajeCliente(pedidoActual.cliente.telefono, nuevaAtencion);
+            }
+
         } catch (error) {
             console.error('Error al actualizar el pedido:', error);
         }
     });
 }
 
+async function enviarCorreoCliente(correoCliente, nuevaAtencion) {
+    try {
+        const formData = new FormData();
+        formData.append('from', correoCliente);
+        formData.append('to', 'clever.max159.com');
+        formData.append('subject', `Nueva atención registrada - Pedido #${nuevaAtencion.id}`);
+        formData.append('email_html', `
+            <p>Se ha registrado una nueva atención en tu pedido.</p>
+            <p><strong>Estado:</strong> ${nuevaAtencion.estado}</p>
+            <p><strong>Comentario:</strong> ${nuevaAtencion.comentario}</p>
+            <p>Gracias por tu preferencia.</p>
+        `);
+
+        const response = await fetch('http://localhost:3001/api/web/sendemail', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            console.log('Correo enviado correctamente:', result);
+        } else {
+            console.error('Error al enviar el correo:', result.error);
+        }
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+    }
+}
+function enviarMensajeCliente(telefonoCliente,nuevaAtencion) {
+    var numeroCLiente = telefonoCliente; 
+    var estado = nuevaAtencion.estado || "";
+    var enlaceSeguimiento = nuevaAtencion.enlaceSeguimiento || "";
+    var comentario = nuevaAtencion.comentario || "";
+    var medioPrueba = nuevaAtencion.medioPrueba || "";
+    var fecha_atencion = nuevaAtencion.fecha_atencion || "";
+    
+    var url = "https://wa.me/" + numeroCLiente + "?text=";
+
+    if (estado !== "") {
+        url += "Estado: " + estado + "%0A";
+    }
+    if (enlaceSeguimiento !== "") {
+        url += "Enlace de seguimiento: " + enlaceSeguimiento + "%0A";
+    }
+    if (comentario !== "") {
+        url += "Comentario: " + comentario + "%0A";
+    }
+    if (medioPrueba !== "") {
+        url += "Medio de prueba: " + medioPrueba + "%0A";
+    }
+    if (fecha_atencion !== "") {
+        url += "Fecha de atención: " + fecha_atencion + "%0A";
+    }
+
+    window.open(url, '_blank').focus();
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {

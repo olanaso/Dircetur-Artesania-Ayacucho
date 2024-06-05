@@ -1,8 +1,8 @@
-const baseUrl = 'http://localhost:3001';
+import { baseUrl} from '../utils/config';
 
 export async function listarCategorias() {
     try {
-        const response = await fetch(baseUrl + "/api/categoria");
+        const response = await fetch(baseUrl + "/categoria");
         const result = await response.json();
         return result;
     } catch (error) {
@@ -13,7 +13,7 @@ export async function listarCategorias() {
 export async function filtrarCategorias(filtro) {
     try {
         const params = new URLSearchParams(filtro);
-        const response = await fetch(baseUrl + `/api/categorias?${params}`);
+        const response = await fetch(baseUrl + `/categorias?${params}`);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -29,7 +29,7 @@ export async function borrarCategoria(id) {
             body: JSON.stringify({ id })
         };
 
-        const response = await fetch(baseUrl+'/api/categoria', requestOptions);
+        const response = await fetch(baseUrl+'/categoria', requestOptions);
         const result = await response.json();
 
         return result;
@@ -46,7 +46,7 @@ export async function actualizarCategoria(id, data) {
             body: JSON.stringify(data)
         };
 
-        const response = await fetch(`${baseUrl}/api/categoria/${id}`, requestOptions);
+        const response = await fetch(`${baseUrl}/categoria/${id}`, requestOptions);
 
         if (!response.ok) {
             throw new Error(`Error al actualizar la categoría: ${response.statusText}`);
@@ -69,7 +69,7 @@ export async function guardarCategoria(data) {
             body: JSON.stringify(data)
         };
 
-        const response = await fetch(baseUrl + '/api/categoria', requestOptions);
+        const response = await fetch(baseUrl + '/categoria', requestOptions);
         const result = await response.json();
 
         return result;

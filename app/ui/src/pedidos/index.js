@@ -1,6 +1,6 @@
 import { listarPedidos, filtrarPedidos } from './api';
 
-const DEFAULT_PAGE_LIMIT = 3;
+const DEFAULT_PAGE_LIMIT = 10;
 let currentPage = 1;
 let totalPages = 0;
 let currentFilter = {}; // Objeto para almacenar el filtro actual
