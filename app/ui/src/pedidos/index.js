@@ -1,12 +1,26 @@
 import { listarPedidos, filtrarPedidos } from './api';
 
-const DEFAULT_PAGE_LIMIT = 10;
+const DEFAULT_PAGE_LIMIT = 3;
 let currentPage = 1;
-let totalPages = 0; // Declarar totalPages para que esté accesible globalmente
+let totalPages = 0;
+let currentFilter = {}; // Objeto para almacenar el filtro actual
 
 async function cargarPedidos() {
     try {
-        const pedidos = await listarPedidos(currentPage, DEFAULT_PAGE_LIMIT);
+        let pedidos;
+
+        // Determinar si se está filtrando o no
+        if (Object.keys(currentFilter).length === 0) {
+            pedidos = await listarPedidos(currentPage, DEFAULT_PAGE_LIMIT);
+        } else {
+            const filtro = {
+                ...currentFilter,
+                page: currentPage,
+                limit: DEFAULT_PAGE_LIMIT
+            };
+            pedidos = await filtrarPedidos(filtro);
+        }
+
         cargarTabla(pedidos.pedidos);
         totalPages = Math.ceil(pedidos.totalItems / DEFAULT_PAGE_LIMIT);
         actualizarControlesPaginacion(totalPages);
@@ -74,13 +88,15 @@ async function filtrarPedidosAction() {
     btnFiltrar.addEventListener('click', async (event) => {
         event.preventDefault();
 
+        // Obtener valores de los campos de filtro
         const numPedido = document.getElementById('num-pedido').value;
         const artesano = document.getElementById('nombre-artesano').value;
         const cliente = document.getElementById('nombre-cliente').value;
         const fecha = document.getElementById('fecha-pedido').value;
         const estado = document.getElementById('estado').value;
 
-        const filtro = {
+        // Construir el objeto de filtro
+        currentFilter = {
             num_pedido: numPedido,
             nombre_artesano: artesano,
             nombre_cliente: cliente,
@@ -88,10 +104,20 @@ async function filtrarPedidosAction() {
             estado: estado
         };
 
+        // Reiniciar currentPage al filtrar
+        currentPage = 1;
+
         try {
+            // Filtrar pedidos con los parámetros actuales
+            const filtro = {
+                ...currentFilter,
+                page: currentPage,
+                limit: DEFAULT_PAGE_LIMIT
+            };
             const pedidosFiltrados = await filtrarPedidos(filtro);
+
+            // Cargar los resultados filtrados en la tabla y actualizar la paginación
             cargarTabla(pedidosFiltrados.pedidos);
-            currentPage = 1; // Reiniciar a la primera página
             totalPages = Math.ceil(pedidosFiltrados.totalItems / DEFAULT_PAGE_LIMIT);
             actualizarControlesPaginacion(totalPages);
         } catch (error) {

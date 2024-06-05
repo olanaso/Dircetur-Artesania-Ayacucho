@@ -175,14 +175,16 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInputId: 'myfile',
     progressBarId: 'progressBar',
     statusElementId: 'status',
-    uploadUrl: 'http://localhost:3001/api/fileupload2',
+    uploadUrl: 'http://localhost:3001/api/fileupload3',
+    folder: '/categorias/img/',
     callback: handleUploadResponse
   });
   initializeFileUploader({
     fileInputId: 'myfile-editar',
     progressBarId: 'progressBar-editar',
     statusElementId: 'status-editar',
-    uploadUrl: 'http://localhost:3001/api/fileupload2',
+    uploadUrl: 'http://localhost:3001/api/fileupload3',
+    folder: '/categorias/img/',
     callback: handleEditUploadResponse
   });
 
@@ -195,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
+function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
 
   const fileInput = document.getElementById(fileInputId);
   const inputName = fileInput.name;
@@ -203,7 +205,7 @@ function initializeFileUploader({ fileInputId, progressBarId, statusElementId, u
   const statusElement = document.getElementById(statusElementId);
 
   if (fileInput && progressBar && statusElement) {
-    const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName);
+    const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
     uploader.attachToFileInput(fileInput);
   } else {
     console.error('Initialization failed: One or more elements not found.');
