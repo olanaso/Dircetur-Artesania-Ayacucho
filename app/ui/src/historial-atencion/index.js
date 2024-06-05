@@ -1,4 +1,4 @@
-import { obtenerPedido, actualizarPedido } from '../historial-atencion/api';
+import { obtenerPedido, actualizarPedido, enviarCorreo } from '../historial-atencion/api';
 import { FileUploader } from '../utils/upload.js';
 
 let ruta_archivo = "";
@@ -26,6 +26,7 @@ const ciudadRecepcion = document.getElementById('ciudad-recepcion');
 const direccionRecepcion = document.getElementById('direccion-recepcion');
 
 const montoTotal = document.getElementById('total-pedido');
+
 
 async function cargarCampos(idPedido) {
     const pedido = await obtenerPedido(idPedido);
@@ -121,10 +122,10 @@ function cargarTablaHistoriaPedido(pedidos) {
 			</td>
         `;
         const btnNotificarEmail = row.querySelector('.btn-notificar-email');
-        btnNotificarEmail.addEventListener('click', () => notificarEmail(pedido.id));
+        btnNotificarEmail.addEventListener('click', () => notificarEmail(pedido));
 
         const btnNotificarWsp = row.querySelector('.btn-notificar-wsp');
-        btnNotificarWsp.addEventListener('click', () => notificarWsp(pedido.id));
+        btnNotificarWsp.addEventListener('click', () => notificarWsp(pedido));
         tablaHistoriaPedido.appendChild(row);
     });
 
@@ -157,12 +158,12 @@ function cargarTablaHistoriaReclamos(pedidos) {
 }
 
 
-function notificarEmail(id) {
-    console.log("notificar email", id);
+function notificarEmail(informacion) {
+    console.log("notificar email", informacion);
 }
 
-function notificarWsp(id) {
-    console.log("notificar wsp", id);
+function notificarWsp(informacion) {
+    console.log("notificar wsp", informacion);
 }
 
 function getQueryParameter(name) {
@@ -247,29 +248,34 @@ async function enviarCorreoCliente(correoCliente, nuevaAtencion) {
         const formData = new FormData();
         formData.append('from', correoCliente);
         formData.append('to', 'clever.max159.com');
-        formData.append('subject', `Nueva atención registrada - Pedido #${nuevaAtencion.id}`);
-        formData.append('email_html', `
+        formData.append('subject', `Pedido #${nuevaAtencion.id}`);
+
+        let emailHtml = `
             <p>Se ha registrado una nueva atención en tu pedido.</p>
             <p><strong>Estado:</strong> ${nuevaAtencion.estado}</p>
             <p><strong>Comentario:</strong> ${nuevaAtencion.comentario}</p>
+            <p><strong>Fecha de atención:</strong> ${formatearFecha(nuevaAtencion.fecha_atencion)}</p>
             <p>Gracias por tu preferencia.</p>
-        `);
+        `;
 
-        const response = await fetch('http://localhost:3001/api/web/sendemail', {
-            method: 'POST',
-            body: formData
-        });
-
-        const result = await response.json();
-        if (response.ok) {
-            console.log('Correo enviado correctamente:', result);
-        } else {
-            console.error('Error al enviar el correo:', result.error);
+        if (nuevaAtencion.enlaceSeguimiento) {
+            emailHtml += `<p><strong>Enlace de seguimiento:</strong> ${nuevaAtencion.enlaceSeguimiento}</p>`;
         }
+
+        if (nuevaAtencion.medioPrueba) {
+            emailHtml += `<p><strong>Medio de prueba:</strong> ${nuevaAtencion.medioPrueba}</p>`;
+        }
+
+        formData.append('email_html', emailHtml);
+
+        const result = await enviarCorreo(formData);
+        return result;
     } catch (error) {
         console.error('Error al enviar el correo:', error);
+        throw error;
     }
 }
+
 function enviarMensajeCliente(telefonoCliente,nuevaAtencion) {
     var numeroCLiente = telefonoCliente; 
     var estado = nuevaAtencion.estado || "";

@@ -31,3 +31,23 @@ export async function actualizarPedido(id, data) {
         throw error; // Relanzar el error para manejo posterior
     }
 }
+
+export async function enviarCorreo(formData) {
+    try {
+        const response = await fetch(`${baseUrl}/web/sendemail`, {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            console.log('Correo enviado correctamente:', result);
+        } else {
+            console.error('Error al enviar el correo:', result.error);
+        }
+        return result;
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+        throw error;
+    }
+}

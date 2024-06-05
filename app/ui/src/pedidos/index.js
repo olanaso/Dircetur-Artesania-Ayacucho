@@ -12,6 +12,7 @@ async function cargarPedidos() {
         // Determinar si se está filtrando o no
         if (Object.keys(currentFilter).length === 0) {
             pedidos = await listarPedidos(currentPage, DEFAULT_PAGE_LIMIT);
+            console.log(pedidos)
         } else {
             const filtro = {
                 ...currentFilter,
