@@ -273,50 +273,22 @@
 													</div>
 	
 													<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-														<div class="mb-4">
-															<div class="d-flex justify-content-center">
-																<img id="imagenPrincipal" src="" alt="Imagen principal" class="img-thumbnail" style="width: 200px; height: 150px;">
+														<a class="block-300 center-text">
+															<div class="user-profile">
+																<div class="form-group">
+																	<img id="principalImagePreview" src="" alt="Vista previa de la imagen principal" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
+																</div>
+																<div class="form-group">
+																	<input type="file" id="myfile" name="myfile">
+																	<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+																	<div id="status"></div>
+																</div>
+																<!-- <img src="img/avatar1.svg" class="profile-thumb" alt="User Thumb">
+																<input type="file" class="form-control" id="imgPerfilC" name="foto_perfil" required> -->
 															</div>
-															<div class="d-flex mt-1 justify-content-center"> 
-																<button type="button" class="btn btn-info mr-1 btn-editarF" data-toggle="modal" data-target="#imagenPrincipalModal"><i class="icon icon-edit2"></i></button>
-																<button type="button" class="btn btn-primary btn-eliminarF" id="limpiarPrincipalBtn"><i class="icon icon-bin"></i></button>
-															</div>
-														</div>
+														</a>
 													</div>
 												</div>
-
-												<!-- modal Foto cliente -->
-												<div class="modal fade" id="imagenPrincipalModal" tabindex="-1" aria-labelledby="imagenPrincipalModalLabel" aria-hidden="true">
-													<div class="modal-dialog modal-lg">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h5 class="modal-title" id="imagenPrincipalModalLabel">Editar Imagen Principal</h5>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<div class="modal-body">
-																<form id="imagenPrincipalForm">
-																	<div class="form-group">
-																		<input type="file" id="myfile" name="myfile">
-																		<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
-																		<div id="status"></div>
-																	</div>
-																	<div class="form-group">
-																		<img id="ClienteImagePreview" src="" alt="Vista previa de la imagen" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
-																	</div>
-																</form>
-															</div>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-secondary"
-																	data-dismiss="modal">Cancelar</button>
-																<button type="submit" id="btn-actualizarFoto"
-																	class="btn btn-primary">Actualizar</button>
-															</div>
-														</div>
-													</div>
-												</div>
-												<!-- fin modal foto cliente -->
 												<div class="modal-footer">
 													<button type="submit" id="actualizar-informacion" class="btn btn-primary">Guardar</button>
 												</div>

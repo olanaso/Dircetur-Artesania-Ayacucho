@@ -14,7 +14,7 @@
 		content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
 	<meta name="author" content="Bootstrap Gallery" />
 	<link rel="shortcut icon" href="/img/fav.png" />
-	<title>Administración de capacitaciones </title>
+	<title>Administración </title>
 
 	<!-- Common CSS -->
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -130,7 +130,8 @@
 														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Ingresa el DNI:</h5>
 													</div>
 													<div class="col-9 col-md-6">
-														<input type="number" class="form-control" placeholder="Ingrese el DNI" id="dni" maxlength="8" minlength="8">
+														<input type="number" class="form-control" placeholder="Ingrese el DNI" id="dni" maxlength="8" minlength="8"  required>
+														
 													</div>
 													<div class="col-10 col-md-3">
 														<button id="buscar-dni" type="submit" class="btn btn-primary">Buscar artesano</button>
@@ -139,7 +140,7 @@
 														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nombre del artesano:</h5>
 													</div>
 													<div class="col-9 col-md-6">
-														<input type="text" class="form-control" placeholder="Nombre del artesano" id="dni" readonly>
+														<input type="text" class="form-control" placeholder="Nombre del artesano" id="nombrecompleto" readonly required >
 													</div>
 												</div> 
 											<hr>
@@ -297,10 +298,10 @@
 												<div class="col-9 col-md-10"> 
 													<div class="form-row">
 														<div class="col">
-															<input type="text"  id="idalto" class="form-control" placeholder="Alto">
+															<input type="number"  id="idalto" class="form-control" placeholder="Alto">
 														</div>
 														<div class="col">
-															<input type="text" id="idancho" class="form-control" placeholder="Ancho">
+															<input type="number" id="idancho" class="form-control" placeholder="Ancho">
 														</div>
 													</div>
 												</div> 
@@ -336,7 +337,7 @@
 												</div>
 												<div class="col-9 col-md-5"> 
 													<div class="input-group">
-														<input type="text" id="precioproducto" class="form-control" placeholder="Ingrese el precio del producto"  > 
+														<input type="number" id="precioproducto" class="form-control" placeholder="Ingrese el precio del producto"  > 
 													</div>
 													 
 												</div> 
@@ -353,7 +354,7 @@
 													<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Peso en kilogramos:</h5>
 												</div>
 												<div class="col-9 col-md-10"> 
-													<input type="text" id="pesokilogramos" class="form-control" placeholder="Ingrese el peso del producto"  >
+													<input type="number" id="pesokilogramos" class="form-control" placeholder="Ingrese el peso del producto"  >
 												</div> 
 											</div>
 											<hr>
@@ -395,7 +396,7 @@
 													<div class="col-9 col-md-10"> 
 														<div class="form-row">
 															<div class="col">
-																<input type="text"   class="form-control" id="cantidad" placeholder="Ingrese la cantidad">
+																<input type="number"   class="form-control" id="cantidad" placeholder="Ingrese la cantidad">
 															</div> 
 														</div>
 													</div> 
@@ -405,7 +406,7 @@
 													<div class="col-9 col-md-10"> 
 														<div class="form-row">
 															<div class="col">
-																<input type="text" class="form-control" id="cantidadMinima" placeholder="Ingrese la cantidad mínima">
+																<input type="number" class="form-control" id="cantidadMinima" placeholder="Ingrese la cantidad mínima">
 															</div> 
 														</div>
 													</div> 
@@ -462,9 +463,10 @@
 
 											<form id="form" action="javascript:void(0)">
 												<h5>Imagen principal</h5>   
+												
 												<div class="mb-4">
 													<div class="d-flex">
-														<img id="imagenPrincipal" src="placeholder.png" alt="Imagen principal" class="img-thumbnail" style="width: 200px; height: 150px;">
+														<img id="imagenPrincipal" src="" alt="Imagen principal" class="img-thumbnail" style="width: 200px; height: 150px;">
 													</div>
 													<div class="d-flex mt-2"> 
 
@@ -507,19 +509,22 @@
 																<span aria-hidden="true">&times;</span>
 															</button>
 														</div>
-														<div class="modal-body">
-															<form id="imagenPrincipalForm">
+														<div class="modal-body"> 
+															<form id="imagenPrincipalForm"> 
 																<div class="form-group">
 																	<label for="uploadPrincipalImage">Subir imagen:</label>
-																	<div class="d-flex align-items-center">
-																		<input type="file" class="form-control-file mr-2" id="uploadPrincipalImage">
+																	<div class="d-flex align-items-center"> 
+																		<input type="file" class="form-control-file mr-2" name="uploadPrincipalImage" id="uploadPrincipalImage">
 																		<input type="text" class="form-control mr-2" id="principalImageName">
-																		<button type="button" class="btn btn-warning" id="visualizarPrincipalBtn">Visualizar</button>
-																	</div>
+																			<!-- <button type="button" class="btn btn-warning" id="visualizarPrincipalBtn">Visualizar</button> -->
+																		   
+																	</div> 
+																	<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+																	<div id="status" style="display: none;"></div> 
 																</div>
 																<div class="form-group">
 																	<img id="principalImagePreview" src="" alt="Vista previa de la imagen principal" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
-																</div>
+																</div> 
 															</form>
 														</div>
 														<div class="modal-footer">
@@ -546,10 +551,13 @@
 																	<div class="form-group">
 																		<label for="uploadImage">Subir imagen:</label>
 																		<div class="d-flex align-items-center">
-																			<input type="file" class="form-control-file mr-2" id="uploadImage">
+																			<input type="file" class="form-control-file mr-2" id="uploadImage" name="uploadImage">
 																			<input type="text" class="form-control mr-2" id="imageName">
-																			<button type="button" class="btn btn-warning" id="visualizarBtn">Visualizar</button>
+																			<!-- <button type="button" class="btn btn-warning" id="visualizarBtn">Visualizar</button> -->
+																			
 																		</div>
+																		<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+																		<div id="status" style="display: none;"></div> 
 																	</div>
 																	<div class="form-group">
 																		<img id="imagePreview" src="" alt="Vista previa de la imagen" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
@@ -599,13 +607,16 @@
 																		<div class="col-9 col-md-9">   
 																			<div class="d-flex align-items-center">
 																				<!--  <input type="file"  class="form-control-file mr-2" id="uploadVideo"> -->
-																				<input type="file"  id="uploadVideo">
+																				<input type="file"  id="uploadVideo" name="uploadVideo">
 																				<span id="fileSize" class="mr-2"></span>
 																				<div class="progress mr-2" style="flex-grow: 1;">
 																					<div id="uploadProgress" class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
 																				</div>
-																				<button type="button" class="btn btn-danger btn-sm" id="cancelUpload">&times;</button>
-																			</div>
+																				<button type="button" class="btn btn-danger btn-sm" id="cancelUpload">&times;</button> 
+																			</div>	
+																			<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+																			<div id="status" style="display: none;"></div> 
+																			<img id="videoPreview" src=""   style="display: none;">
 																			<small class="text-danger">El archivo no debe pesar más de 100mb</small>
 																		</div>   
 
@@ -636,7 +647,7 @@
   
    
 
-													</div>
+										 </div>
 													<div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab">
 														<h5>Sube el enlace del video</h5> 
 														<form id="linkForm">
@@ -657,7 +668,7 @@
 																		<div class="col-9 col-md-9">   
 																			<input type="text" class="form-control" id="videoLink" placeholder="Ingrese el enlace del video">
 																		</div>  
-																		<div class="col-md-7 text-right">
+																		<div class="col-md-12 text-right">
 																			<button type="button" class="btn btn-primary btn-add-offer" id="addVideoLink">
 																				<i class="fas fa-plus-circle"></i> Añadir video
 																			</button> 
@@ -666,7 +677,7 @@
 																	
 														</form>
 																	<hr>
-																	<h5>Lista de colores</h5>  
+																	<h5>Lista de videos</h5>  
 																	<table class="table table-bordered offer-table">
 																		<thead>
 																			<tr>
@@ -719,7 +730,7 @@
 																<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Añade un color:</h5>
 															</div>
 															<div class="col-9 col-md-3">  
-																<input type="color" id="color-input" placeholder="#9900FF">
+																<input type="color" id="color-input" placeholder="#9900FF" >
 															</div>  
 															<div class="col-md-7 text-right">
 																<button type="button" class="btn btn-primary btn-add-offer" id="addcolorbtn">
@@ -787,7 +798,7 @@
 												<h5>Ofertas</h5>
 
 												<div class="card" style="min-height: 70px;">
-													<div class="card-header" style="text-align: center;"> Precio actual: S/ 10.00</div>
+													<div class="card-header" style="text-align: center;"> Precio actual: S/. <span id="precioDisplay">  </span></div>
 													<div class="card-body"> 
 
 														<div class="row mt-4">
@@ -795,18 +806,18 @@
 																<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">(% de descuento):</h5>
 															</div>
 															<div class="col-9 col-md-4">  
-																<input type="text" class="form-control" id="porcentajeDescuento" placeholder="Ingrese el porcentaje de descuento">
+																<input type="number" class="form-control" id="porcentajeDescuento" placeholder="Ingrese el porcentaje de descuento">
 														
 															</div> 
 															<div class="col-1 col-md-2">
 																<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Precio:</h5>
 															</div>
 															<div class="col-9 col-md-4">
-																<input type="text" class="form-control" id="precioOfertado" placeholder="Ingrese el precio ofertado">
+																<input type="number" class="form-control" id="precioOfertado" placeholder="Resultado del precio ofertado" readonly>
 															</div>
 
 															<div class="col-1 col-md-2">
-																<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Fecha de Inicio::</h5>
+																<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Fecha de Inicio:</h5>
 															</div>
 															<div class="col-9 col-md-4">   
 																<input type="date" class="form-control" id="fechaInicio" >
@@ -869,7 +880,7 @@
 														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Precio:</h5>
 													</div>
 													<div class="col-9 col-md-6">
-														<input type="text" class="form-control" id="precioCosto" placeholder="Ingrese el precio">
+														<input type="number" class="form-control" id="precioCosto" placeholder="Ingrese el precio">
 													</div>
 												</div> 
 											<hr>
@@ -937,7 +948,7 @@
 														<div class="form-row">
 															<div class="col">
 																<label for="envioLocal">Local:</label>
-																<input type="text" class="form-control" id="envioLocal" placeholder="Precio de envío local">
+																<input type="number" class="form-control" id="envioLocal" placeholder="Precio de envío local">
 															</div> 
 														</div>
 													</div> 
@@ -948,7 +959,7 @@
 														<div class="form-row">
 															<div class="col">
 																<label for="envioNacional">Nacional:</label>
-																<input type="text" class="form-control" id="envioNacional" placeholder="Precio de envío nacional">
+																<input type="number" class="form-control" id="envioNacional" placeholder="Precio de envío nacional">
 															</div> 
 														</div>
 													</div> 
@@ -959,7 +970,7 @@
 														<div class="form-row">
 															<div class="col">
 																<label for="envioExtranjero">Extranjero:</label>
-																<input type="text" class="form-control" id="envioExtranjero" placeholder="Precio de envío extranjero">
+																<input type="number" class="form-control" id="envioExtranjero" placeholder="Precio de envío extranjero">
 															</div> 
 														</div>
 													</div> 
@@ -972,7 +983,7 @@
 													<div class="col-9 col-md-9"> 
 														<div class="form-row">
 															<div class="col">
-																<input type="text" class="form-control" id="tiemposElaboracion" placeholder="Ingrese los tiempos de elaboración">
+																<input type="number" class="form-control" id="tiemposElaboracion" placeholder="Ingrese los tiempos de elaboración">
 															</div> 
 														</div>
 													</div>  
@@ -985,7 +996,7 @@
 													<div class="col-9 col-md-9"> 
 														<div class="form-row">
 															<div class="col">
-																<input type="text" class="form-control" id="tiemposEnvio" placeholder="Ingrese los tiempos estimados de envío">
+																<input type="number" class="form-control" id="tiemposEnvio" placeholder="Ingrese los tiempos estimados de envío">
 															</div> 
 														</div>
 													</div>  
@@ -1060,8 +1071,7 @@
 
 	<!-- Common JS -->
 	<script src="/js/common.js"></script>
-	<script type="module" src="/src/productos-detalle/index.js"></script>
-
+	<script type="module" src="/src/productos-detalle/index.js"></script> 
 
 
 </body>

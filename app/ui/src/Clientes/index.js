@@ -1,87 +1,12 @@
 import { listarClientes, filtrarClientes, borrarCliente, actualizarCliente } from './api';
 
-const DEFAULT_PAGE_LIMIT = 10;
-let currentPage = 1;
-let totalPages = 0; // Declarar totalPages para que esté accesible globalmente
-
-let currentFilter = {}; // Objeto para almacenar el filtro actual
 
 async function cargarCliente() {
   try {
-    let clientes;
-
-      // Determinar si se está filtrando o no
-      if (Object.keys(currentFilter).length === 0) {
-          clientes = await listarClientes(currentPage, DEFAULT_PAGE_LIMIT);
-      } else {
-          const filtro = {
-              ...currentFilter,
-              page: currentPage,
-              limit: DEFAULT_PAGE_LIMIT
-          };
-          clientes = await filtrarClientes(filtro);
-      }
-
-      //const clientes = await listarClientes(currentPage, DEFAULT_PAGE_LIMIT);
-      console.log(clientes)
-      cargarTabla(clientes.clientes);
-      totalPages = Math.ceil(clientes.totalItems / DEFAULT_PAGE_LIMIT);
-      actualizarControlesPaginacion(totalPages);
+    const Clientes = await listarClientes();
+    cargarTabla(Clientes);
   } catch (error) {
-      console.error('Error:', error);
-  }
-}
-
-function actualizarControlesPaginacion(totalPages) {
-  const prevPageBtn = document.getElementById('prevPage');
-  const nextPageBtn = document.getElementById('nextPage');
-  const currentPageDisplay = document.getElementById('currentPageDisplay');
-
-  prevPageBtn.addEventListener('click', onClickPrevPage);
-  nextPageBtn.addEventListener('click', onClickNextPage);
-
-  currentPageDisplay.innerHTML = '';
-
-  for (let i = 1; i <= totalPages; i++) {
-      const li = document.createElement('li');
-      li.className = 'page-item';
-      const link = document.createElement('a');
-      link.className = 'page-link';
-      link.href = '#';
-      link.textContent = i;
-      if (i === currentPage) {
-          li.classList.add('active');
-      }
-      link.addEventListener('click', () => cambiarPagina(i));
-      li.appendChild(link);
-      currentPageDisplay.appendChild(li);
-  }
-
-  // Deshabilitar botones de navegación según la página actual
-  prevPageBtn.disabled = currentPage === 1;
-  nextPageBtn.disabled = currentPage === totalPages;
-}
-
-async function cambiarPagina(page) {
-  if (page !== currentPage) {
-      currentPage = page;
-      await cargarCliente();
-  }
-}
-
-async function onClickNextPage(event) {
-  event.preventDefault();
-  if (currentPage < totalPages) {
-      currentPage++;
-      await cargarCliente();
-  }
-}
-
-async function onClickPrevPage(event) {
-  event.preventDefault();
-  if (currentPage > 1) {
-      currentPage--;
-      await cargarCliente();
+    console.error('Error:', error);
   }
 }
 
@@ -183,45 +108,13 @@ async function filtrarClientesAction() {
   btnFiltrar.addEventListener('click', async (event) => {
     event.preventDefault();
     const nombre = document.getElementById('nombre-Cliente').value;
-    const apellido = document.getElementById('apellido-Cliente').value;
     const correo = document.getElementById('correo-Cliente').value;
-
-    currentPage = 1;
-
-
-    // Construir el objeto de filtro
-    currentFilter = {
-      nombres: nombre,
-      apellidos: apellido,
-      correo, correo
-    };
-    /*
     const filtro = {
       nombres:nombre,
-      apellidos:apellido,
-      correo:correo,
-      page:currentPage, 
-      limit:DEFAULT_PAGE_LIMIT
-    };*/
-    try {
-      // Filtrar pedidos con los parámetros actuales
-      const filtro = {
-        ...currentFilter,
-        page: currentPage,
-        limit: DEFAULT_PAGE_LIMIT
-      };
-      console.log("filtro:", filtro)
-      const clientesFiltrados = await filtrarClientes(filtro);
-      //const Clientes = await filtrarClientes(filtro);
-      console.log("aaaaaaaa:" ,clientesFiltrados.clientes)
-      cargarTabla(clientesFiltrados.clientes);
-      
-      totalPages = Math.ceil(clientesFiltrados.totalItems / DEFAULT_PAGE_LIMIT);
-      actualizarControlesPaginacion(totalPages);
-    } catch (error) {
-      console.error('Error al filtrar pedidos:', error);
-    }
-    
+      correo:correo
+    };
+    const Clientes = await filtrarClientes(filtro);
+    cargarTabla(Clientes);
   });
 }
 document.addEventListener('DOMContentLoaded', () => {

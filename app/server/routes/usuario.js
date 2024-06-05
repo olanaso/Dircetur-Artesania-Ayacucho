@@ -5,7 +5,7 @@ const router = Router();
 router.post('/usuario',  controller.guardar);
 router.put('/usuario/:id',  controller.actualizar);
 router.delete('/usuario',  controller.eliminar);
-router.get('/usuario/:correo',  controller.obtener);
+router.get('/usuario/:id',  controller.obtener);
 router.get('/usuario_dni' , controller.obtenerDNI);
 router.get('/usuarios',  controller.listar);
 router.post('/usuario_save',  controller.save);
@@ -18,6 +18,8 @@ router.post('/importarUsuarios',  controller.importarUsuarios);
 router.get('/reporteusuariosiestp',  controller.reporteusuariosiestp);
 router.get('/reportelibrosiestp',  controller.reportelibrosiestp);
 router.get('/reporteaccesosiestp',  controller.reporteaccesosiestp);
+
+ 
 
 
 module.exports=router;

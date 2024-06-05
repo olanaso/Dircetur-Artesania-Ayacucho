@@ -3,15 +3,18 @@ const model = require('../models/artesano');
 const { Op } = require('sequelize');
 const PARAMETROS = require("../helpers/parametros");
 const moment = require('moment');
+ 
+ 
 
 module.exports = {
     guardar,
     actualizar,
     eliminar,
     obtener,
-    listar,
-
-    save
+    listar, 
+    save,
+    buscar,
+    obtenerDNI
 };
 
 function guardar (req, res) {
@@ -59,8 +62,49 @@ function eliminar (req, res) {
 function obtener (req, res) {
 
     model.findOne({
-        where: { serie: req.params.id }
+        where: { id: req.params.id }
     })
+        .then(resultset => {
+            res.status(200).json(resultset)
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}
+function obtenerDNI (req, res) {
+
+    model.findOne({
+        where: { dni: req.params.dni }
+    })
+        .then(resultset => {
+            res.status(200).json(resultset)
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}
+ 
+
+ 
+function listar(req, res) {
+    let sql = ``; 
+        sql = 
+        `
+        SELECT 
+        a.id,
+        CONCAT(a.nombres, ' - ', a.apellidos) AS completo,
+        a.correo,
+        CASE 
+            WHEN c.tipousuario = 1 THEN 'artesano'
+            WHEN c.tipousuario = 2 THEN 'cliente'
+            ELSE 'otro'
+        END AS tipousuario
+    FROM artesano a 
+    INNER JOIN usuario c ON c.id = a.usuario_id
+    ORDER BY a.id DESC
+    LIMIT 50;
+    `    
+    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -70,10 +114,50 @@ function obtener (req, res) {
 }
 
 
+function buscar(req, res) {
 
-function listar (req, res) {
+    
+    const { 
+        nombre = '',
+        correo = '', 
+    } = req.query;
+    
+    
 
-    model.findAll()
+    
+    let sql = ``; 
+        sql = 
+        `
+        SELECT 
+        a.id,
+        CONCAT(a.nombres, ' - ', a.apellidos) AS completo,
+        a.correo,
+        CASE 
+            WHEN c.tipousuario = 2 THEN 'Artesano'
+            WHEN c.tipousuario = 3 THEN 'Cliente'
+            ELSE 'otro'
+        END AS tipousuario
+    FROM artesano a 
+    INNER JOIN usuario c ON c.id = a.usuario_id 
+    `;
+     
+
+    if (nombre !== '') {
+        sql += ` AND CONCAT(a.nombres, ' - ', a.apellidos) LIKE '%${nombre}%'`;
+    } 
+
+    if (correo !== '') {
+        sql += ` AND a.correo LIKE '%${correo}%'`;
+    }
+  
+ 
+    sql += `
+        ORDER BY a.id DESC
+        LIMIT 50;
+    `;
+
+    
+    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -84,11 +168,9 @@ function listar (req, res) {
 
 
 /*Guarda los datos generales de un predio*/
-async function save (req, res, next) {
-
+async function save(req, res, next) {
     const t = await model.sequelize.transaction();
     try {
-
         let object = await model.findOne({
             where: {
                 id: req.body.id ? req.body.id : 0
@@ -96,20 +178,20 @@ async function save (req, res, next) {
         });
 
         if (object != null) {
-            let obj = { ...object.dataValues, ...req.body }
+            let obj = { ...object.dataValues, ...req.body };
             for (const prop in obj) {
-                object[prop] = obj[prop]
+                object[prop] = obj[prop];
             }
             object.usuaregistra_id = req.userId;
-            await object.save({ t });
+            await object.save({ transaction: t });
         } else {
-            // object = await model.create({ ...req.body, usuaregistra_id: req.userId }, { t });
-            object = await model.create({ ...req.body }, { t });
+            object = await model.create({ ...req.body }, { transaction: t });
         }
-        t.commit().then();
-        return res.status(200).send(object);
+        await t.commit();
+        // Envía el ID del objeto creado junto con el objeto
+        return res.status(200).send({ id: object.id, object });
     } catch (e) {
-        t.rollback();
+        await t.rollback();
         return next(e);
     }
 }

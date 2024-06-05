@@ -23,7 +23,7 @@ module.exports = {
     obtenerDNI, loginpersonal,
     verificarToken,
     recuperarcuenta, cambiarContrasenia,importarUsuarios
-    ,reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp
+    ,reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp 
 
 };
 
@@ -70,7 +70,7 @@ function eliminar (req, res) {
         .catch(error => res.status(400).send(error));
 }
 
-function obtener (req, res) {
+/*function obtener (req, res) {
 
     model.findOne({
         where: { correo: req.params.correo }
@@ -82,7 +82,22 @@ function obtener (req, res) {
         .catch(error => {
             res.status(400).send(error)
         })
+}*/
+
+function obtener (req, res) {
+
+    model.findOne({
+        where: { id: req.params.id }
+    })
+        .then(resultset => {
+            req.session.usuario = resultset;
+            res.status(200).json(resultset);
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
 }
+
 
 function obtenerDNI (req, res) {
 
@@ -99,12 +114,12 @@ function obtenerDNI (req, res) {
             res.status(400).send(error)
         })
 }
-function listar (req, res) {
+/*function listar (req, res) {
 
     model.findAll({
-        where: { iestp: req.query.iestp },
+        where: { id: req.query.id },
         attributes: {},
-        order: [['carrera', 'DESC']]
+        order: [['id', 'DESC']]
     })
         .then(resultset => {
 
@@ -114,9 +129,22 @@ function listar (req, res) {
             res.status(400).send(error)
         })
 }
+*/
+
+
+function listar (req, res) {
+
+    model.findAll()
+        .then(resultset => {
+            res.status(200).json(resultset)
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}
 
 /*Guarda los datos generales de un predio*/
-async function save (req, res, next) {
+/*async function save (req, res, next) {
 
     console.log(req.body)
     const t = await model.sequelize.transaction();
@@ -124,7 +152,7 @@ async function save (req, res, next) {
 
         let object = await model.findOne({
             where: {
-                dni: req.body.dni ? req.body.dni : 0
+                id: req.body.id ? req.body.id : 0
             }
         });
 
@@ -147,7 +175,40 @@ async function save (req, res, next) {
         t.rollback();
         return next(e);
     }
+}*/
+/*Guarda los datos generales de un predio*/
+async function save(req, res, next) {
+    const t = await model.sequelize.transaction();
+    try {
+        let object = await model.findOne({
+            where: {
+                id: req.body.id ? req.body.id : 0
+            }
+        });
+
+        if (object != null) {
+            let obj = { ...object.dataValues, ...req.body };
+            for (const prop in obj) {
+                object[prop] = obj[prop];
+            }
+            object.usuaregistra_id = req.userId;
+            await object.save({ transaction: t });
+        } else {
+            object = await model.create({ ...req.body }, { transaction: t });
+        }
+        await t.commit();
+        // Envía el ID del objeto creado junto con el objeto
+        return res.status(200).send({ id: object.id, object });
+    } catch (e) {
+        await t.rollback();
+        return next(e);
+    }
 }
+
+
+
+
+
 
 async function cambiarContrasenia (req, res, next) {
 

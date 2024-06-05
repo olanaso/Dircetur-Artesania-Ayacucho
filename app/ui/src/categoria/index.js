@@ -92,7 +92,7 @@ async function editarCategoria(categoria) {
       denominacion: denominacionInput.value,
       descripcion: descripcionInput.value
     }
-
+    
     if (fileInput.files[0]) {
       formData.foto_referente = imagen_principal
     } else {
@@ -113,17 +113,12 @@ async function editarCategoria(categoria) {
 
 async function registrarCategoria() {
   const btnRegistrar = document.getElementById('registrar-categoria');
-  const form = document.getElementById('registrar-categoria-form');
+
 
   const modal = document.getElementById('modalCategoria');
 
   btnRegistrar.addEventListener('click', async (event) => {
     event.preventDefault();
-    // Verificar si el formulario es válido antes de continuar
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
     try {
       // Obtener los valores del formulario
       const abreviatura = document.getElementById('abreviatura').value;
@@ -175,16 +170,14 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInputId: 'myfile',
     progressBarId: 'progressBar',
     statusElementId: 'status',
-    uploadUrl: 'http://localhost:3001/api/fileupload3',
-    folder: '/categorias/img/',
+    uploadUrl: 'http://localhost:3001/api/fileupload2',
     callback: handleUploadResponse
   });
   initializeFileUploader({
     fileInputId: 'myfile-editar',
     progressBarId: 'progressBar-editar',
     statusElementId: 'status-editar',
-    uploadUrl: 'http://localhost:3001/api/fileupload3',
-    folder: '/categorias/img/',
+    uploadUrl: 'http://localhost:3001/api/fileupload2',
     callback: handleEditUploadResponse
   });
 
@@ -197,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
+function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
 
   const fileInput = document.getElementById(fileInputId);
   const inputName = fileInput.name;
@@ -205,7 +198,7 @@ function initializeFileUploader({ fileInputId, progressBarId, statusElementId, u
   const statusElement = document.getElementById(statusElementId);
 
   if (fileInput && progressBar && statusElement) {
-    const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
+    const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName);
     uploader.attachToFileInput(fileInput);
   } else {
     console.error('Initialization failed: One or more elements not found.');
@@ -213,7 +206,7 @@ function initializeFileUploader({ fileInputId, progressBarId, statusElementId, u
 }
 
 function handleUploadResponse(response) {
-
+  
   let file = $('#myfile').prop('files')[0];
   if (file) {
     let reader = new FileReader();
