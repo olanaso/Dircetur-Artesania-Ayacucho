@@ -15,6 +15,7 @@ const cliente = require('./cliente');
 const slider = require('./slider');
 const pedido = require('./pedido');
 const upload = require('./upload');
+const ubicaciones = require('./ubicaciones');
 
 
 module.exports = {
@@ -35,5 +36,6 @@ module.exports = {
     slider,
     producto,
     pedido,
-    upload
+    upload,
+    ubicaciones
 };
