@@ -86,29 +86,30 @@ function cargarTablaHistoriaPedido(pedidos) {
 
     tablaHistoriaPedido.innerHTML = '';
 
+    // Agregar clase badge dependiendo del estado del pedido
+    let estadoClass = '';
+    switch (pedidos.estado) {
+        case 'pendiente':
+            estadoClass = 'badge badge-pill badge-warning text-white'; 
+            break;
+        case 'pagado':
+            estadoClass = 'badge badge-pill badge-success'; 
+            break;
+        case 'envio':
+            estadoClass = 'badge badge-pill badge-info'; 
+            break;
+        case 'finalizado':
+            estadoClass = 'badge badge-pill badge-primary'; 
+            break;
+        case 'anulado':
+            estadoClass = 'badge badge-pill badge-danger';
+            break;
+        default:
+            estadoClass = ''; 
+    }
     listaAtencion.forEach(pedido => {
         const row = document.createElement('tr');
-        // Agregar clase badge dependiendo del estado del pedido
-        let estadoClass = '';
-        switch (pedido.estado) {
-            case 'pendiente':
-                estadoClass = 'badge badge-pill badge-warning text-white';
-                break;
-            case 'pagado':
-                estadoClass = 'badge badge-pill badge-success';
-                break;
-            case 'envio':
-                estadoClass = 'badge badge-pill badge-info';
-                break;
-            case 'finalizado':
-                estadoClass = 'badge badge-pill badge-primary';
-                break;
-            case 'anulado':
-                estadoClass = 'badge badge-pill badge-danger';
-                break;
-            default:
-                estadoClass = '';
-        }
+
         row.innerHTML = `
             <td>${formatearFecha(pedido.fecha_atencion)}</td>
             <td>${pedido.comentario}</td>
@@ -133,7 +134,7 @@ function cargarTablaHistoriaPedido(pedidos) {
 function cargarTablaHistoriaReclamos(pedidos) {
     const tablaHistoriaReclamos = document.getElementById('tablaHistoriaReclamos');
     const tablaDatosHistoria = tablaHistoriaReclamos.getElementsByTagName('tbody')[0];
-
+    
     // Limpiar el contenido actual de la tabla
     tablaDatosHistoria.innerHTML = '';
 
@@ -194,7 +195,7 @@ function generarID() {
 
 async function actualizarHistorialPedido(numPedido) {
     const form = document.getElementById('form-actualizar-historia');
-
+    
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -218,7 +219,7 @@ async function actualizarHistorialPedido(numPedido) {
                 medioPrueba: ruta_archivo,
                 fecha_atencion: new Date().toISOString()
             };
-
+            
             listAtencion.push(nuevaAtencion);
 
             const data = {
@@ -247,13 +248,12 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInputId: 'myfile',
         progressBarId: 'progressBar',
         statusElementId: 'status',
-        uploadUrl: 'http://localhost:3001/api/fileupload3',
-        folder: '/pedidos/archivos/',
+        uploadUrl: 'http://localhost:3001/api/fileupload2',
         callback: handleUploadResponse
     });
 });
 
-function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
+function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
 
     const fileInput = document.getElementById(fileInputId);
     const inputName = fileInput.name;
@@ -261,7 +261,7 @@ function initializeFileUploader({ fileInputId, progressBarId, statusElementId, u
     const statusElement = document.getElementById(statusElementId);
 
     if (fileInput && progressBar && statusElement) {
-        const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
+        const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName);
         uploader.attachToFileInput(fileInput);
     } else {
         console.error('Initialization failed: One or more elements not found.');

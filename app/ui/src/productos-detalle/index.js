@@ -1,6 +1,7 @@
 import { loadPartials } from '../utils/viewpartials';
 import { validarHTML5 } from '../utils/validateForm';
-import { buscarProducto, getusuariocapacitacion, deleteUserCapacitacion, guardarProducto, nuevoUserCapacitacion } from './api';
+import { FileUploader } from '../utils/upload.js';
+import { buscarProducto,geteditarproducto, getusuariocapacitacion, deleteUserCapacitacion, guardarProducto, nuevoUserCapacitacion,buscarartesanoDNI,buscarartesanoid } from './api';
 import { showLoading, hideLoading, checkSession } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
@@ -70,7 +71,22 @@ async function nuevo () {
 
 
 var lstproductos = null;
+var editarproductos = null;
 var idactualizar = null;
+var productId=0;
+
+let contadorImagenes = 0;
+let videoCounter = 0; 
+let videoCounter2 = 0; 
+let contadorColores = 0;
+let contadorTalla = 0;
+let contadorOfertas = 0;
+let contadorCostos = 0;
+
+
+var artesano_id=0;
+
+
 async function buscarUsuario () {
 
   $('#filtrar-producto').on('click', async function (e) {
@@ -208,7 +224,7 @@ async function buscarUsuario () {
 
 /*********** */
   $('#btnguardarcambio').on('click', async function (e) {
-
+    
     e.preventDefault();
     var isValid = true;
     // Itera sobre todos los campos requeridos para verificar si están vacíos
@@ -222,11 +238,14 @@ async function buscarUsuario () {
     });
 
     if (!isValid) {
-      alert('Por favor, completa todos los campos requeridos.');
+      alert('Por favor, ingresa el DNI y todos los campos requeridos.');
+      document.getElementById('dni').focus(); // Pone el foco en el campo del D
+      
+      return;
     } else {
       //$("#btnactualizar").prop("disabled", true).text("Actualizando..."); 
 
-
+      showLoading()
       let nombres_es = $('#idespanolNombre').val()  
       let nombres_eng = $('#idinglesNombre').val() 
       let resumen_es = $('#idespanolResumen').val() 
@@ -253,10 +272,10 @@ async function buscarUsuario () {
       let restar_stock = $('#restarStock').is(':checked') ? 1 : 0;
       let tipo_estado = $('#estadoAgotado').val() 
       let fecha_disponible = $('#fechaDisponible').val()  
-      let imagen_principal = "/img/olla.jpg"  
+
    
-      alto = alto === "" ? 0 : (isInteger(alto) ? parseInt(alto, 10) : NaN);
-      ancho = ancho === "" ? 0 : (isInteger(ancho) ? parseInt(ancho, 10) : NaN);
+      alto = alto === "" ? 0 : (isDecimal(alto) ? parseFloat(alto) : NaN);
+      ancho = ancho === "" ? 0 : (isDecimal(ancho) ? parseFloat(ancho) : NaN);
       precio = precio === "" ? 0 : (isDecimal(precio) ? parseFloat(precio) : NaN);
       peso = peso === "" ? 0 : (isDecimal(peso) ? parseFloat(peso) : NaN);
       cantidad = cantidad === "" ? 0 : (isInteger(cantidad) ? parseInt(cantidad, 10) : NaN);
@@ -267,20 +286,20 @@ async function buscarUsuario () {
  
       let igv = $('#impuestoIGV').is(':checked') ? 1 : 0;      
       let precios_envio = $('#precioEnvio').is(':checked') ? 1 : 0;
-      let precio_local = parseFloat($('#envioLocal').val() )
-      let precio_nacional = parseFloat($('#envioNacional').val() )
-      let precio_extranjero =  parseFloat($('#envioExtranjero').val()  )
-      let tiempo_elaboracion = parseInt($('#tiemposElaboracion').val() )
-      let tiempo_envio = parseInt($('#tiemposEnvio').val()   )
+      let precio_local = $('#envioLocal').val() 
+      let precio_nacional = $('#envioNacional').val() 
+      let precio_extranjero =  $('#envioExtranjero').val()  
+      let tiempo_elaboracion = $('#tiemposElaboracion').val()
+      let tiempo_envio = $('#tiemposEnvio').val()   
       let preventas = $('#preventas').is(':checked') ? 1 : 0;
 
 
 
-      precio_local = precio_local === "" ? null : (isDecimal(precio_local) ? parseFloat(precio_local) : NaN);
-      precio_nacional = precio_nacional === "" ? null : (isDecimal(precio_nacional) ? parseFloat(precio_nacional) : NaN);
-      precio_extranjero = precio_extranjero === "" ? null : (isDecimal(precio_extranjero) ? parseFloat(precio_extranjero) : NaN);      
-      tiempo_elaboracion = tiempo_elaboracion === "" ? null : (isInteger(tiempo_elaboracion) ? parseInt(tiempo_elaboracion, 10) : NaN);
-      tiempo_envio = tiempo_envio === "" ? null : (isInteger(tiempo_envio) ? parseInt(tiempo_envio, 10) : NaN); 
+      precio_local = precio_local === "" ? 0 : (isDecimal(precio_local) ? parseFloat(precio_local) : NaN);
+      precio_nacional = precio_nacional === "" ? 0 : (isDecimal(precio_nacional) ? parseFloat(precio_nacional) : NaN);
+      precio_extranjero = precio_extranjero === "" ? 0 : (isDecimal(precio_extranjero) ? parseFloat(precio_extranjero) : NaN);      
+      tiempo_elaboracion = tiempo_elaboracion === "" ? 0 : (isInteger(tiempo_elaboracion) ? parseInt(tiempo_elaboracion, 10) : NaN);
+      tiempo_envio = tiempo_envio === "" ? 0 : (isInteger(tiempo_envio) ? parseInt(tiempo_envio, 10) : NaN); 
       /***otros costos */
 
       let listaCostos = [];
@@ -355,6 +374,14 @@ async function buscarUsuario () {
 
       let TallaJSON = JSON.stringify(listaTalla);
       let lst_talla = TallaJSON;
+// Aquí puedes enviar imagenesprincipalJSON al servidor o hacer algo con él
+      //alert('Costos guardados en JSON:\n' + costosJSON);
+      /****fin */
+      var principalImagePreview = document.getElementById('imagenPrincipal');
+
+      // Obtener el valor del atributo src
+      var imagen_principal = principalImagePreview.src;
+
 
    // Aquí puedes enviar imagenesJSON al servidor o hacer algo con él
       //alert('Costos guardados en JSON:\n' + costosJSON);
@@ -372,16 +399,64 @@ async function buscarUsuario () {
       });
 
       let imagenesJSON = JSON.stringify(listaImagenes);
-      console.log(imagenesJSON); // Aquí puedes usar el JSON según tus necesidades
-       
+      let lst_imagenes = imagenesJSON;
+  
+
+
+       // Aquí puedes enviar videosJSON al servidor o hacer algo con él
+      //alert('Costos guardados en JSON:\n' + costosJSON);
+      /****fin */
+      let listavideos = []; 
+      $('#videoList tr').each(function() {
+          let fila = $(this);
+          let imagen = {
+              id: fila.find('td').eq(0).text(),
+              nombre: fila.find('td').eq(1).text(),
+              src: fila.find('a').attr('href'),  
+          }; 
+          listavideos.push(imagen);
+      });
+
+      let videosJSON = JSON.stringify(listavideos);
+      let lst_videos = videosJSON;
+
+
+       // Aquí puedes enviar videosenlaceJSON al servidor o hacer algo con él
+      //alert('Costos guardados en JSON:\n' + costosJSON);
+      /****fin */
+      let listavideosenlace = []; 
+      $('#videoList2 tr').each(function() {
+          let fila = $(this);
+          let imagen = {
+              id: fila.find('td').eq(0).text(),
+              nombre: fila.find('td').eq(1).text(),
+              src: fila.find('a').attr('href'),  
+          }; 
+          listavideosenlace.push(imagen);
+      });
+
+      let videosenlaceJSON = JSON.stringify(listavideosenlace);
+      let lst_videoenlace = videosenlaceJSON;
+  
+
+  
+
+      //let imagen_principal = "/img/olla.jpg"  
       
 
-    
-      
-
-      let result = await guardarProducto({ nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal,lst_otros_costos,lst_ofertas,lst_colores,lst_talla   });
+      let result = await guardarProducto({ productId,nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal,lst_otros_costos,lst_ofertas,lst_colores,lst_talla,lst_imagenes,lst_videos,lst_videoenlace,precios_envio,igv,precio_local,precio_nacional,precio_extranjero,tiempo_elaboracion,tiempo_envio,preventas,artesano_id  });
       if (result) {
         showToast('Se actualizo los datos correctamente')
+
+        if (productId == 0) {
+          const url = new URL(window.location.href);
+          url.searchParams.set('id', result.id);
+          window.history.pushState({}, '', url);
+          productId=result.id;
+        } 
+        
+
+        hideLoading() 
         buscarUsuario();
         $('#myModal').css('display', 'none');
       } else {
@@ -391,6 +466,31 @@ async function buscarUsuario () {
     }
 
   })
+
+
+  function validarCantidad() {
+      var cantidad = document.getElementById('cantidad').value;
+      var cantidadMinima = document.getElementById('cantidadMinima').value;
+      var errorMessage = document.getElementById('error-message');
+
+       
+      if (cantidad && cantidadMinima) {
+        if (parseFloat(cantidad) < parseFloat(cantidadMinima)) {
+          alert('La cantidad minima no puede ser mayor');
+          document.getElementById('cantidadMinima').focus(); 
+           document.getElementById('cantidadMinima').value=""; 
+          return
+        }
+    } else {
+        errorMessage.style.display = 'none';
+    }
+  }
+
+  
+document.getElementById('cantidad').addEventListener('input', validarCantidad);
+document.getElementById('cantidadMinima').addEventListener('input', validarCantidad);
+
+
 
 
   $('#btnuevo').on('click', async function (e) {
@@ -452,8 +552,7 @@ async function buscarUsuario () {
 
  
 $(document).on('click', '.btn_Eliminar', async function (e) {
-
-
+ 
   
   async function buscarUser () {
     // Inicializar el contador
@@ -558,14 +657,337 @@ function createXLS (data, reportfilename) {
   var res = alasql(`SELECT INTO XLSX("${reportfilename}.xlsx",?) FROM ?`, [opts, [resultgeojson]]);
 }
 
+ 
+
+// calcular precios 
 
 
+// Obtener referencias a los elementos del DOM
+const descuentoInput = document.getElementById('porcentajeDescuento');
+const precioDisplaySpan = document.getElementById('precioDisplay');
+const precioOfertadoInput = document.getElementById('precioOfertado');
+
+// Añadir un evento para actualizar el precio con descuento cuando el usuario ingrese un valor
+descuentoInput.addEventListener('input', function() {
+    // Obtener el valor del porcentaje de descuento ingresado
+    const porcentajeDescuento = parseFloat(descuentoInput.value);
+
+    // Obtener el valor del precio original
+    const precioOriginal = parseFloat(precioDisplaySpan.innerText) || parseFloat(precioDisplaySpan.textContent);
+
+    // Validar que los valores sean números válidos
+    if (!isNaN(porcentajeDescuento) && !isNaN(precioOriginal)) {
+        // Calcular el precio con descuento
+        const descuento = (precioOriginal * porcentajeDescuento) / 100;
+        const precioConDescuento = precioOriginal - descuento;
+
+        // Actualizar el valor del input
+        precioOfertadoInput.value = precioConDescuento.toFixed(2);
+    } else {
+        // Manejo de errores si los valores no son válidos
+        precioOfertadoInput.value = 'Valor inválido';
+    }
+});
+
+
+// validar fechas 
+ // Obtener referencias a los elementos del DOM
+ const fechaInicioInput = document.getElementById('fechaInicio');
+ const fechaFinInput = document.getElementById('fechaFin');
+ const errorMensaje = document.getElementById('errorMensaje');
+
+ // Establecer la fecha actual en el campo de fecha de fin
+ const hoy = new Date().toISOString().split('T')[0];
+ fechaFinInput.value = hoy;
+
+ // Función para validar las fechas
+ function validarFechas() {
+     const fechaInicio = new Date(fechaInicioInput.value);
+     const fechaFin = new Date(fechaFinInput.value);
+
+     if (fechaFin < fechaInicio) {
+         alert("La fecha de fin no puede ser menor que la fecha de inicio.");
+         fechaFinInput.value = fechaInicioInput.value;
+     }
+ }
+
+ // Añadir eventos para validar las fechas cuando cambian
+ fechaInicioInput.addEventListener('input', validarFechas);
+ fechaFinInput.addEventListener('input', validarFechas);
+
+
+// mostrar el precio
+
+const precioInput = document.getElementById('precioproducto');
+const precioDisplay = document.getElementById('precioDisplay');
+
+// Añadir un evento para actualizar el span cuando el usuario ingrese un valor
+precioInput.addEventListener('input', function() {
+    // Obtener el valor ingresado
+    const precio = precioInput.value;
+    // Actualizar el contenido del span
+    precioDisplay.textContent = precio;
+});
+
+async function editarProducto (id) {
+
+  editarproductos =  await geteditarproducto(id); 
+      $('#idespanolNombre').val(editarproductos.nombres_es)  
+      $('#idinglesNombre').val( editarproductos.nombres_eng) 
+      $('#idespanolResumen').val(editarproductos.resumen_es ) 
+      $('#idinglesResumen').val(editarproductos.resumen_eng) 
+      $('#idespanolDescripcion').val(editarproductos.descripcion_es) 
+      $('#idinglesDescripcion').val(editarproductos.descripcion_eng) 
+      $('#idespanolCualidades').val(editarproductos.cualidades_es) 
+      $('#idinglesCualidades').val(editarproductos.cualidades_eng) 
+      $('#idespanolPalabras').val(editarproductos.palabra_clave_es) 
+      $('#idinglesPalabras').val(editarproductos.palabra_clave_eng ) 
+      $('#idespanolPiezas').val(editarproductos.numero_piezas_es) 
+      $('#idinglesPiezas').val(editarproductos.numero_piezas_eng) 
+      $('#idalto').val(editarproductos.alto ) 
+      $('#idancho').val(editarproductos.ancho) 
+      $('#idespanolMateriales').val(editarproductos.materiales_es) 
+      $('#idinglesMateriales').val(editarproductos.materiales_eng) 
+      $('#precioproducto').val( editarproductos.precio) 
+      precioDisplay.textContent = editarproductos.precio;
+      $('#pesokilogramos').val(editarproductos.peso) 
+      $('#idespanolTecnicas').val(editarproductos.tecnicas_es) 
+      $('#idinglesTecnicas').val(editarproductos.tecnicas_eng) 
+
+      $('#cantidad').val(editarproductos.cantidad ) 
+      $('#cantidadMinima').val(editarproductos.cantidad_minima)  
+      if (editarproductos.restar_stock===1){
+        document.getElementById('restarStock').checked = true;  
+        }else
+        {
+          document.getElementById('restarStock').checked = false;
+        }
+      
+      $('#estadoAgotado').val(editarproductos.tipo_estado) 
+      $('#fechaDisponible').val(editarproductos.fecha_disponible ) 
+
+
+      document.getElementById('imagenPrincipal').src=editarproductos.imagen_principal 
+
+ 
+     // Parsear el JSON
+      // Parsear el JSON y asegurarse de que es un arreglo
+      const lstimagenes2 = JSON.parse(editarproductos.lst_imagenes);
+      const lstimagenes = JSON.parse(lstimagenes2); 
+      console.log('lst_imagenes:', lstimagenes);  // Verificar el contenido de lstimagenes 
+          lstimagenes.forEach(item => {
+              contadorImagenes++;
+              let nuevaFila = `
+                  <tr>
+                      <td>${contadorImagenes}</td>
+                      <td>
+                          <div class="d-flex align-items-center">
+                              <img src="${item.src}" alt="Imagen ${contadorImagenes}" class="img-thumbnail" style="width: 100px; height: 75px;">
+                          </div>
+                      </td>
+                      <td>${item.nombre}</td>
+                      <td>
+                          <button type="button" data-toggle="tooltip" title="Eliminar" class="btn btn-primary btn-sm btn-delete-imagen">
+                              <i class="icon icon-bin"></i>
+                          </button>
+                      </td>
+                  </tr>
+              `; 
+              document.getElementById('listaImagenes').insertAdjacentHTML('beforeend', nuevaFila);
+          });
+    
+          
+     // Parsear el JSON
+      // Parsear el JSON y asegurarse de que es un arreglo
+      const lstvideos1 = JSON.parse(editarproductos.lst_videos);
+      const lstvideos = JSON.parse(lstvideos1); 
+      //console.log('videoList:', lst_videos);  // Verificar el contenido de lstimagenes 
+      lstvideos.forEach(item => {
+            videoCounter++;
+              let nuevaFila = `
+              <tr>
+                  <td>${videoCounter}</td>
+                  <td>${item.nombre}</td>
+                  <td><a href="${item.src}" target="_blank">Video subido</a></td>
+                  <td>
+                      <button type="button" class="btn btn-info btn-sm btn-view-video" data-link="${item.src}">Ver</button>  
+                      <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-video">
+                      <i class="icon icon-bin"></i> 
+                  </td>
+              </tr>
+              `; 
+              document.getElementById('videoList').insertAdjacentHTML('beforeend', nuevaFila);
+          });
+
+
+           // Parsear el JSON
+      // Parsear el JSON y asegurarse de que es un arreglo
+      const lstvideoenlace1 = JSON.parse(editarproductos.lst_videoenlace);
+      const lstvideoenlace = JSON.parse(lstvideoenlace1); 
+      //console.log('videoList:', lst_videos);  // Verificar el contenido de lstimagenes 
+      lstvideoenlace.forEach(item => {
+          videoCounter2++;
+              let nuevaFila = ` 
+              <tr>
+                  <td>${videoCounter2}</td>
+                  <td>${item.nombre}</td>
+                  <td><a href="${item.src}" target="_blank">${item.src}</a></td>
+                  <td>
+                      <button type="button" class="btn btn-info btn-sm btn-view-video" data-link="${item.src}">Ver</button> 
+                      
+                      <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-video1">
+                      <i class="icon icon-bin"></i> 
+                  </td>
+              </tr>
+              `; 
+              document.getElementById('videoList2').insertAdjacentHTML('beforeend', nuevaFila);
+          });
+
+           
+
+                // Parsear el JSON
+      // Parsear el JSON y asegurarse de que es un arreglo
+      const lstcolores1 = JSON.parse(editarproductos.lst_colores);
+      const lstcolores = JSON.parse(lstcolores1); 
+      //console.log('videoList:', lst_videos);  // Verificar el contenido de lstimagenes 
+      lstcolores.forEach(item => {
+        contadorColores++;
+              let nuevaFila = `
+              <tr>
+                  <td>${contadorColores}</td>
+                  <td>${item.color} <label id="color-label" style="background:${item.color} ; width: 10%;height: 25px;"></label></td> 
+                  <td>
+                      <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-colores">
+                      <i class="icon icon-bin"></i>
+                      </button> 
+
+                  </td>
+              </tr>
+              `; 
+              document.getElementById('listaColores').insertAdjacentHTML('beforeend', nuevaFila);
+          });
+ 
+                  // Parsear el JSON
+      // Parsear el JSON y asegurarse de que es un arreglo
+      const lsttalla1 = JSON.parse(editarproductos.lst_talla);
+      const lsttalla = JSON.parse(lsttalla1); 
+      //console.log('videoList:', lst_videos);  // Verificar el contenido de lstimagenes 
+      lsttalla.forEach(item => {
+        contadorTalla++;
+              let nuevaFila = `
+              <tr>
+                  <td>${contadorTalla}</td>
+                  <td>${item.talla}</td> 
+                  <td>
+                      <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-Talla">
+                      <i class="icon icon-bin"></i>
+                      </button> 
+
+                  </td>
+              </tr>
+              `; 
+              document.getElementById('listaTalla').insertAdjacentHTML('beforeend', nuevaFila);
+          });
+  
+                     // Parsear el JSON
+      // Parsear el JSON y asegurarse de que es un arreglo
+      const lstofertas1 = JSON.parse(editarproductos.lst_ofertas);
+      const lstofertas = JSON.parse(lstofertas1); 
+      //console.log('videoList:', lst_videos);  // Verificar el contenido de lstimagenes 
+      lstofertas.forEach(item => {
+        contadorOfertas++;
+              let nuevaFila = `
+              <tr>
+                  <td>${contadorOfertas}</td>
+                  <td>${item.porcentajeDescuento}</td>
+                  <td>${item.precioOfertado.toFixed(2)}</td>
+                  <td>${item.fechaInicio}</td>
+                  <td>${item.fechaFin}</td>
+                  <td>
+                      <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm  btn-delete-offer">
+                      <i class="icon icon-bin"></i>
+                      </button>
+                  </td>
+              </tr>
+              `; 
+              document.getElementById('listaOfertas').insertAdjacentHTML('beforeend', nuevaFila);
+          });
+  
+                     // Parsear el JSON
+      // Parsear el JSON y asegurarse de que es un arreglo
+      const lstotroscostos1 = JSON.parse(editarproductos.lst_otros_costos);
+      const lstotroscostos = JSON.parse(lstotroscostos1); 
+      //console.log('videoList:', lst_videos);  // Verificar el contenido de lstimagenes 
+      lstotroscostos.forEach(item => {
+        contadorCostos++;
+              let nuevaFila = `
+              <tr>
+                  <td>${contadorCostos}</td>
+                  <td>${item.nombre}</td>
+                  <td>${item.precio}</td>
+                  <td>
+                      <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-cost">
+                      <i class="icon icon-bin"></i>
+                      </button> 
+    
+                  </td>
+              </tr>
+              `; 
+              document.getElementById('listaCostos').insertAdjacentHTML('beforeend', nuevaFila);
+          });
+ 
+          if (editarproductos.precios_envio===1){
+            document.getElementById('precioEnvio').checked = true;  
+            }else
+            {
+              document.getElementById('precioEnvio').checked = false;
+            }
+            
+            
+ 
+          if (editarproductos.igv===1){
+            document.getElementById('impuestoIGV').checked = true;  
+            }else
+            {
+              document.getElementById('impuestoIGV').checked = false;
+            }
+
+
+          $('#envioLocal').val(editarproductos.precio_local) 
+          $('#envioNacional').val(editarproductos.precio_nacional) 
+          $('#envioExtranjero').val(editarproductos.precio_extranjero) 
+          $('#tiemposElaboracion').val(editarproductos.tiempo_elaboracion) 
+          $('#tiemposEnvio').val(editarproductos.tiempo_envio) 
+          
+          if (editarproductos.preventas===1){
+            document.getElementById('preventas').checked = true;  
+            }else
+            {
+              document.getElementById('preventas').checked = false;
+            }
+
+
+
+            /*****buscar artesanod */
+
+            const artesanosid = await buscarartesanoid(editarproductos.artesano_id); 
+            $('#dni').val(artesanosid.dni);
+            $('#nombrecompleto').val(artesanosid.nombres + ' ' + artesanosid.apellidos); 
+
+}
 
 $(document).ready(function() {
 
+ ///editar formulario
+ const urlParams = new URLSearchParams(window.location.search);
+   productId = urlParams.get('id');
+ if(productId!=0)
+  { 
+    editarProducto(productId);
+  }
+   
 
    /******otros costos */
-  let contadorCostos = 0;
 
   $('#addCostoButton').on('click', function() {
       let nombreCosto = $('#nombreCosto').val();
@@ -610,7 +1032,6 @@ $(document).ready(function() {
 
 
     /******ofertas */
-    let contadorOfertas = 0;
 
     function isInteger(value) {
         return /^\d+$/.test(value);
@@ -677,7 +1098,7 @@ $(document).ready(function() {
 
 
   /******otros Colores */
-  let contadorColores = 0;
+  
 
   $('#addcolorbtn').on('click', function() { 
       let colorinput = $('#color-input').val(); 
@@ -691,8 +1112,8 @@ $(document).ready(function() {
 
       let nuevaFila = `
           <tr>
-              <td>${contadorColores}</td>
-              <td>${colorinput}</td> 
+              <td>${contadorColores}</td> 
+              <td>${colorinput} <label  style="background: ${colorinput};width: 10%; height: 25px;"></label></td> 
               <td>
                   <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-colores">
                   <i class="icon icon-bin"></i>
@@ -720,7 +1141,7 @@ $(document).ready(function() {
 
   
   /****** Talla */
-  let contadorTalla = 0;
+ 
 
   $('#addtallabtn').on('click', function() { 
       let tallainput = $('#talla-input').val(); 
@@ -772,9 +1193,9 @@ $(document).ready(function() {
 
   /******  Imagenes */
    
-  let contadorImagenes = 0;
+  //let contadorImagenes = 0;
 
-            $('#guardarBtn').on('click', function() {
+   $('#guardarBtn').on('click', function() {
                 let imageName = $('#imageName').val();
                 let imageSrc = $('#imagePreview').attr('src');
 
@@ -817,20 +1238,7 @@ $(document).ready(function() {
     });
      
   });
-
-  $('#visualizarBtn').on('click', function() {
-    let file = $('#uploadImage').prop('files')[0];
-    if (file) {
-        let reader = new FileReader();
-        reader.onload = function(e) {
-            $('#imagePreview').attr('src', e.target.result).show();
-            $('#imageName').val(file.name);
-        }
-        reader.readAsDataURL(file);
-    } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
-    }
-});
+ 
 
 
   $('#guardarPrincipalBtn').on('click', function() {
@@ -851,20 +1259,7 @@ $(document).ready(function() {
     $('#imagenPrincipalForm')[0].reset();
     $('#principalImagePreview').hide();
   });
-
-  $('#visualizarPrincipalBtn').on('click', function() {
-    let file = $('#uploadPrincipalImage').prop('files')[0];
-    if (file) {
-        let reader = new FileReader();
-        reader.onload = function(e) {
-            $('#principalImagePreview').attr('src', e.target.result).show();
-            $('#principalImageName').val(file.name);
-        }
-        reader.readAsDataURL(file);
-    } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
-    }
-  });
+ 
 
   $('#limpiarPrincipalBtn').on('click', function() {
     $('#imagenPrincipal').attr('src', 'placeholder.png');
@@ -874,7 +1269,7 @@ $(document).ready(function() {
 
   
   /******  videos */
-  let videoCounter = 0; 
+  
   let videoStorage = {}; // Almacena los videos cargados
 
   $('#addVideoLink').on('click', function() {
@@ -886,11 +1281,11 @@ $(document).ready(function() {
           return;
       }
 
-      videoCounter++;
+      videoCounter2++;
 
       let newRow = `
           <tr>
-              <td>${videoCounter}</td>
+              <td>${videoCounter2}</td>
               <td>${videoName}</td>
               <td><a href="${videoLink}" target="_blank">${videoLink}</a></td>
               <td>
@@ -981,7 +1376,16 @@ $(document).ready(function() {
       }
 
       videoCounter++;
-      let videoURL = URL.createObjectURL(videoFile);
+
+      // Aquí puedes enviar imagenesprincipalJSON al servidor o hacer algo con él
+      //alert('Costos guardados en JSON:\n' + costosJSON);
+      /****fin */
+      var videoPreview = document.getElementById('videoPreview');
+
+      // Obtener el valor del atributo src
+      var video_Preview = videoPreview.src;
+      let videoURL = video_Preview;
+      //let videoURL = URL.createObjectURL(videoFile);
       videoStorage[videoCounter] = videoURL; // Almacena la URL del video
 
       let newRow = `
@@ -1020,3 +1424,153 @@ $(document).ready(function() {
 });
 
  
+document.addEventListener('DOMContentLoaded', () => {
+  initializeFileUploader({
+      fileInputId: 'uploadPrincipalImage',
+      progressBarId: 'progressBar',
+      statusElementId: 'status',
+      uploadUrl: 'http://localhost:3001/api/fileuploadimg',
+      callback: handleUploadResponseimgprincipal
+  });
+});
+ 
+
+function handleUploadResponseimgprincipal (response) { 
+
+  let file = $('#uploadPrincipalImage').prop('files')[0];
+    if (file) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            $('#principalImagePreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+            $('#principalImageName').val(file.name); 
+        }
+        reader.readAsDataURL(file);
+         
+
+       
+        alert('registro correcto')
+    } else {
+        alert("Por favor, seleccione un archivo para visualizar.");
+    }
+
+  // Ejemplo: Usar el resultado en otro lugar
+   /*document.getElementById('someElement').innerText = response.name;*/
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initializeFileUploader({
+      fileInputId: 'uploadImage',
+      progressBarId: 'progressBar',
+      statusElementId: 'status',
+      uploadUrl: 'http://localhost:3001/api/fileuploadimg',
+      callback: handleUploadResponselistaimg
+  });
+});
+
+function handleUploadResponselistaimg (response) {
+  // Manejar la respuesta del servidor
+  /*alert('registro correcto');
+  console.log('Server response:', response);
+  alert(response.ruta)
+  alert('registro correcto')*/ 
+
+    let file = $('#uploadImage').prop('files')[0];
+    if (file) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+            $('#imageName').val(file.name);
+        }
+        reader.readAsDataURL(file);
+        alert('registro correcto')
+    } else {
+        alert("Por favor, seleccione un archivo para visualizar.");
+    }
+
+  // Ejemplo: Usar el resultado en otro lugar
+   /*document.getElementById('someElement').innerText = response.name;*/
+}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  initializeFileUploader({
+      fileInputId: 'uploadVideo',
+      progressBarId: 'progressBar',
+      statusElementId: 'status',
+      uploadUrl: 'http://localhost:3001/api/fileuploadvideo',
+      callback: handleUploadResponselistavideo
+  });
+});
+
+function handleUploadResponselistavideo (response) {
+  // Manejar la respuesta del servidor
+  /*alert('registro correcto');
+  console.log('Server response:', response);
+  alert(response.ruta)
+  alert('registro correcto')*/ 
+
+  alert('registro correcto')
+  $('#videoPreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+
+   /* let file = $('#uploadImage').prop('files')[0];
+    if (file) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+            $('#imageName').val(file.name);
+        }
+        reader.readAsDataURL(file);
+        alert('registro correcto')
+    } else {
+        alert("Por favor, seleccione un archivo para visualizar.");
+    }*/
+
+  // Ejemplo: Usar el resultado en otro lugar
+   /*document.getElementById('someElement').innerText = response.name;*/
+}
+
+
+
+function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
+
+  const fileInput = document.getElementById(fileInputId);
+  const inputName = fileInput.name;
+  const progressBar = document.getElementById(progressBarId);
+  const statusElement = document.getElementById(statusElementId);
+
+  if (fileInput && progressBar && statusElement) {
+      const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName);
+      uploader.attachToFileInput(fileInput);
+  } else {
+      console.error('Initialization failed: One or more elements not found.');
+  }
+}
+
+
+// Obtener referencias a los elementos del DOM
+const dniElement = document.getElementById('dni'); 
+const nombrecompletoElement = document.getElementById('nombrecompleto');  
+
+// Añadir un evento para actualizar el precio con descuento cuando el usuario ingrese un valor
+dniElement.addEventListener('input', async function() {
+    // Obtener el valor del porcentaje de descuento ingresado
+    const dniValue = dniElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final
+    let valor = dniValue.length;
+    if (valor == 8) {
+        // Asume que buscarDNI es una función que retorna una promesa
+        const artesanosDNI = await buscarartesanoDNI(dniValue);
+    
+
+        if (artesanosDNI != null) {   
+            nombrecompletoElement.value = artesanosDNI.nombres + ' ' + artesanosDNI.apellidos;
+            artesano_id=artesanosDNI.id;
+        } else {  
+            showToast('No existe registro de artesano');
+            $('#dni').val('');
+            $('#nombrecompleto').val('');
+        }
+    }
+    
+    // Aquí puedes usar artesanosDNI como lo necesites 
+});

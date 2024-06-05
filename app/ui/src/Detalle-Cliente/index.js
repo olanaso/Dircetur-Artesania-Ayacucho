@@ -1,7 +1,6 @@
 import { actualizarCliente, obtenerCliente } from '../Clientes/api';
 import {loadData, handleCountryChange, handleStateChange} from '../utils/ubicaciones';
-import { FileUploader } from '../utils/upload.js';
-let imagen_principal = null;
+
 //tab informacion
 const nombreC = document.getElementById('nombreC');
 const apellidosC = document.getElementById('apellidosC');
@@ -63,13 +62,6 @@ async function llenarCampos(idCliente) {
         }
     }
 
-    if (cliente.foto_perfil == "") {
-        $('#imagenPrincipal').attr('src', imagen_principal);
-    }else{
-        $('#imagenPrincipal').attr('src', cliente.foto_perfil);
-    }
-    
-    
     //tab cuenta
 
     //tab reclamo cliente
@@ -115,7 +107,6 @@ function llenar_tablaReclamos(lista){
 }
 
 $(document).on('click', '#actualizar-informacion', async function (e) {
-    e.preventDefault();
     try {
         const result = await actualizarCliente(getQueryParameter('id'), {
             nombres: nombreC.value,
@@ -129,6 +120,7 @@ $(document).on('click', '#actualizar-informacion', async function (e) {
             tipo_documento: tipodocC.value,
             numero_documento: numerodocC.value,
             direccion_envio: dirEnvioC.value,
+            //foto_perfil: categoria.descripcion,
             // agregar después el campo para actualizar la imagen
 
         });
@@ -140,47 +132,12 @@ $(document).on('click', '#actualizar-informacion', async function (e) {
     }
 });
 
-
-
-$(document).on('click', '.btn-editarF', async function (e) {
-    $('#ClienteImagePreview').attr('src', $('#imagenPrincipal').attr('src')).show()
-});
-
-$(document).on('click', '#btn-actualizarFoto', async function (e){
-    e.preventDefault();
-    try {
-        const result = await actualizarCliente(getQueryParameter('id'), {
-            foto_perfil: imagen_principal
-        });
-        console.log('Foto perfil actualizada:', result);
-        $('#imagenPrincipalModal').modal('hide');
-        llenarCampos(getQueryParameter('id'))
-    } catch (error) {
-        console.error('Error al actualizar el cliente:', error);
-    }
-})
-
-$(document).on('click', '.btn-eliminarF', async function (e){
-    e.preventDefault();
-    var respuesta = confirm("¿Estás seguro de que deseas eliminar la foto de perfil?");
-    if (respuesta) {
-        try {
-            const result = await actualizarCliente(getQueryParameter('id'), {
-                foto_perfil: ""
-            });
-            console.log('Foto perfil eliminada:', result);
-            llenarCampos(getQueryParameter('id'))
-        } catch (error) {
-            console.error('Error al eliminar la foto de perfil:', error);
-        }
-    }
-    
-})
-
 $(document).on('click', '#actualizar-cuenta', async function (e) {
     // Actualizar los datos de la categoría en tu estructura de datos
 
 });
+
+
 
 //ver reclamo
 async function mostrarDataModal(clienteID) {
@@ -207,41 +164,6 @@ async function mostrarDataModal(clienteID) {
 }
 
 
-//carga de imagen de perfil de cliente
-function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
-
-    const fileInput = document.getElementById(fileInputId);
-    const inputName = fileInput.name;
-    const progressBar = document.getElementById(progressBarId);
-    const statusElement = document.getElementById(statusElementId);
-  
-    if (fileInput && progressBar && statusElement) {
-        const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
-        uploader.attachToFileInput(fileInput);
-    } else {
-        console.error('Initialization failed: One or more elements not found.');
-    }
-}
-
-function handleUploadResponse(response) {
-    alert('registro correcto')
-    alert(response.ruta)
-
-    let file = $('#myfile').prop('files')[0];
-    if (file) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-        $('#ClienteImagePreview').attr('src', 'http://localhost:3001/' + response.ruta).show();
-        $('#principalImageName').val(file.name);
-        }
-        reader.readAsDataURL(file);
-
-        imagen_principal = 'http://localhost:3001/' + response.ruta;
-    } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
-    }
-}
-
 
 document.addEventListener('DOMContentLoaded', (event)=> {
     event.preventDefault();
@@ -262,15 +184,5 @@ document.addEventListener('DOMContentLoaded', (event)=> {
             console.error('Error al actualizar el estado:', error);
         }
     });
-
-    initializeFileUploader({
-        fileInputId: 'myfile',
-        progressBarId: 'progressBar',
-        statusElementId: 'status',
-        uploadUrl: 'http://localhost:3001/api/fileupload4',
-        folder: '/cliente/img/',
-        callback: handleUploadResponse
-    });
-    
 });
 

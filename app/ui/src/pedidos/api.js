@@ -1,25 +1,22 @@
 const baseUrl = 'http://localhost:3001';
 
-export async function listarPedidos(page, limit) {
+export async function listarPedidos() {
     try {
-        const response = await fetch(`${baseUrl}/api/pedido?page=${page}&limit=${limit}`);
+        const response = await fetch(baseUrl + "/api/pedido");
         const result = await response.json();
         return result;
     } catch (error) {
-        console.error("Error al encontrar las categorías:", error);
-        throw error; // Propagar el error para manejarlo en el front-end si es necesario
+        console.error("Error al encontrar las categorias:", error);
     }
 }
 
 export async function filtrarPedidos(filtro) {
     try {
-        // Construir la URL con los parámetros de filtro
         const params = new URLSearchParams(filtro);
-        const response = await fetch(`${baseUrl}/api/pedidos?${params}`);
+        const response = await fetch(baseUrl + `/api/pedidos?${params}`);
         const result = await response.json();
         return result;
     } catch (error) {
         console.error("Error al buscar las categorias:", error);
-        throw error; // Propagar el error para manejarlo en el front-end si es necesario
     }
 }
