@@ -986,6 +986,241 @@ $(document).ready(function() {
     editarProducto(productId);
   }
    
+//******traductor */
+
+$('#ingles-tab').on('shown.bs.tab', function (e) {
+    const textInSpanish = $('#idespanolNombre').val();
+    if (textInSpanish === "") {
+      $('#idinglesNombre').val(""); // Clear the English field if Spanish field is empty
+      alert("Por favor, ingrese un nombre de producto en español antes de traducir.");
+      return; // Exit the function if the Spanish field is empty
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({ "text": textInSpanish });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesNombre').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));
+});
+
+$('#ingles-tab-resumen').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolResumen').val();
+  if (textInSpanish === "") {
+    $('#idinglesResumen').val(""); // Clear the English field if Spanish field is empty
+    alert("Por favor, ingrese el resumen de producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesResumen').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+$('#ingles-tab-descripcion').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolDescripcion').val();
+  if (textInSpanish === "") {
+    $('#idinglesDescripcion').val(""); // Clear the English field if Spanish field is empty
+    alert("Por favor, ingrese la descripción del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesDescripcion').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+$('#ingles-tab-cualidades').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolCualidades').val();
+  if (textInSpanish === "") {
+    $('#idinglesCualidades').val(""); // Clear the English field if Spanish field is empty
+    alert("Por favor, ingrese las cualidades del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesCualidades').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+$('#ingles-tab-palabras').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolPalabras').val();
+  if (textInSpanish === "") {
+    $('#idinglesPalabras').val(""); // Clear the English field if Spanish field is empty
+    alert("Por favor, ingrese palabra clave del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesPalabras').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+$('#ingles-tab-piezas').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolPiezas').val();
+  if (textInSpanish === "") {
+    $('#idinglesPiezas').val(""); // Clear the English field if Spanish field is empty
+    alert("Por favor, ingrese numero de piezas del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesPiezas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+
+$('#ingles-tab-materiales').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolMateriales').val();
+  if (textInSpanish === "") {
+    $('#idinglesMateriales').val(""); // Clear the English field if Spanish field is empty
+    alert("Por favor, ingrese descripción de materiales del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesMateriales').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+
+$('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolTecnicas').val();
+  if (textInSpanish === "") {
+    $('#idinglesTecnicas').val(""); // Clear the English field if Spanish field is empty
+    alert("Por favor, ingrese técnicas empleadas del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesTecnicas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+//**fin*** */
+
+
 
    /******otros costos */
 
