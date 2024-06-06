@@ -23,7 +23,7 @@
 		<!-- Chartist css -->
 		<link href="vendor/chartist/css/chartist.min.css" rel="stylesheet" />
 		<link href="vendor/chartist/css/chartist-custom.css" rel="stylesheet" />
-
+		<link rel="stylesheet" href="/src/Clientes/Styles.css">
 	</head>
 	<body>
 
@@ -169,24 +169,26 @@
 					<div class="main-content">
 						<div class="card">
 							<div class="card-body">
-								<h5 class="">Filtrar clientes</h5>
-								<form id="filtrarCliente">
-									<div class="row gutters">
-										<div class="col">
-											<input type="text" class="form-control" placeholder="Nombre" id="nombre-Cliente">
+								<div class="filterContent">
+									<div class="card-header">Filtrar</div>
+									<form class="mt-2 mb-2 p-3" id="filtrarCliente">
+										<div class="row gutters">
+											<div class="col">
+												<input type="text" class="form-control" placeholder="Nombre" id="nombre-Cliente">
+											</div>
+											<div class="col">
+												<input type="text" class="form-control" placeholder="Apellido" id="apellido-Cliente">
+											</div>
+											<div class="col">
+												<input type="text" class="form-control" placeholder="Correo" id="correo-Cliente">
+											</div>
+											
 										</div>
-										<div class="col">
-											<input type="text" class="form-control" placeholder="Apellido" id="apellido-Cliente">
+										<div class="d-flex justify-content-end mt-3">
+											<button class="btn btn-primary btn-sm" id="filtrar-Cliente">Filtrar <i class="icon icon-funnel"></i></button>
 										</div>
-										<div class="col">
-											<input type="text" class="form-control" placeholder="Correo" id="correo-Cliente">
-										</div>
-										<div class="col">
-											<button class="btn btn-primary" id="filtrar-Cliente">Filtrar</button>
-										</div>
-									</div>
-								</form>
-								
+									</form>
+								</div>
 								<div class="card">
 									<div class="card-header">Lista de Clientes</div>
 									<div class="card-body" id="listaClientes">

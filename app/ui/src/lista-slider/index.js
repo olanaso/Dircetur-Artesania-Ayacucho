@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fileInputId: 'myfile',
       progressBarId: 'progressBar',
       statusElementId: 'status',
-      uploadUrl: 'http://localhost:3001/api/fileupload3',
+      uploadUrl: 'http://localhost:3001/api/fileupload4',
       folder: '/slider/img/',
       callback: handleUploadResponse
   });
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     progressBarId: 'progressBar-editar',
     statusElementId: 'status-editar',
     folder: '/slider/img/',
-    uploadUrl: 'http://localhost:3001/api/fileupload3',
+    uploadUrl: 'http://localhost:3001/api/fileupload4',
     callback: handleEditUploadResponse
   });
 });
