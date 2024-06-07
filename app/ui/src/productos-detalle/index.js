@@ -32,9 +32,11 @@ function startApp () {
   checkadminsession(); 
   buscarUsuario();
   exportarExcel();
-  nuevo();
-
+  nuevo(); 
+ 
 }
+
+
 async function checkadminsession () {
   let result = await checkSession()
   if (result.usuario.rolid != 1) {
@@ -238,7 +240,8 @@ async function buscarUsuario () {
     });
 
     if (!isValid) {
-      alert('Por favor, ingresa el DNI y todos los campos requeridos.');
+      //alert('Por favor, ingresa el DNI y todos los campos requeridos.');
+      showToast('Por favor, ingresa el DNI y todos los campos requeridos.');
       document.getElementById('dni').focus(); // Pone el foco en el campo del D
       
       return;
@@ -476,7 +479,9 @@ async function buscarUsuario () {
        
       if (cantidad && cantidadMinima) {
         if (parseFloat(cantidad) < parseFloat(cantidadMinima)) {
-          alert('La cantidad minima no puede ser mayor');
+          
+      showToast('La cantidad minima no puede ser mayor.');
+          //alert('La cantidad minima no puede ser mayor');
           document.getElementById('cantidadMinima').focus(); 
            document.getElementById('cantidadMinima').value=""; 
           return
@@ -485,6 +490,8 @@ async function buscarUsuario () {
         errorMessage.style.display = 'none';
     }
   }
+
+  
 
   
 document.getElementById('cantidad').addEventListener('input', validarCantidad);
@@ -509,7 +516,8 @@ document.getElementById('cantidadMinima').addEventListener('input', validarCanti
     });
 
     if (!isValid) {
-      alert('Por favor, completa todos los campos requeridos.');
+      showToast('Por favor, completa todos los campos requeridos.');
+      //alert('Por favor, completa todos los campos requeridos.');
 
     } else {
       //$("#btnactualizar").prop("disabled", true).text("Actualizando..."); 
@@ -685,10 +693,16 @@ descuentoInput.addEventListener('input', function() {
         precioOfertadoInput.value = precioConDescuento.toFixed(2);
     } else {
         // Manejo de errores si los valores no son válidos
-        precioOfertadoInput.value = 'Valor inválido';
+        showToast('Completar el precio actual, registrar en la pestaña "datos generales - Precio del producto".');
+
+        $('#porcentajeDescuento').val("");
+        $('#precioOfertado').val("");
+        //alert("Por favor, complete todos los campos *.");
+        return;
     }
 });
 
+ 
 
 // validar fechas 
  // Obtener referencias a los elementos del DOM
@@ -706,7 +720,9 @@ descuentoInput.addEventListener('input', function() {
      const fechaFin = new Date(fechaFinInput.value);
 
      if (fechaFin < fechaInicio) {
-         alert("La fecha de fin no puede ser menor que la fecha de inicio.");
+      
+      showToast('La fecha de fin no puede ser menor que la fecha de inicio.');
+         //alert("La fecha de fin no puede ser menor que la fecha de inicio.");
          fechaFinInput.value = fechaInicioInput.value;
      }
  }
@@ -767,6 +783,7 @@ async function editarProducto (id) {
       $('#fechaDisponible').val(editarproductos.fecha_disponible ) 
 
 
+      
       document.getElementById('imagenPrincipal').src=editarproductos.imagen_principal 
 
  
@@ -936,14 +953,27 @@ async function editarProducto (id) {
               document.getElementById('listaCostos').insertAdjacentHTML('beforeend', nuevaFila);
           });
  
+          var input = document.getElementById('envioLocal');
+          var input2 = document.getElementById('envioNacional');
+          var input3 = document.getElementById('envioExtranjero');
           if (editarproductos.precios_envio===1){
             document.getElementById('precioEnvio').checked = true;  
+            input.disabled = false;
+            input2.disabled = false;
+            input3.disabled = false;
+            
+          $('#envioLocal').val(editarproductos.precio_local) 
+          $('#envioNacional').val(editarproductos.precio_nacional) 
+          $('#envioExtranjero').val(editarproductos.precio_extranjero) 
             }else
             {
-              document.getElementById('precioEnvio').checked = false;
+              document.getElementById('precioEnvio').checked = false; 
+              input.disabled = true;
+              input2.disabled = true;
+              input3.disabled = true;
             }
             
-            
+             
  
           if (editarproductos.igv===1){
             document.getElementById('impuestoIGV').checked = true;  
@@ -953,9 +983,6 @@ async function editarProducto (id) {
             }
 
 
-          $('#envioLocal').val(editarproductos.precio_local) 
-          $('#envioNacional').val(editarproductos.precio_nacional) 
-          $('#envioExtranjero').val(editarproductos.precio_extranjero) 
           $('#tiemposElaboracion').val(editarproductos.tiempo_elaboracion) 
           $('#tiemposEnvio').val(editarproductos.tiempo_envio) 
           
@@ -978,6 +1005,8 @@ async function editarProducto (id) {
 
 $(document).ready(function() {
 
+   
+
  ///editar formulario
  const urlParams = new URLSearchParams(window.location.search);
    productId = urlParams.get('id');
@@ -992,7 +1021,9 @@ $('#ingles-tab').on('shown.bs.tab', function (e) {
     const textInSpanish = $('#idespanolNombre').val();
     if (textInSpanish === "") {
       $('#idinglesNombre').val(""); // Clear the English field if Spanish field is empty
-      alert("Por favor, ingrese un nombre de producto en español antes de traducir.");
+      
+      showToast('Por favor, ingrese un nombre de producto en español antes de traducir.');
+     // alert("Por favor, ingrese un nombre de producto en español antes de traducir.");
       return; // Exit the function if the Spanish field is empty
     }
 
@@ -1020,7 +1051,9 @@ $('#ingles-tab-resumen').on('shown.bs.tab', function (e) {
   const textInSpanish = $('#idespanolResumen').val();
   if (textInSpanish === "") {
     $('#idinglesResumen').val(""); // Clear the English field if Spanish field is empty
-    alert("Por favor, ingrese el resumen de producto en español antes de traducir.");
+    
+    showToast('Por favor, ingrese el resumen de producto en español antes de traducir.');
+    //alert("Por favor, ingrese el resumen de producto en español antes de traducir.");
     return; // Exit the function if the Spanish field is empty
   }
 
@@ -1048,7 +1081,9 @@ $('#ingles-tab-descripcion').on('shown.bs.tab', function (e) {
   const textInSpanish = $('#idespanolDescripcion').val();
   if (textInSpanish === "") {
     $('#idinglesDescripcion').val(""); // Clear the English field if Spanish field is empty
-    alert("Por favor, ingrese la descripción del producto en español antes de traducir.");
+    
+    showToast('Por favor, ingrese la descripción del producto en español antes de traducir.');
+    //alert("Por favor, ingrese la descripción del producto en español antes de traducir.");
     return; // Exit the function if the Spanish field is empty
   }
 
@@ -1076,7 +1111,9 @@ $('#ingles-tab-cualidades').on('shown.bs.tab', function (e) {
   const textInSpanish = $('#idespanolCualidades').val();
   if (textInSpanish === "") {
     $('#idinglesCualidades').val(""); // Clear the English field if Spanish field is empty
-    alert("Por favor, ingrese las cualidades del producto en español antes de traducir.");
+    
+    showToast('Por favor, ingrese las cualidades del producto en español antes de traducir.');
+   //alert("Por favor, ingrese las cualidades del producto en español antes de traducir.");
     return; // Exit the function if the Spanish field is empty
   }
 
@@ -1104,7 +1141,8 @@ $('#ingles-tab-palabras').on('shown.bs.tab', function (e) {
   const textInSpanish = $('#idespanolPalabras').val();
   if (textInSpanish === "") {
     $('#idinglesPalabras').val(""); // Clear the English field if Spanish field is empty
-    alert("Por favor, ingrese palabra clave del producto en español antes de traducir.");
+    showToast('Por favor, ingrese palabra clave del producto en español antes de traducir.');
+    //alert("Por favor, ingrese palabra clave del producto en español antes de traducir.");
     return; // Exit the function if the Spanish field is empty
   }
 
@@ -1133,7 +1171,8 @@ $('#ingles-tab-piezas').on('shown.bs.tab', function (e) {
   const textInSpanish = $('#idespanolPiezas').val();
   if (textInSpanish === "") {
     $('#idinglesPiezas').val(""); // Clear the English field if Spanish field is empty
-    alert("Por favor, ingrese numero de piezas del producto en español antes de traducir.");
+    showToast('Por favor, ingrese numero de piezas del producto en español antes de traducir.');
+    //alert("Por favor, ingrese numero de piezas del producto en español antes de traducir.");
     return; // Exit the function if the Spanish field is empty
   }
 
@@ -1163,7 +1202,8 @@ $('#ingles-tab-materiales').on('shown.bs.tab', function (e) {
   const textInSpanish = $('#idespanolMateriales').val();
   if (textInSpanish === "") {
     $('#idinglesMateriales').val(""); // Clear the English field if Spanish field is empty
-    alert("Por favor, ingrese descripción de materiales del producto en español antes de traducir.");
+    showToast('Por favor, ingrese descripción de materiales del producto en español antes de traducir.');
+    //alert("Por favor, ingrese descripción de materiales del producto en español antes de traducir.");
     return; // Exit the function if the Spanish field is empty
   }
 
@@ -1193,7 +1233,8 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
   const textInSpanish = $('#idespanolTecnicas').val();
   if (textInSpanish === "") {
     $('#idinglesTecnicas').val(""); // Clear the English field if Spanish field is empty
-    alert("Por favor, ingrese técnicas empleadas del producto en español antes de traducir.");
+    showToast('Por favor, ingrese técnicas empleadas del producto en español antes de traducir.');
+    //alert("Por favor, ingrese técnicas empleadas del producto en español antes de traducir.");
     return; // Exit the function if the Spanish field is empty
   }
 
@@ -1229,7 +1270,8 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
       let precioCosto = $('#precioCosto').val();
 
       if (nombreCosto === "" || precioCosto === "") {
-          alert("Por favor, complete todos los campos.");
+        showToast('Por favor, complete todos los campos *.');
+          //alert("Por favor, complete todos los campos *.");
           return;
       }
 
@@ -1280,10 +1322,25 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
       let porcentajeDescuento = $('#porcentajeDescuento').val();
       let precioOfertado = $('#precioOfertado').val();
       let fechaInicio = $('#fechaInicio').val();
-      let fechaFin = $('#fechaFin').val();
+      let fechaFin = $('#fechaFin').val(); 
+ 
+
+      const precioOriginal = parseFloat(precioDisplaySpan.innerText) || parseFloat(precioDisplaySpan.textContent);
+
+    // Validar que los valores sean números válidos
+    if (isNaN(precioOriginal)) { 
+        // Manejo de errores si los valores no son válidos
+        showToast('Completar el precio actual, registrar en la pestaña "datos generales - Precio del producto".');
+
+        $('#porcentajeDescuento').val("");
+        $('#precioOfertado').val("");
+        //alert("Por favor, complete todos los campos *.");
+        return;
+    }
 
       if (porcentajeDescuento === "" || precioOfertado === "" || fechaInicio === "" || fechaFin === "") {
-          alert("Por favor, complete todos los campos.");
+        showToast('Por favor, complete todos los campos *.');
+          //alert("Por favor, complete todos los campos *.");
           return;
       }
 
@@ -1291,7 +1348,8 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
       precioOfertado = precioOfertado === "" ? 0 : (isDecimal(precioOfertado) ? parseFloat(precioOfertado) : NaN);
 
       if (isNaN(porcentajeDescuento) || isNaN(precioOfertado)) {
-          alert("Por favor, ingrese valores válidos.");
+        showToast('Por favor, ingrese valores válidos.');
+         //alert("Por favor, ingrese valores válidos.");
           return;
       }
 
@@ -1339,7 +1397,8 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
       let colorinput = $('#color-input').val(); 
 
       if (colorinput === "" ) {
-          alert("Por favor, complete todos los campos.");
+        showToast('Por favor, complete todos los campos *.');
+          //alert("Por favor, complete todos los campos *.");
           return;
       }
 
@@ -1382,16 +1441,19 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
       let tallainput = $('#talla-input').val(); 
 
       if (tallainput === "" ) {
-          alert("Por favor, complete todos los campos.");
+        showToast('Por favor, complete todos los campos *.');
+          //alert("Por favor, complete todos los campos *.");
           return;
       }
 
-      tallainput = tallainput === "" ? 0 : (isInteger(tallainput) ? parseInt(tallainput, 10) : NaN); 
+     /* tallainput = tallainput === "" ? 0 : (isInteger(tallainput) ? parseInt(tallainput, 10) : NaN); 
 
       if (isNaN(tallainput)) {
-          alert("Por favor, ingrese valores válidos.");
+        showToast('Por favor, ingrese valores válidos.');
+        $('#talla-input').focus(); 
+          //alert("Por favor, ingrese valores válidos.");
           return;
-      }
+      }*/
 
       contadorTalla++;
 
@@ -1435,7 +1497,8 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
                 let imageSrc = $('#imagePreview').attr('src');
 
                 if (!imageName || !imageSrc) {
-                    alert("Por favor, suba una imagen.");
+                  showToast('Por favor, suba una imagen.');
+                    //alert("Por favor, suba una imagen.");
                     return;
                 }
 
@@ -1485,7 +1548,8 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
     
 
     if (!principalImageSrc || !principalImageName) {
-        alert("Por favor, suba una imagen.");
+      showToast('Por favor, suba una imagen.');
+       // alert("Por favor, suba una imagen.");
         return;
     }
 
@@ -1497,7 +1561,7 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
  
 
   $('#limpiarPrincipalBtn').on('click', function() {
-    $('#imagenPrincipal').attr('src', 'placeholder.png');
+    $('#imagenPrincipal').attr('src', '/img/sin_imagen.jpg');
   });
 
 
@@ -1508,13 +1572,31 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
   let videoStorage = {}; // Almacena los videos cargados
 
   $('#addVideoLink').on('click', function() {
-      let videoName = $('#linkVideoName').val();
-      let videoLink = $('#videoLink').val();
 
-      if (!videoName || !videoLink) {
-          alert("Por favor, complete todos los campos.");
-          return;
-      }
+    let videoName = $('#linkVideoName').val();
+    let videoLink = $('#videoLink').val();
+
+    if (!videoName || !videoLink) {
+      showToast('Por favor, complete todos los campos *.');
+        //alert("Por favor, complete todos los campos *.");
+        return;
+    }
+
+    var urlInput = document.getElementById('videoLink').value;
+    var message = document.getElementById('message');
+    var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-zA-Z0-9]{1,}\\.)?[a-zA-Z0-9]{2,}\\.[a-zA-Z]{2,})|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-zA-Z0-9@:%_\\+.~#?&//=]*)?' + // port and path
+        '(\\?[;&a-zA-Z0-9@:%_\\+.~#?&//=]*)?' + // query string
+        '(\\#[-a-zA-Z0-9@:%_\\+.~#?&//=]*)?$','i'); // fragment locator
+
+    if (!urlPattern.test(urlInput)) { 
+        showToast('URL no válida.'); 
+        $('#videoLink').val("");
+        return;
+    }
+ 
 
       videoCounter2++;
 
@@ -1601,12 +1683,14 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
       let videoFile = $('#uploadVideo').prop('files')[0];
 
       if (!videoName || !videoFile) {
-          alert("Por favor, complete todos los campos.");
+        showToast('Por favor, complete todos los campos *.');
+          //alert("Por favor, complete todos los campos *.");
           return;
       }
 
       if (videoFile.size > 100 * 1024 * 1024) { // 100MB
-          alert("El archivo no debe pesar más de 100mb");
+        showToast('El archivo no debe pesar más de 100mb.');
+          //alert("El archivo no debe pesar más de 100mb");
           return;
       }
 
@@ -1683,9 +1767,11 @@ function handleUploadResponseimgprincipal (response) {
          
 
        
-        alert('registro correcto')
+        showToast('Registro correcto.');
+        //showToast('Registro correcto.');
     } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
+      showToast('Por favor, seleccione un archivo para visualizar.');
+        //alert("Por favor, seleccione un archivo para visualizar.");
     }
 
   // Ejemplo: Usar el resultado en otro lugar
@@ -1704,10 +1790,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function handleUploadResponselistaimg (response) {
   // Manejar la respuesta del servidor
-  /*alert('registro correcto');
+  /*showToast('Registro correcto.');;
   console.log('Server response:', response);
   alert(response.ruta)
-  alert('registro correcto')*/ 
+  showToast('Registro correcto.');*/ 
 
     let file = $('#uploadImage').prop('files')[0];
     if (file) {
@@ -1717,9 +1803,10 @@ function handleUploadResponselistaimg (response) {
             $('#imageName').val(file.name);
         }
         reader.readAsDataURL(file);
-        alert('registro correcto')
+        showToast('Registro correcto.');
     } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
+      showToast('Por favor, seleccione un archivo para visualizar.');
+        //alert("Por favor, seleccione un archivo para visualizar.");
     }
 
   // Ejemplo: Usar el resultado en otro lugar
@@ -1740,12 +1827,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function handleUploadResponselistavideo (response) {
   // Manejar la respuesta del servidor
-  /*alert('registro correcto');
+  /*showToast('Registro correcto.');;
   console.log('Server response:', response);
   alert(response.ruta)
-  alert('registro correcto')*/ 
+  showToast('Registro correcto.');*/ 
 
-  alert('registro correcto')
+  showToast('Registro correcto.');
   $('#videoPreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
 
    /* let file = $('#uploadImage').prop('files')[0];
@@ -1756,7 +1843,7 @@ function handleUploadResponselistavideo (response) {
             $('#imageName').val(file.name);
         }
         reader.readAsDataURL(file);
-        alert('registro correcto')
+        showToast('Registro correcto.');
     } else {
         alert("Por favor, seleccione un archivo para visualizar.");
     }*/
@@ -1808,4 +1895,17 @@ dniElement.addEventListener('input', async function() {
     }
     
     // Aquí puedes usar artesanosDNI como lo necesites 
+});
+
+document.getElementById('precioEnvio').addEventListener('change', function() {
+  var checkbox = this;
+  var input = document.getElementById('envioLocal');
+  var input2 = document.getElementById('envioNacional');
+  var input3 = document.getElementById('envioExtranjero');
+  input.disabled = !checkbox.checked;
+  input2.disabled = !checkbox.checked;
+  input3.disabled = !checkbox.checked; 
+  $('#envioLocal').val('');
+  $('#envioNacional').val('');
+  $('#envioExtranjero').val(''); 
 });
