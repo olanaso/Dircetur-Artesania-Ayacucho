@@ -1,4 +1,3 @@
-
 module.exports = {
     uploadFileDNI,
     uploadFilevideo,
@@ -89,7 +88,7 @@ async function uploadImgSlider (req, res, next) {
 
 async function uploadImgCliente (req, res, next) {
     try {
-        let folder = req.query.folder;
+        let folder = 'files-app' + req.query.folder;
         let filenamesaved = req.filenamesaved;
         if (!filenamesaved) throw {
             error: "No se logro subir el archivo",

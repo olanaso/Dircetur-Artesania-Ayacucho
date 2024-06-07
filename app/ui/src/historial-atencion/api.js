@@ -32,11 +32,14 @@ export async function actualizarPedido(id, data) {
     }
 }
 
-export async function enviarCorreo(formData) {
+export async function enviarCorreo(emailData) {
     try {
         const response = await fetch(`${baseUrl}/web/sendemail`, {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(emailData)
         });
 
         const result = await response.json();

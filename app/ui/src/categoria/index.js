@@ -70,6 +70,7 @@ async function eliminarCategoria(id) {
 }
 
 async function editarCategoria(categoria) {
+  const form = document.getElementById('modalCategoriaEditar');
   const modal = document.getElementById('modalCategoriaEditar');
   const abreviaturaInput = document.getElementById('abreviatura-editar');
   const denominacionInput = document.getElementById('denominacion-editar');
@@ -97,6 +98,11 @@ async function editarCategoria(categoria) {
       formData.foto_referente = imagen_principal
     } else {
       formData.foto_referente = categoria.foto_referente;
+    }
+    // Verificar si el formulario es válido antes de continuar
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
     }
 
     try {
@@ -175,16 +181,16 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInputId: 'myfile',
     progressBarId: 'progressBar',
     statusElementId: 'status',
-    uploadUrl: 'http://localhost:3001/api/fileupload3',
-    folder: '/categorias/img/',
+    uploadUrl: 'http://localhost:3001/api/fileupload4',
+    folder: '/categorias/',
     callback: handleUploadResponse
   });
   initializeFileUploader({
     fileInputId: 'myfile-editar',
     progressBarId: 'progressBar-editar',
     statusElementId: 'status-editar',
-    uploadUrl: 'http://localhost:3001/api/fileupload3',
-    folder: '/categorias/img/',
+    uploadUrl: 'http://localhost:3001/api/fileupload4',
+    folder: '/categorias/',
     callback: handleEditUploadResponse
   });
 
