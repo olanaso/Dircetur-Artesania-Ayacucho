@@ -97,7 +97,7 @@ function listar(req, res) {
         a.cantidad
     FROM producto a
     INNER JOIN artesano b ON a.artesano_id = b.id
-    INNER JOIN usuario c ON c.id = a.login_id 
+    INNER JOIN usuario c ON c.id = b.usuario_id 
     order by a.id desc
     limit 50
     `    
@@ -136,7 +136,7 @@ function buscar(req, res) {
         a.cantidad
     FROM producto a
     INNER JOIN artesano b ON a.artesano_id = b.id
-    INNER JOIN usuario c ON c.id = a.login_id
+    INNER JOIN usuario c ON c.id = b.usuario_id 
     WHERE 1=1 
     `;
     
@@ -181,11 +181,9 @@ function buscar(req, res) {
 
 
 /*Guarda los datos generales de un predio*/
-async function save (req, res, next) {
-
+async function save(req, res, next) {
     const t = await model.sequelize.transaction();
     try {
-
         let object = await model.findOne({
             where: {
                 id: req.body.id ? req.body.id : 0
@@ -193,21 +191,20 @@ async function save (req, res, next) {
         });
 
         if (object != null) {
-            let obj = { ...object.dataValues, ...req.body }
+            let obj = { ...object.dataValues, ...req.body };
             for (const prop in obj) {
-                object[prop] = obj[prop]
+                object[prop] = obj[prop];
             }
             object.usuaregistra_id = req.userId;
-            await object.save({ t });
+            await object.save({ transaction: t });
         } else {
-            // object = await model.create({ ...req.body, usuaregistra_id: req.userId }, { t });
-            object = await model.create({ ...req.body }, { t });
+            object = await model.create({ ...req.body }, { transaction: t });
         }
-        t.commit().then();
-        return res.status(200).send(object);
+        await t.commit();
+        // Envía el ID del objeto creado junto con el objeto
+        return res.status(200).send({ id: object.id, object });
     } catch (e) {
-        t.rollback();
+        await t.rollback();
         return next(e);
     }
 }
-

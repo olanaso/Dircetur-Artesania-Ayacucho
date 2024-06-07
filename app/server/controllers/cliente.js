@@ -63,8 +63,6 @@ function obtener(req, res) {
         })
 }
 
-
-/*
 function listar(req, res) {
 
     model.findAll()
@@ -75,37 +73,6 @@ function listar(req, res) {
             res.status(400).send(error)
         })
 }
-*/
-
-const DEFAULT_PAGE_LIMIT = 10; // Número predeterminado de resultados por página
-
-function listar(req, res) {
-    const page = parseInt(req.query.page) || 1; // Página solicitada, por defecto la primera
-    const limit = parseInt(req.query.limit) || DEFAULT_PAGE_LIMIT; // Límite de resultados por página
-
-    const offset = (page - 1) * limit; // Calcular el desplazamiento
-
-    model.findAndCountAll({
-        limit: limit,
-        offset: offset
-    })
-    .then(result => {
-        const { count, rows } = result;
-        const totalPages = Math.ceil(count / limit); // Calcular el número total de páginas
-
-        res.status(200).json({
-            totalItems: count,
-            totalPages: totalPages,
-            currentPage: page,
-            clientes: rows
-        });
-    })
-    .catch(error => {
-        console.error('Error al listar clientes:', error);
-        res.status(500).json({ message: 'Error interno del servidor' });
-    });
-}
-
 
 
 async function save(req, res, next) {
@@ -138,48 +105,23 @@ async function save(req, res, next) {
 
 async function filtrar(req, res) {
     try {
-        let { nombres, apellidos, correo, page, limit } = req.query;
-
-        // Convertir a números enteros y establecer valores predeterminados si no se proporcionan
-        page = parseInt(page) || 1;
-        limit = parseInt(limit) || DEFAULT_PAGE_LIMIT;
-        
-
         const whereCondition = {};
-        if (nombres) {
-            //whereCondition.nombres = nombres;
-            whereCondition.nombres = {
-                [Op.like]: `%${nombres}%`
-              };
-        }
-        if (apellidos) {
-            //whereCondition.apellidos = apellidos;
-            whereCondition.apellidos = {
-                [Op.like]: `%${apellidos}%`
-            };
-        }
 
-        if (correo) {
-            whereCondition.correo = correo;
+        for (const [key, value] of Object.entries(req.query)) {
+            if (value) {
+                if (typeof value === 'string' && key !== 'id') {
+                    // Si el valor es una cadena y la clave no es 'id', usar Op.like para búsquedas parciales
+                    whereCondition[key] = { [Op.like]: `%${value}%` };
+                } else {
+                    // Si no, hacer una coincidencia exacta
+                    whereCondition[key] = value;
+                }
+            }
         }
 
-        console.log(`bbbb: ${JSON.stringify(whereCondition)}`)
+        const clientes = await model.findAll({ where: whereCondition });
 
-        const offset = (page - 1) * limit; // Calcular el desplazamiento
-        const result = await model.findAndCountAll({ 
-            where: whereCondition,
-            limit: limit,
-            offset: offset
-        });
-        console.log(`ccccc: ${result.count}`)
-        const totalPages = Math.ceil(result.count / limit); // Calcular el número total de páginas
-
-        res.json({
-            totalItems: result.count,
-            totalPages: totalPages,
-            currentPage: page,
-            clientes: result.rows
-        });
+        res.json(clientes);
     } catch (error) {
         console.error('Error al buscar clientes:', error);
         res.status(500).json({ message: 'Error interno del servidor' });
