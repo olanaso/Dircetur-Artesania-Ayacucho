@@ -1,9 +1,8 @@
-
 module.exports = {
     uploadFileDNI,
     uploadFilevideo,
-    uploadImgSlider,
-    uploadImgCliente
+    uploadFileproductovideo,
+    uploadFileproductoimg
 };
 
 async function uploadFileDNI (req, res, next) {
@@ -36,7 +35,7 @@ async function uploadFilevideo (req, res, next) {
             status: 400
         }
         //console.log(req.ciudadano)
-        let file = 'categorias/img/' + req.filenamesaved
+        let file = folder + '/' + req.filenamesaved
         return res.status(200).send({
             nombrearchuvo: req.originalname, ruta: file
         });
@@ -44,8 +43,9 @@ async function uploadFilevideo (req, res, next) {
     } catch (err) {
         return next(err);
     }
-} 
-async function uploadFilevideocat (req, res, next) {
+}
+
+async function uploadFileproductovideo (req, res, next) {
     try {
         let folder = req.query.folder;
         let filenamesaved = req.filenamesaved;
@@ -55,8 +55,7 @@ async function uploadFilevideocat (req, res, next) {
             status: 400
         }
         //console.log(req.ciudadano)
-        let file = 'categorias/img/' + req.filenamesaved
-        
+        let file = 'productos/video/' + req.filenamesaved
         return res.status(200).send({
             nombrearchuvo: req.originalname, ruta: file
         });
@@ -64,30 +63,9 @@ async function uploadFilevideocat (req, res, next) {
     } catch (err) {
         return next(err);
     }
-} 
+}
 
-async function uploadImgSlider (req, res, next) {
-    try {
-        let folder = req.query.folder;
-        let filenamesaved = req.filenamesaved;
-        if (!filenamesaved) throw {
-            error: "No se logro subir el archivo",
-            message: "Ha habido un error",
-            status: 400
-        }
-        //console.log(req.ciudadano)
-        //let file = 'slider/img/' + req.filenamesaved
-        let file = folder + req.filenamesaved
-        return res.status(200).send({
-            nombrearchuvo: req.originalname, ruta: file
-        });
-
-    } catch (err) {
-        return next(err);
-    }
-} 
-
-async function uploadImgCliente (req, res, next) {
+async function uploadFileproductoimg (req, res, next) {
     try {
         let folder = 'files-app' + req.query.folder;
         let filenamesaved = req.filenamesaved;
@@ -97,8 +75,7 @@ async function uploadImgCliente (req, res, next) {
             status: 400
         }
         //console.log(req.ciudadano)
-        //let file = 'cliente/img/' + req.filenamesaved
-        let file = folder + req.filenamesaved
+        let file = 'productos/img/' + req.filenamesaved
         return res.status(200).send({
             nombrearchuvo: req.originalname, ruta: file
         });
@@ -106,4 +83,4 @@ async function uploadImgCliente (req, res, next) {
     } catch (err) {
         return next(err);
     }
-} 
+}

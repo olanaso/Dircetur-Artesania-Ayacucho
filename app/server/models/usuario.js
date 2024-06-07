@@ -10,26 +10,16 @@ module.exports = sequelize.define('usuario', {
         autoIncrement: true,
         field: 'id'
     },
-    dni: {
+    usuario: {
         type: Sequelize.TEXT,
         allowNull: true,
-        field: 'dni'
+        field: 'usuario'
     },
-    nombres: {
+    nombre_completo: {
         type: Sequelize.TEXT,
         allowNull: true,
-        field: 'nombres'
-    },
-    apellidos: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-        field: 'apellidos'
-    },
-    correo: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-        field: 'correo'
-    },
+        field: 'nombre_completo'
+    }, 
     clave: {
         type: Sequelize.TEXT,
         allowNull: true,
@@ -40,21 +30,16 @@ module.exports = sequelize.define('usuario', {
         allowNull: true,
         field: 'rolid'
     },
-    iestpid: {
+    tipousuario: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'iestpid'
+        field: 'tipousuario'
     },
-    programaid: {
+    estado: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'programaid'
-    },
-    telefonos: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-        field: 'telefonos'
-    },
+        field: 'estado'
+    }, 
     createdAt: {
         type: Sequelize.DATE,
         allowNull: true,

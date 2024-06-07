@@ -1,5 +1,4 @@
-import { baseUrl, getDataFromLocalStorage } from '../utils/config';
-//const baseUrl = 'http://localhost:3001'
+const baseUrl = 'http://localhost:3001'
 
 //post
 export async function guardarSlider(data) {
@@ -10,7 +9,7 @@ export async function guardarSlider(data) {
             body: JSON.stringify(data)
         };
 
-        const response = await fetch(baseUrl+'/slider', requestOptions);
+        const response = await fetch(baseUrl+'/api/slider', requestOptions);
         const result = await response.json();
 
         return result;
@@ -28,7 +27,7 @@ export async function actualizarSlider(id, data) {
             body: JSON.stringify(data)
         };
 
-        const response = await fetch(baseUrl+`/slider/${id}`, requestOptions);
+        const response = await fetch(baseUrl+`/api/slider/${id}`, requestOptions);
         const result = await response.json();
 
         return result;
@@ -46,7 +45,7 @@ export async function eliminarSlider(id) {
             body: JSON.stringify({ id })
         };
 
-        const response = await fetch(baseUrl+'/slider', requestOptions);
+        const response = await fetch(baseUrl+'/api/slider', requestOptions);
         const result = await response.json();
 
         return result;
@@ -58,7 +57,7 @@ export async function eliminarSlider(id) {
 //obtenerbyid
 export async function obtenerSlider(id) {
     try {
-        const response = await fetch(baseUrl+`/slider/${id}`, { method: 'GET' });
+        const response = await fetch(baseUrl+`/api/slider/${id}`, { method: 'GET' });
         const result = await response.json();
 
         return result;
@@ -87,7 +86,7 @@ export async function saveSlider(data) {
             body: JSON.stringify(data)
         };
 
-        const response = await fetch(baseUrl+'/slider/save/', requestOptions);
+        const response = await fetch(baseUrl+'/api/slider/save/', requestOptions);
         const result = await response.json();
 
         return result;
