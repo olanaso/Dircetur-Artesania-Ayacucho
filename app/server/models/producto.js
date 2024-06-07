@@ -10,12 +10,7 @@ module.exports = sequelize.define('producto', {
         primaryKey: true,
         autoIncrement: true,
         field: 'id'  
-    },
-    login_id: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        field: 'login_id'
-    },
+    }, 
     artesano_id: {
         type: Sequelize.INTEGER,
         allowNull: true,

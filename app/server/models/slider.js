@@ -16,7 +16,7 @@ module.exports = sequelize.define('slider', {
         field: 'descripcion'
     },
     imagen: {
-        type: Sequelize.STRING(250),
+        type: Sequelize.JSON,
         allowNull: true,
         field: 'imagen'
     },

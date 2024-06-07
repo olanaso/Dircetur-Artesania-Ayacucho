@@ -1,7 +1,6 @@
 import {guardarSlider, listarSliders, eliminarSlider, obtenerSlider, actualizarSlider} from './api';
 import { FileUploader } from '../utils/upload.js';
 
-let imagen_principal = null;
 //carga de imagenes
 document.addEventListener('DOMContentLoaded', () => {
   cargarTablaSliders();
@@ -9,21 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
       fileInputId: 'myfile',
       progressBarId: 'progressBar',
       statusElementId: 'status',
-      uploadUrl: 'http://localhost:3001/api/fileupload3',
-      folder: '/slider/img/',
+      uploadUrl: 'http://localhost:3001/api/fileupload2',
       callback: handleUploadResponse
-  });
-  initializeFileUploader({
-    fileInputId: 'myfile-editar',
-    progressBarId: 'progressBar-editar',
-    statusElementId: 'status-editar',
-    folder: '/slider/img/',
-    uploadUrl: 'http://localhost:3001/api/fileupload3',
-    callback: handleEditUploadResponse
   });
 });
 
-function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
+function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
 
   const fileInput = document.getElementById(fileInputId);
   const inputName = fileInput.name;
@@ -31,7 +21,7 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
   const statusElement = document.getElementById(statusElementId);
 
   if (fileInput && progressBar && statusElement) {
-      const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
+      const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName);
       uploader.attachToFileInput(fileInput);
   } else {
       console.error('Initialization failed: One or more elements not found.');
@@ -39,40 +29,33 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
 }
 
 function handleUploadResponse(response) {
+  // Manejar la respuesta del servidor
+  //console.log('Server response:', response);
   alert('registro correcto')
+
   alert(response.ruta)
 
   let file = $('#myfile').prop('files')[0];
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
+      console.log("response.ruta: ", response.ruta)
       $('#principalImagePreview').attr('src', 'http://localhost:3001/' + response.ruta).show();
       $('#principalImageName').val(file.name);
     }
     reader.readAsDataURL(file);
 
     imagen_principal = 'http://localhost:3001/' + response.ruta;
+
+    alert('registro correcto')
   } else {
     alert("Por favor, seleccione un archivo para visualizar.");
   }
+
+  // Ejemplo: Usar el resultado en otro lugar
+  // document.getElementById('someElement').innerText = response.someValue;
 }
 
-function handleEditUploadResponse(response) {
-  let file = $('#myfile-editar').prop('files')[0];
-  if (file) {
-    let reader = new FileReader();
-    reader.onload = function (e) {
-      $('#SliderImagePreviewEdit').attr('src', 'http://localhost:3001/' + response.ruta).show();
-    }
-    reader.readAsDataURL(file);
-
-    imagen_principal = 'http://localhost:3001/' + response.ruta;
-
-    alert('Actualización de la imagen correctamente');
-  } else {
-    alert("Por favor, seleccione un archivo para visualizar.");
-  }
-}
 //fin carga de imagen
 
 document.getElementById('myfile').addEventListener('change', function() {
@@ -85,6 +68,19 @@ document.getElementById('myfile').addEventListener('change', function() {
         this.value = '';
     }
 });
+
+document.getElementById('visualizar').addEventListener('click', function() {
+    var imagen = document.getElementById('myfile').files[0];
+    var reader = new FileReader();
+    reader.onload = function(event) {
+      var imagenSrc = event.target.result;
+      var newTab = window.open();
+      newTab.document.write('<img src="' + imagenSrc + '">');
+    };
+    reader.readAsDataURL(imagen);
+  });
+
+
 
 
 //cargar datos a la tabla:
@@ -136,18 +132,13 @@ async function cargarTablaSliders() {
 document.getElementById('formSliderC').addEventListener('submit', async (event) => {
   event.preventDefault();
   const frase = document.getElementById('frase').value;
-
-  //imagen
-  var principalImagePreview = document.getElementById('principalImagePreview');
-    // Obtener el valor del atributo src
-  var foto_referente = principalImagePreview.src;
+  const imagenInput = document.getElementById('myfile').value;
   const formData = {
     descripcion: frase,
-    imagen: foto_referente
+    imagen: imagenInput
   };
   try {
     const result = await guardarSlider(formData);
-    console.log(result)
     if (result) {
         $('#frase').val('')
         $('#imgSlider').val('')
@@ -192,8 +183,11 @@ $(document).on('click', '.btn-editarS', async function (e) {
   const id = $(this).data('id');
   try {
       const slider = await obtenerSlider(id);
-      $('#fraseE').val(slider.descripcion);
-      $('#SliderImagePreviewEdit').attr('src', slider.imagen).show();
+
+      $('#modalSliderE #fraseE').val(slider.descripcion);
+      $('#modalSliderE #imgSliderE').val(slider.frase);
+
+      // $('#formSliderE').data('id', slider.id);
       $('#formSliderE').attr('data-id', slider.id);
   } catch (error) {
       console.error('Error:', error);
@@ -204,17 +198,13 @@ $(document).on('submit', '#formSliderE', async function (e) {
   e.preventDefault();
     const id = $(this).data('id');
     const fraseE = document.getElementById('fraseE').value;
-    const fileInput = document.getElementById('myfile-editar');
-
+    const imagenInputE = document.getElementById('imgSliderE').value;
+    
     const formDataE = {
-      descripcion: fraseE
+      descripcion: fraseE,
+      imagen: imagenInputE
     };
-
-    if (fileInput.files[0]) {
-      formDataE.imagen= imagen_principal
-    } else {
-      formDataE.imagen = $('#SliderImagePreviewEdit').attr('src');
-    }
+    console.log("datos de guardado:"+id, formDataE);
   try {
     
     const result = await actualizarSlider(id, formDataE);
