@@ -1,6 +1,7 @@
 import {guardarSlider, listarSliders, eliminarSlider, obtenerSlider, actualizarSlider} from './api';
 import { FileUploader } from '../utils/upload.js';
-
+import { AlertDialog } from "../utils/alert";
+const alertDialog = new AlertDialog();
 let imagen_principal = null;
 //carga de imagenes
 document.addEventListener('DOMContentLoaded', () => {
@@ -39,8 +40,8 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
 }
 
 function handleUploadResponse(response) {
-  alert('registro correcto')
-  alert(response.ruta)
+  //alert('registro correcto')
+  //alert(response.ruta)
 
   let file = $('#myfile').prop('files')[0];
   if (file) {
@@ -70,7 +71,15 @@ function handleEditUploadResponse(response) {
 
     alert('Actualización de la imagen correctamente');
   } else {
-    alert("Por favor, seleccione un archivo para visualizar.");
+    alertDialog.createAlertDialog(
+      'warning',
+      'Warning Alert',
+      'Por favor, seleccione un archivo para visualizar.',
+      'Aceptar',
+      'Cerrar',
+      () => { }
+    );
+    //alert("Por favor, seleccione un archivo para visualizar.");
   }
 }
 //fin carga de imagen
@@ -145,7 +154,12 @@ document.getElementById('formSliderC').addEventListener('submit', async (event) 
     descripcion: frase,
     imagen: foto_referente
   };
+  const form = document.getElementById('formSliderC')
   try {
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
     const result = await guardarSlider(formData);
     console.log(result)
     if (result) {
@@ -167,6 +181,17 @@ document.getElementById('formSliderC').addEventListener('submit', async (event) 
 //eliminar un slider
 $(document).on('click', '.btn-eliminarS', async function (e) {
   const id = $(this).data('id');
+  /*
+  alertDialog.createAlertDialog(
+    'confirm',
+    'Confirm Alert',
+    '¿Estás seguro de que deseas eliminar?',
+    'No',
+    'Si',
+    (inputValue) => {
+        return true;
+    }
+  );*/
   var respuesta = confirm("¿Estás seguro de que deseas eliminar?");
   if (respuesta) {
     try {
