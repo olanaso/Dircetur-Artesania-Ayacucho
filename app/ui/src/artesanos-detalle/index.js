@@ -103,13 +103,13 @@ async function buscarUsuario () {
       }
     });
 
-    if (!isValid) {
-      alert('Por favor, ingresa el DNI y todos los campos requeridos.');
+    if (!isValid) { 
+      showToast('Por favor, ingresa el DNI y todos los campos *.');
       document.getElementById('dni').focus(); // Pone el foco en el campo del D
       
       return;
     } else   if (validar == "0" ) {
-      alert("validar datos de usuario.");
+      showToast('validar usuario ficha - información personal.'); 
       return;
     } else { 
 
@@ -353,14 +353,18 @@ async function editarArtesano (id) {
           {
             document.getElementById('talabarteria').checked = false;
           }
+          
+          var input = document.getElementById('desotro');
           if (item.otro===1){
-            document.getElementById('otro').checked = true;  
+            document.getElementById('otro').checked = true;   
+            input.disabled = false;
+            $('#desotro').val(item.desotro)
           }else
           {
             document.getElementById('otro').checked = false;
-          }
-  
-          $('#desotro').val(item.desotro)
+            input.disabled = true;
+          } 
+ 
           
       });
           
@@ -488,9 +492,15 @@ $(document).ready(function() {
  ///editar formulario
  const urlParams = new URLSearchParams(window.location.search);
    artesanoId = urlParams.get('id');
+   
+   var titulo = document.getElementById("tituloartesano");
  if(artesanoId!=0)
   { 
+    titulo.innerText = "Editar artesano";
     editarArtesano(artesanoId);
+  }else
+  { 
+    titulo.innerText = "Nuevo artesano";
   }
    
 
@@ -510,15 +520,15 @@ $(document).ready(function() {
     let enlacecontacto = $('#enlacecontacto').val();  
 
     if (tiporedsocial === "0" ) {
-      alert("Por favor de seleccionar tipo.");
+      showToast('Por favor de seleccionar tipo.'); 
       return;
     } 
     if (usuarionumero === "" ) {
-        alert("Por favor, ingresar usuario / número.");
+      showToast('Por favor, ingresar usuario / número.');  
         return;
     }
     if (enlacecontacto === "" ) {
-      alert("Por favor, ingresar enlace de contacto");
+      showToast('Por favor, ingresar enlace de contacto.');  
         return;
     }
 
@@ -595,12 +605,12 @@ $(document).on('click', '.btn-delete-Contacto', function() {
     let internacional = $('#internacional').is(':checked') ? 1 : 0; 
     
 
-    if (tipomediopago === "0" ) {
-      alert("Por favor de seleccionar tipo.");
+    if (tipomediopago === "0" ) { 
+      showToast('Por favor de seleccionar tipo.');  
       return;
     } 
-    if (nombrebanco === "" || nombretitular === "" || cuentacorriente === ""  || cuentainterbancaria === "" ) {
-        alert("Por favor, toda la información.");
+    if (nombrebanco === "" || nombretitular === "" || cuentacorriente === ""  || cuentainterbancaria === "" ) { 
+        showToast('Por favor, todos los campos *.'); 
         return;
     } 
 
@@ -667,6 +677,48 @@ $(document).on('click', '.btn-delete-Contacto', function() {
 
 });
 
+var estadomediopago=0;
+var titulomediopago = document.getElementById("addmediopagoModalLabel");
+$('#addmediopagoModal').on('shown.bs.modal', function () {
+  // Limpiar los campos
+if(estadomediopago!==1){
+  $('#tituloreconocimiento').val('');  
+  $('#entidadreconoce').val('');  
+  $('#descripcionreconocimiento').val(''); 
+  
+
+  // Obtener el título 
+
+  // Cambiar el título según lo necesites
+  // Ejemplo: Cambiar a "Nuevo reconocimiento"
+  titulomediopago.innerText = "Nuevo medio de pago";
+}
+});
+
+$('#addmediopagoModal').on('hide.bs.modal', function () {
+  // Limpiar los campos 
+  
+  $('#tipomediopago').val(0);  
+  $('#nombrebanco').val('');  
+  $('#nombretitular').val('');  
+  $('#cuentacorriente').val('');  
+  $('#cuentainterbancaria').val('');   
+  $('#boleta').prop('checked', false);
+  $('#factura').prop('checked', false);
+  $('#recibohonorario').prop('checked', false);
+  $('#local').prop('checked', false);
+  $('#departamental').prop('checked', false);
+  $('#internacional').prop('checked', false);
+  estadomediopago=0;
+
+  // Obtener el título
+ 
+
+  // Cambiar el título según lo necesites
+  // Ejemplo: Cambiar a "Nuevo reconocimiento"
+  titulomediopago.innerText = "Nuevo medio de pago";  
+});
+
 
 // Delegar el evento de clic para el botón editar
 $('#listaMediopago').on('click', '.btn-edit-Mediopago', function() {
@@ -731,7 +783,11 @@ $('#listaMediopago').on('click', '.btn-edit-Mediopago', function() {
   document.getElementById('guardarMediopagoBtn').style.display = 'none';
   document.getElementById('editarMediopagoBtn').style.display = 'inline-block';
 
+  
+  titulomediopago.innerText = "Editar medio de pago";
+  estadomediopago=1;
   $('#addmediopagoModal').modal('show');
+  
 });
 
 $(document).on('click', '.btn-delete-Mediopago', function() {
@@ -796,6 +852,7 @@ $('#editarMediopagoBtn').on('click', function() {
   $('#internacional').prop('checked', false);
 
   $('#addmediopagoModal').modal('hide');
+  estadomediopago=0;
 });
 
 
@@ -812,7 +869,7 @@ $('#editarMediopagoBtn').on('click', function() {
 
     
     if (tituloreconocimiento === "" || entidadreconoce === "" || descripcionreconocimiento === ""   ) {
-        alert("Por favor, toda la información.");
+      showToast('Por favor, todos los campos *.');  
         return;
     } 
  
@@ -847,6 +904,8 @@ $('#editarMediopagoBtn').on('click', function() {
 });
 
 let filaActual;
+var addreconocimmientoModal = document.getElementById("addreconocimmientoModalLabel");
+var estadoreconocimmiento=0;
 // Delegar el evento de clic para el botón editar
 $('#listaReconocimiento').on('click', '.btn-edit-reconocimiento', function() {
   filaActual = $(this).closest('tr');
@@ -863,6 +922,10 @@ $('#listaReconocimiento').on('click', '.btn-edit-reconocimiento', function() {
   document.getElementById('editarreconocimientoBtn').style.display = 'inline-block';
 
   $('#addreconocimmientoModal').modal('show');
+
+  addreconocimmientoModal.innerText = "Editar Reconocimiento";
+  estadoreconocimmiento=1;
+
 });
 
 $(document).on('click', '.btn-delete-reconocimiento', function() {
@@ -875,6 +938,36 @@ $(document).on('click', '.btn-delete-reconocimiento', function() {
     });
 }); 
 
+  $('#addreconocimmientoModal').on('shown.bs.modal', function () {
+        // Limpiar los campos
+      if(estadoreconocimmiento!==1){
+        $('#tituloreconocimiento').val('');  
+        $('#entidadreconoce').val('');  
+        $('#descripcionreconocimiento').val(''); 
+
+        // Obtener el título
+        var titulo = document.getElementById("addreconocimmientoModalLabel");
+
+        // Cambiar el título según lo necesites
+        // Ejemplo: Cambiar a "Nuevo reconocimiento"
+        titulo.innerText = "Nuevo reconocimiento";
+      }
+  });
+
+  $('#addreconocimmientoModal').on('hide.bs.modal', function () {
+        // Limpiar los campos 
+        $('#tituloreconocimiento').val('');  
+        $('#entidadreconoce').val('');  
+        $('#descripcionreconocimiento').val(''); 
+        estadoreconocimmiento=0;
+
+        // Obtener el título
+        var titulo = document.getElementById("addreconocimmientoModalLabel");
+
+        // Cambiar el título según lo necesites
+        // Ejemplo: Cambiar a "Nuevo reconocimiento"
+        titulo.innerText = "Nuevo reconocimiento";  
+    });
 
 $('#editarreconocimientoBtn').on('click', function() {  
 
@@ -895,6 +988,8 @@ $('#editarreconocimientoBtn').on('click', function() {
   $('#descripcionreconocimiento').val(''); 
 
   $('#addreconocimmientoModal').modal('hide');
+  estadoreconocimmiento=0;
+  
 });
 
 
@@ -915,7 +1010,7 @@ $('#editarreconocimientoBtn').on('click', function() {
     
 
     if (!principalImageSrc || !principalImageName) {
-        alert("Por favor, suba una imagen.");
+      showToast('Por favor, suba una imagen.');   
         return;
     }
 
@@ -927,7 +1022,7 @@ $('#editarreconocimientoBtn').on('click', function() {
  
 
   $('#limpiarFoto1Btn').on('click', function() {
-    $('#imagenFoto1').attr('src', 'placeholder.png');
+    $('#imagenFoto1').attr('src', '/img/sin_imagen.jpg');
   });
 
   /******foto 2 */
@@ -940,7 +1035,9 @@ $('#editarreconocimientoBtn').on('click', function() {
     
 
     if (!principalImage2Src || !principalImage2Name) {
-        alert("Por favor, suba una imagen.");
+      
+      showToast('Por favor, suba una imagen.');
+       // alert("Por favor, suba una imagen.");
         return;
     }
 
@@ -952,7 +1049,7 @@ $('#editarreconocimientoBtn').on('click', function() {
  
 
   $('#limpiarFoto2Btn').on('click', function() {
-    $('#imagenFoto2').attr('src', 'placeholder.png');
+    $('#imagenFoto2').attr('src', '/img/sin_imagen.jpg');
   });
 
 });
@@ -979,9 +1076,11 @@ function handleUploadResponseimgprincipal (response) {
             $('#principalImageName').val(file.name); 
         }
         reader.readAsDataURL(file); 
-        alert('registro correcto')
+         showToast('registro correcto.');
     } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
+      
+      showToast('Por favor, seleccione un archivo para visualizar.');
+        //alert("Por favor, seleccione un archivo para visualizar.");
     }
  
 }
@@ -1008,9 +1107,9 @@ function handleUploadResponseimgprincipal2 (response) {
             $('#principalImage2Name').val(file.name); 
         }
         reader.readAsDataURL(file); 
-        alert('registro correcto')
-    } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
+         showToast('registro correcto.');
+    } else { 
+        showToast('Por favor, seleccione un archivo para visualizar.');
     }
  
 }
@@ -1059,9 +1158,9 @@ document.getElementById("registroForm").addEventListener("submit", function(even
   var usuario = document.getElementById("usuario").value;
   var contrasena = document.getElementById("contrasena").value;
   var repetirContrasena = document.getElementById("repetirContrasena").value;
-  var usuarioError = document.getElementById("usuarioError");
-  var contrasenaError = document.getElementById("contrasenaError");
-  var repetirContrasenaError = document.getElementById("repetirContrasenaError");
+  //var usuarioError = document.getElementById("usuarioError");
+  //var contrasenaError = document.getElementById("contrasenaError");
+  //var repetirContrasenaError = document.getElementById("repetirContrasenaError");
   var errores = false;
 
    
@@ -1101,7 +1200,7 @@ document.getElementById("registroForm").addEventListener("submit", function(even
       validar=0;
       return;
   }  else {
-      contrasenaError.textContent = "";
+      //contrasenaError.textContent = "";
   }
 
   // Validar repetir contraseña
@@ -1118,7 +1217,7 @@ document.getElementById("registroForm").addEventListener("submit", function(even
       validar=0;
       return;
   } else {
-      repetirContrasenaError.textContent = "";
+      //.textContent = "";
   }
 
   if (!errores) {
@@ -1127,4 +1226,11 @@ document.getElementById("registroForm").addEventListener("submit", function(even
     validar=1;
       // Aquí podrías realizar alguna otra acción, como redireccionar a otra página
   }
+});
+
+document.getElementById('otro').addEventListener('change', function() {
+  var checkbox = this;
+  var input = document.getElementById('desotro'); 
+  input.disabled = !checkbox.checked; 
+  $('#desotro').val(''); 
 });

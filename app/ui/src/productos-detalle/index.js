@@ -783,6 +783,7 @@ async function editarProducto (id) {
       $('#fechaDisponible').val(editarproductos.fecha_disponible ) 
 
 
+      
       document.getElementById('imagenPrincipal').src=editarproductos.imagen_principal 
 
  
@@ -960,6 +961,10 @@ async function editarProducto (id) {
             input.disabled = false;
             input2.disabled = false;
             input3.disabled = false;
+            
+          $('#envioLocal').val(editarproductos.precio_local) 
+          $('#envioNacional').val(editarproductos.precio_nacional) 
+          $('#envioExtranjero').val(editarproductos.precio_extranjero) 
             }else
             {
               document.getElementById('precioEnvio').checked = false; 
@@ -978,9 +983,6 @@ async function editarProducto (id) {
             }
 
 
-          $('#envioLocal').val(editarproductos.precio_local) 
-          $('#envioNacional').val(editarproductos.precio_nacional) 
-          $('#envioExtranjero').val(editarproductos.precio_extranjero) 
           $('#tiemposElaboracion').val(editarproductos.tiempo_elaboracion) 
           $('#tiemposEnvio').val(editarproductos.tiempo_envio) 
           
