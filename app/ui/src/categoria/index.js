@@ -74,7 +74,7 @@ async function eliminarCategoria(id) {
 }
 
 async function editarCategoria(categoria) {
-  const form = document.getElementById('modalCategoriaEditar');
+  const form = document.getElementById('actualizar-categoria-form');
   const modal = document.getElementById('modalCategoriaEditar');
   const abreviaturaInput = document.getElementById('abreviatura-editar');
   const denominacionInput = document.getElementById('denominacion-editar');
@@ -204,8 +204,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+document.getElementById('myfile').addEventListener('change', function() {
+  var file = this.files[0];
+  var fileType = file.type;
+  var allowedTypes = ['image/png', 'image/jpeg'];
 
+  if (!allowedTypes.includes(fileType)) {
+      alert('Solo se permiten archivos PNG o JPG');
+      this.value = '';
+  }
+});
+document.getElementById('myfile-editar').addEventListener('change', function() {
+  var file = this.files[0];
+  var fileType = file.type;
+  var allowedTypes = ['image/png', 'image/jpeg'];
 
+  if (!allowedTypes.includes(fileType)) {
+      alert('Solo se permiten archivos PNG o JPG');
+      this.value = '';
+  }
+});
 function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
 
   const fileInput = document.getElementById(fileInputId);
