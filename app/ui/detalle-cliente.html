@@ -257,62 +257,62 @@
 												<div class="row">
 													<div class="modal-body col-md-6 ">
 														<div class="form-group row gutters">
-															<label for="inputEmail3" class="col-sm-3 col-form-label">Nombre</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control" id="nombreC" placeholder="" name="nombres">
+															<span class="text-primary">*</span><label for="inputEmail3" class="col-sm-3 col-form-label">Nombre</label>
+															<div class="col">
+																<input type="text" class="form-control" id="nombreC" placeholder="" name="nombres" required>
 															</div>
 														</div>
 														<div class="form-group row gutters">
-															<label for="inputEmail3" class="col-sm-3 col-form-label">Apellidos</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control" id="apellidosC" placeholder="" name="apellidos">
+															<span class="text-primary">*</span><label for="inputEmail3" class="col-sm-3 col-form-label">Apellidos</label>
+															<div class="col">
+																<input type="text" class="form-control" id="apellidosC" placeholder="" name="apellidos" required>
 															</div>
 														</div>
 														<div class="form-group row gutters">
-															<label for="inputEmail3" class="col-sm-3 col-form-label">Correo</label>
-															<div class="col-sm-9">
-																<input type="email" class="form-control" id="correoC" placeholder="" name="correo">
+															<span class="text-primary">*</span><label for="inputEmail3" class="col-sm-3 col-form-label">Correo</label>
+															<div class="col">
+																<input type="email" class="form-control" id="correoC" placeholder="" name="correo" required>
 															</div>
 														</div>
 														<div class="form-group row gutters">
-															<label for="inputEmail3" class="col-sm-3 col-form-label">Teléfono</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control" id="telefonoC" placeholder="" name="telefono">
+															<span class="text-primary">*</span><label for="inputEmail3" class="col-sm-3 col-form-label">Teléfono</label>
+															<div class="col">
+																<input type="text" class="form-control" id="telefonoC" placeholder="" name="telefono" required>
 															</div>
 														</div>
 														<div class="form-group row gutters">
-															<label for="inputEmail3" class="col-sm-3 col-form-label">Dirección</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control" id="direccionC" placeholder="" name="direccion">
+															<span class="text-primary">*</span><label for="inputEmail3" class="col-sm-3 col-form-label">Dirección</label>
+															<div class="col">
+																<input type="text" class="form-control" id="direccionC" placeholder="" name="direccion" required>
 															</div>
 														</div>
 														<div class="form-group row gutters">
-															<label for="inputEmail3" class="col-sm-3 col-form-label">País</label>
-															<div class="col-sm-9">
+															<span class="text-primary">*</span><label for="inputEmail3" class="col-sm-3 col-form-label">País</label>
+															<div class="col">
 																<select class="form-control" id="pais" name="pais">
 																	<option>Seleccione su País</option>
 																</select>
 															</div>
 														</div>
 														<div class="form-group row gutters">
-															<label for="inputEmail3" class="col-sm-3 col-form-label">Región</label>
-															<div class="col-sm-9">
+															<span class="text-primary">*</span><label for="inputEmail3" class="col-sm-3 col-form-label">Región</label>
+															<div class="col">
 																<select class="form-control" id="region" name="region">
 																	<option>Seleccione su Región</option>
 																</select>
 															</div>
 														</div>
 														<div class="form-group row gutters">
-															<label for="inputEmail3" class="col-sm-3 col-form-label">Ciudad</label>
-															<div class="col-sm-9">
+															<span class="text-primary">*</span><label for="inputEmail3" class="col-sm-3 col-form-label">Ciudad</label>
+															<div class="col">
 																<select class="form-control" id="ciudad" name="ciudad">
 																	<option>Seleccione su Ciudad</option>
 																</select>
 															</div>
 														</div>
 														<div class="form-group row gutters">
-															<label for="inputEmail3" class="col-sm-3 col-form-label">Tipo de Documento</label>
-															<div class="col-sm-9">
+															<span class="text-primary">*</span><label for="inputEmail3" class="col-sm-3 col-form-label">Tipo de Documento</label>
+															<div class="col">
 																<div class="form-row">
 																	<div class="form-group col-md-6">
 																		<select id="tipo_documento" class="form-control" name="tipo_documento">
@@ -322,15 +322,15 @@
 																		</select>
 																	</div>
 																	<div class="form-group col-md-6">
-																		<input type="text" class="form-control" placeholder="" id="inputDocumentoTipo" name="numero_documento">
+																		<input type="text" class="form-control" placeholder="" id="inputDocumentoTipo" name="numero_documento" required>
 																	</div>
 																</div>
 															</div>
 														</div>
 														<div class="form-group row gutters">
-															<label for="inputEmail3" class="col-sm-3 col-form-label">Dirección envío</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control" id="dirEnvio" placeholder="" name="direccion_envio">
+															<span class="text-primary">*</span><label for="inputEmail3" class="col-sm-3 col-form-label">Dirección envío</label>
+															<div class="col">
+																<input type="text" class="form-control" id="dirEnvio" placeholder="" name="direccion_envio" required>
 															</div>
 														</div>
 													</div>
@@ -360,6 +360,7 @@
 															</div>
 															<div class="modal-body">
 																<form id="imagenPrincipalForm">
+																	<span class="text-primary">*</span><label for="">Foto de perfil</label>
 																	<div class="form-group">
 																		<input type="file" id="myfile" name="myfile" required>
 																		<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
@@ -389,25 +390,25 @@
                                       	<div class="tab-pane fade" id="cuentaC" role="tabpanel" aria-labelledby="cuentaC-tab">
 											<form action="" class="col-md-8">
 												<div class="form-group row gutters">
-													<label for="inputEmail3" class="col-sm-3 col-form-label">Usuario</label>
-													<div class="col-sm-9">
-														<input type="text" class="form-control" id="usuarioC" placeholder="" name="usuarioC">
+													<span class="text-primary"></span><label for="inputEmail3" class="col-sm-3 col-form-label">Usuario</label>
+													<div class="col">
+														<input type="text" class="form-control" id="usuarioC" placeholder="" name="usuarioC" readonly>
 													</div>
 												</div>
 												<div class="form-group row gutters">
-													<label for="inputPassword3" class="col-sm-3 col-form-label">Contraseña</label>
-													<div class="col-sm-9">
-														<input type="password" class="form-control" id="contraseñaC" placeholder="" name="contraseñaC">
+													<span class="text-primary">*</span><label for="inputPassword3" class="col-sm-3 col-form-label">Contraseña</label>
+													<div class="col">
+														<input type="password" class="form-control" id="contraseñaC" placeholder="" name="contraseñaC" required>
 													</div>
 												</div>
 												<div class="form-group row gutters">
-													<label for="inputPassword3" class="col-sm-3 col-form-label">Repita Contraseña</label>
-													<div class="col-sm-9">
-														<input type="password" class="form-control" id="rContraseñaC" placeholder="" name="rContraseñaC">
+													<span class="text-primary">*</span><label for="inputPassword3" class="col-sm-3 col-form-label">Repita Contraseña</label>
+													<div class="col">
+														<input type="password" class="form-control" id="rContraseñaC" placeholder="" name="rContraseñaC" required>
 													</div>
 												</div>
-												<div class="form-group row gutters">
-													<div class="col-sm-10">
+												<div class="d-flex justify-content-end">
+													<div class="">
 														<button type="submit" class="btn btn-primary" id="actualizar-cuenta">reestablecer</button>
 													</div>
 												</div>
@@ -479,6 +480,23 @@
 													</tbody>
 												</table>
 											</div>
+											<div class="card-footer">
+												<!-- Paginación -->
+												<nav aria-label="Page navigation example">
+													<div class="row">
+														<div class="col-sm-12 col-md-5">
+															<div class="text-primary" id="paginationInfo" role="status" aria-live="polite">
+																<!-- Aquí se generará dinámicamente la información de paginación -->
+															</div>
+														</div>
+														<div class="col-sm-12 col-md-7">
+															<ul class="pagination justify-content-end" id="paginationControls">
+																<!-- Aquí se generará dinámicamente los controles de paginación -->
+															</ul>
+														</div>
+													</div>
+												</nav>
+											</div>
 											
 										</div>
 
@@ -494,17 +512,20 @@
 														</div>
 													</div>
 												</div>
-												<div class="form-group row gutters">
-													<label for="inputEmail3" class="col-sm-3 col-form-label">Mensaje</label>
-													<div class="col-sm-9">
-														<textarea name="mensajeEstado" id="mensajeEstado" class="form-control"></textarea>
+												<form action="" class="">
+													<div class="form-group row gutters">
+														<span class="text-primary">*</span><label for="inputEmail3" class="col-sm-3 col-form-label">Mensaje</label>
+														<div class="col">
+															<textarea name="mensajeEstado" id="mensajeEstado" class="form-control" required></textarea>
+														</div>
 													</div>
-												</div>
-												<div class="form-group row gutters">
-													<div class="col-sm-10">
-														<button type="submit" class="btn btn-primary">Notificar</button>
+													<div class="d-flex justify-content-end">
+														<div class="">
+															<button type="submit" class="btn btn-primary" id="notificaEstado">Notificar</button>
+														</div>
 													</div>
-												</div>
+												</form>
+												
 											</div>
 										</div>
                                     </div>

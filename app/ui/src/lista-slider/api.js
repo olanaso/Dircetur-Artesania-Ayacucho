@@ -68,9 +68,9 @@ export async function obtenerSlider(id) {
 }
 
 //listar
-export async function listarSliders() {
+export async function listarSliders(page, limit) {
     try {
-        const response = await fetch(baseUrl+'/sliders', { method: 'GET' });
+        const response = await fetch(`${baseUrl}/sliders?page=${page}&limit=${limit}`, { method: 'GET' });
         const result = await response.json();
         return result;
     } catch (error) {
