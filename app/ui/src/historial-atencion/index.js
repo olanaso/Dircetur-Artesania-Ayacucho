@@ -1,4 +1,4 @@
-import { obtenerPedido, actualizarPedido } from '../historial-atencion/api';
+import { obtenerPedido, actualizarPedido, enviarCorreo } from '../historial-atencion/api';
 import { FileUploader } from '../utils/upload.js';
 
 let ruta_archivo = "";
@@ -26,6 +26,7 @@ const ciudadRecepcion = document.getElementById('ciudad-recepcion');
 const direccionRecepcion = document.getElementById('direccion-recepcion');
 
 const montoTotal = document.getElementById('total-pedido');
+
 
 async function cargarCampos(idPedido) {
     const pedido = await obtenerPedido(idPedido);
@@ -122,10 +123,10 @@ function cargarTablaHistoriaPedido(pedidos) {
 			</td>
         `;
         const btnNotificarEmail = row.querySelector('.btn-notificar-email');
-        btnNotificarEmail.addEventListener('click', () => notificarEmail(pedido.id));
+        btnNotificarEmail.addEventListener('click', async () => await enviarCorreoCliente(pedidos.cliente.correo, pedido));
 
         const btnNotificarWsp = row.querySelector('.btn-notificar-wsp');
-        btnNotificarWsp.addEventListener('click', () => notificarWsp(pedido.id));
+        btnNotificarWsp.addEventListener('click', () => enviarMensajeCliente(pedidos.cliente.telefono, pedido));
         tablaHistoriaPedido.appendChild(row);
     });
 
@@ -157,14 +158,6 @@ function cargarTablaHistoriaReclamos(pedidos) {
     });
 }
 
-
-function notificarEmail(id) {
-    console.log("notificar email");
-}
-
-function notificarWsp(id) {
-    console.log("notificar wsp");
-}
 
 function getQueryParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -219,22 +212,158 @@ async function actualizarHistorialPedido(numPedido) {
                 medioPrueba: ruta_archivo,
                 fecha_atencion: new Date().toISOString()
             };
-            
-            listAtencion.push(nuevaAtencion);
+            listAtencion.unshift(nuevaAtencion);
 
             const data = {
                 list_atencion: listAtencion,
                 estado: form.estado.value
             };
 
-            const result = await actualizarPedido(numPedido, data);
+            await actualizarPedido(numPedido, data);
+            if (nuevaAtencion.notificarCliente) {
+                await enviarCorreoCliente(pedidoActual.cliente.correo, nuevaAtencion);
+                enviarMensajeCliente(pedidoActual.cliente.telefono, nuevaAtencion);
+            }
+            form.reset();         
             await cargarCampos(numPedido);
-            form.reset();
-            console.log('Pedido actualizado:', result);
+
         } catch (error) {
             console.error('Error al actualizar el pedido:', error);
         }
     });
+}
+
+
+async function enviarCorreoCliente(correoCliente, nuevaAtencion) {
+    try {
+        const emailData = {
+            from: 'tineo.max.clever@cidie.edu.pe',
+            to: 'clever.max159@gmail.com',
+            subject: `Pedido #${nuevaAtencion.id}`,
+            email_html: `
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f4;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        .container {
+                            max-width: 600px;
+                            margin: 20px auto;
+                            background-color: #fff;
+                            padding: 20px;
+                            border-radius: 10px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        }
+                        .header {
+                            text-align: center;
+                            border-bottom: 1px solid #ddd;
+                            padding-bottom: 10px;
+                            margin-bottom: 20px;
+                        }
+                        .header h1 {
+                            margin: 0;
+                            font-size: 24px;
+                            color: #333;
+                        }
+                        .content {
+                            line-height: 1.6;
+                            color: #555;
+                        }
+                        .content p {
+                            margin: 0 0 10px;
+                        }
+                        .footer {
+                            text-align: center;
+                            border-top: 1px solid #ddd;
+                            padding-top: 10px;
+                            margin-top: 20px;
+                            color: #888;
+                            font-size: 12px;
+                        }
+                        .highlight {
+                            font-weight: bold;
+                            color: #333;
+                        }
+                        .link {
+                            color: #1a73e8;
+                            text-decoration: none;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header">
+                            <h1>Información de tu Pedido</h1>
+                        </div>
+                        <div class="content">
+                            <p>Tu pedido está siendo atendido.</p>
+                            <p><span class="highlight">Estado:</span> ${nuevaAtencion.estado}</p>
+                            <p><span class="highlight">Comentario:</span> ${nuevaAtencion.comentario}</p>
+                            <p><span class="highlight">Fecha de atención:</span> ${formatearFecha(nuevaAtencion.fecha_atencion)}</p>
+                            ${nuevaAtencion.enlaceSeguimiento ? `<p><span class="highlight">Enlace de seguimiento:</span> <a class="link" href="${nuevaAtencion.enlaceSeguimiento}" target="_blank">Ver</a></p>` : ''}
+                            ${nuevaAtencion.medioPrueba ? `<p><span class="highlight">Medio de prueba:</span> <a class=link href="${nuevaAtencion.medioPrueba}" target="_blank">Ver</a></p>` : ''}
+                        </div>
+                        <div class="footer">
+                            <p>Gracias por tu preferencia.</p>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `
+        };
+
+        const result = await enviarCorreo(emailData);
+        return result;
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+    }
+}
+
+function enviarMensajeCliente(telefonoCliente, nuevaAtencion) {
+    var numeroCliente = encodeURIComponent(telefonoCliente); 
+    var estado = encodeURIComponent(nuevaAtencion.estado || "");
+    var enlaceSeguimiento = encodeURIComponent(nuevaAtencion.enlaceSeguimiento || "");
+    var comentario = encodeURIComponent(nuevaAtencion.comentario || "");
+    var medioPrueba = encodeURIComponent(nuevaAtencion.medioPrueba || "");
+    var fecha_atencion = encodeURIComponent(formatearFecha(nuevaAtencion.fecha_atencion) || "");
+    
+    var url = "https://wa.me/" + numeroCliente + "?text=";
+
+    var mensaje = "*Estimado/a,*%0A%0A";
+    mensaje += "*Le informamos sobre el estado de su atención:*%0A%0A"; 
+
+    mensaje += "*==============================*%0A";
+
+    if (estado !== "") {
+        mensaje += "*Estado:* " + estado + "%0A";
+    }
+    if (enlaceSeguimiento !== "") {
+        mensaje += "*Enlace de seguimiento:* " + enlaceSeguimiento + "%0A";
+    }
+    if (comentario !== "") {
+        mensaje += "*Comentario:* " + comentario + "%0A";
+    }
+    if (medioPrueba !== "") {
+        mensaje += "*Medio de prueba:* " + medioPrueba + "%0A";
+    }
+    if (fecha_atencion !== "") {
+        mensaje += "*Fecha de atención:* " + fecha_atencion + "%0A";
+    }
+
+    mensaje += "*==============================*%0A"; 
+    mensaje += "%0A";
+    mensaje += "Si tiene alguna pregunta o necesita más información, no dude en contactarnos.%0A%0A";
+    mensaje += "¡Gracias por su preferencia!.%0A";
+    url += mensaje;
+
+    window.open(url, '_blank').focus();
 }
 
 
@@ -248,7 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInputId: 'myfile',
         progressBarId: 'progressBar',
         statusElementId: 'status',
-        uploadUrl: 'http://localhost:3001/api/fileupload2',
+       uploadUrl: 'http://localhost:3001/api/fileupload4',
+        folder: '/pedidos/',
         callback: handleUploadResponse
     });
 });

@@ -1,5 +1,7 @@
 import { listarCategorias, guardarCategoria, filtrarCategorias, borrarCategoria, actualizarCategoria } from './api';
 import { FileUploader } from '../utils/upload.js';
+import { AlertDialog } from "../utils/alert";
+const alertDialog = new AlertDialog();
 
 let imagen_principal = "";
 async function cargarCategoria() {
@@ -30,7 +32,7 @@ function cargarTabla(categorias) {
         <button type="button" class="btn btn-info btn-editar-categoria btn-sm">
           <i class="icon icon-edit2"></i>
         </button>
-        <button type="button" class="btn btn-primary btn-eliminar-categoria btn-sm ml-2">
+        <button type="button" class="btn btn-primary btn-eliminar-categoria btn-sm">
           <i class="icon icon-bin"></i>
         </button>
       </td>
@@ -48,28 +50,31 @@ function cargarTabla(categorias) {
 }
 
 async function eliminarCategoria(id) {
-  var respuesta = confirm("¿Estás seguro de que deseas eliminar?");
-  if (respuesta) {
-    try {
-      const result = await borrarCategoria(id);
-      if (result) {
 
-        console.log("categoria eliminado exitosamente");
-        // Recargar la tabla de categorias
-        await cargarCategoria();
-      } else {
-        console.error("Error al eliminar la categoria");
+  alertDialog.createAlertDialog(
+    'confirm',
+    'Confirmar',
+    '¿Estás seguro que quieres eliminar la categoria?',
+    'Cancelar',
+    'Continuar',
+    async () => {
+      try {
+        const result = await borrarCategoria(id);
+        if (result) {
+          await cargarCategoria();
+        } else {
+          console.error("Error al eliminar la categoria");
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
-    } catch (error) {
-      console.error('Error:', error);
     }
-  } else {
-    console.log("El usuario canceló la acción.");
-  }
+  );
 
 }
 
 async function editarCategoria(categoria) {
+  const form = document.getElementById('actualizar-categoria-form');
   const modal = document.getElementById('modalCategoriaEditar');
   const abreviaturaInput = document.getElementById('abreviatura-editar');
   const denominacionInput = document.getElementById('denominacion-editar');
@@ -98,6 +103,11 @@ async function editarCategoria(categoria) {
     } else {
       formData.foto_referente = categoria.foto_referente;
     }
+    // Verificar si el formulario es válido antes de continuar
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
 
     try {
       const result = await actualizarCategoria(categoria.id, formData);
@@ -109,7 +119,6 @@ async function editarCategoria(categoria) {
     }
   });
 }
-
 
 async function registrarCategoria() {
   const btnRegistrar = document.getElementById('registrar-categoria');
@@ -138,7 +147,7 @@ async function registrarCategoria() {
         foto_referente: foto_referente
       }
       const response = await guardarCategoria(formData);
-      console.log(response)
+      console.log(response);
       await cargarCategoria();
       $(modal).modal('hide');
     } catch (error) {
@@ -170,14 +179,16 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInputId: 'myfile',
     progressBarId: 'progressBar',
     statusElementId: 'status',
-    uploadUrl: 'http://localhost:3001/api/fileupload2',
+    uploadUrl: 'http://localhost:3001/api/fileupload4',
+    folder: '/categorias/',
     callback: handleUploadResponse
   });
   initializeFileUploader({
     fileInputId: 'myfile-editar',
     progressBarId: 'progressBar-editar',
     statusElementId: 'status-editar',
-    uploadUrl: 'http://localhost:3001/api/fileupload2',
+    uploadUrl: 'http://localhost:3001/api/fileupload4',
+    folder: '/categorias/',
     callback: handleEditUploadResponse
   });
 
@@ -190,7 +201,29 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
+document.getElementById('myfile').addEventListener('change', function() {
+  var file = this.files[0];
+  var fileType = file.type;
+  var allowedTypes = ['image/png', 'image/jpeg'];
+
+  if (!allowedTypes.includes(fileType)) {
+      alert('Solo se permiten archivos PNG o JPG');
+      this.value = '';
+  }
+});
+document.getElementById('myfile-editar').addEventListener('change', function() {
+  var file = this.files[0];
+  var fileType = file.type;
+  var allowedTypes = ['image/png', 'image/jpeg'];
+
+  if (!allowedTypes.includes(fileType)) {
+      alert('Solo se permiten archivos PNG o JPG');
+      this.value = '';
+  }
+});
+
+function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
+
 
   const fileInput = document.getElementById(fileInputId);
   const inputName = fileInput.name;
