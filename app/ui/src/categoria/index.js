@@ -1,5 +1,7 @@
 import { listarCategorias, guardarCategoria, filtrarCategorias, borrarCategoria, actualizarCategoria } from './api';
 import { FileUploader } from '../utils/upload.js';
+import { AlertDialog } from "../utils/alert";
+const alertDialog = new AlertDialog();
 
 let imagen_principal = "";
 async function cargarCategoria() {
@@ -30,7 +32,7 @@ function cargarTabla(categorias) {
         <button type="button" class="btn btn-info btn-editar-categoria btn-sm">
           <i class="icon icon-edit2"></i>
         </button>
-        <button type="button" class="btn btn-primary btn-eliminar-categoria btn-sm ml-2">
+        <button type="button" class="btn btn-primary btn-eliminar-categoria btn-sm">
           <i class="icon icon-bin"></i>
         </button>
       </td>
@@ -48,24 +50,26 @@ function cargarTabla(categorias) {
 }
 
 async function eliminarCategoria(id) {
-  var respuesta = confirm("¿Estás seguro de que deseas eliminar?");
-  if (respuesta) {
-    try {
-      const result = await borrarCategoria(id);
-      if (result) {
 
-        console.log("categoria eliminado exitosamente");
-        // Recargar la tabla de categorias
-        await cargarCategoria();
-      } else {
-        console.error("Error al eliminar la categoria");
+  alertDialog.createAlertDialog(
+    'confirm',
+    'Confirmar',
+    '¿Estás seguro que quieres eliminar la categoria?',
+    'Cancelar',
+    'Continuar',
+    async () => {
+      try {
+        const result = await borrarCategoria(id);
+        if (result) {
+          await cargarCategoria();
+        } else {
+          console.error("Error al eliminar la categoria");
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
-    } catch (error) {
-      console.error('Error:', error);
     }
-  } else {
-    console.log("El usuario canceló la acción.");
-  }
+  );
 
 }
 
@@ -116,7 +120,6 @@ async function editarCategoria(categoria) {
   });
 }
 
-
 async function registrarCategoria() {
   const btnRegistrar = document.getElementById('registrar-categoria');
   const form = document.getElementById('registrar-categoria-form');
@@ -149,7 +152,7 @@ async function registrarCategoria() {
         foto_referente: foto_referente
       }
       const response = await guardarCategoria(formData);
-      console.log(response)
+      console.log(response);
       await cargarCategoria();
       $(modal).modal('hide');
     } catch (error) {
