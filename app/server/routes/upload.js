@@ -11,7 +11,7 @@ const router = Router();
 
 router.post('/fileupload', uploadarchivoDDP, controller.uploadFileDNI);
 router.post('/fileupload2', uploadarchivoDDP, controller.uploadFilevideo); 
-
+router.post('/fileupload4', uploadarchivoDDP, controller.uploadFilimg);
 router.post('/fileuploadvideo', uploadarchivoDDPvideo, controller.uploadFileproductovideo);
 router.post('/fileuploadimg', uploadarchivoDDPimg, controller.uploadFileproductoimg);
 

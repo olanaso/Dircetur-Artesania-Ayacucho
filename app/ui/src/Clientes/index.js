@@ -24,7 +24,7 @@ async function cargarCliente() {
       }
 
       //const clientes = await listarClientes(currentPage, DEFAULT_PAGE_LIMIT);
-      console.log(clientes)
+      //console.log(clientes)
       cargarTabla(clientes.clientes);
       totalPages = Math.ceil(clientes.totalItems / DEFAULT_PAGE_LIMIT);
       actualizarControlesPaginacion(totalPages, clientes.totalItems);
@@ -322,10 +322,10 @@ async function filtrarClientesAction() {
         page: currentPage,
         limit: DEFAULT_PAGE_LIMIT
       };
-      console.log("filtro:", filtro)
+      //console.log("filtro:", filtro)
       const clientesFiltrados = await filtrarClientes(filtro);
       //const Clientes = await filtrarClientes(filtro);
-      console.log("aaaaaaaa:" ,clientesFiltrados.clientes)
+      //console.log("aaaaaaaa:" ,clientesFiltrados.clientes)
       cargarTabla(clientesFiltrados.clientes);
       
       totalPages = Math.ceil(clientesFiltrados.totalItems / DEFAULT_PAGE_LIMIT);
