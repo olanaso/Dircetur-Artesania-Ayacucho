@@ -313,7 +313,7 @@ async function filtrarClientesAction() {
     currentFilter = {
       nombres: nombre,
       apellidos: apellido,
-      correo, correo
+      correo: correo
     };
     try {
       // Filtrar pedidos con los parámetros actuales
