@@ -15,6 +15,7 @@ module.exports = {
     listar,
     save,
     filtrar,
+    uploadFileAtencion,
     obtener: async (req, res) => {
         const idPedido = req.params.id;
 
@@ -243,3 +244,23 @@ async function filtrar(req, res) {
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
+
+async function uploadFileAtencion (req, res, next) {
+    try {
+        let folder = 'files-app' + req.query.folder;
+        let filenamesaved = req.filenamesaved;
+        if (!filenamesaved) throw {
+            error: "No se logro subir el archivo",
+            message: "Ha habido un error",
+            status: 400
+        }
+
+        let file = folder + req.filenamesaved
+        return res.status(200).send({
+            nombrearchuvo: req.originalname, ruta: file
+        });
+
+    } catch (err) {
+        return next(err);
+    }
+} 
