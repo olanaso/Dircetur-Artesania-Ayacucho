@@ -1,5 +1,6 @@
 const controller = require('../controllers').artesano;
 const { Router } = require('express');
+const { uploadarchivoArtesano} = require('../midleware/uploadJorge');
 const router = Router();
 
 router.post('/artesano', controller.guardar);
@@ -9,8 +10,8 @@ router.get('/artesano/:id', controller.obtener);
 //router.get('/artesanos', controller.listar);
 router.post('/artesano/save/', controller.save);
 router.get('/artesanos',  controller.buscar);
-router.get('/artesano-dni/:dni', controller.obtenerDNI);
-
+router.get('/artesano-dni/:dni', controller.obtenerDNI); 
+router.post('/artesano/fileupload', uploadarchivoArtesano, controller.uploadFilartesano);
 
 module.exports = router;
  
