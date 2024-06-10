@@ -9,7 +9,8 @@ module.exports = {
     obtener,
     listar,
     save,
-    filtrar
+    filtrar,
+    uploadFilimg
 };
 
 function guardar(req, res) {
@@ -63,18 +64,6 @@ function obtener(req, res) {
         })
 }
 
-/*
-function listar(req, res) {
-
-    model.findAll()
-        .then(resultset => {
-            res.status(200).json(resultset)
-        })
-        .catch(error => {
-            res.status(400).send(error)
-        })
-}
-*/
 const DEFAULT_PAGE_LIMIT = 10; // Número predeterminado de resultados por página
 
 function listar(req, res) {
@@ -158,20 +147,6 @@ async function filtrar(req, res) {
         if (correo) {
             whereCondition.correo = correo;
         }
-
-        /*
-        for (const [key, value] of Object.entries(req.query)) {
-            if (value) {
-                if (typeof value === 'string' && key !== 'id') {
-                    // Si el valor es una cadena y la clave no es 'id', usar Op.like para búsquedas parciales
-                    whereCondition[key] = { [Op.like]: `%${value}%` };
-                } else {
-                    // Si no, hacer una coincidencia exacta
-                    whereCondition[key] = value;
-                }
-            }
-        }
-        */
        
         const clientes = await model.findAll({ where: whereCondition });
 
@@ -181,7 +156,6 @@ async function filtrar(req, res) {
             limit: limit,
             offset: offset
         });
-        console.log(`ccccc: ${result.count}`)
         const totalPages = Math.ceil(result.count / limit); // Calcular el número total de páginas
 
         res.json({
@@ -196,3 +170,23 @@ async function filtrar(req, res) {
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
+
+
+async function uploadFilimg (req, res, next) {
+    try {
+        let folder = 'files-app' + req.query.folder;
+        let filenamesaved = req.filenamesaved;
+        if (!filenamesaved) throw {
+            error: "No se logro subir el archivo",
+            message: "Ha habido un error",
+            status: 400
+        }
+        let file = folder + req.filenamesaved
+        return res.status(200).send({
+            nombrearchuvo: req.originalname, ruta: file
+        });
+
+    } catch (err) {
+        return next(err);
+    }
+}

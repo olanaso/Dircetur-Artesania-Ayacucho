@@ -1,7 +1,7 @@
 import { actualizarCliente, obtenerCliente } from '../Clientes/api';
 import { enviarCorreo } from './api.js';
 import {loadData, handleCountryChange, handleStateChange} from '../utils/ubicaciones';
-import { FileUploader } from '../utils/upload.js';
+import { FileUploader } from '../utils/uploadVictor.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 
@@ -52,7 +52,8 @@ async function llenarCampos(idCliente) {
     if (cliente.foto_perfil == "") {
         $('#imagenPrincipal').attr('src', imagen_principal);
     }else{
-        $('#imagenPrincipal').attr('src', cliente.foto_perfil);
+        let cleanUrl = cliente.foto_perfil.replace(/"/g, '');
+        $('#imagenPrincipal').attr('src', cleanUrl);
     }
     
     

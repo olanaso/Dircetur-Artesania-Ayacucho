@@ -9,11 +9,11 @@ module.exports = {
     obtener,
     listar,
     buscar,
-    save
+    save, 
+    uploadFilimg
 };
 
 function guardar(req, res) {
-
     model.create(req.body)
         .then(object => {
             res.status(200).json(object);
@@ -100,7 +100,7 @@ function listar(req, res) {
         res.status(200).json({
             totalItems: count,
             totalPages: totalPages,
-            currentPage: page,
+            currentnpPage: page,
             sliders: rows
         });
     })
@@ -149,5 +149,26 @@ async function save(req, res, next) {
     } catch (e) {
         t.rollback();
         return next(e);
+    }
+}
+
+//upload de imagen
+
+async function uploadFilimg (req, res, next) {
+    try {
+        let folder = 'files-app' + req.query.folder;
+        let filenamesaved = req.filenamesaved;
+        if (!filenamesaved) throw {
+            error: "No se logro subir el archivo",
+            message: "Ha habido un error",
+            status: 400
+        }
+        let file = folder + req.filenamesaved
+        return res.status(200).send({
+            nombrearchuvo: req.originalname, ruta: file
+        });
+
+    } catch (err) {
+        return next(err);
     }
 }

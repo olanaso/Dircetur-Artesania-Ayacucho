@@ -1,5 +1,5 @@
 import {guardarSlider, listarSliders, eliminarSlider, obtenerSlider, actualizarSlider} from './api';
-import { FileUploader } from '../utils/upload.js';
+import { FileUploader } from '../utils/uploadVictor.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 let imagen_principal = null;
@@ -122,9 +122,10 @@ function cargarTabla(sliders){
   $('#listaSlider').empty()
   let filas = ''
   for (let data of sliders) {
+    let cleanUrl = data.imagen.replace(/"/g, '');
       filas += `<tr>
             <td class="border-b border-gray-200 bg-white text-sm">
-              <img src="${data.imagen}" alt="Imagen del slider" width="100">
+              <img src="${cleanUrl}" alt="Imagen del slider" width="100">
             </td>
             <td class="border-b border-gray-200 bg-white text-sm">
               ${data.descripcion}
@@ -166,10 +167,12 @@ document.getElementById('formSliderC').addEventListener('submit', async (event) 
   var principalImagePreview = document.getElementById('principalImagePreview');
     // Obtener el valor del atributo src
   var foto_referente = principalImagePreview.src;
+  
   const formData = {
     descripcion: frase,
     imagen: foto_referente
   };
+  
   const form = document.getElementById('formSliderC')
   try {
     if (!form.checkValidity()) {
@@ -222,10 +225,11 @@ $(document).on('click', '.btn-eliminarS', async function (e) {
 //editar slider
 $(document).on('click', '.btn-editarS', async function (e) {
   const id = $(this).data('id');
+  
   try {
       const slider = await obtenerSlider(id);
-      $('#fraseE').val(slider.descripcion);
-      $('#SliderImagePreviewEdit').attr('src', slider.imagen).show();
+      let cleanUrl = slider.imagen.replace(/"/g, '');
+      $('#SliderImagePreviewEdit').attr('src', cleanUrl).show();
       $('#formSliderE').attr('data-id', slider.id);
   } catch (error) {
       console.error('Error:', error);
