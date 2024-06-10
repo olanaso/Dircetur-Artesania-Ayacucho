@@ -118,43 +118,8 @@ async function obtenerPedido(idPedido) {
     }
 }
 
-
-// function listar(req, res) {
-//     modelPedido.findAll({
-//         attributes: {
-//             exclude: ['cliente_id', 'artesano_id']
-//         },
-//         include: [
-//             {
-//                 model: modelCliente,
-//                 attributes: [
-//                     'nombres',
-//                     'apellidos'
-//                 ]
-//             },
-//             {
-//                 model: modelArtesano,
-//                 attributes: ['nombres', 'apellidos']
-//             }
-//         ]
-//     })
-//         .then(resultset => {
-//             res.status(200).json(resultset);
-//         })
-//         .catch(error => {
-//             console.error('Error al listar pedidos:', error);
-//             res.status(500).json({ message: 'Error interno del servidor' });
-//         });
-// }
-const DEFAULT_PAGE_LIMIT = 10; // Número predeterminado de resultados por página
-
 function listar(req, res) {
-    const page = parseInt(req.query.page) || 1; // Página solicitada, por defecto la primera
-    const limit = parseInt(req.query.limit) || DEFAULT_PAGE_LIMIT; // Límite de resultados por página
-
-    const offset = (page - 1) * limit; // Calcular el desplazamiento
-
-    modelPedido.findAndCountAll({
+    modelPedido.findAll({
         attributes: {
             exclude: ['cliente_id', 'artesano_id']
         },
@@ -170,26 +135,17 @@ function listar(req, res) {
                 model: modelArtesano,
                 attributes: ['nombres', 'apellidos']
             }
-        ],
-        limit: limit,
-        offset: offset
+        ]
     })
-    .then(result => {
-        const { count, rows } = result;
-        const totalPages = Math.ceil(count / limit); // Calcular el número total de páginas
-
-        res.status(200).json({
-            totalItems: count,
-            totalPages: totalPages,
-            currentPage: page,
-            pedidos: rows
+        .then(resultset => {
+            res.status(200).json(resultset);
+        })
+        .catch(error => {
+            console.error('Error al listar pedidos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
         });
-    })
-    .catch(error => {
-        console.error('Error al listar pedidos:', error);
-        res.status(500).json({ message: 'Error interno del servidor' });
-    });
 }
+
 
 async function save(req, res, next) {
     const t = await model.sequelize.transaction();
@@ -217,16 +173,9 @@ async function save(req, res, next) {
         return next(e);
     }
 }
-
-
 async function filtrar(req, res) {
     try {
-        let { page, limit, fecha_pedido, num_pedido, nombre_artesano, nombre_cliente, estado } = req.query;
-
-        // Convertir a números enteros y establecer valores predeterminados si no se proporcionan
-        page = parseInt(page) || 1;
-        limit = parseInt(limit) || DEFAULT_PAGE_LIMIT;
-
+        const { fecha_pedido, num_pedido, nombre_artesano, nombre_cliente, estado } = req.query;
         const whereCondition = {};
 
         if (fecha_pedido) {
@@ -281,26 +230,15 @@ async function filtrar(req, res) {
             });
         }
 
-        const offset = (page - 1) * limit; // Calcular el desplazamiento
-
-        const result = await modelPedido.findAndCountAll({
+        const result = await modelPedido.findAll({
             where: whereCondition,
             include: includeCondition,
             attributes: {
                 exclude: ['cliente_id', 'artesano_id']
-            },
-            limit: limit,
-            offset: offset
+            }
         });
 
-        const totalPages = Math.ceil(result.count / limit); // Calcular el número total de páginas
-
-        res.json({
-            totalItems: result.count,
-            totalPages: totalPages,
-            currentPage: page,
-            pedidos: result.rows
-        });
+        res.json(result);
     } catch (error) {
         console.error('Error al buscar pedidos:', error);
         res.status(500).json({ message: 'Error interno del servidor' });

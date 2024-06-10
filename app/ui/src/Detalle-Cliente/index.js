@@ -29,7 +29,7 @@ function getQueryParameter(name) {
 }
 
 async function llenarCampos(idCliente) {
-    await loadData();
+    
     const cliente = await obtenerCliente(idCliente);
     console.log("cliente: ", cliente)
     //tab información
@@ -41,18 +41,24 @@ async function llenarCampos(idCliente) {
     tipodocC.value = cliente.tipo_documento;
     numerodocC.value = cliente.numero_documento;
     dirEnvioC.value = cliente.direccion_envio
-    
+    console.log("longitud pais: ", paisC.options.length)
+
+    cargarYSeleccionarUbicaciones(cliente)
+
+    /*
     for (let i = 0; i < paisC.options.length; i++) {
+        console.log("longitud pais: ", paisC.options.length)
         if (paisC.options[i].value === cliente.pais) {
             paisC.options[i].selected = true;
-            handleCountryChange({ target: paisC.options[i]})
+            console.log("target enviado: ",paisC.options[i] )
+            handleStateChange({ target: paisC.options[i]});
             break;
         }
     }
     for (let i = 0; i < regionC.options.length; i++) {
         if (regionC.options[i].value === cliente.region) {
             regionC.options[i].selected = true;
-            handleStateChange({ target: regionC.options[i]});
+            
             break;
         }
     }
@@ -61,7 +67,7 @@ async function llenarCampos(idCliente) {
             ciudadC.options[i].selected = true;
             break;
         }
-    }
+    }*/
 
     if (cliente.foto_perfil == "") {
         $('#imagenPrincipal').attr('src', imagen_principal);
@@ -113,7 +119,50 @@ function llenar_tablaReclamos(lista){
         </table>`
     $('#listReclamos').append(tabla_result)
 }
+async function cargarYSeleccionarUbicaciones(cliente) {
+    // Cargar datos iniciales (paises)
+    await loadData();
 
+    // Seleccionar el país
+    for (let i = 0; i < paisC.options.length; i++) {
+        if (paisC.options[i].textContent === cliente.pais) {
+            paisC.selectedIndex = i;
+            handleCountryChange({ target: paisC });
+            break;
+        }
+    }
+    await waitForOptions(regionC);
+    // Seleccionar la región
+    for (let i = 0; i < regionC.options.length; i++) {
+        console.log(regionC.options.length)
+        if (regionC.options[i].textContent === cliente.region) {
+            regionC.selectedIndex = i;
+            await handleStateChange({ target: regionC });
+            break;
+        }
+    }
+    await waitForOptions(ciudadC);
+    // Seleccionar la ciudad
+    for (let i = 0; i < ciudadC.options.length; i++) {
+        if (ciudadC.options[i].textContent === cliente.ciudad) {
+            ciudadC.selectedIndex = i;
+            break;
+        }
+    }
+}
+
+function waitForOptions(selectElement) {
+    return new Promise((resolve) => {
+        const checkOptions = () => {
+            if (selectElement.options.length > 1) {
+                resolve();
+            } else {
+                setTimeout(checkOptions, 100);
+            }
+        };
+        checkOptions();
+    });
+}
 $(document).on('click', '#actualizar-informacion', async function (e) {
     e.preventDefault();
     try {
@@ -123,14 +172,12 @@ $(document).on('click', '#actualizar-informacion', async function (e) {
             correo: correoC.value,
             telefono: telefonoC.value,
             direccion: direccionC.value,
-            pais: paisC.value,
-            region: regionC.value,
-            ciudad: ciudadC.value,
+            pais: paisC.selectedOptions[0].text,
+            region: regionC.selectedOptions[0].text,
+            ciudad: ciudadC.selectedOptions[0].text,
             tipo_documento: tipodocC.value,
             numero_documento: numerodocC.value,
             direccion_envio: dirEnvioC.value,
-            // agregar después el campo para actualizar la imagen
-
         });
 
         console.log('Cliente actualizada:', result);
@@ -245,32 +292,30 @@ function handleUploadResponse(response) {
 
 document.addEventListener('DOMContentLoaded', (event)=> {
     event.preventDefault();
-    const clienteId = getQueryParameter('id');
-    llenarCampos(clienteId);
-    
-    mostrarDataModal(clienteId)
+    loadData().then(() => {
+        const clienteId = getQueryParameter('id');
+        llenarCampos(clienteId);
+        mostrarDataModal(clienteId);
 
-    const estadoCheckbox = document.getElementById('estado');
-    estadoCheckbox.addEventListener('change', async function (e) {
-        const estadoC = estadoCheckbox.checked ? true : false;
-        try {
-            const result = await actualizarCliente(getQueryParameter('id'), {
-                estado: !estadoC
-            });
-            console.log('estado actualizado:', result);
-        } catch (error) {
-            console.error('Error al actualizar el estado:', error);
-        }
-    });
+        const estadoCheckbox = document.getElementById('estado');
+        estadoCheckbox.addEventListener('change', async function () {
+            const estadoC = estadoCheckbox.checked ? true : false;
+            try {
+                const result = await actualizarCliente(getQueryParameter('id'), { estado: !estadoC });
+                console.log('Estado actualizado:', result);
+            } catch (error) {
+                console.error('Error al actualizar el estado:', error);
+            }
+        });
 
-    initializeFileUploader({
-        fileInputId: 'myfile',
-        progressBarId: 'progressBar',
-        statusElementId: 'status',
-        uploadUrl: 'http://localhost:3001/api/fileupload4',
-        folder: '/cliente/img/',
-        callback: handleUploadResponse
+        initializeFileUploader({
+            fileInputId: 'myfile',
+            progressBarId: 'progressBar',
+            statusElementId: 'status',
+            uploadUrl: 'http://localhost:3001/api/fileupload4',
+            folder: '/cliente/img/',
+            callback: handleUploadResponse
+        });
     });
     
 });
-

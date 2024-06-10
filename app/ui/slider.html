@@ -46,30 +46,58 @@
 			<header class="app-header">
 				<div class="container-fluid">
 					<div class="row gutters">
-						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+						<div class="col-xl-5 col-lg-5 col-md-5 col-sm-3 col-4">
 							<a class="mini-nav-btn" href="#" id="app-side-mini-toggler">
-								<i class="icon-menu5"></i>
+								<i class="icon-sort"></i>
 							</a>
 							<a href="#app-side" data-toggle="onoffcanvas" class="onoffcanvas-toggler" aria-expanded="true">
 								<i class="icon-chevron-thin-left"></i>
 							</a>
 						</div>
-						<div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11 m-auto d-flex justify-content-end gap-3 flex-wrap">
-							<div class="d-flex align-items-center">
-								<p class="mb-1">Bienvenido <span id="userName">Juan perez</span></p>
-								<p class="mb-1 ml-2"> Último acceso:<span id="lastLogin">13/09/2021</span></p>
-							</div>
-							<div class="d-flex align-items-center ml-3">
-								<p class="mb-1">rol <span>Administrador</span></p>
-							</div>
-							<div class="ml-3">
-								<button type="button" class="btn btn-outline-secondary btn-rounded btn-sm">Cambiar contraseña</button>
-								<button type="button" class="btn btn-outline-primary btn-rounded btn-sm">Cerrar sesión</button>
-							</div>
+						<div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-4">
+							<a href="index-2.html" class="logo">
+								<img src="img/lead.png" alt="Lead Admin Dashboard">
+							</a>
+						</div>
+						<div class="col-xl-5 col-lg-5 col-md-5 col-sm-3 col-4">
+							<ul class="header-actions">
+								<li class="dropdown">
+									<a href="#" id="userSettings" class="user-settings" data-toggle="dropdown"
+										aria-haspopup="true">
+										<img class="avatar" src="img/user.png" alt="User Thumb">
+										<span class="user-name">Katy Perry</span>
+										<i class="icon-chevron-small-down"></i>
+									</a>
+									<div class="dropdown-menu lg dropdown-menu-right" aria-labelledby="userSettings">
+										<ul class="user-settings-list">
+											<li>
+												<a href="profile.html">
+													<div class="icon">
+														<i class="icon-account_circle"></i>
+													</div>
+													<p>Profile</p>
+												</a>
+											</li>
+											<li>
+												<a href="profile.html">
+													<div class="icon red">
+														<i class="icon-cog3"></i>
+													</div>
+													<p>Settings</p>
+												</a>
+											</li>
+										</ul>
+										<div class="logout-btn">
+											<a href="login.html" class="btn btn-primary">Logout</a>
+										</div>
+									</div>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</header>
+	
 			<!-- END: .app-heading -->
 			<!-- BEGIN .app-container -->
 			<div class="app-container">
@@ -77,6 +105,31 @@
 				<aside class="app-side" id="app-side">
 					<!-- BEGIN .side-content -->
 					<div class="side-content ">
+						<header class="main-heading user-actions">
+							<div class="container-fluid iestpdetails">
+								<div class="row">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+										<div class="page-icon">
+											<img src="/img/avatar1.svg" alt="" style="width: 57px;">
+										</div>
+										<div class="page-title">
+											<h5 class="bt-virtual">Administrador</h5> 
+										</div>
+									</div>
+									
+								</div>
+								<hr>
+								<!--<div class="row">
+									<h7 class="programas"> <img src="/img/i-programa.svg" alt=""> Administración:</h7>
+									<br><br>
+									<ul class="detail-prog" id="m_programas">
+										
+									</ul>
+									
+								</div>-->
+							</div>
+						</header>
+				
 						<!-- BEGIN .side-nav -->
 						<nav class="side-nav">
 							<!-- BEGIN: side-nav-content -->
@@ -154,14 +207,26 @@
 					<!-- BEGIN .main-heading -->
 					<header class="main-heading">
 						<div class="container-fluid">
-							<h5>Slider</h5>
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="#">Administrador</a></li>
-									<li class="breadcrumb-item"><a href="#">Catálogo</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Slider</li>
-								</ol>
-							</nav>
+							<div class="row">
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+									<div class="page-icon">
+										<svg xmlns="http://www.w3.org/2000/svg" width="33" height="35" viewBox="0 0 20 15" fill="none">
+											<path d="M14 13.0001V15.0001H0V13.0001C0 13.0001 0 9.00005 7 9.00005C14 9.00005 14 13.0001 14 13.0001ZM10.5 3.50005C10.5 2.80782 10.2947 2.13113 9.91014 1.55556C9.52556 0.979985 8.97893 0.531381 8.33939 0.266474C7.69985 0.00156766 6.99612 -0.067744 6.31718 0.0673043C5.63825 0.202353 5.01461 0.535695 4.52513 1.02518C4.03564 1.51466 3.7023 2.1383 3.56725 2.81724C3.4322 3.49617 3.50152 4.1999 3.76642 4.83944C4.03133 5.47899 4.47993 6.02561 5.0555 6.4102C5.63108 6.79478 6.30777 7.00005 7 7.00005C7.92826 7.00005 8.8185 6.6313 9.47487 5.97493C10.1313 5.31855 10.5 4.42831 10.5 3.50005ZM13.94 9.00005C14.5547 9.4758 15.0578 10.0805 15.4137 10.7716C15.7696 11.4626 15.9697 12.2233 16 13.0001V15.0001H20V13.0001C20 13.0001 20 9.37005 13.94 9.00005ZM13 5.2579e-05C12.3117 -0.00378014 11.6385 0.202008 11.07 0.590053C11.6774 1.43879 12.0041 2.45634 12.0041 3.50005C12.0041 4.54377 11.6774 5.56132 11.07 6.41005C11.6385 6.7981 12.3117 7.00389 13 7.00005C13.9283 7.00005 14.8185 6.6313 15.4749 5.97493C16.1313 5.31855 16.5 4.42831 16.5 3.50005C16.5 2.57179 16.1313 1.68156 15.4749 1.02518C14.8185 0.368802 13.9283 5.2579e-05 13 5.2579e-05Z" fill="#E80000"></path>
+										</svg>
+									</div>
+									<div class="page-title">
+										<h5>Slider</h5>
+										<nav aria-label="breadcrumb">
+											<ol class="breadcrumb">
+												<li class="breadcrumb-item"><a href="#">Administrador</a></li>
+												<li class="breadcrumb-item"><a href="#">Catálogo</a></li>
+												<li class="breadcrumb-item active" aria-current="page">Slider</li>
+											</ol>
+										</nav>
+									</div>
+								</div>
+								
+							</div>
 						</div>
 					</header>
 					<!-- END: .main-heading -->
@@ -184,10 +249,10 @@
 													<div class="form-group">
 														<label for="frase">frase</label>
 														<input type="text" class="form-control" id="frase"
-															placeholder="frase" required>
+															placeholder="frase">
 													</div>
 													<div class="form-group">
-														<input type="file" id="myfile" name="myfile">
+														<input type="file" id="myfile" name="myfile" required>
 														<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
 														<div id="status"></div>
 													</div>
@@ -196,10 +261,10 @@
 													</div>
 												</div>
 												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
+													<button type="button" class="btn btn-primary"
 														data-dismiss="modal">Cancelar</button>
 													<button type="submit" id="registrar-categoria"
-														class="btn btn-primary">Guardar</button>
+														class="btn btn-info">Guardar</button>
 												</div>
 											</form>
 										</div>
@@ -239,21 +304,21 @@
 													</div>
 												</div>
 												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
+													<button type="button" class="btn btn-primary"
 														data-dismiss="modal">Cancelar</button>
 													<button type="submit" id="registrar-categoria"
-														class="btn btn-primary">Guardar</button>
+														class="btn btn-info">Guardar</button>
 												</div>
 											</form>
 										</div>
 									</div>
 								</div>
 								<!-- Fin ModalEdición-->
+								<div class="d-flex justify-content-end mt-3 mb-3">
+									<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalSliderC">añadir<i class="icon icon-circle-with-plus"></i></button>
+								</div>
 								<div class="card">
 									<div class="card-header">Lista de Sliders</div>
-									<div class="d-flex justify-content-end mb-3">
-										<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalSliderC">añadir nuevo <i class="icon icon-circle-with-plus"></i></button>
-									</div>
 									<div class="card-body" id="listaSlider">
 										<table class="table m-0" id="tablaSlider">
 											<thead class="thead-default">

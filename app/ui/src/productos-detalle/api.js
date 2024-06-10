@@ -60,29 +60,89 @@ export async function buscarProducto(filtro) {
 }
 
 
-export async function guardarProducto (producto) {
-  if(producto.id==0){
-    producto.id=null;
-  }
-
+export async function guardarProducto(producto) {
+  if (producto.productId != 0) {
+    producto.id = producto.productId;
+  } 
+ 
   const settings = {
       method: "POST",
       headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/json", // Cambiado a JSON
       },
-      body: new URLSearchParams(producto),
+      body: JSON.stringify(producto), // Convertir objeto a JSON
   };
 
   try {
       const response = await fetch(baseUrl + "/producto/save", settings);
       const data = await response.json();
-      return data
+      return data; // Ahora data contiene el ID del objeto creado y otros datos
   } catch (error) {
       console.error("Error:", error);
   }
 }
+export async function geteditarproducto(id){
+  try {
+      
+      const myHeaders = new Headers();
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+  
+      const response = await fetch(baseUrl+"/producto/"+id, requestOptions);
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.log('error', error);
+    }
+
+}
 
 
+
+
+
+export async function buscarartesanoDNI(dni){
+  try {
+      
+      const myHeaders = new Headers();
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+  
+      const response = await fetch(baseUrl+"/artesano-dni/"+dni, requestOptions);
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.log('error', error);
+    }
+
+}
+export async function buscarartesanoid(id){
+  try {
+      
+      const myHeaders = new Headers();
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+  
+      const response = await fetch(baseUrl+"/artesano/"+id, requestOptions);
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.log('error', error);
+    }
+
+}
 
 
 

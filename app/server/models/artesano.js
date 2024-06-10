@@ -11,98 +11,98 @@ module.exports = sequelize.define('artesano', {
         autoIncrement: true,
         field: 'id'
     },
-    nombres: {
-        type: Sequelize.STRING(150),
-        allowNull: true,
-        field: 'nombres'
-    },
-    apellidos: {
-        type: Sequelize.STRING(150),
-        allowNull: true,
-        field: 'apellidos'
-    },
     usuario_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         field: 'usuario_id'
     },
+    dni: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        field: 'dni'
+    },
     ruc: {
-        type: Sequelize.CHAR(11),
+        type: Sequelize.STRING,
         allowNull: true,
         field: 'ruc'
     },
+    nombres: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        field: 'nombres'
+    },
+    apellidos: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        field: 'apellidos'
+    },
+    correo: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        field: 'correo'
+    },
+    celular: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        field: 'celular'
+    },
+    telefonos: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        field: 'telefonos'
+    },
     foto1: {
-        type: Sequelize.STRING(150),
+        type: Sequelize.STRING,
         allowNull: true,
         field: 'foto1'
     },
     foto2: {
-        type: Sequelize.STRING(150),
+        type: Sequelize.STRING,
         allowNull: true,
         field: 'foto2'
     },
     ubigeo: {
-        type: Sequelize.STRING(6),
+        type: Sequelize.STRING,
         allowNull: true,
         field: 'ubigeo'
     },
     lugar_nacimiento: {
-        type: Sequelize.STRING(150),
+        type: Sequelize.STRING,
         allowNull: true,
         field: 'lugar_nacimiento'
-    },
-    region: {
-        type: Sequelize.STRING(150),
-        allowNull: true,
-        field: 'region'
-    },
-    distrito: {
-        type: Sequelize.STRING(150),
-        allowNull: true,
-        field: 'distrito'
-    },
-    provincia: {
-        type: Sequelize.STRING(150),
-        allowNull: true,
-        field: 'provincia'
-    },
+    }, 
     lengua_materna: {
-        type: Sequelize.STRING(150),
+        type: Sequelize.STRING,
         allowNull: true,
         field: 'lengua_materna'
     },
-    info_taller: {
+    lst_taller: {
         type: Sequelize.JSON,
         allowNull: true,
-        field: 'info_taller',
+        field: 'lst_taller',
+    }, 
+    lst_especialidadtecnicas: {
+        type: Sequelize.JSON,
+        allowNull: true,
+        field: 'lst_especialidadtecnicas',
     },
-    list_videos: {
+    lst_contactos: {
         type: Sequelize.JSON,
         allowNull: true,
-        field: 'list_videos',
+        field: 'lst_contactos',
     },
-    list_especialidadtecnicas: {
+    lst_mediospago: {
         type: Sequelize.JSON,
         allowNull: true,
-        field: 'list_especialidadtecnicas',
+        field: 'lst_mediospago',
     },
-    list_contactos: {
+    lst_reconocimientos: {
         type: Sequelize.JSON,
         allowNull: true,
-        field: 'list_contactos',
-    },
-    list_reconocimientos: {
-        type: Sequelize.JSON,
-        allowNull: true,
-        field: 'list_reconocimientos',
-    },
-    list_medios_pago: {
-        type: Sequelize.JSON,
-        allowNull: true,
-        field: 'list_medios_pago',
+        field: 'lst_reconocimientos',
     },
     estado: {
-        type: Sequelize.TINYINT(1),
+        type: Sequelize.INTEGER,
         allowNull: true,
         field: 'estado'
     },
@@ -115,17 +115,16 @@ module.exports = sequelize.define('artesano', {
         type: Sequelize.INTEGER,
         allowNull: true,
         field: 'usuariomodificacion_id'
-    },
-    createdAt: {
+    }, 
+    createdat: {
         type: Sequelize.DATE,
         allowNull: true,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-        field: 'createdAt'
+        field: 'createdat'
     },
-    updatedAt: {
+    updatedat: {
         type: Sequelize.DATE,
         allowNull: true,
-        field: 'updatedAt'
+        field: 'updatedat'
     }
 
 }, {
