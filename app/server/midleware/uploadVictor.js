@@ -7,6 +7,7 @@ function generateFinalName (originalfilename) {
     return `${moment().unix()}-${originalfilename}`;
 }
 
+
 /* Middleware que permite subir un archivo a una Ruta dada */
 async function uploadarchivoDDP (req, res, next) {
     try {
@@ -22,9 +23,8 @@ async function uploadarchivoDDP (req, res, next) {
                 status: 400
             });
         }
-
-
-        const dir = path.join(__dirname, '../public', folder);
+      
+         const dir = path.join(__dirname, '../public', folder);
 
 
         if (!fs.existsSync(dir)) {
@@ -49,6 +49,7 @@ async function uploadarchivoDDP (req, res, next) {
         const maxCount = parseInt(req.query.maxCount) || 1; // Número máximo de archivos, por defecto 1
 
         console.log(`Esperando campo de archivo: ${fieldName} con máximo de archivos: ${maxCount}`);
+
         // Crear el middleware de Multer
         const upload = multer({
             storage: storage,
@@ -97,6 +98,8 @@ async function uploadarchivoDDP (req, res, next) {
         });
     }
 }
+
+
 
 module.exports = {
 

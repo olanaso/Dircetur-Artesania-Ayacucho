@@ -47,14 +47,3 @@ function obtenerCiudades(req, res) {
             res.status(400).send(error)
         })
 }
-
-function listarCiudad(req, res) {
-
-    modelCiudad.findAll()
-        .then(resultset => {
-            res.status(200).json(resultset)
-        })
-        .catch(error => {
-            res.status(400).send(error)
-        })
-}

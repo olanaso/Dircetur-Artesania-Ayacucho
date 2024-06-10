@@ -17,7 +17,7 @@ const producto = require('./producto');
 const categoria = require('./categoria');
 const pedido = require('./pedido');
 const upload = require('./upload');
-const ubicaciones =require('./ubicaciones')
+const ubicaciones =require('./ubicaciones');
 
 module.exports = (app) => {
     app.use('/api', mantenimiento);

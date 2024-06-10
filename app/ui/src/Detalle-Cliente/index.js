@@ -1,6 +1,10 @@
 import { actualizarCliente, obtenerCliente } from '../Clientes/api';
+import { enviarCorreo } from './api.js';
 import {loadData, handleCountryChange, handleStateChange} from '../utils/ubicaciones';
-import { FileUploader } from '../utils/upload.js';
+import { FileUploader } from '../utils/uploadVictor.js';
+import { AlertDialog } from "../utils/alert";
+const alertDialog = new AlertDialog();
+
 let imagen_principal = null;
 //tab informacion
 const nombreC = document.getElementById('nombreC');
@@ -45,34 +49,11 @@ async function llenarCampos(idCliente) {
 
     cargarYSeleccionarUbicaciones(cliente)
 
-    /*
-    for (let i = 0; i < paisC.options.length; i++) {
-        console.log("longitud pais: ", paisC.options.length)
-        if (paisC.options[i].value === cliente.pais) {
-            paisC.options[i].selected = true;
-            console.log("target enviado: ",paisC.options[i] )
-            handleStateChange({ target: paisC.options[i]});
-            break;
-        }
-    }
-    for (let i = 0; i < regionC.options.length; i++) {
-        if (regionC.options[i].value === cliente.region) {
-            regionC.options[i].selected = true;
-            
-            break;
-        }
-    }
-    for (let i = 0; i < ciudadC.options.length; i++) {
-        if (ciudadC.options[i].value === cliente.ciudad) {
-            ciudadC.options[i].selected = true;
-            break;
-        }
-    }*/
-
     if (cliente.foto_perfil == "") {
         $('#imagenPrincipal').attr('src', imagen_principal);
     }else{
-        $('#imagenPrincipal').attr('src', cliente.foto_perfil);
+        let cleanUrl = cliente.foto_perfil.replace(/"/g, '');
+        $('#imagenPrincipal').attr('src', cleanUrl);
     }
     
     
@@ -209,25 +190,35 @@ $(document).on('click', '#btn-actualizarFoto', async function (e){
 
 $(document).on('click', '.btn-eliminarF', async function (e){
     e.preventDefault();
-    var respuesta = confirm("¿Estás seguro de que deseas eliminar la foto de perfil?");
-    if (respuesta) {
-        try {
-            const result = await actualizarCliente(getQueryParameter('id'), {
-                foto_perfil: ""
-            });
-            console.log('Foto perfil eliminada:', result);
-            llenarCampos(getQueryParameter('id'))
-        } catch (error) {
-            console.error('Error al eliminar la foto de perfil:', error);
+    alertDialog.createAlertDialog(
+        'confirm',
+        'Confirm Alert',
+        '¿Estás seguro de que deseas eliminar el slider?',
+        'Cancelar',
+        'Continuar',
+        async() => {
+            try {
+                const result = await actualizarCliente(getQueryParameter('id'), {
+                    foto_perfil: ""
+                });
+                console.log('Foto perfil eliminada:', result);
+                llenarCampos(getQueryParameter('id'))
+            } catch (error) {
+                console.error('Error al eliminar la foto de perfil:', error);
+            }
         }
-    }
-    
+    );  
 })
 
 $(document).on('click', '#actualizar-cuenta', async function (e) {
     // Actualizar los datos de la categoría en tu estructura de datos
 
 });
+
+
+
+
+
 
 //ver reclamo
 async function mostrarDataModal(clienteID) {
@@ -254,6 +245,100 @@ async function mostrarDataModal(clienteID) {
 }
 
 
+//correos
+async function enviarCorreoCliente(correoCliente, mensaje) {
+    try {
+        const emailData = {
+            from: 'tineo.max.clever@cidie.edu.pe',
+            to: 'victorheli2101@gmail.com',
+            subject: "Mensaje de activación de cuenta",
+            email_html: `
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f4;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        .container {
+                            max-width: 600px;
+                            margin: 20px auto;
+                            background-color: #fff;
+                            padding: 20px;
+                            border-radius: 10px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        }
+                        .header {
+                            text-align: center;
+                            border-bottom: 1px solid #ddd;
+                            padding-bottom: 10px;
+                            margin-bottom: 20px;
+                        }
+                        .header h1 {
+                            margin: 0;
+                            font-size: 24px;
+                            color: #333;
+                        }
+                        .content {
+                            line-height: 1.6;
+                            color: #555;
+                        }
+                        .content p {
+                            margin: 0 0 10px;
+                        }
+                        .footer {
+                            text-align: center;
+                            border-top: 1px solid #ddd;
+                            padding-top: 10px;
+                            margin-top: 20px;
+                            color: #888;
+                            font-size: 12px;
+                        }
+                        .highlight {
+                            font-weight: bold;
+                            color: #333;
+                        }
+                        .link {
+                            color: #1a73e8;
+                            text-decoration: none;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header">
+                            <h1>Información de cuenta</h1>
+                        </div>
+                        <div class="content">
+                            <p>${mensaje}.</p>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `
+        };
+
+        const result = await enviarCorreo(emailData);
+        return result;
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+    }
+}
+
+
+$(document).on('click', '#notificaEstado', async function (e) {
+    e.preventDefault();
+    const msg = document.getElementById('mensajeEstado');
+    enviarCorreoCliente('correoCliente', msg.value);
+    $('#mensajeEstado').val('');
+
+});
+
 //carga de imagen de perfil de cliente
 function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
 
@@ -269,6 +354,17 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
         console.error('Initialization failed: One or more elements not found.');
     }
 }
+
+document.getElementById('myfile').addEventListener('change', function() {
+    var file = this.files[0];
+    var fileType = file.type;
+    var allowedTypes = ['image/png', 'image/jpeg'];
+
+    if (!allowedTypes.includes(fileType)) {
+        alert('Solo se permiten archivos PNG o JPG');
+        this.value = '';
+    }
+});
 
 function handleUploadResponse(response) {
     alert('registro correcto')

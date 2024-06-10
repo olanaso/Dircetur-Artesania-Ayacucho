@@ -9,11 +9,11 @@ module.exports = {
     obtener,
     listar,
     buscar,
-    save
+    save, 
+    uploadFilimg
 };
 
 function guardar(req, res) {
-
     model.create(req.body)
         .then(object => {
             res.status(200).json(object);
@@ -82,6 +82,34 @@ function buscar(req, res) {
         })
 }
 
+const DEFAULT_PAGE_LIMIT = 10; // Número predeterminado de resultados por página
+function listar(req, res) {
+    const page = parseInt(req.query.page) || 1; // Página solicitada, por defecto la primera
+    const limit = parseInt(req.query.limit) || DEFAULT_PAGE_LIMIT; // Límite de resultados por página
+
+    const offset = (page - 1) * limit; // Calcular el desplazamiento
+
+    model.findAndCountAll({
+        limit: limit,
+        offset: offset
+    })
+    .then(result => {
+        const { count, rows } = result;
+        const totalPages = Math.ceil(count / limit); // Calcular el número total de páginas
+
+        res.status(200).json({
+            totalItems: count,
+            totalPages: totalPages,
+            currentnpPage: page,
+            sliders: rows
+        });
+    })
+    .catch(error => {
+        console.error('Error al listar sliders:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    });
+}
+/*
 function listar(req, res) {
 
     model.findAll()
@@ -92,7 +120,7 @@ function listar(req, res) {
             res.status(400).send(error)
         })
 }
-
+*/
 
 /*Guarda los datos generales de un predio*/
 async function save(req, res, next) {
@@ -121,5 +149,26 @@ async function save(req, res, next) {
     } catch (e) {
         t.rollback();
         return next(e);
+    }
+}
+
+//upload de imagen
+
+async function uploadFilimg (req, res, next) {
+    try {
+        let folder = 'files-app' + req.query.folder;
+        let filenamesaved = req.filenamesaved;
+        if (!filenamesaved) throw {
+            error: "No se logro subir el archivo",
+            message: "Ha habido un error",
+            status: 400
+        }
+        let file = folder + req.filenamesaved
+        return res.status(200).send({
+            nombrearchuvo: req.originalname, ruta: file
+        });
+
+    } catch (err) {
+        return next(err);
     }
 }

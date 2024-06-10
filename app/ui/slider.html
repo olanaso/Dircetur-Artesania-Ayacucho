@@ -251,6 +251,7 @@
 														<input type="text" class="form-control" id="frase"
 															placeholder="frase">
 													</div>
+													<span class="text-primary">*</span><label>Imagen de Slider</label>
 													<div class="form-group">
 														<input type="file" id="myfile" name="myfile" required>
 														<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
@@ -288,8 +289,9 @@
 														<input type="text" class="form-control" id="fraseE"
 															placeholder="frase" required>
 													</div>
+													<span class="text-primary">*</span><label for="myfile-editar">Actualizar imagen</label>
 													<div class="form-group">
-														<label for="myfile-editar">Actualizar imagen</label>
+														
 														<input type="file" id="myfile-editar" name="myfile-editar">
 														<progress id="progressBar-editar" value="0" max="100"
 															style="width: 100%;"></progress>
@@ -333,7 +335,25 @@
 											</tbody>
 										</table>
 									</div>
+									<div class="card-footer">
+										<!-- Paginación -->
+										<nav aria-label="Page navigation example">
+											<div class="row">
+												<div class="col-sm-12 col-md-5">
+													<div class="text-primary" id="paginationInfo" role="status" aria-live="polite">
+														<!-- Aquí se generará dinámicamente la información de paginación -->
+													</div>
+												</div>
+												<div class="col-sm-12 col-md-7">
+													<ul class="pagination justify-content-end" id="paginationControls">
+														<!-- Aquí se generará dinámicamente los controles de paginación -->
+													</ul>
+												</div>
+											</div>
+										</nav>
+									</div>
 								</div>
+								
 							</div>
 						</div>
 						
