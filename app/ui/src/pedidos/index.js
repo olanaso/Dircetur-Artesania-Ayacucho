@@ -53,7 +53,7 @@ function actualizarControlesPaginacion(totalPages, totalItems) {
 
     // Actualizamos la información de paginación
     const paginationInfo = document.getElementById('paginationInfo');
-    paginationInfo.innerHTML = `Viendo del ${fromItem} a ${toItem} de un total de ${totalItems} resultados`;
+    paginationInfo.innerHTML = `Viendo del ${fromItem} al ${toItem} de un total de ${totalItems} resultados`;
 
     // Limpiamos y generamos los controles de paginación
     const paginationControls = document.getElementById('paginationControls');
