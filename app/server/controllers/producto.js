@@ -12,7 +12,8 @@ module.exports = {
     obtener,
     listar, 
     save,
-    buscar
+    buscar,
+    uploadFilproducto
 };
 
 function guardar (req, res) {
@@ -208,3 +209,26 @@ async function save(req, res, next) {
         return next(e);
     }
 }
+
+
+async function uploadFilproducto (req, res, next) {
+    try {
+        let folder = 'producto-app' + req.query.folder; 
+        let filenamesaved = req.filenamesaved;
+        if (!filenamesaved) throw {
+            error: "No se logro subir el archivo",
+            message: "Ha habido un error",
+            status: 400
+        }
+        //console.log(req.ciudadano)
+        let file = folder + '/' + req.filenamesaved
+        return res.status(200).send({
+            filename: req.originalname, path: file
+        });
+
+    } catch (err) {
+        return next(err);
+    }
+}
+
+

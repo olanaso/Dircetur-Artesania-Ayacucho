@@ -1,11 +1,13 @@
 import { loadPartials } from '../utils/viewpartials';
-import { validarHTML5 } from '../utils/validateForm';
-import { FileUploader } from '../utils/upload.js';
+import { validarHTML5 } from '../utils/validateForm'; 
+import { FileUploader } from '../utils/uploadJorge.js';
 import { buscarProducto,geteditarproducto, getusuariocapacitacion, deleteUserCapacitacion, guardarProducto, nuevoUserCapacitacion,buscarartesanoDNI,buscarartesanoid } from './api';
 import { showLoading, hideLoading, checkSession } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
 import '../productos-detalle/style.css'
+import { AlertDialog } from "../utils/alert";
+const alertDialog = new AlertDialog();
 hideLoading();
 // Uso de la función
 (async function () {
@@ -248,7 +250,7 @@ async function buscarUsuario () {
     } else {
       //$("#btnactualizar").prop("disabled", true).text("Actualizando..."); 
 
-      showLoading()
+     
       let nombres_es = $('#idespanolNombre').val()  
       let nombres_eng = $('#idinglesNombre').val() 
       let resumen_es = $('#idespanolResumen').val() 
@@ -445,27 +447,40 @@ async function buscarUsuario () {
   
 
       //let imagen_principal = "/img/olla.jpg"  
-      
+      alertDialog.createAlertDialog(
+        'confirm',
+        'Confirm Alert',
+        '¿Estás seguro de que deseas guardar el producto?',
+        'Cancelar',
+        'Continuar',
+        async() => {
+            try {
+                  showLoading()
+                  let result = await guardarProducto({ productId,nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal,lst_otros_costos,lst_ofertas,lst_colores,lst_talla,lst_imagenes,lst_videos,lst_videoenlace,precios_envio,igv,precio_local,precio_nacional,precio_extranjero,tiempo_elaboracion,tiempo_envio,preventas,artesano_id  });
+                  if (result) {
+                    showToast('Se actualizo los datos correctamente')
 
-      let result = await guardarProducto({ productId,nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal,lst_otros_costos,lst_ofertas,lst_colores,lst_talla,lst_imagenes,lst_videos,lst_videoenlace,precios_envio,igv,precio_local,precio_nacional,precio_extranjero,tiempo_elaboracion,tiempo_envio,preventas,artesano_id  });
-      if (result) {
-        showToast('Se actualizo los datos correctamente')
+                    if (productId == 0) {
+                      const url = new URL(window.location.href);
+                      url.searchParams.set('id', result.id);
+                      window.history.pushState({}, '', url);
+                      productId=result.id;
+                    } 
+                    
 
-        if (productId == 0) {
-          const url = new URL(window.location.href);
-          url.searchParams.set('id', result.id);
-          window.history.pushState({}, '', url);
-          productId=result.id;
-        } 
-        
+                    hideLoading() 
+                    buscarUsuario();
+                    $('#myModal').css('display', 'none');
+                  } else {
+                    showToast('Ocurrio un error.')
+                  }
+                  //$("#btnactualizar").prop("disabled", false).text("Actualizar");
+                } catch (error) {
+                  console.error('Error al eliminar la foto de perfil:', error);
+                }
+        }
+        );  
 
-        hideLoading() 
-        buscarUsuario();
-        $('#myModal').css('display', 'none');
-      } else {
-        showToast('Ocurrio un error.')
-      }
-      //$("#btnactualizar").prop("disabled", false).text("Actualizar");
     }
 
   })
@@ -996,8 +1011,9 @@ async function editarProducto (id) {
 
 
             /*****buscar artesanod */
-
+            artesano_id=editarproductos.artesano_id;
             const artesanosid = await buscarartesanoid(editarproductos.artesano_id); 
+           
             $('#dni').val(artesanosid.dni);
             $('#nombrecompleto').val(artesanosid.nombres + ' ' + artesanosid.apellidos); 
 
@@ -1010,9 +1026,15 @@ $(document).ready(function() {
  ///editar formulario
  const urlParams = new URLSearchParams(window.location.search);
    productId = urlParams.get('id');
+    
+   var titulo = document.getElementById("tituloproducto");
  if(productId!=0)
   { 
     editarProducto(productId);
+    titulo.innerText = "Editar producto";
+  }else
+  { 
+    titulo.innerText = "Nuevo producto";
   }
    
 //******traductor */
@@ -1748,8 +1770,9 @@ document.addEventListener('DOMContentLoaded', () => {
       fileInputId: 'uploadPrincipalImage',
       progressBarId: 'progressBar',
       statusElementId: 'status',
-      uploadUrl: 'http://localhost:3001/api/fileuploadimg',
-      callback: handleUploadResponseimgprincipal
+      uploadUrl: 'http://localhost:3001/api/producto/fileupload',
+      callback: handleUploadResponseimgprincipal,
+      folder: '/producto/img/',
   });
 });
  
@@ -1760,7 +1783,7 @@ function handleUploadResponseimgprincipal (response) {
     if (file) {
         let reader = new FileReader();
         reader.onload = function(e) {
-            $('#principalImagePreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+            $('#principalImagePreview').attr('src', 'http://localhost:3001/'+response.path).show();
             $('#principalImageName').val(file.name); 
         }
         reader.readAsDataURL(file);
@@ -1783,8 +1806,9 @@ document.addEventListener('DOMContentLoaded', () => {
       fileInputId: 'uploadImage',
       progressBarId: 'progressBar',
       statusElementId: 'status',
-      uploadUrl: 'http://localhost:3001/api/fileuploadimg',
-      callback: handleUploadResponselistaimg
+      uploadUrl: 'http://localhost:3001/api/producto/fileupload',
+      callback: handleUploadResponselistaimg,
+      folder: '/producto/img/',
   });
 });
 
@@ -1799,7 +1823,7 @@ function handleUploadResponselistaimg (response) {
     if (file) {
         let reader = new FileReader();
         reader.onload = function(e) {
-            $('#imagePreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+            $('#imagePreview').attr('src', 'http://localhost:3001/'+response.path).show();
             $('#imageName').val(file.name);
         }
         reader.readAsDataURL(file);
@@ -1820,8 +1844,9 @@ document.addEventListener('DOMContentLoaded', () => {
       fileInputId: 'uploadVideo',
       progressBarId: 'progressBar',
       statusElementId: 'status',
-      uploadUrl: 'http://localhost:3001/api/fileuploadvideo',
-      callback: handleUploadResponselistavideo
+      uploadUrl: 'http://localhost:3001/api/producto/fileupload',
+      callback: handleUploadResponselistavideo,
+      folder: '/producto/video/',
   });
 });
 
@@ -1833,7 +1858,7 @@ function handleUploadResponselistavideo (response) {
   showToast('Registro correcto.');*/ 
 
   showToast('Registro correcto.');
-  $('#videoPreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+  $('#videoPreview').attr('src', 'http://localhost:3001/'+response.path).show();
 
    /* let file = $('#uploadImage').prop('files')[0];
     if (file) {
@@ -1854,7 +1879,9 @@ function handleUploadResponselistavideo (response) {
 
 
 
-function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
+
+//carga de imagen de perfil de cliente
+function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
 
   const fileInput = document.getElementById(fileInputId);
   const inputName = fileInput.name;
@@ -1862,12 +1889,13 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
   const statusElement = document.getElementById(statusElementId);
 
   if (fileInput && progressBar && statusElement) {
-      const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName);
+      const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
       uploader.attachToFileInput(fileInput);
   } else {
       console.error('Initialization failed: One or more elements not found.');
   }
 }
+
 
 
 // Obtener referencias a los elementos del DOM

@@ -176,4 +176,3 @@ export class AlertDialog {
         document.body.appendChild(modal);
     }
 }
-
