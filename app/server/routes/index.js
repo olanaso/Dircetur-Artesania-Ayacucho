@@ -18,6 +18,7 @@ const categoria = require('./categoria');
 const pedido = require('./pedido');
 const upload = require('./upload');
 const ubicaciones =require('./ubicaciones');
+const reportes = require('./reportes');
 
 module.exports = (app) => {
     app.use('/api', mantenimiento);
@@ -39,4 +40,5 @@ module.exports = (app) => {
     app.use('/api', pedido);
     app.use('/api', upload);
     app.use('/api', ubicaciones);
+    app.use('/api', reportes);
 };

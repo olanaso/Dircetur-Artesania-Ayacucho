@@ -19,11 +19,15 @@
 		<link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
 		<link rel="stylesheet" href="public/css/main.css" />
 
+		<link rel="stylesheet" href="vendor/c3/c3.min.css" />
+
 		<!-- Other CSS includes plugins - Cleanedup unnecessary CSS -->
 		<!-- Chartist css -->
 		<link href="vendor/chartist/css/chartist.min.css" rel="stylesheet" />
 		<link href="vendor/chartist/css/chartist-custom.css" rel="stylesheet" />
-		<link rel="stylesheet" href="/src/Clientes/Styles.css">
+
+		
+
 	</head>
 	<body>
 
@@ -97,6 +101,7 @@
 					</div>
 				</div>
 			</header>
+	
 			<!-- END: .app-heading -->
 			<!-- BEGIN .app-container -->
 			<div class="app-container">
@@ -118,22 +123,15 @@
 									
 								</div>
 								<hr>
-								<!--<div class="row">
-									<h7 class="programas"> <img src="/img/i-programa.svg" alt=""> Administración:</h7>
-									<br><br>
-									<ul class="detail-prog" id="m_programas">
-										
-									</ul>
-									
-								</div>-->
 							</div>
 						</header>
+				
 						<!-- BEGIN .side-nav -->
 						<nav class="side-nav">
 							<!-- BEGIN: side-nav-content -->
 							<ul class="unifyMenu" id="unifyMenu">
-								<li >
-									<a href="/dashboard.html">
+								<li  class="active selected">
+									<a href="/dashboard.html" class="current-page">
 										<span class="has-icon">
 											<i class="icon-home"></i>
 										</span>
@@ -155,7 +153,7 @@
 											<a href="/productos.html">Productos</a>
 										</li>
 										<li>
-											<a href="/slider.html">Slider</a>
+											<a href="/slider.html" class="current-page">Slider</a>
 										</li>
 									</ul>
 								</li>
@@ -167,7 +165,7 @@
 										<span class="nav-title">Ventas</span>
 									</a>
 								</li>
-								<li class="active selected">
+								<li>
 									<a href="#" class="has-arrow" aria-expanded="false">
 										<span class="has-icon">
 											<i class="icon-user2"></i>
@@ -179,7 +177,7 @@
 											<a href="/artesanos.html">Artesano</a>
 										</li>
 										<li>
-											<a href="/clientes.html" class="current-page">Cliente</a>
+											<a href="/clientes.html">Cliente</a>
 										</li>
 									</ul>
 								</li>
@@ -204,99 +202,100 @@
 				<div class="app-main">
 					<!-- BEGIN .main-heading -->
 					<header class="main-heading">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-									<div class="page-icon">
-										<svg xmlns="http://www.w3.org/2000/svg" width="33" height="35" viewBox="0 0 20 15" fill="none">
-											<path d="M14 13.0001V15.0001H0V13.0001C0 13.0001 0 9.00005 7 9.00005C14 9.00005 14 13.0001 14 13.0001ZM10.5 3.50005C10.5 2.80782 10.2947 2.13113 9.91014 1.55556C9.52556 0.979985 8.97893 0.531381 8.33939 0.266474C7.69985 0.00156766 6.99612 -0.067744 6.31718 0.0673043C5.63825 0.202353 5.01461 0.535695 4.52513 1.02518C4.03564 1.51466 3.7023 2.1383 3.56725 2.81724C3.4322 3.49617 3.50152 4.1999 3.76642 4.83944C4.03133 5.47899 4.47993 6.02561 5.0555 6.4102C5.63108 6.79478 6.30777 7.00005 7 7.00005C7.92826 7.00005 8.8185 6.6313 9.47487 5.97493C10.1313 5.31855 10.5 4.42831 10.5 3.50005ZM13.94 9.00005C14.5547 9.4758 15.0578 10.0805 15.4137 10.7716C15.7696 11.4626 15.9697 12.2233 16 13.0001V15.0001H20V13.0001C20 13.0001 20 9.37005 13.94 9.00005ZM13 5.2579e-05C12.3117 -0.00378014 11.6385 0.202008 11.07 0.590053C11.6774 1.43879 12.0041 2.45634 12.0041 3.50005C12.0041 4.54377 11.6774 5.56132 11.07 6.41005C11.6385 6.7981 12.3117 7.00389 13 7.00005C13.9283 7.00005 14.8185 6.6313 15.4749 5.97493C16.1313 5.31855 16.5 4.42831 16.5 3.50005C16.5 2.57179 16.1313 1.68156 15.4749 1.02518C14.8185 0.368802 13.9283 5.2579e-05 13 5.2579e-05Z" fill="#E80000"></path>
-										</svg>
-									</div>
-									<div class="page-title">
-										<h5>Clientes</h5>
-										<nav aria-label="breadcrumb">
-											<ol class="breadcrumb">
-												<li class="breadcrumb-item"><a href="#">Administrador</a></li>
-												<li class="breadcrumb-item"><a href="#">Usuarios</a></li>
-												<li class="breadcrumb-item active" aria-current="page">Clientes</li>
-											</ol>
-										</nav>
-									</div>
-								</div>
-								
-							</div>
-						</div>
+						
 					</header>
 					<!-- END: .main-heading -->
 					<!-- BEGIN .main-content -->
 					<div class="main-content">
-						<div class="card">
-							<div class="card-body">
-								<div class="filterContent">
-									<div class="card-header">Filtrar</div>
-									<form class="mt-2 mb-2 p-3" id="filtrarCliente">
-										<div class="row gutters">
-											<div class="col">
-												<label for="">Nombre</label>
-												<input type="text" class="form-control"  id="nombre-Cliente" placeholder="Nombre">
-											</div>
-											<div class="col">
-												<label for="">Apellido</label>
-												<input type="text" class="form-control"  id="apellido-Cliente" placeholder="Apellido">
-											</div>
-											<div class="col">
-												<label for="">Correo</label>
-												<input type="text" class="form-control"  id="correo-Cliente" placeholder="Correo">
-											</div>
-											
-										</div>
-										<div class="d-flex justify-content-end mt-3">
-											<button class="btn btn-primary btn-sm" id="filtrar-Cliente">Filtrar <i class="icon icon-funnel"></i></button>
-										</div>
-									</form>
-								</div>
+						<div class="row gutters">
+							<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
 								<div class="card">
-									<div class="card-header">Lista de Clientes</div>
-									<div class="card-body" id="listaClientes">
-										<table class="table m-0" id="tablaCliente">
-											<thead class="thead-default">
-												<tr>
-													<th>ID</th>
-													<th>Nombres y Apellidos</th>
-													<th>Correo</th>
-													<th>Estado</th>
-													<th>Acciones</th>
-												</tr>
-											</thead>
-											<tbody>
-												
-											</tbody>
-										</table>
+									<div class="card-header">Pie Chart</div>
+									<div class="card-body">
+										<div id="pieChart" class="chart-height"></div>
 									</div>
-									<div class="card-footer">
-										<!-- Paginación -->
-										<nav aria-label="Page navigation example">
-											<div class="row">
-												<div class="col-sm-12 col-md-5">
-													<div class="text-primary" id="paginationInfo" role="status" aria-live="polite">
-														<!-- Aquí se generará dinámicamente la información de paginación -->
-													</div>
-												</div>
-												<div class="col-sm-12 col-md-7">
-													<ul class="pagination justify-content-end" id="paginationControls">
-														<!-- Aquí se generará dinámicamente los controles de paginación -->
-													</ul>
-												</div>
-											</div>
-										</nav>
+								</div>
+							</div>
+							<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+								<div class="card">
+									<div class="card-header">Donut Chart</div>
+									<div class="card-body">
+										<div id="donutChart" class="chart-height"></div>
 									</div>
-
-									
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+								<div class="card">
+									<div class="card-header">Line Graph</div>
+									<div class="card-body">
+										<!-- <div id="lineGraphOverview" class="chart-height"></div> -->
+										<div id="serverRequests" class="chart-height"></div>
+									</div>
 								</div>
 							</div>
 						</div>
-						
-
+						<!-- Row start -->
+						<div class="row gutters">
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+								<div class="row gutters">
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+										<div class="info-stats4">
+											<div class="icon-type pull-left">
+												<i class="icon-announcement"></i>
+											</div>
+											<div class="sale-num">
+												<p>Total Productos</p>
+												<h4>450</h4>
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+										<div class="info-stats4">
+											<div class="icon-type pull-left">
+												<i class="icon-drafts"></i>
+											</div>
+											<div class="sale-num">
+												<p>Total Usuarios</p>
+												<h4>890</h4>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								<div class="row gutters">
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+										<div class="info-stats4">
+											<div class="icon-type pull-left">
+												<i class="icon-chat2"></i>
+											</div>
+											<div class="sale-num">
+												<p>Total Artesanos</p>
+												<h4>185</h4>
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+										<div class="info-stats4">
+											<div class="icon-type pull-left">
+												<i class="icon-assignment_turned_in"></i>
+											</div>
+											<div class="sale-num">
+												<p>Total Categorías</p>
+												<h4>570</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+								<div class="card mt-0">
+									<H6></H6>
+									<div class="card-body">
+										<div id="lineGraphOverview" class="chart-height"></div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<!-- END: .main-content -->
 				</div>
@@ -331,9 +330,13 @@
 		<script src="vendor/chartist/js/custom/donut-chart2.js"></script>
 		<script src="vendor/chartist/js/custom/custom-line-chart4.js"></script>
 
+		<!-- Graficos -->
+		<script src="vendor/c3/c3.min.js"></script>
+		<script src="vendor/c3/custom/server-requests.js"></script>
+
 		<!-- Common JS -->
 		<script src="js/common.js"></script>
-		<script type="module" src="src/Clientes/index.js"></script>
+		<script type="module" src="/src/dashboard/index.js"></script>
 	</body>
 
 <!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
