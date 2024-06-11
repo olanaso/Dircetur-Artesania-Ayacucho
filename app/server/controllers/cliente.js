@@ -164,7 +164,6 @@ async function filtrar(req, res) {
             currentPage: page,
             clientes: result.rows
         });
-        res.json(clientes);
     } catch (error) {
         console.error('Error al buscar clientes:', error);
         res.status(500).json({ message: 'Error interno del servidor' });
