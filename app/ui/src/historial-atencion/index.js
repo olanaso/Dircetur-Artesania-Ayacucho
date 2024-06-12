@@ -1,5 +1,8 @@
-import { obtenerPedido, actualizarPedido } from '../historial-atencion/api';
+import { obtenerPedido, actualizarPedido, enviarCorreo } from '../historial-atencion/api';
 import { FileUploader } from '../utils/upload.js';
+import { AlertDialog } from "../utils/alert";
+const alertDialog = new AlertDialog();
+
 
 let ruta_archivo = "";
 
@@ -26,6 +29,7 @@ const ciudadRecepcion = document.getElementById('ciudad-recepcion');
 const direccionRecepcion = document.getElementById('direccion-recepcion');
 
 const montoTotal = document.getElementById('total-pedido');
+
 
 async function cargarCampos(idPedido) {
     const pedido = await obtenerPedido(idPedido);
@@ -86,30 +90,29 @@ function cargarTablaHistoriaPedido(pedidos) {
 
     tablaHistoriaPedido.innerHTML = '';
 
-    // Agregar clase badge dependiendo del estado del pedido
-    let estadoClass = '';
-    switch (pedidos.estado) {
-        case 'pendiente':
-            estadoClass = 'badge badge-pill badge-warning text-white'; 
-            break;
-        case 'pagado':
-            estadoClass = 'badge badge-pill badge-success'; 
-            break;
-        case 'envio':
-            estadoClass = 'badge badge-pill badge-info'; 
-            break;
-        case 'finalizado':
-            estadoClass = 'badge badge-pill badge-primary'; 
-            break;
-        case 'anulado':
-            estadoClass = 'badge badge-pill badge-danger';
-            break;
-        default:
-            estadoClass = ''; 
-    }
     listaAtencion.forEach(pedido => {
         const row = document.createElement('tr');
-
+        // Agregar clase badge dependiendo del estado del pedido
+        let estadoClass = '';
+        switch (pedido.estado) {
+            case 'pendiente':
+                estadoClass = 'badge badge-pill badge-warning text-white';
+                break;
+            case 'pagado':
+                estadoClass = 'badge badge-pill badge-success';
+                break;
+            case 'envio':
+                estadoClass = 'badge badge-pill badge-info';
+                break;
+            case 'finalizado':
+                estadoClass = 'badge badge-pill badge-primary';
+                break;
+            case 'anulado':
+                estadoClass = 'badge badge-pill badge-danger';
+                break;
+            default:
+                estadoClass = '';
+        }
         row.innerHTML = `
             <td>${formatearFecha(pedido.fecha_atencion)}</td>
             <td>${pedido.comentario}</td>
@@ -117,15 +120,15 @@ function cargarTablaHistoriaPedido(pedidos) {
             <td>${pedido.enlaceSeguimiento == '' ? '' : ` <a href="${pedido.enlaceSeguimiento}"  class="font-italic text-info" target="_blank">Ver enlace</a>`}</td>
             <td>${pedido.medioPrueba == '' ? '' : ` <a href="${pedido.medioPrueba}"  class="font-italic text-info" target="_blank">Ver prueba</a>`}</td>
             <td>
-				<button class="btn btn-primary btn-notificar-email btn-sm">Notificar email</button>
-				<button class="btn btn-success btn-notificar-wsp btn-sm">Notificar WhatsApp</button>
+				<button class="btn btn-primary btn-notificar-email btn-sm">Email</button>
+				<button class="btn btn-success btn-notificar-wsp btn-sm">WhatsApp</button>
 			</td>
         `;
         const btnNotificarEmail = row.querySelector('.btn-notificar-email');
-        btnNotificarEmail.addEventListener('click', () => notificarEmail(pedido.id));
+        btnNotificarEmail.addEventListener('click', async () => await enviarCorreoCliente(pedidos.cliente.correo, pedido));
 
         const btnNotificarWsp = row.querySelector('.btn-notificar-wsp');
-        btnNotificarWsp.addEventListener('click', () => notificarWsp(pedido.id));
+        btnNotificarWsp.addEventListener('click', () => enviarMensajeCliente(pedidos.cliente.telefono, pedido));
         tablaHistoriaPedido.appendChild(row);
     });
 
@@ -134,7 +137,7 @@ function cargarTablaHistoriaPedido(pedidos) {
 function cargarTablaHistoriaReclamos(pedidos) {
     const tablaHistoriaReclamos = document.getElementById('tablaHistoriaReclamos');
     const tablaDatosHistoria = tablaHistoriaReclamos.getElementsByTagName('tbody')[0];
-    
+
     // Limpiar el contenido actual de la tabla
     tablaDatosHistoria.innerHTML = '';
 
@@ -157,14 +160,6 @@ function cargarTablaHistoriaReclamos(pedidos) {
     });
 }
 
-
-function notificarEmail(id) {
-    console.log("notificar email");
-}
-
-function notificarWsp(id) {
-    console.log("notificar wsp");
-}
 
 function getQueryParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -195,7 +190,7 @@ function generarID() {
 
 async function actualizarHistorialPedido(numPedido) {
     const form = document.getElementById('form-actualizar-historia');
-    
+
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -219,22 +214,178 @@ async function actualizarHistorialPedido(numPedido) {
                 medioPrueba: ruta_archivo,
                 fecha_atencion: new Date().toISOString()
             };
-            
-            listAtencion.push(nuevaAtencion);
+
+            listAtencion.unshift(nuevaAtencion);
 
             const data = {
                 list_atencion: listAtencion,
                 estado: form.estado.value
             };
 
-            const result = await actualizarPedido(numPedido, data);
-            await cargarCampos(numPedido);
-            form.reset();
-            console.log('Pedido actualizado:', result);
+            alertDialog.createAlertDialog(
+                'confirm',
+                'Confirmar',
+                '¿Estás seguro que quieres actualizar el pedido?',
+                'Cancelar',
+                'Continuar',
+                async () => {
+                    await actualizarPedido(numPedido, data);
+                    if (nuevaAtencion.notificarCliente) {
+                        await enviarCorreoCliente(pedidoActual.cliente.correo, nuevaAtencion);
+                        enviarMensajeCliente(pedidoActual.cliente.telefono, nuevaAtencion);
+                    }
+                    form.reset();
+                    await cargarCampos(numPedido);
+                }
+            );
+
         } catch (error) {
             console.error('Error al actualizar el pedido:', error);
         }
     });
+}
+
+
+async function enviarCorreoCliente(correoCliente, nuevaAtencion) {
+    alertDialog.createAlertDialog(
+        'confirm',
+        'Confirmar',
+        '¿Estás seguro que quieres enviar notificación al correo del cliente?',
+        'Cancelar',
+        'Continuar',
+        async () => {
+            try {
+                const emailData = {
+                    from: 'tineo.max.clever@cidie.edu.pe',
+                    to: 'clever.max159@gmail.com',
+                    subject: `Pedido #${nuevaAtencion.id}`,
+                    email_html: `
+                        <!DOCTYPE html>
+                        <html lang="es">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    background-color: #f4f4f4;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                                .container {
+                                    max-width: 600px;
+                                    margin: 20px auto;
+                                    background-color: #fff;
+                                    padding: 20px;
+                                    border-radius: 10px;
+                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                }
+                                .header {
+                                    text-align: center;
+                                    border-bottom: 1px solid #ddd;
+                                    padding-bottom: 10px;
+                                    margin-bottom: 20px;
+                                }
+                                .header h1 {
+                                    margin: 0;
+                                    font-size: 24px;
+                                    color: #333;
+                                }
+                                .content {
+                                    line-height: 1.6;
+                                    color: #555;
+                                }
+                                .content p {
+                                    margin: 0 0 10px;
+                                }
+                                .footer {
+                                    text-align: center;
+                                    border-top: 1px solid #ddd;
+                                    padding-top: 10px;
+                                    margin-top: 20px;
+                                    color: #888;
+                                    font-size: 12px;
+                                }
+                                .highlight {
+                                    font-weight: bold;
+                                    color: #333;
+                                }
+                                .link {
+                                    color: #1a73e8;
+                                    text-decoration: none;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="container">
+                                <div class="header">
+                                    <h1>Información de tu Pedido</h1>
+                                </div>
+                                <div class="content">
+                                    <p>Tu pedido está siendo atendido.</p>
+                                    <p><span class="highlight">Estado:</span> ${nuevaAtencion.estado}</p>
+                                    <p><span class="highlight">Comentario:</span> ${nuevaAtencion.comentario}</p>
+                                    <p><span class="highlight">Fecha de atención:</span> ${formatearFecha(nuevaAtencion.fecha_atencion)}</p>
+                                    ${nuevaAtencion.enlaceSeguimiento ? `<p><span class="highlight">Enlace de seguimiento:</span> <a class="link" href="${nuevaAtencion.enlaceSeguimiento}" target="_blank">Ver</a></p>` : ''}
+                                    ${nuevaAtencion.medioPrueba ? `<p><span class="highlight">Medio de prueba:</span> <a class=link href="${nuevaAtencion.medioPrueba}" target="_blank">Ver</a></p>` : ''}
+                                </div>
+                                <div class="footer">
+                                    <p>Gracias por tu preferencia.</p>
+                                </div>
+                            </div>
+                        </body>
+                        </html>
+                    `
+                };
+
+                const result = await enviarCorreo(emailData);
+                return result;
+            } catch (error) {
+                console.error('Error al enviar el correo:', error);
+            }
+        }
+    );
+
+}
+
+function enviarMensajeCliente(telefonoCliente, nuevaAtencion) {
+    var numeroCliente = encodeURIComponent(telefonoCliente);
+    var estado = encodeURIComponent(nuevaAtencion.estado || "");
+    var enlaceSeguimiento = encodeURIComponent(nuevaAtencion.enlaceSeguimiento || "");
+    var comentario = encodeURIComponent(nuevaAtencion.comentario || "");
+    var medioPrueba = encodeURIComponent(nuevaAtencion.medioPrueba || "");
+    var fecha_atencion = encodeURIComponent(formatearFecha(nuevaAtencion.fecha_atencion) || "");
+
+    var url = "https://wa.me/" + numeroCliente + "?text=";
+
+    var mensaje = "*Estimado/a,*%0A%0A";
+    mensaje += "*Le informamos sobre el estado de su atención:*%0A%0A";
+
+    mensaje += "*==============================*%0A";
+
+    if (estado !== "") {
+        mensaje += "*Estado:* " + estado + "%0A";
+    }
+    if (enlaceSeguimiento !== "") {
+        mensaje += "*Enlace de seguimiento:* " + enlaceSeguimiento + "%0A";
+    }
+    if (comentario !== "") {
+        mensaje += "*Comentario:* " + comentario + "%0A";
+    }
+    if (medioPrueba !== "") {
+        mensaje += "*Medio de prueba:* " + medioPrueba + "%0A";
+    }
+    if (fecha_atencion !== "") {
+        mensaje += "*Fecha de atención:* " + fecha_atencion + "%0A";
+    }
+
+    mensaje += "*==============================*%0A";
+    mensaje += "%0A";
+    mensaje += "Si tiene alguna pregunta o necesita más información, no dude en contactarnos.%0A%0A";
+    mensaje += "¡Gracias por su preferencia!.%0A";
+    url += mensaje;
+
+    window.open(url, '_blank').focus();
 }
 
 
@@ -248,12 +399,13 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInputId: 'myfile',
         progressBarId: 'progressBar',
         statusElementId: 'status',
-        uploadUrl: 'http://localhost:3001/api/fileupload2',
+        uploadUrl: 'http://localhost:3001/api/pedido/fileupload',
+        folder: '/pedidos/',
         callback: handleUploadResponse
     });
 });
 
-function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
+function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
 
     const fileInput = document.getElementById(fileInputId);
     const inputName = fileInput.name;
@@ -261,7 +413,7 @@ function initializeFileUploader({ fileInputId, progressBarId, statusElementId, u
     const statusElement = document.getElementById(statusElementId);
 
     if (fileInput && progressBar && statusElement) {
-        const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName);
+        const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
         uploader.attachToFileInput(fileInput);
     } else {
         console.error('Initialization failed: One or more elements not found.');

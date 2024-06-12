@@ -1,6 +1,11 @@
 import { actualizarCliente, obtenerCliente } from '../Clientes/api';
+import { enviarCorreo } from './api.js';
 import {loadData, handleCountryChange, handleStateChange} from '../utils/ubicaciones';
+import { FileUploader } from '../utils/uploadVictor.js';
+import { AlertDialog } from "../utils/alert";
+const alertDialog = new AlertDialog();
 
+let imagen_principal = null;
 //tab informacion
 const nombreC = document.getElementById('nombreC');
 const apellidosC = document.getElementById('apellidosC');
@@ -28,7 +33,7 @@ function getQueryParameter(name) {
 }
 
 async function llenarCampos(idCliente) {
-    await loadData();
+    
     const cliente = await obtenerCliente(idCliente);
     console.log("cliente: ", cliente)
     //tab información
@@ -40,28 +45,18 @@ async function llenarCampos(idCliente) {
     tipodocC.value = cliente.tipo_documento;
     numerodocC.value = cliente.numero_documento;
     dirEnvioC.value = cliente.direccion_envio
-    
-    for (let i = 0; i < paisC.options.length; i++) {
-        if (paisC.options[i].value === cliente.pais) {
-            paisC.options[i].selected = true;
-            handleCountryChange({ target: paisC.options[i]})
-            break;
-        }
-    }
-    for (let i = 0; i < regionC.options.length; i++) {
-        if (regionC.options[i].value === cliente.region) {
-            regionC.options[i].selected = true;
-            handleStateChange({ target: regionC.options[i]});
-            break;
-        }
-    }
-    for (let i = 0; i < ciudadC.options.length; i++) {
-        if (ciudadC.options[i].value === cliente.ciudad) {
-            ciudadC.options[i].selected = true;
-            break;
-        }
-    }
+    console.log("longitud pais: ", paisC.options.length)
 
+    cargarYSeleccionarUbicaciones(cliente)
+
+    if (cliente.foto_perfil == "") {
+        $('#imagenPrincipal').attr('src', imagen_principal);
+    }else{
+        let cleanUrl = cliente.foto_perfil.replace(/"/g, '');
+        $('#imagenPrincipal').attr('src', cleanUrl);
+    }
+    
+    
     //tab cuenta
 
     //tab reclamo cliente
@@ -105,8 +100,52 @@ function llenar_tablaReclamos(lista){
         </table>`
     $('#listReclamos').append(tabla_result)
 }
+async function cargarYSeleccionarUbicaciones(cliente) {
+    // Cargar datos iniciales (paises)
+    await loadData();
 
+    // Seleccionar el país
+    for (let i = 0; i < paisC.options.length; i++) {
+        if (paisC.options[i].textContent === cliente.pais) {
+            paisC.selectedIndex = i;
+            handleCountryChange({ target: paisC });
+            break;
+        }
+    }
+    await waitForOptions(regionC);
+    // Seleccionar la región
+    for (let i = 0; i < regionC.options.length; i++) {
+        console.log(regionC.options.length)
+        if (regionC.options[i].textContent === cliente.region) {
+            regionC.selectedIndex = i;
+            await handleStateChange({ target: regionC });
+            break;
+        }
+    }
+    await waitForOptions(ciudadC);
+    // Seleccionar la ciudad
+    for (let i = 0; i < ciudadC.options.length; i++) {
+        if (ciudadC.options[i].textContent === cliente.ciudad) {
+            ciudadC.selectedIndex = i;
+            break;
+        }
+    }
+}
+
+function waitForOptions(selectElement) {
+    return new Promise((resolve) => {
+        const checkOptions = () => {
+            if (selectElement.options.length > 1) {
+                resolve();
+            } else {
+                setTimeout(checkOptions, 100);
+            }
+        };
+        checkOptions();
+    });
+}
 $(document).on('click', '#actualizar-informacion', async function (e) {
+    e.preventDefault();
     try {
         const result = await actualizarCliente(getQueryParameter('id'), {
             nombres: nombreC.value,
@@ -114,15 +153,12 @@ $(document).on('click', '#actualizar-informacion', async function (e) {
             correo: correoC.value,
             telefono: telefonoC.value,
             direccion: direccionC.value,
-            pais: paisC.value,
-            region: regionC.value,
-            ciudad: ciudadC.value,
+            pais: paisC.selectedOptions[0].text,
+            region: regionC.selectedOptions[0].text,
+            ciudad: ciudadC.selectedOptions[0].text,
             tipo_documento: tipodocC.value,
             numero_documento: numerodocC.value,
             direccion_envio: dirEnvioC.value,
-            //foto_perfil: categoria.descripcion,
-            // agregar después el campo para actualizar la imagen
-
         });
 
         console.log('Cliente actualizada:', result);
@@ -132,10 +168,55 @@ $(document).on('click', '#actualizar-informacion', async function (e) {
     }
 });
 
+
+
+$(document).on('click', '.btn-editarF', async function (e) {
+    $('#ClienteImagePreview').attr('src', $('#imagenPrincipal').attr('src')).show()
+});
+
+$(document).on('click', '#btn-actualizarFoto', async function (e){
+    e.preventDefault();
+    try {
+        const result = await actualizarCliente(getQueryParameter('id'), {
+            foto_perfil: imagen_principal
+        });
+        console.log('Foto perfil actualizada:', result);
+        $('#imagenPrincipalModal').modal('hide');
+        llenarCampos(getQueryParameter('id'))
+    } catch (error) {
+        console.error('Error al actualizar el cliente:', error);
+    }
+})
+
+$(document).on('click', '.btn-eliminarF', async function (e){
+    e.preventDefault();
+    alertDialog.createAlertDialog(
+        'confirm',
+        'Confirm Alert',
+        '¿Estás seguro de que deseas eliminar el slider?',
+        'Cancelar',
+        'Continuar',
+        async() => {
+            try {
+                const result = await actualizarCliente(getQueryParameter('id'), {
+                    foto_perfil: ""
+                });
+                console.log('Foto perfil eliminada:', result);
+                llenarCampos(getQueryParameter('id'))
+            } catch (error) {
+                console.error('Error al eliminar la foto de perfil:', error);
+            }
+        }
+    );  
+})
+
 $(document).on('click', '#actualizar-cuenta', async function (e) {
     // Actualizar los datos de la categoría en tu estructura de datos
 
 });
+
+
+
 
 
 
@@ -164,25 +245,173 @@ async function mostrarDataModal(clienteID) {
 }
 
 
+//correos
+async function enviarCorreoCliente(correoCliente, mensaje) {
+    try {
+        const emailData = {
+            from: 'tineo.max.clever@cidie.edu.pe',
+            to: 'victorheli2101@gmail.com',
+            subject: "Mensaje de activación de cuenta",
+            email_html: `
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f4;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        .container {
+                            max-width: 600px;
+                            margin: 20px auto;
+                            background-color: #fff;
+                            padding: 20px;
+                            border-radius: 10px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        }
+                        .header {
+                            text-align: center;
+                            border-bottom: 1px solid #ddd;
+                            padding-bottom: 10px;
+                            margin-bottom: 20px;
+                        }
+                        .header h1 {
+                            margin: 0;
+                            font-size: 24px;
+                            color: #333;
+                        }
+                        .content {
+                            line-height: 1.6;
+                            color: #555;
+                        }
+                        .content p {
+                            margin: 0 0 10px;
+                        }
+                        .footer {
+                            text-align: center;
+                            border-top: 1px solid #ddd;
+                            padding-top: 10px;
+                            margin-top: 20px;
+                            color: #888;
+                            font-size: 12px;
+                        }
+                        .highlight {
+                            font-weight: bold;
+                            color: #333;
+                        }
+                        .link {
+                            color: #1a73e8;
+                            text-decoration: none;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header">
+                            <h1>Información de cuenta</h1>
+                        </div>
+                        <div class="content">
+                            <p>${mensaje}.</p>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `
+        };
+
+        const result = await enviarCorreo(emailData);
+        return result;
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+    }
+}
+
+
+$(document).on('click', '#notificaEstado', async function (e) {
+    e.preventDefault();
+    const msg = document.getElementById('mensajeEstado');
+    enviarCorreoCliente('correoCliente', msg.value);
+    $('#mensajeEstado').val('');
+
+});
+
+//carga de imagen de perfil de cliente
+function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
+
+    const fileInput = document.getElementById(fileInputId);
+    const inputName = fileInput.name;
+    const progressBar = document.getElementById(progressBarId);
+    const statusElement = document.getElementById(statusElementId);
+  
+    if (fileInput && progressBar && statusElement) {
+        const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
+        uploader.attachToFileInput(fileInput);
+    } else {
+        console.error('Initialization failed: One or more elements not found.');
+    }
+}
+
+document.getElementById('myfile').addEventListener('change', function() {
+    var file = this.files[0];
+    var fileType = file.type;
+    var allowedTypes = ['image/png', 'image/jpeg'];
+
+    if (!allowedTypes.includes(fileType)) {
+        alert('Solo se permiten archivos PNG o JPG');
+        this.value = '';
+    }
+});
+
+function handleUploadResponse(response) {
+    alert('registro correcto')
+    alert(response.ruta)
+
+    let file = $('#myfile').prop('files')[0];
+    if (file) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+        $('#ClienteImagePreview').attr('src', 'http://localhost:3001/' + response.ruta).show();
+        $('#principalImageName').val(file.name);
+        }
+        reader.readAsDataURL(file);
+
+        imagen_principal = 'http://localhost:3001/' + response.ruta;
+    } else {
+        alert("Por favor, seleccione un archivo para visualizar.");
+    }
+}
+
 
 document.addEventListener('DOMContentLoaded', (event)=> {
     event.preventDefault();
-    const clienteId = getQueryParameter('id');
-    llenarCampos(clienteId);
-    
-    mostrarDataModal(clienteId)
+    loadData().then(() => {
+        const clienteId = getQueryParameter('id');
+        llenarCampos(clienteId);
+        mostrarDataModal(clienteId);
 
-    const estadoCheckbox = document.getElementById('estado');
-    estadoCheckbox.addEventListener('change', async function (e) {
-        const estadoC = estadoCheckbox.checked ? true : false;
-        try {
-            const result = await actualizarCliente(getQueryParameter('id'), {
-                estado: !estadoC
-            });
-            console.log('estado actualizado:', result);
-        } catch (error) {
-            console.error('Error al actualizar el estado:', error);
-        }
+        const estadoCheckbox = document.getElementById('estado');
+        estadoCheckbox.addEventListener('change', async function () {
+            const estadoC = estadoCheckbox.checked ? true : false;
+            try {
+                const result = await actualizarCliente(getQueryParameter('id'), { estado: !estadoC });
+                console.log('Estado actualizado:', result);
+            } catch (error) {
+                console.error('Error al actualizar el estado:', error);
+            }
+        });
+
+        initializeFileUploader({
+            fileInputId: 'myfile',
+            progressBarId: 'progressBar',
+            statusElementId: 'status',
+            uploadUrl: 'http://localhost:3001/api/fileupload4',
+            folder: '/cliente/img/',
+            callback: handleUploadResponse
+        });
     });
+    
 });
-

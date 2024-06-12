@@ -1,6 +1,8 @@
 const controller = require('../controllers').pedido;
 const { Router } = require('express');
 const router = Router();
+const { uploadarchivoDDP } = require('../midleware/uploadMax');
+
 
 router.post('/pedido', controller.guardar);
 router.put('/pedido/:id', controller.actualizar);
@@ -10,5 +12,6 @@ router.get('/pedido', controller.listar);
 router.post('/pedido/save/', controller.save);
 router.get('/pedidos', controller.filtrar);
 
+router.post('/pedido/fileupload', uploadarchivoDDP, controller.uploadFileAtencion);
 
 module.exports = router;

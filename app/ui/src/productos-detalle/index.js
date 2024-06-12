@@ -1,11 +1,13 @@
 import { loadPartials } from '../utils/viewpartials';
-import { validarHTML5 } from '../utils/validateForm';
-import { FileUploader } from '../utils/upload.js';
+import { validarHTML5 } from '../utils/validateForm'; 
+import { FileUploader } from '../utils/uploadJorge.js';
 import { buscarProducto,geteditarproducto, getusuariocapacitacion, deleteUserCapacitacion, guardarProducto, nuevoUserCapacitacion,buscarartesanoDNI,buscarartesanoid } from './api';
 import { showLoading, hideLoading, checkSession } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
 import '../productos-detalle/style.css'
+import { AlertDialog } from "../utils/alert";
+const alertDialog = new AlertDialog();
 hideLoading();
 // Uso de la función
 (async function () {
@@ -32,9 +34,11 @@ function startApp () {
   checkadminsession(); 
   buscarUsuario();
   exportarExcel();
-  nuevo();
-
+  nuevo(); 
+ 
 }
+
+
 async function checkadminsession () {
   let result = await checkSession()
   if (result.usuario.rolid != 1) {
@@ -238,14 +242,15 @@ async function buscarUsuario () {
     });
 
     if (!isValid) {
-      alert('Por favor, ingresa el DNI y todos los campos requeridos.');
+      //alert('Por favor, ingresa el DNI y todos los campos requeridos.');
+      showToast('Por favor, ingresa el DNI y todos los campos requeridos.');
       document.getElementById('dni').focus(); // Pone el foco en el campo del D
       
       return;
     } else {
       //$("#btnactualizar").prop("disabled", true).text("Actualizando..."); 
 
-      showLoading()
+     
       let nombres_es = $('#idespanolNombre').val()  
       let nombres_eng = $('#idinglesNombre').val() 
       let resumen_es = $('#idespanolResumen').val() 
@@ -442,27 +447,40 @@ async function buscarUsuario () {
   
 
       //let imagen_principal = "/img/olla.jpg"  
-      
+      alertDialog.createAlertDialog(
+        'confirm',
+        'Confirm Alert',
+        '¿Estás seguro de que deseas guardar el producto?',
+        'Cancelar',
+        'Continuar',
+        async() => {
+            try {
+                  showLoading()
+                  let result = await guardarProducto({ productId,nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal,lst_otros_costos,lst_ofertas,lst_colores,lst_talla,lst_imagenes,lst_videos,lst_videoenlace,precios_envio,igv,precio_local,precio_nacional,precio_extranjero,tiempo_elaboracion,tiempo_envio,preventas,artesano_id  });
+                  if (result) {
+                    showToast('Se actualizo los datos correctamente')
 
-      let result = await guardarProducto({ productId,nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal,lst_otros_costos,lst_ofertas,lst_colores,lst_talla,lst_imagenes,lst_videos,lst_videoenlace,precios_envio,igv,precio_local,precio_nacional,precio_extranjero,tiempo_elaboracion,tiempo_envio,preventas,artesano_id  });
-      if (result) {
-        showToast('Se actualizo los datos correctamente')
+                    if (productId == 0) {
+                      const url = new URL(window.location.href);
+                      url.searchParams.set('id', result.id);
+                      window.history.pushState({}, '', url);
+                      productId=result.id;
+                    } 
+                    
 
-        if (productId == 0) {
-          const url = new URL(window.location.href);
-          url.searchParams.set('id', result.id);
-          window.history.pushState({}, '', url);
-          productId=result.id;
-        } 
-        
+                    hideLoading() 
+                    buscarUsuario();
+                    $('#myModal').css('display', 'none');
+                  } else {
+                    showToast('Ocurrio un error.')
+                  }
+                  //$("#btnactualizar").prop("disabled", false).text("Actualizar");
+                } catch (error) {
+                  console.error('Error al eliminar la foto de perfil:', error);
+                }
+        }
+        );  
 
-        hideLoading() 
-        buscarUsuario();
-        $('#myModal').css('display', 'none');
-      } else {
-        showToast('Ocurrio un error.')
-      }
-      //$("#btnactualizar").prop("disabled", false).text("Actualizar");
     }
 
   })
@@ -476,7 +494,9 @@ async function buscarUsuario () {
        
       if (cantidad && cantidadMinima) {
         if (parseFloat(cantidad) < parseFloat(cantidadMinima)) {
-          alert('La cantidad minima no puede ser mayor');
+          
+      showToast('La cantidad minima no puede ser mayor.');
+          //alert('La cantidad minima no puede ser mayor');
           document.getElementById('cantidadMinima').focus(); 
            document.getElementById('cantidadMinima').value=""; 
           return
@@ -485,6 +505,8 @@ async function buscarUsuario () {
         errorMessage.style.display = 'none';
     }
   }
+
+  
 
   
 document.getElementById('cantidad').addEventListener('input', validarCantidad);
@@ -509,7 +531,8 @@ document.getElementById('cantidadMinima').addEventListener('input', validarCanti
     });
 
     if (!isValid) {
-      alert('Por favor, completa todos los campos requeridos.');
+      showToast('Por favor, completa todos los campos requeridos.');
+      //alert('Por favor, completa todos los campos requeridos.');
 
     } else {
       //$("#btnactualizar").prop("disabled", true).text("Actualizando..."); 
@@ -685,10 +708,16 @@ descuentoInput.addEventListener('input', function() {
         precioOfertadoInput.value = precioConDescuento.toFixed(2);
     } else {
         // Manejo de errores si los valores no son válidos
-        precioOfertadoInput.value = 'Valor inválido';
+        showToast('Completar el precio actual, registrar en la pestaña "datos generales - Precio del producto".');
+
+        $('#porcentajeDescuento').val("");
+        $('#precioOfertado').val("");
+        //alert("Por favor, complete todos los campos *.");
+        return;
     }
 });
 
+ 
 
 // validar fechas 
  // Obtener referencias a los elementos del DOM
@@ -706,7 +735,9 @@ descuentoInput.addEventListener('input', function() {
      const fechaFin = new Date(fechaFinInput.value);
 
      if (fechaFin < fechaInicio) {
-         alert("La fecha de fin no puede ser menor que la fecha de inicio.");
+      
+      showToast('La fecha de fin no puede ser menor que la fecha de inicio.');
+         //alert("La fecha de fin no puede ser menor que la fecha de inicio.");
          fechaFinInput.value = fechaInicioInput.value;
      }
  }
@@ -767,6 +798,7 @@ async function editarProducto (id) {
       $('#fechaDisponible').val(editarproductos.fecha_disponible ) 
 
 
+      
       document.getElementById('imagenPrincipal').src=editarproductos.imagen_principal 
 
  
@@ -936,14 +968,27 @@ async function editarProducto (id) {
               document.getElementById('listaCostos').insertAdjacentHTML('beforeend', nuevaFila);
           });
  
+          var input = document.getElementById('envioLocal');
+          var input2 = document.getElementById('envioNacional');
+          var input3 = document.getElementById('envioExtranjero');
           if (editarproductos.precios_envio===1){
             document.getElementById('precioEnvio').checked = true;  
+            input.disabled = false;
+            input2.disabled = false;
+            input3.disabled = false;
+            
+          $('#envioLocal').val(editarproductos.precio_local) 
+          $('#envioNacional').val(editarproductos.precio_nacional) 
+          $('#envioExtranjero').val(editarproductos.precio_extranjero) 
             }else
             {
-              document.getElementById('precioEnvio').checked = false;
+              document.getElementById('precioEnvio').checked = false; 
+              input.disabled = true;
+              input2.disabled = true;
+              input3.disabled = true;
             }
             
-            
+             
  
           if (editarproductos.igv===1){
             document.getElementById('impuestoIGV').checked = true;  
@@ -953,9 +998,6 @@ async function editarProducto (id) {
             }
 
 
-          $('#envioLocal').val(editarproductos.precio_local) 
-          $('#envioNacional').val(editarproductos.precio_nacional) 
-          $('#envioExtranjero').val(editarproductos.precio_extranjero) 
           $('#tiemposElaboracion').val(editarproductos.tiempo_elaboracion) 
           $('#tiemposEnvio').val(editarproductos.tiempo_envio) 
           
@@ -969,8 +1011,9 @@ async function editarProducto (id) {
 
 
             /*****buscar artesanod */
-
+            artesano_id=editarproductos.artesano_id;
             const artesanosid = await buscarartesanoid(editarproductos.artesano_id); 
+           
             $('#dni').val(artesanosid.dni);
             $('#nombrecompleto').val(artesanosid.nombres + ' ' + artesanosid.apellidos); 
 
@@ -978,14 +1021,269 @@ async function editarProducto (id) {
 
 $(document).ready(function() {
 
+   
+
  ///editar formulario
  const urlParams = new URLSearchParams(window.location.search);
    productId = urlParams.get('id');
+    
+   var titulo = document.getElementById("tituloproducto");
  if(productId!=0)
   { 
     editarProducto(productId);
+    titulo.innerText = "Editar producto";
+  }else
+  { 
+    titulo.innerText = "Nuevo producto";
   }
    
+//******traductor */
+
+$('#ingles-tab').on('shown.bs.tab', function (e) {
+    const textInSpanish = $('#idespanolNombre').val();
+    if (textInSpanish === "") {
+      $('#idinglesNombre').val(""); // Clear the English field if Spanish field is empty
+      
+      showToast('Por favor, ingrese un nombre de producto en español antes de traducir.');
+     // alert("Por favor, ingrese un nombre de producto en español antes de traducir.");
+      return; // Exit the function if the Spanish field is empty
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({ "text": textInSpanish });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesNombre').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));
+});
+
+$('#ingles-tab-resumen').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolResumen').val();
+  if (textInSpanish === "") {
+    $('#idinglesResumen').val(""); // Clear the English field if Spanish field is empty
+    
+    showToast('Por favor, ingrese el resumen de producto en español antes de traducir.');
+    //alert("Por favor, ingrese el resumen de producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesResumen').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+$('#ingles-tab-descripcion').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolDescripcion').val();
+  if (textInSpanish === "") {
+    $('#idinglesDescripcion').val(""); // Clear the English field if Spanish field is empty
+    
+    showToast('Por favor, ingrese la descripción del producto en español antes de traducir.');
+    //alert("Por favor, ingrese la descripción del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesDescripcion').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+$('#ingles-tab-cualidades').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolCualidades').val();
+  if (textInSpanish === "") {
+    $('#idinglesCualidades').val(""); // Clear the English field if Spanish field is empty
+    
+    showToast('Por favor, ingrese las cualidades del producto en español antes de traducir.');
+   //alert("Por favor, ingrese las cualidades del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesCualidades').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+$('#ingles-tab-palabras').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolPalabras').val();
+  if (textInSpanish === "") {
+    $('#idinglesPalabras').val(""); // Clear the English field if Spanish field is empty
+    showToast('Por favor, ingrese palabra clave del producto en español antes de traducir.');
+    //alert("Por favor, ingrese palabra clave del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesPalabras').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+$('#ingles-tab-piezas').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolPiezas').val();
+  if (textInSpanish === "") {
+    $('#idinglesPiezas').val(""); // Clear the English field if Spanish field is empty
+    showToast('Por favor, ingrese numero de piezas del producto en español antes de traducir.');
+    //alert("Por favor, ingrese numero de piezas del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesPiezas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+
+$('#ingles-tab-materiales').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolMateriales').val();
+  if (textInSpanish === "") {
+    $('#idinglesMateriales').val(""); // Clear the English field if Spanish field is empty
+    showToast('Por favor, ingrese descripción de materiales del producto en español antes de traducir.');
+    //alert("Por favor, ingrese descripción de materiales del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesMateriales').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+
+$('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
+  const textInSpanish = $('#idespanolTecnicas').val();
+  if (textInSpanish === "") {
+    $('#idinglesTecnicas').val(""); // Clear the English field if Spanish field is empty
+    showToast('Por favor, ingrese técnicas empleadas del producto en español antes de traducir.');
+    //alert("Por favor, ingrese técnicas empleadas del producto en español antes de traducir.");
+    return; // Exit the function if the Spanish field is empty
+  }
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({ "text": textInSpanish });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+    .then(response => response.json()) // assuming the API returns JSON
+    .then(result => {
+      $('#idinglesTecnicas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+//**fin*** */
+
+
 
    /******otros costos */
 
@@ -994,7 +1292,8 @@ $(document).ready(function() {
       let precioCosto = $('#precioCosto').val();
 
       if (nombreCosto === "" || precioCosto === "") {
-          alert("Por favor, complete todos los campos.");
+        showToast('Por favor, complete todos los campos *.');
+          //alert("Por favor, complete todos los campos *.");
           return;
       }
 
@@ -1045,10 +1344,25 @@ $(document).ready(function() {
       let porcentajeDescuento = $('#porcentajeDescuento').val();
       let precioOfertado = $('#precioOfertado').val();
       let fechaInicio = $('#fechaInicio').val();
-      let fechaFin = $('#fechaFin').val();
+      let fechaFin = $('#fechaFin').val(); 
+ 
+
+      const precioOriginal = parseFloat(precioDisplaySpan.innerText) || parseFloat(precioDisplaySpan.textContent);
+
+    // Validar que los valores sean números válidos
+    if (isNaN(precioOriginal)) { 
+        // Manejo de errores si los valores no son válidos
+        showToast('Completar el precio actual, registrar en la pestaña "datos generales - Precio del producto".');
+
+        $('#porcentajeDescuento').val("");
+        $('#precioOfertado').val("");
+        //alert("Por favor, complete todos los campos *.");
+        return;
+    }
 
       if (porcentajeDescuento === "" || precioOfertado === "" || fechaInicio === "" || fechaFin === "") {
-          alert("Por favor, complete todos los campos.");
+        showToast('Por favor, complete todos los campos *.');
+          //alert("Por favor, complete todos los campos *.");
           return;
       }
 
@@ -1056,7 +1370,8 @@ $(document).ready(function() {
       precioOfertado = precioOfertado === "" ? 0 : (isDecimal(precioOfertado) ? parseFloat(precioOfertado) : NaN);
 
       if (isNaN(porcentajeDescuento) || isNaN(precioOfertado)) {
-          alert("Por favor, ingrese valores válidos.");
+        showToast('Por favor, ingrese valores válidos.');
+         //alert("Por favor, ingrese valores válidos.");
           return;
       }
 
@@ -1104,7 +1419,8 @@ $(document).ready(function() {
       let colorinput = $('#color-input').val(); 
 
       if (colorinput === "" ) {
-          alert("Por favor, complete todos los campos.");
+        showToast('Por favor, complete todos los campos *.');
+          //alert("Por favor, complete todos los campos *.");
           return;
       }
 
@@ -1147,16 +1463,19 @@ $(document).ready(function() {
       let tallainput = $('#talla-input').val(); 
 
       if (tallainput === "" ) {
-          alert("Por favor, complete todos los campos.");
+        showToast('Por favor, complete todos los campos *.');
+          //alert("Por favor, complete todos los campos *.");
           return;
       }
 
-      tallainput = tallainput === "" ? 0 : (isInteger(tallainput) ? parseInt(tallainput, 10) : NaN); 
+     /* tallainput = tallainput === "" ? 0 : (isInteger(tallainput) ? parseInt(tallainput, 10) : NaN); 
 
       if (isNaN(tallainput)) {
-          alert("Por favor, ingrese valores válidos.");
+        showToast('Por favor, ingrese valores válidos.');
+        $('#talla-input').focus(); 
+          //alert("Por favor, ingrese valores válidos.");
           return;
-      }
+      }*/
 
       contadorTalla++;
 
@@ -1200,7 +1519,8 @@ $(document).ready(function() {
                 let imageSrc = $('#imagePreview').attr('src');
 
                 if (!imageName || !imageSrc) {
-                    alert("Por favor, suba una imagen.");
+                  showToast('Por favor, suba una imagen.');
+                    //alert("Por favor, suba una imagen.");
                     return;
                 }
 
@@ -1250,7 +1570,8 @@ $(document).ready(function() {
     
 
     if (!principalImageSrc || !principalImageName) {
-        alert("Por favor, suba una imagen.");
+      showToast('Por favor, suba una imagen.');
+       // alert("Por favor, suba una imagen.");
         return;
     }
 
@@ -1262,7 +1583,7 @@ $(document).ready(function() {
  
 
   $('#limpiarPrincipalBtn').on('click', function() {
-    $('#imagenPrincipal').attr('src', 'placeholder.png');
+    $('#imagenPrincipal').attr('src', '/img/sin_imagen.jpg');
   });
 
 
@@ -1273,13 +1594,31 @@ $(document).ready(function() {
   let videoStorage = {}; // Almacena los videos cargados
 
   $('#addVideoLink').on('click', function() {
-      let videoName = $('#linkVideoName').val();
-      let videoLink = $('#videoLink').val();
 
-      if (!videoName || !videoLink) {
-          alert("Por favor, complete todos los campos.");
-          return;
-      }
+    let videoName = $('#linkVideoName').val();
+    let videoLink = $('#videoLink').val();
+
+    if (!videoName || !videoLink) {
+      showToast('Por favor, complete todos los campos *.');
+        //alert("Por favor, complete todos los campos *.");
+        return;
+    }
+
+    var urlInput = document.getElementById('videoLink').value;
+    var message = document.getElementById('message');
+    var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-zA-Z0-9]{1,}\\.)?[a-zA-Z0-9]{2,}\\.[a-zA-Z]{2,})|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-zA-Z0-9@:%_\\+.~#?&//=]*)?' + // port and path
+        '(\\?[;&a-zA-Z0-9@:%_\\+.~#?&//=]*)?' + // query string
+        '(\\#[-a-zA-Z0-9@:%_\\+.~#?&//=]*)?$','i'); // fragment locator
+
+    if (!urlPattern.test(urlInput)) { 
+        showToast('URL no válida.'); 
+        $('#videoLink').val("");
+        return;
+    }
+ 
 
       videoCounter2++;
 
@@ -1366,12 +1705,14 @@ $(document).ready(function() {
       let videoFile = $('#uploadVideo').prop('files')[0];
 
       if (!videoName || !videoFile) {
-          alert("Por favor, complete todos los campos.");
+        showToast('Por favor, complete todos los campos *.');
+          //alert("Por favor, complete todos los campos *.");
           return;
       }
 
       if (videoFile.size > 100 * 1024 * 1024) { // 100MB
-          alert("El archivo no debe pesar más de 100mb");
+        showToast('El archivo no debe pesar más de 100mb.');
+          //alert("El archivo no debe pesar más de 100mb");
           return;
       }
 
@@ -1429,8 +1770,9 @@ document.addEventListener('DOMContentLoaded', () => {
       fileInputId: 'uploadPrincipalImage',
       progressBarId: 'progressBar',
       statusElementId: 'status',
-      uploadUrl: 'http://localhost:3001/api/fileuploadimg',
-      callback: handleUploadResponseimgprincipal
+      uploadUrl: 'http://localhost:3001/api/producto/fileupload',
+      callback: handleUploadResponseimgprincipal,
+      folder: '/producto/img/',
   });
 });
  
@@ -1441,16 +1783,18 @@ function handleUploadResponseimgprincipal (response) {
     if (file) {
         let reader = new FileReader();
         reader.onload = function(e) {
-            $('#principalImagePreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+            $('#principalImagePreview').attr('src', 'http://localhost:3001/'+response.path).show();
             $('#principalImageName').val(file.name); 
         }
         reader.readAsDataURL(file);
          
 
        
-        alert('registro correcto')
+        showToast('Registro correcto.');
+        //showToast('Registro correcto.');
     } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
+      showToast('Por favor, seleccione un archivo para visualizar.');
+        //alert("Por favor, seleccione un archivo para visualizar.");
     }
 
   // Ejemplo: Usar el resultado en otro lugar
@@ -1462,29 +1806,31 @@ document.addEventListener('DOMContentLoaded', () => {
       fileInputId: 'uploadImage',
       progressBarId: 'progressBar',
       statusElementId: 'status',
-      uploadUrl: 'http://localhost:3001/api/fileuploadimg',
-      callback: handleUploadResponselistaimg
+      uploadUrl: 'http://localhost:3001/api/producto/fileupload',
+      callback: handleUploadResponselistaimg,
+      folder: '/producto/img/',
   });
 });
 
 function handleUploadResponselistaimg (response) {
   // Manejar la respuesta del servidor
-  /*alert('registro correcto');
+  /*showToast('Registro correcto.');;
   console.log('Server response:', response);
   alert(response.ruta)
-  alert('registro correcto')*/ 
+  showToast('Registro correcto.');*/ 
 
     let file = $('#uploadImage').prop('files')[0];
     if (file) {
         let reader = new FileReader();
         reader.onload = function(e) {
-            $('#imagePreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+            $('#imagePreview').attr('src', 'http://localhost:3001/'+response.path).show();
             $('#imageName').val(file.name);
         }
         reader.readAsDataURL(file);
-        alert('registro correcto')
+        showToast('Registro correcto.');
     } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
+      showToast('Por favor, seleccione un archivo para visualizar.');
+        //alert("Por favor, seleccione un archivo para visualizar.");
     }
 
   // Ejemplo: Usar el resultado en otro lugar
@@ -1498,20 +1844,21 @@ document.addEventListener('DOMContentLoaded', () => {
       fileInputId: 'uploadVideo',
       progressBarId: 'progressBar',
       statusElementId: 'status',
-      uploadUrl: 'http://localhost:3001/api/fileuploadvideo',
-      callback: handleUploadResponselistavideo
+      uploadUrl: 'http://localhost:3001/api/producto/fileupload',
+      callback: handleUploadResponselistavideo,
+      folder: '/producto/video/',
   });
 });
 
 function handleUploadResponselistavideo (response) {
   // Manejar la respuesta del servidor
-  /*alert('registro correcto');
+  /*showToast('Registro correcto.');;
   console.log('Server response:', response);
   alert(response.ruta)
-  alert('registro correcto')*/ 
+  showToast('Registro correcto.');*/ 
 
-  alert('registro correcto')
-  $('#videoPreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+  showToast('Registro correcto.');
+  $('#videoPreview').attr('src', 'http://localhost:3001/'+response.path).show();
 
    /* let file = $('#uploadImage').prop('files')[0];
     if (file) {
@@ -1521,7 +1868,7 @@ function handleUploadResponselistavideo (response) {
             $('#imageName').val(file.name);
         }
         reader.readAsDataURL(file);
-        alert('registro correcto')
+        showToast('Registro correcto.');
     } else {
         alert("Por favor, seleccione un archivo para visualizar.");
     }*/
@@ -1532,7 +1879,9 @@ function handleUploadResponselistavideo (response) {
 
 
 
-function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
+
+//carga de imagen de perfil de cliente
+function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
 
   const fileInput = document.getElementById(fileInputId);
   const inputName = fileInput.name;
@@ -1540,12 +1889,13 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
   const statusElement = document.getElementById(statusElementId);
 
   if (fileInput && progressBar && statusElement) {
-      const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName);
+      const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
       uploader.attachToFileInput(fileInput);
   } else {
       console.error('Initialization failed: One or more elements not found.');
   }
 }
+
 
 
 // Obtener referencias a los elementos del DOM
@@ -1573,4 +1923,17 @@ dniElement.addEventListener('input', async function() {
     }
     
     // Aquí puedes usar artesanosDNI como lo necesites 
+});
+
+document.getElementById('precioEnvio').addEventListener('change', function() {
+  var checkbox = this;
+  var input = document.getElementById('envioLocal');
+  var input2 = document.getElementById('envioNacional');
+  var input3 = document.getElementById('envioExtranjero');
+  input.disabled = !checkbox.checked;
+  input2.disabled = !checkbox.checked;
+  input3.disabled = !checkbox.checked; 
+  $('#envioLocal').val('');
+  $('#envioNacional').val('');
+  $('#envioExtranjero').val(''); 
 });

@@ -1,6 +1,8 @@
 import { loadPartials } from '../utils/viewpartials';
-import { validarHTML5 } from '../utils/validateForm';
-import { FileUploader } from '../utils/upload.js';
+import { validarHTML5 } from '../utils/validateForm'; 
+import { FileUploader } from '../utils/uploadJorge.js';
+import { AlertDialog } from "../utils/alert";
+const alertDialog = new AlertDialog();
 import { guardarUsuario,geteditarArtesano, geteditarLogin, deleteUserCapacitacion, guardarArtesano, nuevoUserCapacitacion,buscarDNI } from './api';
 import { showLoading, hideLoading, checkSession } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
@@ -91,189 +93,206 @@ async function buscarUsuario () {
     
   
 
-    e.preventDefault();
-    var isValid = true;
-    // Itera sobre todos los campos requeridos para verificar si están vacíos
-    $('#form .form-control[required]').each(function () {
-      if ($(this).val() === '') {
-        isValid = false;
-        $(this).css('border-color', 'red'); // Marca los campos vacíos
-      } else {
-        $(this).css('border-color', ''); // Restablece a la normalidad si se corrige
-      }
-    });
+            e.preventDefault();
+            var isValid = true;
+            // Itera sobre todos los campos requeridos para verificar si están vacíos
+            $('#form .form-control[required]').each(function () {
+              if ($(this).val() === '') {
+                isValid = false;
+                $(this).css('border-color', 'red'); // Marca los campos vacíos
+              } else {
+                $(this).css('border-color', ''); // Restablece a la normalidad si se corrige
+              }
+            });
 
-    if (!isValid) {
-      alert('Por favor, ingresa el DNI y todos los campos requeridos.');
-      document.getElementById('dni').focus(); // Pone el foco en el campo del D
-      
-      return;
-    } else   if (validar == "0" ) {
-      alert("validar datos de usuario.");
-      return;
-    } else { 
+            if (!isValid) { 
+              showToast('Por favor, ingresa el DNI y todos los campos *.');
+              document.getElementById('dni').focus(); // Pone el foco en el campo del D
+              
+              return;
+            } else   if (validar == "0" ) {
+              showToast('validar usuario ficha - información personal.'); 
+              return;
+            } else { 
 
-      showLoading()
-      let dni = $('#dni').val()  
-      let ruc = $('#ruc').val() 
-      let nombres = $('#nombres').val() 
-      let apellidos = $('#apellidos').val() 
-      let correo = $('#correo').val() 
-      let celular = $('#celular').val()  
-      let lugar_nacimiento = $('#lugar_nacimiento').val() 
-      let ubigeo = $('#distrito').val() 
-      let lengua_materna = $('#lengua_materna').val() 
+              let dni = $('#dni').val()  
+              let ruc = $('#ruc').val() 
+              let nombres = $('#nombres').val() 
+              let apellidos = $('#apellidos').val() 
+              let correo = $('#correo').val() 
+              let celular = $('#celular').val()  
+              let lugar_nacimiento = $('#lugar_nacimiento').val() 
+              let ubigeo = $('#distrito').val() 
+              let lengua_materna = $('#lengua_materna').val() 
 
-       
-      var foto1ImagePreview = document.getElementById('imagenFoto1');
-      var foto2ImagePreview = document.getElementById('imagenFoto2');
+              
+              var foto1ImagePreview = document.getElementById('imagenFoto1');
+              var foto2ImagePreview = document.getElementById('imagenFoto2');
 
-      // Obtener el valor del atributo src
-      var foto1 = foto1ImagePreview.src;
-      var foto2 = foto2ImagePreview.src;
+              // Obtener el valor del atributo src
+              var foto1 = foto1ImagePreview.src;
+              var foto2 = foto2ImagePreview.src;
 
-//****informacion del taller */
-let listataller = [];
- 
-    let taller = {
-        id: 1, 
-        nombretaller: $('#nombretaller').val(), 
-        horarioatencion: $('#horarioatencion').val(), 
-        ructaller: $('#ructaller').val() ,
-        direccionfisica: $('#direccionfisica').val(), 
-        latitud: $('#latitud').val(), 
-        longitud: $('#longitud').val() 
-    };
-    listataller.push(taller);
- 
-
-let tallerJSON = JSON.stringify(listataller);
-
-let lst_taller = tallerJSON;
-
-//****informacion especialidad tecnica */
-let listaespecialidad = [];
- 
-    let especialidad = {
-        id: 1, 
-        descripcionhabilidades: $('#descripcionhabilidades').val(), 
-        tipoartesania: $('#tipoartesania').val(), 
-        ceramica : $('#ceramica').is(':checked') ? 1 : 0, 
-        piedra : $('#piedra').is(':checked') ? 1 : 0, 
-        talabarteria : $('#talabarteria').is(':checked') ? 1 : 0, 
-        otro : $('#otro').is(':checked') ? 1 : 0,
-        desotro: $('#desotro').val()
-    };
-    listaespecialidad.push(especialidad);
- 
-
-let especialidadJSON = JSON.stringify(listaespecialidad);
-
-let lst_especialidadtecnicas = especialidadJSON;
-
-
-
-//****informacion del contacto */
-
-let listacontacto = [];
-
-$('#listaContacto tr').each(function() {
-  let fila = $(this);
-  let contacto = {
-      id: fila.find('td').eq(0).text(),
-      valor: fila.find('td.ocultar').text(),
-      tipo: fila.find('td').eq(2).text(),
-      Usuario: fila.find('td').eq(3).text(),
-      Enlace: fila.find('td').eq(4).text()
-  };
-  listacontacto.push(contacto);
-});
-
-let contactoJSON = JSON.stringify(listacontacto);
-
-let lst_contactos = contactoJSON;
-
-//****informacion del medio de pago */
-
-let listamediospago = [];
-
-$('#listaMediopago tr').each(function() {
-    let fila = $(this);
-    let mediospago = {
-      id: fila.find('td').eq(0).text(),
-      valor: fila.find('td.ocultar').eq(0).text(),
-      Pago: fila.find('td').eq(2).text(),
-      Banco: fila.find('td.ocultar').eq(1).text(), 
-      Titular: fila.find('td').eq(4).text(),
-      Corriente: fila.find('td').eq(5).text(),
-      Interbancaria: fila.find('td').eq(6).text(),
-      Boleta: fila.find('td.ocultar').eq(2).text(),
-      Factura: fila.find('td.ocultar').eq(3).text(),
-      Recibo: fila.find('td.ocultar').eq(4).text(),
-      Local: fila.find('td.ocultar').eq(5).text(),
-      Departamental: fila.find('td.ocultar').eq(6).text(),
-      Internacional: fila.find('td.ocultar').eq(7).text()
-  };
-    listamediospago.push(mediospago);
-});
- 
-let mediospagoJSON = JSON.stringify(listamediospago);
-
-let lst_mediospago = mediospagoJSON;
-      
- 
-//****informacion del reconocimiento */
-
-let listareconocimientos = [];
-
-$('#listaReconocimiento tr').each(function() {
-    let fila = $(this);
-    let reconocimientos = {
-        id: fila.find('td').eq(0).text(), 
-        Título: fila.find('td').eq(1).text(),
-        Entidad  : fila.find('td').eq(2).text(),
-        Descripcion : fila.find('td').eq(3).text()
-    };
-    listareconocimientos.push(reconocimientos);
-});
-
-let reconocimientosJSON = JSON.stringify(listareconocimientos);
-
-let lst_reconocimientos = reconocimientosJSON;
-
-
- 
-let usuario = $('#usuario').val(); 
-let clave = $('#contrasena').val() ;
-
-
-      let resultlogin = await guardarUsuario({ usuarioid,usuario,nombre_completo: nombres +' ' +apellidos,clave,rolid:2,tipousuario:2,estado:1  });
-          if (resultlogin) {
-            showToast('Se actualizo los datos correctamente')
-            usuarioid=resultlogin.id
-
-                let result = await guardarArtesano({ artesanoId,dni,ruc,nombres,apellidos,correo,celular,lugar_nacimiento,ubigeo,lengua_materna,foto1,foto2,lst_taller,lst_especialidadtecnicas,lst_contactos,lst_mediospago,lst_reconocimientos,usuario_id:usuarioid  });
-                if (result) {
-                  showToast('Se actualizo los datos correctamente')
+        //****informacion del taller */
+        let listataller = [];
         
-                  if (artesanoId == 0) {
-                    const url = new URL(window.location.href);
-                    url.searchParams.set('id', result.id);
-                    window.history.pushState({}, '', url);
-                    artesanoId=result.id;
-                  } 
-                  
+            let taller = {
+                id: 1, 
+                nombretaller: $('#nombretaller').val(), 
+                horarioatencion: $('#horarioatencion').val(), 
+                ructaller: $('#ructaller').val() ,
+                direccionfisica: $('#direccionfisica').val(), 
+                latitud: $('#latitud').val(), 
+                longitud: $('#longitud').val() 
+            };
+            listataller.push(taller);
         
-                  hideLoading()  
-                  $('#myModal').css('display', 'none');
-                } else {
-                  showToast('Ocurrio un error.')
-                }  
-          } else {
-            showToast('Ocurrio un error.')
-          }    
+
+        let tallerJSON = JSON.stringify(listataller);
+
+        let lst_taller = tallerJSON;
+
+        //****informacion especialidad tecnica */
+        let listaespecialidad = [];
+        
+            let especialidad = {
+                id: 1, 
+                descripcionhabilidades: $('#descripcionhabilidades').val(), 
+                tipoartesania: $('#tipoartesania').val(), 
+                ceramica : $('#ceramica').is(':checked') ? 1 : 0, 
+                piedra : $('#piedra').is(':checked') ? 1 : 0, 
+                talabarteria : $('#talabarteria').is(':checked') ? 1 : 0, 
+                otro : $('#otro').is(':checked') ? 1 : 0,
+                desotro: $('#desotro').val()
+            };
+            listaespecialidad.push(especialidad);
+        
+
+        let especialidadJSON = JSON.stringify(listaespecialidad);
+
+        let lst_especialidadtecnicas = especialidadJSON;
+
+
+
+        //****informacion del contacto */
+
+        let listacontacto = [];
+
+        $('#listaContacto tr').each(function() {
+          let fila = $(this);
+          let contacto = {
+              id: fila.find('td').eq(0).text(),
+              valor: fila.find('td.ocultar').text(),
+              tipo: fila.find('td').eq(2).text(),
+              Usuario: fila.find('td').eq(3).text(),
+              Enlace: fila.find('td').eq(4).text()
+          };
+          listacontacto.push(contacto);
+        });
+
+        let contactoJSON = JSON.stringify(listacontacto);
+
+        let lst_contactos = contactoJSON;
+
+        //****informacion del medio de pago */
+
+        let listamediospago = [];
+
+        $('#listaMediopago tr').each(function() {
+            let fila = $(this);
+            let mediospago = {
+              id: fila.find('td').eq(0).text(),
+              valor: fila.find('td.ocultar').eq(0).text(),
+              Pago: fila.find('td').eq(2).text(),
+              Banco: fila.find('td.ocultar').eq(1).text(), 
+              Titular: fila.find('td').eq(4).text(),
+              Corriente: fila.find('td').eq(5).text(),
+              Interbancaria: fila.find('td').eq(6).text(),
+              Boleta: fila.find('td.ocultar').eq(2).text(),
+              Factura: fila.find('td.ocultar').eq(3).text(),
+              Recibo: fila.find('td.ocultar').eq(4).text(),
+              Local: fila.find('td.ocultar').eq(5).text(),
+              Departamental: fila.find('td.ocultar').eq(6).text(),
+              Internacional: fila.find('td.ocultar').eq(7).text()
+          };
+            listamediospago.push(mediospago);
+        });
+        
+        let mediospagoJSON = JSON.stringify(listamediospago);
+
+        let lst_mediospago = mediospagoJSON;
+              
+        
+        //****informacion del reconocimiento */
+
+        let listareconocimientos = [];
+
+        $('#listaReconocimiento tr').each(function() {
+            let fila = $(this);
+            let reconocimientos = {
+                id: fila.find('td').eq(0).text(), 
+                Título: fila.find('td').eq(1).text(),
+                Entidad  : fila.find('td').eq(2).text(),
+                Descripcion : fila.find('td').eq(3).text()
+            };
+            listareconocimientos.push(reconocimientos);
+        });
+
+        let reconocimientosJSON = JSON.stringify(listareconocimientos);
+
+        let lst_reconocimientos = reconocimientosJSON; 
+        
+        let usuario = $('#usuario').val(); 
+        let clave = $('#contrasena').val() ;
+
+
+          
+            alertDialog.createAlertDialog(
+                'confirm',
+                'Confirm Alert',
+                '¿Estás seguro de que deseas guardar?',
+                'Cancelar',
+                'Continuar',
+                async() => {
+                    try {
+                      
+
+                      showLoading()
+                      let resultlogin = await guardarUsuario({ usuarioid,usuario,nombre_completo: nombres +' ' +apellidos,clave,rolid:2,tipousuario:2,estado:1  });
+                      if (resultlogin) {
+                        showToast('Se actualizo los datos correctamente')
+                        usuarioid=resultlogin.id
+    
+                            let result = await guardarArtesano({ artesanoId,dni,ruc,nombres,apellidos,correo,celular,lugar_nacimiento,ubigeo,lengua_materna,foto1,foto2,lst_taller,lst_especialidadtecnicas,lst_contactos,lst_mediospago,lst_reconocimientos,usuario_id:usuarioid  });
+                            if (result) {
+                              showToast('Se actualizo los datos correctamente')
+                    
+                              if (artesanoId == 0) {
+                                const url = new URL(window.location.href);
+                                url.searchParams.set('id', result.id);
+                                window.history.pushState({}, '', url);
+                                artesanoId=result.id;
+                              } 
+                              
+                    
+                              hideLoading()  
+                              $('#myModal').css('display', 'none');
+                            } else {
+                              showToast('Ocurrio un error.')
+                            }  
+                      } else {
+                        showToast('Ocurrio un error.')
+                      }  
+
+                    } catch (error) {
+                        console.error('Error al eliminar la foto de perfil:', error);
+                    }
+                }
+            );  
+
+             
       } 
-    })
+  })
 
    
 
@@ -353,14 +372,18 @@ async function editarArtesano (id) {
           {
             document.getElementById('talabarteria').checked = false;
           }
+          
+          var input = document.getElementById('desotro');
           if (item.otro===1){
-            document.getElementById('otro').checked = true;  
+            document.getElementById('otro').checked = true;   
+            input.disabled = false;
+            $('#desotro').val(item.desotro)
           }else
           {
             document.getElementById('otro').checked = false;
-          }
-  
-          $('#desotro').val(item.desotro)
+            input.disabled = true;
+          } 
+ 
           
       });
           
@@ -488,9 +511,15 @@ $(document).ready(function() {
  ///editar formulario
  const urlParams = new URLSearchParams(window.location.search);
    artesanoId = urlParams.get('id');
+   
+   var titulo = document.getElementById("tituloartesano");
  if(artesanoId!=0)
   { 
+    titulo.innerText = "Editar artesano";
     editarArtesano(artesanoId);
+  }else
+  { 
+    titulo.innerText = "Nuevo artesano";
   }
    
 
@@ -510,15 +539,15 @@ $(document).ready(function() {
     let enlacecontacto = $('#enlacecontacto').val();  
 
     if (tiporedsocial === "0" ) {
-      alert("Por favor de seleccionar tipo.");
+      showToast('Por favor de seleccionar tipo.'); 
       return;
     } 
     if (usuarionumero === "" ) {
-        alert("Por favor, ingresar usuario / número.");
+      showToast('Por favor, ingresar usuario / número.');  
         return;
     }
     if (enlacecontacto === "" ) {
-      alert("Por favor, ingresar enlace de contacto");
+      showToast('Por favor, ingresar enlace de contacto.');  
         return;
     }
 
@@ -595,12 +624,12 @@ $(document).on('click', '.btn-delete-Contacto', function() {
     let internacional = $('#internacional').is(':checked') ? 1 : 0; 
     
 
-    if (tipomediopago === "0" ) {
-      alert("Por favor de seleccionar tipo.");
+    if (tipomediopago === "0" ) { 
+      showToast('Por favor de seleccionar tipo.');  
       return;
     } 
-    if (nombrebanco === "" || nombretitular === "" || cuentacorriente === ""  || cuentainterbancaria === "" ) {
-        alert("Por favor, toda la información.");
+    if (nombrebanco === "" || nombretitular === "" || cuentacorriente === ""  || cuentainterbancaria === "" ) { 
+        showToast('Por favor, todos los campos *.'); 
         return;
     } 
 
@@ -667,6 +696,48 @@ $(document).on('click', '.btn-delete-Contacto', function() {
 
 });
 
+var estadomediopago=0;
+var titulomediopago = document.getElementById("addmediopagoModalLabel");
+$('#addmediopagoModal').on('shown.bs.modal', function () {
+  // Limpiar los campos
+if(estadomediopago!==1){
+  $('#tituloreconocimiento').val('');  
+  $('#entidadreconoce').val('');  
+  $('#descripcionreconocimiento').val(''); 
+  
+
+  // Obtener el título 
+
+  // Cambiar el título según lo necesites
+  // Ejemplo: Cambiar a "Nuevo reconocimiento"
+  titulomediopago.innerText = "Nuevo medio de pago";
+}
+});
+
+$('#addmediopagoModal').on('hide.bs.modal', function () {
+  // Limpiar los campos 
+  
+  $('#tipomediopago').val(0);  
+  $('#nombrebanco').val('');  
+  $('#nombretitular').val('');  
+  $('#cuentacorriente').val('');  
+  $('#cuentainterbancaria').val('');   
+  $('#boleta').prop('checked', false);
+  $('#factura').prop('checked', false);
+  $('#recibohonorario').prop('checked', false);
+  $('#local').prop('checked', false);
+  $('#departamental').prop('checked', false);
+  $('#internacional').prop('checked', false);
+  estadomediopago=0;
+
+  // Obtener el título
+ 
+
+  // Cambiar el título según lo necesites
+  // Ejemplo: Cambiar a "Nuevo reconocimiento"
+  titulomediopago.innerText = "Nuevo medio de pago";  
+});
+
 
 // Delegar el evento de clic para el botón editar
 $('#listaMediopago').on('click', '.btn-edit-Mediopago', function() {
@@ -731,7 +802,11 @@ $('#listaMediopago').on('click', '.btn-edit-Mediopago', function() {
   document.getElementById('guardarMediopagoBtn').style.display = 'none';
   document.getElementById('editarMediopagoBtn').style.display = 'inline-block';
 
+  
+  titulomediopago.innerText = "Editar medio de pago";
+  estadomediopago=1;
   $('#addmediopagoModal').modal('show');
+  
 });
 
 $(document).on('click', '.btn-delete-Mediopago', function() {
@@ -796,6 +871,7 @@ $('#editarMediopagoBtn').on('click', function() {
   $('#internacional').prop('checked', false);
 
   $('#addmediopagoModal').modal('hide');
+  estadomediopago=0;
 });
 
 
@@ -812,7 +888,7 @@ $('#editarMediopagoBtn').on('click', function() {
 
     
     if (tituloreconocimiento === "" || entidadreconoce === "" || descripcionreconocimiento === ""   ) {
-        alert("Por favor, toda la información.");
+      showToast('Por favor, todos los campos *.');  
         return;
     } 
  
@@ -847,6 +923,8 @@ $('#editarMediopagoBtn').on('click', function() {
 });
 
 let filaActual;
+var addreconocimmientoModal = document.getElementById("addreconocimmientoModalLabel");
+var estadoreconocimmiento=0;
 // Delegar el evento de clic para el botón editar
 $('#listaReconocimiento').on('click', '.btn-edit-reconocimiento', function() {
   filaActual = $(this).closest('tr');
@@ -863,6 +941,10 @@ $('#listaReconocimiento').on('click', '.btn-edit-reconocimiento', function() {
   document.getElementById('editarreconocimientoBtn').style.display = 'inline-block';
 
   $('#addreconocimmientoModal').modal('show');
+
+  addreconocimmientoModal.innerText = "Editar Reconocimiento";
+  estadoreconocimmiento=1;
+
 });
 
 $(document).on('click', '.btn-delete-reconocimiento', function() {
@@ -875,6 +957,36 @@ $(document).on('click', '.btn-delete-reconocimiento', function() {
     });
 }); 
 
+  $('#addreconocimmientoModal').on('shown.bs.modal', function () {
+        // Limpiar los campos
+      if(estadoreconocimmiento!==1){
+        $('#tituloreconocimiento').val('');  
+        $('#entidadreconoce').val('');  
+        $('#descripcionreconocimiento').val(''); 
+
+        // Obtener el título
+        var titulo = document.getElementById("addreconocimmientoModalLabel");
+
+        // Cambiar el título según lo necesites
+        // Ejemplo: Cambiar a "Nuevo reconocimiento"
+        titulo.innerText = "Nuevo reconocimiento";
+      }
+  });
+
+  $('#addreconocimmientoModal').on('hide.bs.modal', function () {
+        // Limpiar los campos 
+        $('#tituloreconocimiento').val('');  
+        $('#entidadreconoce').val('');  
+        $('#descripcionreconocimiento').val(''); 
+        estadoreconocimmiento=0;
+
+        // Obtener el título
+        var titulo = document.getElementById("addreconocimmientoModalLabel");
+
+        // Cambiar el título según lo necesites
+        // Ejemplo: Cambiar a "Nuevo reconocimiento"
+        titulo.innerText = "Nuevo reconocimiento";  
+    });
 
 $('#editarreconocimientoBtn').on('click', function() {  
 
@@ -895,6 +1007,8 @@ $('#editarreconocimientoBtn').on('click', function() {
   $('#descripcionreconocimiento').val(''); 
 
   $('#addreconocimmientoModal').modal('hide');
+  estadoreconocimmiento=0;
+  
 });
 
 
@@ -915,7 +1029,7 @@ $('#editarreconocimientoBtn').on('click', function() {
     
 
     if (!principalImageSrc || !principalImageName) {
-        alert("Por favor, suba una imagen.");
+      showToast('Por favor, suba una imagen.');   
         return;
     }
 
@@ -927,7 +1041,7 @@ $('#editarreconocimientoBtn').on('click', function() {
  
 
   $('#limpiarFoto1Btn').on('click', function() {
-    $('#imagenFoto1').attr('src', 'placeholder.png');
+    $('#imagenFoto1').attr('src', '/img/sin_imagen.jpg');
   });
 
   /******foto 2 */
@@ -940,7 +1054,9 @@ $('#editarreconocimientoBtn').on('click', function() {
     
 
     if (!principalImage2Src || !principalImage2Name) {
-        alert("Por favor, suba una imagen.");
+      
+      showToast('Por favor, suba una imagen.');
+       // alert("Por favor, suba una imagen.");
         return;
     }
 
@@ -952,7 +1068,7 @@ $('#editarreconocimientoBtn').on('click', function() {
  
 
   $('#limpiarFoto2Btn').on('click', function() {
-    $('#imagenFoto2').attr('src', 'placeholder.png');
+    $('#imagenFoto2').attr('src', '/img/sin_imagen.jpg');
   });
 
 });
@@ -963,10 +1079,12 @@ document.addEventListener('DOMContentLoaded', () => {
       fileInputId: 'uploadPrincipalImage',
       progressBarId: 'progressBar',
       statusElementId: 'status',
-      uploadUrl: 'http://localhost:3001/api/fileuploadimg',
-      callback: handleUploadResponseimgprincipal
+      uploadUrl: 'http://localhost:3001/api/artesano/fileupload',
+      callback: handleUploadResponseimgprincipal,
+      folder: '/artesano/img/'
   });
 });
+
  
 
 function handleUploadResponseimgprincipal (response) { 
@@ -975,16 +1093,19 @@ function handleUploadResponseimgprincipal (response) {
     if (file) {
         let reader = new FileReader();
         reader.onload = function(e) {
-            $('#principalImagePreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+            $('#principalImagePreview').attr('src', 'http://localhost:3001/'+response.path).show();
             $('#principalImageName').val(file.name); 
         }
         reader.readAsDataURL(file); 
-        alert('registro correcto')
+         showToast('registro correcto.');
     } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
+      
+      showToast('Por favor, seleccione un archivo para visualizar.');
+        //alert("Por favor, seleccione un archivo para visualizar.");
     }
  
 }
+
 
 /******foto 2 */
 document.addEventListener('DOMContentLoaded', () => {
@@ -992,8 +1113,9 @@ document.addEventListener('DOMContentLoaded', () => {
       fileInputId: 'uploadPrincipal2Image',
       progressBarId: 'progressBar2',
       statusElementId: 'status',
-      uploadUrl: 'http://localhost:3001/api/fileuploadimg',
-      callback: handleUploadResponseimgprincipal2
+      uploadUrl: 'http://localhost:3001/api/artesano/fileupload',
+      callback: handleUploadResponseimgprincipal2,
+      folder: '/artesano/img/'
   });
 });
  
@@ -1004,18 +1126,19 @@ function handleUploadResponseimgprincipal2 (response) {
     if (file) {
         let reader = new FileReader();
         reader.onload = function(e) {
-            $('#principalImage2Preview').attr('src', 'http://localhost:3001/'+response.ruta).show();
+            $('#principalImage2Preview').attr('src', 'http://localhost:3001/'+response.path).show();
             $('#principalImage2Name').val(file.name); 
         }
         reader.readAsDataURL(file); 
-        alert('registro correcto')
-    } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
+         showToast('registro correcto.');
+    } else { 
+        showToast('Por favor, seleccione un archivo para visualizar.');
     }
  
 }
-/******Generarl para la carga */
-function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, callback }) {
+
+//carga de imagen de perfil de cliente
+function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
 
   const fileInput = document.getElementById(fileInputId);
   const inputName = fileInput.name;
@@ -1023,7 +1146,7 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
   const statusElement = document.getElementById(statusElementId);
 
   if (fileInput && progressBar && statusElement) {
-      const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName);
+      const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
       uploader.attachToFileInput(fileInput);
   } else {
       console.error('Initialization failed: One or more elements not found.');
@@ -1059,9 +1182,9 @@ document.getElementById("registroForm").addEventListener("submit", function(even
   var usuario = document.getElementById("usuario").value;
   var contrasena = document.getElementById("contrasena").value;
   var repetirContrasena = document.getElementById("repetirContrasena").value;
-  var usuarioError = document.getElementById("usuarioError");
-  var contrasenaError = document.getElementById("contrasenaError");
-  var repetirContrasenaError = document.getElementById("repetirContrasenaError");
+  //var usuarioError = document.getElementById("usuarioError");
+  //var contrasenaError = document.getElementById("contrasenaError");
+  //var repetirContrasenaError = document.getElementById("repetirContrasenaError");
   var errores = false;
 
    
@@ -1101,7 +1224,7 @@ document.getElementById("registroForm").addEventListener("submit", function(even
       validar=0;
       return;
   }  else {
-      contrasenaError.textContent = "";
+      //contrasenaError.textContent = "";
   }
 
   // Validar repetir contraseña
@@ -1118,7 +1241,7 @@ document.getElementById("registroForm").addEventListener("submit", function(even
       validar=0;
       return;
   } else {
-      repetirContrasenaError.textContent = "";
+      //.textContent = "";
   }
 
   if (!errores) {
@@ -1127,4 +1250,11 @@ document.getElementById("registroForm").addEventListener("submit", function(even
     validar=1;
       // Aquí podrías realizar alguna otra acción, como redireccionar a otra página
   }
+});
+
+document.getElementById('otro').addEventListener('change', function() {
+  var checkbox = this;
+  var input = document.getElementById('desotro'); 
+  input.disabled = !checkbox.checked; 
+  $('#desotro').val(''); 
 });

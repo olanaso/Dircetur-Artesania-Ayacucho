@@ -1,7 +1,7 @@
 const mantenimiento = require('./mantenimiento');
 const equipo = require('./equipo');
 const personal = require('./personal');
-const indent_predios = require('./indent_predios')
+const indent_predios = require('./indent_predios');
 const usuario = require('./usuario');
 const libros = require('./libro');
 const accesos = require('./accesos');
@@ -15,6 +15,8 @@ const cliente = require('./cliente');
 const slider = require('./slider');
 const pedido = require('./pedido');
 const upload = require('./upload');
+const ubicaciones = require('./ubicaciones');
+const reportes = require('./reportes');
 
 
 module.exports = {
@@ -35,5 +37,7 @@ module.exports = {
     slider,
     producto,
     pedido,
-    upload
+    upload,
+    ubicaciones,
+    reportes
 };

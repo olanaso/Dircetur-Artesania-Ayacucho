@@ -101,13 +101,10 @@
 											<div class="col">
 												<input type="text" class="form-control" placeholder="Correo del artesano" id="correo">
 											</div> 
-											<div class="col">
-												<button id="filtrar-artesano" type="submit" class="btn btn-primary">Filtrar</button>
-											</div>
-										</div>
-									
-										<div class="d-flex justify-content-end mb-3">  
-													<a href="/artesanos-detalle.html?id=0" class="btn btn-info btn-sm">Nuevo</a>
+											<div class="col">  
+												<button id="filtrar-artesano" type="submit" class="btn btn-primary btn-sm">Filtrar <i class="icon icon-funnel"></i></button> 
+												</button>
+											</div> 
 										</div> 
 									</form>  
 								</div>
@@ -116,7 +113,10 @@
 							
 							<div class="card">
 								<div class="card-header">Lista de Artesanos</div>
-								<div class="card-body"> 
+								<div class="card-body">  
+									<div class="d-flex justify-content-end mb-3">  
+										<a href="/artesanos-detalle.html?id=0" class="btn btn-info btn-sm">Añadir <i class="icon icon-circle-with-plus"></i></a> 
+									</div> 
 									<table id="tablaartesano">
 										<tr>
 											<th>N°</th>
@@ -129,6 +129,20 @@
 											</td>
 										</tr>
 									</table>
+									
+
+									<div class="row">
+										<div class="col-sm-12 col-md-5">
+											<div class="dataTables_info" id="basicExample_info" role="status" aria-live="polite">
+												Mostrando 1 a 0 de 0 entradas
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-7">
+											<div class="dataTables_paginate paging_simple_numbers" id="basicExample_paginate">
+												<ul class="pagination"></ul>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 

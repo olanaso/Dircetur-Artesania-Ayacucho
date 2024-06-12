@@ -65,7 +65,7 @@
 									</svg>
 								</div>
 								<div class="page-title">
-									<h5>Artesanos</h5>
+									<h6>Artesanos</h6>
 									<nav aria-label="breadcrumb">
 										<ol class="breadcrumb">
 											<li class="breadcrumb-item"><a href="/">Administrador</a></li>
@@ -92,7 +92,7 @@
 						<div class="card-body"> 
 							
 							<div class="card">
-								<div class="card-header">Nuevo artesano</div>
+								<div class="card-header" id="tituloartesano">Nuevo artesano</div>
 								<div class="card-body">  
 									<ul class="nav nav-tabs" id="myTab" role="tablist">
 										<li class="nav-item">
@@ -112,9 +112,6 @@
 										</li>
 										<li class="nav-item">
 											<a class="nav-link" id="home-tab6" data-toggle="tab" href="#home6" role="tab" aria-controls="home6" aria-selected="false">Reconocimientos</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" id="home-tab7" data-toggle="tab" href="#home7" role="tab" aria-controls="home7" aria-selected="false">Login</a>
 										</li> 
 									</ul>
 									
@@ -122,123 +119,158 @@
 										<div class="tab-pane fade show active" id="home1" role="tabpanel" aria-labelledby="home-tab1">  
 											<form id="form" action="javascript:void(0)">
 												<div class="row mt-4">
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">DNI:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> DNI:</h6>
 													</div>
-													<div class="col-9 col-md-4">  
+													<div class="col-sm-4">   
 														<input type="number" class="form-control" id="dni" placeholder="Ingrese el dni" required>
 												
-													</div> 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">RUC:</h5>
+													</div>  
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> RUC:</h6>
 													</div>
-													<div class="col-9 col-md-4">
+													<div class="col-sm-4">
 														<input type="number" class="form-control" id="ruc" placeholder="Ingrese el ruc" >
 													</div> 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nombres:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombres:</h6>
 													</div>
-													<div class="col-9 col-md-4">  
-														<input type="text" class="form-control" id="nombres" placeholder="Ingrese el nombres" readonly>
-												
+													<div class="col-sm-4">  
+														<input type="text" class="form-control" id="nombres" placeholder="Ingrese el nombres" readonly> 
 													</div> 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Apellidos:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Apellidos:</h6>
 													</div>
-													<div class="col-9 col-md-4">
+													<div class="col-sm-4">
 														<input type="text" class="form-control" id="apellidos" placeholder="Ingrese el apellidos"  readonly>
 													</div> 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Correo:</h5>
+												</div>  
+											</form> 
+											<form id="registroForm">
+
+												<div class="row mt-4">
+
+													<div class="col-sm-2"> 
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Usuario:</h6>
 													</div>
-													<div class="col-9 col-md-4">  
+													<div class="col-sm-4">
+														<input type="text" class="form-control" id="usuario" placeholder="Usuario">
+														<span class="error" id="usuarioError"></span>
+													</div> 
+
+													<div class="col-sm-2"> 
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Contraseña:</h6> 
+													</div>
+													<div class="col-sm-4">
+														<input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
+														<span class="error" id="contrasenaError"></span>
+													</div> 
+
+													<div class="col-sm-2"> 
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Repita Contraseña:</h6>  
+													</div>
+													<div class="col-sm-4">
+														<input type="password" class="form-control" id="repetirContrasena" placeholder="Repita Contraseña">
+														<span class="error" id="repetirContrasenaError"></span>
+													</div> 
+													<div class="col-sm-2">  
+													</div>
+													<div class="col-sm-4">
+														<button type="submit" class="btn btn-info">Validar usuario</button> 
+													</div>  
+												</div>  
+												 
+											</form> 
+													<hr> 
+
+												<div class="row mt-4">  
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Correo:</h6>
+													</div>
+													<div class="col-sm-4">  
 														<input type="text" class="form-control" id="correo" placeholder="Ingrese el correo">
 												
 													</div> 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Celular:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Celular:</h6>
 													</div>
-													<div class="col-9 col-md-4">
+													<div class="col-sm-4">
 														<input type="text" class="form-control" id="celular" placeholder="Ingrese el celular" >
-													</div> 
- 
-													 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Lugar de Nacimiento:</h5>
+													</div>  
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Lugar de Nacimiento:</h6>
 													</div>
-													<div class="col-9 col-md-10">
+													<div class="col-sm-10">
 														<input type="text" class="form-control" id="lugar_nacimiento" placeholder="Ingrese el lugar nacimiento" >
 													</div> 
 														
-														<div class="col-1 col-md-2">
-															<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Región:</h5>
+														<div class="col-sm-2">
+															<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Región:</h6>
 														</div>
-														<div class="col-9 col-md-4">
+														<div class="col-sm-4">
 															<select class="form-control" id="region">
 																<option value="0">Seleccionar</option> 	
 																<option value="01">Lima</option> 
 															</select>
 														</div> 
-														<div class="col-1 col-md-2">
-															<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Provincia:</h5>
+														<div class="col-sm-2">
+															<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Provincia:</h6>
 														</div>
-														<div class="col-9 col-md-4">
+														<div class="col-sm-4">
 															<select class="form-control" id="provincia">
 																<option value="0">Seleccionar</option> 	
 																<option value="0101">Lima</option> 
 															</select>
 														</div> 
-														<div class="col-1 col-md-2">
-															<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Distrito:</h5>
+														<div class="col-sm-2">
+															<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Distrito:</h6>
 														</div>
-														<div class="col-9 col-md-4">
+														<div class="col-sm-4">
 															<select class="form-control" id="distrito">
 																<option value="0">Seleccionar</option> 	
 																<option value="010101">Lima</option> 
 															</select>
 														</div> 
-														<div class="col-1 col-md-2">
-															<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Lengua materna:</h5>
+														<div class="col-sm-2">
+															<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Lengua materna:</h6>
 														</div>
-														<div class="col-9 col-md-4">
+														<div class="col-sm-4">
 															<input type="text" class="form-control" id="lengua_materna" placeholder="Ingrese el lengua materna" >
 														</div> 
-														<div class="col-1 col-md-2">
-															<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Foto 1:</h5>
+														<div class="col-sm-2">
+															<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Foto 1:</h6>
 														</div>
-														<div class="col-9 col-md-4">
+														<div class="col-sm-4">
 															<div class="d-flex"> 
-																<img id="imagenFoto1" src="" alt="Imagen principal" class="img-thumbnail" style="width: 200px; height: 150px;">
+																<img id="imagenFoto1" src="/img/sin_imagen.jpg" alt="Imagen principal" class="img-thumbnail" style="width: 200px; height: 150px;">
 															</div>
-															<div class="d-flex mt-2"> 
-		
-																<button type="button" class="btn btn-primary btn-add-offer" data-toggle="modal" data-target="#imagenFoto1Modal"><i class="fas fa-plus-circle"></i>Editar</button>
-																<button type="button" class="btn btn-warning btn-add-offer" id="limpiarFoto1Btn"><i class="fas fa-plus-tash"></i>Limpiar</button>																 
+															<div>  
+																<button type="button" class="btn btn-info" data-toggle="modal" data-target="#imagenFoto1Modal">Editar</button>
+																<button type="button" class="btn btn-primary" id="limpiarFoto1Btn">Limpiar</button> 																 
 															</div>
 														</div> 
 	
-														<div class="col-1 col-md-2">
-															<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Foto 2:</h5>
+														<div class="col-sm-2">
+															<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Foto 2:</h6>
 														</div>
-														<div class="col-9 col-md-4">
+														<div class="col-sm-4">
 															<div class="d-flex">
-																<img id="imagenFoto2" src="" alt="Imagen principal" class="img-thumbnail" style="width: 200px; height: 150px;">
+																<img id="imagenFoto2" src="/img/sin_imagen.jpg" alt="Imagen principal" class="img-thumbnail" style="width: 200px; height: 150px;">
 															</div>
-															<div class="d-flex mt-2"> 
-		
-																<button type="button" class="btn btn-primary btn-add-offer" data-toggle="modal" data-target="#imagenFoto2Modal"><i class="fas fa-plus-circle"></i>Editar</button>
-																<button type="button" class="btn btn-warning btn-add-offer" id="limpiarFoto2Btn"><i class="fas fa-plus-tash"></i>Limpiar</button>																 
+															<div>  			
+																<button type="button" class="btn btn-info" data-toggle="modal" data-target="#imagenFoto2Modal">Editar</button>
+																<button type="button" class="btn btn-primary" id="limpiarFoto2Btn">Limpiar</button> 																 
 															</div>
 														</div>   
 												</div>  
-											</form> 
+											
 
 											<!-- Modal foto 1 Principal -->
 											<div class="modal fade" id="imagenFoto1Modal" tabindex="-1" aria-labelledby="imagenPrincipalModalLabel" aria-hidden="true">
-												<div class="modal-dialog modal-xl">
+												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h5 class="modal-title" id="imagenPrincipalModalLabel">Editar Imagen Principal</h5>
+															<h6 class="modal-title" id="imagenPrincipalModalLabel">Editar Imagen Principal</h6>
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																<span aria-hidden="true">&times;</span>
 															</button>
@@ -246,17 +278,17 @@
 														<div class="modal-body"> 
 															<form id="imagenPrincipalForm"> 
 																<div class="form-group">
-																	<label for="uploadPrincipalImage">Subir imagen:</label>
+																	<label for="uploadPrincipalImage"><span class="text-primary">*</span> Subir imagen:</label>
 																	<div class="d-flex align-items-center"> 
-																		<input type="file" class="form-control-file mr-2" name="uploadPrincipalImage" id="uploadPrincipalImage">
-																		<input type="text" class="form-control mr-2" id="principalImageName">
+																		<input type="file" class="form-control-file mr-2" name="uploadPrincipalImage" id="uploadPrincipalImage"  accept="image/*">
+																		<input type="text" class="form-control mr-2" id="principalImageName" style="display: none;">
 																			<!-- <button type="button" class="btn btn-warning" id="visualizarPrincipalBtn">Visualizar</button> -->
 																		   
 																	</div> 
 																	<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
 																	<div id="status" style="display: none;"></div> 
 																</div>
-																<div class="form-group">
+																<div class="form-group" style="text-align: center;" >
 																	<img id="principalImagePreview" src="" alt="Vista previa de la imagen principal" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
 																</div> 
 															</form>
@@ -273,10 +305,10 @@
 											
 											<!-- Modal foto 1 Principal -->
 											<div class="modal fade" id="imagenFoto2Modal" tabindex="-1" aria-labelledby="imagenPrincipal2ModalLabel" aria-hidden="true">
-												<div class="modal-dialog modal-xl">
+												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h5 class="modal-title" id="imagenPrincipal2ModalLabel">Editar Imagen Principal</h5>
+															<h6 class="modal-title" id="imagenPrincipal2ModalLabel">Editar Imagen Principal</h6>
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																<span aria-hidden="true">&times;</span>
 															</button>
@@ -284,17 +316,17 @@
 														<div class="modal-body"> 
 															<form id="imagenPrincipal2Form"> 
 																<div class="form-group">
-																	<label for="uploadPrincipal2Image">Subir imagen:</label>
+																	<label for="uploadPrincipal2Image"><span class="text-primary">*</span> Subir imagen:</label>
 																	<div class="d-flex align-items-center"> 
-																		<input type="file" class="form-control-file mr-2" name="uploadPrincipal2Image" id="uploadPrincipal2Image">
-																		<input type="text" class="form-control mr-2" id="principalImage2Name">
+																		<input type="file" class="form-control-file mr-2" name="uploadPrincipal2Image" id="uploadPrincipal2Image"  accept="image/*">
+																		<input type="text" class="form-control mr-2" id="principalImage2Name" style="display: none;">
 																			<!-- <button type="button" class="btn btn-warning" id="visualizarPrincipalBtn">Visualizar</button> -->
 																		   
 																	</div> 
 																	<progress id="progressBar2" value="0" max="100" style="width: 100%;"></progress>
 																	<div id="status" style="display: none;"></div> 
 																</div>
-																<div class="form-group">
+																<div class="form-group" style="text-align: center;" >
 																	<img id="principalImage2Preview" src="" alt="Vista previa de la imagen principal" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
 																</div> 
 															</form>
@@ -317,44 +349,44 @@
 										<div class="tab-pane fade" id="home2" role="tabpanel" aria-labelledby="home-tab2"> 
 											<form id="form" action="javascript:void(0)">
 												<div class="row mt-4">
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nombre:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nombre:</h6>
 													</div>
-													<div class="col-9 col-md-4">  
+													<div class="col-sm-4">  
 														<input type="text" class="form-control" id="nombretaller" placeholder="Ingrese el nombre del taller">
 												
 													</div> 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Horario de Atención:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Horario de Atención:</h6>
 													</div>
-													<div class="col-9 col-md-4">
+													<div class="col-sm-4">
 														<input type="text" class="form-control" id="horarioatencion" placeholder="Ingrese el horario de atención" >
 													</div> 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Ruc:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Ruc:</h6>
 													</div>
-													<div class="col-9 col-md-4">  
+													<div class="col-sm-4">  
 														<input type="number" class="form-control" id="ructaller" placeholder="Ingrese el ruc">
 												
 													</div> 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Dirección Física:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Dirección Física:</h6>
 													</div>
-													<div class="col-9 col-md-4">
+													<div class="col-sm-4">
 														<input type="text" class="form-control" id="direccionfisica" placeholder="Ingrese la dirección física" >
 													</div>  
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Latitud:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Latitud:</h6>
 													</div>
-													<div class="col-9 col-md-4">  
-														<input type="text" class="form-control" id="latitud" placeholder="Ingrese latitud">
+													<div class="col-sm-4">  
+														<input type="number" class="form-control" id="latitud" placeholder="Ingrese latitud">
 												
 													</div> 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Longitud:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Longitud:</h6>
 													</div>
-													<div class="col-9 col-md-4">
-														<input type="text" class="form-control" id="longitud" placeholder="Ingrese longitud" >
+													<div class="col-sm-4">
+														<input type="number" class="form-control" id="longitud" placeholder="Ingrese longitud" >
 													</div>  
 												</div> 
 
@@ -367,22 +399,22 @@
 											<form id="form" action="javascript:void(0)">
 												 
 												<div class="row mt-4">
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Descripción de habilidades:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Descripción de habilidades:</h6>
 													</div>
-													<div class="col-9 col-md-10">   
+													<div class="col-sm-10">   
 														<textarea  id="descripcionhabilidades" placeholder="Ingrese descripción de habilidades"	class="form-control form-control-sm"></textarea>
 													</div> 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Tipos de artesanía que produce:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Tipos de artesanía que produce:</h6>
 													</div>
-													<div class="col-9 col-md-10">
+													<div class="col-sm-10">
 														<textarea  id="tipoartesania" placeholder="Ingrese descripción de habilidades"	class="form-control form-control-sm"></textarea>													
 													</div> 
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Línea artesanal:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Línea artesanal:</h6>
 													</div>
-													<div class="col-9 col-md-10">   
+													<div class="col-sm-10">   
 														<input type="checkbox" id="ceramica" name="ceramica" value="Cerámica">
 														<label for="ceramica">Cerámica</label>
 														<input type="checkbox" id="piedra" name="piedra" value="Piedra de Huamanga">
@@ -390,9 +422,8 @@
 														<input type="checkbox" id="talabarteria" name="talabarteria" value="Talabartería">
 														<label for="talabarteria">Talabartería</label>  
 														<input type="checkbox" id="otro" name="otro" value="Otro">
-														<label for="otro">Otro</label> 
-														
-														<input type="text" class="form-control" id="desotro" placeholder="Ingrese otra linea artesanal" >
+														<label for="otro">Otro</label>  
+														<input type="text" class="form-control" id="desotro" placeholder="Ingrese otra linea artesanal" disabled >
 													</div> 
 													 
 												</div> 
@@ -400,11 +431,11 @@
 										</div>
 										<div class="tab-pane fade" id="home4" role="tabpanel" aria-labelledby="home-tab4">  
 											<form id="form" action="javascript:void(0)">
-												<h5>Nuevo Contacto</h5>
+												<h6>Nuevo Contacto</h6>
 
 												<div class="row mt-3">
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Seleccione tipo:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Seleccione tipo:</h6>
 													</div>
 													<div class="col-9 col-md-9">  
 														<select class="form-control" id="tiporedsocial" >
@@ -418,29 +449,27 @@
 														</select>
 													</div>
 													
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Usuario / Número:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Usuario / Número:</h6>
 													</div>
 													<div class="col-9 col-md-9">
 														<input type="text" class="form-control" id="usuarionumero" placeholder="Ingrese el usuario / número" >
 													</div>
 													
-													<div class="col-1 col-md-2">
-														<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Enlace de contacto:</h5>
+													<div class="col-sm-2">
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Enlace de contacto:</h6>
 													</div>
 													<div class="col-9 col-md-9">
 														<input type="text" class="form-control" id="enlacecontacto" placeholder="Ingrese el usuario / número" >
 													</div> 
 													
-													<div class="col-10 col-md-11" style="text-align: right;"> 
-														<button type="button" class="btn btn-primary btn-add-contacto" id="addcontactoButton">
-															<i class="fas fa-plus-circle"></i> Añadir
-														</button>
+													<div class="col-10 col-md-11" style="text-align: right;">   
+														<button type="button" class="btn btn-info btn-sm btn-add-contacto" id="addcontactoButton">Añadir <i class="icon icon-circle-with-plus"></i></button>
 													</div>  
 												</div> 
 											<hr>
  
-												<h5>Lista de contactos</h5>
+												<h6>Lista de contactos</h6>
 												<table class="table table-bordered cost-table">
 													<thead>
 														<tr>
@@ -467,10 +496,8 @@
 													<div class="card-body"> 
 
 														<div class="row mt-4"> 
-															<div class="col-md-12 text-right">
-																<button type="button" class="btn btn-primary btn-add-offer" data-toggle="modal" data-target="#addmediopagoModal">
-																	<i class="fas fa-plus-circle"></i> Añadir
-																</button>
+															<div class="col-md-12 text-right"> 
+																<button type="button" class="btn btn-info btn-sm btn-add-offer" data-toggle="modal" data-target="#addmediopagoModal" >Añadir <i class="icon icon-circle-with-plus"></i></button>
 																 
 															</div>
 														</div> 
@@ -498,7 +525,7 @@
 												<div class="modal-dialog modal-xl">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h5 class="modal-title" id="addmediopagoModalLabel">Medio de Pago</h5>
+															<h6 class="modal-title" id="addmediopagoModalLabel">Medio de Pago</h6>
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																<span aria-hidden="true">&times;</span>
 															</button>
@@ -508,7 +535,7 @@
 																	
 																<div class="row mt-4">
 																	<div class="col-1 col-md-3">
-																		<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Medio de Pago:</h5>
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Medio de Pago:</h6>
 																	</div>
 																	<div class="col-9 col-md-8">   
 																		<select class="form-control" id="tipomediopago">
@@ -521,25 +548,25 @@
 																		</select> 
 																	</div> 
 																	<div class="col-1 col-md-3">
-																		<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nombre del Banco:</h5>
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre del Banco:</h6>
 																	</div>
 																	<div class="col-9 col-md-8">  
 																		<input type="text" class="form-control" id="nombrebanco" placeholder="Ingrese el nombre del banco"> 
 																	</div> 
 																	<div class="col-1 col-md-3">
-																		<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Nombre Titular:</h5>
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre Titular:</h6>
 																	</div>
 																	<div class="col-9 col-md-8">
 																		<input type="text" class="form-control" id="nombretitular" placeholder="Ingrese el nombre titular" >
 																	</div> 
 																	<div class="col-1 col-md-3">
-																		<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nro de Cuenta Corriente:</h5>
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nro de Cuenta Corriente:</h6>
 																	</div>
 																	<div class="col-9 col-md-8">
 																		<input type="text" class="form-control" id="cuentacorriente" placeholder="Ingrese el nro de cuenta corriente" >
 																	</div>  
 																	<div class="col-1 col-md-3">
-																		<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nro de Cuenta Interbancaria:</h5>
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nro de Cuenta Interbancaria:</h6>
 																	</div>
 																	<div class="col-9 col-md-8">  
 																		<input type="text" class="form-control" id="cuentainterbancaria" placeholder="Ingrese el nro de cuenta interbancaria"> 
@@ -549,7 +576,7 @@
 																
 																<hr>
 
-																<h5>Comprobantes de pago</h5>  
+																<h6>Comprobantes de pago</h6>  
 																<div class="row mt-4"> 
 																	<div class="col-9 col-md-2">    
 																				<label for="envioNacional">Boleta:</label>
@@ -576,7 +603,7 @@
 																</div>  
 																<hr>
 
-																<h5>Envíos</h5>  
+																<h6>Envíos</h6>  
 																<div class="row mt-4"> 
 																	<div class="col-9 col-md-2">    
 																				<label for="envioNacional">Local:</label>
@@ -606,9 +633,11 @@
 															</form>
 														</div>
 														<div class="modal-footer">
-															<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-															<button type="button" class="btn btn-primary" id="guardarMediopagoBtn">Guardar</button>
-															<button type="button" class="btn btn-primary" id="editarMediopagoBtn">Guardar</button>
+															<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+															<button type="button" class="btn btn-info" id="guardarMediopagoBtn"  style="color: white;">Guardar</button>
+															<button type="button" class="btn btn-info" id="editarMediopagoBtn"  style="color: white;">Guardar</button>
+
+
                    
 														</div>
 													</div>
@@ -624,10 +653,8 @@
 													<div class="card-body"> 
 
 														<div class="row mt-4"> 
-															<div class="col-md-12 text-right">
-																<button type="button" class="btn btn-primary btn-add-offer" data-toggle="modal" data-target="#addreconocimmientoModal">
-																	<i class="fas fa-plus-circle"></i> Añadir
-																</button>
+															<div class="col-md-12 text-right"> 
+																<button type="button" class="btn btn-info btn-sm btn-add-offer" data-toggle="modal" data-target="#addreconocimmientoModal" >Añadir <i class="icon icon-circle-with-plus"></i></button>
 																 
 															</div>
 														</div> 
@@ -654,7 +681,7 @@
 												<div class="modal-dialog modal-xl">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h5 class="modal-title" id="addreconocimmientoModalLabel">Reconocimiento</h5>
+															<h6 class="modal-title" id="addreconocimmientoModalLabel">Nuevo Reconocimiento</h6>
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																<span aria-hidden="true">&times;</span>
 															</button>
@@ -664,19 +691,19 @@
 																	
 																<div class="row mt-4"> 
 																	<div class="col-1 col-md-3">
-																		<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Título:</h5>
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Título:</h6>
 																	</div>
 																	<div class="col-9 col-md-8">  
 																		<input type="text" class="form-control" id="tituloreconocimiento" placeholder="Ingrese el titulo"> 
 																	</div> 
 																	<div class="col-1 col-md-3">
-																		<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Entidad que lo reconoce:</h5>
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Entidad que lo reconoce:</h6>
 																	</div>
 																	<div class="col-9 col-md-8">
 																		<input type="text" class="form-control" id="entidadreconoce" placeholder="Ingrese la entidad que lo reconoce" >
 																	</div> 
 																	<div class="col-1 col-md-3">
-																		<h5 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Descripción:</h5>
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Descripción:</h6>
 																	</div>
 																	<div class="col-9 col-md-8">
 																		<textarea type="text" class="form-control" id="descripcionreconocimiento" placeholder="Ingrese la descripcion" ></textarea>  
@@ -684,10 +711,12 @@
 																</div>  
 															</form>
 														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-															<button type="button" class="btn btn-primary" id="guardarreconocimientoBtn">Guardar</button>
-															<button type="button" class="btn btn-primary" id="editarreconocimientoBtn">Guardar</button>
+														<div class="modal-footer">  
+															<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+															<button type="button" class="btn btn-info" id="guardarreconocimientoBtn"  style="color: white;">Guardar</button>
+															<button type="button" class="btn btn-info" id="editarreconocimientoBtn"  style="color: white;">Guardar</button>
+
+
                   
 														</div>
 													</div>
@@ -695,48 +724,15 @@
 											</div> 
 
 
-										</div>
-										<div class="tab-pane fade" id="home7" role="tabpanel" aria-labelledby="home-tab7">
-
-											<form id="registroForm">
-												<div class="form-group row">
-													<label for="usuario" class="col-sm-2 col-form-label">Usuario</label>
-													<div class="col-sm-10">
-														<input type="text" class="form-control" id="usuario" placeholder="Usuario">
-														<span class="error" id="usuarioError"></span>
-													</div>
-												</div>
-												<div class="form-group row">
-													<label for="contrasena" class="col-sm-2 col-form-label">Contraseña</label>
-													<div class="col-sm-10">
-														<input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
-														<span class="error" id="contrasenaError"></span>
-													</div>
-												</div>
-												<div class="form-group row">
-													<label for="repetirContrasena" class="col-sm-2 col-form-label">Repita Contraseña</label>
-													<div class="col-sm-10">
-														<input type="password" class="form-control" id="repetirContrasena" placeholder="Repita Contraseña">
-														<span class="error" id="repetirContrasenaError"></span>
-													</div>
-												</div>
-												<div class="form-group row">
-													<div class="col-sm-10 offset-sm-2">
-														<button type="submit" class="btn btn-primary">Validar</button>
-													</div>
-												</div>
-											</form>
-										
-										</div>
+										</div> 
 									</div>
 									
-									<hr> 
-									<div class="d-flex justify-content-end mb-3">  
-										<button id="btnguardarcambio" type="submit" class="btn btn-info btn-sm">Guardar cambios</button>
-										<div >  
-											<a href="/artesanos.html" class="btn btn-primary" style="padding: 10px; margin-top: 10px;">salir</a>
-										</div> 
-									</div> 	
+									<hr>  
+									<div class="modal-footer"> 
+										<a href="/artesanos.html" class="btn btn-primary" >Cancelar</a>
+										<a id="btnguardarcambio"  class="btn btn-info" style="color: white;">Registrar</a>
+									</div>
+
 
 								</div>
 							</div>
