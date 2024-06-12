@@ -5,19 +5,12 @@ let currentPage = 1;
 let totalPages = 0;
 let currentFilter = {};
 
-const limpiarDatosFiltro = document.getElementById('limpiar-filtro');
 const btnFiltrar = document.getElementById('filtrar-pedido');
 
 const tablaPedidos = document.getElementById('tablaPedidos');
 const tablaPedidoBody = tablaPedidos.getElementsByTagName('tbody')[0];
 
-function limpiarDatos() {
-    limpiarDatosFiltro.addEventListener('click', (event) => {
-        event.preventDefault();
-        const form = document.getElementById('filtrarPedido');
-        form.reset();
-    });
-}
+
 
 async function cargarPedidos() {
     try {
@@ -290,6 +283,5 @@ function formatearFecha(fecha) {
 document.addEventListener('DOMContentLoaded', () => {
     cargarPedidos();
     filtrarPedidosAction();
-    limpiarDatos();
 });
 
