@@ -324,8 +324,7 @@ async function filtrarClientesAction() {
       };
       //console.log("filtro:", filtro)
       const clientesFiltrados = await filtrarClientes(filtro);
-      //const Clientes = await filtrarClientes(filtro);
-      //console.log("aaaaaaaa:" ,clientesFiltrados.clientes)
+
       cargarTabla(clientesFiltrados.clientes);
       
       totalPages = Math.ceil(clientesFiltrados.totalItems / DEFAULT_PAGE_LIMIT);
@@ -336,7 +335,19 @@ async function filtrarClientesAction() {
     
   });
 }
+
+
+function limpiarDatos() {
+  const limpiarDatosFiltro = document.getElementById('limpiar-filtro');
+  limpiarDatosFiltro.addEventListener('click', (event) => {
+      event.preventDefault();
+      const form = document.getElementById('filtrarCliente');
+      form.reset();
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   cargarCliente();
   filtrarClientesAction();
+  limpiarDatos()
 });
