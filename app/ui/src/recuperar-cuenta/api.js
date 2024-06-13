@@ -12,7 +12,7 @@ export async function recuperarCuenta(correo){
       };
     
       try {
-        const response = await fetch(baseUrl+"/api/recuperarcuenta", settings);
+        const response = await fetch(baseUrl+"/recuperarcuenta", settings);
         const data = await response.json();
         return data
       } catch (error) {

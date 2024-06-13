@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 
-<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
 
 <head>
 	<!-- Required meta tags -->
@@ -9,27 +9,22 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<meta name="description" content="Biblioideas: Biblioteca Virtual del Instituto" />
+	<meta name="description" content="Lead Admin Panel" />
 	<meta name="keywords"
-		content="Biblioteca, Virtual, Biblioideas, Instituto, Libros, Publicaciones, Educación, Lectura, Aprendizaje, Cultura" />
-	<meta name="author" content="Biblioideas" />
-	<link rel="shortcut icon" href="img/fav.png" />
-	<title>CENGEST - Login</title>
+		content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+	<meta name="author" content="Bootstrap Gallery" />
+	<link rel="shortcut icon" href="/img/fav.png" />
+	<title>Administración de capacitaciones </title>
 
 	<!-- Common CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
-
-	<!-- Mian and Login css -->
-	<link rel="stylesheet" href="css/main.css" />
-
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="/css/main.css" />
 
 </head>
 
-<body class="login-bg">
-
+<body>
+	<!-- Loading starts -->
 	<div class="loading-wrapper">
 		<div class="loading">
 			<div class="img"></div>
@@ -41,76 +36,90 @@
 		</div>
 	</div>
 
-	<div class="container">
-		<div class="contenedor-logo-iestp">
-			<img id="logoiestp" src="" alt="">
-		</div>
+	<!-- BEGIN .app-wrap -->
+	<div class="app-wrap">
+		<!-- Headerg -->
+		<header class="app-header" id="app-header">
+		</header>
 
-		<div class="login-screen row align-items-center">
+		<!-- END: .app-heading -->
+		<!-- BEGIN .app-container -->
+		<div class="app-container">
+			<!-- Menu -->
+			<aside class="app-side" id="app-side"></aside>
+			<!-- END: .app-side -->
 
-
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-				<form id="form" action="javascript:void(0)">
-					<div class="login-container">
-						<div class="row no-gutters">
-							<div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
-								<div class="login-box">
-									<a href="#" class="login-logo">
-										<img src="img/lead.svg" alt="Lead Admin Dashboard" />
-									</a>
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text" id="basic-addon1">
-												<i class="icon-account_circle"></i>
-											</span>
-										</div>
-										<input required id="txtusuario" type="text" class="form-control"
-											oninvalid="this.setCustomValidity('Por favor, ingresa el DNI o correo electronico')"
-											oninput="this.setCustomValidity('')" placeholder="Usuario o Email"
-											aria-label="username" aria-describedby="username">
-									</div>
-									<br>
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text" id="basic-addon1">
-												<i class="icon-verified_user"></i>
-											</span>
-										</div>
-										<input required id="txtclave" type="password" class="form-control"
-											oninvalid="this.setCustomValidity('Por favor, ingresa la clave de acceso')"
-											oninput="this.setCustomValidity('')" title="Ingrese la clave de acceso"
-											placeholder="Contraseña" aria-label="Password" aria-describedby="password">
-									</div>
-									<div class="actions clearfix">
-										<a href="recuperar-cuenta.html">¿Olvidaste tu contraseña?</a>
-										<button id="btnlogin" type="submit" class="btn btn-primary">Login</button>
-									</div>
-
+			<!-- BEGIN .app-main -->
+			<div class="app-main">
+				<!-- BEGIN .main-heading -->
+				<header class="main-heading">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+								<div class="page-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="33" height="35" viewBox="0 0 20 15"
+										fill="none">
+										<path
+											d="M14 13.0001V15.0001H0V13.0001C0 13.0001 0 9.00005 7 9.00005C14 9.00005 14 13.0001 14 13.0001ZM10.5 3.50005C10.5 2.80782 10.2947 2.13113 9.91014 1.55556C9.52556 0.979985 8.97893 0.531381 8.33939 0.266474C7.69985 0.00156766 6.99612 -0.067744 6.31718 0.0673043C5.63825 0.202353 5.01461 0.535695 4.52513 1.02518C4.03564 1.51466 3.7023 2.1383 3.56725 2.81724C3.4322 3.49617 3.50152 4.1999 3.76642 4.83944C4.03133 5.47899 4.47993 6.02561 5.0555 6.4102C5.63108 6.79478 6.30777 7.00005 7 7.00005C7.92826 7.00005 8.8185 6.6313 9.47487 5.97493C10.1313 5.31855 10.5 4.42831 10.5 3.50005ZM13.94 9.00005C14.5547 9.4758 15.0578 10.0805 15.4137 10.7716C15.7696 11.4626 15.9697 12.2233 16 13.0001V15.0001H20V13.0001C20 13.0001 20 9.37005 13.94 9.00005ZM13 5.2579e-05C12.3117 -0.00378014 11.6385 0.202008 11.07 0.590053C11.6774 1.43879 12.0041 2.45634 12.0041 3.50005C12.0041 4.54377 11.6774 5.56132 11.07 6.41005C11.6385 6.7981 12.3117 7.00389 13 7.00005C13.9283 7.00005 14.8185 6.6313 15.4749 5.97493C16.1313 5.31855 16.5 4.42831 16.5 3.50005C16.5 2.57179 16.1313 1.68156 15.4749 1.02518C14.8185 0.368802 13.9283 5.2579e-05 13 5.2579e-05Z"
+											fill="#E80000" />
+									</svg>
 								</div>
-								<div id="error_msj" class="col-xl-12 col-lg-12 col-md-12 col-sm-12"
-									style="display: none;">
-									<div class="alert custom alert-danger">
-										<i class="icon-warning2"></i>Usuario o clave incorrecto
-									</div>
+								<div class="page-title">
+									<h5>Inicio</h5> 
 								</div>
 							</div>
-							<div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
-								<div class="login-slider"></div>
+							<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+								<div class="right-actions">
+									<span class="last-login"></span>
+								</div>
 							</div>
 						</div>
 					</div>
-				</form>
+				</header>
+				<!-- END: .main-heading -->
+				<!-- BEGIN .main-content -->
+				<div class="main-content"> 
+
+
+				</div>
+				<!-- END: .main-content -->
 			</div>
+			<!-- END: .app-main -->
+
 		</div>
+		<!-- END: .app-container -->
+		<!-- BEGIN .main-footer -->
+		<footer class="main-footer fixed-btm">
+			Copyright Artesania 2024.
+		</footer>
+		<!-- END: .main-footer -->
 	</div>
-	<footer class="main-footer no-bdr fixed-btm">
-		<div class="container">
-			Copyright BiblioIdeas 2023.
-		</div>
-	</footer>
+
+ 
+ 
+	<!-- END: .app-wrap -->
+
+	<!-- jQuery first, then Tether, then other JS. -->
+	<script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/vendor/leadMenu/leadMenu.js"></script>
+	<script src="/vendor/onoffcanvas/onoffcanvas.js"></script>
+	<script src="/js/moment.js"></script>
+	<script src="/js/jquery.twbsPagination.min.js"></script>
+	<script src="/js/alasql.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+	
+
+
+	<!-- Common JS -->
+	<script src="/js/common.js"></script>
+	<script type="module" src="/src/inicio/index.js"></script>
+
+
+
 </body>
 
-<script type="module" src="src/login/index.js"></script>
-<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
 
 </html>

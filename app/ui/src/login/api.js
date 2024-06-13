@@ -12,7 +12,7 @@ export async function login(usuario,clave){
       };
     
       try {
-        const response = await fetch(baseUrl+"/api/login", settings);
+        const response = await fetch(baseUrl+"/login", settings);
         const data = await response.json();
         return data
       } catch (error) {
