@@ -434,7 +434,7 @@ async function enviarcorreo (usuario) {
             subject: 'Recuperación de cuenta de artesania',
             html: `
             <h1>Recuperacion de cuenta de usuario</h1>
-            <p>Usuario: ${usuario.dni}</p>
+            <p>Usuario: ${usuario.nombre_completo}</p>
             <p>Clave: ${usuario.clave}</p>
             
             
