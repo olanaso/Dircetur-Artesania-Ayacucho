@@ -17,6 +17,8 @@ const pedido = require('./pedido');
 const upload = require('./upload');
 const ubicaciones = require('./ubicaciones');
 const reportes = require('./reportes');
+const productoartesano = require('./productoartesano');
+const ventapedido = require('./ventapedido');
 
 
 module.exports = {
@@ -39,5 +41,7 @@ module.exports = {
     pedido,
     upload,
     ubicaciones,
-    reportes
+    reportes,
+    productoartesano,
+    ventapedido
 };

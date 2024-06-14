@@ -6,7 +6,7 @@ import { buscarProducto,geteditarproducto, getusuariocapacitacion, deleteUserCap
 import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
-import '../productos-detalle/style.css'
+import '../productoartesano-detalle/style.css'
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog(); 
 hideLoading();
@@ -95,8 +95,8 @@ let contadorTalla = 0;
 let contadorOfertas = 0;
 let contadorCostos = 0;
 
-
-var artesano_id=0;
+let usuario=getDataFromLocalStorage('session').usuarios; 
+var artesano_id=usuario.datos[0].id;  
 
 
 async function buscarUsuario () {
@@ -249,10 +249,8 @@ async function buscarUsuario () {
       }
     });
 
-    if (!isValid) {
-      //alert('Por favor, ingresa el DNI y todos los campos requeridos.');
-      showToast('Por favor, ingresa el DNI y todos los campos requeridos.');
-      document.getElementById('dni').focus(); // Pone el foco en el campo del D
+    if (!isValid) { 
+      showToast('Por favor, ingresa el DNI y todos los campos requeridos.'); 
       
       return;
     } else {
@@ -522,57 +520,7 @@ document.getElementById('cantidadMinima').addEventListener('input', validarCanti
 
 
 
-
-  $('#btnuevo').on('click', async function (e) {
-    e.preventDefault();
-
-    var isValid = true;
-
-    // Itera sobre todos los campos requeridos para verificar si están vacíos
-    $('#form2 .form-control[required]').each(function () {
-      if ($(this).val() === '') {
-        isValid = false;
-        $(this).css('border-color', 'red'); // Marca los campos vacíos
-      } else {
-        $(this).css('border-color', ''); // Restablece a la normalidad si se corrige
-      }
-    });
-
-    if (!isValid) {
-      showToast('Por favor, completa todos los campos requeridos.');
-      //alert('Por favor, completa todos los campos requeridos.');
-
-    } else {
-      //$("#btnactualizar").prop("disabled", true).text("Actualizando..."); 
-
-      let dni = $('#txt-dni1').val()
-      let nombres = $('#txt-nombres1').val()
-      let cod_curso = $('#txt-cod_curso1').val()
-      let nota = $('#txt-nota1').val()
-      let cant_horas = $('#txt-cant_horas1').val()
-      let fecha_inicio = $('#txt-fecha_inicio1').val()
-      let fecha_fin = $('#txt-fecha_fin1').val()
-      let fecha_emision = $('#txt-fecha_emision1').val()
-      let instructor = $('#txt-instructor1').val()
-      let temario = $('#txt-temario1').val()
-      let curso = $('#txt-curso1').val()
-
-      let ubicacion = $('#txt-ubicacion1').val()
-      let institucion_solicitante = $('#txt-institucion_solicitante1').val()
-
-
-      let result = await nuevoUserCapacitacion({ fecha_emision, dni, nombres, cod_curso, curso, nota, cant_horas, fecha_inicio, fecha_fin, instructor, temario, ubicacion, institucion_solicitante });
-      if (result) {
-        showToast('Se registro los datos correctamente')
-        buscarUsuario2();
-        $('#myModalNuevo').css('display', 'none');
-      } else {
-        showToast('Ocurrio un error.')
-      }
-      //$("#btnactualizar").prop("disabled", false).text("Actualizar");
-    }
-
-  })
+ 
 
 
 
@@ -1905,33 +1853,7 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
 }
 
 
-
-// Obtener referencias a los elementos del DOM
-const dniElement = document.getElementById('dni'); 
-const nombrecompletoElement = document.getElementById('nombrecompleto');  
-
-// Añadir un evento para actualizar el precio con descuento cuando el usuario ingrese un valor
-dniElement.addEventListener('input', async function() {
-    // Obtener el valor del porcentaje de descuento ingresado
-    const dniValue = dniElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final
-    let valor = dniValue.length;
-    if (valor == 8) {
-        // Asume que buscarDNI es una función que retorna una promesa
-        const artesanosDNI = await buscarartesanoDNI(dniValue);
-    
-
-        if (artesanosDNI != null) {   
-            nombrecompletoElement.value = artesanosDNI.nombres + ' ' + artesanosDNI.apellidos;
-            artesano_id=artesanosDNI.id;
-        } else {  
-            showToast('No existe registro de artesano');
-            $('#dni').val('');
-            $('#nombrecompleto').val('');
-        }
-    }
-    
-    // Aquí puedes usar artesanosDNI como lo necesites 
-});
+ 
 
 document.getElementById('precioEnvio').addEventListener('change', function() {
   var checkbox = this;

@@ -192,7 +192,7 @@ $(document).on('click', '.btn-eliminarF', async function (e){
     e.preventDefault();
     alertDialog.createAlertDialog(
         'confirm',
-        'Confirm Alert',
+        'Confirmar Alerta',
         '¿Estás seguro de que deseas eliminar el slider?',
         'Cancelar',
         'Continuar',

@@ -54,7 +54,7 @@ async function validarSession () {
 
 function llenarinformacion (datos) {
   let usuario=getDataFromLocalStorage('session').usuarios;
-  $('#mlbliestp').text(usuario.nombre_completo)
+  $('#mlbliestp').text(usuario.id)
   //$('#mlbliestp').text(datos.usuario.iestp.nombre)
   $('#m_programas').empty();
   /*let nro = 1

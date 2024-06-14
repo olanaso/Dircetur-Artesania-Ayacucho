@@ -93,7 +93,7 @@ export function llenarinformacionIESTPProg () {
 
         if (prog.padreid == 0 && prog.hijoid == 0) {
             htmlContent += ` 
-                <a href="${prog.enlace}">
+                <a href="${prog.enlace}" class="has-arrow1">
                     <span class="${prog.estilo}">
                         <i class="${prog.imagen}"></i>
                     </span>
@@ -169,8 +169,24 @@ export function llenarinformacionIESTPProg () {
   // Función para marcar el submenú y sus elementos como activos
   export function marcarSubMenuSeleccionado() { 
     const currentPath = window.location.pathname; // Obtener la ruta actual
+    let currentPath2 = currentPath.replace("-detalle", "");
 
-    
+    // Iterar sobre los elementos del menú principal
+    $('#unifyMenu .has-arrow1').each(function() {
+        const $this = $(this);
+        const href = $this.attr('href');
+
+        // Verificar si la ruta actual coincide con el enlace del menú principal
+        if (currentPath2 === href) {
+            // Marcar el menú principal como activo
+            $this.addClass('active selected').attr('aria-expanded', 'true');
+            $this.closest('li').addClass('active selected');
+
+            // Salir del bucle each una vez que se encuentra el elemento activo
+            return false;
+        }
+    });
+
     // Iterar sobre los elementos del submenú
     $('#unifyMenu .submenu li a').each(function() {
         const $this = $(this);
@@ -181,16 +197,14 @@ export function llenarinformacionIESTPProg () {
         const href = $this.attr('href');
 
         // Verificar si la ruta actual coincide con el enlace del elemento del submenú
-        if (currentPath === href) {
+        if (currentPath2 === href) {
             // Expandir el submenú y marcar como activo
             $this.addClass('current-page');
             $parentMenuItem.addClass('active selected').attr('aria-expanded', 'true');
             $submenu.slideDown('fast').attr('aria-expanded', 'true');
 
             // Marcar como activo el contenedor del menú principal
-            $parentMenuItem.closest('li').addClass('active selected'); 
-
-            
+            $parentMenuItem.closest('li').addClass('active selected');
 
             // Salir del bucle each una vez que se encuentra el elemento activo
             return false;

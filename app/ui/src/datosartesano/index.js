@@ -7,7 +7,7 @@ import { guardarUsuario,geteditarArtesano, geteditarLogin, deleteUserCapacitacio
 import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
-import '../artesanos-detalle/style.css'
+import '../datosartesano/style.css' 
 
 
 hideLoading();
@@ -120,7 +120,7 @@ async function buscarUsuario () {
               
               return;
             } else   if (validar == "0" ) {
-              showToast('validar usuario ficha - información personal.'); 
+              showToast('validar usuario de la ficha - información personal.'); 
               return;
             } else { 
 
@@ -518,13 +518,17 @@ $(document).ready(function() {
   document.getElementById('editarreconocimientoBtn').style.display = 'none';
 
  ///editar formulario
- const urlParams = new URLSearchParams(window.location.search);
-   artesanoId = urlParams.get('id');
+ /**const urlParams = new URLSearchParams(window.location.search);
+   artesanoId = urlParams.get('id');*/
+   let usuario=getDataFromLocalStorage('session').usuarios;
+   artesanoId = usuario.datos[0].id; 
    
    var titulo = document.getElementById("tituloartesano");
+
+
  if(artesanoId!=0)
   { 
-    titulo.innerText = "Editar artesano";
+    titulo.innerText = "Datos Artesano";
     editarArtesano(artesanoId);
   }else
   { 

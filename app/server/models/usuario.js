@@ -14,6 +14,11 @@ module.exports = sequelize.define('usuario', {
         type: Sequelize.TEXT,
         allowNull: true,
         field: 'usuario'
+    }, 
+    correo: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        field: 'correo'
     },
     nombre_completo: {
         type: Sequelize.TEXT,

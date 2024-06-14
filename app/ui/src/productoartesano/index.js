@@ -6,7 +6,7 @@ import { buscarProducto, getusuariocapacitacion, deleteProducto, saveUserCapacit
 import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
-import '../productos/style.css'
+import '../productoartesano/style.css'
 
  
    
@@ -49,65 +49,20 @@ async function checkadminsession () {
     location.href = "sinacceso.html"
   }
 }
-
-
  
- 
- 
+ /*
 
 async function buscarUsuario22 () {
   
-  const Nombreproducto = document.getElementById('nombre-producto').value;
-  const Nombreartesano = document.getElementById('nombre-artesano').value;
-  const Preciosid = document.getElementById('precios-id').value;
-  const Cantidadesid = document.getElementById('cantidades-id').value;
-  const filtro = {
-    nombres_es:Nombreproducto,
-    nombre_completo:Nombreartesano,
-    precio:Preciosid,
-    cantidad:Cantidadesid
-  }; 
-  const data = await buscarProducto(filtro);
-
-    currentPage = 1; // Reset to the first page
-    displayTable(data, rowsPerPage, currentPage);
-    displayPagination(data, rowsPerPage);
-    
-
-}
-var lstproductos = null;
-var idactualizar = null;
-
-document.getElementById('filtrar-producto').addEventListener('click', async  function(e) {
-      e.preventDefault();
-
-      buscarUsuario22 ()
-});
-
-
-async function buscarUsuario () {
-
-  $('#filtrar-producto').on('click', async function (e) {
-
-    //e.preventDefault(); 
 
    
-   /* buscarUsuario22()
-    
-      $('[data-toggle="tooltip"]').tooltip();
-      hideLoading()*/
-      e.preventDefault();
-        currentPage = 1; // Reset to the first page
-        displayTable(data, rowsPerPage, currentPage);
-        displayPagination(data, rowsPerPage);
- 
+      showLoading()
+      //let certificados = buscarProducto($('#searchBox').val())
+      //console.log(certificados) 
+      // Obtener la lista de certificados
+      //certificados = await buscarProducto($('#searchBox').val());
 
-  })
-
-
-  async function buscarUsuario2 () {
-
-    const Nombreproducto = document.getElementById('nombre-producto').value;
+      const Nombreproducto = document.getElementById('nombre-producto').value;
       const Nombreartesano = document.getElementById('nombre-artesano').value;
       const Preciosid = document.getElementById('precios-id').value;
       const Cantidadesid = document.getElementById('cantidades-id').value;
@@ -147,7 +102,7 @@ async function buscarUsuario () {
         fila += `<td>${prog.precio}</td>`;
         fila += `<td>${prog.cantidad}</td>`;
         fila += `<td style="text-align: center;"><a href="/productos-detalle.html?id=${prog.id}" data-toggle="tooltip" title="Editar" data-id="${prog.id}" class="btn btn-info btn-sm" > <i class="icon icon-edit2"></i></a> `;
-        fila += `<a href="javascript:void(0);"  data-toggle="tooltip" title="Eliminar" data-id="${prog.id}" class="btn btn-primary btn-sm">  <i class="icon icon-bin"></i></a>`;
+        fila += `<a href="javascript:void(0);"  data-toggle="tooltip"  title="Eliminar" data-id="${prog.id}" class="btn btn_Eliminar btn-primary btn-sm">  <i class="icon icon-bin"></i></a>`;
         fila += `</td>`;
    
 
@@ -158,12 +113,63 @@ async function buscarUsuario () {
         correlativo++;
       }
       $('[data-toggle="tooltip"]').tooltip();
+      hideLoading() 
 
-  }
+}*/
+var lstproductos = null;
+var idactualizar = null;
+
+var artesanoId=0;
+let usuario=getDataFromLocalStorage('session').usuarios;
+  artesanoId = usuario.datos[0].id; 
+
+document.getElementById('filtrar-producto').addEventListener('click', async  function(e) {
+    buscarUsuario22();
+});
+
+
+async function buscarUsuario () {
+
+  $('#filtrar-producto').on('click', async function (e) {
+
+    //e.preventDefault(); 
+
+   
+   /* buscarUsuario22()
+    
+      $('[data-toggle="tooltip"]').tooltip();
+      hideLoading()*/
+      e.preventDefault();
+        currentPage = 1; // Reset to the first page
+        displayTable(data, rowsPerPage, currentPage);
+        displayPagination(data, rowsPerPage);
+ 
+
+  })
+
+
  
 
 }
 
+async function buscarUsuario22 () {
+ 
+
+  const Nombreproducto = document.getElementById('nombre-producto').value; 
+  const Preciosid = document.getElementById('precios-id').value;
+  const Cantidadesid = document.getElementById('cantidades-id').value;
+  const filtro = {
+    nombres_es:Nombreproducto, 
+    precio:Preciosid,
+    cantidad:Cantidadesid,
+    id:artesanoId
+  }; 
+  const data = await buscarProducto(filtro);
+
+    currentPage = 1; // Reset to the first page
+    displayTable(data, rowsPerPage, currentPage);
+    displayPagination(data, rowsPerPage);
+}
  
 
 
@@ -208,21 +214,22 @@ $(document).on('click', '.btn_Eliminar', async function (e) {
 /****crear paginacion */   
 
  // Datos de ejemplo para llenar la tabla
-  
- 
+
 
 const rowsPerPage = 10;
 let currentPage = 1; 
 
-const Nombreproducto = document.getElementById('nombre-producto').value;
-const Nombreartesano = document.getElementById('nombre-artesano').value;
+const Nombreproducto = document.getElementById('nombre-producto').value; 
 const Preciosid = document.getElementById('precios-id').value;
 const Cantidadesid = document.getElementById('cantidades-id').value;
+
+
+
 const filtro = {
-  nombres_es:Nombreproducto,
-  nombre_completo:Nombreartesano,
+  nombres_es:Nombreproducto, 
   precio:Preciosid,
-  cantidad:Cantidadesid
+  cantidad:Cantidadesid,
+  id:artesanoId
 }; 
 const data = await buscarProducto(filtro);
 
@@ -242,7 +249,7 @@ async function displayTable(data, rowsPerPage, page) {
   tabla.innerHTML = '';
 
   // Crear una fila para los encabezados de la tabla
-  let encabezados = '<tr><th>N°</th><th>Imagen</th><th>Producto</th><th>Nombre Artesano</th><th>Precio S/.</th><th>Stock</th> <th  style="text-align: center;">Acciones</th></tr>';
+  let encabezados = '<tr><th>N°</th><th>Imagen</th><th>Producto</th> <th>Precio S/.</th><th>Stock</th> <th  style="text-align: center;">Acciones</th></tr>';
 
   // Agregar los encabezados a la tabla
   tabla.innerHTML += encabezados;
@@ -258,11 +265,10 @@ async function displayTable(data, rowsPerPage, page) {
     // Agregar las celdas con los datos del certificado
     fila += `<td>${correlativo}</td>`; 
     fila += `<td style="text-align: center;"><img src="${prog.imagen_principal}" alt="Imagen" style="width: 150px;ali height: auto;"></td>`;
-    fila += `<td>${prog.nombres_es}</td>`;
-    fila += `<td>${prog.nombre_completo}</td>`;
+    fila += `<td>${prog.nombres_es}</td>`; 
     fila += `<td>${prog.precio}</td>`;
     fila += `<td>${prog.cantidad}</td>`;
-    fila += `<td style="text-align: center;"><a href="/productos-detalle.html?id=${prog.id}" data-toggle="tooltip" title="Editar" data-id="${prog.id}" class="btn btn-info btn-sm" > <i class="icon icon-edit2"></i></a> `;
+    fila += `<td style="text-align: center;"><a href="/productoartesano-detalle.html?id=${prog.id}" data-toggle="tooltip" title="Editar" data-id="${prog.id}" class="btn btn-info btn-sm" > <i class="icon icon-edit2"></i></a> `;
     fila += `<a href="javascript:void(0);"  data-toggle="tooltip"  title="Eliminar" data-id="${prog.id}" class="btn btn_Eliminar btn-primary btn-sm">  <i class="icon icon-bin"></i></a>`;
     fila += `</td>`;
 
