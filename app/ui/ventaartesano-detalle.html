@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Lead Admin Panel" />
+	<meta name="keywords"
+		content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+	<meta name="author" content="Bootstrap Gallery" />
+	<link rel="shortcut icon" href="img/fav.png" />
+	<title>Lead Admin Dashboard</title>
+
+	<!-- Common CSS -->
+	<link rel="stylesheet" href="public/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="public/css/main.css" />
+
+	<!-- Other CSS includes plugins - Cleanedup unnecessary CSS -->
+	<!-- Chartist css -->
+	<link href="vendor/chartist/css/chartist.min.css" rel="stylesheet" />
+	<link href="vendor/chartist/css/chartist-custom.css" rel="stylesheet" />
+</head>
+
+<body>
+
+	<!-- Loading starts -->
+	<div class="loading-wrapper">
+		<div class="loading">
+			<div class="img"></div>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<!-- Loading ends -->
+
+	<!-- BEGIN .app-wrap -->
+	<div class="app-wrap">
+		<!-- BEGIN .app-heading -->
+		<header class="app-header" id="app-header">
+		</header>
+		<!-- END: .app-heading -->
+		<!-- BEGIN .app-container -->
+		<div class="app-container">
+			<!-- BEGIN .app-side --> 
+			<aside class="app-side" id="app-side"></aside>
+			<!-- END: .app-side -->
+
+			<!-- BEGIN .app-main -->
+			<div class="app-main">
+				<!-- BEGIN .main-heading -->
+				<header class="main-heading">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+								<div class="page-icon">
+									<i class="icon-shopping-cart"></i>
+								</div>
+								<div class="page-title">
+									<h5>Orden</h5>
+									<nav aria-label="breadcrumb">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item"><a href="inicio.html">Artesano</a></li>
+											<li class="breadcrumb-item"><a href="/ventaartesano.html">Ventas</a></li>
+											<li class="breadcrumb-item active" aria-current="page">Orden</li>
+										</ol>
+									</nav>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</header>
+
+				<!-- END: .main-heading -->
+				<!-- BEGIN .main-content -->
+				<div class="main-content">
+
+
+					<div class="card">
+						<div class="card-body">
+							<div class="card">
+								<div class="card-header"><span id="id-orden-pedido">Orden #</span></div>
+								<div class="card-body">
+									<!-- Tab Pestañas -->
+									<ul class="nav nav-tabs" id="pestañasPersonalizadas" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active" id="informacion-tab" data-toggle="tab"
+												href="#informacion" role="tab" aria-controls="informacion"
+												aria-selected="true">Información</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="atencion-tab" data-toggle="tab" href="#atencion"
+												role="tab" aria-controls="atencion" aria-selected="false">Atención</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="reclamos-tab" data-toggle="tab" href="#reclamos"
+												role="tab" aria-controls="reclamos" aria-selected="false">Reclamos de
+												pedidos</a>
+										</li>
+									</ul>
+									<div class="tab-content" id="contenidoPestañas">
+										<!-- Tab Información -->
+										<div class="tab-pane fade show active" id="informacion" role="tabpanel"
+											aria-labelledby="informacion-tab">
+											<div class="card">
+												<div class="card-body">
+													<h6 class="border-bottom pb-2">Datos del pedido</h6>
+													<div class="container mt-4">
+														<div class="row gutters mb-4">
+															<div class="col-md-6 col-sm-12">
+																<label for="num-pedido">Número de pedido</label>
+																<input type="number" class="form-control"
+																	placeholder=" N°" id="num-pedido" readonly>
+															</div>
+															<div class="col-md-6 col-sm-12">
+																<label for="nombre-artesano">Artesano</label>
+																<input type="text" class="form-control"
+																	placeholder="nombre del artesano"
+																	id="nombre-artesano" readonly>
+															</div>
+															<div class="col-md-6 col-sm-12 mt-3"
+																data-placeholder="Fecha del pedido">
+																<label for="fecha-pedido">Fecha del pedido</label>
+																<input type="text" class="form-control"
+																	id="fecha-pedido" readonly>
+															</div>
+															<div class="col-md-6 col-sm-12 mt-3"
+																data-placeholder="Fecha del pedido">
+																<label for="comprobante-solicitado">Comprobante
+																	solicitado</label>
+																<input type="text" class="form-control"
+																	id="comprobante-solicitado" readonly>
+															</div>
+														</div>
+													</div>
+													<h6 class="border-bottom pb-2">Datos de producto</h6>
+													<div class="container mt-4">
+														<table class="table" id="tablaDatosPedido">
+															<thead class="thead-default">
+																<tr>
+																	<th>Cantidad</th>
+																	<th>Producto</th>
+																	<th>Descripción de compra</th>
+																	<th>Valor Unitario</th>
+																	<th>Precio</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>02</td>
+																	<td>Nombre del producto</td>
+																	<td>Descripción del producto (artesanía)</td>
+																	<td>S/ 40.00</td>
+																	<td>S/ 80.00</td>
+																</tr>
+															</tbody>
+														</table>
+														<div class="text-right">
+															<strong id="total-pedido">Total: S/ 80.00</strong>
+														</div>
+
+													</div>
+													<h6 class="border-bottom pb-2">Datos del cliente</h6>
+													<div class="container mt-4 mb-4">
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="nombre-cliente">Nombres</label>
+																	<input type="text" class="form-control"
+																		id="nombre-cliente" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="numDocum-cliente"
+																		id="tipo-doc-cliente">N</label>
+																	<input type="text" class="form-control"
+																		id="numDocum-cliente" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="correo-cliente">Correo</label>
+																	<input type="email" class="form-control"
+																		id="correo-cliente" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="telefono-cliente">Teléfono</label>
+																	<input type="tel" class="form-control"
+																		id="telefono-cliente" placeholder="" readonly>
+																</div>
+															</div>
+														</div>
+														<div class="row mt-3">
+															<div class="col-12">
+																<a id="wsp-cliente" href="https://wa.me/1234567890"
+																	class="btn btn-success" target="_blank">Contactar
+																	por WhatsApp</a>
+															</div>
+														</div>
+													</div>
+													<h6 class="border-bottom pb-2">Datos de Pago</h6>
+													<div class="container mt-4 mb-4">
+														<p>Imagen de pago</p>
+														<button class="btn btn-primary" type="button"
+															data-toggle="modal" data-target="#modalCategoria">
+															Ver Imagen
+														</button>
+														<!-- Modal -->
+														<div class="modal fade" id="modalCategoria" tabindex="-1"
+															role="dialog" aria-hidden="true">
+															<div class="modal-dialog modal-lg">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title">Imagen del pago
+																			realizado</h5>
+																		<button type="button" class="close"
+																			data-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body">
+																		<img id="imagen-compra" src=" "
+																			alt="Imagen de la compra" class="img-fluid">
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<h6 class="border-bottom pb-2">Datos de Envío</h6>
+													<div class="container mt-4">
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="pais-recepcion">País</label>
+																	<input type="text" class="form-control"
+																		id="pais-recepcion" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="region-recepcion">Región</label>
+																	<input type="text" class="form-control"
+																		id="region-recepcion" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="ciudad-recepcion">Ciudad</label>
+																	<input type="text" class="form-control"
+																		id="ciudad-recepcion" placeholder="" readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="direccion-recepcion">Dirección</label>
+																	<input type="text" class="form-control"
+																		id="direccion-recepcion" placeholder=""
+																		readonly>
+																</div>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<!-- Tab Atención -->
+										<div class="tab-pane fade" id="atencion" role="tabpanel"
+											aria-labelledby="atencion-tab">
+											<div class="mt-2">
+												<h6 class="border-bottom pb-2">Historial de atención</h6>
+												<table class="table mt-4" id="tablaHistoriaPedidos">
+													<thead class="thead-default">
+														<tr>
+															<th>Fecha atención </th>
+															<th>Comentario</th>
+															<th>Estado</th>
+															<th>Enlace</th>
+															<th>Medio de prueba</th>
+															<th>Notificar cliente</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+													</tbody>
+												</table>
+												<h6 class="border-bottom mt-5 pb-2">Añadir historia de atención</h6>
+												<div class="card" style="background-color: #f1f1f1;">
+													<div class="card-body ">
+														<form id="form-actualizar-historia">
+															<div class="form-group">
+																<label for="estado"><span class="text-primary">* </span>Estado</label>
+																<select id="estado" class="form-control" name="estado"
+																	required>
+																	<option value="" selected disabled hidden>Seleccione
+																		estado...</option>
+																	<option value="pendiente">Pendiente</option>
+																	<option value="pagado">Pagado</option>
+																	<option value="enviado">Enviado</option>
+																	<option value="finalizado">Finalizado</option>
+																	<option value="anulado">Anulado</option>
+																</select>
+															</div>
+															<div class="form-group custom-switch">
+																<input type="checkbox" class="custom-control-input"
+																	id="notificarCliente" name="notificarCliente"
+																	checked>
+																<label class="custom-control-label"
+																	for="notificarCliente">Notificar cliente</label><br>
+															</div>
+															<div class="form-group">
+																<label for="enlaceSeguimiento">Enlace de
+																	Seguimiento</label>
+																<input type="text" class="form-control"
+																	id="enlaceSeguimiento" name="enlaceSeguimiento"
+																	placeholder="Ingrese el enlace de seguimiento">
+															</div>
+															<div class="form-group">
+																<label for="comentario"><span class="text-primary">*</span> Comentario</label>
+																<textarea class="form-control" id="comentario"
+																	name="comentario" rows="2" required></textarea>
+															</div>
+															<div class="form-group">
+																<label for="myfile">Selecciona Archivo</label>
+																<input type="file" id="myfile" name="myfile">
+																<progress id="progressBar" value="0" max="100"
+																	style="width: 100%;"></progress>
+																<div id="status"></div>
+															</div>
+
+															<!-- visualizar la imagen -->
+															<div class="form-group">
+																<img id="principalImagePreview"
+																	alt="Vista previa de la imagen principal"
+																	class="img-thumbnail"
+																	style="display: none; width: 200px; height: 150px;">
+															</div>
+															<button type="submit" id="btnActualizarHistoria"
+																class="btn btn-info">Añadir Historia</button>
+														</form>
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<!-- Tab Reclamos -->
+										<div class="tab-pane fade" id="reclamos" role="tabpanel"
+											aria-labelledby="reclamos-tab">
+											<h6 class="border-bottom pb-2">Reclamos / Comentario</h6>
+											<table class="table mt-4" id="tablaHistoriaReclamos">
+												<thead class="thead-default">
+													<tr>
+														<th>Fecha de reclamo</th>
+														<th>Reclamo / Comentario</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>12/03/2024</td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+											<div class="mt-4">
+												<a id="wsp-reclamos" href="https://wa.me/" class="btn btn-success"
+													target="_blank">Contactar por WhatsApp</a>
+											</div>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+				</div>
+				<!-- END: .main-content -->
+			</div>
+			<!-- END: .app-main -->
+		</div>
+		<!-- END: .app-container -->
+		<!-- BEGIN .main-footer -->
+		<footer class="main-footer fixed-btm">
+			Copyright Lead Admin 2019.
+		</footer>
+		<!-- END: .main-footer -->
+	</div>
+	<!-- END: .app-wrap -->
+
+	<!-- jQuery first, then Tether, then other JS. -->
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="vendor/leadMenu/leadMenu.js"></script>
+	<script src="vendor/onoffcanvas/onoffcanvas.js"></script>
+	<script src="js/moment.js"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="vendor/slimscroll/slimscroll.min.js"></script>
+	<script src="vendor/slimscroll/custom-scrollbar.js"></script>
+
+	<!-- Chartist JS -->
+	<script src="vendor/chartist/js/chartist.min.js"></script>
+	<script src="vendor/chartist/js/chartist-tooltip.js"></script>
+	<script src="vendor/chartist/js/custom/custom-line-chart.js"></script>
+	<script src="vendor/chartist/js/custom/custom-line-chart1.js"></script>
+	<script src="vendor/chartist/js/custom/custom-area-chart.js"></script>
+	<script src="vendor/chartist/js/custom/donut-chart2.js"></script>
+	<script src="vendor/chartist/js/custom/custom-line-chart4.js"></script>
+
+	<!-- Common JS -->
+	<script src="js/common.js"></script>
+
+	<script type="module" src="src/ventaartesano-detalle/index.js"></script>
+</body>
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+
+</html>

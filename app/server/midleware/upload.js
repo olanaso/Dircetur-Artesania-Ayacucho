@@ -11,31 +11,20 @@ function generateFinalName (originalfilename) {
 async function uploadarchivoDDP (req, res, next) {
     try {
         // Verificar si la carpeta existe, si no, crearla
-        //     
-<<<<<<< HEAD
-        //const folder = (req.query.folder || '');
-        const folder = 'files-app/' + (req.query.folder || '');
-=======
+        //      
         //const folder = 'img/' + (req.query.folder || '');
         const folder = 'files-app/' + (req.query.folder || '');
-        console.log(`folder: ${folder}`)
->>>>>>> 1f6197306d400d10aa94281ec4a2d5d4336a07dd
+        console.log(`folder: ${folder}`) 
         if (!folder) {
             return res.status(400).json({
                 error: "Falta el parámetro 'folder' en la solicitud.",
                 message: "OCURRIÓ UN ERROR AL SUBIR EL ARCHIVO",
                 status: 400
             });
-        }
-
-<<<<<<< HEAD
-        const dir = path.join(__dirname, '../public/', folder);
-=======
+        } 
 
         const dir = path.join(__dirname, '../public', folder);
-
-
->>>>>>> 1f6197306d400d10aa94281ec4a2d5d4336a07dd
+ 
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
         }

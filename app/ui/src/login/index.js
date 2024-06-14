@@ -36,7 +36,7 @@ async function loguear(usuario,clave){
    if(result.islogueado){
     saveDataToLocalStorage('usuario',result.usuario);
     saveDataToLocalStorage('accessToken',result.token);
-    window.location.href='productos.html'
+    window.location.href='inicio.html'
    }else{
 
     $('#error_msj').show()

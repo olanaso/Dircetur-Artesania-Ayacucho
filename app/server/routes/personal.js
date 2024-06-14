@@ -9,7 +9,6 @@ router.get('/personal/:id',  controller.obtener);
 router.get('/personals',  controller.listar);
 router.get('/personals/buscar',  controller.buscar);
 router.post('/personals/save',  controller.save);
-router.get('/login',  controller.login);
 
 
 module.exports=router;

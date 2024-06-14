@@ -1,5 +1,5 @@
 import { loadPartials } from '../utils/viewpartials';
-import { hideLoading, checkSession,llenarinformacionIESTPProg } from '../utils/init'
+import { hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'
 import {  } from '../utils/config'
 import {  obtenerLibrosLeidosGuardados } from './api'
 
@@ -12,7 +12,7 @@ hideLoading();
     { path: 'partials/shared/menu.html', container: 'app-side' },
 
 
-  ];
+  ]; 
   try {
     await loadPartials(partials);
     import ('../utils/common')
@@ -31,7 +31,10 @@ hideLoading();
 function startApp () {
  
   validarSession();
-  setTimeout(function(e){ llenarinformacionIESTPProg()},500)
+  setTimeout(function() {
+    llenarinformacionIESTPProg();
+    marcarSubMenuSeleccionado();
+}, 500);
  
 
 }
@@ -40,7 +43,7 @@ async function validarSession () {
   let result = await checkSession()
   console.log(result)
   if (result.isvalid) {
-    usuario = result.usuario;
+    usuario = result.usuarios;
     llenarinformacion(result)
     cargarLibrosLeidosGuardados(usuario);
   } else {
@@ -50,17 +53,17 @@ async function validarSession () {
 
 
 function llenarinformacion (datos) {
-  let usuario=getDataFromLocalStorage('session').usuario;
-  $('#mlbliestp').text(usuario.nombres+' '+usuario.apellidos)
+  let usuario=getDataFromLocalStorage('session').usuarios;
+  $('#mlbliestp').text(usuario.id)
   //$('#mlbliestp').text(datos.usuario.iestp.nombre)
-  //$('#m_programas').empty();
-  //let nro = 1
-  //for (let prog of datos.usuario.programas) {
-    //$('#m_programas').append(`
-    //    <li>${nro}.- ${prog.denominacion}</li>
-    //  `)
-   //   nro++
- // }
+  $('#m_programas').empty();
+  /*let nro = 1
+  for (let prog of datos.usuario.programas) {
+  $('#m_programas').append(`
+        <li>${nro}.- ${prog.denominacion}</li>
+      `)
+      nro++
+ }*/
 
 }
 

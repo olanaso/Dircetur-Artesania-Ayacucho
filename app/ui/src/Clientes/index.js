@@ -273,7 +273,7 @@ async function eliminarCliente(id) {
 
   alertDialog.createAlertDialog(
     'confirm',
-    'Confirm Alert',
+    'Confirmar Alerta',
     '¿Estás seguro de que deseas eliminar el slider?',
     'Cancelar',
     'Continuar',

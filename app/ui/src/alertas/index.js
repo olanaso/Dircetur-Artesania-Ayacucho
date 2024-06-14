@@ -73,7 +73,7 @@ document.getElementById('showPromptAlertBtn').addEventListener('click', function
 document.getElementById('confirmAlertBtn').addEventListener('click', function () {
     alertDialog.createAlertDialog(
         'confirm',
-        'Confirm Alert',
+        'Confirmar Alerta',
         'Are you sure you want to proceed?',
         'Cancel',
         'Continue',

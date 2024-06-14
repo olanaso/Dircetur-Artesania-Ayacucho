@@ -10,8 +10,7 @@ module.exports = {
     obtener,
     listar,
     buscar,
-    save,
-    login
+    save 
 };
 
 function guardar(req, res) {
@@ -129,30 +128,3 @@ async function save(req, res, next) {
     }
 }
 
-
-async function login(req,res ) {
-
-
-    try {
-        let usuarioDB = await model.findOne({where:{dni:req.query.dni}});
-
-        if (!usuarioDB) {
-            return res.status(400).json({ok: false, message: "El usuario no existe"});
-        }
-
-        let claveCorrecta = usuarioDB.clave == req.query.clave;
-
-        if (!claveCorrecta) {
-            return res.status(400).json({ok: false, message: "Clave incorrecta"});
-        }
-
-        res.status(200).json({
-            ok: true,
-            usuario: {...usuarioDB},
-            token: "token"+usuarioDB.dni
-        });
-
-    } catch (err) {
-        return res.status(500).json({ok: false, err});
-    }
-}

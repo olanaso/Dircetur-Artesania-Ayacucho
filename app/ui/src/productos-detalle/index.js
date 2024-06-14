@@ -2,24 +2,27 @@ import { loadPartials } from '../utils/viewpartials';
 import { validarHTML5 } from '../utils/validateForm'; 
 import { FileUploader } from '../utils/uploadJorge.js';
 import { buscarProducto,geteditarproducto, getusuariocapacitacion, deleteUserCapacitacion, guardarProducto, nuevoUserCapacitacion,buscarartesanoDNI,buscarartesanoid } from './api';
-import { showLoading, hideLoading, checkSession } from '../utils/init';
+
+import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
 import '../productos-detalle/style.css'
 import { AlertDialog } from "../utils/alert";
-const alertDialog = new AlertDialog();
+const alertDialog = new AlertDialog(); 
 hideLoading();
 // Uso de la función
 (async function () {
   let partials = [
     { path: 'partials/shared/header.html', container: 'app-header' },
-    { path: 'partials/shared/menuadmin.html', container: 'app-side' },
-  ];
+    { path: 'partials/shared/menu.html', container: 'app-side' },
+
+
+  ]; 
   try {
     await loadPartials(partials);
-    import('../utils/common')
+    import ('../utils/common')
 
-
+   
     // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
     console.log('Las vistas parciales se han cargado correctamente!');
     // Por ejemplo, podrías iniciar tu aplicación aquí.
@@ -32,12 +35,17 @@ hideLoading();
 
 function startApp () {
   checkadminsession(); 
-  buscarUsuario();
-  exportarExcel();
-  nuevo(); 
- 
-}
+  setTimeout(function() {
+    llenarinformacionIESTPProg();
+    marcarSubMenuSeleccionado();
+}, 500); 
 
+buscarUsuario();
+exportarExcel();
+nuevo(); 
+
+}
+ 
 
 async function checkadminsession () {
   let result = await checkSession()
@@ -449,7 +457,7 @@ async function buscarUsuario () {
       //let imagen_principal = "/img/olla.jpg"  
       alertDialog.createAlertDialog(
         'confirm',
-        'Confirm Alert',
+        'Confirmar Alerta',
         '¿Estás seguro de que deseas guardar el producto?',
         'Cancelar',
         'Continuar',

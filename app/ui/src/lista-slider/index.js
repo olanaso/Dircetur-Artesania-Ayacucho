@@ -201,7 +201,7 @@ $(document).on('click', '.btn-eliminarS', async function (e) {
   const id = $(this).data('id');
   alertDialog.createAlertDialog(
     'confirm',
-    'Confirm Alert',
+    'Confirmar Alerta',
     '¿Estás seguro de que deseas eliminar el slider?',
     'Cancelar',
     'Continuar',

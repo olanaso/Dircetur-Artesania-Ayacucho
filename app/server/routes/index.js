@@ -19,6 +19,8 @@ const pedido = require('./pedido');
 const upload = require('./upload');
 const ubicaciones =require('./ubicaciones');
 const reportes = require('./reportes');
+const productoartesano = require('./productoartesano');
+const ventapedido = require('./ventapedido');
 
 module.exports = (app) => {
     app.use('/api', mantenimiento);
@@ -41,4 +43,6 @@ module.exports = (app) => {
     app.use('/api', upload);
     app.use('/api', ubicaciones);
     app.use('/api', reportes);
+    app.use('/api', productoartesano);
+    app.use('/api', ventapedido);
 };
