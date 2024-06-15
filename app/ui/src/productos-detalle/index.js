@@ -251,7 +251,7 @@ async function buscarUsuario () {
 
     if (!isValid) {
       //alert('Por favor, ingresa el DNI y todos los campos requeridos.');
-      showToast('Por favor, ingresa el DNI y todos los campos requeridos.');
+      showToast('Por favor, ingresa el DNI y todos los campos * requeridos.');
       document.getElementById('dni').focus(); // Pone el foco en el campo del D
       
       return;
