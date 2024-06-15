@@ -77,12 +77,12 @@ module.exports = sequelize.define('producto', {
         field: 'numero_piezas_eng'
     },
     alto: {
-        type: Sequelize.DECIMAL(6,2),
+        type: Sequelize.DECIMAL,
         allowNull: true,
         field: 'alto'
     },
     ancho: {
-        type: Sequelize.DECIMAL(6,2),
+        type: Sequelize.DECIMAL,
         allowNull: true,
         field: 'ancho'
     },
@@ -97,12 +97,12 @@ module.exports = sequelize.define('producto', {
         field: 'materiales_eng'
     },
     precio: {
-        type: Sequelize.DECIMAL(6,2),
+        type: Sequelize.DECIMAL,
         allowNull: true,
         field: 'precio'
     },
     peso: {
-        type: Sequelize.DECIMAL(6,2),
+        type: Sequelize.DECIMAL,
         allowNull: true,
         field: 'peso'
     },
@@ -193,17 +193,17 @@ module.exports = sequelize.define('producto', {
         field: 'precios_envio'
     },
     precio_local: {
-        type: Sequelize.DECIMAL(6,2),
+        type: Sequelize.DECIMAL,
         allowNull: true,
         field: 'precio_local'
     },
     precio_nacional: {
-        type: Sequelize.DECIMAL(6,2),
+        type: Sequelize.DECIMAL,
         allowNull: true,
         field: 'precio_nacional'
     },
     precio_extranjero: {
-        type: Sequelize.DECIMAL(6,2),
+        type: Sequelize.DECIMAL,
         allowNull: true,
         field: 'precio_extranjero'
     },

@@ -14,7 +14,7 @@ async function uploadarchivoProducto (req, res, next) {
         // Verificar si la carpeta existe, si no, crearla
         //     
         //const folder = 'img/' + (req.query.folder || '');
-        const folder = 'producto-app/' + (req.query.folder || '');
+        const folder = 'files-app/' + (req.query.folder || '');
         console.log(`folder: ${folder}`)
         if (!folder) {
             return res.status(400).json({
@@ -105,7 +105,7 @@ async function uploadarchivoArtesano (req, res, next) {
         // Verificar si la carpeta existe, si no, crearla
         //     
         //const folder = 'img/' + (req.query.folder || '');
-        const folder = 'artesano-app/' + (req.query.folder || '');
+        const folder = 'files-app/' + (req.query.folder || '');
         console.log(`folder: ${folder}`)
         if (!folder) {
             return res.status(400).json({

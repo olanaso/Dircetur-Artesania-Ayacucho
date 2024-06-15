@@ -1925,7 +1925,7 @@ dniElement.addEventListener('input', async function() {
             artesano_id=artesanosDNI.id;
         } else {  
             showToast('No existe registro de artesano');
-            $('#dni').val('');
+           // $('#dni').val('');
             $('#nombrecompleto').val('');
         }
     }
