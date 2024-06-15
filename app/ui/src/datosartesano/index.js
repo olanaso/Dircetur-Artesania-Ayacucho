@@ -3,7 +3,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import { FileUploader } from '../utils/uploadJorge.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
-import { guardarUsuario,geteditarArtesano, geteditarLogin, deleteUserCapacitacion, guardarArtesano, nuevoUserCapacitacion,buscarDNI } from './api'; 
+import { guardarUsuario,geteditarArtesano, geteditarLogin, deleteUserCapacitacion, guardarArtesano,llenardepartamento,llenarprovincia,llenardistrito,  nuevoUserCapacitacion,buscarDNI } from './api'; 
 import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
@@ -329,9 +329,28 @@ async function editarArtesano (id) {
        $('#correo').val(editarartesano.correo) 
        $('#celular').val(editarartesano.celular)  
        $('#lugar_nacimiento').val(editarartesano.lugar_nacimiento) 
-       $('#region').val(editarartesano.ubigeo.substring(0,2) ) 
+
+      /* $('#region').val(editarartesano.ubigeo.substring(0,2) ) 
        $('#provincia').val(editarartesano.ubigeo.substring(0,4)) 
-       $('#distrito').val(editarartesano.ubigeo) 
+       $('#distrito').val(editarartesano.ubigeo) */
+
+       await llenarDpto();
+
+       // Establecer el valor del select de región
+       $('#region').val(editarartesano.ubigeo.substring(0, 2));
+   
+       // Llenar provincias basadas en la región seleccionada
+       await llenarProv(editarartesano.ubigeo.substring(0, 2));
+   
+       // Establecer el valor del select de provincia
+       $('#provincia').val(editarartesano.ubigeo.substring(0, 4));
+   
+       // Llenar distritos basados en la provincia seleccionada
+       await llenarDist(editarartesano.ubigeo.substring(0, 4));
+   
+       // Establecer el valor del select de distrito
+       $('#distrito').val(editarartesano.ubigeo);
+
        $('#lengua_materna').val(editarartesano.lengua_materna) 
        document.getElementById('imagenFoto1').src=editarartesano.foto1 
        document.getElementById('imagenFoto2').src=editarartesano.foto2  
@@ -506,10 +525,116 @@ async function editarArtesano (id) {
 
 }
 
+
+
+const selectRegion = document.getElementById('region');
+const selectProvincian = document.getElementById('provincia');
+const selectDistrito = document.getElementById('distrito');
+
+selectRegion.addEventListener('change', function() {
+  var regionSelect = document.getElementById("region");
+
+  // Obtener el valor seleccionado
+  var iddepartamento = regionSelect.value;
+  llenarProv(iddepartamento);
+});
+
+selectProvincian.addEventListener('change', function() {
+  var provinciaSelect = document.getElementById("provincia");
+
+  // Obtener el valor seleccionado
+  var idprovincia = provinciaSelect.value;
+  llenarDist(idprovincia);
+});
+
+// Función para obtener y llenar el select
+async function llenarDpto() { 
+
+    try {
+      // Obtener los datos asincrónicamente
+      const llenardepartamentos = await llenardepartamento(); 
+      // Limpiar opciones existentes en el select (si es necesario)
+      selectRegion.innerHTML = '';
+
+      // Agregar opción inicial "Seleccionar"
+      let optionSeleccionar = document.createElement('option');
+      optionSeleccionar.value = '0';
+      optionSeleccionar.textContent = 'Seleccionar';
+      selectRegion.appendChild(optionSeleccionar);
+
+      // Iterar sobre el arreglo de regiones y agregar cada una como una opción
+      llenardepartamentos.forEach(region => {
+          let option = document.createElement('option');
+          option.value = region.iddepartamento;
+          option.textContent = region.departamento;
+          selectRegion.appendChild(option);
+      });
+  } catch (error) {
+      console.error('Error al llenar el select:', error);
+  }
+}
+
+async function llenarProv(iddepartamento) { 
+
+  try {
+
+  
+    // Obtener los datos asincrónicamente
+    const llenarprovincias = await llenarprovincia(iddepartamento); 
+    // Limpiar opciones existentes en el select (si es necesario)
+    selectProvincian.innerHTML = '';
+
+    // Agregar opción inicial "Seleccionar"
+    let optionSeleccionar = document.createElement('option');
+    optionSeleccionar.value = '0';
+    optionSeleccionar.textContent = 'Seleccionar';
+    selectProvincian.appendChild(optionSeleccionar);
+
+    // Iterar sobre el arreglo de regiones y agregar cada una como una opción
+    llenarprovincias.forEach(region => {
+        let option = document.createElement('option');
+        option.value = region.idprovincia;
+        option.textContent = region.provincia;
+        selectProvincian.appendChild(option);
+    });
+} catch (error) {
+    console.error('Error al llenar el select:', error);
+}
+}
+
+
+async function llenarDist(idprovincia) { 
+
+  try {
+
+
+    // Obtener los datos asincrónicamente
+    const llenardistritos = await llenardistrito(idprovincia); 
+    // Limpiar opciones existentes en el select (si es necesario)
+    selectDistrito.innerHTML = '';
+
+    // Agregar opción inicial "Seleccionar"
+    let optionSeleccionar = document.createElement('option');
+    optionSeleccionar.value = '0';
+    optionSeleccionar.textContent = 'Seleccionar';
+    selectDistrito.appendChild(optionSeleccionar);
+
+    // Iterar sobre el arreglo de regiones y agregar cada una como una opción
+    llenardistritos.forEach(region => {
+        let option = document.createElement('option');
+        option.value = region.ubigeo;
+        option.textContent = region.distrito;
+        selectDistrito.appendChild(option);
+    });
+} catch (error) {
+    console.error('Error al llenar el select:', error);
+}
+}
+
  
 $(document).ready(function() {
 
- 
+  llenarDpto();
   document.getElementById('guardarMediopagoBtn').style.display = 'inline-block';
   document.getElementById('editarMediopagoBtn').style.display = 'none';
 

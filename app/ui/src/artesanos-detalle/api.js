@@ -123,6 +123,67 @@ export async function geteditarArtesano(id){
 
 }
 
+export async function llenardepartamento(){
+  try {
+      
+      const myHeaders = new Headers();
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+  
+      const response = await fetch(baseUrl+"/departamento", requestOptions);
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.log('error', error);
+    }
+
+}
+
+export async function llenarprovincia(iddepartamento){
+  try {
+      
+      const myHeaders = new Headers();
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+  
+      const response = await fetch(baseUrl+"/ubigeo-provincias/"+iddepartamento, requestOptions);
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.log('error', error);
+    }
+
+}
+
+export async function llenardistrito(idprovincia){
+  try {
+      
+      const myHeaders = new Headers();
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+  
+      const response = await fetch(baseUrl+"/ubigeo-distritos/"+idprovincia, requestOptions);
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.log('error', error);
+    }
+
+}
+
+
 
 export async function geteditarLogin(id){
   try {
