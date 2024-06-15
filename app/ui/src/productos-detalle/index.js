@@ -251,7 +251,7 @@ async function buscarUsuario () {
 
     if (!isValid) {
       //alert('Por favor, ingresa el DNI y todos los campos requeridos.');
-      showToast('Por favor, ingresa el DNI y todos los campos * requeridos.');
+      showToast('Por favor, ingresa todos los campos * requeridos.');
       document.getElementById('dni').focus(); // Pone el foco en el campo del D
       
       return;
@@ -473,11 +473,10 @@ async function buscarUsuario () {
                       url.searchParams.set('id', result.id);
                       window.history.pushState({}, '', url);
                       productId=result.id;
-                    } 
-                    
+                      habilitar();
+                    }  
 
                     hideLoading() 
-                    buscarUsuario();
                     $('#myModal').css('display', 'none');
                   } else {
                     showToast('Ocurrio un error.')
@@ -521,58 +520,7 @@ document.getElementById('cantidad').addEventListener('input', validarCantidad);
 document.getElementById('cantidadMinima').addEventListener('input', validarCantidad);
 
 
-
-
-  $('#btnuevo').on('click', async function (e) {
-    e.preventDefault();
-
-    var isValid = true;
-
-    // Itera sobre todos los campos requeridos para verificar si están vacíos
-    $('#form2 .form-control[required]').each(function () {
-      if ($(this).val() === '') {
-        isValid = false;
-        $(this).css('border-color', 'red'); // Marca los campos vacíos
-      } else {
-        $(this).css('border-color', ''); // Restablece a la normalidad si se corrige
-      }
-    });
-
-    if (!isValid) {
-      showToast('Por favor, completa todos los campos requeridos.');
-      //alert('Por favor, completa todos los campos requeridos.');
-
-    } else {
-      //$("#btnactualizar").prop("disabled", true).text("Actualizando..."); 
-
-      let dni = $('#txt-dni1').val()
-      let nombres = $('#txt-nombres1').val()
-      let cod_curso = $('#txt-cod_curso1').val()
-      let nota = $('#txt-nota1').val()
-      let cant_horas = $('#txt-cant_horas1').val()
-      let fecha_inicio = $('#txt-fecha_inicio1').val()
-      let fecha_fin = $('#txt-fecha_fin1').val()
-      let fecha_emision = $('#txt-fecha_emision1').val()
-      let instructor = $('#txt-instructor1').val()
-      let temario = $('#txt-temario1').val()
-      let curso = $('#txt-curso1').val()
-
-      let ubicacion = $('#txt-ubicacion1').val()
-      let institucion_solicitante = $('#txt-institucion_solicitante1').val()
-
-
-      let result = await nuevoUserCapacitacion({ fecha_emision, dni, nombres, cod_curso, curso, nota, cant_horas, fecha_inicio, fecha_fin, instructor, temario, ubicacion, institucion_solicitante });
-      if (result) {
-        showToast('Se registro los datos correctamente')
-        buscarUsuario2();
-        $('#myModalNuevo').css('display', 'none');
-      } else {
-        showToast('Ocurrio un error.')
-      }
-      //$("#btnactualizar").prop("disabled", false).text("Actualizar");
-    }
-
-  })
+ 
 
 
 
@@ -706,6 +654,15 @@ descuentoInput.addEventListener('input', function() {
     // Obtener el valor del precio original
     const precioOriginal = parseFloat(precioDisplaySpan.innerText) || parseFloat(precioDisplaySpan.textContent);
 
+    if (isNaN(precioOriginal)) {
+     
+      showToast('Completar el precio actual, registrar en la pestaña "datos generales - Precio del producto".');
+      
+      $('#porcentajeDescuento').val("");
+      $('#precioOfertado').val("");
+      return;
+  } 
+
     // Validar que los valores sean números válidos
     if (!isNaN(porcentajeDescuento) && !isNaN(precioOriginal)) {
         // Calcular el precio con descuento
@@ -716,7 +673,6 @@ descuentoInput.addEventListener('input', function() {
         precioOfertadoInput.value = precioConDescuento.toFixed(2);
     } else {
         // Manejo de errores si los valores no son válidos
-        showToast('Completar el precio actual, registrar en la pestaña "datos generales - Precio del producto".');
 
         $('#porcentajeDescuento').val("");
         $('#precioOfertado').val("");
@@ -1027,6 +983,28 @@ async function editarProducto (id) {
 
 }
 
+function disabilitar(){
+  $('#home-tab2, #home-tab3, #home-tab4, #home-tab5, #home-tab6, #home-tab7, #home-tab8').addClass('disabled');
+}
+
+function habilitar(){ 
+     
+      let home2Tab = document.getElementById('home-tab2');  
+      home2Tab.classList.remove('disabled'); 
+      let home3Tab = document.getElementById('home-tab3');  
+      home3Tab.classList.remove('disabled'); 
+      let home4Tab = document.getElementById('home-tab4');  
+      home4Tab.classList.remove('disabled'); 
+      let home5Tab = document.getElementById('home-tab5');  
+      home5Tab.classList.remove('disabled'); 
+      let home6Tab = document.getElementById('home-tab6');  
+      home6Tab.classList.remove('disabled'); 
+      let home7Tab = document.getElementById('home-tab7');  
+      home7Tab.classList.remove('disabled'); 
+      let home8Tab = document.getElementById('home-tab8');  
+      home8Tab.classList.remove('disabled'); 
+}
+
 $(document).ready(function() {
 
    
@@ -1042,6 +1020,7 @@ $(document).ready(function() {
     titulo.innerText = "Editar producto";
   }else
   { 
+    disabilitar();
     titulo.innerText = "Nuevo producto";
   }
    

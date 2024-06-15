@@ -213,7 +213,7 @@ async function save(req, res, next) {
 
 async function uploadFilproducto (req, res, next) {
     try {
-        let folder = 'producto-app' + req.query.folder; 
+        let folder = 'files-app' + req.query.folder; 
         let filenamesaved = req.filenamesaved;
         if (!filenamesaved) throw {
             error: "No se logro subir el archivo",
