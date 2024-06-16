@@ -96,6 +96,84 @@ var editarlogin = null;
 
 async function buscarUsuario () { 
   
+$('#btnvalidar').on('click', async function (e) {
+
+  event.preventDefault(); // Prevenir el envío predeterminado del formulario
+
+  var usuario = document.getElementById("usuario").value;
+  var contrasena = document.getElementById("contrasena").value;
+  var repetirContrasena = document.getElementById("repetirContrasena").value;
+  //var usuarioError = document.getElementById("usuarioError");
+  //var contrasenaError = document.getElementById("contrasenaError");
+  //var repetirContrasenaError = document.getElementById("repetirContrasenaError");
+  var errores = false;
+
+   
+  // Validar usuario
+  if (usuario.trim() === "") {
+    
+    showToast('El campo usuario es obligatorio')
+    //usuarioError.textContent = "El campo usuario es obligatorio";
+    errores = true; 
+    validar=0;
+    return;
+} else if (!/^\w+$/.test(usuario)) {
+  
+  showToast('El usuario solo puede contener letras, números y guiones bajos')
+    //usuarioError.textContent = "El usuario solo puede contener letras, números y guiones bajos";
+    errores = true; 
+    validar=0;
+    return;
+} else {
+    usuarioError.textContent = "";
+}
+
+  // Validar contraseña
+  if (contrasena.trim() === "") {
+    
+    showToast('El campo contraseña es obligatorio')
+      //contrasenaError.textContent = "El campo contraseña es obligatorio";
+      errores = true; 
+      validar=0;
+      return;
+ 
+  } else if (!/^\w+$/.test(contrasena)) {
+    
+    showToast('El contraseña solo puede contener letras, números y guiones bajos')
+      //usuarioError.textContent = "El usuario solo puede contener letras, números y guiones bajos";
+      errores = true; 
+      validar=0;
+      return;
+  }  else {
+      //contrasenaError.textContent = "";
+  }
+
+  // Validar repetir contraseña
+  if (repetirContrasena.trim() === "") {
+    showToast('Debe repetir la contraseña')
+      //repetirContrasenaError.textContent = "Debe repetir la contraseña";
+      errores = true; 
+      validar=0;
+      return;
+  } else if (repetirContrasena !== contrasena) {
+    showToast('Las contraseñas no coinciden')
+      //repetirContrasenaError.textContent = "Las contraseñas no coinciden";
+      errores = true; 
+      validar=0;
+      return;
+  } else {
+      //.textContent = "";
+  }
+
+  if (!errores) {
+      // No hay errores, mostrar alerta de éxito
+    showToast('Se valido con exito') 
+    validar=1;
+      // Aquí podrías realizar alguna otra acción, como redireccionar a otra página
+  } 
+
+
+});
 
 /*********** */
   $('#btnguardarcambio').on('click', async function (e) {
@@ -724,13 +802,30 @@ $(document).ready(function() {
 });
 
 $(document).on('click', '.btn-delete-Contacto', function() {
-    $(this).closest('tr').remove();
-    contadorContacto--;
 
-    // Reordenar los números de la lista
-    $('#listaContacto tr').each(function(index, tr) {
-        $(tr).find('td:first').text(index + 1);
-    });
+  alertDialog.createAlertDialog(
+    'confirm',
+    'Confirmar Alerta',
+    '¿Estás seguro de que deseas eliminar?',
+    'Cancelar',
+    'Continuar',
+    async() => {
+          try {
+
+                  $(this).closest('tr').remove();
+                  contadorContacto--;
+              
+                  // Reordenar los números de la lista
+                  $('#listaContacto tr').each(function(index, tr) {
+                      $(tr).find('td:first').text(index + 1);
+                  });
+                  
+            } catch (error) {
+              console.error('Error al eliminar:', error);
+            }
+        }
+      );  
+
 });
 
 
@@ -948,13 +1043,31 @@ $('#listaMediopago').on('click', '.btn-edit-Mediopago', function() {
 });
 
 $(document).on('click', '.btn-delete-Mediopago', function() {
-    $(this).closest('tr').remove();
-    contadorMedioPago--;
 
-    // Reordenar los números de la lista
-    $('#listaMediopago tr').each(function(index, tr) {
-        $(tr).find('td:first').text(index + 1);
-    });
+  alertDialog.createAlertDialog(
+    'confirm',
+    'Confirmar Alerta',
+    '¿Estás seguro de que deseas eliminar?',
+    'Cancelar',
+    'Continuar',
+    async() => {
+          try {
+
+                  $(this).closest('tr').remove();
+                  contadorMedioPago--;
+              
+                  // Reordenar los números de la lista
+                  $('#listaMediopago tr').each(function(index, tr) {
+                      $(tr).find('td:first').text(index + 1);
+                  });
+                  
+            } catch (error) {
+              console.error('Error al eliminar:', error);
+            }
+        }
+      ); 
+
+  
 });
 
 $('#editarMediopagoBtn').on('click', function() {  
@@ -1086,13 +1199,34 @@ $('#listaReconocimiento').on('click', '.btn-edit-reconocimiento', function() {
 });
 
 $(document).on('click', '.btn-delete-reconocimiento', function() {
-    $(this).closest('tr').remove();
-    contadorMedioPago--;
 
-    // Reordenar los números de la lista
-    $('#listaReconocimiento tr').each(function(index, tr) {
-        $(tr).find('td:first').text(index + 1);
-    });
+
+
+  alertDialog.createAlertDialog(
+    'confirm',
+    'Confirmar Alerta',
+    '¿Estás seguro de que deseas eliminar?',
+    'Cancelar',
+    'Continuar',
+    async() => {
+          try {
+
+                $(this).closest('tr').remove();
+                contadorMedioPago--;
+            
+                // Reordenar los números de la lista
+                $('#listaReconocimiento tr').each(function(index, tr) {
+                    $(tr).find('td:first').text(index + 1);
+                });
+                      
+            } catch (error) {
+              console.error('Error al eliminar:', error);
+            }
+        }
+      ); 
+
+
+ 
 }); 
 
   $('#addreconocimmientoModal').on('shown.bs.modal', function () {
@@ -1302,93 +1436,27 @@ const apellidosElement = document.getElementById('apellidos');
 // Añadir un evento para actualizar el precio con descuento cuando el usuario ingrese un valor
 dniElement.addEventListener('input', async function() {
     // Obtener el valor del porcentaje de descuento ingresado
-    const dniValue = parseFloat(dniElement.value);
+    const dniValue = dniElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final
+    let valor = dniValue.length; 
+    if (valor == 8) {
+        // Asume que buscarDNI es una función que retorna una promesa
+        const artesanosDNI = await buscarDNI(dniValue);
 
-    // Asume que buscarDNI es una función que retorna una promesa
-    const artesanosDNI = await buscarDNI(dniValue);
+        if (artesanosDNI != null) {  
+            nombresElement.value = artesanosDNI.nombres;
+            apellidosElement.value = artesanosDNI.apellidoPaterno + ' ' + artesanosDNI.apellidoMaterno;
+        }else
+        {
 
-    if (artesanosDNI != null) {  
-        nombresElement.value = artesanosDNI.nombres;
-        apellidosElement.value = artesanosDNI.apellidoPaterno + ' ' + artesanosDNI.apellidoMaterno;
+          showToast('El DNI no esta registrado en reniec')
+
+          $('#nombres').val('');
+          $('#apellidos').val('');
+        }
     }
     // Aquí puedes usar artesanosDNI como lo necesites 
 });
-
-document.getElementById("registroForm").addEventListener("submit", function(event) {
-  event.preventDefault(); // Prevenir el envío predeterminado del formulario
-
-  var usuario = document.getElementById("usuario").value;
-  var contrasena = document.getElementById("contrasena").value;
-  var repetirContrasena = document.getElementById("repetirContrasena").value;
-  //var usuarioError = document.getElementById("usuarioError");
-  //var contrasenaError = document.getElementById("contrasenaError");
-  //var repetirContrasenaError = document.getElementById("repetirContrasenaError");
-  var errores = false;
-
-   
-  // Validar usuario
-  if (usuario.trim() === "") {
-    
-    showToast('El campo usuario es obligatorio')
-    //usuarioError.textContent = "El campo usuario es obligatorio";
-    errores = true; 
-    validar=0;
-    return;
-} else if (!/^\w+$/.test(usuario)) {
-  
-  showToast('El usuario solo puede contener letras, números y guiones bajos')
-    //usuarioError.textContent = "El usuario solo puede contener letras, números y guiones bajos";
-    errores = true; 
-    validar=0;
-    return;
-} else {
-    usuarioError.textContent = "";
-}
-
-  // Validar contraseña
-  if (contrasena.trim() === "") {
-    
-    showToast('El campo contraseña es obligatorio')
-      //contrasenaError.textContent = "El campo contraseña es obligatorio";
-      errores = true; 
-      validar=0;
-      return;
  
-  } else if (!/^\w+$/.test(contrasena)) {
-    
-    showToast('El contraseña solo puede contener letras, números y guiones bajos')
-      //usuarioError.textContent = "El usuario solo puede contener letras, números y guiones bajos";
-      errores = true; 
-      validar=0;
-      return;
-  }  else {
-      //contrasenaError.textContent = "";
-  }
-
-  // Validar repetir contraseña
-  if (repetirContrasena.trim() === "") {
-    showToast('Debe repetir la contraseña')
-      //repetirContrasenaError.textContent = "Debe repetir la contraseña";
-      errores = true; 
-      validar=0;
-      return;
-  } else if (repetirContrasena !== contrasena) {
-    showToast('Las contraseñas no coinciden')
-      //repetirContrasenaError.textContent = "Las contraseñas no coinciden";
-      errores = true; 
-      validar=0;
-      return;
-  } else {
-      //.textContent = "";
-  }
-
-  if (!errores) {
-      // No hay errores, mostrar alerta de éxito
-    showToast('Se valido con exito') 
-    validar=1;
-      // Aquí podrías realizar alguna otra acción, como redireccionar a otra página
-  }
-});
 
 document.getElementById('otro').addEventListener('change', function() {
   var checkbox = this;
