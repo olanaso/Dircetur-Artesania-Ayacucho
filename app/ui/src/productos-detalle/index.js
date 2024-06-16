@@ -252,7 +252,7 @@ async function buscarUsuario () {
     if (!isValid) {
       //alert('Por favor, ingresa el DNI y todos los campos requeridos.');
       showToast('Por favor, ingresa todos los campos * requeridos.');
-      document.getElementById('dni').focus(); // Pone el foco en el campo del D
+     // document.getElementById('dni').focus(); // Pone el foco en el campo del D
       
       return;
     } else {
@@ -1018,6 +1018,7 @@ $(document).ready(function() {
   { 
     editarProducto(productId);
     titulo.innerText = "Editar producto";
+    $('#btnguardarcambio').text('Actualizar');
   }else
   { 
     disabilitar();
@@ -1026,247 +1027,271 @@ $(document).ready(function() {
    
 //******traductor */
 
-$('#ingles-tab').on('shown.bs.tab', function (e) {
-    const textInSpanish = $('#idespanolNombre').val();
-    if (textInSpanish === "") {
-      $('#idinglesNombre').val(""); // Clear the English field if Spanish field is empty
-      
-      showToast('Por favor, ingrese un nombre de producto en español antes de traducir.');
-     // alert("Por favor, ingrese un nombre de producto en español antes de traducir.");
-      return; // Exit the function if the Spanish field is empty
-    }
-
+// Obtener referencias a los elementos del DOM
+/*************** Nombre del producto: */
+const idespanolNombreElement = document.getElementById('idespanolNombre');   
+idespanolNombreElement.addEventListener('input', async function() { 
+    const idespanolNombreValue = idespanolNombreElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
     const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({ "text": textInSpanish });
-
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolNombreValue }); 
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
       redirect: "follow"
-    };
-
+    }; 
     fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
       .then(response => response.json()) // assuming the API returns JSON
       .then(result => {
         $('#idinglesNombre').val(result.translatedText); // assuming the JSON response has a "translatedText" field
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => console.error('Error:', error));  
+}); 
+
+$('#ingles-tab').on('shown.bs.tab', function (e) {
+    const textInSpanish = $('#idespanolNombre').val();
+    if (textInSpanish === "") {
+      $('#idinglesNombre').val("");  
+      showToast('Por favor, ingrese un nombre de producto en español antes de traducir.'); 
+      return;  
+    }
+
 });
+/******************************************** */
+
+/*************** Resumen del producto: */
+const idespanolResumenElement = document.getElementById('idespanolResumen');   
+idespanolResumenElement.addEventListener('input', async function() { 
+    const idespanolResumenValue = idespanolResumenElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolResumenValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesResumen').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-resumen').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolResumen').val();
-  if (textInSpanish === "") {
-    $('#idinglesResumen').val(""); // Clear the English field if Spanish field is empty
-    
-    showToast('Por favor, ingrese el resumen de producto en español antes de traducir.');
-    //alert("Por favor, ingrese el resumen de producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolResumen').val();
+    if (textInSpanish === "") {
+      $('#idinglesResumen').val("");  
+      showToast('Por favor, ingrese el resumen de producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesResumen').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
+ 
+
+/***************   Descripción del producto */
+const idespanolDescripcionElement = document.getElementById('idespanolDescripcion');   
+idespanolDescripcionElement.addEventListener('input', async function() { 
+    const idespanolDescripcionValue = idespanolDescripcionElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolDescripcionValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesDescripcion').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-descripcion').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolDescripcion').val();
-  if (textInSpanish === "") {
-    $('#idinglesDescripcion').val(""); // Clear the English field if Spanish field is empty
-    
-    showToast('Por favor, ingrese la descripción del producto en español antes de traducir.');
-    //alert("Por favor, ingrese la descripción del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolDescripcion').val();
+    if (textInSpanish === "") {
+      $('#idinglesDescripcion').val("");  
+      showToast('Por favor, ingrese la descripción del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesDescripcion').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
+
+
+/*************** Cualidades del producto: */
+const idespanolCualidadesElement = document.getElementById('idespanolCualidades');   
+idespanolCualidadesElement.addEventListener('input', async function() { 
+    const idespanolCualidadesValue = idespanolCualidadesElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolCualidadesValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesCualidades').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-cualidades').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolCualidades').val();
-  if (textInSpanish === "") {
-    $('#idinglesCualidades').val(""); // Clear the English field if Spanish field is empty
-    
-    showToast('Por favor, ingrese las cualidades del producto en español antes de traducir.');
-   //alert("Por favor, ingrese las cualidades del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolCualidades').val();
+    if (textInSpanish === "") {
+      $('#idinglesCualidades').val("");  
+      showToast('Por favor, ingrese las cualidades del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesCualidades').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
+ 
+ 
+/*************** Palabras clave: */
+const idespanolPalabrasElement = document.getElementById('idespanolPalabras');   
+idespanolPalabrasElement.addEventListener('input', async function() { 
+    const idespanolPalabrasValue = idespanolPalabrasElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolPalabrasValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesPalabras').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-palabras').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolPalabras').val();
-  if (textInSpanish === "") {
-    $('#idinglesPalabras').val(""); // Clear the English field if Spanish field is empty
-    showToast('Por favor, ingrese palabra clave del producto en español antes de traducir.');
-    //alert("Por favor, ingrese palabra clave del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolPalabras').val();
+    if (textInSpanish === "") {
+      $('#idinglesPalabras').val("");  
+      showToast('Por favor, ingrese palabra clave del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesPalabras').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
 
+ 
+/*************** Número de piezas: */
+const idespanolPiezasElement = document.getElementById('idespanolPiezas');   
+idespanolPiezasElement.addEventListener('input', async function() { 
+    const idespanolPiezasValue = idespanolPiezasElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolPiezasValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesPiezas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-piezas').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolPiezas').val();
-  if (textInSpanish === "") {
-    $('#idinglesPiezas').val(""); // Clear the English field if Spanish field is empty
-    showToast('Por favor, ingrese numero de piezas del producto en español antes de traducir.');
-    //alert("Por favor, ingrese numero de piezas del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolPiezas').val();
+    if (textInSpanish === "") {
+      $('#idinglesPiezas').val("");  
+      showToast('Por favor, ingrese numero de piezas del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesPiezas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
 
+  
 
+/*************** Descripción de materiales: */
+const idespanolMaterialesElement = document.getElementById('idespanolMateriales');   
+idespanolMaterialesElement.addEventListener('input', async function() { 
+    const idespanolMaterialesValue = idespanolMaterialesElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolMaterialesValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesMateriales').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-materiales').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolMateriales').val();
-  if (textInSpanish === "") {
-    $('#idinglesMateriales').val(""); // Clear the English field if Spanish field is empty
-    showToast('Por favor, ingrese descripción de materiales del producto en español antes de traducir.');
-    //alert("Por favor, ingrese descripción de materiales del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolMateriales').val();
+    if (textInSpanish === "") {
+      $('#idinglesMateriales').val("");  
+      showToast('Por favor, ingrese descripción de materiales del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesMateriales').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
 
+   
 
+/*************** Técnicas empleadas: */
+const idespanolTecnicasElement = document.getElementById('idespanolTecnicas');   
+idespanolTecnicasElement.addEventListener('input', async function() { 
+    const idespanolTecnicasValue = idespanolTecnicasElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolTecnicasValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesTecnicas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolTecnicas').val();
-  if (textInSpanish === "") {
-    $('#idinglesTecnicas').val(""); // Clear the English field if Spanish field is empty
-    showToast('Por favor, ingrese técnicas empleadas del producto en español antes de traducir.');
-    //alert("Por favor, ingrese técnicas empleadas del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolTecnicas').val();
+    if (textInSpanish === "") {
+      $('#idinglesTecnicas').val("");  
+      showToast('Por favor, ingrese técnicas empleadas del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesTecnicas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
-
+/******************************************** */
+ 
 
 //**fin*** */
 
