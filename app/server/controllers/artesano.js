@@ -201,7 +201,7 @@ async function save(req, res, next) {
 
 async function uploadFilartesano(req, res, next) {
     try {
-        let folder = 'artesano-app' + req.query.folder; 
+        let folder = 'files-app' + req.query.folder; 
         let filenamesaved = req.filenamesaved;
         if (!filenamesaved) throw {
             error: "No se logro subir el archivo",

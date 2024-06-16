@@ -3,7 +3,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import { FileUploader } from '../utils/uploadJorge.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
-import { guardarUsuario,geteditarArtesano, geteditarLogin, deleteUserCapacitacion, guardarArtesano, nuevoUserCapacitacion,buscarDNI } from './api'; 
+import { guardarUsuario,geteditarArtesano, geteditarLogin, llenardepartamento,llenarprovincia,llenardistrito, guardarArtesano,buscarDNI } from './api'; 
 import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
@@ -54,31 +54,10 @@ async function checkadminsession () {
 }
 
  
- 
 
-async function nuevo () {
 
-  $('#btnNuevoRegistro').on('click', async function (e) {
 
-    openModalNuevo(0); // Llama a la función que abre el modal y pasa el ID
 
-    $('#txt-dni1').val('')
-    $('#txt-nombres1').val('')
-    $('#txt-cod_curso1').val('')
-    $('#txt-nota1').val('')
-    $('#txt-cant_horas1').val('')
-    $('#txt-fecha_inicio1').val('')
-    $('#txt-fecha_fin1').val('')
-    $('#txt-fecha_emision1').val('')
-    $('#txt-instructor1').val('')
-    $('#txt-temario1').val('')
-    $('#txt-curso1').val('')
-    $('#txt-ubicacion1').val('')
-    $('#txt-institucion_solicitante1').val('')
-
-  })
-
-}
  
 var artesanoId=0;
 var usuarioid=0;
@@ -95,8 +74,87 @@ var editarlogin = null;
 
 
 async function buscarUsuario () { 
-  
+   
 
+  
+$('#btnvalidar').on('click', async function (e) {
+
+  event.preventDefault(); // Prevenir el envío predeterminado del formulario
+
+  var usuario = document.getElementById("usuario").value;
+  var contrasena = document.getElementById("contrasena").value;
+  var repetirContrasena = document.getElementById("repetirContrasena").value;
+  //var usuarioError = document.getElementById("usuarioError");
+  //var contrasenaError = document.getElementById("contrasenaError");
+  //var repetirContrasenaError = document.getElementById("repetirContrasenaError");
+  var errores = false;
+
+   
+  // Validar usuario
+  if (usuario.trim() === "") {
+    
+    showToast('El campo usuario es obligatorio')
+    //usuarioError.textContent = "El campo usuario es obligatorio";
+    errores = true; 
+    validar=0;
+    return;
+} else if (!/^\w+$/.test(usuario)) {
+  
+  showToast('El usuario solo puede contener letras, números y guiones bajos')
+    //usuarioError.textContent = "El usuario solo puede contener letras, números y guiones bajos";
+    errores = true; 
+    validar=0;
+    return;
+} else {
+    usuarioError.textContent = "";
+}
+
+  // Validar contraseña
+  if (contrasena.trim() === "") {
+    
+    showToast('El campo contraseña es obligatorio')
+      //contrasenaError.textContent = "El campo contraseña es obligatorio";
+      errores = true; 
+      validar=0;
+      return;
+ 
+  } else if (!/^\w+$/.test(contrasena)) {
+    
+    showToast('El contraseña solo puede contener letras, números y guiones bajos')
+      //usuarioError.textContent = "El usuario solo puede contener letras, números y guiones bajos";
+      errores = true; 
+      validar=0;
+      return;
+  }  else {
+      //contrasenaError.textContent = "";
+  }
+
+  // Validar repetir contraseña
+  if (repetirContrasena.trim() === "") {
+    showToast('Debe repetir la contraseña')
+      //repetirContrasenaError.textContent = "Debe repetir la contraseña";
+      errores = true; 
+      validar=0;
+      return;
+  } else if (repetirContrasena !== contrasena) {
+    showToast('Las contraseñas no coinciden')
+      //repetirContrasenaError.textContent = "Las contraseñas no coinciden";
+      errores = true; 
+      validar=0;
+      return;
+  } else {
+      //.textContent = "";
+  }
+
+  if (!errores) {
+      // No hay errores, mostrar alerta de éxito
+    showToast('Se valido con exito') 
+    validar=1;
+      // Aquí podrías realizar alguna otra acción, como redireccionar a otra página
+  } 
+
+
+});
 /*********** */
   $('#btnguardarcambio').on('click', async function (e) {
     
@@ -115,7 +173,7 @@ async function buscarUsuario () {
             });
 
             if (!isValid) { 
-              showToast('Por favor, ingresa el DNI y todos los campos *.');
+              showToast('Por favor, ingresa todos los campos *.');
               document.getElementById('dni').focus(); // Pone el foco en el campo del D
               
               return;
@@ -281,6 +339,10 @@ async function buscarUsuario () {
                                 url.searchParams.set('id', result.id);
                                 window.history.pushState({}, '', url);
                                 artesanoId=result.id;
+                                habilitar();
+                                var titulo = document.getElementById("tituloartesano");
+                                titulo.innerText = "Editar artesano"; 
+                                $('#btnguardarcambio').text('Actualizar');
                               } 
                               
                     
@@ -329,9 +391,30 @@ async function editarArtesano (id) {
        $('#correo').val(editarartesano.correo) 
        $('#celular').val(editarartesano.celular)  
        $('#lugar_nacimiento').val(editarartesano.lugar_nacimiento) 
+       /*llenarDpto()
        $('#region').val(editarartesano.ubigeo.substring(0,2) ) 
+       llenarProv(editarartesano.ubigeo.substring(0,2)); 
        $('#provincia').val(editarartesano.ubigeo.substring(0,4)) 
-       $('#distrito').val(editarartesano.ubigeo) 
+       llenarDist(editarartesano.ubigeo.substring(0,4));
+       $('#distrito').val(editarartesano.ubigeo) */
+
+       await llenarDpto();
+
+       // Establecer el valor del select de región
+       $('#region').val(editarartesano.ubigeo.substring(0, 2));
+   
+       // Llenar provincias basadas en la región seleccionada
+       await llenarProv(editarartesano.ubigeo.substring(0, 2));
+   
+       // Establecer el valor del select de provincia
+       $('#provincia').val(editarartesano.ubigeo.substring(0, 4));
+   
+       // Llenar distritos basados en la provincia seleccionada
+       await llenarDist(editarartesano.ubigeo.substring(0, 4));
+   
+       // Establecer el valor del select de distrito
+       $('#distrito').val(editarartesano.ubigeo);
+
        $('#lengua_materna').val(editarartesano.lengua_materna) 
        document.getElementById('imagenFoto1').src=editarartesano.foto1 
        document.getElementById('imagenFoto2').src=editarartesano.foto2  
@@ -506,8 +589,137 @@ async function editarArtesano (id) {
 
 }
 
+
+const selectRegion = document.getElementById('region');
+const selectProvincian = document.getElementById('provincia');
+const selectDistrito = document.getElementById('distrito');
+
+selectRegion.addEventListener('change', function() {
+  var regionSelect = document.getElementById("region");
+
+  // Obtener el valor seleccionado
+  var iddepartamento = regionSelect.value;
+  llenarProv(iddepartamento);
+});
+
+selectProvincian.addEventListener('change', function() {
+  var provinciaSelect = document.getElementById("provincia");
+
+  // Obtener el valor seleccionado
+  var idprovincia = provinciaSelect.value;
+  llenarDist(idprovincia);
+});
+
+// Función para obtener y llenar el select
+async function llenarDpto() { 
+
+    try {
+      // Obtener los datos asincrónicamente
+      const llenardepartamentos = await llenardepartamento(); 
+      // Limpiar opciones existentes en el select (si es necesario)
+      selectRegion.innerHTML = '';
+
+      // Agregar opción inicial "Seleccionar"
+      let optionSeleccionar = document.createElement('option');
+      optionSeleccionar.value = '0';
+      optionSeleccionar.textContent = 'Seleccionar';
+      selectRegion.appendChild(optionSeleccionar);
+
+      // Iterar sobre el arreglo de regiones y agregar cada una como una opción
+      llenardepartamentos.forEach(region => {
+          let option = document.createElement('option');
+          option.value = region.iddepartamento;
+          option.textContent = region.departamento;
+          selectRegion.appendChild(option);
+      });
+  } catch (error) {
+      console.error('Error al llenar el select:', error);
+  }
+}
+
+async function llenarProv(iddepartamento) { 
+
+  try {
+
+  
+    // Obtener los datos asincrónicamente
+    const llenarprovincias = await llenarprovincia(iddepartamento); 
+    // Limpiar opciones existentes en el select (si es necesario)
+    selectProvincian.innerHTML = '';
+
+    // Agregar opción inicial "Seleccionar"
+    let optionSeleccionar = document.createElement('option');
+    optionSeleccionar.value = '0';
+    optionSeleccionar.textContent = 'Seleccionar';
+    selectProvincian.appendChild(optionSeleccionar);
+
+    // Iterar sobre el arreglo de regiones y agregar cada una como una opción
+    llenarprovincias.forEach(region => {
+        let option = document.createElement('option');
+        option.value = region.idprovincia;
+        option.textContent = region.provincia;
+        selectProvincian.appendChild(option);
+    });
+} catch (error) {
+    console.error('Error al llenar el select:', error);
+}
+}
+
+
+async function llenarDist(idprovincia) { 
+
+  try {
+
+
+    // Obtener los datos asincrónicamente
+    const llenardistritos = await llenardistrito(idprovincia); 
+    // Limpiar opciones existentes en el select (si es necesario)
+    selectDistrito.innerHTML = '';
+
+    // Agregar opción inicial "Seleccionar"
+    let optionSeleccionar = document.createElement('option');
+    optionSeleccionar.value = '0';
+    optionSeleccionar.textContent = 'Seleccionar';
+    selectDistrito.appendChild(optionSeleccionar);
+
+    // Iterar sobre el arreglo de regiones y agregar cada una como una opción
+    llenardistritos.forEach(region => {
+        let option = document.createElement('option');
+        option.value = region.ubigeo;
+        option.textContent = region.distrito;
+        selectDistrito.appendChild(option);
+    });
+} catch (error) {
+    console.error('Error al llenar el select:', error);
+}
+}
+
+
+ 
+function disabilitar(){
+  $('#home-tab2, #home-tab3, #home-tab4, #home-tab5, #home-tab6').addClass('disabled');
+}
+
+function habilitar(){ 
+     
+      let home2Tab = document.getElementById('home-tab2');  
+      home2Tab.classList.remove('disabled'); 
+      let home3Tab = document.getElementById('home-tab3');  
+      home3Tab.classList.remove('disabled'); 
+      let home4Tab = document.getElementById('home-tab4');  
+      home4Tab.classList.remove('disabled'); 
+      let home5Tab = document.getElementById('home-tab5');  
+      home5Tab.classList.remove('disabled'); 
+      let home6Tab = document.getElementById('home-tab6');  
+      home6Tab.classList.remove('disabled');  
+}
+
  
 $(document).ready(function() {
+
+ 
+  llenarDpto();
+ 
 
  
   document.getElementById('guardarMediopagoBtn').style.display = 'inline-block';
@@ -524,10 +736,12 @@ $(document).ready(function() {
    var titulo = document.getElementById("tituloartesano");
  if(artesanoId!=0)
   { 
-    titulo.innerText = "Editar artesano";
+    titulo.innerText = "Editar artesano"; 
+    $('#btnguardarcambio').text('Actualizar');
     editarArtesano(artesanoId);
   }else
   { 
+    disabilitar();
     titulo.innerText = "Nuevo artesano";
   }
    
@@ -595,13 +809,32 @@ $(document).ready(function() {
 });
 
 $(document).on('click', '.btn-delete-Contacto', function() {
-    $(this).closest('tr').remove();
-    contadorContacto--;
 
-    // Reordenar los números de la lista
-    $('#listaContacto tr').each(function(index, tr) {
-        $(tr).find('td:first').text(index + 1);
-    });
+
+  alertDialog.createAlertDialog(
+    'confirm',
+    'Confirmar Alerta',
+    '¿Estás seguro de que deseas eliminar?',
+    'Cancelar',
+    'Continuar',
+    async() => {
+          try {
+
+                $(this).closest('tr').remove();
+                contadorContacto--;
+            
+                // Reordenar los números de la lista
+                $('#listaContacto tr').each(function(index, tr) {
+                    $(tr).find('td:first').text(index + 1);
+                });
+                      
+            } catch (error) {
+              console.error('Error al eliminar:', error);
+            }
+        }
+      ); 
+
+   
 });
 
 
@@ -819,13 +1052,33 @@ $('#listaMediopago').on('click', '.btn-edit-Mediopago', function() {
 });
 
 $(document).on('click', '.btn-delete-Mediopago', function() {
-    $(this).closest('tr').remove();
-    contadorMedioPago--;
 
-    // Reordenar los números de la lista
-    $('#listaMediopago tr').each(function(index, tr) {
-        $(tr).find('td:first').text(index + 1);
-    });
+  alertDialog.createAlertDialog(
+    'confirm',
+    'Confirmar Alerta',
+    '¿Estás seguro de que deseas eliminar?',
+    'Cancelar',
+    'Continuar',
+    async() => {
+          try {
+
+                $(this).closest('tr').remove();
+                contadorMedioPago--;
+            
+                // Reordenar los números de la lista
+                $('#listaMediopago tr').each(function(index, tr) {
+                    $(tr).find('td:first').text(index + 1);
+                });
+                          
+            } catch (error) {
+              console.error('Error al eliminar:', error);
+            }
+        }
+      ); 
+
+
+
+   
 });
 
 $('#editarMediopagoBtn').on('click', function() {  
@@ -957,13 +1210,34 @@ $('#listaReconocimiento').on('click', '.btn-edit-reconocimiento', function() {
 });
 
 $(document).on('click', '.btn-delete-reconocimiento', function() {
-    $(this).closest('tr').remove();
-    contadorMedioPago--;
 
-    // Reordenar los números de la lista
-    $('#listaReconocimiento tr').each(function(index, tr) {
-        $(tr).find('td:first').text(index + 1);
-    });
+
+  alertDialog.createAlertDialog(
+    'confirm',
+    'Confirmar Alerta',
+    '¿Estás seguro de que deseas eliminar?',
+    'Cancelar',
+    'Continuar',
+    async() => {
+          try {
+
+                $(this).closest('tr').remove();
+                contadorMedioPago--;
+            
+                // Reordenar los números de la lista
+                $('#listaReconocimiento tr').each(function(index, tr) {
+                    $(tr).find('td:first').text(index + 1);
+                });
+                          
+            } catch (error) {
+              console.error('Error al eliminar:', error);
+            }
+        }
+      ); 
+
+
+
+  
 }); 
 
   $('#addreconocimmientoModal').on('shown.bs.modal', function () {
@@ -1106,7 +1380,7 @@ function handleUploadResponseimgprincipal (response) {
             $('#principalImageName').val(file.name); 
         }
         reader.readAsDataURL(file); 
-         showToast('registro correcto.');
+         //showToast('registro correcto.');
     } else {
       
       showToast('Por favor, seleccione un archivo para visualizar.');
@@ -1139,7 +1413,7 @@ function handleUploadResponseimgprincipal2 (response) {
             $('#principalImage2Name').val(file.name); 
         }
         reader.readAsDataURL(file); 
-         showToast('registro correcto.');
+        // showToast('registro correcto.');
     } else { 
         showToast('Por favor, seleccione un archivo para visualizar.');
     }
@@ -1173,93 +1447,28 @@ const apellidosElement = document.getElementById('apellidos');
 // Añadir un evento para actualizar el precio con descuento cuando el usuario ingrese un valor
 dniElement.addEventListener('input', async function() {
     // Obtener el valor del porcentaje de descuento ingresado
-    const dniValue = parseFloat(dniElement.value);
+    const dniValue = dniElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final
+    let valor = dniValue.length; 
+    if (valor == 8) {
+        // Asume que buscarDNI es una función que retorna una promesa
+        const artesanosDNI = await buscarDNI(dniValue);
 
-    // Asume que buscarDNI es una función que retorna una promesa
-    const artesanosDNI = await buscarDNI(dniValue);
+        if (artesanosDNI != null) {  
+            nombresElement.value = artesanosDNI.nombres;
+            apellidosElement.value = artesanosDNI.apellidoPaterno + ' ' + artesanosDNI.apellidoMaterno;
+        }else
+        {
 
-    if (artesanosDNI != null) {  
-        nombresElement.value = artesanosDNI.nombres;
-        apellidosElement.value = artesanosDNI.apellidoPaterno + ' ' + artesanosDNI.apellidoMaterno;
+          showToast('El DNI no esta registrado en reniec')
+
+          $('#nombres').val('');
+          $('#apellidos').val('');
+        }
     }
     // Aquí puedes usar artesanosDNI como lo necesites 
 });
 
-document.getElementById("registroForm").addEventListener("submit", function(event) {
-  event.preventDefault(); // Prevenir el envío predeterminado del formulario
-
-  var usuario = document.getElementById("usuario").value;
-  var contrasena = document.getElementById("contrasena").value;
-  var repetirContrasena = document.getElementById("repetirContrasena").value;
-  //var usuarioError = document.getElementById("usuarioError");
-  //var contrasenaError = document.getElementById("contrasenaError");
-  //var repetirContrasenaError = document.getElementById("repetirContrasenaError");
-  var errores = false;
-
-   
-  // Validar usuario
-  if (usuario.trim() === "") {
-    
-    showToast('El campo usuario es obligatorio')
-    //usuarioError.textContent = "El campo usuario es obligatorio";
-    errores = true; 
-    validar=0;
-    return;
-} else if (!/^\w+$/.test(usuario)) {
-  
-  showToast('El usuario solo puede contener letras, números y guiones bajos')
-    //usuarioError.textContent = "El usuario solo puede contener letras, números y guiones bajos";
-    errores = true; 
-    validar=0;
-    return;
-} else {
-    usuarioError.textContent = "";
-}
-
-  // Validar contraseña
-  if (contrasena.trim() === "") {
-    
-    showToast('El campo contraseña es obligatorio')
-      //contrasenaError.textContent = "El campo contraseña es obligatorio";
-      errores = true; 
-      validar=0;
-      return;
  
-  } else if (!/^\w+$/.test(contrasena)) {
-    
-    showToast('El contraseña solo puede contener letras, números y guiones bajos')
-      //usuarioError.textContent = "El usuario solo puede contener letras, números y guiones bajos";
-      errores = true; 
-      validar=0;
-      return;
-  }  else {
-      //contrasenaError.textContent = "";
-  }
-
-  // Validar repetir contraseña
-  if (repetirContrasena.trim() === "") {
-    showToast('Debe repetir la contraseña')
-      //repetirContrasenaError.textContent = "Debe repetir la contraseña";
-      errores = true; 
-      validar=0;
-      return;
-  } else if (repetirContrasena !== contrasena) {
-    showToast('Las contraseñas no coinciden')
-      //repetirContrasenaError.textContent = "Las contraseñas no coinciden";
-      errores = true; 
-      validar=0;
-      return;
-  } else {
-      //.textContent = "";
-  }
-
-  if (!errores) {
-      // No hay errores, mostrar alerta de éxito
-    showToast('Se valido con exito') 
-    validar=1;
-      // Aquí podrías realizar alguna otra acción, como redireccionar a otra página
-  }
-});
 
 document.getElementById('otro').addEventListener('change', function() {
   var checkbox = this;

@@ -1,4 +1,4 @@
-import { baseUrl,baseUrldni, getDataFromLocalStorage } from '../utils/config';
+import { baseUrl, getDataFromLocalStorage } from '../utils/config';
 
 export async function getprogramasbyIESTP(iestpid){
     try {
@@ -20,9 +20,68 @@ export async function getprogramasbyIESTP(iestpid){
 
 }
 
+
+/*export async function buscarProducto (search) {
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+
+  try {
+    const response = await fetch(baseUrl+"/api/producto/buscar" + `search?search=${encodeURIComponent(search)}`, requestOptions);
+
+    // Si esperas un JSON en la respuesta, usa response.json() en vez de response.text()
+    const result = await response.json();
+
+    //console.log(result);
+
+    // Si necesitas retornar los resultados para ser usados posteriormente
+    return result;
+  } catch (error) {
+    console.error("Error al buscar los certificados:", error);
+
+    // Si necesitas que la función arroje el error hacia el código que la llame
+    throw error;
+  }
+}*/
+
  
 
-export async function buscarDNI(dni){
+export async function buscarProducto(filtro) {
+  
+  try {
+      const params = new URLSearchParams(filtro);
+      const response = await fetch(baseUrl + `/productos?${params}`);
+      const result = await response.json();
+      return result;
+  } catch (error) {
+      console.error("Error al buscar las producto:", error);
+  }
+}
+
+
+export async function guardarProducto(producto) {
+  if (producto.productId != 0) {
+    producto.id = producto.productId;
+  } 
+ 
+  const settings = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json", // Cambiado a JSON
+      },
+      body: JSON.stringify(producto), // Convertir objeto a JSON
+  };
+
+  try {
+      const response = await fetch(baseUrl + "/producto/save", settings);
+      const data = await response.json();
+      return data; // Ahora data contiene el ID del objeto creado y otros datos
+  } catch (error) {
+      console.error("Error:", error);
+  }
+}
+export async function geteditarproducto(id){
   try {
       
       const myHeaders = new Headers();
@@ -32,7 +91,7 @@ export async function buscarDNI(dni){
         redirect: 'follow'
       };
   
-      const response = await fetch(baseUrldni+"/dni/"+dni, requestOptions);
+      const response = await fetch(baseUrl+"/producto/"+id, requestOptions);
       const result = await response.json();
 
       return result;
@@ -43,67 +102,29 @@ export async function buscarDNI(dni){
 }
 
 
- 
 
-export async function buscarArtesano(filtro) {
+
+
+export async function buscarartesanoDNI(dni){
+  try {
+      
+      const myHeaders = new Headers();
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
   
-  try {
-      const params = new URLSearchParams(filtro);
-      const response = await fetch(baseUrl + `/artesanos?${params}`);
+      const response = await fetch(baseUrl+"/artesano-dni/"+dni, requestOptions);
       const result = await response.json();
+
       return result;
-  } catch (error) {
-      console.error("Error al buscar las Artesano:", error);
-  }
+    } catch (error) {
+      console.log('error', error);
+    }
+
 }
-
-
-export async function guardarArtesano(artesano) {
-  if (artesano.artesanoId != 0) {
-    artesano.id = artesano.artesanoId;
-  } 
-
-  const settings = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json", // Cambiado a JSON
-      },
-      body: JSON.stringify(artesano), // Convertir objeto a JSON
-  };
-
-  try {
-      const response = await fetch(baseUrl + "/artesano/save/", settings);
-      const data = await response.json();
-      return data; // Ahora data contiene el ID del objeto creado y otros datos
-  } catch (error) {
-      console.error("Error:", error);
-  }
-}
-
-export async function guardarUsuario(usuario) {
-  if (usuario.usuarioid != 0) {
-    usuario.id = usuario.usuarioid;
-  } 
-
-  const settings = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json", // Cambiado a JSON
-      },
-      body: JSON.stringify(usuario), // Convertir objeto a JSON
-  };
-
-  try {
-      const response = await fetch(baseUrl + "/usuario_save/", settings);
-      const data = await response.json();
-      return data; // Ahora data contiene el ID del objeto creado y otros datos
-  } catch (error) {
-      console.error("Error:", error);
-  }
-}
-
-
-export async function geteditarArtesano(id){
+export async function buscarartesanoid(id){
   try {
       
       const myHeaders = new Headers();
@@ -122,93 +143,6 @@ export async function geteditarArtesano(id){
     }
 
 }
-
-export async function llenardepartamento(){
-  try {
-      
-      const myHeaders = new Headers();
-      const requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-      };
-  
-      const response = await fetch(baseUrl+"/departamento", requestOptions);
-      const result = await response.json();
-
-      return result;
-    } catch (error) {
-      console.log('error', error);
-    }
-
-}
-
-export async function llenarprovincia(iddepartamento){
-  try {
-      
-      const myHeaders = new Headers();
-      const requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-      };
-  
-      const response = await fetch(baseUrl+"/ubigeo-provincias/"+iddepartamento, requestOptions);
-      const result = await response.json();
-
-      return result;
-    } catch (error) {
-      console.log('error', error);
-    }
-
-}
-
-export async function llenardistrito(idprovincia){
-  try {
-      
-      const myHeaders = new Headers();
-      const requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-      };
-  
-      const response = await fetch(baseUrl+"/ubigeo-distritos/"+idprovincia, requestOptions);
-      const result = await response.json();
-
-      return result;
-    } catch (error) {
-      console.log('error', error);
-    }
-
-}
-
-
-
-export async function geteditarLogin(id){
-  try {
-      
-      const myHeaders = new Headers();
-      const requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-      };
-  
-      const response = await fetch(baseUrl+"/usuario/"+id, requestOptions);
-      const result = await response.json();
-
-      return result;
-    } catch (error) {
-      console.log('error', error);
-    }
-
-}
-
-
-
-
-
 
 
 

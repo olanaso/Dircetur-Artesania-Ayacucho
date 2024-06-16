@@ -122,39 +122,39 @@
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> DNI:</h6>
 													</div>
-													<div class="col-sm-4">   
-														<input type="number" class="form-control" id="dni" placeholder="Ingrese el dni" required>
+													<div class="col-sm-4">     
+														<input type="text" class="form-control" placeholder="Ingrese el DNI" id="dni" maxlength="8" minlength="8" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
 												
 													</div>  
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> RUC:</h6>
 													</div>
-													<div class="col-sm-4">
-														<input type="number" class="form-control" id="ruc" placeholder="Ingrese el ruc" >
+													<div class="col-sm-4"> 
+														<input type="text" class="form-control" placeholder="Ingrese el RUC" id="ruc" maxlength="11" minlength="11" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+												
 													</div> 
 													<div class="col-sm-2">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombres:</h6>
+														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombres:</h6> 
 													</div>
 													<div class="col-sm-4">  
-														<input type="text" class="form-control" id="nombres" placeholder="Ingrese el nombres" readonly> 
+														<input type="text" class="form-control" id="nombres" placeholder="Ingrese el nombres" required readonly> 
 													</div> 
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Apellidos:</h6>
 													</div>
 													<div class="col-sm-4">
-														<input type="text" class="form-control" id="apellidos" placeholder="Ingrese el apellidos"  readonly>
+														<input type="text" class="form-control" id="apellidos" placeholder="Ingrese el apellidos" required readonly>
 													</div> 
 												</div>  
-											</form> 
-											<form id="registroForm">
+											 
 
 												<div class="row mt-4">
 
 													<div class="col-sm-2"> 
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Usuario:</h6>
 													</div>
-													<div class="col-sm-4">
-														<input type="text" class="form-control" id="usuario" placeholder="Usuario">
+													<div class="col-sm-4"> 
+														<input type="text" class="form-control" placeholder="Ingrese el Usuario" id="usuario" maxlength="20" minlength="20" required oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');">
 														<span class="error" id="usuarioError"></span>
 													</div> 
 
@@ -162,46 +162,48 @@
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Contraseña:</h6> 
 													</div>
 													<div class="col-sm-4">
-														<input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
+														<input type="password" class="form-control" id="contrasena" maxlength="20" required placeholder="Contraseña">
 														<span class="error" id="contrasenaError"></span>
 													</div> 
 
 													<div class="col-sm-2"> 
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Repita Contraseña:</h6>  
 													</div>
-													<div class="col-sm-4">
-														<input type="password" class="form-control" id="repetirContrasena" placeholder="Repita Contraseña">
+													<div class="col-sm-4"> 
+														<input type="password" class="form-control" id="repetirContrasena" maxlength="20" required placeholder="Repita Contraseña">
 														<span class="error" id="repetirContrasenaError"></span>
 													</div> 
 													<div class="col-sm-2">  
 													</div>
-													<div class="col-sm-4">
-														<button type="submit" class="btn btn-info">Validar usuario</button> 
+													<div class="col-sm-4">  
+														
+														<a id="btnvalidar"  class="btn btn-info" style="color: white;">Validar usuario</a>
 													</div>  
 												</div>  
 												 
-											</form> 
 													<hr> 
 
 												<div class="row mt-4">  
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Correo:</h6>
 													</div>
-													<div class="col-sm-4">  
-														<input type="text" class="form-control" id="correo" placeholder="Ingrese el correo">
+													<div class="col-sm-4">   
+														<input type="email" class="form-control" placeholder="Ingrese el correo" id="correo" maxlength="150" minlength="20" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" required >
 												
+    
 													</div> 
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Celular:</h6>
 													</div>
-													<div class="col-sm-4">
-														<input type="text" class="form-control" id="celular" placeholder="Ingrese el celular" >
+													<div class="col-sm-4"> 
+														<input type="text" class="form-control" placeholder="Ingrese el celular" id="celular" maxlength="9" minlength="9" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+												
 													</div>  
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Lugar de Nacimiento:</h6>
 													</div>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" id="lugar_nacimiento" placeholder="Ingrese el lugar nacimiento" >
+														<input type="text" class="form-control" id="lugar_nacimiento" maxlength="150" placeholder="Ingrese el lugar nacimiento" >
 													</div> 
 														
 														<div class="col-sm-2">
@@ -209,17 +211,15 @@
 														</div>
 														<div class="col-sm-4">
 															<select class="form-control" id="region">
-																<option value="0">Seleccionar</option> 	
-																<option value="01">Lima</option> 
+																<option value="0">Seleccionar</option> 	 
 															</select>
 														</div> 
 														<div class="col-sm-2">
 															<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Provincia:</h6>
 														</div>
 														<div class="col-sm-4">
-															<select class="form-control" id="provincia">
-																<option value="0">Seleccionar</option> 	
-																<option value="0101">Lima</option> 
+															<select class="form-control" id="provincia" >
+																<option value="0">Seleccionar</option> 	 
 															</select>
 														</div> 
 														<div class="col-sm-2">
@@ -227,15 +227,14 @@
 														</div>
 														<div class="col-sm-4">
 															<select class="form-control" id="distrito">
-																<option value="0">Seleccionar</option> 	
-																<option value="010101">Lima</option> 
+																<option value="0">Seleccionar</option> 	 
 															</select>
 														</div> 
 														<div class="col-sm-2">
 															<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Lengua materna:</h6>
 														</div>
 														<div class="col-sm-4">
-															<input type="text" class="form-control" id="lengua_materna" placeholder="Ingrese el lengua materna" >
+															<input type="text" class="form-control" id="lengua_materna" maxlength="150" placeholder="Ingrese el lengua materna" >
 														</div> 
 														<div class="col-sm-2">
 															<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Foto 1:</h6>
@@ -264,6 +263,7 @@
 														</div>   
 												</div>  
 											
+											</form> 
 
 											<!-- Modal foto 1 Principal -->
 											<div class="modal fade" id="imagenFoto1Modal" tabindex="-1" aria-labelledby="imagenPrincipalModalLabel" aria-hidden="true">
@@ -352,41 +352,43 @@
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nombre:</h6>
 													</div>
-													<div class="col-sm-4">  
-														<input type="text" class="form-control" id="nombretaller" placeholder="Ingrese el nombre del taller">
-												
+													<div class="col-sm-4">   
+														<input type="text" class="form-control" placeholder="Ingrese el nombre del taller" id="nombretaller" maxlength="150" minlength="8"   oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+														
 													</div> 
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Horario de Atención:</h6>
 													</div>
 													<div class="col-sm-4">
-														<input type="text" class="form-control" id="horarioatencion" placeholder="Ingrese el horario de atención" >
+														<input type="text" class="form-control" id="horarioatencion" maxlength="100" placeholder="Ingrese el horario de atención" >
 													</div> 
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Ruc:</h6>
 													</div>
-													<div class="col-sm-4">  
-														<input type="number" class="form-control" id="ructaller" placeholder="Ingrese el ruc">
+													<div class="col-sm-4">   
+														<input type="text" class="form-control" placeholder="Ingrese el RUC" id="ructaller" maxlength="11" minlength="11" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+														
 												
 													</div> 
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Dirección Física:</h6>
 													</div>
 													<div class="col-sm-4">
-														<input type="text" class="form-control" id="direccionfisica" placeholder="Ingrese la dirección física" >
+														<input type="text" class="form-control" id="direccionfisica" maxlength="150" placeholder="Ingrese la dirección física" >
 													</div>  
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Latitud:</h6>
 													</div>
-													<div class="col-sm-4">  
-														<input type="number" class="form-control" id="latitud" placeholder="Ingrese latitud">
+													<div class="col-sm-4">   
+														<input type="text" class="form-control" placeholder="Ingrese latitud" id="latitud" maxlength="8"  required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 												
 													</div> 
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Longitud:</h6>
 													</div>
-													<div class="col-sm-4">
-														<input type="number" class="form-control" id="longitud" placeholder="Ingrese longitud" >
+													<div class="col-sm-4"> 
+														<input type="text" class="form-control" placeholder="Ingrese longitud" id="longitud" maxlength="8"  required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+												
 													</div>  
 												</div> 
 
@@ -403,13 +405,14 @@
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Descripción de habilidades:</h6>
 													</div>
 													<div class="col-sm-10">   
-														<textarea  id="descripcionhabilidades" placeholder="Ingrese descripción de habilidades"	class="form-control form-control-sm"></textarea>
+														<textarea  id="descripcionhabilidades" placeholder="Ingrese descripción de habilidades" maxlength="300" minlength="20"	class="form-control form-control-sm"  oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');"></textarea>
+														
 													</div> 
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Tipos de artesanía que produce:</h6>
 													</div>
 													<div class="col-sm-10">
-														<textarea  id="tipoartesania" placeholder="Ingrese descripción de habilidades"	class="form-control form-control-sm"></textarea>													
+														<textarea  id="tipoartesania" placeholder="Ingrese Tipos de artesanía que produce" maxlength="300" minlength="20"	class="form-control form-control-sm"  oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');"></textarea>													
 													</div> 
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Línea artesanal:</h6>
@@ -422,8 +425,9 @@
 														<input type="checkbox" id="talabarteria" name="talabarteria" value="Talabartería">
 														<label for="talabarteria">Talabartería</label>  
 														<input type="checkbox" id="otro" name="otro" value="Otro">
-														<label for="otro">Otro</label>  
-														<input type="text" class="form-control" id="desotro" placeholder="Ingrese otra linea artesanal" disabled >
+														<label for="otro">Otro</label>   
+														<input type="text" class="form-control" placeholder="Ingrese otra linea artesanal" id="desotro" maxlength="30" minlength="8" disabled oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+														
 													</div> 
 													 
 												</div> 
@@ -452,15 +456,17 @@
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Usuario / Número:</h6>
 													</div>
-													<div class="col-9 col-md-9">
-														<input type="text" class="form-control" id="usuarionumero" placeholder="Ingrese el usuario / número" >
+													<div class="col-9 col-md-9"> 
+														<input type="text" class="form-control" placeholder="Ingrese el usuario / número" id="usuarionumero" maxlength="30" minlength="8"  oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+														
 													</div>
 													
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Enlace de contacto:</h6>
 													</div>
-													<div class="col-9 col-md-9">
-														<input type="text" class="form-control" id="enlacecontacto" placeholder="Ingrese el usuario / número" >
+													<div class="col-9 col-md-9"> 
+														<input type="text" class="form-control" placeholder="Ingrese el usuario / número" id="enlacecontacto" maxlength="150" minlength="8"  oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+														
 													</div> 
 													
 													<div class="col-10 col-md-11" style="text-align: right;">   
@@ -550,26 +556,30 @@
 																	<div class="col-1 col-md-3">
 																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre del Banco:</h6>
 																	</div>
-																	<div class="col-9 col-md-8">  
-																		<input type="text" class="form-control" id="nombrebanco" placeholder="Ingrese el nombre del banco"> 
+																	<div class="col-9 col-md-8">   
+																		<input type="text" class="form-control" placeholder="Ingrese el nombre del banco" id="nombrebanco" maxlength="100" minlength="8"  oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+														
 																	</div> 
 																	<div class="col-1 col-md-3">
 																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre Titular:</h6>
 																	</div>
-																	<div class="col-9 col-md-8">
-																		<input type="text" class="form-control" id="nombretitular" placeholder="Ingrese el nombre titular" >
+																	<div class="col-9 col-md-8"> 
+																		<input type="text" class="form-control" placeholder="Ingrese el nombre titular" id="nombretitular" maxlength="100" minlength="8"  oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+														
 																	</div> 
 																	<div class="col-1 col-md-3">
 																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nro de Cuenta Corriente:</h6>
 																	</div>
-																	<div class="col-9 col-md-8">
-																		<input type="text" class="form-control" id="cuentacorriente" placeholder="Ingrese el nro de cuenta corriente" >
+																	<div class="col-9 col-md-8"> 
+																		<input type="text" class="form-control" placeholder="Ingrese el nro de cuenta corriente"  id="cuentacorriente" maxlength="100" minlength="8"  oninput="this.value = this.value.replace(/[^0-9\-]/g, '');">
+														
 																	</div>  
 																	<div class="col-1 col-md-3">
 																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nro de Cuenta Interbancaria:</h6>
 																	</div>
 																	<div class="col-9 col-md-8">  
-																		<input type="text" class="form-control" id="cuentainterbancaria" placeholder="Ingrese el nro de cuenta interbancaria"> 
+																		<input type="text" class="form-control" placeholder="Ingrese el nro de cuenta interbancaria"  id="cuentainterbancaria" maxlength="100" minlength="8"  oninput="this.value = this.value.replace(/[^0-9\-]/g, '');">
+														
 																	</div>   
 																</div>
 
@@ -693,20 +703,24 @@
 																	<div class="col-1 col-md-3">
 																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Título:</h6>
 																	</div>
-																	<div class="col-9 col-md-8">  
-																		<input type="text" class="form-control" id="tituloreconocimiento" placeholder="Ingrese el titulo"> 
+																	<div class="col-9 col-md-8">   
+																		<input type="text" class="form-control" placeholder="Ingrese el titulo" id="tituloreconocimiento" maxlength="100" minlength="8"  oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+														
 																	</div> 
 																	<div class="col-1 col-md-3">
 																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Entidad que lo reconoce:</h6>
 																	</div>
-																	<div class="col-9 col-md-8">
-																		<input type="text" class="form-control" id="entidadreconoce" placeholder="Ingrese la entidad que lo reconoce" >
+																	<div class="col-9 col-md-8"> 
+																		<input type="text" class="form-control" placeholder="Ingrese la entidad que lo reconoce" id="entidadreconoce" maxlength="100" minlength="8"  oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+														
 																	</div> 
 																	<div class="col-1 col-md-3">
 																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Descripción:</h6>
 																	</div>
 																	<div class="col-9 col-md-8">
-																		<textarea type="text" class="form-control" id="descripcionreconocimiento" placeholder="Ingrese la descripcion" ></textarea>  
+																		<textarea type="text" class="form-control" id="descripcionreconocimiento" placeholder="Ingrese la descripcion" maxlength="300" minlength="8"  oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');"></textarea>  
+																		 
+														
 																	</div>   
 																</div>  
 															</form>

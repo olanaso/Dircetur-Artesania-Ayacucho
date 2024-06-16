@@ -308,11 +308,11 @@ async function verificarToken (req, res) {
             return res.status(200).json({ isvalid: false, message: 'Token no valido' });
         }
 
-        console.log(decoded)
-        console.log('----------------------')
-        console.log(req.session.user)
+        //console.log(decoded)
+        //console.log('----------------------')
+        //console.log(req.session.user)
         let usuarios = decoded.usuarioDB;
-        console.log(usuarios)
+        //console.log(usuarios)
 
         const iestp = await usuario.findOne({
             where: { usuario: usuarios.usuario }
@@ -330,7 +330,23 @@ async function verificarToken (req, res) {
                 where: { id: usuario.programaid }
             });
         }
-*/
+            
+*/  
+        let datosartesano = [];
+        const idusu=usuarios.id;
+        console.log(idusu)
+        if (idusu) {
+
+            datosartesano = await artesano.findAll({
+                where: { 
+                usuario_id: idusu
+            } 
+            });
+            usuarios.datos = datosartesano;
+        } else {
+            usuarios.datos = null; // o algún valor predeterminado
+        }
+ 
 
         const role = await rol.findOne({
             where: { id: usuarios.rolid }
@@ -359,24 +375,14 @@ async function verificarToken (req, res) {
             order: [['orden', 'ASC']]
         });
 
-        let datosartesano = [];
-        datosartesano = await artesano.findAll({
-            where: { 
-                usuario_id: usuarios.id 
-            } 
-        });
         
         console.log(role)
         usuarios.rol = role;
         usuarios.menu = menuspadre;
         usuarios.menuhijo = menushijo;
-        if (datosartesano) {
-            usuarios.datos = datosartesano;
-        } else {
-            usuarios.datos = null; // o algún valor predeterminado
-        }
+        
          
-        console.log(datosartesano)
+        //console.log(datosartesano)
 
 
         return res.status(200).json({ isvalid: true, message: 'Token valido', usuarios });

@@ -6,7 +6,7 @@ import { buscarProducto,geteditarproducto, getusuariocapacitacion, deleteUserCap
 import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
-import '../productoartesano-detalle/style.css'
+import '../productos-detalle/style.css'
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog(); 
 hideLoading();
@@ -57,30 +57,6 @@ async function checkadminsession () {
  
  
 
-async function nuevo () {
-
-  $('#btnNuevoRegistro').on('click', async function (e) {
-
-    openModalNuevo(0); // Llama a la función que abre el modal y pasa el ID
-
-    $('#txt-dni1').val('')
-    $('#txt-nombres1').val('')
-    $('#txt-cod_curso1').val('')
-    $('#txt-nota1').val('')
-    $('#txt-cant_horas1').val('')
-    $('#txt-fecha_inicio1').val('')
-    $('#txt-fecha_fin1').val('')
-    $('#txt-fecha_emision1').val('')
-    $('#txt-instructor1').val('')
-    $('#txt-temario1').val('')
-    $('#txt-curso1').val('')
-    $('#txt-ubicacion1').val('')
-    $('#txt-institucion_solicitante1').val('')
-
-  })
-
-}
-
 
 var lstproductos = null;
 var editarproductos = null;
@@ -94,6 +70,7 @@ let contadorColores = 0;
 let contadorTalla = 0;
 let contadorOfertas = 0;
 let contadorCostos = 0;
+
 
 let usuario=getDataFromLocalStorage('session').usuarios; 
 var artesano_id=usuario.datos[0].id;  
@@ -249,8 +226,10 @@ async function buscarUsuario () {
       }
     });
 
-    if (!isValid) { 
-      showToast('Por favor, ingresa el DNI y todos los campos requeridos.'); 
+    if (!isValid) {
+      //alert('Por favor, ingresa el DNI y todos los campos requeridos.');
+      showToast('Por favor, ingresa todos los campos * requeridos.');
+     // document.getElementById('dni').focus(); // Pone el foco en el campo del D
       
       return;
     } else {
@@ -471,11 +450,13 @@ async function buscarUsuario () {
                       url.searchParams.set('id', result.id);
                       window.history.pushState({}, '', url);
                       productId=result.id;
-                    } 
-                    
+                      habilitar();
+                      var titulo = document.getElementById("tituloproducto");
+                      titulo.innerText = "Editar producto"; 
+                      $('#btnguardarcambio').text('Actualizar');
+                    }  
 
                     hideLoading() 
-                    buscarUsuario();
                     $('#myModal').css('display', 'none');
                   } else {
                     showToast('Ocurrio un error.')
@@ -519,112 +500,13 @@ document.getElementById('cantidad').addEventListener('input', validarCantidad);
 document.getElementById('cantidadMinima').addEventListener('input', validarCantidad);
 
 
-
  
 
 
 
 }
 
-
-
-
  
-$(document).on('click', '.btn_Eliminar', async function (e) {
- 
-  
-  async function buscarUser () {
-    // Inicializar el contador
-
-    certificados = await buscarProducto($('#searchBox').val());
-    // Obtener la referencia del elemento HTML donde se insertará la tabla
-    let tabla = document.getElementById('tablaCertificados');
-    // Limpiar la tabla antes de insertar nuevos datos
-    tabla.innerHTML = '';
-    // Crear una fila para los encabezados de la tabla
-    let encabezados = '<tr><th>N°</th><th>Nombres Completos</th><th>Curso</th><th>Fecha Emisión</th><th>Código</th> <th colspan="3" style="text-align: center;">Certificado</th></tr>';
-    // Agregar los encabezados a la tabla
-    tabla.innerHTML += encabezados;
-    // Recorrer la lista de certificados y pintar los datos en la tabla
-    // Inicializar el contador
-    let correlativo = 1;
-    for (let prog of certificados) {
-      // Crear una fila para cada certificado
-
-      let fila = '<tr>';
-      // Agregar las celdas con los datos del certificado
-      fila += `<td>${correlativo}</td>`;
-      fila += `<td>${prog.nombres}</td>`;
-      fila += `<td>${prog.curso}</td>`;
-      fila += `<td>${prog.fecha_fin}</td>`;
-      fila += `<td>${prog.cod_curso}</td>`;
-      fila += `<td><a href="javascript:void(0);"   class="open-modal" data-toggle="tooltip" title="Editar" data-id="${prog.id}" style="color: blue; text-decoration: underline;"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px;">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-            </svg></a></td>`;
-
-      fila += `<td><a href="javascript:void(0);" class="btn_Eliminar" data-toggle="tooltip" title="Eliminar" data-id="${prog.id}" style="color: blue; text-decoration: underline;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px;">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-            <line x1="9" y1="9" x2="15" y2="15"/>
-            <line x1="15" y1="9" x2="9" y2="15"/>
-          </svg></a></td>`;
-
-
-
-      fila += `<td><a href="${prog.certificado}" target="_blank" data-toggle="tooltip" title="Ver certificado" style="color: blue; text-decoration: underline;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px;">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg></a></td>`;
-
-
-      fila += '</tr>';
-      // Agregar la fila a la tabla
-      tabla.innerHTML += fila;
-      // Incrementar el correlativo
-      correlativo++;
-    }
-    $('[data-toggle="tooltip"]').tooltip();
-
-  }
-
-  e.preventDefault();
-  var respuesta = confirm("¿Estás seguro de que deseas eliminar?");
-  if (respuesta) {
-    let id = $(this).data('id');
-    let usuario = await getusuariocapacitacion(id)
-    let dni = usuario.dni;
-    let nombres = usuario.nombres;
-    let cod_curso = usuario.cod_curso;
-    let nota = usuario.nota;
-    let cant_horas = usuario.cant_horas;
-    let fecha_inicio = usuario.fecha_inicio;
-    let fecha_fin = usuario.fecha_fin;
-    let instructor = usuario.instructor;
-    let temario = usuario.temario;
-    let curso = usuario.curso;
-
-
-
-    let ubicacion = usuario.ubicacion;
-    let institucion_solicitante = usuario.institucion_solicitante;
-
-    let result = await deleteUserCapacitacion({ id, dni, nombres, cod_curso, curso, nota, cant_horas, fecha_inicio, fecha_fin, instructor, temario, ubicacion, institucion_solicitante });
-    if (result) {
-      showToast('Se elimino los datos correctamente')
-      await buscarUser();
-
-    } else {
-      showToast('Ocurrio un error.')
-    }
-  } else {
-    console.log("El usuario canceló la acción.");
-  }
-
-});
-
-   
-
 
 function createXLS (data, reportfilename) {
   var resultgeojson = alasql(`SELECT *
@@ -654,6 +536,15 @@ descuentoInput.addEventListener('input', function() {
     // Obtener el valor del precio original
     const precioOriginal = parseFloat(precioDisplaySpan.innerText) || parseFloat(precioDisplaySpan.textContent);
 
+    if (isNaN(precioOriginal)) {
+     
+      showToast('Completar el precio actual, registrar en la pestaña "datos generales - Precio del producto".');
+      
+      $('#porcentajeDescuento').val("");
+      $('#precioOfertado').val("");
+      return;
+  } 
+
     // Validar que los valores sean números válidos
     if (!isNaN(porcentajeDescuento) && !isNaN(precioOriginal)) {
         // Calcular el precio con descuento
@@ -664,7 +555,6 @@ descuentoInput.addEventListener('input', function() {
         precioOfertadoInput.value = precioConDescuento.toFixed(2);
     } else {
         // Manejo de errores si los valores no son válidos
-        showToast('Completar el precio actual, registrar en la pestaña "datos generales - Precio del producto".');
 
         $('#porcentajeDescuento').val("");
         $('#precioOfertado').val("");
@@ -975,6 +865,28 @@ async function editarProducto (id) {
 
 }
 
+function disabilitar(){
+  $('#home-tab2, #home-tab3, #home-tab4, #home-tab5, #home-tab6, #home-tab7, #home-tab8').addClass('disabled');
+}
+
+function habilitar(){ 
+     
+      let home2Tab = document.getElementById('home-tab2');  
+      home2Tab.classList.remove('disabled'); 
+      let home3Tab = document.getElementById('home-tab3');  
+      home3Tab.classList.remove('disabled'); 
+      let home4Tab = document.getElementById('home-tab4');  
+      home4Tab.classList.remove('disabled'); 
+      let home5Tab = document.getElementById('home-tab5');  
+      home5Tab.classList.remove('disabled'); 
+      let home6Tab = document.getElementById('home-tab6');  
+      home6Tab.classList.remove('disabled'); 
+      let home7Tab = document.getElementById('home-tab7');  
+      home7Tab.classList.remove('disabled'); 
+      let home8Tab = document.getElementById('home-tab8');  
+      home8Tab.classList.remove('disabled'); 
+}
+
 $(document).ready(function() {
 
    
@@ -988,254 +900,280 @@ $(document).ready(function() {
   { 
     editarProducto(productId);
     titulo.innerText = "Editar producto";
+    $('#btnguardarcambio').text('Actualizar');
   }else
   { 
+    disabilitar();
     titulo.innerText = "Nuevo producto";
   }
    
 //******traductor */
 
-$('#ingles-tab').on('shown.bs.tab', function (e) {
-    const textInSpanish = $('#idespanolNombre').val();
-    if (textInSpanish === "") {
-      $('#idinglesNombre').val(""); // Clear the English field if Spanish field is empty
-      
-      showToast('Por favor, ingrese un nombre de producto en español antes de traducir.');
-     // alert("Por favor, ingrese un nombre de producto en español antes de traducir.");
-      return; // Exit the function if the Spanish field is empty
-    }
-
+// Obtener referencias a los elementos del DOM
+/*************** Nombre del producto: */
+const idespanolNombreElement = document.getElementById('idespanolNombre');   
+idespanolNombreElement.addEventListener('input', async function() { 
+    const idespanolNombreValue = idespanolNombreElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
     const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({ "text": textInSpanish });
-
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolNombreValue }); 
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
       redirect: "follow"
-    };
-
+    }; 
     fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
       .then(response => response.json()) // assuming the API returns JSON
       .then(result => {
         $('#idinglesNombre').val(result.translatedText); // assuming the JSON response has a "translatedText" field
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => console.error('Error:', error));  
+}); 
+
+$('#ingles-tab').on('shown.bs.tab', function (e) {
+    const textInSpanish = $('#idespanolNombre').val();
+    if (textInSpanish === "") {
+      $('#idinglesNombre').val("");  
+      showToast('Por favor, ingrese un nombre de producto en español antes de traducir.'); 
+      return;  
+    }
+
 });
+/******************************************** */
+
+/*************** Resumen del producto: */
+const idespanolResumenElement = document.getElementById('idespanolResumen');   
+idespanolResumenElement.addEventListener('input', async function() { 
+    const idespanolResumenValue = idespanolResumenElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolResumenValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesResumen').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-resumen').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolResumen').val();
-  if (textInSpanish === "") {
-    $('#idinglesResumen').val(""); // Clear the English field if Spanish field is empty
-    
-    showToast('Por favor, ingrese el resumen de producto en español antes de traducir.');
-    //alert("Por favor, ingrese el resumen de producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolResumen').val();
+    if (textInSpanish === "") {
+      $('#idinglesResumen').val("");  
+      showToast('Por favor, ingrese el resumen de producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesResumen').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
+ 
+
+/***************   Descripción del producto */
+const idespanolDescripcionElement = document.getElementById('idespanolDescripcion');   
+idespanolDescripcionElement.addEventListener('input', async function() { 
+    const idespanolDescripcionValue = idespanolDescripcionElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolDescripcionValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesDescripcion').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-descripcion').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolDescripcion').val();
-  if (textInSpanish === "") {
-    $('#idinglesDescripcion').val(""); // Clear the English field if Spanish field is empty
-    
-    showToast('Por favor, ingrese la descripción del producto en español antes de traducir.');
-    //alert("Por favor, ingrese la descripción del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolDescripcion').val();
+    if (textInSpanish === "") {
+      $('#idinglesDescripcion').val("");  
+      showToast('Por favor, ingrese la descripción del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesDescripcion').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
+
+
+/*************** Cualidades del producto: */
+const idespanolCualidadesElement = document.getElementById('idespanolCualidades');   
+idespanolCualidadesElement.addEventListener('input', async function() { 
+    const idespanolCualidadesValue = idespanolCualidadesElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolCualidadesValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesCualidades').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-cualidades').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolCualidades').val();
-  if (textInSpanish === "") {
-    $('#idinglesCualidades').val(""); // Clear the English field if Spanish field is empty
-    
-    showToast('Por favor, ingrese las cualidades del producto en español antes de traducir.');
-   //alert("Por favor, ingrese las cualidades del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolCualidades').val();
+    if (textInSpanish === "") {
+      $('#idinglesCualidades').val("");  
+      showToast('Por favor, ingrese las cualidades del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesCualidades').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
+ 
+ 
+/*************** Palabras clave: */
+const idespanolPalabrasElement = document.getElementById('idespanolPalabras');   
+idespanolPalabrasElement.addEventListener('input', async function() { 
+    const idespanolPalabrasValue = idespanolPalabrasElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolPalabrasValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesPalabras').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-palabras').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolPalabras').val();
-  if (textInSpanish === "") {
-    $('#idinglesPalabras').val(""); // Clear the English field if Spanish field is empty
-    showToast('Por favor, ingrese palabra clave del producto en español antes de traducir.');
-    //alert("Por favor, ingrese palabra clave del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolPalabras').val();
+    if (textInSpanish === "") {
+      $('#idinglesPalabras').val("");  
+      showToast('Por favor, ingrese palabra clave del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesPalabras').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
 
+ 
+/*************** Número de piezas: */
+const idespanolPiezasElement = document.getElementById('idespanolPiezas');   
+idespanolPiezasElement.addEventListener('input', async function() { 
+    const idespanolPiezasValue = idespanolPiezasElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolPiezasValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesPiezas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-piezas').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolPiezas').val();
-  if (textInSpanish === "") {
-    $('#idinglesPiezas').val(""); // Clear the English field if Spanish field is empty
-    showToast('Por favor, ingrese numero de piezas del producto en español antes de traducir.');
-    //alert("Por favor, ingrese numero de piezas del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolPiezas').val();
+    if (textInSpanish === "") {
+      $('#idinglesPiezas').val("");  
+      showToast('Por favor, ingrese numero de piezas del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesPiezas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
 
+  
 
+/*************** Descripción de materiales: */
+const idespanolMaterialesElement = document.getElementById('idespanolMateriales');   
+idespanolMaterialesElement.addEventListener('input', async function() { 
+    const idespanolMaterialesValue = idespanolMaterialesElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolMaterialesValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesMateriales').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-materiales').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolMateriales').val();
-  if (textInSpanish === "") {
-    $('#idinglesMateriales').val(""); // Clear the English field if Spanish field is empty
-    showToast('Por favor, ingrese descripción de materiales del producto en español antes de traducir.');
-    //alert("Por favor, ingrese descripción de materiales del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolMateriales').val();
+    if (textInSpanish === "") {
+      $('#idinglesMateriales').val("");  
+      showToast('Por favor, ingrese descripción de materiales del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesMateriales').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
+/******************************************** */
 
+   
 
+/*************** Técnicas empleadas: */
+const idespanolTecnicasElement = document.getElementById('idespanolTecnicas');   
+idespanolTecnicasElement.addEventListener('input', async function() { 
+    const idespanolTecnicasValue = idespanolTecnicasElement.value.trim(); // Trim para eliminar espacios en blanco al inicio y al final  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json"); 
+    const raw = JSON.stringify({ "text": idespanolTecnicasValue }); 
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    }; 
+    fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
+      .then(response => response.json()) // assuming the API returns JSON
+      .then(result => {
+        $('#idinglesTecnicas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
+      })
+      .catch(error => console.error('Error:', error));  
+}); 
 
 $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
-  const textInSpanish = $('#idespanolTecnicas').val();
-  if (textInSpanish === "") {
-    $('#idinglesTecnicas').val(""); // Clear the English field if Spanish field is empty
-    showToast('Por favor, ingrese técnicas empleadas del producto en español antes de traducir.');
-    //alert("Por favor, ingrese técnicas empleadas del producto en español antes de traducir.");
-    return; // Exit the function if the Spanish field is empty
-  }
+    const textInSpanish = $('#idespanolTecnicas').val();
+    if (textInSpanish === "") {
+      $('#idinglesTecnicas').val("");  
+      showToast('Por favor, ingrese técnicas empleadas del producto en español antes de traducir.');
+      return;  
+    }
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({ "text": textInSpanish });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
-
-  fetch("https://dni.biblio-ideas.com/api/translate", requestOptions)
-    .then(response => response.json()) // assuming the API returns JSON
-    .then(result => {
-      $('#idinglesTecnicas').val(result.translatedText); // assuming the JSON response has a "translatedText" field
-    })
-    .catch(error => console.error('Error:', error));
 });
-
+/******************************************** */
+ 
 
 //**fin*** */
 
@@ -1275,14 +1213,29 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
       $('#precioCosto').val('');
   });
 
-  $(document).on('click', '.btn-delete-cost', function() {
-      $(this).closest('tr').remove();
-      contadorCostos--;
+  $(document).on('click', '.btn-delete-cost', function() {  
+    alertDialog.createAlertDialog(
+      'confirm',
+      'Confirmar Alerta',
+      '¿Estás seguro de que deseas eliminar?',
+      'Cancelar',
+      'Continuar',
+      async() => {
+            try {
 
-      // Reordenar los números de la lista
-      $('#listaCostos tr').each(function(index, tr) {
-          $(tr).find('td:first').text(index + 1);
-      });
+                $(this).closest('tr').remove();
+                contadorCostos--;
+          
+                // Reordenar los números de la lista
+                $('#listaCostos tr').each(function(index, tr) {
+                    $(tr).find('td:first').text(index + 1);
+                });
+                    
+              } catch (error) {
+                console.error('Error al eliminar:', error);
+              }
+          }
+        );   
   });
 
 
@@ -1358,13 +1311,30 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
   });
 
   $(document).on('click', '.btn-delete-offer', function() {
-      $(this).closest('tr').remove();
-      contadorOfertas--;
 
-      // Reordenar los números de la lista
-      $('#listaOfertas tr').each(function(index, tr) {
-          $(tr).find('td:first').text(index + 1);
-      });
+    alertDialog.createAlertDialog(
+      'confirm',
+      'Confirmar Alerta',
+      '¿Estás seguro de que deseas eliminar?',
+      'Cancelar',
+      'Continuar',
+      async() => {
+            try {
+
+                  $(this).closest('tr').remove();
+                  contadorOfertas--;
+            
+                  // Reordenar los números de la lista
+                  $('#listaOfertas tr').each(function(index, tr) {
+                      $(tr).find('td:first').text(index + 1);
+                  });
+                    
+              } catch (error) {
+                console.error('Error al eliminar:', error);
+              }
+          }
+        );   
+ 
   });
 
 
@@ -1401,13 +1371,30 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
   });
 
   $(document).on('click', '.btn-delete-colores', function() {
-      $(this).closest('tr').remove();
-      contadorColores--;
 
-      // Reordenar los números de la lista
-      $('#listaColores tr').each(function(index, tr) {
-          $(tr).find('td:first').text(index + 1);
-      });
+
+    alertDialog.createAlertDialog(
+      'confirm',
+      'Confirmar Alerta',
+      '¿Estás seguro de que deseas eliminar?',
+      'Cancelar',
+      'Continuar',
+      async() => {
+            try {
+
+                    $(this).closest('tr').remove();
+                    contadorColores--; 
+                    // Reordenar los números de la lista
+                    $('#listaColores tr').each(function(index, tr) {
+                        $(tr).find('td:first').text(index + 1);
+                    });
+                    
+              } catch (error) {
+                console.error('Error al eliminar:', error);
+              }
+          }
+        );   
+    
   });
 
 
@@ -1454,13 +1441,33 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
   });
 
   $(document).on('click', '.btn-delete-Talla', function() {
-      $(this).closest('tr').remove();
-      contadorTalla--;
 
-      // Reordenar los números de la lista
-      $('#listaTalla tr').each(function(index, tr) {
-          $(tr).find('td:first').text(index + 1);
-      });
+
+    alertDialog.createAlertDialog(
+      'confirm',
+      'Confirmar Alerta',
+      '¿Estás seguro de que deseas eliminar?',
+      'Cancelar',
+      'Continuar',
+      async() => {
+            try {
+
+                   
+                    $(this).closest('tr').remove();
+                    contadorTalla--;
+
+                    // Reordenar los números de la lista
+                    $('#listaTalla tr').each(function(index, tr) {
+                        $(tr).find('td:first').text(index + 1);
+                    });
+                    
+              } catch (error) {
+                console.error('Error al eliminar:', error);
+              }
+          }
+        );  
+
+        
   });
  
  
@@ -1505,13 +1512,32 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
 
   $(document).on('click', '.btn-delete-imagen', function() {
 
-    $(this).closest('tr').remove();
-    contadorImagenes--;
 
-    // Reordenar los números de la lista
-    $('#listaImagenes tr').each(function(index, tr) {
-        $(tr).find('td:first').text(index + 1);
-    });
+    alertDialog.createAlertDialog(
+      'confirm',
+      'Confirmar Alerta',
+      '¿Estás seguro de que deseas eliminar?',
+      'Cancelar',
+      'Continuar',
+      async() => {
+            try {
+
+                  $(this).closest('tr').remove();
+                  contadorImagenes--;
+              
+                  // Reordenar los números de la lista
+                  $('#listaImagenes tr').each(function(index, tr) {
+                      $(tr).find('td:first').text(index + 1);
+                  });
+                    
+              } catch (error) {
+                console.error('Error al eliminar:', error);
+              }
+          }
+        );  
+
+
+ 
      
   });
  
@@ -1596,15 +1622,29 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
       $('#linkForm')[0].reset();
   });
 
-  $(document).on('click', '.btn-delete-video1', function() {
-    
-    $(this).closest('tr').remove();
-    contadorImagenes--;
+  $(document).on('click', '.btn-delete-video1', function() { 
+    alertDialog.createAlertDialog(
+      'confirm',
+      'Confirmar Alerta',
+      '¿Estás seguro de que deseas eliminar?',
+      'Cancelar',
+      'Continuar',
+      async() => {
+            try {
 
-    // Reordenar los números de la lista
-    $('#videoList2 tr').each(function(index, tr) {
-        $(tr).find('td:first').text(index + 1);
-    });
+                  $(this).closest('tr').remove();
+                  contadorImagenes--; 
+                  // Reordenar los números de la lista
+                  $('#videoList2 tr').each(function(index, tr) {
+                      $(tr).find('td:first').text(index + 1);
+                  });
+                    
+              } catch (error) {
+                console.error('Error al eliminar:', error);
+              }
+          }
+        );   
+    
 });
 
 
@@ -1707,13 +1747,33 @@ $('#ingles-tab-tecnicas').on('shown.bs.tab', function (e) {
 
 
   $(document).on('click', '.btn-delete-video', function() {
-    $(this).closest('tr').remove();
-    contadorImagenes--;
 
-    // Reordenar los números de la lista
-    $('#videoList tr').each(function(index, tr) {
-        $(tr).find('td:first').text(index + 1);
-    });
+
+    alertDialog.createAlertDialog(
+      'confirm',
+      'Confirmar Alerta',
+      '¿Estás seguro de que deseas eliminar?',
+      'Cancelar',
+      'Continuar',
+      async() => {
+            try {
+
+                    $(this).closest('tr').remove();
+                    contadorImagenes--;
+                
+                    // Reordenar los números de la lista
+                    $('#videoList tr').each(function(index, tr) {
+                        $(tr).find('td:first').text(index + 1);
+                    });
+                    
+              } catch (error) {
+                console.error('Error al eliminar:', error);
+              }
+          }
+        );  
+
+
+    
 }); 
 
 
@@ -1746,7 +1806,7 @@ function handleUploadResponseimgprincipal (response) {
          
 
        
-        showToast('Registro correcto.');
+        //showToast('Registro correcto.');
         //showToast('Registro correcto.');
     } else {
       showToast('Por favor, seleccione un archivo para visualizar.');
@@ -1783,7 +1843,7 @@ function handleUploadResponselistaimg (response) {
             $('#imageName').val(file.name);
         }
         reader.readAsDataURL(file);
-        showToast('Registro correcto.');
+        //showToast('Registro correcto.');
     } else {
       showToast('Por favor, seleccione un archivo para visualizar.');
         //alert("Por favor, seleccione un archivo para visualizar.");
@@ -1813,7 +1873,7 @@ function handleUploadResponselistavideo (response) {
   alert(response.ruta)
   showToast('Registro correcto.');*/ 
 
-  showToast('Registro correcto.');
+  //showToast('Registro correcto.');
   $('#videoPreview').attr('src', 'http://localhost:3001/'+response.path).show();
 
    /* let file = $('#uploadImage').prop('files')[0];
@@ -1851,6 +1911,7 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
       console.error('Initialization failed: One or more elements not found.');
   }
 }
+
 
 
  

@@ -122,19 +122,19 @@
 									</ul>
 									
 									<div class="tab-content" id="myTabContent">
-										<div class="tab-pane fade show active" id="home1" role="tabpanel" aria-labelledby="home-tab1"> 
+										<div class="tab-pane fade show active" id="home1" role="tabpanel" aria-labelledby="home-tab1">
+											<h6 class="sub-heading">Busca el artesano</h6>
 											<form id="form" action="javascript:void(0)">
-													<!-- END: .app-side  
-												<div class="row mt-3">
+												<!--<div class="row mt-3">
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> DNI:</h6>
 													</div>
 													<div class="col-sm-6">
-														<input type="number" class="form-control" placeholder="Ingrese el DNI" id="dni" maxlength="8" minlength="8"  readonly required>
+														<input type="text" class="form-control" placeholder="Ingrese el DNI" id="dni" maxlength="8" minlength="8" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
 														
 													</div>
 													<div class="col-10 col-md-3">
-														<button id="buscar-dni" type="submit" class="btn btn-primary" disabled >Buscar</button>
+														<button id="buscar-dni" type="submit" class="btn btn-primary">Buscar</button>
 													</div> 	
 													<div class="col-sm-2">
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre:</h6>
@@ -146,7 +146,7 @@
 											<hr>-->
 											<div class="row mt-2">
 												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Nombre del producto:</h6>
+													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre del producto:</h6>
 												</div>
 												<div class="col-9 col-md-10"> 
 													<ul class="nav nav-tabs" id="nombreProductoTab" role="tablist">
@@ -159,10 +159,10 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolNombre" role="tabpanel" aria-labelledby="espanol-tab">
-															<textarea type="text" id="idespanolNombre" class="form-control" placeholder="Ingrese el nombre del producto" ></textarea>
+															<textarea type="text" id="idespanolNombre" class="form-control" placeholder="Ingrese el nombre del producto" maxlength="300" minlength="20" required></textarea>
 														</div>
 														<div class="tab-pane fade"  id="inglesNombre" role="tabpanel" aria-labelledby="ingles-tab">
-															<textarea type="text" id="idinglesNombre" class="form-control" placeholder="Enter the product name"></textarea> 
+															<textarea type="text" id="idinglesNombre" class="form-control" placeholder="Enter the product name" maxlength="300" minlength="20" ></textarea> 
 														</div>
 													</div>
 												</div> 
@@ -170,7 +170,7 @@
 											<hr>
 											<div class="row mt-2">
 												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Resumen del producto:</h6>
+													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Resumen del producto:</h6>
 												</div>
 												<div class="col-9 col-md-10"> 
 													<ul class="nav nav-tabs" id="resumenProductoTab" role="tablist">
@@ -183,10 +183,10 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolResumen"  role="tabpanel" aria-labelledby="espanol-tab-resumen">
-															<textarea type="text" id="idespanolResumen" class="form-control" placeholder="Ingrese el resumen del producto"></textarea>
+															<textarea type="text" id="idespanolResumen" class="form-control" placeholder="Ingrese el resumen del producto" maxlength="300" minlength="20" required></textarea>
 														</div>
 														<div class="tab-pane fade"  id="inglesResumen" role="tabpanel" aria-labelledby="ingles-tab-resumen">
-															<textarea type="text" id="idinglesResumen" class="form-control" placeholder="Enter the product summary"></textarea>
+															<textarea type="text" id="idinglesResumen" class="form-control" placeholder="Enter the product summary" maxlength="300" minlength="20"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -194,7 +194,7 @@
 											<hr>
 											<div class="row mt-2">
 												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Descripción del producto:</h6>
+													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Descripción del producto:</h6>
 												</div>
 												<div class="col-9 col-md-10"> 
 													<ul class="nav nav-tabs" id="descripcionProductoTab" role="tablist">
@@ -207,10 +207,10 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolDescripcion" role="tabpanel" aria-labelledby="espanol-tab-descripcion">
-															<textarea type="text" id="idespanolDescripcion" class="form-control"   placeholder="Ingrese la descripción del producto"></textarea>
+															<textarea type="text" id="idespanolDescripcion" class="form-control"   placeholder="Ingrese la descripción del producto" maxlength="300" minlength="20" required></textarea>
 														</div>
 														<div class="tab-pane fade"  id="inglesDescripcion" role="tabpanel" aria-labelledby="ingles-tab-descripcion">
-															<textarea type="text" id="idinglesDescripcion" class="form-control"    placeholder="Enter the product description"></textarea>
+															<textarea type="text" id="idinglesDescripcion" class="form-control"    placeholder="Enter the product description" maxlength="300" minlength="20"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -219,7 +219,7 @@
 											<hr>
 											<div class="row mt-2">
 												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Cualidades del producto:</h6>
+													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Cualidades del producto:</h6>
 												</div>
 												<div class="col-9 col-md-10"> 
 													<ul class="nav nav-tabs" id="cualidadesProductoTab" role="tablist">
@@ -232,10 +232,10 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active"  id="espanolCualidades" role="tabpanel" aria-labelledby="espanol-tab-cualidades">
-															<textarea class="form-control" id="idespanolCualidades" rows="3" placeholder="Ingrese las cualidades del producto"></textarea>
+															<textarea class="form-control" id="idespanolCualidades" rows="3" placeholder="Ingrese las cualidades del producto" maxlength="300" minlength="20" required></textarea>
 														</div>
 														<div class="tab-pane fade"  role="tabpanel" id="inglesCualidades" aria-labelledby="ingles-tab-cualidades">
-															<textarea class="form-control" id="idinglesCualidades" rows="3" placeholder="Enter the product qualities"></textarea>
+															<textarea class="form-control" id="idinglesCualidades" rows="3" placeholder="Enter the product qualities" maxlength="300" minlength="20"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -244,7 +244,7 @@
 											<hr>
 											<div class="row mt-2">
 												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Palabras clave:</h6>
+													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Palabras clave:</h6>
 												</div>
 												<div class="col-9 col-md-10"> 
 													<ul class="nav nav-tabs" id="palabrasClaveTab" role="tablist">
@@ -257,10 +257,10 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active"  id="espanolPalabras" role="tabpanel" aria-labelledby="espanol-tab-palabras">
-															<textarea type="text" id="idespanolPalabras" class="form-control" placeholder="Ingrese las palabras clave" value="Guerrero wari"></textarea>
+															<textarea type="text" id="idespanolPalabras" class="form-control" placeholder="Ingrese las palabras clave" value="Guerrero wari" maxlength="300" minlength="20" required></textarea>
 														</div>
 														<div class="tab-pane fade" id="inglesPalabras"  role="tabpanel" aria-labelledby="ingles-tab-palabras">
-															<textarea type="text" id="idinglesPalabras" class="form-control" placeholder="Enter the keywords"></textarea>
+															<textarea type="text" id="idinglesPalabras" class="form-control" placeholder="Enter the keywords" maxlength="300" minlength="20"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -268,7 +268,7 @@
 											<hr>
 											<div class="row mt-2">
 												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Número de piezas:</h6>
+													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span>  Número de piezas:</h6>
 												</div>
 												<div class="col-9 col-md-10"> 
 													<ul class="nav nav-tabs" id="numeroPiezasTab" role="tablist">
@@ -281,10 +281,10 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolPiezas"  role="tabpanel" aria-labelledby="espanol-tab-piezas">
-															<textarea type="text" id="idespanolPiezas" class="form-control" placeholder="Ingrese el número de piezas" ></textarea>
+															<textarea type="text" id="idespanolPiezas" class="form-control" placeholder="Ingrese el número de piezas"  maxlength="300" minlength="20" required></textarea>
 														</div>
 														<div class="tab-pane fade"  id="inglesPiezas" role="tabpanel" aria-labelledby="ingles-tab-piezas">
-															<textarea type="text" id="idinglesPiezas" class="form-control" placeholder="Enter the number of pieces"></textarea>
+															<textarea type="text" id="idinglesPiezas" class="form-control" placeholder="Enter the number of pieces" maxlength="300" minlength="20"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -293,15 +293,15 @@
 											<hr>
 											<div class="row mt-2">
 												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Medidas en centímetros:</h6>
+													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span>  Medidas en centímetros:</h6>
 												</div>
 												<div class="col-9 col-md-10"> 
 													<div class="form-row">
-														<div class="col">
-															<input type="number"  id="idalto" class="form-control" placeholder="Alto">
+														<div class="col"> 
+															<input type="text" class="form-control" placeholder="Alto" id="idalto" maxlength="8"  required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 														</div>
-														<div class="col">
-															<input type="number" id="idancho" class="form-control" placeholder="Ancho">
+														<div class="col"> 
+															<input type="text" class="form-control" placeholder="Ancho" id="idancho" maxlength="8" required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 														</div>
 													</div>
 												</div> 
@@ -309,7 +309,7 @@
 											<hr>
 											<div class="row mt-2">
 												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Descripción de materiales:</h6>
+													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span>  Descripción de materiales:</h6>
 												</div>
 												<div class="col-9 col-md-10"> 
 													<ul class="nav nav-tabs" id="descripcionMaterialesTab" role="tablist">
@@ -322,10 +322,10 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolMateriales" role="tabpanel" aria-labelledby="espanol-tab-materiales">
-															<textarea type="text" id="idespanolMateriales"  class="form-control" rows="3" placeholder="Ingrese la descripción de los materiales"></textarea> 
+															<textarea type="text" id="idespanolMateriales"  class="form-control" rows="3" placeholder="Ingrese la descripción de los materiales" maxlength="300" minlength="20" required></textarea> 
 														</div>
 														<div class="tab-pane fade" id="inglesMateriales"  role="tabpanel" aria-labelledby="ingles-tab-materiales">
-															<textarea class="form-control" id="idinglesMateriales" rows="3" placeholder="Enter the material description"></textarea>
+															<textarea class="form-control" id="idinglesMateriales" rows="3" placeholder="Enter the material description" maxlength="300" minlength="20"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -333,11 +333,12 @@
 											<hr>
 											<div class="row mt-2">
 												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Precio del producto:</h6>
+													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span>  Precio del producto:</h6>
 												</div>
 												<div class="col-9 col-md-5"> 
-													<div class="input-group">
-														<input type="number" id="precioproducto" class="form-control" placeholder="Ingrese el precio del producto"  > 
+													<div class="input-group"> 
+														
+														<input type="text" class="form-control" placeholder="Ingrese el precio del producto" id="precioproducto" maxlength="8"  required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 													</div>
 													 
 												</div> 
@@ -351,10 +352,11 @@
 											
 											<div class="row mt-2">
 												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Peso en kilogramos:</h6>
+													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span>  Peso en kilogramos:</h6>
 												</div>
-												<div class="col-9 col-md-10"> 
-													<input type="number" id="pesokilogramos" class="form-control" placeholder="Ingrese el peso del producto"  >
+												<div class="col-9 col-md-10">  
+													
+													<input type="text" class="form-control" placeholder="Ingrese el peso del producto" id="pesokilogramos" maxlength="8"  required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 												</div> 
 											</div>
 											<hr>
@@ -374,10 +376,10 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active"  id="espanolTecnicas" role="tabpanel" aria-labelledby="espanol-tab-tecnicas">
-															<textarea type="text"   id="idespanolTecnicas"   class="form-control" rows="3" placeholder="Ingrese las técnicas empleadas"></textarea>
+															<textarea type="text"   id="idespanolTecnicas"   class="form-control" rows="3" placeholder="Ingrese las técnicas empleadas" maxlength="300" minlength="20"></textarea>
 														</div>
 														<div class="tab-pane fade" id="inglesTecnicas" role="tabpanel" aria-labelledby="ingles-tab-tecnicas">
-															<textarea type="text" id="idinglesTecnicas" class="form-control" rows="3" placeholder="Enter the techniques used"></textarea>
+															<textarea type="text" id="idinglesTecnicas" class="form-control" rows="3" placeholder="Enter the techniques used" maxlength="300" minlength="20"></textarea>
 														</div>
 													</div>
 												</div> 
@@ -395,8 +397,9 @@
 													</div>
 													<div class="col-9 col-md-10"> 
 														<div class="form-row">
-															<div class="col">
-																<input type="number"   class="form-control" id="cantidad" placeholder="Ingrese la cantidad">
+															<div class="col"> 
+																<input type="text" class="form-control" placeholder="Ingrese la cantidad" id="cantidad" maxlength="11" minlength="11"   oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+														
 															</div> 
 														</div>
 													</div> 
@@ -405,8 +408,9 @@
 													</div>
 													<div class="col-9 col-md-10"> 
 														<div class="form-row">
-															<div class="col">
-																<input type="number" class="form-control" id="cantidadMinima" placeholder="Ingrese la cantidad mínima">
+															<div class="col"> 
+																<input type="text" class="form-control" placeholder="Ingrese la cantidad mínima" id="cantidadMinima" maxlength="11" minlength="11"   oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+														
 															</div> 
 														</div>
 													</div> 
@@ -600,7 +604,7 @@
 																			<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre del video:</h6>
 																		</div>
 																		<div class="col-sm-9">   
-																			<input type="text" class="form-control" id="videoName" placeholder="Ingrese el nombre del video">
+																			<input type="text" class="form-control" id="videoName" maxlength="100"  placeholder="Ingrese el nombre del video">
 																		</div>  
 																		<div class="col-sm-2">
 																			<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Seleccionar:</h6>
@@ -660,13 +664,13 @@
 																			<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre del video:</h6>
 																		</div>
 																		<div class="col-sm-9">   
-																			<input type="text" class="form-control" id="linkVideoName" placeholder="Ingrese el nombre del video">  
+																			<input type="text" class="form-control" id="linkVideoName" maxlength="100"  placeholder="Ingrese el nombre del video">  
 																		</div>  
 																		<div class="col-sm-2">
 																			<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Enlace del video:</h6>
 																		</div>
 																		<div class="col-sm-9">   
-																			<input type="text" class="form-control" id="videoLink" placeholder="Ingrese el enlace del video">
+																			<input type="text" class="form-control" id="videoLink" maxlength="150"  placeholder="Ingrese el enlace del video">
 																		</div>  
 																		<div class="col-md-12 text-right">
 																			<button type="button" class="btn btn-info btn-sm" id="addVideoLink">
@@ -766,7 +770,7 @@
 																<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Ingresar:</h6>
 															</div>
 															<div class="col-9 col-md-3">  
-																<input type="text" id="talla-input"  class="form-control" placeholder="Mediano (M)"> 
+																<input type="text" id="talla-input"  class="form-control" maxlength="15"  placeholder="Mediano (M)"> 
 														
 															</div>  
 															<div class="col-md-7 text-right"> 
@@ -807,9 +811,8 @@
 															<div class="col-sm-2">
 																<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> (% de descuento):</h6>
 															</div>
-															<div class="col-9 col-md-4">  
-																<input type="number" class="form-control" id="porcentajeDescuento" placeholder="Ingrese el porcentaje de descuento">
-														
+															<div class="col-9 col-md-4">   
+																<input type="text" class="form-control" placeholder="Ingrese el porcentaje de descuento" id="porcentajeDescuento" maxlength="3"   oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 															</div> 
 															<div class="col-sm-2">
 																<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Precio:</h6>
@@ -871,7 +874,7 @@
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre:</h6>
 													</div>
 													<div class="col-sm-6"> 
-														<input type="text" class="form-control" id="nombreCosto" placeholder="Ingrese el nombre del costo">
+														<input type="text" class="form-control" id="nombreCosto" maxlength="150" placeholder="Ingrese el nombre del costo">
 													</div>
 														
 													<div class="col-10 col-md-3">  
@@ -882,7 +885,8 @@
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Precio:</h6>
 													</div>
 													<div class="col-sm-6">
-														<input type="number" class="form-control" id="precioCosto" placeholder="Ingrese el precio">
+														<input type="text" class="form-control" placeholder="Ingrese el precio" id="precioCosto" maxlength="8"   oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+														 
 													</div>
 												</div> 
 											<hr>
@@ -949,8 +953,8 @@
 													<div class="col-sm-9"> 
 														<div class="form-row">
 															<div class="col">
-																<label for="envioLocal">Local:</label>
-																<input type="number" class="form-control" id="envioLocal" placeholder="Precio de envío local" disabled>
+																<label for="envioLocal">Local:</label> 
+																<input type="text" class="form-control" placeholder="Precio de envío local" id="envioLocal" maxlength="8"  disabled oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 															</div> 
 														</div>
 													</div> 
@@ -960,8 +964,8 @@
 													<div class="col-sm-9"> 
 														<div class="form-row">
 															<div class="col">
-																<label for="envioNacional">Nacional:</label>
-																<input type="number" class="form-control" id="envioNacional" placeholder="Precio de envío nacional" disabled>
+																<label for="envioNacional">Nacional:</label> 
+																<input type="text" class="form-control" placeholder="Precio de envío nacional" id="envioNacional" maxlength="8"  disabled oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 															</div> 
 														</div>
 													</div> 
@@ -971,8 +975,9 @@
 													<div class="col-sm-9"> 
 														<div class="form-row">
 															<div class="col">
-																<label for="envioExtranjero">Extranjero:</label>
-																<input type="number" class="form-control" id="envioExtranjero" placeholder="Precio de envío extranjero" disabled>
+																<label for="envioExtranjero">Extranjero:</label> 
+																
+																<input type="text" class="form-control" placeholder="Precio de envío extranjero" id="envioExtranjero" maxlength="8"  disabled oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 															</div> 
 														</div>
 													</div> 
@@ -984,8 +989,8 @@
 													</div>
 													<div class="col-sm-9"> 
 														<div class="form-row">
-															<div class="col">
-																<input type="number" class="form-control" id="tiemposElaboracion" placeholder="Ingrese los tiempos de elaboración">
+															<div class="col"> 
+																<input type="text" class="form-control" placeholder="Ingrese los tiempos de elaboración" id="tiemposElaboracion" maxlength="4"   oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 															</div> 
 														</div>
 													</div>  
@@ -997,8 +1002,8 @@
 													</div>
 													<div class="col-sm-9"> 
 														<div class="form-row">
-															<div class="col">
-																<input type="number" class="form-control" id="tiemposEnvio" placeholder="Ingrese los tiempos estimados de envío">
+															<div class="col"> 
+																<input type="text" class="form-control" placeholder="Ingrese los tiempos de envío" id="tiemposEnvio" maxlength="4"   oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 															</div> 
 														</div>
 													</div>  
