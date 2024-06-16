@@ -1,5 +1,60 @@
 import { listarPedidos, filtrarPedidos } from './api';
 
+
+import { loadPartials } from '../utils/viewpartials';   
+import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
+
+ 
+hideLoading();
+// Uso de la función
+(async function () {
+  let partials = [
+    { path: 'partials/shared/header.html', container: 'app-header' },
+    { path: 'partials/shared/menu.html', container: 'app-side' },
+
+
+  ]; 
+  try {
+    await loadPartials(partials);
+    import ('../utils/common')
+
+   
+    // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
+    console.log('Las vistas parciales se han cargado correctamente!');
+    // Por ejemplo, podrías iniciar tu aplicación aquí.
+
+    startApp();
+  } catch (e) {
+    console.error(e);
+  }
+})();
+
+function startApp () {
+  checkadminsession(); 
+  setTimeout(function() {
+    llenarinformacionIESTPProg();
+    marcarSubMenuSeleccionado();
+}, 500); 
+
+}
+async function checkadminsession () {
+  let result = await checkSession()
+  if (result.usuario.rolid != 1) {
+    location.href = "sinacceso.html"
+  }
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
 const DEFAULT_PAGE_LIMIT = 10;
 let currentPage = 1;
 let totalPages = 0;
@@ -10,7 +65,7 @@ const btnFiltrar = document.getElementById('filtrar-pedido');
 const tablaPedidos = document.getElementById('tablaPedidos');
 const tablaPedidoBody = tablaPedidos.getElementsByTagName('tbody')[0];
 
-
+ 
 
 async function cargarPedidos() {
     try {
@@ -262,7 +317,7 @@ function cargarTabla(pedidos) {
             <td><span class="${estadoClass}">${pedido.estado}</span></td>
             <td>
                 <button type="button" class="btn btn-light btn-sm">
-                    <a href="/historial-ventas.html?id=${pedido.num_pedido}">
+                    <a href="/ventas-detalle.html?id=${pedido.num_pedido}">
                         <i class="icon icon-eye2"></i>
                     </a>
                 </button>

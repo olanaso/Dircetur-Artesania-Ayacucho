@@ -2,6 +2,63 @@ import {guardarSlider, listarSliders, eliminarSlider, obtenerSlider, actualizarS
 import { FileUploader } from '../utils/uploadVictor.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
+
+
+import { loadPartials } from '../utils/viewpartials';   
+import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
+
+
+hideLoading();
+// Uso de la función
+(async function () {
+  let partials = [
+    { path: 'partials/shared/header.html', container: 'app-header' },
+    { path: 'partials/shared/menu.html', container: 'app-side' },
+
+
+  ]; 
+  try {
+    await loadPartials(partials);
+    import ('../utils/common')
+
+   
+    // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
+    console.log('Las vistas parciales se han cargado correctamente!');
+    // Por ejemplo, podrías iniciar tu aplicación aquí.
+
+    startApp();
+  } catch (e) {
+    console.error(e);
+  }
+})();
+
+function startApp () {
+  checkadminsession(); 
+  setTimeout(function() {
+    llenarinformacionIESTPProg();
+    marcarSubMenuSeleccionado();
+}, 500); 
+
+}
+async function checkadminsession () {
+  let result = await checkSession()
+  if (result.usuario.rolid != 1) {
+    location.href = "sinacceso.html"
+  }
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 let imagen_principal = null;
 
 //var de paginación
@@ -9,7 +66,7 @@ const DEFAULT_PAGE_LIMIT = 10;
 let currentPage = 1;
 let totalPages = 0; // Declarar totalPages para que esté accesible globalmente
 
-
+ 
 
 //carga de imagenes
 document.addEventListener('DOMContentLoaded', () => {
