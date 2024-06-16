@@ -45,7 +45,7 @@ async function checkadminsession () {
 }
 
 
-/* (en caso de querer personalizar campos de reportes en general)*/
+/* (en caso de querer personalizar campos de reportes en general)
 document.getElementById('reportType').addEventListener('change', function() {
     const reportType = this.value;
     const checkboxContainer = document.getElementById('checkboxContainer');
@@ -101,7 +101,8 @@ document.getElementById('reportType').addEventListener('change', function() {
 
         checkboxContainer.appendChild(checkboxDiv);
     }
-}); 
+});
+*/
 
 document.getElementById('btn-reporte').addEventListener('click', async function(event) {
     event.preventDefault()
@@ -118,7 +119,7 @@ document.getElementById('btn-reporte').addEventListener('click', async function(
     }
 });
 
- 
+/*
 function generateTable(data, attributes) {
     const tableContainer = document.getElementById('tablaReportes');
     tableContainer.innerHTML = ''; // Clear previous table
@@ -150,4 +151,4 @@ function generateTable(data, attributes) {
 
     tableContainer.appendChild(table);
 }
-    
+    */

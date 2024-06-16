@@ -205,6 +205,8 @@ async function registrarCategoria() {
       const response = await guardarCategoria(formData);
       console.log(response);
       await cargarCategoria();
+
+      limpiar();
       $(modal).modal('hide');
     } catch (error) {
       console.error('Error:', error);
@@ -217,11 +219,11 @@ async function filtrarCategoriasAction() {
 
   btnFiltrar.addEventListener('click', async (event) => {
     event.preventDefault();
-    const id = document.getElementById('id-categoria').value;
+    //const id = document.getElementById('id-categoria').value;
     const abreviatura = document.getElementById('abreviatura-categoria').value;
     const denominacion = document.getElementById('denominacion-categoria').value;
     const filtro = {
-      id: id,
+      //id: id,
       abreviatura: abreviatura,
       denominacion: denominacion
     };
@@ -303,7 +305,7 @@ function handleUploadResponse(response) {
 
     imagen_principal = 'http://localhost:3001/' + response.ruta;
 
-    alert('registro de la imagen correctamente')
+    //alert('registro de la imagen correctamente')
   } else {
     alert("Por favor, seleccione un archivo para visualizar.");
   }
@@ -326,3 +328,29 @@ function handleEditUploadResponse(response) {
     alert("Por favor, seleccione un archivo para visualizar.");
   }
 }
+
+
+
+
+$('#modalCategoria').on('shown.bs.modal', function () {
+  $('#abreviatura').val('');
+  $('#denominacion').val('');
+  $('#descripcion').val(''); 
+  $('#myfile').val('');
+  $('#status').html('');
+
+  
+  $('#principalImagePreview').attr('src', '').css('display', 'none');
+});
+
+function limpiar()
+{ 
+  $('#abreviatura').val('');
+  $('#denominacion').val('');
+  $('#descripcion').val(''); 
+  $('#myfile').val('');
+  $('#principalImagePreview').attr('src', '').css('display', 'none');
+  $('#status').html('');
+}
+
+ 

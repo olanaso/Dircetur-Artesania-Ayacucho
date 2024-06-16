@@ -159,7 +159,7 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolNombre" role="tabpanel" aria-labelledby="espanol-tab">
-															<textarea type="text" id="idespanolNombre" class="form-control" placeholder="Ingrese el nombre del producto" maxlength="300" minlength="20" required></textarea>
+															<textarea type="text" id="idespanolNombre" class="form-control" placeholder="Ingrese el nombre del producto" maxlength="300" minlength="20" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
 														</div>
 														<div class="tab-pane fade"  id="inglesNombre" role="tabpanel" aria-labelledby="ingles-tab">
 															<textarea type="text" id="idinglesNombre" class="form-control" placeholder="Enter the product name" maxlength="300" minlength="20" ></textarea> 
@@ -183,7 +183,7 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolResumen"  role="tabpanel" aria-labelledby="espanol-tab-resumen">
-															<textarea type="text" id="idespanolResumen" class="form-control" placeholder="Ingrese el resumen del producto" maxlength="300" minlength="20" required></textarea>
+															<textarea type="text" id="idespanolResumen" class="form-control" placeholder="Ingrese el resumen del producto" maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
 														</div>
 														<div class="tab-pane fade"  id="inglesResumen" role="tabpanel" aria-labelledby="ingles-tab-resumen">
 															<textarea type="text" id="idinglesResumen" class="form-control" placeholder="Enter the product summary" maxlength="300" minlength="20"></textarea>
@@ -207,7 +207,7 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolDescripcion" role="tabpanel" aria-labelledby="espanol-tab-descripcion">
-															<textarea type="text" id="idespanolDescripcion" class="form-control"   placeholder="Ingrese la descripción del producto" maxlength="300" minlength="20" required></textarea>
+															<textarea type="text" id="idespanolDescripcion" class="form-control"   placeholder="Ingrese la descripción del producto" maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
 														</div>
 														<div class="tab-pane fade"  id="inglesDescripcion" role="tabpanel" aria-labelledby="ingles-tab-descripcion">
 															<textarea type="text" id="idinglesDescripcion" class="form-control"    placeholder="Enter the product description" maxlength="300" minlength="20"></textarea>
@@ -232,7 +232,7 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active"  id="espanolCualidades" role="tabpanel" aria-labelledby="espanol-tab-cualidades">
-															<textarea class="form-control" id="idespanolCualidades" rows="3" placeholder="Ingrese las cualidades del producto" maxlength="300" minlength="20" required></textarea>
+															<textarea class="form-control" id="idespanolCualidades" rows="3" placeholder="Ingrese las cualidades del producto" maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
 														</div>
 														<div class="tab-pane fade"  role="tabpanel" id="inglesCualidades" aria-labelledby="ingles-tab-cualidades">
 															<textarea class="form-control" id="idinglesCualidades" rows="3" placeholder="Enter the product qualities" maxlength="300" minlength="20"></textarea>
@@ -257,7 +257,7 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active"  id="espanolPalabras" role="tabpanel" aria-labelledby="espanol-tab-palabras">
-															<textarea type="text" id="idespanolPalabras" class="form-control" placeholder="Ingrese las palabras clave" value="Guerrero wari" maxlength="300" minlength="20" required></textarea>
+															<textarea type="text" id="idespanolPalabras" class="form-control" placeholder="Ingrese las palabras clave" value="Guerrero wari" maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
 														</div>
 														<div class="tab-pane fade" id="inglesPalabras"  role="tabpanel" aria-labelledby="ingles-tab-palabras">
 															<textarea type="text" id="idinglesPalabras" class="form-control" placeholder="Enter the keywords" maxlength="300" minlength="20"></textarea>
@@ -281,7 +281,7 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolPiezas"  role="tabpanel" aria-labelledby="espanol-tab-piezas">
-															<textarea type="text" id="idespanolPiezas" class="form-control" placeholder="Ingrese el número de piezas"  maxlength="300" minlength="20" required></textarea>
+															<textarea type="text" id="idespanolPiezas" class="form-control" placeholder="Ingrese el número de piezas"  maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
 														</div>
 														<div class="tab-pane fade"  id="inglesPiezas" role="tabpanel" aria-labelledby="ingles-tab-piezas">
 															<textarea type="text" id="idinglesPiezas" class="form-control" placeholder="Enter the number of pieces" maxlength="300" minlength="20"></textarea>
@@ -322,7 +322,7 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active" id="espanolMateriales" role="tabpanel" aria-labelledby="espanol-tab-materiales">
-															<textarea type="text" id="idespanolMateriales"  class="form-control" rows="3" placeholder="Ingrese la descripción de los materiales" maxlength="300" minlength="20" required></textarea> 
+															<textarea type="text" id="idespanolMateriales"  class="form-control" rows="3" placeholder="Ingrese la descripción de los materiales" maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea> 
 														</div>
 														<div class="tab-pane fade" id="inglesMateriales"  role="tabpanel" aria-labelledby="ingles-tab-materiales">
 															<textarea class="form-control" id="idinglesMateriales" rows="3" placeholder="Enter the material description" maxlength="300" minlength="20"></textarea>
@@ -376,7 +376,7 @@
 													</ul>
 													<div class="tab-content">
 														<div class="tab-pane fade show active"  id="espanolTecnicas" role="tabpanel" aria-labelledby="espanol-tab-tecnicas">
-															<textarea type="text"   id="idespanolTecnicas"   class="form-control" rows="3" placeholder="Ingrese las técnicas empleadas" maxlength="300" minlength="20"></textarea>
+															<textarea type="text"   id="idespanolTecnicas"   class="form-control" rows="3" placeholder="Ingrese las técnicas empleadas" maxlength="300" minlength="20"  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
 														</div>
 														<div class="tab-pane fade" id="inglesTecnicas" role="tabpanel" aria-labelledby="ingles-tab-tecnicas">
 															<textarea type="text" id="idinglesTecnicas" class="form-control" rows="3" placeholder="Enter the techniques used" maxlength="300" minlength="20"></textarea>

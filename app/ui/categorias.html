@@ -87,31 +87,28 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="card" style="min-height: 70px;">
-								<div class="card-header">Filtro de categorías</div>
+								<div class="card-header">Filtrar categorías</div>
 								<div class="card-body">
 									<form id="filtrarCategoria">
 										<div class="row gutters mb-4">
-											<div class="col-lg-3 col-md-6 col-sm-12">
-												<label for="id-categoria">ID de categoría</label>
+											<!--<div class="col-lg-3 col-md-6 col-sm-12"> 
 												<input type="number" class="form-control" placeholder="ID de categoría"
 													id="id-categoria">
-											</div>
-											<div class="col-lg-3 col-md-6 col-sm-12">
-												<label for="abreviatura-categoria">Abreviatura</label>
+											</div>-->
+											<div class="col-lg-5 col-md-6 col-sm-12"> 
 												<input type="text" class="form-control" placeholder="Abreviatura"
 													id="abreviatura-categoria">
 											</div>
-											<div class="col-lg-3 col-md-6 col-sm-12">
-												<label for="denominacion-categoria">Denominación</label>
+											<div class="col-lg-5 col-md-6 col-sm-12"> 
 												<input type="text" class="form-control"
 													placeholder="Denominación" id="denominacion-categoria">
 											</div>
-											<div class="col-md-12 text-right">
-												<button id="limpiar-filtro" type="reset" class="btn btn-info btn-sm">Limpiar</button>
+											<div class="col-md-2 text-right">
 												<button id="filtrar-categoria" type="submit"
 													class="btn btn-primary btn-sm">Filtrar <i
 														class="icon icon-funnel"></i>
 												</button>
+												<button id="limpiar-filtro" type="reset" class="btn btn-info btn-sm">Limpiar</button>
 											</div>
 										</div>
 									</form>
@@ -122,7 +119,7 @@
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title">Añadir categoría</h5>
+											<h5 class="modal-title">Nuevo</h5>
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
@@ -131,18 +128,16 @@
 											<form id="registrar-categoria-form">
 												<div class="form-group">
 													<label for="abreviatura"><span class="text-primary">*</span> Abreviatura</label>
-													<input type="text" class="form-control" id="abreviatura"
-														placeholder="Abreviatura" required>
+													<input type="text" class="form-control" id="abreviatura" placeholder="Abreviatura" maxlength="10" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"> 
+													
 												</div>
 												<div class="form-group">
 													<label for="denominacion"><span class="text-primary">*</span> Denominación</label>
-													<input type="text" class="form-control" id="denominacion"
-														placeholder="Denominación" required>
+													<input type="text" class="form-control" id="denominacion" placeholder="Denominación" maxlength="155" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"> 
 												</div>
 												<div class="form-group">
 													<label for="descripcion"><span class="text-primary">*</span> Descripción</label>
-													<textarea class="form-control" id="descripcion"
-														placeholder="Descripción" required></textarea>
+													<textarea class="form-control" id="descripcion" placeholder="Descripción" maxlength="255"  required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
 												</div>
 												<div class="form-group">
 													<label for="myfile"><span class="text-primary">*</span> Foto Referente</label>
@@ -175,7 +170,7 @@
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Editar categoría</h5>
+											<h5 class="modal-title" id="exampleModalLabel">Editar</h5>
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
@@ -184,18 +179,15 @@
 											<div class="modal-body">
 												<div class="form-group">
 													<label for="abreviatura-editar"><span class="text-primary">*</span> Abreviatura</label>
-													<input type="text" class="form-control" id="abreviatura-editar"
-														placeholder="Abreviatura" required>
+													<input type="text" class="form-control" id="abreviatura-editar" placeholder="Abreviatura"  maxlength="10" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');">
 												</div>
 												<div class="form-group">
 													<label for="denominacion-editar"><span class="text-primary">*</span> Denominación</label>
-													<input type="text" class="form-control" id="denominacion-editar"
-														placeholder="Denominación" required>
+													<input type="text" class="form-control" id="denominacion-editar" placeholder="Denominación"  maxlength="155" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');">
 												</div>
 												<div class="form-group">
 													<label for="descripcion-editar"><span class="text-primary">*</span> Descripción</label>
-													<textarea class="form-control" id="descripcion-editar"
-														placeholder="Descripción" required></textarea>
+													<textarea class="form-control" id="descripcion-editar" placeholder="Descripción"  maxlength="255" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
 												</div>
 												<div class="form-group">
 													<label for="myfile-editar"><span class="text-primary">*</span> Actualizar imagen</label>
