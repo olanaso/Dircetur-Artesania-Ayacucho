@@ -1,7 +1,58 @@
 import { listarCategorias, guardarCategoria, filtrarCategorias, borrarCategoria, actualizarCategoria } from './api';
 import { FileUploader } from '../utils/upload.js';
 import { AlertDialog } from "../utils/alert";
-const alertDialog = new AlertDialog();
+const alertDialog = new AlertDialog(); 
+
+
+import { loadPartials } from '../utils/viewpartials';   
+import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
+
+ 
+hideLoading();
+// Uso de la función
+(async function () {
+  let partials = [
+    { path: 'partials/shared/header.html', container: 'app-header' },
+    { path: 'partials/shared/menu.html', container: 'app-side' },
+
+
+  ]; 
+  try {
+    await loadPartials(partials);
+    import ('../utils/common')
+
+   
+    // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
+    console.log('Las vistas parciales se han cargado correctamente!');
+    // Por ejemplo, podrías iniciar tu aplicación aquí.
+
+    startApp();
+  } catch (e) {
+    console.error(e);
+  }
+})();
+
+function startApp () {
+  checkadminsession(); 
+  setTimeout(function() {
+    llenarinformacionIESTPProg();
+    marcarSubMenuSeleccionado();
+}, 500); 
+
+}
+async function checkadminsession () {
+  let result = await checkSession()
+  if (result.usuario.rolid != 1) {
+    location.href = "sinacceso.html"
+  }
+}
+ 
+
+
+
+
+
+
 
 let imagen_principal = "";
 async function cargarCategoria() {
@@ -12,7 +63,7 @@ async function cargarCategoria() {
     console.error('Error:', error);
   }
 }
-
+ 
 function cargarTabla(categorias) {
   const tablaCategoria = document.getElementById('tablaCategoria');
   const tablaCategoriaBody = tablaCategoria.getElementsByTagName('tbody')[0];
@@ -154,6 +205,8 @@ async function registrarCategoria() {
       const response = await guardarCategoria(formData);
       console.log(response);
       await cargarCategoria();
+
+      limpiar();
       $(modal).modal('hide');
     } catch (error) {
       console.error('Error:', error);
@@ -166,11 +219,11 @@ async function filtrarCategoriasAction() {
 
   btnFiltrar.addEventListener('click', async (event) => {
     event.preventDefault();
-    const id = document.getElementById('id-categoria').value;
+    //const id = document.getElementById('id-categoria').value;
     const abreviatura = document.getElementById('abreviatura-categoria').value;
     const denominacion = document.getElementById('denominacion-categoria').value;
     const filtro = {
-      id: id,
+      //id: id,
       abreviatura: abreviatura,
       denominacion: denominacion
     };
@@ -252,7 +305,7 @@ function handleUploadResponse(response) {
 
     imagen_principal = 'http://localhost:3001/' + response.ruta;
 
-    alert('registro de la imagen correctamente')
+    //alert('registro de la imagen correctamente')
   } else {
     alert("Por favor, seleccione un archivo para visualizar.");
   }
@@ -275,3 +328,29 @@ function handleEditUploadResponse(response) {
     alert("Por favor, seleccione un archivo para visualizar.");
   }
 }
+
+
+
+
+$('#modalCategoria').on('shown.bs.modal', function () {
+  $('#abreviatura').val('');
+  $('#denominacion').val('');
+  $('#descripcion').val(''); 
+  $('#myfile').val('');
+  $('#status').html('');
+
+  
+  $('#principalImagePreview').attr('src', '').css('display', 'none');
+});
+
+function limpiar()
+{ 
+  $('#abreviatura').val('');
+  $('#denominacion').val('');
+  $('#descripcion').val(''); 
+  $('#myfile').val('');
+  $('#principalImagePreview').attr('src', '').css('display', 'none');
+  $('#status').html('');
+}
+
+ 

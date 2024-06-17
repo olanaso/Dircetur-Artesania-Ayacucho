@@ -3424,7 +3424,8 @@ a.blog-sm {
   padding: 0.4em 1em 0.4em 1em;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
-  border-radius: 50px; }
+  border-radius: 50px; 
+  width: 100px;}
 
 .badge-primary {
   background-color: #da1113; }

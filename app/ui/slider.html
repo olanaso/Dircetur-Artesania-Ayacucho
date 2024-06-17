@@ -43,155 +43,14 @@
 		<!-- BEGIN .app-wrap -->
 		<div class="app-wrap">
 			<!-- BEGIN .app-heading -->
-			<header class="app-header">
-				<div class="container-fluid">
-					<div class="row gutters">
-						<div class="col-xl-5 col-lg-5 col-md-5 col-sm-3 col-4">
-							<a class="mini-nav-btn" href="#" id="app-side-mini-toggler">
-								<i class="icon-sort"></i>
-							</a>
-							<a href="#app-side" data-toggle="onoffcanvas" class="onoffcanvas-toggler" aria-expanded="true">
-								<i class="icon-chevron-thin-left"></i>
-							</a>
-						</div>
-						<div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-4">
-							<a href="index-2.html" class="logo">
-								<img src="img/lead.png" alt="Lead Admin Dashboard">
-							</a>
-						</div>
-						<div class="col-xl-5 col-lg-5 col-md-5 col-sm-3 col-4">
-							<ul class="header-actions">
-								<li class="dropdown">
-									<a href="#" id="userSettings" class="user-settings" data-toggle="dropdown"
-										aria-haspopup="true">
-										<img class="avatar" src="img/user.png" alt="User Thumb">
-										<span class="user-name">Katy Perry</span>
-										<i class="icon-chevron-small-down"></i>
-									</a>
-									<div class="dropdown-menu lg dropdown-menu-right" aria-labelledby="userSettings">
-										<ul class="user-settings-list">
-											<li>
-												<a href="profile.html">
-													<div class="icon">
-														<i class="icon-account_circle"></i>
-													</div>
-													<p>Profile</p>
-												</a>
-											</li> 
-										</ul>
-										<div class="logout-btn">
-											<a href="index.html" class="btn btn-primary">Salir</a>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</header>
+		<header class="app-header" id="app-header">
+		</header>
 	
 			<!-- END: .app-heading -->
 			<!-- BEGIN .app-container -->
 			<div class="app-container">
 				<!-- BEGIN .app-side -->
-				<aside class="app-side" id="app-side">
-					<!-- BEGIN .side-content -->
-					<div class="side-content ">
-						<header class="main-heading user-actions">
-							<div class="container-fluid iestpdetails">
-								<div class="row">
-									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-										<div class="page-icon">
-											<img src="/img/avatar1.svg" alt="" style="width: 57px;">
-										</div>
-										<div class="page-title">
-											<h5 class="bt-virtual">Administrador</h5> 
-										</div>
-									</div>
-									
-								</div>
-								<hr>
-								<!--<div class="row">
-									<h7 class="programas"> <img src="/img/i-programa.svg" alt=""> Administración:</h7>
-									<br><br>
-									<ul class="detail-prog" id="m_programas">
-										
-									</ul>
-									
-								</div>-->
-							</div>
-						</header>
-				
-						<!-- BEGIN .side-nav -->
-						<nav class="side-nav">
-							<!-- BEGIN: side-nav-content -->
-							<ul class="unifyMenu" id="unifyMenu">
-								<li >
-									<a href="/dashboard.html">
-										<span class="has-icon">
-											<i class="icon-home"></i>
-										</span>
-										<span class="nav-title">Administrador</span>
-									</a>
-								</li>
-								<li class="active selected">
-									<a href="" class="has-arrow" aria-expanded="false">
-										<span class="has-icon">
-											<i class="icon-tag"></i>
-										</span>
-										<span class="nav-title">Catálogo</span>
-									</a>
-									<ul aria-expanded="false">
-										<li>
-											<a href="/categorias.html">Categorías</a>
-										</li>
-										<li>
-											<a href="/productos.html">Productos</a>
-										</li>
-										<li>
-											<a href="/slider.html" class="current-page">Slider</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<a href="/ventas.html">
-										<span class="has-icon">
-											<i class="icon-shopping-cart"></i>
-										</span>
-										<span class="nav-title">Ventas</span>
-									</a>
-								</li>
-								<li>
-									<a href="#" class="has-arrow" aria-expanded="false">
-										<span class="has-icon">
-											<i class="icon-user2"></i>
-										</span>
-										<span class="nav-title">Usuarios</span>
-									</a>
-									<ul aria-expanded="false">
-										<li>
-											<a href="/artesanos.html">Artesano</a>
-										</li>
-										<li>
-											<a href="/clientes.html">Cliente</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<a href="/reportes.html">
-										<span class="has-icon">
-											<i class="icon-file-text"></i>
-										</span>
-										<span class="nav-title">Reportes</span>
-									</a>
-								</li>								
-							</ul>
-							<!-- END: side-nav-content -->
-						</nav>
-						<!-- END: .side-nav -->
-					</div>
-					<!-- END: .side-content -->
-				</aside>
+			<aside class="app-side" id="app-side"></aside>
 				<!-- END: .app-side -->
 
 				<!-- BEGIN .app-main -->
@@ -208,7 +67,7 @@
 										<h5>Slider</h5>
 										<nav aria-label="breadcrumb">
 											<ol class="breadcrumb">
-												<li class="breadcrumb-item"><a href="#">Administrador</a></li>
+												<li class="breadcrumb-item"><a href="inicio.html">Administrador</a></li>
 												<li class="breadcrumb-item"><a href="#">Catálogo</a></li>
 												<li class="breadcrumb-item active" aria-current="page">Slider</li>
 											</ol>
@@ -229,7 +88,7 @@
 									<div class="modal-dialog modal-lg">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">Añadir Slider</h5>
+												<h5 class="modal-title" id="exampleModalLabel">Añadir</h5>
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
@@ -238,12 +97,12 @@
 												<div class="modal-body">
 													<div class="form-group">
 														<label for="frase">Frase</label>
-														<input type="text" class="form-control" id="frase"
-															placeholder="Frase">
+														<input type="text" class="form-control" id="frase" placeholder="frase"  maxlength="250" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');">
+												 
 													</div>
 													<span class="text-primary">*</span><label>Imagen de Slider</label>
 													<div class="form-group">
-														<input type="file" id="myfile" name="myfile" required>
+														<input type="file" id="myfile" name="myfile" required accept="image/*">
 														<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
 														<div id="status"></div>
 													</div>
@@ -275,14 +134,15 @@
 											<form id="formSliderE" data-id="">
 												<div class="modal-body">
 													<div class="form-group">
-														<label for="frase">Frase</label>
-														<input type="text" class="form-control" id="fraseE"
-															placeholder="Frase" required>
+														<label for="frase">Frase</label> 
+
+															<input type="text" class="form-control" id="fraseE" placeholder="frase"  maxlength="250" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');">
+												 
 													</div>
 													<span class="text-primary">*</span><label for="myfile-editar">Actualizar imagen</label>
 													<div class="form-group">
 														
-														<input type="file" id="myfile-editar" name="myfile-editar">
+														<input type="file" id="myfile-editar" name="myfile-editar" accept="image/*">
 														<progress id="progressBar-editar" value="0" max="100"
 															style="width: 100%;"></progress>
 														<div id="status-editar"></div>
@@ -306,12 +166,15 @@
 									</div>
 								</div>
 								<!-- Fin ModalEdición-->
-								<div class="d-flex justify-content-end mt-3 mb-3">
-									<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalSliderC">añadir<i class="icon icon-circle-with-plus mr-1"></i></button>
-								</div>
+								
 								<div class="card">
+									
 									<div class="card-header">Lista de Slider</div>
-									<div class="card-body" id="listaSlider">
+									<div class="card-body" > 
+										<div class="d-flex justify-content-end mt-3 mb-3">
+											<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalSliderC">añadir<i class="icon icon-circle-with-plus mr-1"></i></button>
+										</div>
+										<div   id="listaSlider">
 										<table class="table m-0" id="tablaSlider">
 											<thead class="thead-default">
 												<tr>
@@ -324,6 +187,7 @@
 
 											</tbody>
 										</table>
+									</div>
 									</div>
 									<div class="card-footer">
 										<!-- Paginación -->

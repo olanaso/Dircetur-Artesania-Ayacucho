@@ -3278,7 +3278,8 @@ a.blog-sm p.blog-date:after {
 
 .login-screen .login-logo>img {
   margin: 0;
-  max-height: 50px;
+  max-height: 150px;
+  /*max-height: 50px;*/
 }
 
 .login-container {
@@ -4874,6 +4875,7 @@ a.blog-sm p.blog-date:after {
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
+  width: 100px;
 }
 
 .badge-primary {
