@@ -4875,6 +4875,7 @@ a.blog-sm p.blog-date:after {
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
+  width: 100px;
 }
 
 .badge-primary {

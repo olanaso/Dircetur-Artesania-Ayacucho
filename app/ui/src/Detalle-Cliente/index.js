@@ -193,21 +193,37 @@ function waitForOptions(selectElement) {
 $(document).on('click', '#actualizar-informacion', async function (e) {
     e.preventDefault();
     try {
-        const result = await actualizarCliente(getQueryParameter('id'), {
-            nombres: nombreC.value,
-            apellidos: apellidosC.value,
-            correo: correoC.value,
-            telefono: telefonoC.value,
-            direccion: direccionC.value,
-            pais: paisC.selectedOptions[0].text,
-            region: regionC.selectedOptions[0].text,
-            ciudad: ciudadC.selectedOptions[0].text,
-            tipo_documento: tipodocC.value,
-            numero_documento: numerodocC.value,
-            direccion_envio: dirEnvioC.value,
-        });
 
-        console.log('Cliente actualizada:', result);
+        alertDialog.createAlertDialog(
+            'confirm',
+            'Confirmar',
+            '¿Estás seguro que quieres actualizar?',
+            'Cancelar',
+            'Continuar',
+            async () => {
+              try {
+                const result = await actualizarCliente(getQueryParameter('id'), {
+                    nombres: nombreC.value,
+                    apellidos: apellidosC.value,
+                    correo: correoC.value,
+                    telefono: telefonoC.value,
+                    direccion: direccionC.value,
+                    pais: paisC.selectedOptions[0].text,
+                    region: regionC.selectedOptions[0].text,
+                    ciudad: ciudadC.selectedOptions[0].text,
+                    tipo_documento: tipodocC.value,
+                    numero_documento: numerodocC.value,
+                    direccion_envio: dirEnvioC.value,
+                });
+        
+                console.log('Cliente actualizada:', result);
+              } catch (error) {
+                console.error('Error:', error);
+              }
+            }
+          );
+ 
+
 
     } catch (error) {
         console.error('Error al actualizar el cliente:', error);

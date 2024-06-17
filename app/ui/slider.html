@@ -88,7 +88,7 @@
 									<div class="modal-dialog modal-lg">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">Añadir Slider</h5>
+												<h5 class="modal-title" id="exampleModalLabel">Añadir</h5>
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
@@ -97,12 +97,12 @@
 												<div class="modal-body">
 													<div class="form-group">
 														<label for="frase">Frase</label>
-														<input type="text" class="form-control" id="frase"
-															placeholder="Frase">
+														<input type="text" class="form-control" id="frase" placeholder="frase"  maxlength="250" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');">
+												 
 													</div>
 													<span class="text-primary">*</span><label>Imagen de Slider</label>
 													<div class="form-group">
-														<input type="file" id="myfile" name="myfile" required>
+														<input type="file" id="myfile" name="myfile" required accept="image/*">
 														<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
 														<div id="status"></div>
 													</div>
@@ -134,14 +134,15 @@
 											<form id="formSliderE" data-id="">
 												<div class="modal-body">
 													<div class="form-group">
-														<label for="frase">Frase</label>
-														<input type="text" class="form-control" id="fraseE"
-															placeholder="Frase" required>
+														<label for="frase">Frase</label> 
+
+															<input type="text" class="form-control" id="fraseE" placeholder="frase"  maxlength="250" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');">
+												 
 													</div>
 													<span class="text-primary">*</span><label for="myfile-editar">Actualizar imagen</label>
 													<div class="form-group">
 														
-														<input type="file" id="myfile-editar" name="myfile-editar">
+														<input type="file" id="myfile-editar" name="myfile-editar" accept="image/*">
 														<progress id="progressBar-editar" value="0" max="100"
 															style="width: 100%;"></progress>
 														<div id="status-editar"></div>
@@ -165,12 +166,15 @@
 									</div>
 								</div>
 								<!-- Fin ModalEdición-->
-								<div class="d-flex justify-content-end mt-3 mb-3">
-									<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalSliderC">añadir<i class="icon icon-circle-with-plus mr-1"></i></button>
-								</div>
+								
 								<div class="card">
+									
 									<div class="card-header">Lista de Slider</div>
-									<div class="card-body" id="listaSlider">
+									<div class="card-body" > 
+										<div class="d-flex justify-content-end mt-3 mb-3">
+											<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalSliderC">añadir<i class="icon icon-circle-with-plus mr-1"></i></button>
+										</div>
+										<div   id="listaSlider">
 										<table class="table m-0" id="tablaSlider">
 											<thead class="thead-default">
 												<tr>
@@ -183,6 +187,7 @@
 
 											</tbody>
 										</table>
+									</div>
 									</div>
 									<div class="card-footer">
 										<!-- Paginación -->

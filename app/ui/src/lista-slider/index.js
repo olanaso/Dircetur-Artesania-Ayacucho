@@ -242,6 +242,7 @@ document.getElementById('formSliderC').addEventListener('submit', async (event) 
         $('#imgSlider').val('')
         $('#modalSliderC').modal('hide');
         listarSlider();
+        limpiar();
     } else {
         console.error('Error al guardar el slider');
     }
@@ -288,6 +289,11 @@ $(document).on('click', '.btn-editarS', async function (e) {
       let cleanUrl = slider.imagen.replace(/"/g, '');
       $('#SliderImagePreviewEdit').attr('src', cleanUrl).show();
       $('#formSliderE').attr('data-id', slider.id);
+
+      $('#fraseE').val(slider.descripcion); 
+      $('#myfile-editar').val(slider.imagen);    
+
+
   } catch (error) {
       console.error('Error:', error);
   }
@@ -490,4 +496,24 @@ async function onClickPrevPage(event) {
       currentPage--;
       await listarSlider();
   }
+}
+
+$('#modalSliderC').on('shown.bs.modal', function () {
+  $('#frase').val(''); 
+  $('#myfile').val('');
+  $('#status').html('');
+
+  
+  $('#principalImagePreview').attr('src', '').css('display', 'none');
+});
+
+function limpiar()
+{
+  $('#frase').val(''); 
+  $('#myfile').val('');
+  $('#status').html('');
+
+  
+  $('#principalImagePreview').attr('src', '').css('display', 'none');
+
 }
