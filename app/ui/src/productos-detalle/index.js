@@ -1,7 +1,7 @@
 import { loadPartials } from '../utils/viewpartials';
 import { validarHTML5 } from '../utils/validateForm'; 
 import { FileUploader } from '../utils/uploadJorge.js';
-import { buscarProducto,geteditarproducto, getusuariocapacitacion, deleteUserCapacitacion, guardarProducto, nuevoUserCapacitacion,buscarartesanoDNI,buscarartesanoid } from './api';
+import { buscarProducto,geteditarproducto, lstcategoria, deleteUserCapacitacion, guardarProducto, nuevoUserCapacitacion,buscarartesanoDNI,buscarartesanoid } from './api';
 
 import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
@@ -286,6 +286,8 @@ async function buscarUsuario () {
       let tipo_estado = $('#estadoAgotado').val() 
       let fecha_disponible = $('#fechaDisponible').val()  
 
+      let categoria_id = $('#lstcategoria').val() 
+
    
       alto = alto === "" ? 0 : (isDecimal(alto) ? parseFloat(alto) : NaN);
       ancho = ancho === "" ? 0 : (isDecimal(ancho) ? parseFloat(ancho) : NaN);
@@ -295,6 +297,7 @@ async function buscarUsuario () {
       cantidad_minima = cantidad_minima === "" ? 0 : (isInteger(cantidad_minima) ? parseInt(cantidad_minima, 10) : NaN);
       fecha_disponible = fecha_disponible === "" ? null : fecha_disponible;
       tipo_estado = parseInt(tipo_estado, 10);
+      categoria_id = parseInt(categoria_id, 10);
 
  
       let igv = $('#impuestoIGV').is(':checked') ? 1 : 0;      
@@ -464,7 +467,7 @@ async function buscarUsuario () {
         async() => {
             try {
                   showLoading()
-                  let result = await guardarProducto({ productId,nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal,lst_otros_costos,lst_ofertas,lst_colores,lst_talla,lst_imagenes,lst_videos,lst_videoenlace,precios_envio,igv,precio_local,precio_nacional,precio_extranjero,tiempo_elaboracion,tiempo_envio,preventas,artesano_id  });
+                  let result = await guardarProducto({ productId,categoria_id,nombres_es,nombres_eng,resumen_es,resumen_eng,descripcion_es,descripcion_eng,cualidades_es,cualidades_eng,palabra_clave_es,palabra_clave_eng,numero_piezas_es,numero_piezas_eng,alto,ancho,materiales_es,materiales_eng,precio,peso,tecnicas_es,tecnicas_eng,cantidad,cantidad_minima,restar_stock,tipo_estado,fecha_disponible,imagen_principal,lst_otros_costos,lst_ofertas,lst_colores,lst_talla,lst_imagenes,lst_videos,lst_videoenlace,precios_envio,igv,precio_local,precio_nacional,precio_extranjero,tiempo_elaboracion,tiempo_envio,preventas,artesano_id  });
                   if (result) {
                     showToast('Se actualizo los datos correctamente')
 
@@ -664,6 +667,7 @@ async function editarProducto (id) {
         }
       
       $('#estadoAgotado').val(editarproductos.tipo_estado) 
+      $('#lstcategoria').val(editarproductos.categoria_id) 
       $('#fechaDisponible').val(editarproductos.fecha_disponible ) 
 
 
@@ -913,7 +917,7 @@ function habilitar(){
 $(document).ready(function() {
 
    
-
+  llenarcategoria();
  ///editar formulario
  const urlParams = new URLSearchParams(window.location.search);
    productId = urlParams.get('id');
@@ -1976,3 +1980,30 @@ document.getElementById('precioEnvio').addEventListener('change', function() {
   $('#envioNacional').val('');
   $('#envioExtranjero').val(''); 
 });
+
+const selectCategoria= document.getElementById('lstcategoria');
+async function llenarcategoria() { 
+
+  try {
+    // Obtener los datos asincrónicamente
+    const lstcategorias = await lstcategoria(); 
+    // Limpiar opciones existentes en el select (si es necesario)
+    selectCategoria.innerHTML = '';
+
+    // Agregar opción inicial "Seleccionar"
+    let optionSeleccionar = document.createElement('option');
+    optionSeleccionar.value = '0';
+    optionSeleccionar.textContent = 'Seleccionar';
+    selectCategoria.appendChild(optionSeleccionar);
+
+    // Iterar sobre el arreglo de regiones y agregar cada una como una opción
+    lstcategorias.forEach(region => {
+        let option = document.createElement('option');
+        option.value = region.id;
+        option.textContent = region.abreviatura;
+        selectCategoria.appendChild(option);
+    });
+} catch (error) {
+    console.error('Error al llenar el select:', error);
+}
+}

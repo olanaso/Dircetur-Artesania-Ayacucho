@@ -103,6 +103,29 @@ export async function geteditarproducto(id){
 
 
 
+export async function lstcategoria(){
+  try {
+      
+      const myHeaders = new Headers();
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+  
+      const response = await fetch(baseUrl+"/categoria", requestOptions);
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.log('error', error);
+    }
+
+}
+
+
+
+
 
 
 export async function buscarartesanoDNI(dni){
