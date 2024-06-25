@@ -68,102 +68,106 @@ export async function checkSession(){
 
 export function llenarinformacionIESTPProg () {
 
-    let usuario=getDataFromLocalStorage('session').usuarios;
-    $('#user-name').text(usuario.nombre_completo)
-    $('#mlbliestp').text(usuario.nombre_completo)
-   // $('#mlbliestp').text(usuario.nombre_completo)
-    $('#mlblnombrerol').text(usuario.rol.denominacion)
-    //$('#logoiestpheader').attr('src',usuario.rol.denominacion)
-    $('#m_programas').empty();
-      
-
- 
-
-
-    let nro = 0;
-    let nroitem = 0;
-    let htmlContent = '';
-
-    for (let prog of usuario.menu) {
-        nroitem = 1;
-
-        htmlContent += `
-            <li>
-        `;
-
-        if (prog.padreid == 0 && prog.hijoid == 0) {
-            htmlContent += ` 
-                <a href="${prog.enlace}" class="has-arrow1">
-                    <span class="${prog.estilo}">
-                        <i class="${prog.imagen}"></i>
-                    </span>
-                    <span class="nav-title">${prog.nombre}</span>
-                </a> 
+    setTimeout(function() { 
+        let usuario=getDataFromLocalStorage('session').usuarios;
+        $('#user-name').text(usuario.nombre_completo)
+        $('#mlbliestp').text(usuario.nombre_completo)
+       // $('#mlbliestp').text(usuario.nombre_completo)
+        $('#mlblnombrerol').text(usuario.rol.denominacion)
+        //$('#logoiestpheader').attr('src',usuario.rol.denominacion)
+        $('#m_programas').empty();
+          
+    
+     
+    
+    
+        let nro = 0;
+        let nroitem = 0;
+        let htmlContent = '';
+    
+        for (let prog of usuario.menu) {
+            nroitem = 1;
+    
+            htmlContent += `
+                <li>
             `;
-        } else if (prog.padreid == 0 && prog.hijoid != 0) {
-            htmlContent += ` 
-                <a href="${prog.enlace}" class="has-arrow" aria-expanded="false">
-                    <span class="${prog.estilo}">
-                        <i class="${prog.imagen}"></i>
-                    </span>
-                    <span class="nav-title">${prog.nombre}</span>
-                </a> 
-                <ul class="submenu" style="display: none;" aria-expanded="false">
-            `;
-
-            for (let progitem of usuario.menuhijo) {
-                if (progitem.padreid == prog.id) {
-                    htmlContent += `  
-                        <li>
-                            <a href="${progitem.enlace}">${progitem.nombre}</a>
-                        </li> 
-                    `;
-                    nroitem++;
+    
+            if (prog.padreid == 0 && prog.hijoid == 0) {
+                htmlContent += ` 
+                    <a href="${prog.enlace}" class="has-arrow1">
+                        <span class="${prog.estilo}">
+                            <i class="${prog.imagen}"></i>
+                        </span>
+                        <span class="nav-title">${prog.nombre}</span>
+                    </a> 
+                `;
+            } else if (prog.padreid == 0 && prog.hijoid != 0) {
+                htmlContent += ` 
+                    <a href="${prog.enlace}" class="has-arrow" aria-expanded="false">
+                        <span class="${prog.estilo}">
+                            <i class="${prog.imagen}"></i>
+                        </span>
+                        <span class="nav-title">${prog.nombre}</span>
+                    </a> 
+                    <ul class="submenu" style="display: none;" aria-expanded="false">
+                `;
+    
+                for (let progitem of usuario.menuhijo) {
+                    if (progitem.padreid == prog.id) {
+                        htmlContent += `  
+                            <li>
+                                <a href="${progitem.enlace}">${progitem.nombre}</a>
+                            </li> 
+                        `;
+                        nroitem++;
+                    }
                 }
+    
+                htmlContent += `   
+                    </ul> 
+                `;
             }
-
-            htmlContent += `   
-                </ul> 
+    
+            htmlContent += `  
+                </li>
             `;
+            nro++;
         }
+    
+        $('#unifyMenu').empty().append(htmlContent);
+    
+    
+    
+            // Event listener para el toggle del submenú
+            $(document).on('click', '.has-arrow', function(e) {
+                e.preventDefault();
+                const $submenu = $(this).next('.submenu');
+                const isExpanded = $(this).attr('aria-expanded') === 'true';
+    
+                // Cerrar todos los submenús
+                $('.submenu').slideUp('fast').attr('aria-expanded', 'false');
+                $('.has-arrow').removeClass('active').attr('aria-expanded', 'false');
+    
+                // Abrir el submenú clickeado si no está abierto
+                if (!isExpanded) {
+                    $(this).addClass('active').attr('aria-expanded', 'true');
+                    $submenu.slideDown('fast').attr('aria-expanded', 'true');
+                }
+            });
+    
+            // Event listener opcional para clic en elemento de submenú
+            $(document).on('click', '.submenu li a', function(e) {
+                // Remover clase activa de todos los elementos de submenú
+                $('.submenu li a').removeClass('active');
+    
+                // Agregar clase activa al elemento de submenú clickeado
+                $(this).addClass('active');
+            });
+    
+    
 
-        htmlContent += `  
-            </li>
-        `;
-        nro++;
-    }
-
-    $('#unifyMenu').empty().append(htmlContent);
-
-
-
-        // Event listener para el toggle del submenú
-        $(document).on('click', '.has-arrow', function(e) {
-            e.preventDefault();
-            const $submenu = $(this).next('.submenu');
-            const isExpanded = $(this).attr('aria-expanded') === 'true';
-
-            // Cerrar todos los submenús
-            $('.submenu').slideUp('fast').attr('aria-expanded', 'false');
-            $('.has-arrow').removeClass('active').attr('aria-expanded', 'false');
-
-            // Abrir el submenú clickeado si no está abierto
-            if (!isExpanded) {
-                $(this).addClass('active').attr('aria-expanded', 'true');
-                $submenu.slideDown('fast').attr('aria-expanded', 'true');
-            }
-        });
-
-        // Event listener opcional para clic en elemento de submenú
-        $(document).on('click', '.submenu li a', function(e) {
-            // Remover clase activa de todos los elementos de submenú
-            $('.submenu li a').removeClass('active');
-
-            // Agregar clase activa al elemento de submenú clickeado
-            $(this).addClass('active');
-        });
-
-
+    }, 20);
+    
      
   }
   // Función para marcar el submenú y sus elementos como activos

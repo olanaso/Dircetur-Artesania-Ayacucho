@@ -20,6 +20,11 @@ module.exports = sequelize.define('rol', {
         allowNull: true,
         field: 'estado'
     },
+    url: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        field: 'url'
+    },
     createdAt: {
         type: Sequelize.DATE,
         allowNull: true,

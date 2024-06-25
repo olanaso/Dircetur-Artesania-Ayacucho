@@ -82,76 +82,86 @@
 
 						<!-- Row start -->
 						<div class="row gutters"> 
-							<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+							<div class="col-xl-5 col-lg-6 col-md-6 col-sm-6">
 								<div class="card">
-									<div class="card-header">Visitas al portal</div>
+									<div class="card-header">Ventas totales por categoría</div>
 									<div class="card-body">
-										<div id="line-chart" class="chart-height"></div>
+										<div id="horizontal-chart" class="chart-height"></div>
 									</div>
 								</div>
-							</div>
-							<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-								<div class="card">
-									<div class="card-header">Categorías demandadas</div>
-									<div class="card-body">
-										<div id="vertical-chart" class="chart-height"></div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-								<div class="card">
-									<div class="card-header">Horas de mayor uso de usuarios</div>
-									<div class="card-body">
-										<div id="combineChartCompare" class="chart-height"></div>
-									</div>
-								</div>
-							</div>
-							<div class="col-xl-4 col-lg-2 col-md-3 col-sm-6 col">
+							</div>	
+							<div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col">
 								<a href="#" class="block-140">
 									<div class="icon primary">
 										<i class="icon-shopping-cart2"></i>
 									</div>
 									<h5 id="id_total"></h5>
-									<p> Total Productos</p>
+									<p>Ventas Totales</p>
 								</a>
 								<a href="#" class="block-140">
 									<div class="icon primary">
-										<i class="icon-face"></i>
+										<i class="icon-shopping-cart2"></i>
 									</div>
 									<h5 id="id_entregado"></h5>
-									<p> Total usuarios</p>
+									<p>Ventas Entregados</p>
 								</a>
 							</div>
-							<div class="col-xl-4 col-lg-2 col-md-3 col-sm-12 col">
+							<div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col">
 								<a href="#" class="block-140">
 									<div class="icon primary">
 										<i class="icon-shopping-cart2"></i>
 									</div>
 									<h5 id="id_pendiente"></h5>
-									<p>Total Artesanos</p>
+									<p>Ventas Pendientes</p>
 								</a>
 								<a href="#" class="block-140">
 									<div class="icon primary">
 										<i class="icon-shopping-cart2"></i>
 									</div>
 									<h5 id="id_proceso"></h5>
-									<p>Total Categorías</p>
+									<p>Ventas En Proceso</p>
 								</a>
-							</div>  
-							<!-- <div class="col-xl-4 col-lg-2 col-md-3 col-sm-12 col">
+							</div> 
+							<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+								<a class="block-300 center-text">
+									<div class="user-profile">
+										<img src="img/user.png" class="profile-thumb" alt="User Thumb">
+										<h5 id="id_nombre" class="profile-name">Yuki Hayashi</h5>
+										<h6 id="id_rol" class="profile-designation">UX Designer</h6>
+										
+									</div>
+								</a>
+							</div>
+						</div>
+						<!-- Row end -->  
+						<!-- Row start -->
+						<div class="row gutters">
+							
+							<div class="col-xl-8 col-lg-6 col-md-6 col-sm-6">
 								<div class="card">
-									<div class="card-header">Palabras clave frecuentes</div>
+									<div class="card-header">Stock</div>
+									<div class="customScroll">
+										<div class="card-body">
+											<ul class="stats" id="lista-producto">
+													 
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+								<div class="card">
+									<div class="card-header">Pedidos</div>
 									<div class="card-body">
 										<ul class="stats"  id="lista-pedidos"> 
-										 
+											 
 										</ul>
 									</div>
 								</div>
-							</div>-->  
+							</div>
 						</div>
-						<!-- Row end -->   
 						<!-- Row end -->
+
 				</div>
 				<!-- END: .main-content -->
 			</div>
@@ -169,7 +179,7 @@
  
  
 	<!-- END: .app-wrap -->
- 
+
 	<!-- jQuery first, then Tether, then other JS. -->
 	<script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
@@ -188,10 +198,10 @@
 	<script src="vendor/flot/jquery.flot.stack.min.js"></script>
 	<script src="vendor/flot/jquery.flot.tooltip.min.js"></script>
 	<script src="vendor/flot/jquery.flot.resize.min.js"></script>
-	
+
 	<!-- Common JS -->
 	<script src="/js/common.js"></script>
-	<script type="module" src="/src/inicio/index.js"></script>
+	<script type="module" src="/src/inicioartesano/index.js"></script>
 
 
 

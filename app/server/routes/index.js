@@ -22,6 +22,8 @@ const reportes = require('./reportes');
 const productoartesano = require('./productoartesano');
 const ventapedido = require('./ventapedido');
 const ubigeo = require('./ubigeo');
+const pedidodetalle = require('./pedidodetalle');
+
 
 module.exports = (app) => {
     app.use('/api', mantenimiento);
@@ -47,6 +49,7 @@ module.exports = (app) => {
     app.use('/api', productoartesano);
     app.use('/api', ventapedido);
     app.use('/api', ubigeo);
+    app.use('/api', pedidodetalle);
 
     
 };

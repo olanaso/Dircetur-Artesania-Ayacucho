@@ -37,16 +37,10 @@ export async function obtenerLibrosLeidosGuardados(usuario){
         return result;
       } catch (error) {
         console.log('error', error);
-      }
-
-
-
+      } 
 }
 
-
-
-
-export async function getreportegeneral(){
+export async function getreporte1(id){
   try {
       
       const myHeaders = new Headers();
@@ -56,7 +50,7 @@ export async function getreportegeneral(){
         redirect: 'follow'
       };
   
-      const response = await fetch(baseUrl+"/reportegeneral", requestOptions);
+      const response = await fetch(baseUrl+"/reporte1/"+id, requestOptions);
       const result = await response.json();
 
       return result;
@@ -66,4 +60,64 @@ export async function getreportegeneral(){
 
 }
 
- 
+
+export async function getreporte2(id){
+  try {
+      
+      const myHeaders = new Headers();
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+  
+      const response = await fetch(baseUrl+"/productoartesanos/"+id, requestOptions);
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.log('error', error);
+    }
+
+}
+
+
+export async function getreporte3(id){
+  try {
+      
+      const myHeaders = new Headers();
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+  
+      const response = await fetch(baseUrl+"/reporte2/"+id, requestOptions);
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.log('error', error);
+    }
+
+}
+
+export async function getreporte4(id){
+  try {
+      
+      const myHeaders = new Headers();
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+  
+      const response = await fetch(baseUrl+"/pedidodetalle/"+id, requestOptions);
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.log('error', error);
+    }
+
+}

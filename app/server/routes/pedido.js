@@ -12,6 +12,10 @@ router.get('/pedido', controller.listar);
 router.post('/pedido/save/', controller.save);
 router.get('/pedidos', controller.filtrar);
 
+
+router.get('/reporte1/:id', controller.reporte1);
+router.get('/reporte2/:id', controller.reporte2);
+
 router.post('/pedido/fileupload', uploadarchivoDDP, controller.uploadFileAtencion);
 
 module.exports = router;

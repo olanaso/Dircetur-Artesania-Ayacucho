@@ -16,6 +16,8 @@ module.exports = {
     save,
     filtrar,
     uploadFileAtencion,
+    reporte1,
+    reporte2,
     obtener: async (req, res) => {
         const idPedido = req.params.id;
 
@@ -28,6 +30,59 @@ module.exports = {
         }
     }
 };
+
+
+function reporte1(req, res) {
+  
+    
+    let sql = ``; 
+        sql = 
+        `
+        SELECT
+            SUM(CASE WHEN estado = 'pagado' THEN 1 ELSE 0 END) AS pagado,
+            SUM(CASE WHEN estado = 'envio' THEN 1 ELSE 0 END) AS envio,
+            SUM(CASE WHEN estado = 'pendiente' THEN 1 ELSE 0 END) AS pendiente,
+            SUM(CASE WHEN estado = 'proceso' THEN 1 ELSE 0 END) AS proceso
+        FROM pedido
+        WHERE 1=1 AND artesano_id = '${req.params.id}'
+    `;
+     
+   
+    
+    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+        .then(resultset => {
+            res.status(200).json(resultset)
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}
+
+
+function reporte2(req, res) {
+  
+    
+    let sql = ``; 
+        sql = 
+        `
+        SELECT
+            num_pedido,
+            fecha_pedido,
+            estado 
+        FROM pedido
+        WHERE 1=1 AND artesano_id = '${req.params.id}'
+    `;
+     
+   
+    
+    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+        .then(resultset => {
+            res.status(200).json(resultset)
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}
 
 function guardar(req, res) {
     model.create(req.body)

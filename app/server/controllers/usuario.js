@@ -252,6 +252,11 @@ async function loginpersonal (req, res) {
                 ]
             }
         });
+        const roles = await rol.findOne({
+            where: { id: usuarioDB.rolid }
+        });
+
+        console.log(roles)
 
         if (!usuarioDB) {
             return res.status(400).json({ ok: false, message: "El usuario no existe" });
@@ -267,7 +272,9 @@ async function loginpersonal (req, res) {
         }
 
         else {
-            usuarioDB.clave = "chismoso"
+           
+            usuarioDB.clave = "chismoso" 
+            usuarioDB.url = roles.url;
             req.session.user = usuarioDB.dataValues; // Puedes almacenar cualquier informaci贸n adicional del usuario aqu铆
             console.log('Impmiendo session ----------------------')
             console.log(req.session.user);
@@ -275,7 +282,7 @@ async function loginpersonal (req, res) {
             // Almacenar el token en una cookie para mantener la sesi贸n
             res.cookie('token', token, { maxAge: 24 * 60 * 60 * 1000 });
 
-
+ 
         }
 
         res.status(200).json({
