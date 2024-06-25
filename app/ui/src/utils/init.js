@@ -166,7 +166,7 @@ export function llenarinformacionIESTPProg () {
     
     
 
-    }, 20);
+    }, 100);
     
      
   }
