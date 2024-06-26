@@ -11,7 +11,10 @@ router.get('/producto/:id', controller.obtener);
 router.post('/producto/save', controller.save);
 router.get('/productos',  controller.buscar);
 
+
+
 router.post('/producto/fileupload', uploadarchivoProducto, controller.uploadFilproducto);
+router.get('/reportegeneral', controller.reportegeneral);
 
 
 module.exports = router;

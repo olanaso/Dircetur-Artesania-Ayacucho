@@ -89,18 +89,17 @@ function listar(req, res) {
     let sql = ``; 
         sql = 
         `
-        SELECT 
-        a.id,
-        a.imagen_principal,
-        a.nombres_es,
-        c.nombre_completo,
-        a.precio,
-        a.cantidad
-    FROM producto a
-    INNER JOIN artesano b ON a.artesano_id = b.id
-    INNER JOIN usuario c ON c.id = b.usuario_id 
-    order by a.id desc
-    limit 50
+    select  p.imagen_principal,
+            p.nombres_es,
+            c.abreviatura,
+            p.alto,
+            p.ancho,
+            p.materiales_es,
+            p.cantidad,
+            p.tipo_estado
+    from producto as  p
+    inner join categoria c on p.categoria_id=c.id 
+    where p.artesano_id= '${req.params.id}'
     `    
     model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
         .then(resultset => {

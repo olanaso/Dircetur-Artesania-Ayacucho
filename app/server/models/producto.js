@@ -16,6 +16,11 @@ module.exports = sequelize.define('producto', {
         allowNull: true,
         field: 'artesano_id'
     },
+    categoria_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        field: 'categoria_id'
+    },
     nombres_es: {
         type: Sequelize.STRING,
         allowNull: true,
