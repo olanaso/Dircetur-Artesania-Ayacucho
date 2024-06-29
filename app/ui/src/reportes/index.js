@@ -2,7 +2,7 @@ import {reporteGeneral} from './api'
 
 
 import { loadPartials } from '../utils/viewpartials';   
-import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
+import {  hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
 
  
 hideLoading();
@@ -29,23 +29,16 @@ hideLoading();
   }
 })();
 
-function startApp () {
-  checkadminsession(); 
+function startApp () {  
   setTimeout(function() {
-    llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
+    llenarinformacionIESTPProg(); 
 }, 500); 
 
 }
-async function checkadminsession () {
-  let result = await checkSession()
-  if (result.usuario.rolid != 1) {
-    location.href = "sinacceso.html"
-  }
-}
+ 
 
 
-/* (en caso de querer personalizar campos de reportes en general)
+/* (en caso de querer personalizar campos de reportes en general)*/
 document.getElementById('reportType').addEventListener('change', function() {
     const reportType = this.value;
     const checkboxContainer = document.getElementById('checkboxContainer');
@@ -102,24 +95,24 @@ document.getElementById('reportType').addEventListener('change', function() {
         checkboxContainer.appendChild(checkboxDiv);
     }
 });
-*/
+ 
 
 document.getElementById('btn-reporte').addEventListener('click', async function(event) {
     event.preventDefault()
     const selectedReportType = document.getElementById('reportType').value;
-    /*const selectedAttributes = Array.from(document.querySelectorAll('#checkboxContainer input:checked')).map(input => input.value);
+     const selectedAttributes = Array.from(document.querySelectorAll('#checkboxContainer input:checked')).map(input => input.value);
     if (selectedReportType && selectedAttributes.length > 0) {
         const response = await reporteGeneral(selectedReportType);
-        //generateTable(response ,selectedAttributes)
-    }*/
+         generateTable(response ,selectedAttributes)
+    } 
     if (selectedReportType) {
         const response = await reporteGeneral(selectedReportType);
         console.log("response: ", response)
-        //generateTable(response ,selectedAttributes)
+         generateTable(response ,selectedAttributes)
     }
 });
 
-/*
+ 
 function generateTable(data, attributes) {
     const tableContainer = document.getElementById('tablaReportes');
     tableContainer.innerHTML = ''; // Clear previous table
@@ -151,4 +144,4 @@ function generateTable(data, attributes) {
 
     tableContainer.appendChild(table);
 }
-    */
+    

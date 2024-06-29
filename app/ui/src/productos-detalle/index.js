@@ -1,9 +1,9 @@
 import { loadPartials } from '../utils/viewpartials';
 import { validarHTML5 } from '../utils/validateForm'; 
 import { FileUploader } from '../utils/uploadJorge.js';
-import { buscarProducto,geteditarproducto, lstcategoria, deleteUserCapacitacion, guardarProducto, nuevoUserCapacitacion,buscarartesanoDNI,buscarartesanoid } from './api';
+import { buscarProducto,geteditarproducto, lstcategoria,  guardarProducto, buscarartesanoDNI,buscarartesanoid } from './api';
 
-import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
+import { showLoading, hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
 import '../productos-detalle/style.css'
@@ -34,52 +34,19 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession(); 
+  //checkadminsession(); 
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
+    //marcarSubMenuSeleccionado();
+    buscarUsuario();  
 }, 500); 
 
-buscarUsuario();
-exportarExcel();
-nuevo(); 
+
 
 }
+  
  
-
-async function checkadminsession () {
-  let result = await checkSession()
-  if (result.usuario.rolid != 1) {
-    location.href = "sinacceso.html"
-  }
-}
-
- 
- 
-
-async function nuevo () {
-
-  $('#btnNuevoRegistro').on('click', async function (e) {
-
-    openModalNuevo(0); // Llama a la función que abre el modal y pasa el ID
-
-    $('#txt-dni1').val('')
-    $('#txt-nombres1').val('')
-    $('#txt-cod_curso1').val('')
-    $('#txt-nota1').val('')
-    $('#txt-cant_horas1').val('')
-    $('#txt-fecha_inicio1').val('')
-    $('#txt-fecha_fin1').val('')
-    $('#txt-fecha_emision1').val('')
-    $('#txt-instructor1').val('')
-    $('#txt-temario1').val('')
-    $('#txt-curso1').val('')
-    $('#txt-ubicacion1').val('')
-    $('#txt-institucion_solicitante1').val('')
-
-  })
-
-}
+  
 
 
 var lstproductos = null;
@@ -241,7 +208,7 @@ async function buscarUsuario () {
     var isValid = true;
     // Itera sobre todos los campos requeridos para verificar si están vacíos
     $('#form .form-control[required]').each(function () {
-      if ($(this).val() === '') {
+      if ($(this).val() === '' || $(this).val() === '0') {
         isValid = false;
         $(this).css('border-color', 'red'); // Marca los campos vacíos
       } else {
@@ -532,17 +499,7 @@ document.getElementById('cantidadMinima').addEventListener('input', validarCanti
 
 }
 
- 
-
-function createXLS (data, reportfilename) {
-  var resultgeojson = alasql(`SELECT *
-  FROM ? `, [data])
-  var opts = [{
-    sheetid: 'Reporte',
-    headers: true
-  }];
-  var res = alasql(`SELECT INTO XLSX("${reportfilename}.xlsx",?) FROM ?`, [opts, [resultgeojson]]);
-}
+  
 
  
 
@@ -1856,12 +1813,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function handleUploadResponselistaimg (response) {
-  // Manejar la respuesta del servidor
-  /*showToast('Registro correcto.');;
-  console.log('Server response:', response);
-  alert(response.ruta)
-  showToast('Registro correcto.');*/ 
-
+  // Manejar la respuesta del servidor 
     let file = $('#uploadImage').prop('files')[0];
     if (file) {
         let reader = new FileReader();
@@ -1875,9 +1827,7 @@ function handleUploadResponselistaimg (response) {
       showToast('Por favor, seleccione un archivo para visualizar.');
         //alert("Por favor, seleccione un archivo para visualizar.");
     }
-
-  // Ejemplo: Usar el resultado en otro lugar
-   /*document.getElementById('someElement').innerText = response.name;*/
+ 
 }
 
 
@@ -1893,31 +1843,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-function handleUploadResponselistavideo (response) {
-  // Manejar la respuesta del servidor
-  /*showToast('Registro correcto.');;
-  console.log('Server response:', response);
-  alert(response.ruta)
-  showToast('Registro correcto.');*/ 
-
+function handleUploadResponselistavideo (response) { 
   //showToast('Registro correcto.');
   $('#videoPreview').attr('src', 'http://localhost:3001/'+response.path).show();
-
-   /* let file = $('#uploadImage').prop('files')[0];
-    if (file) {
-        let reader = new FileReader();
-        reader.onload = function(e) {
-            $('#imagePreview').attr('src', 'http://localhost:3001/'+response.ruta).show();
-            $('#imageName').val(file.name);
-        }
-        reader.readAsDataURL(file);
-        showToast('Registro correcto.');
-    } else {
-        alert("Por favor, seleccione un archivo para visualizar.");
-    }*/
-
-  // Ejemplo: Usar el resultado en otro lugar
-   /*document.getElementById('someElement').innerText = response.name;*/
+ 
 }
 
 

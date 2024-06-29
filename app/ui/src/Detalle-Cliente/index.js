@@ -7,7 +7,7 @@ const alertDialog = new AlertDialog();
 
 
 import { loadPartials } from '../utils/viewpartials';   
-import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
+import { hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
 
  
 hideLoading();
@@ -35,19 +35,19 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession(); 
+  //checkadminsession(); 
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
+   // marcarSubMenuSeleccionado();
 }, 500); 
 
 }
-async function checkadminsession () {
+/*async function checkadminsession () {
   let result = await checkSession()
   if (result.usuario.rolid != 1) {
     location.href = "sinacceso.html"
   }
-}
+}*/
 
 
 
@@ -114,37 +114,40 @@ async function llenarCampos(idCliente) {
 
 function llenar_tablaReclamos(lista){
     const list_reclamos = JSON.parse(lista);
-    $('#listReclamos').empty()
-    let filas = ''
-    for (let data of list_reclamos) {
-        console.log("data: ", data)
-        filas += `
-            <tr>
-                <td class="border-b border-gray-200 bg-white text-sm">
-                    ${data.reclamo_id}
-                </td>
-                <td class="border-b border-gray-200 bg-white text-sm">
-                    ${data.descripcion}
-                </td>
-                <td class="border-b border-gray-200 bg-white text-sm">
-                    <button type="button" class="btn btn-light btn-sm btn-verR" data-toggle="modal" data-target="#modalverReclamo" data-id="${data.reclamo_id}""><i class="icon icon-eye2"></i></button>
-                </td>
-            </tr>`
-    }
-    let tabla_result = `
-        <table class="table m-0" id="tablaReclamos">
-            <thead class="thead-default">
+    if (list_reclamos != null) {
+        $('#listReclamos').empty()
+        let filas = ''
+        for (let data of list_reclamos) {
+            console.log("data: ", data)
+            filas += `
                 <tr>
-                    <th>ID</th>
-                    <th>Descripción</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>`+ filas + `
-                
-            </tbody>
-        </table>`
-    $('#listReclamos').append(tabla_result)
+                    <td class="border-b border-gray-200 bg-white text-sm">
+                        ${data.reclamo_id}
+                    </td>
+                    <td class="border-b border-gray-200 bg-white text-sm">
+                        ${data.descripcion}
+                    </td>
+                    <td class="border-b border-gray-200 bg-white text-sm">
+                        <button type="button" class="btn btn-light btn-sm btn-verR" data-toggle="modal" data-target="#modalverReclamo" data-id="${data.reclamo_id}""><i class="icon icon-eye2"></i></button>
+                    </td>
+                </tr>`
+        }
+        let tabla_result = `
+            <table class="table m-0" id="tablaReclamos">
+                <thead class="thead-default">
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>`+ filas + `
+                    
+                </tbody>
+            </table>`
+        $('#listReclamos').append(tabla_result)
+    }
+   
 }
 async function cargarYSeleccionarUbicaciones(cliente) {
     // Cargar datos iniciales (paises)

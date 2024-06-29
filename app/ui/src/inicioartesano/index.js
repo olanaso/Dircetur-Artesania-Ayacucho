@@ -36,7 +36,7 @@ function startApp () {
   validarSession();
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
+   // marcarSubMenuSeleccionado();
 }, 500);
  
 

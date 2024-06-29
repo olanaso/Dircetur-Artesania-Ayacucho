@@ -36,22 +36,19 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession(); 
+  //checkadminsession(); 
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
-}, 500); 
+   // marcarSubMenuSeleccionado();
+}, 500);  
+iniciarcarga();
+} 
 
-}
-async function checkadminsession () {
-  let result = await checkSession()
-  if (result.usuario.rolid != 1) {
-    location.href = "sinacceso.html"
-  }
-}
+var lstproductos = null;
+var idactualizar = null;
+const currentPage = 1; // Reset to the first page
+const rowsPerPage = 10; 
 
-
- 
  
  
 
@@ -69,14 +66,12 @@ async function buscarUsuario22 () {
   }; 
   const data = await buscarProducto(filtro);
 
-    currentPage = 1; // Reset to the first page
+    //currentPage = 1; // Reset to the first page
     displayTable(data, rowsPerPage, currentPage);
     displayPagination(data, rowsPerPage);
     
 
 }
-var lstproductos = null;
-var idactualizar = null;
 
 document.getElementById('filtrar-producto').addEventListener('click', async  function(e) {
       e.preventDefault();
@@ -209,22 +204,32 @@ $(document).on('click', '.btn_Eliminar', async function (e) {
 
  // Datos de ejemplo para llenar la tabla
   
- 
+  
 
-const rowsPerPage = 10;
-let currentPage = 1; 
 
-const Nombreproducto = document.getElementById('nombre-producto').value;
-const Nombreartesano = document.getElementById('nombre-artesano').value;
-const Preciosid = document.getElementById('precios-id').value;
-const Cantidadesid = document.getElementById('cantidades-id').value;
-const filtro = {
-  nombres_es:Nombreproducto,
-  nombre_completo:Nombreartesano,
-  precio:Preciosid,
-  cantidad:Cantidadesid
-}; 
-const data = await buscarProducto(filtro);
+
+async function iniciarcarga(){
+  
+  const Nombreproducto = document.getElementById('nombre-producto').value;
+  const Nombreartesano = document.getElementById('nombre-artesano').value;
+  const Preciosid = document.getElementById('precios-id').value;
+  const Cantidadesid = document.getElementById('cantidades-id').value;
+  const filtro = {
+    nombres_es:Nombreproducto,
+    nombre_completo:Nombreartesano,
+    precio:Preciosid,
+    cantidad:Cantidadesid
+  }; 
+  const data = await buscarProducto(filtro);
+  
+  // Inicializar la tabla y la paginación 
+  displayTable(data, rowsPerPage, currentPage);
+  displayPagination(data, rowsPerPage);
+  }
+
+
+
+
 
 async function displayTable(data, rowsPerPage, page) {
   /*const table = document.getElementById('tablaproducto').getElementsByTagName('tbody')[0];
@@ -372,5 +377,5 @@ function updateInfo(start, end, total) {
 }
 
 // Inicializar la tabla y la paginación
-displayTable(data, rowsPerPage, currentPage);
-displayPagination(data, rowsPerPage);
+//displayTable(data, rowsPerPage, currentPage);
+//displayPagination(data, rowsPerPage);

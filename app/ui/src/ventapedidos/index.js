@@ -3,7 +3,7 @@ import { listarPedidos, filtrarPedidos } from './api';
 import { loadPartials } from '../utils/viewpartials'; 
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog(); 
-import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
+import {  hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config' 
 
 
@@ -35,19 +35,19 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession(); 
+  //checkadminsession(); 
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
+   // marcarSubMenuSeleccionado();
 }, 500); 
 
 }
-async function checkadminsession () {
+/*async function checkadminsession () {
   let result = await checkSession()
   if (result.usuario.rolid != 1) {
     location.href = "sinacceso.html"
   }
-}
+}*/
 
 
 

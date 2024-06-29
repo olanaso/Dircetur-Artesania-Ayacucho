@@ -3,7 +3,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import { FileUploader } from '../utils/uploadJorge.js';
 import { buscarProducto,geteditarproducto, lstcategoria,getusuariocapacitacion, deleteUserCapacitacion, guardarProducto, nuevoUserCapacitacion,buscarartesanoDNI,buscarartesanoid } from './api';
  
-import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
+import { showLoading, hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
 import '../productos-detalle/style.css'
@@ -34,25 +34,25 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession(); 
+ // checkadminsession(); 
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
+  //  marcarSubMenuSeleccionado();
 }, 500); 
 
 buscarUsuario();
-exportarExcel();
-nuevo(); 
+//exportarExcel();
+//nuevo(); 
 
 }
  
 
-async function checkadminsession () {
+/*async function checkadminsession () {
   let result = await checkSession()
   if (result.usuario.rolid != 1) {
     location.href = "sinacceso.html"
   }
-}
+}*/
 
  
  
