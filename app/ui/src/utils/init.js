@@ -163,7 +163,7 @@ export function llenarinformacionIESTPProg () {
             });
 
             marcarSubMenuSeleccionado();
-    }, 80); // Simula un proceso que tarda 1 segundo
+    }, 500); // Simula un proceso que tarda 1 segundo
         
     
     

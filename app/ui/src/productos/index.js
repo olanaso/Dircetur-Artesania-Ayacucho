@@ -46,8 +46,8 @@ iniciarcarga();
 
 var lstproductos = null;
 var idactualizar = null;
-const currentPage = 1; // Reset to the first page
-const rowsPerPage = 10; 
+let  currentPage = 1; // Reset to the first page
+let  rowsPerPage = 10; 
 
  
  

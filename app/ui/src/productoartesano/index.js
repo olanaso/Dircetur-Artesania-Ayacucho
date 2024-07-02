@@ -47,8 +47,8 @@ iniciarcarga();
   
 var lstproductos = null;
 var idactualizar = null;
-const currentPage = 1; // Reset to the first page
-const rowsPerPage = 10; 
+let  currentPage = 1; // Reset to the first page
+let  rowsPerPage = 10; 
 
 var artesanoId=0;
 let usuario=getDataFromLocalStorage('session').usuarios;
