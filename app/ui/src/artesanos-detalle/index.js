@@ -4,7 +4,7 @@ import { FileUploader } from '../utils/uploadJorge.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 import { guardarUsuario,geteditarArtesano, geteditarLogin, llenardepartamento,llenarprovincia,llenardistrito, guardarArtesano,buscarDNI } from './api'; 
-import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
+import { showLoading, hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
 import '../artesanos-detalle/style.css'
@@ -35,23 +35,23 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession(); 
+  //checkadminsession(); 
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
+    //();
 }, 500); 
 buscarUsuario();
-exportarExcel();
-nuevo();
+//exportarExcel();
+//nuevo();
 
 }
  
-async function checkadminsession () {
+/*async function checkadminsession () {
   let result = await checkSession()
   if (result.usuario.rolid != 1) {
     location.href = "sinacceso.html"
   }
-}
+}*/
 
  
 

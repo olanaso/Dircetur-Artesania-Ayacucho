@@ -21,7 +21,7 @@ export async function login(usuario,clave){
 }
 
 
-export async function getIESTP(nombre){
+/*export async function getIESTP(nombre){
     const settings = {
         method: "GET",
         headers: {
@@ -35,4 +35,4 @@ export async function getIESTP(nombre){
       } catch (error) {
         console.error("Error:", error);
       }
-}
+}*/

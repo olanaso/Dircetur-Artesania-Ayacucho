@@ -3,7 +3,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import {saveDataToLocalStorage} from '../utils/config'
 import {hideLoading} from '../utils/init'
 import {obtenerParametrosURL} from '../utils/path'
-import {login, getIESTP} from './api'
+import {login} from './api'
 import './login.css'
 
 //ocultando el loading 
@@ -12,15 +12,15 @@ limpiarDatos();
 
 //obteniendo los datos del IESTP
 let {iestp}=obtenerParametrosURL()
-obtenerIESTP(iestp)
+//obtenerIESTP(iestp)
 
-async function obtenerIESTP(nombre){
+/*async function obtenerIESTP(nombre){
     let result =await getIESTP(nombre);
     if(result) {
         $('#logoiestp').attr('src', result.logourl)
         $('#imgbanner').attr('src', result.banner)
     }
-}
+}*/
 
 $('#btnlogin').on('click', function (event) {
     validarHTML5('form', function () {

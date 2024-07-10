@@ -1,7 +1,7 @@
 import { loadPartials } from '../utils/viewpartials';
 import { validarHTML5 } from '../utils/validateForm';
 import { getprogramasbyIESTP, buscarCertificados, getusuariocapacitacion, deleteUserCapacitacion, saveUserCapacitacion, nuevoUserCapacitacion } from './api';
-import { showLoading, hideLoading, checkSession, llenarinformacionIESTPProg } from '../utils/init';
+import { showLoading, hideLoading } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
 import '../lista-capacitaciones/style.css'
@@ -28,7 +28,7 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession();
+ // checkadminsession();
   // cargarcomboprogramas();
   //llenarinformacionIESTPProg();
   buscarUsuario();
@@ -36,12 +36,12 @@ function startApp () {
   nuevo();
 
 }
-async function checkadminsession () {
+/*async function checkadminsession () {
   let result = await checkSession()
   if (result.usuario.rolid != 1) {
     location.href = "sinacceso.html"
   }
-}
+}*/
 
 
 async function cargarcomboprogramas () {

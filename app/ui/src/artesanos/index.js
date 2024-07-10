@@ -3,7 +3,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 import { buscarArtesano,  deleteArtesano } from './api';  
-import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
+import { showLoading, hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
 import '../artesanos/style.css'
@@ -36,22 +36,23 @@ hideLoading();
 
 
 function startApp () {
-  checkadminsession(); 
+  //checkadminsession(); 
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
+    //marcarSubMenuSeleccionado();
 }, 500); 
+iniciarcarga();
 
 }
-async function checkadminsession () {
+/*async function checkadminsession () {
   let result = await checkSession()
   if (result.usuario.rolid != 1) {
     location.href = "sinacceso.html"
   }
-}
+}*/
  
- 
- 
+const rowsPerPage = 10;
+let currentPage = 1; 
  
 
 async function buscarArtesano22 () {
@@ -114,23 +115,32 @@ var lstartesanos = null;
 var idactualizar = null;
 
 document.getElementById('filtrar-artesano').addEventListener('click', async  function(e) {
-  e.preventDefault();
+  buscarUsuario22();
 
   
-const Nombre = document.getElementById('nombre').value;
-const Correo = document.getElementById('correo').value; 
-const filtro = {
-  nombre:Nombre,
-  correo:Correo 
-}; 
-const data  = await buscarArtesano(filtro);
- 
 
-    currentPage = 1; // Reset to the first page
-    displayTable(data, rowsPerPage, currentPage);
-    displayPagination(data, rowsPerPage);
 });
 
+
+
+
+async function buscarUsuario22 () {
+ 
+  const Nombre = document.getElementById('nombre').value;
+  const Correo = document.getElementById('correo').value; 
+  const filtro = {
+    nombre:Nombre,
+    correo:Correo 
+  }; 
+  
+  const data  = await buscarArtesano(filtro);
+   
+  
+      currentPage = 1; // Reset to the first page
+      displayTable(data, rowsPerPage, currentPage);
+      displayPagination(data, rowsPerPage);
+}
+ 
 
 async function buscarUsuario () {
 
@@ -252,16 +262,32 @@ $(document).on('click', '.btn_Eliminar', async function (e) {
   
  
 
-const rowsPerPage = 10;
-let currentPage = 1; 
 
-const Nombre = document.getElementById('nombre').value;
-const Correo = document.getElementById('correo').value; 
-const filtro = {
-  nombre:Nombre,
-  correo:Correo 
-}; 
-const data  = await buscarArtesano(filtro);
+
+
+
+
+
+async function iniciarcarga(){
+  
+  const Nombre = document.getElementById('nombre').value;
+  const Correo = document.getElementById('correo').value; 
+  const filtro = {
+    nombre:Nombre,
+    correo:Correo 
+  }; 
+  const data  = await buscarArtesano(filtro);
+  
+  // Inicializar la tabla y la paginación
+  
+  
+  
+  displayTable(data, rowsPerPage, currentPage);
+  displayPagination(data, rowsPerPage);
+  }
+
+
+
  
 
 async function displayTable(data, rowsPerPage, page) {

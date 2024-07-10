@@ -3,7 +3,7 @@ import { FileUploader } from '../utils/upload.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog(); 
 import { loadPartials } from '../utils/viewpartials';  
-import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
+import {  hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
 
 
 
@@ -33,19 +33,19 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession(); 
+  //checkadminsession(); 
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
+   // marcarSubMenuSeleccionado();
 }, 500); 
 
 }
-async function checkadminsession () {
+/*async function checkadminsession () {
   let result = await checkSession()
   if (result.usuario.rolid != 1) {
     location.href = "sinacceso.html"
   }
-}
+}*/
 
 
 
@@ -84,7 +84,7 @@ const ordenTitle = document.getElementById('id-orden-pedido');
 const numPedido = document.getElementById('num-pedido');
 const fechaPedido = document.getElementById('fecha-pedido');
 const comprobateSolicitado = document.getElementById('comprobante-solicitado');
-const imagenCompra = document.getElementById('imagenCompra');
+const imagenCompra = document.getElementById('imagen-Compra');
 
 const nombreArtesano = document.getElementById('nombre-artesano');
 
@@ -128,7 +128,9 @@ async function cargarCampos(idPedido) {
     direccionRecepcion.value = pedido.cliente['direccion'];
     wspCliente.setAttribute('href', `https://wa.me/${pedido.cliente['telefono']}`);
     wspClienteReclamos.setAttribute('href', `https://wa.me/${pedido.cliente['telefono']}`);
-    imagenCompra.setAttribute('src', pedido.imagen_pago);
+    //imagenCompra.setAttribute('src', pedido.imagen_pago);
+    
+    $('#imagen-Compra').attr('src', pedido.imagen_pago);
 }
 function cargarTablaProductos(pedidos) {
     var sumaSubtotal = 0;

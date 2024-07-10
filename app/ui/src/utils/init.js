@@ -68,16 +68,15 @@ export async function checkSession(){
 
 export function llenarinformacionIESTPProg () {
  
+
+    setTimeout(() => {
         let usuario=getDataFromLocalStorage('session').usuarios;
         $('#user-name').text(usuario.nombre_completo)
         $('#mlbliestp').text(usuario.nombre_completo)
        // $('#mlbliestp').text(usuario.nombre_completo)
         $('#mlblnombrerol').text(usuario.rol.denominacion)
         //$('#logoiestpheader').attr('src',usuario.rol.denominacion)
-        $('#m_programas').empty();
-          
-    
-     
+        $('#m_programas').empty(); 
     
     
         let nro = 0;
@@ -162,6 +161,10 @@ export function llenarinformacionIESTPProg () {
                 // Agregar clase activa al elemento de submenú clickeado
                 $(this).addClass('active');
             });
+
+            marcarSubMenuSeleccionado();
+    }, 500); // Simula un proceso que tarda 1 segundo
+        
     
     
  

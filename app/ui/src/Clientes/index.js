@@ -1,11 +1,11 @@
-import { listarClientes, filtrarClientes, borrarCliente, actualizarCliente } from './api';
+import { listarClientes, filtrarClientes, borrarCliente } from './api';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 
 
 
 import { loadPartials } from '../utils/viewpartials';   
-import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
+import {  hideLoading, llenarinformacionIESTPProg } from '../utils/init'; 
 
  
 hideLoading();
@@ -33,33 +33,13 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession(); 
+  //checkadminsession(); 
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
+    //marcarSubMenuSeleccionado();
 }, 500); 
 
-}
-async function checkadminsession () {
-  let result = await checkSession()
-  if (result.usuario.rolid != 1) {
-    location.href = "sinacceso.html"
-  }
-}
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
+}  
 const DEFAULT_PAGE_LIMIT = 10;
 let currentPage = 1;
 let totalPages = 0; // Declarar totalPages para que esté accesible globalmente
@@ -81,9 +61,7 @@ async function cargarCliente() {
           };
           clientes = await filtrarClientes(filtro);
       }
-
-      //const clientes = await listarClientes(currentPage, DEFAULT_PAGE_LIMIT);
-      //console.log(clientes)
+ 
       cargarTabla(clientes.clientes);
       totalPages = Math.ceil(clientes.totalItems / DEFAULT_PAGE_LIMIT);
       actualizarControlesPaginacion(totalPages, clientes.totalItems);

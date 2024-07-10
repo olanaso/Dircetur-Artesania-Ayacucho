@@ -2,8 +2,8 @@ import { loadPartials } from '../utils/viewpartials';
 import { validarHTML5 } from '../utils/validateForm';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
-import { buscarProducto, getusuariocapacitacion, deleteProducto, saveUserCapacitacion, nuevoUserCapacitacion } from './api';
-import { showLoading, hideLoading, checkSession,llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
+import { buscarProducto,  deleteProducto} from './api';
+import { showLoading, hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
 import '../productoartesano/style.css'
@@ -36,88 +36,19 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession(); 
+  //checkadminsession(); 
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    marcarSubMenuSeleccionado();
+   // marcarSubMenuSeleccionado();
 }, 500); 
+iniciarcarga();
 
-}
-async function checkadminsession () {
-  let result = await checkSession()
-  if (result.usuario.rolid != 1) {
-    location.href = "sinacceso.html"
-  }
-}
- 
- /*
-
-async function buscarUsuario22 () {
+} 
   
-
-   
-      showLoading()
-      //let certificados = buscarProducto($('#searchBox').val())
-      //console.log(certificados) 
-      // Obtener la lista de certificados
-      //certificados = await buscarProducto($('#searchBox').val());
-
-      const Nombreproducto = document.getElementById('nombre-producto').value;
-      const Nombreartesano = document.getElementById('nombre-artesano').value;
-      const Preciosid = document.getElementById('precios-id').value;
-      const Cantidadesid = document.getElementById('cantidades-id').value;
-      const filtro = {
-        nombres_es:Nombreproducto,
-        nombre_completo:Nombreartesano,
-        precio:Preciosid,
-        cantidad:Cantidadesid
-      }; 
-      lstproductos = await buscarProducto(filtro);
-
-      // Obtener la referencia del elemento HTML donde se insertará la tabla
-      let tabla = document.getElementById('tablaproducto');
-
-      // Limpiar la tabla antes de insertar nuevos datos
-      tabla.innerHTML = '';
-
-      // Crear una fila para los encabezados de la tabla
-      let encabezados = '<tr><th>N°</th><th>Imagen</th><th>Producto</th><th>Nombre Artesano</th><th>Precio S/.</th><th>Stock</th> <th  style="text-align: center;">Acciones</th></tr>';
-
-      // Agregar los encabezados a la tabla
-      tabla.innerHTML += encabezados;
-
-      // Recorrer la lista de certificados y pintar los datos en la tabla
-
-      // Inicializar el contador
-      let correlativo = 1;
-      for (let prog of lstproductos) {
-        // Crear una fila para cada certificado
-
-        let fila = '<tr>';
-        // Agregar las celdas con los datos del certificado
-        fila += `<td>${correlativo}</td>`; 
-        fila += `<td style="text-align: center;"><img src="${prog.imagen_principal}" alt="Imagen" style="width: 150px;ali height: auto;"></td>`;
-        fila += `<td>${prog.nombres_es}</td>`;
-        fila += `<td>${prog.nombre_completo}</td>`;
-        fila += `<td>${prog.precio}</td>`;
-        fila += `<td>${prog.cantidad}</td>`;
-        fila += `<td style="text-align: center;"><a href="/productos-detalle.html?id=${prog.id}" data-toggle="tooltip" title="Editar" data-id="${prog.id}" class="btn btn-info btn-sm" > <i class="icon icon-edit2"></i></a> `;
-        fila += `<a href="javascript:void(0);"  data-toggle="tooltip"  title="Eliminar" data-id="${prog.id}" class="btn btn_Eliminar btn-primary btn-sm">  <i class="icon icon-bin"></i></a>`;
-        fila += `</td>`;
-   
-
-        fila += '</tr>';
-        // Agregar la fila a la tabla
-        tabla.innerHTML += fila;
-        // Incrementar el correlativo
-        correlativo++;
-      }
-      $('[data-toggle="tooltip"]').tooltip();
-      hideLoading() 
-
-}*/
 var lstproductos = null;
 var idactualizar = null;
+let  currentPage = 1; // Reset to the first page
+let  rowsPerPage = 10; 
 
 var artesanoId=0;
 let usuario=getDataFromLocalStorage('session').usuarios;
@@ -140,7 +71,7 @@ async function buscarUsuario () {
       $('[data-toggle="tooltip"]').tooltip();
       hideLoading()*/
       e.preventDefault();
-        currentPage = 1; // Reset to the first page
+       // currentPage = 1; // Reset to the first page
         displayTable(data, rowsPerPage, currentPage);
         displayPagination(data, rowsPerPage);
  
@@ -164,9 +95,10 @@ async function buscarUsuario22 () {
     cantidad:Cantidadesid,
     id:artesanoId
   }; 
+
   const data = await buscarProducto(filtro);
 
-    currentPage = 1; // Reset to the first page
+   // currentPage = 1; // Reset to the first page
     displayTable(data, rowsPerPage, currentPage);
     displayPagination(data, rowsPerPage);
 }
@@ -215,9 +147,8 @@ $(document).on('click', '.btn_Eliminar', async function (e) {
 
  // Datos de ejemplo para llenar la tabla
 
-
-const rowsPerPage = 10;
-let currentPage = 1; 
+ async function iniciarcarga(){
+  
 
 const Nombreproducto = document.getElementById('nombre-producto').value; 
 const Preciosid = document.getElementById('precios-id').value;
@@ -232,6 +163,14 @@ const filtro = {
   id:artesanoId
 }; 
 const data = await buscarProducto(filtro);
+
+// Inicializar la tabla y la paginación
+
+
+
+displayTable(data, rowsPerPage, currentPage);
+displayPagination(data, rowsPerPage);
+}
 
 async function displayTable(data, rowsPerPage, page) {
   /*const table = document.getElementById('tablaproducto').getElementsByTagName('tbody')[0];
@@ -378,5 +317,5 @@ function updateInfo(start, end, total) {
 }
 
 // Inicializar la tabla y la paginación
-displayTable(data, rowsPerPage, currentPage);
-displayPagination(data, rowsPerPage);
+/*displayTable(data, rowsPerPage, currentPage);
+displayPagination(data, rowsPerPage);*/

@@ -1,6 +1,6 @@
 import { loadPartials } from '../utils/viewpartials';
 import { saveUser, getprogramasbyIESTP, getusuarioDNI, deleteUser,importarNotas } from './api';
-import { hideLoading, showLoading, checkSession, llenarinformacionIESTPProg } from '../utils/init';
+import { hideLoading, showLoading,  llenarinformacionIESTPProg } from '../utils/init';
 import { showToast } from '../utils/toast';
 import { getDataFromLocalStorage, } from '../utils/config'
  
@@ -29,7 +29,7 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession()
+  //checkadminsession()
   //setDrp()
   //cargarDatosusuario();
   // buscarlibro();
@@ -43,12 +43,12 @@ function startApp () {
 
 }
 
-async function checkadminsession () {
+/*async function checkadminsession () {
   let result = await checkSession()
   if (result.usuario.rolid != 1) {
     location.href = "sinacceso.html"
   }
-}
+}*/
 
 function eventorol () {
  /* $('#drprol').change((e) => {
