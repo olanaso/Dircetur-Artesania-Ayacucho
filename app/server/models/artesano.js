@@ -11,7 +11,7 @@ module.exports = sequelize.define('artesano', {
         autoIncrement: true,
         field: 'id'
     },
-    usuario_id: {
+    usuario_id: { 
         type: Sequelize.INTEGER,
         allowNull: true,
         field: 'usuario_id'
