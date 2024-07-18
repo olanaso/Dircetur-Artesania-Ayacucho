@@ -1064,7 +1064,7 @@ hr {
 .logo {
   display: block;
   margin: auto;
-  text-align: center;
+  text-align: center; 
 }
 
 .logo img {
