@@ -99,7 +99,7 @@
 							</ul>		
 					 	</li> 
 						 <li>
-							<a href="#search"><i class="fa fa-shopping-cart"></i></a>
+							<a href="principal-compra.html"><i class="fa fa-shopping-cart"></i></a>
 						</li> 
 						 <li>
 							<a href="#search"><i class="fa fa-search"></i></a>
@@ -209,13 +209,59 @@
 								</div>
 								<div class="col-md-6">
 									<div class="stock-info">
-										<p style="margin-bottom: 0;">25 disponibles 
+										<p style="margin-bottom: 0;margin-top: 0px !important;">25 disponibles 
 											<span style="display: inline-block; background-color: rgb(40 167 69 / 58%); color: white; padding: 3px 8px; border-radius: 5px; margin-left: 5px; cursor: pointer;">
 												En stock
 											</span>
-										</p>
+										</p>	
+									</div>
+									
+									<div class="product-info"> 
+										<p style="color: red; margin-top: 0;">En oferta hasta el: 20/02/2024.</p>
 									</div>
 								</div>
+								<div class="col-md-6">
+									<p style="color: rgb(12, 11, 11); margin-top: 0;">Escoge según el color:</p> 
+									<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" style="background: red;width: 30px;height: 30px;"> </button>
+									<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" style="background: yellow;width: 30px;height: 30px;"> </button>
+									<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" style="background: green;width: 30px;height: 30px;"> </button>
+								</div>
+								<div class="col-md-6">
+									<p style="color: rgb(12, 11, 11); margin-top: 0;">Otros costos:</p>  
+									<select name="brand" id="brand" style=" margin-bottom: 30px;font-size: 11px;font-weight: 600;line-height: 40px;width: 100%;height: 30px;padding-left: 10px;border: 1px solid #eee;background-color: transparent;">
+										<option value="-1">Seleccione otros</option>
+										  <option>accesorio cinta (S/. 5.00 )</option> 
+									</select>		
+								</div>
+								<div class="col-md-6" style="margin-bottom: 20px;">
+										<p style="color: rgb(12, 11, 11); margin-top: 0;">Escoge la talla:		</p> 
+										<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" >S </button>
+										<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" >M </button>
+									<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" >L </button>
+								</div>
+								<div class="col-md-6" >   
+								</div>
+								<div class="col-md-6" style="margin-bottom: 20px;">
+									<p style="color: rgb(12, 11, 11); margin-top: 0;">Cantidad				</p>  
+									<div class="counter-container">
+										<button id="decrement-btn" class="counter-button" disabled>-</button>
+										<input id="counter-value" type="text" class="counter-value" value="1" readonly>
+										<button id="increment-btn" class="counter-button">+</button>
+									</div>
+
+								</div>
+								<div class="col-md-6"> 
+								</br>  		
+							</br> 
+									<div class="product-info"> 
+										<p style="color: red; margin-top: 0;">tiempo estimado de envío:3-7 días</p>
+									</div> 
+								</div>
+							</br>  
+							</br>  
+							</br>  
+							</br>  
+							</div>
 							</div>
 							<!--<div class="container">
 								<div class="row">
@@ -251,19 +297,28 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="item wow fadeInUp animated" data-wow-duration="0.5s">
-                        <div class="sep-section-heading">
-                            <h2>Resumen <em>Producto</em></h2>
-                        </div>
+							<div class="sep-section-heading">
+								<h2>Resumen <em>Producto</em></h2>
+							</div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
                     </div>
+					
                 </div> 
                 <div class="col-md-6 wow fadeInUp animated" data-wow-duration="1s">
                     <div class="item">
-                        <div class="sep-section-heading">
-                            <h2>Sobre el <em>Artesano</em></h2>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
-                        
+						<div class="sep-section-heading">
+							<h2>Sobre el <em>Artesano</em></h2>
+						</div>
+						<div style="display: flex;flex-wrap: nowrap;align-content: stretch;align-items: center;flex-direction: row;">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.
+						 <br>
+								<a style="color: red;" href="principal-artesano.html">Ver mas... <i class="fas fa-plus-circle"></i></a>
+							 
+						</p>
+							<div >
+								<img class="sp-image" src="/img/user.png" alt="" style="width: 100%;">
+							</div>
+						</div>
                     </div>
                 </div>
                 <div class="col-md-6">
