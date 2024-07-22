@@ -54,7 +54,8 @@ buscarUsuario();
 }*/
 
  
- 
+let videoCounter = 0; 
+let videoCounter2 = 0; 
 
 async function nuevo () {
 
@@ -328,9 +329,51 @@ $('#btnvalidar').on('click', async function (e) {
         let reconocimientosJSON = JSON.stringify(listareconocimientos);
 
         let lst_reconocimientos = reconocimientosJSON; 
+
+
+
         
         let usuario = $('#usuario').val(); 
         let clave = $('#contrasena').val() ;
+
+       // Aquí puedes enviar videosJSON al servidor o hacer algo con él
+      //alert('Costos guardados en JSON:\n' + costosJSON);
+      /****fin */
+      let listavideos = []; 
+      $('#videoList tr').each(function() {
+          let fila = $(this);
+          let imagen = {
+              id: fila.find('td').eq(0).text(),
+              nombre: fila.find('td').eq(1).text(),
+              src: fila.find('a').attr('href'),  
+          }; 
+          listavideos.push(imagen);
+      });
+
+      let videosJSON = JSON.stringify(listavideos);
+      let lst_videos = videosJSON;
+
+
+       // Aquí puedes enviar videosenlaceJSON al servidor o hacer algo con él
+      //alert('Costos guardados en JSON:\n' + costosJSON);
+      /****fin */
+      let listavideosenlace = []; 
+      $('#videoList2 tr').each(function() {
+          let fila = $(this);
+          let imagen = {
+              id: fila.find('td').eq(0).text(),
+              nombre: fila.find('td').eq(1).text(),
+              src: fila.find('a').attr('href'),  
+          }; 
+          listavideosenlace.push(imagen);
+      });
+
+      let videosenlaceJSON = JSON.stringify(listavideosenlace);
+      let lst_videoenlace = videosenlaceJSON;
+  
+
+
+
 
 
           
@@ -350,7 +393,7 @@ $('#btnvalidar').on('click', async function (e) {
                         showToast('Se actualizo los datos correctamente')
                         usuarioid=resultlogin.id
     
-                            let result = await guardarArtesano({ artesanoId,dni,ruc,nombres,apellidos,correo,celular,lugar_nacimiento,ubigeo,lengua_materna,foto1,foto2,lst_taller,lst_especialidadtecnicas,lst_contactos,lst_mediospago,lst_reconocimientos,usuario_id:usuarioid  });
+                            let result = await guardarArtesano({ artesanoId,dni,ruc,nombres,apellidos,correo,celular,lugar_nacimiento,ubigeo,lengua_materna,foto1,foto2,lst_taller,lst_especialidadtecnicas,lst_contactos,lst_mediospago,lst_reconocimientos,usuario_id:usuarioid ,lst_videoenlace,lst_videos });
                             if (result) {
                               showToast('Se actualizo los datos correctamente')
                     
@@ -593,13 +636,67 @@ async function editarArtesano (id) {
               document.getElementById('listaReconocimiento').insertAdjacentHTML('beforeend', nuevaFila);
           }); 
 
+          
           /****Login */
+
 
         editarlogin =  await geteditarLogin(editarartesano.usuario_id); 
 
         $('#usuario').val(editarlogin.usuario) 
         $('#contrasena').val(editarlogin.clave) 
         $('#repetirContrasena').val(editarlogin.clave) 
+          
+     // Parsear el JSON
+      // Parsear el JSON y asegurarse de que es un arreglo
+      const lstvideos1 = JSON.parse(editarartesano.lst_videos);
+      const lstvideos = JSON.parse(lstvideos1); 
+      //console.log('videoList:', lst_videos);  // Verificar el contenido de lstimagenes 
+      lstvideos.forEach(item => {
+            videoCounter++;
+              let nuevaFila = `
+              <tr>
+                  <td>${videoCounter}</td>
+                  <td>${item.nombre}</td>
+                  <td><a href="${item.src}" target="_blank">Video subido</a></td>
+                  <td>
+                      <button type="button" class="btn btn-info btn-sm btn-view-video" data-link="${item.src}">Ver</button>  
+                      <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-video">
+                      <i class="icon icon-bin"></i> 
+                  </td>
+              </tr>
+              `; 
+              document.getElementById('videoList').insertAdjacentHTML('beforeend', nuevaFila);
+          });
+
+
+           // Parsear el JSON
+      // Parsear el JSON y asegurarse de que es un arreglo
+      const lstvideoenlace1 = JSON.parse(editarartesano.lst_videoenlace);
+      const lstvideoenlace = JSON.parse(lstvideoenlace1); 
+      //console.log('videoList:', lst_videos);  // Verificar el contenido de lstimagenes 
+      lstvideoenlace.forEach(item => {
+          videoCounter2++;
+              let nuevaFila = ` 
+              <tr>
+                  <td>${videoCounter2}</td>
+                  <td>${item.nombre}</td>
+                  <td><a href="${item.src}" target="_blank">${item.src}</a></td>
+                  <td>
+                      <button type="button" class="btn btn-info btn-sm btn-view-video" data-link="${item.src}">Ver</button> 
+                      
+                      <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-video1">
+                      <i class="icon icon-bin"></i> 
+                  </td>
+              </tr>
+              `; 
+              document.getElementById('videoList2').insertAdjacentHTML('beforeend', nuevaFila);
+          });
+
+
+
+
+
+          
 
 }
 
@@ -1343,6 +1440,222 @@ $('#editarreconocimientoBtn').on('click', function() {
     $('#imagenFoto2').attr('src', '/img/sin_imagen.jpg');
   });
 
+
+
+
+
+
+  
+  /******  videos */
+  
+  let videoStorage = {}; // Almacena los videos cargados
+
+  $('#addVideoLink').on('click', function() {
+
+    let videoName = $('#linkVideoName').val();
+    let videoLink = $('#videoLink').val();
+
+    if (!videoName || !videoLink) {
+      showToast('Por favor, complete todos los campos *.');
+        //alert("Por favor, complete todos los campos *.");
+        return;
+    }
+
+    var urlInput = document.getElementById('videoLink').value;
+    var message = document.getElementById('message');
+    var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-zA-Z0-9]{1,}\\.)?[a-zA-Z0-9]{2,}\\.[a-zA-Z]{2,})|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-zA-Z0-9@:%_\\+.~#?&//=]*)?' + // port and path
+        '(\\?[;&a-zA-Z0-9@:%_\\+.~#?&//=]*)?' + // query string
+        '(\\#[-a-zA-Z0-9@:%_\\+.~#?&//=]*)?$','i'); // fragment locator
+
+    if (!urlPattern.test(urlInput)) { 
+        showToast('URL no válida.'); 
+        $('#videoLink').val("");
+        return;
+    }
+ 
+
+      videoCounter2++;
+
+      let newRow = `
+          <tr>
+              <td>${videoCounter2}</td>
+              <td>${videoName}</td>
+              <td><a href="${videoLink}" target="_blank">${videoLink}</a></td>
+              <td>
+                  <button type="button" class="btn btn-info btn-sm btn-view-video" data-link="${videoLink}">Ver</button> 
+                  
+                  <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-video1">
+                  <i class="icon icon-bin"></i> 
+              </td>
+          </tr>
+      `;
+
+      $('#videoList2').append(newRow);
+      $('#linkForm')[0].reset();
+  });
+
+  $(document).on('click', '.btn-delete-video1', function() { 
+    alertDialog.createAlertDialog(
+      'confirm',
+      'Confirmar Alerta',
+      '¿Estás seguro de que deseas eliminar?',
+      'Cancelar',
+      'Continuar',
+      async() => {
+            try {
+
+                  $(this).closest('tr').remove();
+                  contadorImagenes--; 
+                  // Reordenar los números de la lista
+                  $('#videoList2 tr').each(function(index, tr) {
+                      $(tr).find('td:first').text(index + 1);
+                  });
+                    
+              } catch (error) {
+                console.error('Error al eliminar:', error);
+              }
+          }
+        );   
+    
+});
+
+
+  $(document).on('click', '.btn-view-video', function() {
+      let videoLink = $(this).data('link');
+      let embedLink = videoLink;
+
+      if (videoLink.includes('youtube.com/watch')) {
+          const urlParams = new URLSearchParams(new URL(videoLink).search);
+          const videoId = urlParams.get('v');
+          embedLink = `https://www.youtube.com/embed/${videoId}`;
+      } else if (videoLink.includes('youtu.be')) {
+          const videoId = videoLink.split('/').pop();
+          embedLink = `https://www.youtube.com/embed/${videoId}`;
+      }
+
+      $('#videoPlayer').attr('src', embedLink);
+      $('#videoModal').modal('show');
+  });
+
+  $('#videoModal').on('hidden.bs.modal', function() {
+      $('#videoPlayer').attr('src', ''); // Limpiar el src del iframe cuando se cierre el modal
+  });
+
+  $('#uploadVideo').on('change', function() {
+      let file = $(this).prop('files')[0];
+      if (file) {
+          let fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+          $('#fileSize').text(`${fileSizeMB}mb`);
+          if (file.size > 100 * 1024 * 1024) { // 100MB
+              $('#uploadProgress').addClass('bg-danger').text('100%');
+              $('#uploadProgress').css('width', '100%');
+          } else {
+              let progress = (file.size / (100 * 1024 * 1024) * 100).toFixed(0); // Percentage
+              $('#uploadProgress').removeClass('bg-danger').addClass('bg-success').text(`${progress}%`);
+              $('#uploadProgress').css('width', `${progress}%`);
+          }
+      } else {
+          $('#fileSize').text('100mb');
+          $('#uploadProgress').removeClass('bg-danger bg-success').text('0%');
+          $('#uploadProgress').css('width', '0%');
+      }
+  });
+
+  $('#cancelUpload').on('click', function() {
+      $('#uploadVideo').val('');
+      $('#fileSize').text('100mb');
+      $('#uploadProgress').removeClass('bg-danger bg-success').text('0%');
+      $('#uploadProgress').css('width', '0%');
+  });
+
+
+  $('#registerVideo').on('click', function() {
+      let videoName = $('#videoName').val();
+      let videoFile = $('#uploadVideo').prop('files')[0];
+
+      if (!videoName || !videoFile) {
+        showToast('Por favor, complete todos los campos *.');
+          //alert("Por favor, complete todos los campos *.");
+          return;
+      }
+
+      if (videoFile.size > 100 * 1024 * 1024) { // 100MB
+        showToast('El archivo no debe pesar más de 100mb.');
+          //alert("El archivo no debe pesar más de 100mb");
+          return;
+      }
+
+      videoCounter++;
+
+      // Aquí puedes enviar imagenesprincipalJSON al servidor o hacer algo con él
+      //alert('Costos guardados en JSON:\n' + costosJSON);
+      /****fin */
+      var videoPreview = document.getElementById('videoPreview');
+
+      // Obtener el valor del atributo src
+      var video_Preview = videoPreview.src;
+      let videoURL = video_Preview;
+      //let videoURL = URL.createObjectURL(videoFile);
+      videoStorage[videoCounter] = videoURL; // Almacena la URL del video
+
+      let newRow = `
+          <tr>
+              <td>${videoCounter}</td>
+              <td>${videoName}</td>
+              <td><a href="${videoURL}" target="_blank">Video subido</a></td>
+              <td>
+                  <button type="button" class="btn btn-info btn-sm btn-view-video" data-link="${videoURL}">Ver</button>  
+                  <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-video">
+                  <i class="icon icon-bin"></i> 
+              </td>
+          </tr>
+      `;
+
+      $('#videoList').append(newRow);
+      $('#videoForm')[0].reset();
+      $('#fileSize').text('100mb');
+      $('#uploadProgress').removeClass('bg-danger bg-success').text('0%');
+      $('#uploadProgress').css('width', '0%');
+  });
+
+
+  $(document).on('click', '.btn-delete-video', function() {
+
+
+    alertDialog.createAlertDialog(
+      'confirm',
+      'Confirmar Alerta',
+      '¿Estás seguro de que deseas eliminar?',
+      'Cancelar',
+      'Continuar',
+      async() => {
+            try {
+
+                    $(this).closest('tr').remove();
+                    contadorImagenes--;
+                
+                    // Reordenar los números de la lista
+                    $('#videoList tr').each(function(index, tr) {
+                        $(tr).find('td:first').text(index + 1);
+                    });
+                    
+              } catch (error) {
+                console.error('Error al eliminar:', error);
+              }
+          }
+        );  
+
+
+    
+}); 
+
+
+
+
+
 });
  
 /******foto 1 */
@@ -1408,6 +1721,23 @@ function handleUploadResponseimgprincipal2 (response) {
     }
  
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  initializeFileUploader({
+      fileInputId: 'uploadVideo',
+      progressBarId: 'progressBar',
+      statusElementId: 'status',
+      uploadUrl: 'http://localhost:3001/api/producto/fileupload',
+      callback: handleUploadResponselistavideo,
+      folder: '/producto/video/',
+  });
+});
+function handleUploadResponselistavideo (response) {
+  
+  $('#videoPreview').attr('src', 'http://localhost:3001/'+response.path).show();
+ 
+}
+
 
 //carga de imagen de perfil de cliente
 function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {

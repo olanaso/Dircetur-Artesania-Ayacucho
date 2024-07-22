@@ -11,7 +11,7 @@ module.exports = sequelize.define('artesano', {
         autoIncrement: true,
         field: 'id'
     },
-    usuario_id: {
+    usuario_id: { 
         type: Sequelize.INTEGER,
         allowNull: true,
         field: 'usuario_id'
@@ -100,7 +100,17 @@ module.exports = sequelize.define('artesano', {
         type: Sequelize.JSON,
         allowNull: true,
         field: 'lst_reconocimientos',
+    }, 
+    lst_videos: {
+        type: Sequelize.JSON,
+        allowNull: true,
+        field: 'lst_videos'
     },
+    lst_videoenlace: {
+        type: Sequelize.JSON,
+        allowNull: true,
+        field: 'lst_videoenlace'
+    }, 
     estado: {
         type: Sequelize.INTEGER,
         allowNull: true,
