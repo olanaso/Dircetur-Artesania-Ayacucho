@@ -112,6 +112,9 @@
 										</li>
 										<li class="nav-item">
 											<a class="nav-link" id="home-tab6" data-toggle="tab" href="#home6" role="tab" aria-controls="home6" aria-selected="false">Reconocimientos</a>
+										</li>  
+										<li class="nav-item">
+											<a class="nav-link" id="home-tab7" data-toggle="tab" href="#home7" role="tab" aria-controls="home7" aria-selected="false">Video Presentación</a>
 										</li> 
 									</ul>
 									
@@ -739,6 +742,148 @@
 
 
 										</div> 
+
+										<div class="tab-pane fade" id="home7" role="tabpanel" aria-labelledby="home-tab7">  
+											 
+											<h6>Escoge una opción para subir el video:</h6>
+											<ul class="nav nav-tabs" id="myTab" role="tablist">
+												<li class="nav-item">
+													<a class="nav-link active" id="upload-tab" data-toggle="tab" href="#upload" role="tab" aria-controls="upload" aria-selected="true">Sube el video</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" id="link-tab" data-toggle="tab" href="#link" role="tab" aria-controls="link" aria-selected="false">Sube el enlace del video</a>
+												</li>
+											</ul>
+											<div class="tab-content" id="myTabContent">
+												<div class="tab-pane fade show active" id="upload" role="tabpanel" aria-labelledby="upload-tab">
+
+													<h6>Sube el video del presentación</h6>
+													<form id="videoForm">
+														<div class="card" style="min-height: 70px;"> 
+															<div class="card-body"> 
+		
+																<div class="row mt-4">
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre del video:</h6>
+																	</div>
+																	<div class="col-sm-9">   
+																		<input type="text" class="form-control" id="videoName" maxlength="100"  placeholder="Ingrese el nombre del video">
+																	</div>  
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Seleccionar:</h6>
+																	</div>
+																	<div class="col-sm-9">   
+																		<div class="d-flex align-items-center"> 
+																			<input type="file"  id="uploadVideo" name="uploadVideo" accept="video/*">
+																			<span id="fileSize" class="mr-2"></span>
+																			<div class="progress mr-2" style="flex-grow: 1;">
+																				<div id="uploadProgress" class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+																			</div>
+																			<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-original-title="cancelar" id="cancelUpload">&times;</button> 
+																		</div>	
+																		<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+																		<div id="status" style="display: none;"></div> 
+																		<img id="videoPreview" src="/img/sin_imagen.jpg"   style="display: none;">
+																		<small class="text-danger">El archivo no debe pesar más de 100mb</small>
+																	</div>   
+
+																	<div class="col-md-12 text-right">   
+																		<button type="button" class="btn btn-info btn-sm" id="registerVideo">Añadir <i class="icon icon-circle-with-plus"></i></button>
+																	</div>
+																</div> 
+															</form>
+																<hr>
+																<h6>Lista de videos</h6>  
+																<table class="table table-bordered offer-table">
+																	<thead>
+																		<tr>
+																			<th style="width: 5%;">N°</th>
+																			<th style="width: 30%;">Nombre del video</th>
+																			<th style="width: 45%;">Enlace del video</th>
+																			<th style="width: 20%;">Acción</th>
+																		</tr>
+																	</thead> 
+																	<tbody id="videoList">
+																		
+																	</tbody>
+																</table>
+															</div> 
+														</div>  
+
+
+
+
+									 </div>
+												<div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab">
+													<h6>Sube el enlace del video</h6> 
+													<form id="linkForm">
+
+														<div class="card" style="min-height: 70px;"> 
+															<div class="card-body"> 
+		
+																<div class="row mt-4">
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre del video:</h6>
+																	</div>
+																	<div class="col-sm-9">   
+																		<input type="text" class="form-control" id="linkVideoName" maxlength="100"  placeholder="Ingrese el nombre del video">  
+																	</div>  
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Enlace del video:</h6>
+																	</div>
+																	<div class="col-sm-9">   
+																		<input type="text" class="form-control" id="videoLink" maxlength="150"  placeholder="Ingrese el enlace del video">
+																	</div>  
+																	<div class="col-md-12 text-right">
+																		<button type="button" class="btn btn-info btn-sm" id="addVideoLink">
+																			Añadir <i class="icon icon-circle-with-plus"></i>
+																		</button>  
+																	</div>
+																</div> 
+																
+													</form>
+																<hr>
+																<h6>Lista de videos</h6>  
+																<table class="table table-bordered offer-table">
+																	<thead>
+																		<tr>
+																			<th style="width: 5%;">N°</th>
+																			<th style="width: 30%;">Nombre del video</th>
+																			<th style="width: 45%;">Enlace del video</th>
+																			<th style="width: 20%;">Acción</th>
+																		</tr>
+																	</thead> 
+																	<tbody id="videoList2">
+																		 
+																	</tbody>
+																</table>
+															</div> 
+														</div>   
+
+												</div>
+											</div> 
+									
+										<!-- Modal para ver video -->
+										<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h6 class="modal-title" id="videoModalLabel">Ver Video</h6>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<iframe id="videoPlayer" style="width: 100%; height: 500px;" frameborder="0" allowfullscreen></iframe>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+
+									</div> 
+									
 									</div>
 									
 									<hr>  
@@ -764,7 +909,7 @@
 		<!-- END: .app-container -->
 		<!-- BEGIN .main-footer -->
 		<footer class="main-footer fixed-btm">
-			Copyright Ayarte.pe 2024.
+			Copyright Artesanias Ayacucho 2024.
 		</footer>
 		<!-- END: .main-footer -->
 	</div>
