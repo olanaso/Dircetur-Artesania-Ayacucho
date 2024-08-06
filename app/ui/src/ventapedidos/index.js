@@ -299,7 +299,7 @@ function cargarTabla(pedidos) {
             case 'pagado':
                 estadoClass = 'badge badge-pill badge-success';
                 break;
-            case 'envio':
+            case 'enviado':
                 estadoClass = 'badge badge-pill badge-info';
                 break;
             case 'finalizado':

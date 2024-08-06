@@ -863,15 +863,18 @@ $(document).ready(function() {
       showToast('Por favor, ingresar enlace de contacto.');  
         return;
     }
-
+    //oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');"
     const selectElement = document.getElementById('tiporedsocial');
     const opciones = selectElement.options;
     let texto="";
     let valor="";
     for (let i = 0; i < opciones.length; i++) {
-         texto = opciones[i].text;
-         valor = opciones[i].value;
-        console.log(`Texto: ${texto}, Valor: ${valor}`);
+      if (opciones[i].value === tiporedsocial) {
+        texto = opciones[i].text;
+        valor = opciones[i].value;
+       console.log(`Texto: ${texto}, Valor: ${valor}`);
+        
+      }
     }
    
     contadorContacto++;
