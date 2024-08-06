@@ -163,16 +163,16 @@ $('#btnvalidar').on('click', async function (e) {
   
 
             e.preventDefault();
-            var isValid = true;
-            // Itera sobre todos los campos requeridos para verificar si están vacíos
-            $('#form .form-control[required]').each(function () {
-              if ($(this).val() === '') {
-                isValid = false;
-                $(this).css('border-color', 'red'); // Marca los campos vacíos
-              } else {
-                $(this).css('border-color', ''); // Restablece a la normalidad si se corrige
-              }
-            });
+            // var isValid = true;
+            // // Itera sobre todos los campos requeridos para verificar si están vacíos
+            // $('#form .form-control[required]').each(function () {
+            //   if ($(this).val() === '') {
+            //     isValid = false;
+            //     $(this).css('border-color', 'red'); // Marca los campos vacíos
+            //   } else {
+            //     $(this).css('border-color', ''); // Restablece a la normalidad si se corrige
+            //   }
+            // });
 
             if (!isValid) { 
               showToast('Por favor, ingresa todos los campos *.');
