@@ -163,7 +163,7 @@ $('#btnvalidar').on('click', async function (e) {
   
 
             e.preventDefault();
-            // var isValid = true;
+            var isValid = true;
             // // Itera sobre todos los campos requeridos para verificar si están vacíos
             // $('#form .form-control[required]').each(function () {
             //   if ($(this).val() === '') {
