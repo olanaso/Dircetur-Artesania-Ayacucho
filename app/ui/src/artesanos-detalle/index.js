@@ -866,12 +866,9 @@ $(document).ready(function() {
     let texto="";
     let valor="";
     for (let i = 0; i < opciones.length; i++) {
-      if (opciones[i].value === tiporedsocial) {
-        texto = opciones[i].text;
-        valor = opciones[i].value;
-       console.log(`Texto: ${texto}, Valor: ${valor}`);
-        
-      }
+         texto = opciones[i].text;
+         valor = opciones[i].value;
+        console.log(`Texto: ${texto}, Valor: ${valor}`);
     }
    
     contadorContacto++;

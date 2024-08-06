@@ -1,7 +1,7 @@
 # Ignorar todos los directorios node_modules en cualquier lugar del proyecto
 **/node_modules/
 
-**/public/
+#**/public/
 
 # Logs
 logs
