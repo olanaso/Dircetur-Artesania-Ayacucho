@@ -75,7 +75,6 @@ function cargarTabla(categorias) {
     const row = document.createElement('tr');
 
     row.innerHTML = `
-      <td>${categoria.id}</td>
       <td><img src="${categoria.foto_referente}" alt="${categoria.denominacion}" width="100"></td>
       <td>${categoria.denominacion}</td>
       <td>${categoria.abreviatura}</td>
