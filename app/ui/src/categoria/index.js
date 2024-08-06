@@ -1,7 +1,8 @@
 import { listarCategorias, guardarCategoria, filtrarCategorias, borrarCategoria, actualizarCategoria } from './api';
 import { FileUploader } from '../utils/upload.js';
 import { AlertDialog } from "../utils/alert";
-const alertDialog = new AlertDialog(); 
+const alertDialog = new AlertDialog();
+import { showToast } from '../utils/toast';
 
 
 import { loadPartials } from '../utils/viewpartials';   
@@ -140,7 +141,12 @@ async function editarCategoria(categoria) {
   $(modal).modal('show');
 
   const guardarBtn = document.getElementById('guardarCambios');
-  guardarBtn.addEventListener('click', async (event) => {
+  
+  // Eliminar todos los eventos de click previamente agregados
+  const nuevoGuardarBtn = guardarBtn.cloneNode(true);
+  guardarBtn.parentNode.replaceChild(nuevoGuardarBtn, guardarBtn);
+
+  nuevoGuardarBtn.addEventListener('click', async (event) => {
     event.preventDefault();
 
     const formData = {
@@ -162,7 +168,7 @@ async function editarCategoria(categoria) {
 
     try {
       const result = await actualizarCategoria(categoria.id, formData);
-      console.log('Categoría actualizada:', result);
+      showToast('Categoría actualizada exitosamente');
       await cargarCategoria();
       $(modal).modal('hide');
     } catch (error) {
