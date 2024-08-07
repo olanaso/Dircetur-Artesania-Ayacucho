@@ -291,7 +291,7 @@ function displayPagination(data, rowsPerPage) {
   const pageCount = Math.ceil(data.length / rowsPerPage);
   const prevButton = document.createElement('li');
   prevButton.classList.add('paginate_button', 'page-item', 'previous');
-  prevButton.innerHTML = `<a href="#" class="page-link">Siguiente</a>`;
+  prevButton.innerHTML = `<a href="#" class="page-link">Anterior</a>`;
   prevButton.addEventListener('click', function(e) {
       e.preventDefault();
       if (currentPage > 1) {
@@ -325,7 +325,7 @@ function displayPagination(data, rowsPerPage) {
 
   const nextButton = document.createElement('li');
   nextButton.classList.add('paginate_button', 'page-item', 'next');
-  nextButton.innerHTML = `<a href="#" class="page-link">Anterior</a>`;
+  nextButton.innerHTML = `<a href="#" class="page-link">Siguiente</a>`;
   nextButton.addEventListener('click', function(e) {
       e.preventDefault();
       if (currentPage < pageCount) {
