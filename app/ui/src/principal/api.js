@@ -36,3 +36,13 @@ export async function login(usuario,clave){
         console.error("Error:", error);
       }
 }*/
+
+export async function listarSliders(page, limit) {
+  try {
+      const response = await fetch(`${baseUrl}/sliders?page=${page}&limit=${limit}`, { method: 'GET' });
+      const result = await response.json();
+      return result;
+  } catch (error) {
+      console.error('Error:', error);
+  }
+}
