@@ -3,7 +3,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import {saveDataToLocalStorage} from '../utils/config'
 import {hideLoading} from '../utils/init'
 import {obtenerParametrosURL} from '../utils/path'
-import {login} from './api'
+import {login, listarSliders} from './api'
 import './flaticon.css'
 import './main.css'
 import './owl-carousel.css'
@@ -12,7 +12,8 @@ import './animated.css'
 import './font-awesome.min.css'
  
 
-$(document).ready(function(){
+$(document).ready(async function(){
+    await cargarSliders();
    if ($('.Modern-Slider').length) {
        $('.Modern-Slider').slick({
            // Tus opciones de configuración aquí
@@ -27,6 +28,7 @@ $(document).ready(function(){
            nextArrow: $('.NextArrow')
        });
    }
+   
    initMap();
 });
 
@@ -46,5 +48,47 @@ function initMap() {
         .openPopup();
 }
 
+async function cargarSliders(){
+    const sliders =  await listarSliders(1, 10000)
+    console.log(sliders.sliders)
+    $('.Modern-Slider').empty()
+    let filas = ''
+    for (let data of sliders.sliders) {
+      let cleanUrl = data.imagen.replace(/"/g, '');
+        filas += `
+            <div class="item">
+            <div class="img-fill">
+                <img src="${cleanUrl}" alt="">
+                <div class="info">
+                    <div>
+                        <h5>Ayacucho tiene la mejor opción</h5>
+                        <h3>Buscando lo perfecto en <em>Artesanias</em>?</h3>
+                        <h6 class="secondary-button">
+                            <a href="#">Registrate <i class="fa fa-user-plus"></i></a>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>`
+    }
+    let resultado = `
+      <div class="item">
+            <div class="img-fill">
+                <img src="img/main_slide_01.jpg" alt="">
+                <div class="info">
+                    <div>
+                        <h5>Ayacucho tiene la mejor opción</h5>
+                        <h3>Buscando lo perfecto<em>Artesanias</em>?</h3>
+                        <h6 class="secondary-button">
+                            <a href="#">Registrate <i class="fa fa-user-plus"></i></a>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>`+ filas 
+    $('.Modern-Slider').append(resultado)
+  }
+
+  
 // Llamar a la función de inicialización del mapa cuando el documento esté listo
-document.addEventListener('DOMContentLoaded', initMap);
+//document.addEventListener('DOMContentLoaded', initMap);
