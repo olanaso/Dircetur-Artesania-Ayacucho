@@ -16,10 +16,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 const sessionStore = new MySQLStore({
-  host: 'localhost',
-  user: 'jhzokngp_ucertificados',
-  password: 'ehxq2apf;-~j',
-  database: 'jhzokngp_sessions'
+  host: 'database-1.ctm6s248ayce.us-east-1.rds.amazonaws.com',
+  user: 'admin',
+  password: 'IdeasSoft2024%',
+  database: 'artesania'
 });
 
 /*Activando el uso de CORS*/
