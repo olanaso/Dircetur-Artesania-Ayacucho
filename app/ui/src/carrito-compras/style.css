@@ -54,5 +54,6 @@
 .card-buy-title{
     color: #ed1e78;
     font-weight: bold;
+    text-transform: uppercase;
     /* text-decoration: underline; */
 }
