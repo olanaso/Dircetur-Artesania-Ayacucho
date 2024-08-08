@@ -1,4 +1,4 @@
-import {baseUrl} from '../utils/config'
+import {baseUrl, saveDataToLocalStorage} from '../utils/config'
 export async function login(usuario,clave){
     const settings = {
         method: "POST",
@@ -14,6 +14,10 @@ export async function login(usuario,clave){
       try {
         const response = await fetch(baseUrl+"/login", settings);
         const data = await response.json();
+        console.log('Token:', data.token)
+        if(data && data.token){
+            saveDataToLocalStorage('accessToken', data.token)
+        }
         return data
       } catch (error) {
         console.error("Error:", error);

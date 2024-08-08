@@ -4,6 +4,7 @@ export async function checkSession(){
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": "Bearer " + getDataFromLocalStorage('accessToken')
         },
         body: new URLSearchParams({
           token: getDataFromLocalStorage('accessToken')
@@ -15,6 +16,7 @@ export async function checkSession(){
         const data = await response.json();
         return data
       } catch (error) {
+          console.log('Token:', getDataFromLocalStorage('accessToken'))
         console.error("Error:", error);
       }
 }
