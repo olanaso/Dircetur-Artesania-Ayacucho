@@ -138,3 +138,7 @@
     font-weight: bold;
     font-size: 1.2rem;  
   }
+  .text-underline-accept{
+    text-decoration: underline;
+    color: #2959ad;
+  }
