@@ -57,3 +57,7 @@
     text-transform: uppercase;
     /* text-decoration: underline; */
 }
+.custom-img-size {
+    width: 150px;
+    height: 150px;
+}

@@ -1,0 +1,140 @@
+.stepper-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .stepper-item {
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .stepper-item::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: repeating-linear-gradient(
+      -45deg,
+      #ccc,
+      #ccc 10px,
+      #ddd 10px,
+      #ddd 20px
+    );
+    background-size: 50px 50px;
+    animation: move 15s linear infinite;
+    z-index: 1;
+    transform: skewX(-20deg);
+  }
+  
+  @keyframes move {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 50px 50px;
+    }
+  }
+  
+  .stepper-item.active::before,
+  .stepper-item.completed::before {
+    background: repeating-linear-gradient(
+      -45deg,
+      #ff4495,
+      #ff4495 10px,
+      #a71655 10px,
+      #a71655 20px
+    );
+    background-size: 50px 50px;
+    transform: skewX(-20deg);
+  }
+  
+  .stepper-item:first-child::before {
+    left: 50%;
+  }
+  
+  .stepper-item:last-child::before {
+    right: 50%;
+  }
+  
+  .step-counter {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    color: white;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .stepper-item.active .step-counter,
+  .stepper-item.completed .step-counter {
+    background-color: #ed1e78;
+  }
+  
+  .step-title {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #777;
+  }
+  
+  .stepper-item.active .step-title,
+  .stepper-item.completed .step-title {
+    font-weight: bold;
+    color: #ed1e78;
+  }
+  
+  .step {
+    display: none;
+  }
+  
+  .step.active {
+    display: block;
+    padding: 30px;
+    margin: auto auto;
+    border: #c5c5c5 1px solid;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+    margin-top: 40px;
+  }
+  .btn-prev{
+    background-color: #bc2265;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    transition: .25s;
+  }
+  .btn-next{
+    background-color: #2959ad;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    transition: .25s;
+  }
+  
+  .btn-prev:hover,
+  .btn-next:hover{
+    color: white;
+    filter: brightness(1.15);
+    transition: .25s;
+  }
+  .step.active .step-title{
+    color: #de82fd;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  .step.active .step-subtitle{
+    color: #7b7b7b;
+    font-weight: bold;
+    font-size: 1.2rem;  
+  }
