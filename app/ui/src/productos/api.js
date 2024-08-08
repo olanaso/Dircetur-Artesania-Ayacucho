@@ -50,7 +50,6 @@ export async function getprogramasbyIESTP(iestpid){
 export async function buscarProducto(filtro) {
   
   try {
-      alert("TOKEN")
       const settings = {
           method: "GET",
           headers: {
