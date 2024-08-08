@@ -50,8 +50,16 @@ export async function getprogramasbyIESTP(iestpid){
 export async function buscarProducto(filtro) {
   
   try {
+      alert("TOKEN")
+      const settings = {
+          method: "GET",
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization' : 'Bearer ' + getDataFromLocalStorage('accessToken')
+          }
+      }
       const params = new URLSearchParams(filtro);
-      const response = await fetch(baseUrl + `/productos?${params}`);
+      const response = await fetch(baseUrl + `/productos?${params}`, settings);
       const result = await response.json();
       return result;
   } catch (error) {

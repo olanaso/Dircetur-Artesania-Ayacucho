@@ -2,13 +2,15 @@ import {baseUrl,getDataFromLocalStorage} from '../utils/config'
 export async function checkSession(){
 
     const token = getDataFromLocalStorage('accessToken')
+    console.log("primer", token)
     const headers ={
         'Content-Type': 'application/x-www-form-urlencoded',
+
     }
     if(token){
         headers['Authorization'] = 'Bearer ' + token
     }
-
+    console.log("Headers",headers)
     const settings = {
         method: "POST",
         headers: headers,

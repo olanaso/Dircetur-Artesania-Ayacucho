@@ -13,7 +13,7 @@ router.post('/usuario_save',  controller.save);
 router.post('/cambiar_contrasenia',  controller.cambiarContrasenia);
 router.get('/loginpersonal',  controller.loginpersonal);
 router.post('/login',  controller.loginpersonal);
-router.post('/protegido',  controller.verificarToken);
+router.post('/protegido',authenticateToken, controller.verificarToken);
 router.post('/recuperarcuenta',  controller.recuperarcuenta);
 router.post('/importarUsuarios',  controller.importarUsuarios);
 router.get('/reporteusuariosiestp',  controller.reporteusuariosiestp);

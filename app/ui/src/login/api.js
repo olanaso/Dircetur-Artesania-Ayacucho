@@ -4,6 +4,7 @@ export async function login(usuario,clave){
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
+
         },
         body: new URLSearchParams({
           usuario: usuario,
