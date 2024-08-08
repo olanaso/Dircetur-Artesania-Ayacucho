@@ -1,20 +1,32 @@
 import {baseUrl,getDataFromLocalStorage} from '../utils/config'
 export async function checkSession(){
+
+    const token = getDataFromLocalStorage('accessToken')
+    console.log("primer", token)
+    const headers ={
+        'Content-Type': 'application/x-www-form-urlencoded',
+
+    }
+    if(token){
+        headers['Authorization'] = 'Bearer ' + token
+    }
+    console.log("Headers",headers)
     const settings = {
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
+        headers: headers,
         body: new URLSearchParams({
-          token: getDataFromLocalStorage('accessToken')
+          token: token
         }),
       };
+    console.log('fetch settings', settings)
     
       try {
         const response = await fetch(baseUrl+"/api/protegido", settings);
         const data = await response.json();
+        console.log("El data del token", getDataFromLocalStorage('accessToken'))
         return data
       } catch (error) {
+          console.log('Token:', getDataFromLocalStorage('accessToken'))
         console.error("Error:", error);
       }
 }

@@ -46,6 +46,7 @@ export async function checkSession(){
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
+            'Authorization': 'Bearer ' + getDataFromLocalStorage('accessToken')
         },
         body: new URLSearchParams({
           token: getDataFromLocalStorage('accessToken')

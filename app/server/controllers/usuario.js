@@ -391,7 +391,7 @@ async function verificarToken (req, res) {
          
         //console.log(datosartesano)
 
-
+        console.log("Los headers",req.headers)
         return res.status(200).json({ isvalid: true, message: 'Token valido', usuarios });
     });
 }
