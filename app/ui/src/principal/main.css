@@ -3678,3 +3678,10 @@ footer .sub-footer p a:hover {
     text-align: justify;
     margin-top: 20px;
 }
+
+.item{
+    width: 15rem;
+}
+.thumb-content img{
+    width: 100%;
+}

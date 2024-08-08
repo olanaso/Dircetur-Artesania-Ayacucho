@@ -137,7 +137,7 @@
 						<div id="single-car" class="slider-pro sp-horizontal">
 							<div class="sp-slides-container">
 								<div class="sp-mask sp-grab">
-									<div class="sp-slides">
+									<div class="sp-slides" id="imagenesSlider">
 										<div class="sp-slide" data-index="0">
 											<div class="sp-image-container">
 												<img class="sp-image" src="/img/car_item_2.jpg" alt="">
@@ -202,15 +202,15 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="product-info">
-										<h4>Olla de Barro</h4>
-										<span style="white-space: nowrap;">S/. 1,200.00</span> 
-										<p style="color: red; margin-top: 0;">El precio incluye IGV.</p>
+										<h4 id="nombreProd">Olla de Barro</h4>
+										<span id="precioProd" style="white-space: nowrap;">S/. 1,200.00</span> 
+										<p  id="igvProd" dstyle="color: red; margin-top: 0;">El precio incluye IGV.</p>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="stock-info">
-										<p style="margin-bottom: 0;margin-top: 0px !important;">25 disponibles 
-											<span style="display: inline-block; background-color: rgb(40 167 69 / 58%); color: white; padding: 3px 8px; border-radius: 5px; margin-left: 5px; cursor: pointer;">
+										<p id="cantidadProd" style="margin-bottom: 0;margin-top: 0px !important;">25 disponibles 
+											<span id="disponible" style="display: inline-block; background-color: rgb(40 167 69 / 58%); color: white; padding: 3px 8px; border-radius: 5px; margin-left: 5px; cursor: pointer;">
 												En stock
 											</span>
 										</p>	
@@ -221,14 +221,16 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<p style="color: rgb(12, 11, 11); margin-top: 0;">Escoge según el color:</p> 
-									<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" style="background: red;width: 30px;height: 30px;"> </button>
-									<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" style="background: yellow;width: 30px;height: 30px;"> </button>
-									<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" style="background: green;width: 30px;height: 30px;"> </button>
+									<p style="color: rgb(12, 11, 11); margin-top: 0;">Escoge según el color:</p>
+									<div id="Colores">
+										<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" style="background: red;width: 30px;height: 30px;"> </button>
+										<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" style="background: yellow;width: 30px;height: 30px;"> </button>
+										<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" style="background: green;width: 30px;height: 30px;"> </button>
+									</div> 
 								</div>
 								<div class="col-md-6">
 									<p style="color: rgb(12, 11, 11); margin-top: 0;">Otros costos:</p>  
-									<select name="brand" id="brand" style=" margin-bottom: 30px;font-size: 11px;font-weight: 600;line-height: 40px;width: 100%;height: 30px;padding-left: 10px;border: 1px solid #eee;background-color: transparent;">
+									<select id="otrosCostos" name="brand" id="brand" style=" margin-bottom: 30px;font-size: 11px;font-weight: 600;line-height: 40px;width: 100%;height: 30px;padding-left: 10px;border: 1px solid #eee;background-color: transparent;">
 										<option value="-1">Seleccione otros</option>
 										  <option>accesorio cinta (S/. 5.00 )</option> 
 									</select>		
@@ -300,7 +302,7 @@
 							<div class="sep-section-heading">
 								<h2>Resumen <em>Producto</em></h2>
 							</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
+                        <p id="resumenProd">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
                     </div>
 					
                 </div> 
@@ -326,7 +328,7 @@
                         <div class="sep-section-heading">
                             <h2>Descripción <em>Producto</em></h2>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
+                        <p id="descripcionProd">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
                     </div>
                 </div> 
                 <div class="col-md-6 wow fadeInUp animated" data-wow-duration="1s">
@@ -354,7 +356,7 @@
                         <div class="sep-section-heading">
                             <h2>Cualidades <em>Producto</em></h2>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
+                        <p id="cualidadesProd">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
                     </div>
                 </div> 
                 <div class="col-md-6 wow fadeInUp animated" data-wow-duration="1s">
@@ -372,7 +374,7 @@
                         <div class="sep-section-heading">
                             <h2>Palabras <em>clave</em></h2>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
+                        <p id="palabrasClave">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
                     </div>
                 </div> 
                 <div class="col-md-6 wow fadeInUp animated" data-wow-duration="1s">
@@ -390,13 +392,14 @@
                         <div class="sep-section-heading">
                             <h2>Número <em>piezas</em></h2>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
+                        <p id="cantPiezas">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
                     </div>
                 </div> 
                 <div class="col-md-6 wow fadeInUp animated" data-wow-duration="1s">
                     <div class="item">
                         <div class="sep-section-heading">
                             <h2> Medidas <em>centimetros</em></h2>
+							<p id="medidasProd"></p>
                         </div>
                         
                     </div>
@@ -406,13 +409,14 @@
                         <div class="sep-section-heading">
                             <h2>Descripción <em>materiales</em></h2>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
+                        <p id="materialesProd">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
                     </div>
                 </div> 
                 <div class="col-md-6 wow fadeInUp animated" data-wow-duration="1s">
                     <div class="item">
                         <div class="sep-section-heading">
                             <h2> Peso <em>kilogramos</em></h2>
+							<p id="pesoProd"></p>
                         </div>
                         
                     </div>
@@ -422,7 +426,7 @@
                         <div class="sep-section-heading">
                             <h2>Técnicas <em>empleadas</em></h2>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
+                        <p id="tecnicasProd">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
                     </div>
                 </div> 
                 <div class="col-md-6 wow fadeInUp animated" data-wow-duration="1s">
@@ -438,7 +442,7 @@
                         <div class="sep-section-heading">
                             <h2>Tiempo <em>elaboración</em></h2>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
+                        <p id="tiempoElaboracion"></p>
                     </div>
                 </div> 
 
@@ -513,6 +517,7 @@
 </body>
 
 <script type="module" src="src/principal/index.js"></script> 
+<script type="module" src="src/principal-detalle/index.js"></script> 
 
 <!-- Slider Pro Js -->
 <script src="assets/js/sliderpro.min.js"></script>
