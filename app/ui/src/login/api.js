@@ -18,6 +18,7 @@ export async function login(usuario,clave){
         console.log('Token:', data.token)
         if(data && data.token){
             saveDataToLocalStorage('accessToken', data.token)
+            saveDataToLocalStorage('rol', data.usuario.rolid)
         }
         return data
       } catch (error) {
