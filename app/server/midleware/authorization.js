@@ -7,8 +7,10 @@ const authenticateToken = async (req, res, next) => {
 
 
     try{
+        console.log("El header", req.headers)
+        console.log(req.headers.authorization)
         if(!req.headers.authorization){
-            console.log(req.headers.authorization)
+
             handleHttpError(res, 'No existe token',401)
             return
         }

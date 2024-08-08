@@ -20,20 +20,21 @@ export function saveDataToLocalStorage (key, data) {
 
 // Function to get data from localStorage
 export function getDataFromLocalStorage (key) {
-  try {
-    // Get the data from localStorage using the given key
-    const dataJSON = localStorage.getItem(key);
-
-    // If the data exists, parse it from JSON back to an object
-    if (dataJSON !== null) {
-      const data = JSON.parse(dataJSON);
-      return data;
-    }
-
-    // If the data does not exist or if it's not a valid JSON, return null or handle accordingly
-    return null;
-  } catch (error) {
-    console.error('Error while getting data from localStorage:', error);
-    return null;
-  }
+  return JSON.parse(localStorage.getItem(key))
+  // try {
+  //   // Get the data from localStorage using the given key
+  //   const dataJSON = localStorage.getItem(key);
+  //
+  //   // If the data exists, parse it from JSON back to an object
+  //   if (dataJSON !== null) {
+  //     const data = JSON.parse(dataJSON);
+  //     return data;
+  //   }
+  //
+  //   // If the data does not exist or if it's not a valid JSON, return null or handle accordingly
+  //   return null;
+  // } catch (error) {
+  //   console.error('Error while getting data from localStorage:', error);
+  //   return null;
+  // }
 }
