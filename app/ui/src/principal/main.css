@@ -4,7 +4,7 @@
 Project:    Acropos - Car Dealer HTML Template
 Version:    1.1
 Last change:    25/Jan/2019
-Primary use:    Car Dealer 
+Primary use:    Car Dealer
 -------------------------------------------------------------------*/
 
 
@@ -12,8 +12,8 @@ Primary use:    Car Dealer
 [Table of contents]
 
 01. Main & Elements
-    02. Header 
-    03. Content 
+    02. Header
+    03. Content
         03.01. Slider (Banner)
         03.02. Car Items
         03.03. Blog Items
@@ -26,7 +26,7 @@ Primary use:    Car Dealer
 
 /* 01. Main & Elements Starts */
 
- 
+
 section {
   padding: 80px 0px 0px 0px
 }
@@ -1455,7 +1455,7 @@ section.top-slider-features .slider-top-features .owl-dots {
     left: 20px;
     bottom: -18px;
     margin-right: 26px
-} 
+}
 
 .on-grids .car-item .thumb-content .car-banner a,
 .recent-cars .car-item .thumb-content .car-banner a {
@@ -3659,7 +3659,7 @@ footer .sub-footer p a:hover {
 
 .certificate {
     border: 2px solid black;
-    padding: 20px; 
+    padding: 20px;
     margin-bottom: 20px;
     margin: 0 auto;
     font-family: Arial, sans-serif;
@@ -3684,4 +3684,8 @@ footer .sub-footer p a:hover {
 }
 .thumb-content img{
     width: 100%;
+}
+
+.input-solo{
+  width:100%
 }
