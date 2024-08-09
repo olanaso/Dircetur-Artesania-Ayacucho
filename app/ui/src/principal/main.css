@@ -34,10 +34,10 @@ section {
 .primary-button a {
   display: inline-block;
   background: #2959ad;
-  padding: 10px 20px;
+  padding: 10px 15px;
   text-align: center;
   letter-spacing: 0.5px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   border-radius: 5px;
   text-transform: uppercase;
