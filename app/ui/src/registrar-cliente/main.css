@@ -516,7 +516,7 @@ section {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(250, 250, 250, 0);
+    background-color: white;
     border-bottom: 1px solid rgba(250, 250, 250, 0.1);
     -webkit-transition: background 0.5s ease-in-out, height 0.5s ease-in-out;
     -o-transition: background 0.5s ease-in-out, height 0.5s ease-in-out;
@@ -595,7 +595,7 @@ section {
     font-size: 14px;
     letter-spacing: 1px;
     text-decoration: none;
-    color: #fff;
+    color: black;
     font-weight: 400;
     text-transform: uppercase;
     -webkit-transition: all 0.3s;
@@ -3677,4 +3677,7 @@ footer .sub-footer p a:hover {
 .content {
     text-align: justify;
     margin-top: 20px;
+}
+.input-solo{
+    width:100%
 }

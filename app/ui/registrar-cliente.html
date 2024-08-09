@@ -30,7 +30,85 @@
 </head>
 
 <body>
+<div class="preloader" style="display: none;">
+    <div class="preloader-bounce">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
 
+<div id="search">
+    <button type="button" class="close">×</button>
+    <form>
+        <input type="search" value="" placeholder="Escribe palabras clave aquí">
+        <button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
+    </form>
+</div>
+
+<header class="site-header wow fadeIn" data-wow-duration="1s" style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
+    <div id="main-header" class="main-header">
+        <div class="container clearfix">
+            <div class="logo">
+                <a href="index.html"></a>
+            </div>
+            <div id="cssmenu"><div id="menu-button">Menu</div>
+                <ul>
+                    <li><a href="principal.html">Inicio</a></li>
+                    <li class="active has-sub"><span class="submenu-button"></span><a href="#">Productos</a>
+                        <ul>
+                            <li class="has-sub"><span class="submenu-button"></span><a href="#">Sobre Nosotros</a>
+                                <ul>
+                                    <li><a href="car_listing_sidebar.html">Car Listing</a></li>
+                                    <li><a href="car_grid_sidebar.html">Car Grid</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub"><span class="submenu-button"></span><a href="#">Preguntas Frecuentes</a>
+                                <ul>
+                                    <li><a href="car_listing_no_sidebar.html">Car Listing</a></li>
+                                    <li><a href="car_grid_no_sidebar.html">Car Grid</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="principal-detalle.html">Single Car</a></li>
+                        </ul>
+                    </li>
+                    <li class="active has-sub"><span class="submenu-button"></span><a href="#">Blog</a>
+                        <ul>
+                            <li class="has-sub"><span class="submenu-button"></span><a href="#">Sidebar</a>
+                                <ul>
+                                    <li><a href="blog_listing_sidebar.html">Blog Classic</a></li>
+                                    <li><a href="blog_grid_sidebar.html">Blog Grid</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub"><span class="submenu-button"></span><a href="#">No Sidebar</a>
+                                <ul>
+                                    <li><a href="blog_listing_no_sidebar.html">Blog Classic</a></li>
+                                    <li><a href="blog_grid_no_sidebar.html">Blog Grid</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="single_post.html">Single Post</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact_us.html">Contactenos</a></li>
+
+                    <li class="active has-sub"><span class="submenu-button"></span><a href="#">Iniciar Sesión</a>
+                        <ul>
+                            <li><a href="blog_listing_no_sidebar.html">Iniciar Sesión</a></li>
+                            <li><a href="registrar-cliente.html">Registrate</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="principal-compra.html"><i class="fa fa-shopping-cart"></i></a>
+                    </li>
+                    <li>
+                        <a href="#search"><i class="fa fa-search"></i></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
 <div class="preloader" style="display: none;">
     <div class="preloader-bounce">
         <span></span>
@@ -52,7 +130,7 @@
 
 
 <section>
-    <div class="features-search-section">
+    <div class="features-search-section mt-5">
         <div class="container">
             <div class="row justify-content-center align-center">
                 <div class="col-md-6">
@@ -67,13 +145,13 @@
                         </div>
                         <div class="search-form">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="input-select">
-                                        <p>Tus nombres:</p>
+                                        <p>Tu Nombre:</p>
                                         <input class="input-solo" type="text" name="nombres" id="nombres" placeholder="Nombres">
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="input-select">
                                         <p>Tus Apellidos:</p>
                                         <input class="input-solo" type="text" name="apellidos" id="apellidos" placeholder="Apellidos">
@@ -93,63 +171,20 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-4">
                                     <div class="input-select">
                                         <p>Tu telefono:</p>
                                         <input class="input-solo" type="text" name="telefono" id="telefono" placeholder="Telefono">
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div class="input-select">
-                                        <p>Tu direccion:</p>
-                                        <input class="input-solo" type="text" name="direccion" id="direccion" placeholder="Direccion">
-                                    </div>
-                                </div>
 
 
 
-                                <div class="col-md-6">
-                                    <div class="input-select">
-                                        <select name="min-price" id="min-price">
-                                            <option value="-1">Seleccione el tipo de documento</option>
-                                            <option>DNI</option>
-                                            <option>Carnet de extranjeria</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-select">
-                                        <p>Tu direccion:</p>
-                                        <input class="input-solo" type="text" name="direccion" id="direccion" placeholder="Direccion">
-                                    </div>
-                                </div>
 
-
-                                <div class="col-md-6">
-                                    <div class="input-select">
-                                        <select name="min-price" id="min-price">
-                                            <option value="0">Seleccione la region</option>
-                                            <option>r-1</option>
-                                            <option>r-2</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-select">
-                                        <select name="max-price" id="max-price">
-                                            <option value="0">Seleccione la ciudad</option>
-                                            <option>c-1</option>
-                                            <option>c-2</option>
-                                            <option>c-3</option>
-                                            <option>c-4</option>
-                                            <option>c-5</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="col-md-12">
                                     <div class="secondary-button">
-                                        <a href="#" id="btn-registrar">Registrarse </a>
+                                        <a href="#" id="btnregistrar">Registrarse </a>
                                     </div>
                                 </div>
                             </div>
@@ -224,7 +259,8 @@
 </body>
 
 
-<script type="module" src="src/principal/index.js"></script>
+
+<script type="module" src="src/registrar-cliente/index.js"></script>
 
 <!-- Boostrap Js -->
 <script src="assets/js/wow.animation.js"></script>
