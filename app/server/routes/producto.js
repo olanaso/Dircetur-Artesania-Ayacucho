@@ -16,6 +16,7 @@ router.get('/productos', authenticateToken,  controller.buscar);
 
 router.post('/producto/fileupload', uploadarchivoProducto, controller.uploadFilproducto);
 router.get('/reportegeneral', controller.reportegeneral);
+router.get('/prductosFiltrados', controller.productoFiltrados);
 
 
 module.exports = router;

@@ -14,7 +14,7 @@ module.exports = {
     save,
     buscar,
     uploadFilproducto,
-    reportegeneral
+    reportegeneral, productoFiltrados
 };
 
 function guardar (req, res) {
@@ -249,6 +249,46 @@ async function uploadFilproducto (req, res, next) {
     } catch (err) {
         return next(err);
     }
+}
+async function productoFiltrados(req, res) {
+    try {
+        const {categoria, oferta, precio_min, precio_max} = req.params;
+
+        let filters = {};
+        if (categoria) {
+            filters.categoria_id = categoria;
+        }
+
+        if (oferta) {
+            filters.lst_ofertas = {
+                [Op.ne]: '[]'
+            };
+        }
+
+        if (precio_min) {
+            filters.precio = {
+                [Op.gte]: precio_min
+            };
+        }
+
+        if (precio_max) {
+            filters.precio = {
+                ...filters.precio,
+                [Op.lte]: precio_max
+            };
+        }
+        const productos = await model.findAll({ where: filters });
+
+        if (productos) {
+            res.status(200).json(productos);
+        }else{
+            res.status(500).json({ error: 'no se han encontrado productos' })
+        }
+        
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+    
 }
 
 

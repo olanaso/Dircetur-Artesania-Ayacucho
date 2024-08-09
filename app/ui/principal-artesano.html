@@ -136,25 +136,25 @@
 					<div class="col-md-4" > 
 							<div style="margin-bottom: 20px;text-align: -webkit-center;">
 								<div class="sp-image-container">
-									<img class="sp-image" src="/img/user.png" alt="">
+									<img class="sp-image" id="fotoArtesano" src="/img/user.png" alt="">
 								</div>
 									 
 							</div>
 							<div style="margin-bottom: 20px; "> 
 								<div class="product-info" >
-									<h4 style="text-align: center;margin-bottom: 20px;" >Artesano artesano, artesano</h4> 
+									<h4 id="nombresArtesano" style="text-align: center;margin-bottom: 20px;" >Artesano artesano, artesano</h4> 
 									<div class="more-details"> 
 										<div class="item"> 
 											<div class="contact-info">
 												<div class="row">
 													<div class="phone col-md-12 col-sm-6 col-xs-6">
-														<i class="fa fa-phone"></i><span>+1 123 489-5748</span>
+														<i class="fa fa-phone"></i><span id="telefonoArtesano">+1 123 489-5748</span>
 													</div>
 													<div class="mail col-md-12 col-sm-6 col-xs-6">
-														<i class="fa fa-envelope"></i><span>youremail@gmail.com</span>
+														<i class="fa fa-envelope"></i><span id="emailArtesano">youremail@gmail.com</span>
 													</div>
 													<div class="phone col-md-12 col-sm-6 col-xs-6">
-														<i class="fas fa-map-marker-alt"></i><span>direccion</span>
+														<i class="fas fa-map-marker-alt"></i><span id="direccionArtesano">direccion</span>
 													</div>
 												</div>
 											</div>
@@ -175,14 +175,17 @@
 										</div> 
 									</div> 
 									<p style="color: black; margin-top: 0;">
-										<strong>Habilidades de un artesano:</strong> Un artesano posee una variedad de habilidades esenciales que le permiten crear productos de alta calidad. La destreza manual es fundamental, permitiéndole trabajar con precisión y cuidado. Además, tiene un profundo conocimiento de los materiales que utiliza, comprendiendo sus propiedades y aplicaciones. La creatividad es clave, ya que le permite diseñar y producir piezas únicas y atractivas.  
+										<strong>Habilidades de un artesano:</strong> <br> <span id="habilidades" style="all:unset ;"></span>
 									</p>
+									
 									<p style="color: black; margin-top: 0;">
-										<strong>Tipos de artesanía que produce:</strong> Un artesano puede especializarse en una variedad de disciplinas artesanales, cada una con sus propias técnicas y materiales únicos. En la  artesanía en madera , los artesanos crean muebles, esculturas, utensilios de cocina y decoraciones talladas a mano, utilizando técnicas tradicionales y modernas.  
+										<strong>Tipos de artesanía que produce:</strong> <br> <span id="tiposArtesania" style="all:unset ;"></span>
 									</p>
+									
 									<p style="color: black; margin-top: 0;">
-										<strong>Línea artesanal:</strong> Nuestra línea artesanal se distingue por la creación de productos únicos y de alta calidad, elaborados con técnicas tradicionales que han sido perfeccionadas a lo largo de generaciones. Cada pieza es una obra de arte hecha a mano, reflejando la pasión y la habilidad de nuestros artesanos. Utilizamos materiales seleccionados con cuidado, como madera, cerámica, cuero, y textiles naturales, para garantizar no solo la belleza sino también la durabilidad de nuestros productos.
+										<strong>Línea artesanal:</strong> <br> <span id="lineaArtesanal"></span>
 									</p>	
+									
 								</div> 
 							</div> 
 						</div>
@@ -205,19 +208,19 @@
 					
                 </div> 
 				<div class="col-md-6">
-                    <div class="item wow fadeInUp animated" data-wow-duration="0.5s">
+                    <div class="item wow fadeInUp animated w-100" data-wow-duration="0.5s">
 						
 						<p style="color: black; margin-top: 0;">
-							<strong>Nombre del taller:</strong> artesania 2024  
+							<strong>Nombre del taller:</strong> <span id="nombreTaller">artesania 2024 </span> 
 						</p>
 						<p style="color: black; margin-top: 0;">
-							<strong>Ruc del taller:</strong> 2515484578
+							<strong>Ruc del taller:</strong> <span id="rucTaller">2515484578</span> 
 						</p>
 						<p style="color: black; margin-top: 0;">
-							<strong>Dirección física:</strong> av.direccion 1525 victoria
+							<strong>Dirección física:</strong> <span id="direccionTaller">av.direccion 1525 victoria</span>
 						</p>
 						<p style="color: black; margin-top: 0;">
-							<strong>Horario de atención:</strong> Lunes - Viernes de 08: a.m. - 6:00 p.m
+							<strong>Horario de atención:</strong> <span id="atencionTaller">Lunes - Viernes de 08: a.m. - 6:00 p.m</span>
 						</p>		
 
                     </div>
@@ -235,7 +238,7 @@
                 </div> 
 
 				<div class="col-md-12">
-                    <div class="item wow fadeInUp animated" data-wow-duration="0.5s">
+                    <div class="item wow fadeInUp animated w-100" data-wow-duration="0.5s">
                         <div class="sep-section-heading">
 							<div class="certificate">
 								<div class="title">Reconocimiento por ......</div>
@@ -402,6 +405,7 @@
 </body>
 
 <script type="module" src="src/principal/index.js"></script> 
+<script type="module" src="src/principal-artesano/index.js"></script> 
 
 <!-- Slider Pro Js -->
 <script src="assets/js/sliderpro.min.js"></script>
