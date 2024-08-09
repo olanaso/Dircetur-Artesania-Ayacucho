@@ -79,7 +79,7 @@ export async function guardarArtesano(artesano) {
       console.error("Error:", error);
   }
 }
-
+//comprobar en donde se usa y borrar
 export async function guardarUsuario(usuario) {
   if (usuario.usuarioid != 0) {
     usuario.id = usuario.usuarioid;
