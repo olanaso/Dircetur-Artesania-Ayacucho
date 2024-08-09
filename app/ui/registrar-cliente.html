@@ -93,7 +93,7 @@
 
                     <li class="active has-sub"><span class="submenu-button"></span><a href="#">Iniciar Sesión</a>
                         <ul>
-                            <li><a href="login-cliente.html">Iniciar Sesión</a></li>
+                            <li><a href="blog_listing_no_sidebar.html">Iniciar Sesión</a></li>
                             <li><a href="registrar-cliente.html">Registrate</a></li>
                         </ul>
                     </li>
@@ -117,15 +117,6 @@
     </div>
 </div>
 
-<div id="search">
-    <button type="button" class="close">×</button>
-    <form>
-        <input type="search" value="" placeholder="Escribe palabras clave aquí">
-        <button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
-    </form>
-</div>
-
-
 
 
 
@@ -143,52 +134,46 @@
                                 <h2>REGISTRATE</h2>
                             </div>
                         </div>
-                        <div class="search-form">
+                        <form class="search-form form-register-client" id="registerForm">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-select">
-                                        <p>Tu Nombre:</p>
-                                        <input class="input-solo" type="text" name="nombres" id="nombres" placeholder="Nombres">
+                                        <label for="nombres">Tu Nombre:</label>
+                                        <input class="input-solo" type="text" name="nombres" id="nombres" placeholder="Nombres" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-select">
-                                        <p>Tus Apellidos:</p>
-                                        <input class="input-solo" type="text" name="apellidos" id="apellidos" placeholder="Apellidos">
+                                        <label for="apellidos">Tus Apellidos:</label>
+                                        <input class="input-solo" type="text" name="apellidos" id="apellidos" placeholder="Apellidos" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input-select">
-                                        <p>Tu correo:</p>
-                                        <input class="input-solo" type="text" name="correo" id="correo" placeholder="Correo">
+                                        <label for="correo">Tu correo:</label>
+                                        <input class="input-solo" type="text" name="correo" id="correo" placeholder="Correo" required>
                                     </div>
                                 </div>
-
+                        
                                 <div class="col-md-12">
                                     <div class="input-select">
-                                        <p>Tu contraseña:</p>
-                                        <input class="input-solo" type="password" name="contraseña" id="contraseña" placeholder="Contraseña">
+                                        <label for="contraseña">Tu contraseña:</label>
+                                        <input class="input-solo" type="password" name="contraseña" id="contraseña" placeholder="Contraseña" required>
                                     </div>
                                 </div>
-
+                        
                                 <div class="col-md-12 mb-4">
                                     <div class="input-select">
-                                        <p>Tu telefono:</p>
-                                        <input class="input-solo" type="text" name="telefono" id="telefono" placeholder="Telefono">
+                                        <label for="telefono">Tu telefono:</label>
+                                        <input class="input-solo" type="text" name="telefono" id="telefono" placeholder="Telefono" required>
                                     </div>
                                 </div>
-
-
-
-
-
+                        
                                 <div class="col-md-12">
-                                    <div class="secondary-button">
-                                        <a href="#" id="btnregistrar">Registrarse </a>
-                                    </div>
+                                    <button class="btn-register-client btn w-100" type="submit" id="btnregistrar">Registrarse</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
