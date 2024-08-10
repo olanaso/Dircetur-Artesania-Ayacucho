@@ -1,6 +1,5 @@
 import { listarPedidos, filtrarPedidos } from './api';
-
-
+import { showToast } from '../utils/toast';
 import { loadPartials } from '../utils/viewpartials';   
 import {  hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
 
@@ -70,7 +69,6 @@ const tablaPedidoBody = tablaPedidos.getElementsByTagName('tbody')[0];
 async function cargarPedidos() {
     try {
         let pedidos;
-
         // Determinar si se está filtrando o no
         if (Object.keys(currentFilter).length === 0) {
             pedidos = await listarPedidos(currentPage, DEFAULT_PAGE_LIMIT);
@@ -238,11 +236,13 @@ async function cambiarPagina(page) {
         await cargarPedidos();
     }
 }
+btnFiltrar.addEventListener('click', async (event) => {
+    event.preventDefault();
+    await filtrarPedidosAction();
+});
 
 async function filtrarPedidosAction() {
-    btnFiltrar.addEventListener('click', async (event) => {
-        event.preventDefault();
-
+    
         // Obtener valores de los campos de filtro
         const numPedido = document.getElementById('num-pedido').value;
         const artesano = document.getElementById('nombre-artesano').value;
@@ -278,7 +278,6 @@ async function filtrarPedidosAction() {
         } catch (error) {
             console.error('Error al filtrar pedidos:', error);
         }
-    });
 }
 
 function cargarTabla(pedidos) {
@@ -295,7 +294,7 @@ function cargarTabla(pedidos) {
             case 'pagado':
                 estadoClass = 'badge badge-pill badge-success';
                 break;
-            case 'enviado':
+            case 'envio':
                 estadoClass = 'badge badge-pill badge-info';
                 break;
             case 'finalizado':
@@ -308,10 +307,15 @@ function cargarTabla(pedidos) {
                 estadoClass = '';
         }
 
+        const clienteNombres = pedido.cliente?.nombres ?? 'NA';
+        const clienteApellidos = pedido.cliente?.apellidos ?? 'NA';
+        const artesanoNombres = pedido.artesano?.nombres ?? 'NA';
+        const artesanoApellidos = pedido.artesano?.apellidos ?? 'NA';
+
         row.innerHTML = `
             <td>${pedido.num_pedido}</td>
-            <td>${pedido.cliente.nombres} ${pedido.cliente.apellidos}</td>
-            <td>${pedido.artesano.nombres} ${pedido.artesano.apellidos}</td>
+            <td>${clienteNombres} ${clienteApellidos}</td>
+            <td>${artesanoNombres} ${artesanoApellidos}</td>
             <td>${formatearFecha(pedido.fecha_pedido)}</td>
             <td>${formatearFecha(pedido.updatedAt)}</td>
             <td><span class="${estadoClass}">${pedido.estado}</span></td>
@@ -327,6 +331,8 @@ function cargarTabla(pedidos) {
     });
 }
 
+
+
 function formatearFecha(fecha) {
     const date = new Date(fecha);
     const anio = date.getUTCFullYear();
@@ -337,6 +343,5 @@ function formatearFecha(fecha) {
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarPedidos();
-    filtrarPedidosAction();
 });
 

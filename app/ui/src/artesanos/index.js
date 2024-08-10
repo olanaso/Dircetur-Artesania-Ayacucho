@@ -2,343 +2,158 @@ import { loadPartials } from '../utils/viewpartials';
 import { validarHTML5 } from '../utils/validateForm';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
-import { buscarArtesano,  deleteArtesano } from './api';  
-import { showLoading, hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
-import { getDataFromLocalStorage, } from '../utils/config'
+import { buscarArtesano, deleteArtesano } from './api';  
+import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
+import { getDataFromLocalStorage } from '../utils/config';
 import { showToast } from '../utils/toast';
-import '../artesanos/style.css'
-
+import '../artesanos/style.css';
 
 hideLoading();
+
 // Uso de la función
 (async function () {
   let partials = [
     { path: 'partials/shared/header.html', container: 'app-header' },
-    { path: 'partials/shared/menu.html', container: 'app-side' },
-
-
+    { path: 'partials/shared/menu.html', container: 'app-side' }
   ]; 
   try {
     await loadPartials(partials);
-    import ('../utils/common')
-
+    import ('../utils/common');
    
-    // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
     console.log('Las vistas parciales se han cargado correctamente!');
-    // Por ejemplo, podrías iniciar tu aplicación aquí.
-
     startApp();
   } catch (e) {
     console.error(e);
   }
 })();
 
-
-
-function startApp () {
-  //checkadminsession(); 
+function startApp() {
   setTimeout(function() {
     llenarinformacionIESTPProg();
-    //marcarSubMenuSeleccionado();
-}, 500); 
-iniciarcarga();
-
+  }, 500); 
+  iniciarcarga();
 }
-/*async function checkadminsession () {
-  let result = await checkSession()
-  if (result.usuario.rolid != 1) {
-    location.href = "sinacceso.html"
-  }
-}*/
- 
+
 const rowsPerPage = 10;
 let currentPage = 1; 
- 
 
-async function buscarArtesano22 () {
-  
+async function buscarArtesano22() {
+  showLoading();
 
-   
-      showLoading() 
+  const Nombre = document.getElementById('nombre').value;
+  const Correo = document.getElementById('correo').value; 
+  const filtro = {
+    nombre: Nombre,
+    correo: Correo
+  }; 
+  lstartesanos = await buscarArtesano(filtro);
 
-      const Nombre = document.getElementById('nombre').value;
-      const Correo = document.getElementById('correo').value; 
-      const filtro = {
-        nombre:Nombre,
-        correo:Correo 
-      }; 
-      lstartesanos = await buscarArtesano(filtro);
-      
-    
+  let tabla = document.getElementById('tablaartesano');
+  tabla.innerHTML = '';
+  let encabezados = '<tr><th>N°</th><th>Nombre y Apellidos</th><th>Correo</th><th>Tipo</th><th style="text-align: center;">Acciones</th></tr>';
+  tabla.innerHTML += encabezados;
 
-      // Obtener la referencia del elemento HTML donde se insertará la tabla
-      let tabla = document.getElementById('tablaartesano');
-
-      // Limpiar la tabla antes de insertar nuevos datos
-      tabla.innerHTML = '';
-
-      // Crear una fila para los encabezados de la tabla
-      let encabezados = '<tr> <th>N°</th><th>Nombre y Apellidos</th><th>Correo</th><th>Tipo</th> <th  style="text-align: center;">Acciones</th></tr>';
-
-      // Agregar los encabezados a la tabla
-      tabla.innerHTML += encabezados;
-
-      // Recorrer la lista de certificados y pintar los datos en la tabla
-
-      // Inicializar el contador
-      let correlativo = 1;
-      for (let prog of lstartesanos) {
-        // Crear una fila para cada certificado
-
-        let fila = '<tr>';
-        // Agregar las celdas con los datos del certificado
-        fila += `<td>${correlativo}</td>`;  
-        fila += `<td>${prog.completo}</td>`;
-        fila += `<td>${prog.correo}</td>`;
-        fila += `<td>${prog.tipousuario}</td>`; 
-        fila += `<td style="text-align: center;"><a href="/artesanos-detalle.html?id=${prog.id}" data-toggle="tooltip" title="Editar" data-id="${prog.id}" class="btn btn-info btn-sm" > <i class="icon icon-edit2"></i></a> `;
-        fila += `<a href="javascript:void(0);"  data-toggle="tooltip"  title="Eliminar" data-id="${prog.id}" class="btn btn_Eliminar btn-primary btn-sm">  <i class="icon icon-bin"></i></a>`;
-        fila += `</td>`;
-   
-
-        fila += '</tr>';
-        // Agregar la fila a la tabla
-        tabla.innerHTML += fila;
-        // Incrementar el correlativo
-        correlativo++;
-      }
-      $('[data-toggle="tooltip"]').tooltip();
-      hideLoading() 
-
+  let correlativo = 1;
+  for (let prog of lstartesanos) {
+    let fila = '<tr>';
+    fila += `<td>${correlativo}</td>`;
+    fila += `<td>${prog.completo}</td>`;
+    fila += `<td>${prog.correo}</td>`;
+    fila += `<td>${prog.tipousuario}</td>`;
+    fila += `<td style="text-align: center;"><a href="/artesanos-detalle.html?id=${prog.id}" data-toggle="tooltip" title="Editar" data-id="${prog.id}" class="btn btn-info btn-sm"><i class="icon icon-edit2"></i></a>`;
+    fila += `<a href="javascript:void(0);" data-toggle="tooltip" title="Eliminar" data-id="${prog.id}" class="btn btn_Eliminar btn-primary btn-sm"><i class="icon icon-bin"></i></a></td>`;
+    fila += '</tr>';
+    tabla.innerHTML += fila;
+    correlativo++;
+  }
+  $('[data-toggle="tooltip"]').tooltip();
+  hideLoading();
 }
+
 var lstartesanos = null; 
 var idactualizar = null;
 
-document.getElementById('filtrar-artesano').addEventListener('click', async  function(e) {
+document.getElementById('filtrar-artesano').addEventListener('click', async function(e) {
   buscarUsuario22();
-
-  
-
 });
 
-
-
-
-async function buscarUsuario22 () {
- 
+async function buscarUsuario22() {
   const Nombre = document.getElementById('nombre').value;
   const Correo = document.getElementById('correo').value; 
   const filtro = {
-    nombre:Nombre,
-    correo:Correo 
+    nombre: Nombre,
+    correo: Correo
   }; 
   
-  const data  = await buscarArtesano(filtro);
-   
+  const data = await buscarArtesano(filtro);
   
-      currentPage = 1; // Reset to the first page
-      displayTable(data, rowsPerPage, currentPage);
-      displayPagination(data, rowsPerPage);
-}
- 
-
-async function buscarUsuario () {
-
-  $('#filtrar-artesano').on('click', async function (e) {
-
-    e.preventDefault();
-    currentPage = 1; // Reset to the first page
-    displayTable(data, rowsPerPage, currentPage);
-    displayPagination(data, rowsPerPage);
-
-  })
-
-
-
-  async function buscarUsuario2 () {
- 
-    showLoading() 
-
-    const Nombre = document.getElementById('nombre').value;
-    const Correo = document.getElementById('correo').value; 
-    const filtro = {
-      nombre:Nombre,
-      correo:Correo 
-    }; 
-    lstartesanos = await buscarArtesano(filtro);
- 
-
-    // Obtener la referencia del elemento HTML donde se insertará la tabla
-    let tabla = document.getElementById('tablaartesano');
-
-    // Limpiar la tabla antes de insertar nuevos datos
-    tabla.innerHTML = '';
-
-    // Crear una fila para los encabezados de la tabla
-    let encabezados = '<tr> <th>N°</th><th>Nombre y Apellidos</th><th>Correo</th><th>Tipo</th> <th  style="text-align: center;">Acciones</th></tr>';
-
-    // Agregar los encabezados a la tabla
-    tabla.innerHTML += encabezados;
-
-    // Recorrer la lista de certificados y pintar los datos en la tabla
-
-    // Inicializar el contador
-    let correlativo = 1;
-    for (let prog of lstartesanos) {
-      // Crear una fila para cada certificado
-
-      let fila = '<tr>';
-      // Agregar las celdas con los datos del certificado
-      fila += `<td>${correlativo}</td>`;  
-      fila += `<td>${prog.completo}</td>`;
-      fila += `<td>${prog.correo}</td>`;
-      fila += `<td>${prog.tipousuario}</td>`; 
-      fila += `<td style="text-align: center;"><a href="/artesanos-detalle.html?id=${prog.id}" data-toggle="tooltip" title="Editar" data-id="${prog.id}" class="btn btn-info btn-sm" > <i class="icon icon-edit2"></i></a> `;
-      fila += `<a href="javascript:void(0);"  data-toggle="tooltip"  title="Eliminar" data-id="${prog.id}" class="btn btn_Eliminar btn-primary btn-sm">  <i class="icon icon-bin"></i></a>`;
-      fila += `</td>`;
- 
-
-      fila += '</tr>';
-      // Agregar la fila a la tabla
-      tabla.innerHTML += fila;
-      // Incrementar el correlativo
-      correlativo++;
-    }
-    $('[data-toggle="tooltip"]').tooltip();
-    hideLoading() 
-
-  }
- 
-
+  currentPage = 1; // Reset to the first page
+  displayTable(data, rowsPerPage, currentPage);
+  displayPagination(data, rowsPerPage);
 }
 
- 
-
-
-$(document).on('click', '.btn_Eliminar', async function (e) { 
-
-
-
-      alertDialog.createAlertDialog(
-        'confirm',
-        'Confirmar Alerta',
-        '¿Estás seguro de que deseas eliminar el artesano?',
-        'Cancelar',
-        'Continuar',
-        async() => {
-            try {
-                  
-                  e.preventDefault();
-                 /* var respuesta = confirm("¿Estás seguro de que deseas eliminar?");
-                  if (respuesta) {*/
-                    let id = $(this).data('id');  
-                
-                    let result = await deleteArtesano({ id });
-                    if (result) {
-                      showToast('Se elimino los datos correctamente')
-                      buscarArtesano22();
-                      await buscarUser();
-
-                    } else {
-                      showToast('Ocurrio un error.')
-                    }
-                  /*} else {
-                    console.log("El usuario canceló la acción.");
-                  }*/
-            } catch (error) {
-              console.error('Error al eliminar la foto de perfil:', error);
-            }
+$(document).on('click', '.btn_Eliminar', async function(e) { 
+  alertDialog.createAlertDialog(
+    'confirm',
+    'Confirmar Alerta',
+    '¿Estás seguro de que deseas eliminar el artesano?',
+    'Cancelar',
+    'Continuar',
+    async() => {
+      try {
+        e.preventDefault();
+        let id = $(this).data('id');  
+        let result = await deleteArtesano({ id });
+        if (result) {
+          showToast('Se eliminó los datos correctamente');
+          buscarArtesano22();
+        } else {
+          showToast('Ocurrió un error.');
+        }
+      } catch (error) {
+        console.error('Error al eliminar la foto de perfil:', error);
+      }
     }
-    );  
-
-
-
+  );  
 });
- 
-   
-/****crear paginacion */   
 
- // Datos de ejemplo para llenar la tabla
-  
- 
-
-
-
-
-
-
-
-async function iniciarcarga(){
-  
+async function iniciarcarga() {
   const Nombre = document.getElementById('nombre').value;
   const Correo = document.getElementById('correo').value; 
   const filtro = {
-    nombre:Nombre,
-    correo:Correo 
+    nombre: Nombre,
+    correo: Correo
   }; 
-  const data  = await buscarArtesano(filtro);
-  
-  // Inicializar la tabla y la paginación
-  
-  
+  const data = await buscarArtesano(filtro);
   
   displayTable(data, rowsPerPage, currentPage);
   displayPagination(data, rowsPerPage);
-  }
-
-
-
- 
+}
 
 async function displayTable(data, rowsPerPage, page) {
-  /*const table = document.getElementById('tablaproducto').getElementsByTagName('tbody')[0];
-  table.innerHTML = '';*/
-
- 
-
   const start = (page - 1) * rowsPerPage;
   const end = Math.min(start + rowsPerPage, data.length);
   const paginatedData = data.slice(start, end);
   
-  
-    // Obtener la referencia del elemento HTML donde se insertará la tabla
-    let tabla = document.getElementById('tablaartesano');
+  let tabla = document.getElementById('tablaartesano');
+  tabla.innerHTML = '';
+  let encabezados = '<tr><th>N°</th><th>Nombre y Apellidos</th><th>Correo</th><th>Tipo</th><th style="text-align: center;">Acciones</th></tr>';
+  tabla.innerHTML += encabezados;
 
-    // Limpiar la tabla antes de insertar nuevos datos
-    tabla.innerHTML = '';
-
-    // Crear una fila para los encabezados de la tabla
-    let encabezados = '<tr> <th>N°</th><th>Nombre y Apellidos</th><th>Correo</th><th>Tipo</th> <th  style="text-align: center;">Acciones</th></tr>';
-
-    // Agregar los encabezados a la tabla
-    tabla.innerHTML += encabezados;
-
-    // Recorrer la lista de certificados y pintar los datos en la tabla
-
-    // Inicializar el contador
-    let correlativo = 1;
-    for (let prog of paginatedData) {
-      // Crear una fila para cada certificado
-
-      let fila = '<tr>';
-      // Agregar las celdas con los datos del certificado
-      fila += `<td>${correlativo}</td>`;  
-      fila += `<td>${prog.completo}</td>`;
-      fila += `<td>${prog.correo}</td>`;
-      fila += `<td>${prog.tipousuario}</td>`; 
-      fila += `<td style="text-align: center;"><a href="/artesanos-detalle.html?id=${prog.id}" data-toggle="tooltip" title="Editar" data-id="${prog.id}" class="btn btn-info btn-sm" > <i class="icon icon-edit2"></i></a> `;
-      fila += `<a href="javascript:void(0);"  data-toggle="tooltip"  title="Eliminar" data-id="${prog.id}" class="btn btn_Eliminar btn-primary btn-sm">  <i class="icon icon-bin"></i></a>`;
-      fila += `</td>`;
- 
-
-      fila += '</tr>';
-      // Agregar la fila a la tabla
-      tabla.innerHTML += fila;
-      // Incrementar el correlativo
-      correlativo++;
-    }
-    $('[data-toggle="tooltip"]').tooltip(); 
-
+  let correlativo = start + 1;
+  for (let prog of paginatedData) {
+    let fila = '<tr>';
+    fila += `<td>${correlativo}</td>`;
+    fila += `<td>${prog.completo}</td>`;
+    fila += `<td>${prog.correo}</td>`;
+    fila += `<td>${prog.tipousuario}</td>`;
+    fila += `<td style="text-align: center;"><a href="/artesanos-detalle.html?id=${prog.id}" data-toggle="tooltip" title="Editar" data-id="${prog.id}" class="btn btn-info btn-sm"><i class="icon icon-edit2"></i></a>`;
+    fila += `<a href="javascript:void(0);" data-toggle="tooltip" title="Eliminar" data-id="${prog.id}" class="btn btn_Eliminar btn-primary btn-sm"><i class="icon icon-bin"></i></a></td>`;
+    fila += '</tr>';
+    tabla.innerHTML += fila;
+    correlativo++;
+  }
+  $('[data-toggle="tooltip"]').tooltip();
   updateInfo(start + 1, end, data.length);
 }
 
@@ -349,7 +164,7 @@ function displayPagination(data, rowsPerPage) {
   const pageCount = Math.ceil(data.length / rowsPerPage);
   const prevButton = document.createElement('li');
   prevButton.classList.add('paginate_button', 'page-item', 'previous');
-  prevButton.innerHTML = `<a href="#" class="page-link">Siguiente</a>`;
+  prevButton.innerHTML = `<a href="#" class="page-link">Anterior</a>`;
   prevButton.addEventListener('click', function(e) {
       e.preventDefault();
       if (currentPage > 1) {
@@ -364,26 +179,26 @@ function displayPagination(data, rowsPerPage) {
   const endPage = Math.min(pageCount, currentPage + 2);
 
   if (startPage > 1) {
-      pagination.appendChild(createPageButton(1));
+      pagination.appendChild(createPageButton(1, data));
       if (startPage > 2) {
           pagination.appendChild(createEllipsis());
       }
   }
 
   for (let i = startPage; i <= endPage; i++) {
-      pagination.appendChild(createPageButton(i));
+      pagination.appendChild(createPageButton(i, data));
   }
 
   if (endPage < pageCount) {
       if (endPage < pageCount - 1) {
           pagination.appendChild(createEllipsis());
       }
-      pagination.appendChild(createPageButton(pageCount));
+      pagination.appendChild(createPageButton(pageCount, data));
   }
 
   const nextButton = document.createElement('li');
   nextButton.classList.add('paginate_button', 'page-item', 'next');
-  nextButton.innerHTML = `<a href="#" class="page-link">Anterior</a>`;
+  nextButton.innerHTML = `<a href="#" class="page-link">Siguiente</a>`;
   nextButton.addEventListener('click', function(e) {
       e.preventDefault();
       if (currentPage < pageCount) {
@@ -397,7 +212,7 @@ function displayPagination(data, rowsPerPage) {
   updatePaginationButtons();
 }
 
-function createPageButton(page) {
+function createPageButton(page, data) {
   const button = document.createElement('li');
   button.classList.add('paginate_button', 'page-item');
   button.innerHTML = `<a href="#" class="page-link">${page}</a>`;
@@ -431,9 +246,5 @@ function updatePaginationButtons() {
 
 function updateInfo(start, end, total) {
   const info = document.getElementById('basicExample_info'); 
-  info.textContent = `Mostrando del ${start} a ${end} de ${total} resultados`;
+  info.textContent = `Mostrando del ${start} al ${end} de ${total} resultados`;
 }
-
-// Inicializar la tabla y la paginación
-displayTable(data, rowsPerPage, currentPage);
-displayPagination(data, rowsPerPage);

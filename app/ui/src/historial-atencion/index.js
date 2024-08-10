@@ -154,7 +154,7 @@ function cargarTablaHistoriaPedido(pedidos) {
             case 'pagado':
                 estadoClass = 'badge badge-pill badge-success';
                 break;
-            case 'enviado':
+            case 'envio':
                 estadoClass = 'badge badge-pill badge-info';
                 break;
             case 'finalizado':

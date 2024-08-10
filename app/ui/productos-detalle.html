@@ -68,8 +68,8 @@
 									<h6>Productos</h6>
 									<nav aria-label="breadcrumb">
 										<ol class="breadcrumb">
-											<li class="breadcrumb-item"><a href="/">Administrador</a></li>
-											<li class="breadcrumb-item"><a href="#">Catálogo</a></li>
+											<li class="breadcrumb-item"><a href="/inicio.html">Administrador</a></li>
+											<li class="breadcrumb-item"><a href="/productos.html">Catálogo</a></li>
 											<li class="breadcrumb-item active" aria-current="page">Productos</li>
 										</ol>
 									</nav>
@@ -87,420 +87,651 @@
 				<!-- BEGIN .main-content -->
 				<div class="main-content">
 
- 
+
 					<div class="card">
-						<div class="card-body"> 
-							
+						<div class="card-body">
+
 							<div class="card">
 								<div class="card-header" id="tituloproducto">Nuevo producto</div>
-								<div class="card-body">  
+								<div class="card-body">
 									<ul class="nav nav-tabs" id="myTab" role="tablist">
 										<li class="nav-item">
-											<a class="nav-link active" id="home-tab1" data-toggle="tab" href="#home1" role="tab" aria-controls="home1" aria-selected="true">Datos generales</a>
+											<a class="nav-link active" id="home-tab1" data-toggle="tab" href="#home1"
+												role="tab" aria-controls="home1" aria-selected="true">Datos
+												generales</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" id="home-tab2" data-toggle="tab" href="#home2" role="tab" aria-controls="home2" aria-selected="false">Stock</a>
+											<a class="nav-link" id="home-tab2" data-toggle="tab" href="#home2"
+												role="tab" aria-controls="home2" aria-selected="false">Stock</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" id="home-tab3" data-toggle="tab" href="#home3" role="tab" aria-controls="home3" aria-selected="false">Imagenes</a>
+											<a class="nav-link" id="home-tab3" data-toggle="tab" href="#home3"
+												role="tab" aria-controls="home3" aria-selected="false">Imagenes</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" id="home-tab4" data-toggle="tab" href="#home4" role="tab" aria-controls="home4" aria-selected="false">Videos</a>
+											<a class="nav-link" id="home-tab4" data-toggle="tab" href="#home4"
+												role="tab" aria-controls="home4" aria-selected="false">Videos</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" id="home-tab5" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-selected="false">Colores y Tallas</a>
+											<a class="nav-link" id="home-tab5" data-toggle="tab" href="#home5"
+												role="tab" aria-controls="home5" aria-selected="false">Colores y
+												Tallas</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" id="home-tab6" data-toggle="tab" href="#home6" role="tab" aria-controls="home6" aria-selected="false">Ofertas</a>
+											<a class="nav-link" id="home-tab6" data-toggle="tab" href="#home6"
+												role="tab" aria-controls="home6" aria-selected="false">Ofertas</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" id="home-tab7" data-toggle="tab" href="#home7" role="tab" aria-controls="home7" aria-selected="false">Otros Costos</a>
+											<a class="nav-link" id="home-tab7" data-toggle="tab" href="#home7"
+												role="tab" aria-controls="home7" aria-selected="false">Otros Costos</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" id="home-tab8" data-toggle="tab" href="#home8" role="tab" aria-controls="home8" aria-selected="false">Condiciones del producto</a>
+											<a class="nav-link" id="home-tab8" data-toggle="tab" href="#home8"
+												role="tab" aria-controls="home8" aria-selected="false">Condiciones del
+												producto</a>
 										</li>
 									</ul>
-									
+
 									<div class="tab-content" id="myTabContent">
-										<div class="tab-pane fade show active" id="home1" role="tabpanel" aria-labelledby="home-tab1">
+										<div class="tab-pane fade show active" id="home1" role="tabpanel"
+											aria-labelledby="home-tab1">
 											<h6 class="sub-heading">Busca el artesano</h6>
 											<form id="form" action="javascript:void(0)">
 												<div class="row mt-3">
 													<div class="col-sm-2">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> DNI:</h6>
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> DNI:
+														</h6>
 													</div>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" placeholder="Ingrese el DNI" id="dni" maxlength="8" minlength="8" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-														
+														<input type="text" class="form-control"
+															placeholder="Ingrese el DNI" id="dni" maxlength="8"
+															minlength="8" required
+															oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+
 													</div>
 													<div class="col-10 col-md-3">
-														<button id="buscar-dni" type="submit" class="btn btn-primary">Buscar</button>
-													</div> 	
+														<button id="buscar-dni" type="submit"
+															class="btn btn-primary">Buscar</button>
+													</div>
 													<div class="col-sm-2">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre:</h6>
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Nombre:
+														</h6>
 													</div>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" placeholder="Nombre del artesano" id="nombrecompleto" readonly required >
+														<input type="text" class="form-control"
+															placeholder="Nombre del artesano" id="nombrecompleto"
+															readonly required>
 													</div>
-												</div> 
-											<hr>
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Categria:</h6>
 												</div>
-												<div class="col-9 col-md-10"> 
-													<div class="form-row">
-														<div class="col">
-															<select class="form-control" id="lstcategoria" required> 
-															</select>
-														</div> 
+												<hr>
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Categoría:
+														</h6>
 													</div>
-												</div> 
-											</div> 
-											<hr>
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre del producto:</h6>
+													<div class="col-9 col-md-10">
+														<div class="form-row">
+															<div class="col">
+																<select class="form-control" id="lstcategoria" required>
+																</select>
+															</div>
+														</div>
+													</div>
 												</div>
-												<div class="col-9 col-md-10"> 
-													<ul class="nav nav-tabs" id="nombreProductoTab" role="tablist">
-														<li class="nav-item">
-															<a class="nav-link active" id="espanol-tab" data-toggle="tab" href="#espanolNombre" role="tab" aria-controls="espanolNombre" aria-selected="true">Español</a>
-														</li>
-														<li class="nav-item">
-															<a class="nav-link" id="ingles-tab" data-toggle="tab" href="#inglesNombre" role="tab" aria-controls="inglesNombre" aria-selected="false">Ingles</a>
-														</li>
-													</ul>
-													<div class="tab-content">
-														<div class="tab-pane fade show active" id="espanolNombre" role="tabpanel" aria-labelledby="espanol-tab">
-															<textarea type="text" id="idespanolNombre" class="form-control" placeholder="Ingrese el nombre del producto" maxlength="300" minlength="20" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
-														</div>
-														<div class="tab-pane fade"  id="inglesNombre" role="tabpanel" aria-labelledby="ingles-tab">
-															<textarea type="text" id="idinglesNombre" class="form-control" placeholder="Enter the product name" maxlength="300" minlength="20" ></textarea> 
+												<hr>
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Nombre del producto:
+														</h6>
+													</div>
+													<div class="col-9 col-md-10">
+														<ul class="nav nav-tabs" id="nombreProductoTab" role="tablist">
+															<li class="nav-item">
+																<a class="nav-link active" id="espanol-tab"
+																	data-toggle="tab" href="#espanolNombre" role="tab"
+																	aria-controls="espanolNombre"
+																	aria-selected="true">Español</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link" id="ingles-tab" data-toggle="tab"
+																	href="#inglesNombre" role="tab"
+																	aria-controls="inglesNombre"
+																	aria-selected="false">Ingles</a>
+															</li>
+														</ul>
+														<div class="tab-content">
+															<div class="tab-pane fade show active" id="espanolNombre"
+																role="tabpanel" aria-labelledby="espanol-tab">
+																<textarea type="text" id="idespanolNombre"
+																	class="form-control"
+																	placeholder="Ingrese el nombre del producto"
+																	maxlength="300" minlength="20" required
+																	oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜñÑ ]/g, '');"></textarea>
+															</div>
+															<div class="tab-pane fade" id="inglesNombre" role="tabpanel"
+																aria-labelledby="ingles-tab">
+																<textarea type="text" id="idinglesNombre"
+																	class="form-control"
+																	placeholder="Enter the product name" maxlength="300"
+																	minlength="20"></textarea>
+															</div>
 														</div>
 													</div>
-												</div> 
-											</div>
-											<hr>
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Resumen del producto:</h6>
 												</div>
-												<div class="col-9 col-md-10"> 
-													<ul class="nav nav-tabs" id="resumenProductoTab" role="tablist">
-														<li class="nav-item">
-															<a class="nav-link active" id="espanol-tab-resumen" data-toggle="tab" href="#espanolResumen" role="tab" aria-controls="espanolResumen" aria-selected="true">Español</a>
-														</li>
-														<li class="nav-item">
-															<a class="nav-link" id="ingles-tab-resumen" data-toggle="tab" href="#inglesResumen" role="tab" aria-controls="inglesResumen" aria-selected="false">Ingles</a>
-														</li>
-													</ul>
-													<div class="tab-content">
-														<div class="tab-pane fade show active" id="espanolResumen"  role="tabpanel" aria-labelledby="espanol-tab-resumen">
-															<textarea type="text" id="idespanolResumen" class="form-control" placeholder="Ingrese el resumen del producto" maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
-														</div>
-														<div class="tab-pane fade"  id="inglesResumen" role="tabpanel" aria-labelledby="ingles-tab-resumen">
-															<textarea type="text" id="idinglesResumen" class="form-control" placeholder="Enter the product summary" maxlength="300" minlength="20"></textarea>
+												<hr>
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Resumen del producto:
+														</h6>
+													</div>
+													<div class="col-9 col-md-10">
+														<ul class="nav nav-tabs" id="resumenProductoTab" role="tablist">
+															<li class="nav-item">
+																<a class="nav-link active" id="espanol-tab-resumen"
+																	data-toggle="tab" href="#espanolResumen" role="tab"
+																	aria-controls="espanolResumen"
+																	aria-selected="true">Español</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link" id="ingles-tab-resumen"
+																	data-toggle="tab" href="#inglesResumen" role="tab"
+																	aria-controls="inglesResumen"
+																	aria-selected="false">Ingles</a>
+															</li>
+														</ul>
+														<div class="tab-content">
+															<div class="tab-pane fade show active" id="espanolResumen"
+																role="tabpanel" aria-labelledby="espanol-tab-resumen">
+																<textarea type="text" id="idespanolResumen"
+																	class="form-control"
+																	placeholder="Ingrese el resumen del producto"
+																	maxlength="300" minlength="20" required
+																	oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
+															</div>
+															<div class="tab-pane fade" id="inglesResumen"
+																role="tabpanel" aria-labelledby="ingles-tab-resumen">
+																<textarea type="text" id="idinglesResumen"
+																	class="form-control"
+																	placeholder="Enter the product summary"
+																	maxlength="300" minlength="20"></textarea>
+															</div>
 														</div>
 													</div>
-												</div> 
-											</div>
-											<hr>
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Descripción del producto:</h6>
 												</div>
-												<div class="col-9 col-md-10">    
-													<ul class="nav nav-tabs" id="descripcionProductoTab" role="tablist">
-														<li class="nav-item">
-															<a class="nav-link active" id="espanol-tab-descripcion" data-toggle="tab" href="#espanolDescripcion" role="tab" aria-controls="espanolDescripcion" aria-selected="true">Español</a>
-														</li>
-														<li class="nav-item">
-															<a class="nav-link" id="ingles-tab-descripcion" data-toggle="tab" href="#inglesDescripcion" role="tab" aria-controls="inglesDescripcion" aria-selected="false">Ingles</a>
-														</li>
-													</ul>
-													<div class="tab-content">
-														<div class="tab-pane fade show active" id="espanolDescripcion" role="tabpanel" aria-labelledby="espanol-tab-descripcion">
-															<textarea type="text" id="idespanolDescripcion" class="form-control"   placeholder="Ingrese la descripción del producto" maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
-														</div>
-														<div class="tab-pane fade"  id="inglesDescripcion" role="tabpanel" aria-labelledby="ingles-tab-descripcion">
-															<textarea type="text" id="idinglesDescripcion" class="form-control"    placeholder="Enter the product description" maxlength="300" minlength="20"></textarea>
+												<hr>
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Descripción del
+															producto:
+														</h6>
+													</div>
+													<div class="col-9 col-md-10">
+														<ul class="nav nav-tabs" id="descripcionProductoTab"
+															role="tablist">
+															<li class="nav-item">
+																<a class="nav-link active" id="espanol-tab-descripcion"
+																	data-toggle="tab" href="#espanolDescripcion"
+																	role="tab" aria-controls="espanolDescripcion"
+																	aria-selected="true">Español</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link" id="ingles-tab-descripcion"
+																	data-toggle="tab" href="#inglesDescripcion"
+																	role="tab" aria-controls="inglesDescripcion"
+																	aria-selected="false">Ingles</a>
+															</li>
+														</ul>
+														<div class="tab-content">
+															<div class="tab-pane fade show active"
+																id="espanolDescripcion" role="tabpanel"
+																aria-labelledby="espanol-tab-descripcion">
+																<textarea type="text" id="idespanolDescripcion"
+																	class="form-control"
+																	placeholder="Ingrese la descripción del producto"
+																	minlength="20" required
+																	oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜñÑ ]/g, '');"></textarea>
+															</div>
+															<div class="tab-pane fade" id="inglesDescripcion"
+																role="tabpanel"
+																aria-labelledby="ingles-tab-descripcion">
+																<textarea type="text" id="idinglesDescripcion"
+																	class="form-control"
+																	placeholder="Enter the product description"
+																	minlength="20"></textarea>
+															</div>
 														</div>
 													</div>
-												</div> 
-											</div>
-											
-											<hr>
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Cualidades del producto:</h6>
 												</div>
-												<div class="col-9 col-md-10"> 
-													<ul class="nav nav-tabs" id="cualidadesProductoTab" role="tablist">
-														<li class="nav-item">
-															<a class="nav-link active" id="espanol-tab-cualidades" data-toggle="tab" href="#espanolCualidades" role="tab" aria-controls="espanolCualidades" aria-selected="true">Español</a>
-														</li>
-														<li class="nav-item">
-															<a class="nav-link" id="ingles-tab-cualidades" data-toggle="tab" href="#inglesCualidades" role="tab" aria-controls="inglesCualidades" aria-selected="false">Ingles</a>
-														</li>
-													</ul>
-													<div class="tab-content">
-														<div class="tab-pane fade show active"  id="espanolCualidades" role="tabpanel" aria-labelledby="espanol-tab-cualidades">
-															<textarea class="form-control" id="idespanolCualidades" rows="3" placeholder="Ingrese las cualidades del producto" maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
-														</div>
-														<div class="tab-pane fade"  role="tabpanel" id="inglesCualidades" aria-labelledby="ingles-tab-cualidades">
-															<textarea class="form-control" id="idinglesCualidades" rows="3" placeholder="Enter the product qualities" maxlength="300" minlength="20"></textarea>
+
+												<hr>
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Cualidades del producto:
+														</h6>
+													</div>
+													<div class="col-9 col-md-10">
+														<ul class="nav nav-tabs" id="cualidadesProductoTab"
+															role="tablist">
+															<li class="nav-item">
+																<a class="nav-link active" id="espanol-tab-cualidades"
+																	data-toggle="tab" href="#espanolCualidades"
+																	role="tab" aria-controls="espanolCualidades"
+																	aria-selected="true">Español</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link" id="ingles-tab-cualidades"
+																	data-toggle="tab" href="#inglesCualidades"
+																	role="tab" aria-controls="inglesCualidades"
+																	aria-selected="false">Ingles</a>
+															</li>
+														</ul>
+														<div class="tab-content">
+															<div class="tab-pane fade show active"
+																id="espanolCualidades" role="tabpanel"
+																aria-labelledby="espanol-tab-cualidades">
+																<textarea class="form-control" id="idespanolCualidades"
+																	rows="3"
+																	placeholder="Ingrese las cualidades del producto"
+																	minlength="20" required
+																	oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜñÑ ]/g, '');"></textarea>
+															</div>
+															<div class="tab-pane fade" role="tabpanel"
+																id="inglesCualidades"
+																aria-labelledby="ingles-tab-cualidades">
+																<textarea class="form-control" id="idinglesCualidades"
+																	rows="3" placeholder="Enter the product qualities"
+																	minlength="20"></textarea>
+															</div>
 														</div>
 													</div>
-												</div> 
-											</div>
-											
-											<hr>
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Palabras clave:</h6>
 												</div>
-												<div class="col-9 col-md-10"> 
-													<ul class="nav nav-tabs" id="palabrasClaveTab" role="tablist">
-														<li class="nav-item">
-															<a class="nav-link active" id="espanol-tab-palabras" data-toggle="tab" href="#espanolPalabras" role="tab" aria-controls="espanolPalabras" aria-selected="true">Español</a>
-														</li>
-														<li class="nav-item">
-															<a class="nav-link" id="ingles-tab-palabras" data-toggle="tab" href="#inglesPalabras" role="tab" aria-controls="inglesPalabras" aria-selected="false">Ingles</a>
-														</li>
-													</ul>
-													<div class="tab-content">
-														<div class="tab-pane fade show active"  id="espanolPalabras" role="tabpanel" aria-labelledby="espanol-tab-palabras">
-															<textarea type="text" id="idespanolPalabras" class="form-control" placeholder="Ingrese las palabras clave" value="Guerrero wari" maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
-														</div>
-														<div class="tab-pane fade" id="inglesPalabras"  role="tabpanel" aria-labelledby="ingles-tab-palabras">
-															<textarea type="text" id="idinglesPalabras" class="form-control" placeholder="Enter the keywords" maxlength="300" minlength="20"></textarea>
+
+												<hr>
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Palabras clave:
+														</h6>
+													</div>
+													<div class="col-9 col-md-10">
+														<ul class="nav nav-tabs" id="palabrasClaveTab" role="tablist">
+															<li class="nav-item">
+																<a class="nav-link active" id="espanol-tab-palabras"
+																	data-toggle="tab" href="#espanolPalabras" role="tab"
+																	aria-controls="espanolPalabras"
+																	aria-selected="true">Español</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link" id="ingles-tab-palabras"
+																	data-toggle="tab" href="#inglesPalabras" role="tab"
+																	aria-controls="inglesPalabras"
+																	aria-selected="false">Ingles</a>
+															</li>
+														</ul>
+														<div class="tab-content">
+															<div class="tab-pane fade show active" id="espanolPalabras"
+																role="tabpanel" aria-labelledby="espanol-tab-palabras">
+																<textarea type="text" id="idespanolPalabras"
+																	class="form-control"
+																	placeholder="Ingrese las palabras clave"
+																	value="Guerrero wari" minlength="20" required
+																	oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜñÑ ]/g, '');"></textarea>
+															</div>
+															<div class="tab-pane fade" id="inglesPalabras"
+																role="tabpanel" aria-labelledby="ingles-tab-palabras">
+																<textarea type="text" id="idinglesPalabras"
+																	class="form-control"
+																	placeholder="Enter the keywords"
+																	minlength="20"></textarea>
+															</div>
 														</div>
 													</div>
-												</div> 
-											</div>
-											<hr>
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span>  Número de piezas:</h6>
 												</div>
-												<div class="col-9 col-md-10"> 
-													<ul class="nav nav-tabs" id="numeroPiezasTab" role="tablist">
-														<li class="nav-item">
-															<a class="nav-link active" id="espanol-tab-piezas" data-toggle="tab" href="#espanolPiezas" role="tab" aria-controls="espanolPiezas" aria-selected="true">Español</a>
-														</li>
-														<li class="nav-item">
-															<a class="nav-link" id="ingles-tab-piezas" data-toggle="tab" href="#inglesPiezas" role="tab" aria-controls="inglesPiezas" aria-selected="false">Ingles</a>
-														</li>
-													</ul>
-													<div class="tab-content">
-														<div class="tab-pane fade show active" id="espanolPiezas"  role="tabpanel" aria-labelledby="espanol-tab-piezas">
-															<textarea type="text" id="idespanolPiezas" class="form-control" placeholder="Ingrese el número de piezas"  maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
-														</div>
-														<div class="tab-pane fade"  id="inglesPiezas" role="tabpanel" aria-labelledby="ingles-tab-piezas">
-															<textarea type="text" id="idinglesPiezas" class="form-control" placeholder="Enter the number of pieces" maxlength="300" minlength="20"></textarea>
+												<hr>
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Número de piezas:
+														</h6>
+													</div>
+													<div class="col-9 col-md-10">
+														<ul class="nav nav-tabs" id="numeroPiezasTab" role="tablist">
+															<li class="nav-item">
+																<a class="nav-link active" id="espanol-tab-piezas"
+																	data-toggle="tab" href="#espanolPiezas" role="tab"
+																	aria-controls="espanolPiezas"
+																	aria-selected="true">Español</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link" id="ingles-tab-piezas"
+																	data-toggle="tab" href="#inglesPiezas" role="tab"
+																	aria-controls="inglesPiezas"
+																	aria-selected="false">Ingles</a>
+															</li>
+														</ul>
+														<div class="tab-content">
+															<div class="tab-pane fade show active" id="espanolPiezas"
+																role="tabpanel" aria-labelledby="espanol-tab-piezas">
+																<textarea type="text" id="idespanolPiezas"
+																	class="form-control"
+																	placeholder="Ingrese el número de piezas"
+																	minlength="20" required
+																	oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜñÑ ]/g, '');"></textarea>
+															</div>
+															<div class="tab-pane fade" id="inglesPiezas" role="tabpanel"
+																aria-labelledby="ingles-tab-piezas">
+																<textarea type="text" id="idinglesPiezas"
+																	class="form-control"
+																	placeholder="Enter the number of pieces"
+																	minlength="20"></textarea>
+															</div>
 														</div>
 													</div>
-												</div> 
-											</div>
-											
-											<hr>
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span>  Medidas en centímetros:</h6>
 												</div>
-												<div class="col-9 col-md-10"> 
-													<div class="form-row">
-														<div class="col"> 
-															<input type="text" class="form-control" placeholder="Alto" id="idalto" maxlength="8"  required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-														</div>
-														<div class="col"> 
-															<input type="text" class="form-control" placeholder="Ancho" id="idancho" maxlength="8" required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+
+												<hr>
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Medidas en centímetros:
+														</h6>
+													</div>
+													<div class="col-9 col-md-10">
+														<div class="form-row">
+															<div class="col">
+																<input type="text" class="form-control"
+																	placeholder="Alto" id="idalto" maxlength="8"
+																	required
+																	oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+															</div>
+															<div class="col">
+																<input type="text" class="form-control"
+																	placeholder="Ancho" id="idancho" maxlength="8"
+																	required
+																	oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+															</div>
 														</div>
 													</div>
-												</div> 
-											</div>
-											<hr>
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span>  Descripción de materiales:</h6>
 												</div>
-												<div class="col-9 col-md-10"> 
-													<ul class="nav nav-tabs" id="descripcionMaterialesTab" role="tablist">
-														<li class="nav-item">
-															<a class="nav-link active" id="espanol-tab-materiales" data-toggle="tab" href="#espanolMateriales" role="tab" aria-controls="espanolMateriales" aria-selected="true">Español</a>
-														</li>
-														<li class="nav-item">
-															<a class="nav-link" id="ingles-tab-materiales" data-toggle="tab" href="#inglesMateriales" role="tab" aria-controls="inglesMateriales" aria-selected="false">Ingles</a>
-														</li>
-													</ul>
-													<div class="tab-content">
-														<div class="tab-pane fade show active" id="espanolMateriales" role="tabpanel" aria-labelledby="espanol-tab-materiales">
-															<textarea type="text" id="idespanolMateriales"  class="form-control" rows="3" placeholder="Ingrese la descripción de los materiales" maxlength="300" minlength="20" required  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea> 
-														</div>
-														<div class="tab-pane fade" id="inglesMateriales"  role="tabpanel" aria-labelledby="ingles-tab-materiales">
-															<textarea class="form-control" id="idinglesMateriales" rows="3" placeholder="Enter the material description" maxlength="300" minlength="20"></textarea>
+												<hr>
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Descripción de
+															materiales:
+														</h6>
+													</div>
+													<div class="col-9 col-md-10">
+														<ul class="nav nav-tabs" id="descripcionMaterialesTab"
+															role="tablist">
+															<li class="nav-item">
+																<a class="nav-link active" id="espanol-tab-materiales"
+																	data-toggle="tab" href="#espanolMateriales"
+																	role="tab" aria-controls="espanolMateriales"
+																	aria-selected="true">Español</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link" id="ingles-tab-materiales"
+																	data-toggle="tab" href="#inglesMateriales"
+																	role="tab" aria-controls="inglesMateriales"
+																	aria-selected="false">Ingles</a>
+															</li>
+														</ul>
+														<div class="tab-content">
+															<div class="tab-pane fade show active"
+																id="espanolMateriales" role="tabpanel"
+																aria-labelledby="espanol-tab-materiales">
+																<textarea type="text" id="idespanolMateriales"
+																	class="form-control" rows="3"
+																	placeholder="Ingrese la descripción de los materiales"
+																	minlength="20" required></textarea>
+															</div>
+															<div class="tab-pane fade" id="inglesMateriales"
+																role="tabpanel" aria-labelledby="ingles-tab-materiales">
+																<textarea class="form-control" id="idinglesMateriales"
+																	rows="3"
+																	placeholder="Enter the material description"
+																	minlength="20"></textarea>
+															</div>
 														</div>
 													</div>
-												</div> 
-											</div>
-											<hr>
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span>  Precio del producto:</h6>
 												</div>
-												<div class="col-9 col-md-5"> 
-													<div class="input-group"> 
-														
-														<input type="text" class="form-control" placeholder="Ingrese el precio del producto" id="precioproducto" maxlength="8"  required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+												<hr>
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Precio del producto:
+														</h6>
 													</div>
-													 
-												</div> 
-												<div class="col-9 col-md-2" style="padding: 0px; margin-top: 10px;font-size: 1.0rem;">  
-													<div class="input-group-append">
-														<span class="input-group-text">S/. en soles</span>
-													</div>
-												</div> 
-											</div>
-											<hr>
-											
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span>  Peso en kilogramos:</h6>
-												</div>
-												<div class="col-9 col-md-10">  
-													
-													<input type="text" class="form-control" placeholder="Ingrese el peso del producto" id="pesokilogramos" maxlength="8"  required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-												</div> 
-											</div>
-											<hr>
-											
-											<div class="row mt-2">
-												<div class="col-sm-2">
-													<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Técnicas empleadas:</h6>
-												</div>
-												<div class="col-9 col-md-10"> 
-													<ul class="nav nav-tabs" id="tecnicasEmpleadasTab" role="tablist">
-														<li class="nav-item">
-															<a class="nav-link active" id="espanol-tab-tecnicas" data-toggle="tab" href="#espanolTecnicas" role="tab" aria-controls="espanolTecnicas" aria-selected="true">Español</a>
-														</li>
-														<li class="nav-item">
-															<a class="nav-link" id="ingles-tab-tecnicas" data-toggle="tab" href="#inglesTecnicas" role="tab" aria-controls="inglesTecnicas" aria-selected="false">Ingles</a>
-														</li>
-													</ul>
-													<div class="tab-content">
-														<div class="tab-pane fade show active"  id="espanolTecnicas" role="tabpanel" aria-labelledby="espanol-tab-tecnicas">
-															<textarea type="text"   id="idespanolTecnicas"   class="form-control" rows="3" placeholder="Ingrese las técnicas empleadas" maxlength="300" minlength="20"  oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');"></textarea>
+													<div class="col-9 col-md-5">
+														<div class="input-group">
+
+															<input type="text" class="form-control"
+																placeholder="Ingrese el precio del producto"
+																id="precioproducto" maxlength="8" required
+																oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
 														</div>
-														<div class="tab-pane fade" id="inglesTecnicas" role="tabpanel" aria-labelledby="ingles-tab-tecnicas">
-															<textarea type="text" id="idinglesTecnicas" class="form-control" rows="3" placeholder="Enter the techniques used" maxlength="300" minlength="20"></textarea>
+
+													</div>
+													<div class="col-9 col-md-2"
+														style="padding: 0px; margin-top: 10px;font-size: 1.0rem;">
+														<div class="input-group-append">
+															<span class="input-group-text">S/. en soles</span>
 														</div>
 													</div>
-												</div> 
-											</div>
-										</form> 
-										
+												</div>
+												<hr>
+
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Peso en kilogramos:
+														</h6>
+													</div>
+													<div class="col-9 col-md-10">
+
+														<input type="text" class="form-control"
+															placeholder="Ingrese el peso del producto"
+															id="pesokilogramos" maxlength="8" required
+															oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+													</div>
+												</div>
+												<hr>
+
+												<div class="row mt-2">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Técnicas empleadas:</h6>
+													</div>
+													<div class="col-9 col-md-10">
+														<ul class="nav nav-tabs" id="tecnicasEmpleadasTab"
+															role="tablist">
+															<li class="nav-item">
+																<a class="nav-link active" id="espanol-tab-tecnicas"
+																	data-toggle="tab" href="#espanolTecnicas" role="tab"
+																	aria-controls="espanolTecnicas"
+																	aria-selected="true">Español</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link" id="ingles-tab-tecnicas"
+																	data-toggle="tab" href="#inglesTecnicas" role="tab"
+																	aria-controls="inglesTecnicas"
+																	aria-selected="false">Ingles</a>
+															</li>
+														</ul>
+														<div class="tab-content">
+															<div class="tab-pane fade show active" id="espanolTecnicas"
+																role="tabpanel" aria-labelledby="espanol-tab-tecnicas">
+																<textarea type="text" id="idespanolTecnicas"
+																	class="form-control" rows="3"
+																	placeholder="Ingrese las técnicas empleadas"
+																	minlength="20"></textarea>
+															</div>
+															<div class="tab-pane fade" id="inglesTecnicas"
+																role="tabpanel" aria-labelledby="ingles-tab-tecnicas">
+																<textarea type="text" id="idinglesTecnicas"
+																	class="form-control" rows="3"
+																	placeholder="Enter the techniques used"
+																	minlength="20"></textarea>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+
 										</div>
-										<div class="tab-pane fade" id="home2" role="tabpanel" aria-labelledby="home-tab2"> 
+										<div class="tab-pane fade" id="home2" role="tabpanel"
+											aria-labelledby="home-tab2">
 											<form id="form" action="javascript:void(0)">
 												<h6>Stock</h6>
 
 												<div class="row mt-2">
 													<div class="col-sm-2">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> <span class="text-primary">*</span> Cantidad:</h6>
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Cantidad:
+														</h6>
 													</div>
-													<div class="col-9 col-md-10"> 
+													<div class="col-9 col-md-10">
 														<div class="form-row">
-															<div class="col"> 
-																<input type="text" class="form-control" placeholder="Ingrese la cantidad" id="cantidad" maxlength="11" minlength="11"   oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-														
-															</div> 
+															<div class="col">
+																<input type="text" class="form-control"
+																	placeholder="Ingrese la cantidad" id="cantidad"
+																	maxlength="11" minlength="11"
+																	oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+
+															</div>
 														</div>
-													</div> 
+													</div>
 													<div class="col-sm-2">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> <span class="text-primary">*</span> Cantidad mínima:</h6>
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Cantidad mínima:
+														</h6>
 													</div>
-													<div class="col-9 col-md-10"> 
+													<div class="col-9 col-md-10">
 														<div class="form-row">
-															<div class="col"> 
-																<input type="text" class="form-control" placeholder="Ingrese la cantidad mínima" id="cantidadMinima" maxlength="11" minlength="11"   oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-														
-															</div> 
+															<div class="col">
+																<input type="text" class="form-control"
+																	placeholder="Ingrese la cantidad mínima"
+																	id="cantidadMinima" maxlength="11" minlength="11"
+																	oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+
+															</div>
 														</div>
-													</div> 
+													</div>
 												</div>
-												<hr> 
+												<hr>
 												<div class="row mt-2">
 													<div class="col-sm-2">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Restar Stock:</h6>
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Restar Stock:</h6>
 													</div>
-													<div class="col-9 col-md-10"> 
+													<div class="col-9 col-md-10">
 														<div class="form-row">
 															<div class="col">
 																<div class="custom-switch">
-																	<input type="checkbox" class="custom-control-input" id="restarStock">
-																	<label class="custom-control-label" for="restarStock" style="padding: 10px;margin-top: 10px;"></label>
+																	<input type="checkbox" class="custom-control-input"
+																		id="restarStock">
+																	<label class="custom-control-label"
+																		for="restarStock"
+																		style="padding: 10px;margin-top: 10px;"></label>
 																</div>
-															</div> 
+															</div>
 														</div>
-													</div>  
-												</div> 
+													</div>
+												</div>
 												<hr>
 												<div class="row mt-2">
 													<div class="col-sm-2">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Estado agotado:</h6>
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Estado agotado:</h6>
 													</div>
-													<div class="col-9 col-md-10"> 
+													<div class="col-9 col-md-10">
 														<div class="form-row">
 															<div class="col">
 																<select class="form-control" id="estadoAgotado">
-																	<option value="0">Seleccionar</option> 	
-																	<option value="1">en stock</option> 	
-																	<option value="2">poco stock</option> 	
-																	<option value="3">Agotado</option> 	 
+																	<option value="0">Seleccionar</option>
+																	<option value="1">en stock</option>
+																	<option value="2">poco stock</option>
+																	<option value="3">Agotado</option>
 
 																</select>
-															</div> 
+															</div>
 														</div>
-													</div> 
-													<div class="col-sm-2">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Fecha Disponible:</h6>
 													</div>
-													<div class="col-9 col-md-10"> 
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Fecha Disponible:</h6>
+													</div>
+													<div class="col-9 col-md-10">
 														<div class="form-row">
 															<div class="col">
-																<input type="date" class="form-control" id="fechaDisponible" placeholder="DD / MM / YYYY">
-														 
-															</div> 
+																<input type="date" class="form-control"
+																	id="fechaDisponible" placeholder="DD / MM / YYYY">
+
+															</div>
 														</div>
-													</div> 
-												</div> 
-											</form> 
+													</div>
+												</div>
+											</form>
 
 
 										</div>
-										<div class="tab-pane fade" id="home3" role="tabpanel" aria-labelledby="home-tab3">
+										<div class="tab-pane fade" id="home3" role="tabpanel"
+											aria-labelledby="home-tab3">
 
 											<form id="form" action="javascript:void(0)">
-												<h6><span class="text-primary">*</span> Imagen principal</h6>   
-												
+												<h6><span class="text-primary">*</span> Imagen principal</h6>
+
 												<div class="mb-4">
 													<div class="d-flex">
-														<img id="imagenPrincipal" src="/img/sin_imagen.jpg"  alt="Imagen principal" class="img-thumbnail" style="width: 200px; height: 150px;">
+														<img id="imagenPrincipal" src="/img/sin_imagen.jpg"
+															alt="Imagen principal" class="img-thumbnail"
+															style="width: 200px; height: 150px;">
 													</div>
-													<div>  
-														<button type="button" class="btn btn-info" data-toggle="modal" data-target="#imagenPrincipalModal">Editar</button>
-														<button type="button" class="btn btn-primary" id="limpiarPrincipalBtn">Limpiar</button> 
+													<div>
+														<button type="button" class="btn btn-info" data-toggle="modal"
+															data-target="#imagenPrincipalModal">Editar</button>
+														<button type="button" class="btn btn-primary"
+															id="limpiarPrincipalBtn">Limpiar</button>
 													</div>
 												</div>
 												<hr>
 
-												<h6>Imagen adicionales</h6>  
-												<div class="d-flex justify-content-end mb-3">  
-													<button type="button" class="btn btn-info btn-sm" id="addImagenButton" data-toggle="modal" data-target="#imagenModal">Añadir <i class="icon icon-circle-with-plus"></i></button>
-												</div> 
+												<h6>Imagen adicionales</h6>
+												<div class="d-flex justify-content-end mb-3">
+													<button type="button" class="btn btn-info btn-sm"
+														id="addImagenButton" data-toggle="modal"
+														data-target="#imagenModal">Añadir <i
+															class="icon icon-circle-with-plus"></i></button>
+												</div>
 												<table class="table table-bordered offer-table">
-													<thead >
+													<thead>
 														<tr>
 															<th style="width: 5%;">N°</th>
 															<th style="width: 35%;">Imagen</th>
@@ -511,571 +742,706 @@
 													<tbody id="listaImagenes">
 														<!-- Filas dinámicas aquí -->
 													</tbody>
-												</table> 
-													
-												
-											</form> 
+												</table>
+
+
+											</form>
 
 
 											<!-- Modal Imagen Principal -->
-											<div class="modal fade" id="imagenPrincipalModal" tabindex="-1" aria-labelledby="imagenPrincipalModalLabel" aria-hidden="true">
+											<div class="modal fade" id="imagenPrincipalModal" tabindex="-1"
+												aria-labelledby="imagenPrincipalModalLabel" aria-hidden="true">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h6 class="modal-title" id="imagenPrincipalModalLabel">Editar Imagen Principal</h6>
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																<span aria-hidden="true">&times;</span>
-															</button>
-														</div>
-														<div class="modal-body"> 
-															<form id="imagenPrincipalForm"> 
-																<div class="form-group">
-																	<label for="uploadPrincipalImage"><span class="text-primary">*</span> Subir imagen:</label>
-																	<div class="d-flex align-items-center"> 
-																		<input type="file" class="form-control-file mr-2" name="uploadPrincipalImage" id="uploadPrincipalImage" accept="image/*">
-																		<input type="text" class="form-control mr-2" id="principalImageName" style="display: none;">
-																			<!-- <button type="button" class="btn btn-warning" id="visualizarPrincipalBtn">Visualizar</button> -->
-																		   
-																	</div> 
-																	<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
-																	<div id="status" style="display: none;"></div> 
-																</div>
-																<div class="form-group" style="text-align: center;" >
-																	<img id="principalImagePreview" src="/img/sin_imagen.jpg" alt="Vista previa de la imagen principal" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
-																</div> 
-															</form>
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-															<button type="button" class="btn btn-info" id="guardarPrincipalBtn" style="color: white;" >Guardar</button>
-														</div>
-													</div>
-												</div>
-											</div>
-
-
-												<!-- Modal -->
-												<div class="modal fade" id="imagenModal" tabindex="-1" aria-labelledby="imagenModalLabel" aria-hidden="true">
-													<div class="modal-dialog">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h6 class="modal-title" id="imagenModalLabel">Nueva Imagen</h6>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<div class="modal-body">
-																<form id="imagenForm">
-																	<div class="form-group">
-																		<label for="uploadImage">Subir imagen:</label>
-																		<div class="d-flex align-items-center">
-																			<input type="file" class="form-control-file mr-2" id="uploadImage" name="uploadImage" accept="image/*">
-																			<input type="text" class="form-control mr-2" id="imageName" style="display: none;">
-																			<!-- <button type="button" class="btn btn-warning" id="visualizarBtn">Visualizar</button> -->
-																			
-																		</div>
-																		<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
-																		<div id="status" style="display: none;"></div> 
-																	</div>
-																	<div class="form-group" style="text-align: center;">
-																		<img id="imagePreview" src="/img/sin_imagen.jpg" alt="Vista previa de la imagen" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
-																	</div>
-																</form>
-															</div>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-																<button type="button" class="btn btn-info" style="color: white;" id="guardarBtn">Guardar</button>
-
-
-
-															</div>
-														</div>
-													</div>
-												</div>
-
-  
-
-										</div>
-										<div class="tab-pane fade" id="home4" role="tabpanel" aria-labelledby="home-tab4">  
-											 
-												<h6>Escoge una opción para subir el video:</h6>
-												<ul class="nav nav-tabs" id="myTab" role="tablist">
-													<li class="nav-item">
-														<a class="nav-link active" id="upload-tab" data-toggle="tab" href="#upload" role="tab" aria-controls="upload" aria-selected="true">Sube el video</a>
-													</li>
-													<li class="nav-item">
-														<a class="nav-link" id="link-tab" data-toggle="tab" href="#link" role="tab" aria-controls="link" aria-selected="false">Sube el enlace del video</a>
-													</li>
-												</ul>
-												<div class="tab-content" id="myTabContent">
-													<div class="tab-pane fade show active" id="upload" role="tabpanel" aria-labelledby="upload-tab">
-
-														<h6>Sube el video del producto</h6>
-														<form id="videoForm">
-															<div class="card" style="min-height: 70px;"> 
-																<div class="card-body"> 
-			
-																	<div class="row mt-4">
-																		<div class="col-sm-2">
-																			<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre del video:</h6>
-																		</div>
-																		<div class="col-sm-9">   
-																			<input type="text" class="form-control" id="videoName" maxlength="100"  placeholder="Ingrese el nombre del video">
-																		</div>  
-																		<div class="col-sm-2">
-																			<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Seleccionar:</h6>
-																		</div>
-																		<div class="col-sm-9">   
-																			<div class="d-flex align-items-center">
-																				<!--  <input type="file"  class="form-control-file mr-2" id="uploadVideo"> -->
-																				<input type="file"  id="uploadVideo" name="uploadVideo" accept="video/*">
-																				<span id="fileSize" class="mr-2"></span>
-																				<div class="progress mr-2" style="flex-grow: 1;">
-																					<div id="uploadProgress" class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
-																				</div>
-																				<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-original-title="cancelar" id="cancelUpload">&times;</button> 
-																			</div>	
-																			<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
-																			<div id="status" style="display: none;"></div> 
-																			<img id="videoPreview" src="/img/sin_imagen.jpg"   style="display: none;">
-																			<small class="text-danger">El archivo no debe pesar más de 100mb</small>
-																		</div>   
-
-																		<div class="col-md-12 text-right">   
-																			<button type="button" class="btn btn-info btn-sm" id="registerVideo">Añadir <i class="icon icon-circle-with-plus"></i></button>
-																		</div>
-																	</div> 
-																</form>
-																	<hr>
-																	<h6>Lista de videos</h6>  
-																	<table class="table table-bordered offer-table">
-																		<thead>
-																			<tr>
-																				<th style="width: 5%;">N°</th>
-																				<th style="width: 30%;">Nombre del video</th>
-																				<th style="width: 45%;">Enlace del video</th>
-																				<th style="width: 20%;">Acción</th>
-																			</tr>
-																		</thead> 
-																		<tbody id="videoList">
-																			
-																		</tbody>
-																	</table>
-																</div> 
-															</div>  
-
-  
-   
-
-										 </div>
-													<div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab">
-														<h6>Sube el enlace del video</h6> 
-														<form id="linkForm">
-
-															<div class="card" style="min-height: 70px;"> 
-																<div class="card-body"> 
-			
-																	<div class="row mt-4">
-																		<div class="col-sm-2">
-																			<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre del video:</h6>
-																		</div>
-																		<div class="col-sm-9">   
-																			<input type="text" class="form-control" id="linkVideoName" maxlength="100"  placeholder="Ingrese el nombre del video">  
-																		</div>  
-																		<div class="col-sm-2">
-																			<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Enlace del video:</h6>
-																		</div>
-																		<div class="col-sm-9">   
-																			<input type="text" class="form-control" id="videoLink" maxlength="150"  placeholder="Ingrese el enlace del video">
-																		</div>  
-																		<div class="col-md-12 text-right">
-																			<button type="button" class="btn btn-info btn-sm" id="addVideoLink">
-																				Añadir <i class="icon icon-circle-with-plus"></i>
-																			</button>  
-																		</div>
-																	</div> 
-																	
-														</form>
-																	<hr>
-																	<h6>Lista de videos</h6>  
-																	<table class="table table-bordered offer-table">
-																		<thead>
-																			<tr>
-																				<th style="width: 5%;">N°</th>
-																				<th style="width: 30%;">Nombre del video</th>
-																				<th style="width: 45%;">Enlace del video</th>
-																				<th style="width: 20%;">Acción</th>
-																			</tr>
-																		</thead> 
-																		<tbody id="videoList2">
-																			 
-																		</tbody>
-																	</table>
-																</div> 
-															</div>   
- 
-													</div>
-												</div> 
-										
-											<!-- Modal para ver video -->
-											<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-												<div class="modal-dialog modal-lg">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h6 class="modal-title" id="videoModalLabel">Ver Video</h6>
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<h6 class="modal-title" id="imagenPrincipalModalLabel">
+																Editar Imagen Principal</h6>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
 																<span aria-hidden="true">&times;</span>
 															</button>
 														</div>
 														<div class="modal-body">
-															<iframe id="videoPlayer" style="width: 100%; height: 500px;" frameborder="0" allowfullscreen></iframe>
+															<form id="imagenPrincipalForm">
+																<div class="form-group">
+																	<label for="uploadPrincipalImage"><span
+																			class="text-primary">*</span> Subir
+																		imagen:</label>
+																	<div class="d-flex align-items-center">
+																		<input type="file"
+																			class="form-control-file mr-2"
+																			name="uploadPrincipalImage"
+																			id="uploadPrincipalImage" accept="image/*">
+																		<input type="text" class="form-control mr-2"
+																			id="principalImageName"
+																			style="display: none;">
+																		<!-- <button type="button" class="btn btn-warning" id="visualizarPrincipalBtn">Visualizar</button> -->
+
+																	</div>
+																	<progress id="progressBar" value="0" max="100"
+																		style="width: 100%;"></progress>
+																	<div id="status" style="display: none;"></div>
+																</div>
+																<div class="form-group" style="text-align: center;">
+																	<img id="principalImagePreview"
+																		src="/img/sin_imagen.jpg"
+																		alt="Vista previa de la imagen principal"
+																		class="img-thumbnail"
+																		style="display: none; width: 200px; height: 150px;">
+																</div>
+															</form>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary"
+																data-dismiss="modal">Cancelar</button>
+															<button type="button" class="btn btn-info"
+																id="guardarPrincipalBtn"
+																style="color: white;">Guardar</button>
 														</div>
 													</div>
 												</div>
 											</div>
- 
 
 
-										</div> 
+											<!-- Modal -->
+											<div class="modal fade" id="imagenModal" tabindex="-1"
+												aria-labelledby="imagenModalLabel" aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h6 class="modal-title" id="imagenModalLabel">Nueva Imagen
+															</h6>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form id="imagenForm">
+																<div class="form-group">
+																	<label for="uploadImage">Subir imagen:</label>
+																	<div class="d-flex align-items-center">
+																		<input type="file"
+																			class="form-control-file mr-2"
+																			id="uploadImage" name="uploadImage"
+																			accept="image/*">
+																		<input type="text" class="form-control mr-2"
+																			id="imageName" style="display: none;">
+																		<!-- <button type="button" class="btn btn-warning" id="visualizarBtn">Visualizar</button> -->
 
-										<div class="tab-pane fade" id="home5" role="tabpanel" aria-labelledby="home-tab5"> 
-											<form id="form" action="javascript:void(0)"> 
-											<h6>Colores</h6>
+																	</div>
+																	<progress id="progressBar" value="0" max="100"
+																		style="width: 100%;"></progress>
+																	<div id="status" style="display: none;"></div>
+																</div>
+																<div class="form-group" style="text-align: center;">
+																	<img id="imagePreview" src="/img/sin_imagen.jpg"
+																		alt="Vista previa de la imagen"
+																		class="img-thumbnail"
+																		style="display: none; width: 200px; height: 150px;">
+																</div>
+															</form>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary"
+																data-dismiss="modal">Cancelar</button>
+															<button type="button" class="btn btn-info"
+																style="color: white;" id="guardarBtn">Guardar</button>
 
-												<div class="card" style="min-height: 70px;"> 
-													<div class="card-body"> 
 
-														<div class="row mt-4">
-															<div class="col-sm-2">
-																<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Seleccionar:</h6>
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+
+										</div>
+										<div class="tab-pane fade" id="home4" role="tabpanel"
+											aria-labelledby="home-tab4">
+
+											<h6>Escoge una opción para subir el video:</h6>
+											<ul class="nav nav-tabs" id="myTab" role="tablist">
+												<li class="nav-item">
+													<a class="nav-link active" id="upload-tab" data-toggle="tab"
+														href="#upload" role="tab" aria-controls="upload"
+														aria-selected="true">Sube el video</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" id="link-tab" data-toggle="tab" href="#link"
+														role="tab" aria-controls="link" aria-selected="false">Sube el
+														enlace del video</a>
+												</li>
+											</ul>
+											<div class="tab-content" id="myTabContent">
+												<div class="tab-pane fade show active" id="upload" role="tabpanel"
+													aria-labelledby="upload-tab">
+
+													<h6>Sube el video del producto</h6>
+													<form id="videoForm">
+														<div class="card" style="min-height: 70px;">
+															<div class="card-body">
+
+																<div class="row mt-4">
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Nombre
+																			del video:
+																		</h6>
+																	</div>
+																	<div class="col-sm-9">
+																		<input type="text" class="form-control"
+																			id="videoName" maxlength="100"
+																			placeholder="Ingrese el nombre del video">
+																	</div>
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span>
+																			Seleccionar:
+																		</h6>
+																	</div>
+																	<div class="col-sm-9">
+																		<div class="d-flex align-items-center">
+																			<!--  <input type="file"  class="form-control-file mr-2" id="uploadVideo"> -->
+																			<input type="file" id="uploadVideo"
+																				name="uploadVideo" accept="video/*">
+																			<span id="fileSize" class="mr-2"></span>
+																			<div class="progress mr-2"
+																				style="flex-grow: 1;">
+																				<div id="uploadProgress"
+																					class="progress-bar"
+																					role="progressbar"
+																					style="width: 0%;">0%</div>
+																			</div>
+																			<button type="button"
+																				class="btn btn-danger btn-sm"
+																				data-toggle="tooltip"
+																				data-original-title="cancelar"
+																				id="cancelUpload">&times;</button>
+																		</div>
+																		<progress id="progressBar" value="0" max="100"
+																			style="width: 100%;"></progress>
+																		<div id="status" style="display: none;"></div>
+																		<img id="videoPreview" src="/img/sin_imagen.jpg"
+																			style="display: none;">
+																		<small class="text-danger">El archivo no debe
+																			pesar más de 100mb</small>
+																	</div>
+
+																	<div class="col-md-12 text-right">
+																		<button type="button"
+																			class="btn btn-info btn-sm"
+																			id="registerVideo">Añadir <i
+																				class="icon icon-circle-with-plus"></i></button>
+																	</div>
+																</div>
 															</div>
-															<div class="col-9 col-md-3">  
-																<input type="color" id="color-input" placeholder="#9900FF" >
-															</div>  
-															<div class="col-md-7 text-right">
-																<button type="button" class="btn btn-info btn-sm" id="addcolorbtn">
-																	Añadir <i class="icon icon-circle-with-plus"></i>
-																</button>
- 
-															</div>
-														</div> 
-														<hr>
-														<h6>Lista de colores</h6>  
-														<table class="table table-bordered offer-table">
-															<thead>
-																<tr>
-																	<th>N°</th>
-																	<th>Color</th>
-																	<th>Acción</th>
-																</tr>
-															</thead> 
-															<tbody id="listaColores">
-																
-															</tbody>
-														</table>
-													</div> 
-												</div> 
+														</div>
+													</form>
+													<hr>
+													<h6>Lista de videos</h6>
+													<table class="table table-bordered offer-table">
+														<thead>
+															<tr>
+																<th style="width: 5%;">N°</th>
+																<th style="width: 30%;">Nombre del video</th>
+																<th style="width: 45%;">Enlace del video</th>
+																<th style="width: 20%;">Acción</th>
+															</tr>
+														</thead>
+														<tbody id="videoList">
 
-												<h6>Talla</h6>
+														</tbody>
+													</table>
+												</div>
+											</div>
 
-												<div class="card" style="min-height: 70px;"> 
-													<div class="card-body"> 
 
-														<div class="row mt-4">
-															<div class="col-sm-2">
-																<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Ingresar:</h6>
-															</div>
-															<div class="col-9 col-md-3">  
-																<input type="text" id="talla-input"  class="form-control" maxlength="15"  placeholder="Mediano (M)"> 
-														
-															</div>  
-															<div class="col-md-7 text-right"> 
-																
-																<button type="button" class="btn btn-info btn-sm" id="addtallabtn">
-																	Añadir <i class="icon icon-circle-with-plus"></i>
-																</button>
-															</div>
-														</div> 
-														<hr>
-														<h6>Lista de colores</h6>  
-														<table class="table table-bordered offer-table">
-															<thead>
-																<tr>
-																	<th>N°</th>
-																	<th>Talla</th>
-																	<th>Acción</th>
-																</tr>
-															</thead> 
-															<tbody id="listaTalla">
-																 
-															</tbody>
-														</table>
-													</div> 
-												</div>  
-											</form> 
-										</div>   
-											 
-										<div class="tab-pane fade" id="home6" role="tabpanel" aria-labelledby="home-tab6">
-											<form id="form" action="javascript:void(0)">
-												<h6>Ofertas</h6>
+
+
+										</div>
+										<div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab">
+											<h6>Sube el enlace del video</h6>
+											<form id="linkForm">
 
 												<div class="card" style="min-height: 70px;">
-													<div class="card-header" style="text-align: center;"> <span class="text-primary">*</span> Precio actual: S/. <span id="precioDisplay">  </span></div>
-													<div class="card-body"> 
+													<div class="card-body">
 
 														<div class="row mt-4">
 															<div class="col-sm-2">
-																<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> (% de descuento):</h6>
+																<h6 class="sub-heading"
+																	style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																	<span class="text-primary">*</span> Nombre del
+																	video:
+																</h6>
 															</div>
-															<div class="col-9 col-md-4">   
-																<input type="text" class="form-control" placeholder="Ingrese el porcentaje de descuento" id="porcentajeDescuento" maxlength="3"   oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-															</div> 
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	id="linkVideoName" maxlength="100"
+																	placeholder="Ingrese el nombre del video">
+															</div>
 															<div class="col-sm-2">
-																<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Precio:</h6>
+																<h6 class="sub-heading"
+																	style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																	<span class="text-primary">*</span> Enlace del
+																	video:
+																</h6>
 															</div>
-															<div class="col-9 col-md-4">
-																<input type="number" class="form-control" id="precioOfertado" placeholder="Resultado del precio ofertado" readonly>
-															</div>
-
-															<div class="col-sm-2">
-																<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Fecha de Inicio:</h6>
-															</div>
-															<div class="col-9 col-md-4">   
-																<input type="date" class="form-control" id="fechaInicio" >
-															</div> 
-															<div class="col-sm-2">
-																<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Fecha de Fin:</h6>
-															</div>
-															<div class="col-9 col-md-4"> 
-															<input type="date" class="form-control" id="fechaFin"  >
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="videoLink"
+																	maxlength="150"
+																	placeholder="Ingrese el enlace del video">
 															</div>
 															<div class="col-md-12 text-right">
-																<button type="button" class="btn btn-info btn-sm" id="addOfferButton">
+																<button type="button" class="btn btn-info btn-sm"
+																	id="addVideoLink">
 																	Añadir <i class="icon icon-circle-with-plus"></i>
 																</button>
- 
 															</div>
-														</div> 
-													</div> 
-												</div>  
-												<h6>Lista de ofertas</h6>
-												<table class="table table-bordered offer-table">
-													<thead>
-														<tr>
-															<th>Número</th>
-															<th>Porcentaje de descuento (%)</th>
-															<th>Precio ofertado</th>
-															<th>Fecha de inicio</th>
-															<th>Fecha de fin</th>
-															<th>Acciones</th>
-														</tr>
-													</thead>
-													<tbody id="listaOfertas">
-														<!-- Filas de ofertas se agregarán aquí -->
-													</tbody>
-												</table> 
-  
-
-											</form> 
-
-
-										</div>
-										<div class="tab-pane fade" id="home7" role="tabpanel" aria-labelledby="home-tab7">
-
-											<form id="form" action="javascript:void(0)">
-												<h6>Otros costos</h6>
-
-												<div class="row mt-3">
-													<div class="col-sm-2">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Nombre:</h6>
-													</div>
-													<div class="col-sm-6"> 
-														<input type="text" class="form-control" id="nombreCosto" maxlength="150" placeholder="Ingrese el nombre del costo">
-													</div>
-														
-													<div class="col-10 col-md-3">  
-
-														<button type="button" class="btn btn-info btn-sm" id="addCostoButton">Añadir <i class="icon icon-circle-with-plus"></i></button>
-													</div> 
-													<div class="col-sm-2">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> Precio:</h6>
-													</div>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" placeholder="Ingrese el precio" id="precioCosto" maxlength="8"   oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-														 
-													</div>
-												</div> 
-											<hr>
- 
-												<h6>Lista de costos</h6>
-												<table class="table table-bordered cost-table">
-													<thead>
-														<tr>
-															<th>N°</th>
-															<th>Nombre del costo</th>
-															<th>Precio en S/. (soles)</th>
-															<th>Acción</th>
-														</tr>
-													</thead>
-													<tbody id="listaCostos">
-														<!-- Filas de costos se agregarán aquí -->
-													</tbody>
-												</table> 
-
-											</form> 
-
-										</div>
-										<div class="tab-pane fade" id="home8" role="tabpanel" aria-labelledby="home-tab8">
-											<form id="form" action="javascript:void(0)">
-												<h6>Condiciones del producto</h6>
-
-												<!-- Precios de impuesto de IGV --> 
-												<div class="row mt-2">
-													<div class="col-sm-3">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Precios de impuesto de IGV:</h6>
-													</div>
-													<div class="col-sm-9"> 
-														<div class="form-row">
-															<div class="col">
-																<div class="custom-switch">
-																	<input type="checkbox" class="custom-control-input" id="impuestoIGV">
-																	<label class="custom-control-label" for="impuestoIGV" style="padding: 10px;margin-top: 17px;"></label>
-																</div>
-															</div> 
 														</div>
-													</div>  
-												</div>    
-									
-												<hr>
-												<div class="row mt-2">
-													<div class="col-sm-3">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Precios de envío en soles:</h6>
 													</div>
-													<div class="col-sm-9"> 
-														<div class="form-row">
-															<div class="col">
-																<div class="custom-switch"> 
-																	<input type="checkbox" class="custom-control-input" id="precioEnvio">
-																	<label class="custom-control-label" for="precioEnvio" style="padding: 10px;margin-top: 17px;"></label>
-																</div>
-															</div> 
-														</div>
-													</div>  
-												</div>  
-												<div class="row mt-2">
-													<div class="col-sm-3">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"></h6>
-													</div>
-													<div class="col-sm-9"> 
-														<div class="form-row">
-															<div class="col">
-																<label for="envioLocal">Local:</label> 
-																<input type="text" class="form-control" placeholder="Precio de envío local" id="envioLocal" maxlength="8"  disabled oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-															</div> 
-														</div>
-													</div> 
-													<div class="col-sm-3">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> </h6>
-													</div>
-													<div class="col-sm-9"> 
-														<div class="form-row">
-															<div class="col">
-																<label for="envioNacional">Nacional:</label> 
-																<input type="text" class="form-control" placeholder="Precio de envío nacional" id="envioNacional" maxlength="8"  disabled oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-															</div> 
-														</div>
-													</div> 
-													<div class="col-sm-3">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> </h6>
-													</div>
-													<div class="col-sm-9"> 
-														<div class="form-row">
-															<div class="col">
-																<label for="envioExtranjero">Extranjero:</label> 
-																
-																<input type="text" class="form-control" placeholder="Precio de envío extranjero" id="envioExtranjero" maxlength="8"  disabled oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-															</div> 
-														</div>
-													</div> 
-												</div> 
-												<hr>
-												<div class="row mt-2">
-													<div class="col-sm-3">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Tiempos de elaboración (en días):</h6>
-													</div>
-													<div class="col-sm-9"> 
-														<div class="form-row">
-															<div class="col"> 
-																<input type="text" class="form-control" placeholder="Ingrese los tiempos de elaboración" id="tiemposElaboracion" maxlength="4"   oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-															</div> 
-														</div>
-													</div>  
 												</div>
-												<hr>
-												<div class="row mt-2">
-													<div class="col-sm-3">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Tiempos estimado de envío (en días):</h6>
-													</div>
-													<div class="col-sm-9"> 
-														<div class="form-row">
-															<div class="col"> 
-																<input type="text" class="form-control" placeholder="Ingrese los tiempos de envío" id="tiemposEnvio" maxlength="4"   oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-															</div> 
-														</div>
-													</div>  
-												</div> 
-												 
-												<hr>
-												<div class="row mt-2">
-													<div class="col-sm-3">
-														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Preventas:</h6>
-													</div>
-													<div class="col-sm-9"> 
-														<div class="form-row">
-															<div class="col">
-																<div class="custom-switch"> 																	
-																	<input type="checkbox" class="custom-control-input" id="preventas">
-																	<label class="custom-control-label" for="preventas" style="padding: 10px;margin-top: 17px;"></label>
-																</div>
-															</div> 
-														</div>
-													</div>  
-												</div>   
-											</div> 
-											 
-											</form> 
-										
+											</form>
+											<hr>
+											<h6>Lista de videos</h6>
+											<table class="table table-bordered offer-table">
+												<thead>
+													<tr>
+														<th style="width: 5%;">N°</th>
+														<th style="width: 30%;">Nombre del video</th>
+														<th style="width: 45%;">Enlace del video</th>
+														<th style="width: 20%;">Acción</th>
+													</tr>
+												</thead>
+												<tbody id="videoList2">
+
+												</tbody>
+											</table>
 										</div>
-									</div>  
-									
-									<div class="modal-footer"> 
-										<a href="/productos.html" class="btn btn-primary" >Cancelar</a>
-										<a id="btnguardarcambio"  class="btn btn-info" style="color: white;">Registrar</a>
 									</div>
 
 								</div>
 							</div>
 
+							<!-- Modal para ver video -->
+							<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h6 class="modal-title" id="videoModalLabel">Ver Video</h6>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<iframe id="videoPlayer" style="width: 100%; height: 500px;" frameborder="0"
+												allowfullscreen></iframe>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+
+						<div class="tab-pane fade" id="home5" role="tabpanel" aria-labelledby="home-tab5">
+							<form id="form" action="javascript:void(0)">
+								<h6>Colores</h6>
+
+								<div class="card" style="min-height: 70px;">
+									<div class="card-body">
+
+										<div class="row mt-4">
+											<div class="col-sm-2">
+												<h6 class="sub-heading"
+													style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span
+														class="text-primary">*</span> Seleccionar:</h6>
+											</div>
+											<div class="col-9 col-md-3">
+												<input type="color" id="color-input" placeholder="#9900FF">
+											</div>
+											<div class="col-md-7 text-right">
+												<button type="button" class="btn btn-info btn-sm" id="addcolorbtn">
+													Añadir <i class="icon icon-circle-with-plus"></i>
+												</button>
+
+											</div>
+										</div>
+										<hr>
+										<h6>Lista de colores</h6>
+										<table class="table table-bordered offer-table">
+											<thead>
+												<tr>
+													<th>N°</th>
+													<th>Color</th>
+													<th>Acción</th>
+												</tr>
+											</thead>
+											<tbody id="listaColores">
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<h6>Talla</h6>
+
+								<div class="card" style="min-height: 70px;">
+									<div class="card-body">
+
+										<div class="row mt-4">
+											<div class="col-sm-2">
+												<h6 class="sub-heading"
+													style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span
+														class="text-primary">*</span> Ingresar:</h6>
+											</div>
+											<div class="col-9 col-md-3">
+												<input type="text" id="talla-input" class="form-control" maxlength="15"
+													placeholder="Mediano (M)">
+
+											</div>
+											<div class="col-md-7 text-right">
+
+												<button type="button" class="btn btn-info btn-sm" id="addtallabtn">
+													Añadir <i class="icon icon-circle-with-plus"></i>
+												</button>
+											</div>
+										</div>
+										<hr>
+										<h6>Lista de colores</h6>
+										<table class="table table-bordered offer-table">
+											<thead>
+												<tr>
+													<th>N°</th>
+													<th>Talla</th>
+													<th>Acción</th>
+												</tr>
+											</thead>
+											<tbody id="listaTalla">
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<div class="tab-pane fade" id="home6" role="tabpanel" aria-labelledby="home-tab6">
+							<form id="form" action="javascript:void(0)">
+								<h6>Ofertas</h6>
+
+								<div class="card" style="min-height: 70px;">
+									<div class="card-header" style="text-align: center;"> <span
+											class="text-primary">*</span> Precio actual: S/. <span id="precioDisplay">
+										</span></div>
+									<div class="card-body">
+
+										<div class="row mt-4">
+											<div class="col-sm-2">
+												<h6 class="sub-heading"
+													style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span
+														class="text-primary">*</span> (% de descuento):</h6>
+											</div>
+											<div class="col-9 col-md-4">
+												<input type="text" class="form-control"
+													placeholder="Ingrese el porcentaje de descuento"
+													id="porcentajeDescuento" maxlength="3"
+													oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+											</div>
+											<div class="col-sm-2">
+												<h6 class="sub-heading"
+													style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Precio:
+												</h6>
+											</div>
+											<div class="col-9 col-md-4">
+												<input type="number" class="form-control" id="precioOfertado"
+													placeholder="Resultado del precio ofertado" readonly>
+											</div>
+
+											<div class="col-sm-2">
+												<h6 class="sub-heading"
+													style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span
+														class="text-primary">*</span> Fecha de Inicio:</h6>
+											</div>
+											<div class="col-9 col-md-4">
+												<input type="date" class="form-control" id="fechaInicio">
+											</div>
+											<div class="col-sm-2">
+												<h6 class="sub-heading"
+													style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span
+														class="text-primary">*</span> Fecha de Fin:</h6>
+											</div>
+											<div class="col-9 col-md-4">
+												<input type="date" class="form-control" id="fechaFin">
+											</div>
+											<div class="col-md-12 text-right">
+												<button type="button" class="btn btn-info btn-sm" id="addOfferButton">
+													Añadir <i class="icon icon-circle-with-plus"></i>
+												</button>
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<h6>Lista de ofertas</h6>
+								<table class="table table-bordered offer-table">
+									<thead>
+										<tr>
+											<th>Número</th>
+											<th>Porcentaje de descuento (%)</th>
+											<th>Precio ofertado</th>
+											<th>Fecha de inicio</th>
+											<th>Fecha de fin</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody id="listaOfertas">
+										<!-- Filas de ofertas se agregarán aquí -->
+									</tbody>
+								</table>
+
+
+							</form>
+
+
+						</div>
+						<div class="tab-pane fade" id="home7" role="tabpanel" aria-labelledby="home-tab7">
+
+							<form id="form" action="javascript:void(0)">
+								<h6>Otros costos</h6>
+
+								<div class="row mt-3">
+									<div class="col-sm-2">
+										<h6 class="sub-heading"
+											style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span
+												class="text-primary">*</span> Nombre:</h6>
+									</div>
+									<div class="col-sm-6">
+										<input type="text" class="form-control" id="nombreCosto" maxlength="150"
+											placeholder="Ingrese el nombre del costo">
+									</div>
+
+									<div class="col-10 col-md-3">
+
+										<button type="button" class="btn btn-info btn-sm" id="addCostoButton">Añadir <i
+												class="icon icon-circle-with-plus"></i></button>
+									</div>
+									<div class="col-sm-2">
+										<h6 class="sub-heading"
+											style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span
+												class="text-primary">*</span> Precio:</h6>
+									</div>
+									<div class="col-sm-6">
+										<input type="text" class="form-control" placeholder="Ingrese el precio"
+											id="precioCosto" maxlength="8"
+											oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+
+									</div>
+								</div>
+								<hr>
+
+								<h6>Lista de costos</h6>
+								<table class="table table-bordered cost-table">
+									<thead>
+										<tr>
+											<th>N°</th>
+											<th>Nombre del costo</th>
+											<th>Precio en S/. (soles)</th>
+											<th>Acción</th>
+										</tr>
+									</thead>
+									<tbody id="listaCostos">
+										<!-- Filas de costos se agregarán aquí -->
+									</tbody>
+								</table>
+
+							</form>
+
+						</div>
+						<div class="tab-pane fade" id="home8" role="tabpanel" aria-labelledby="home-tab8">
+							<form id="form" action="javascript:void(0)">
+								<h6>Condiciones del producto</h6>
+
+								<!-- Precios de impuesto de IGV -->
+								<div class="row mt-2">
+									<div class="col-sm-3">
+										<h6 class="sub-heading"
+											style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Precios de
+											impuesto de IGV:</h6>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-row">
+											<div class="col">
+												<div class="custom-switch">
+													<input type="checkbox" class="custom-control-input"
+														id="impuestoIGV">
+													<label class="custom-control-label" for="impuestoIGV"
+														style="padding: 10px;margin-top: 17px;"></label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<hr>
+								<div class="row mt-2">
+									<div class="col-sm-3">
+										<h6 class="sub-heading"
+											style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Precios de envío
+											en soles:</h6>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-row">
+											<div class="col">
+												<div class="custom-switch">
+													<input type="checkbox" class="custom-control-input"
+														id="precioEnvio">
+													<label class="custom-control-label" for="precioEnvio"
+														style="padding: 10px;margin-top: 17px;"></label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row mt-2">
+									<div class="col-sm-3">
+										<h6 class="sub-heading"
+											style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"></h6>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-row">
+											<div class="col">
+												<label for="envioLocal">Local:</label>
+												<input type="text" class="form-control"
+													placeholder="Precio de envío local" id="envioLocal" maxlength="8"
+													disabled oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<h6 class="sub-heading"
+											style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> </h6>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-row">
+											<div class="col">
+												<label for="envioNacional">Nacional:</label>
+												<input type="text" class="form-control"
+													placeholder="Precio de envío nacional" id="envioNacional"
+													maxlength="8" disabled
+													oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<h6 class="sub-heading"
+											style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> </h6>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-row">
+											<div class="col">
+												<label for="envioExtranjero">Extranjero:</label>
+
+												<input type="text" class="form-control"
+													placeholder="Precio de envío extranjero" id="envioExtranjero"
+													maxlength="8" disabled
+													oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="row mt-2">
+									<div class="col-sm-3">
+										<h6 class="sub-heading"
+											style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Tiempos de
+											elaboración (en días):</h6>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-row">
+											<div class="col">
+												<input type="text" class="form-control"
+													placeholder="Ingrese los tiempos de elaboración"
+													id="tiemposElaboracion" maxlength="4"
+													oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="row mt-2">
+									<div class="col-sm-3">
+										<h6 class="sub-heading"
+											style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">Tiempos estimado
+											de envío (en días):</h6>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-row">
+											<div class="col">
+												<input type="text" class="form-control"
+													placeholder="Ingrese los tiempos de envío" id="tiemposEnvio"
+													maxlength="4"
+													oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<hr>
+								<div class="row mt-2">
+									<div class="col-sm-3">
+										<h6 class="sub-heading"
+											style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"> Preventas:</h6>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-row">
+											<div class="col">
+												<div class="custom-switch">
+													<input type="checkbox" class="custom-control-input" id="preventas">
+													<label class="custom-control-label" for="preventas"
+														style="padding: 10px;margin-top: 17px;"></label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+
 						</div>
 					</div>
 
+					<div class="modal-footer">
+						<a href="/productos.html" class="btn btn-primary">Cancelar</a>
+						<a id="btnguardarcambio" class="btn btn-info" style="color: white;">Registrar</a>
+					</div>
 
 				</div>
-				<!-- END: .main-content -->
 			</div>
-			<!-- END: .app-main -->
 
 		</div>
-		<!-- END: .app-container -->
-		<!-- BEGIN .main-footer -->
-		<footer class="main-footer fixed-btm">
-			Copyright Artesanias Ayacucho 2024.
-		</footer>
-		<!-- END: .main-footer -->
 	</div>
 
- 
- 
+	<!-- <div></div> -->
+	<!-- END: .main-content -->
+	<!-- <div></div> -->
+	<!-- END: .app-main -->
+
+	<!-- <div></div> -->
+	<!-- END: .app-container -->
+	<!-- BEGIN .main-footer -->
+	<footer class="main-footer fixed-btm">
+		Copyright Artesanias Ayacucho 2024.
+	</footer>
+	<!-- END: .main-footer -->
+	<!-- <div></div> -->
+
+
+
 	<!-- END: .app-wrap -->
 
 	<!-- jQuery first, then Tether, then other JS. -->
@@ -1091,7 +1457,7 @@
 
 	<!-- Common JS -->
 	<script src="/js/common.js"></script>
-	<script type="module" src="/src/productos-detalle/index.js"></script> 
+	<script type="module" src="/src/productos-detalle/index.js"></script>
 
 
 </body>

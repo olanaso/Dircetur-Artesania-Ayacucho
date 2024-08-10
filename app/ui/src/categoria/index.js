@@ -2,7 +2,7 @@ import { listarCategorias, guardarCategoria, filtrarCategorias, borrarCategoria,
 import { FileUploader } from '../utils/upload.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
-import { showToast } from "../utils/toast.js";
+import { showToast } from '../utils/toast';
 
 
 import { loadPartials } from '../utils/viewpartials';   
@@ -75,7 +75,6 @@ function cargarTabla(categorias) {
     const row = document.createElement('tr');
 
     row.innerHTML = `
-      <td>${categoria.id}</td>
       <td><img src="${categoria.foto_referente}" alt="${categoria.denominacion}" width="100"></td>
       <td>${categoria.denominacion}</td>
       <td>${categoria.abreviatura}</td>
@@ -156,11 +155,10 @@ async function editarCategoria(categoria) {
     }
 
     if (fileInput.files[0]) {
-      formData.foto_referente = imagen_principal;
+      formData.foto_referente = imagen_principal
     } else {
       formData.foto_referente = categoria.foto_referente;
     }
-
     // Verificar si el formulario es válido antes de continuar
     if (!form.checkValidity()) {
       form.reportValidity();
@@ -169,8 +167,7 @@ async function editarCategoria(categoria) {
 
     try {
       const result = await actualizarCategoria(categoria.id, formData);
-      showToast('Categoría actualizada correctamente');
-      // console.log('Categoría actualizada:', result);
+      showToast('Categoría actualizada exitosamente');
       await cargarCategoria();
       $(modal).modal('hide');
     } catch (error) {
@@ -178,7 +175,6 @@ async function editarCategoria(categoria) {
     }
   });
 }
-
 
 async function registrarCategoria() {
   const btnRegistrar = document.getElementById('registrar-categoria');

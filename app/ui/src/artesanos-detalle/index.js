@@ -164,15 +164,15 @@ $('#btnvalidar').on('click', async function (e) {
 
             e.preventDefault();
             var isValid = true;
-            // Itera sobre todos los campos requeridos para verificar si están vacíos
-            $('#form .form-control[required]').each(function () {
-              if ($(this).val() === '') {
-                isValid = false;
-                $(this).css('border-color', 'red'); // Marca los campos vacíos
-              } else {
-                $(this).css('border-color', ''); // Restablece a la normalidad si se corrige
-              }
-            });
+            // // Itera sobre todos los campos requeridos para verificar si están vacíos
+            // $('#form .form-control[required]').each(function () {
+            //   if ($(this).val() === '') {
+            //     isValid = false;
+            //     $(this).css('border-color', 'red'); // Marca los campos vacíos
+            //   } else {
+            //     $(this).css('border-color', ''); // Restablece a la normalidad si se corrige
+            //   }
+            // });
 
             if (!isValid) { 
               showToast('Por favor, ingresa todos los campos *.');
@@ -866,12 +866,9 @@ $(document).ready(function() {
     let texto="";
     let valor="";
     for (let i = 0; i < opciones.length; i++) {
-      if (opciones[i].value === tiporedsocial) {
-        texto = opciones[i].text;
-        valor = opciones[i].value;
-       console.log(`Texto: ${texto}, Valor: ${valor}`);
-        
-      }
+         texto = opciones[i].text;
+         valor = opciones[i].value;
+        console.log(`Texto: ${texto}, Valor: ${valor}`);
     }
    
     contadorContacto++;
