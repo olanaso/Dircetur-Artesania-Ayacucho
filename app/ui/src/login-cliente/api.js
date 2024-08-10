@@ -1,4 +1,4 @@
-import{baseUrl, saveDataToLocalStorage} from "../utils/config";
+import {baseUrl, getDataFromLocalStorage, saveDataToLocalStorage} from "../utils/config";
 export async function loginCliente(usuario,clave){
     const settings = {
         method: "POST",
@@ -17,6 +17,7 @@ export async function loginCliente(usuario,clave){
         if(data && data.token){
             saveDataToLocalStorage('accessToken', data.token)
             saveDataToLocalStorage('rol', data.usuario.rolid)
+
         }
         return data
     } catch(e){

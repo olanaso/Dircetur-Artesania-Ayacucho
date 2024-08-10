@@ -38,7 +38,7 @@ function validarCamposRegistro() {
 }
 async function registrarCliente() {
 
-    let nombres = $('#nombres').val()
+    let nombres = $('#nombre').val()
     let apellidos = $('#apellidos').val()
     let correo = $('#correo').val()
     let clave = $('#contraseña').val()

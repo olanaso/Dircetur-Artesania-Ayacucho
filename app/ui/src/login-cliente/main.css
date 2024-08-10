@@ -3737,7 +3737,7 @@ footer .sub-footer p a:hover {
     color: white;
 }
 
-#btnIniciarSesion {
+#btnloginc {
     background-color: #f4c23d;
     color: #ffffff;
     border: 2px solid #f4c23d;
@@ -3745,7 +3745,7 @@ footer .sub-footer p a:hover {
     padding: 10px 20px;
 }
 
-#btnIniciarSesion:hover {
+#btnloginc:hover {
     background-color: #d4a32b;
     color: #ffffff;
     border: 2px solid #fab31e;
