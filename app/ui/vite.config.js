@@ -32,7 +32,7 @@ export default {
         'ventaartesano-detalle': resolve(__dirname, 'ventaartesano-detalle.html'),
         'ventaartesano': resolve(__dirname, 'ventaartesano.html'),
         'ventas-detalle': resolve(__dirname, 'ventas-detalle.html'),
-        'ventas': resolve(__dirname, 'ventas.html')        
+        'ventas': resolve(__dirname, 'ventas.html')
       }
     },
     outDir: resolve(__dirname, './dist'),
