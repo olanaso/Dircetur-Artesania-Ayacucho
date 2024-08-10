@@ -32,12 +32,31 @@ async function infoArtesano() {
     $('#emailArtesano').text(artesano.correo)
     $('#habilidades').text(listEspecialidadesTecnicas[0].descripcionhabilidades)
     $('#tiposArtesania').text(listEspecialidadesTecnicas[0].tipoartesania)
-    console.log('taller: ', listReconocimientos[0]);
+    console.log('taller: ', listReconocimientos);
     $('#nombreTaller').text(listTaller[0].nombretaller)
     $('#rucTaller').text(listTaller[0].ructaller)
     $('#direccionTaller').text(listTaller[0].direccionfisica)
     $('#atencionTaller').text(listTaller[0].horarioatencion)
     initMap(listTaller[0].latitud, listTaller[0].longitud)
+
+
+    if (listReconocimientos.length > 0) {
+        for(let reconocimiento of listReconocimientos){
+            $('#listReconocimientos').append(`
+                <div class="sep-section-heading">
+                    <div class="certificate">
+                        <div class="title">${reconocimiento.Título}</div>
+                        <div class="subtitle">Otorgado por ${reconocimiento.Entidad} </div>
+                        <div class="content">
+                            ${reconocimiento.Descripcion}
+                        </div>
+                    </div>
+                </div>
+            `)
+        }
+    } else {
+        
+    }
     
 }
 
