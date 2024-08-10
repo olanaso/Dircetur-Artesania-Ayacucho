@@ -3,11 +3,12 @@ import { validarHTML5 } from '../utils/validateForm';
 import { FileUploader } from '../utils/uploadJorge.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
-import { guardarUsuario,geteditarArtesano, geteditarLogin, llenardepartamento,llenarprovincia,llenardistrito, guardarArtesano,buscarDNI } from './api'; 
+import {geteditarArtesano, geteditarLogin, llenardepartamento,llenarprovincia,llenardistrito, guardarArtesano,buscarDNI } from './api';
 import { showLoading, hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
 import '../artesanos-detalle/style.css'
+import {guardarUsuario} from '../../shared/api/usuario.js'
 
 
 hideLoading();

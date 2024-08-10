@@ -4,6 +4,7 @@ import './font-awesome.min.css'
 import './style.css'
 import { showToast } from "../utils/toast.js";
 import { guardarCliente } from './api.js'
+import {guardarUsuario} from '../../shared/api/usuario.js'
 
 
 
@@ -40,19 +41,21 @@ async function registrarCliente() {
     let nombres = $('#nombres').val()
     let apellidos = $('#apellidos').val()
     let correo = $('#correo').val()
-    let contraseña = $('#contraseña').val()
+    let clave = $('#contraseña').val()
     let telefono = $('#telefono').val()
 
     //usando api
     try {
-        const registroCliente = await guardarCliente({ nombres, apellidos, correo, contraseña, telefono })
-        if (registroCliente) {
+        const registroCliente = await guardarCliente({ nombres, apellidos, correo, clave, telefono })
+        const registroUsuario = await guardarUsuario({nombre_completo: nombres +' ' +apellidos,clave,rolid:3,tipousuario:3,estado:1  })
+        if (registroCliente && registroUsuario)  {
             showToast('success', 'Cliente registrado correctamente')
         }
     } catch (e) {
         showToast('error', 'Error al registrar el cliente') //por cambiar, debe responder de acuerdo al api
-        console.log(e)
+        console.error(e)
     }
 
 }
+
 
