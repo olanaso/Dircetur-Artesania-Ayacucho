@@ -47,7 +47,7 @@ async function registrarCliente() {
     //usando api
     try {
         const registroCliente = await guardarCliente({ nombres, apellidos, correo, clave, telefono })
-        const registroUsuario = await guardarUsuario({nombre_completo: nombres +' ' +apellidos,clave,rolid:3,tipousuario:3,estado:1  })
+        const registroUsuario = await guardarUsuario({usuario: correo,nombre_completo: nombres +' ' +apellidos,clave,rolid:3,tipousuario:3,estado:1  })
         if (registroCliente && registroUsuario)  {
             showToast('success', 'Cliente registrado correctamente')
         }
