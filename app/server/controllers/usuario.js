@@ -204,7 +204,8 @@ async function save(req, res, next) {
         const data = {
             message: "Cuenta creada con exito",
             token: await tokenSign(object),
-            rolid: object.rolid
+            rolid: object.rolid,
+            id: object.id
         }
         console.log(data)
 

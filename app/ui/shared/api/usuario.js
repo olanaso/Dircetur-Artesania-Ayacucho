@@ -19,6 +19,7 @@ export async function guardarUsuario(usuario) {
         if(data && data.data.token){
             saveDataToLocalStorage('accessToken', data.data.token)
             saveDataToLocalStorage('rol', data.data.rolid)
+            saveDataToLocalStorage('id', data.data.id)
         }
         return data; // Ahora data contiene el ID del objeto creado y otros datos
     } catch (error) {
