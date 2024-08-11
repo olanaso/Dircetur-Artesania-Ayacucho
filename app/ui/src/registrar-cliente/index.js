@@ -45,7 +45,7 @@ async function registrarCliente() {
         const registroCliente = await guardarCliente({ nombres, apellidos, correo, clave, telefono });
         const registroUsuario = await guardarUsuario({ usuario: correo, nombre_completo: `${nombres} ${apellidos}`, clave, rolid: 3, tipousuario: 3, estado: 1 });
         if (registroCliente && registroUsuario) {
-            saveDataToLocalStorage('rol', 2);
+            saveDataToLocalStorage('rol', 3);
             showToast('success', 'Cliente registrado correctamente');
             window.location.href = '/principal.html';
         }
