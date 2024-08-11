@@ -14,6 +14,7 @@ const rol = require('../models/rol');
 const menu = require('../models/menu');
 const usuario = require('../models/usuario');
 const artesano = require('../models/artesano');
+const cliente = require('../models/cliente')
 const{tokenSign} = require('../utils/handleJwt')
 
 module.exports = {
@@ -205,7 +206,8 @@ async function save(req, res, next) {
             message: "Cuenta creada con exito",
             token: await tokenSign(object),
             rolid: object.rolid,
-            id: object.id
+            id: object.id,
+            idCliente: await cliente.findIdByCorreo(object.correo)
         }
         console.log(data)
 
@@ -298,11 +300,12 @@ async function loginpersonal (req, res) {
 
  
         }
-
+        const idClient = await cliente.findIdByCorreo(usuarioDB.correo)
         res.status(200).json({
             islogueado: true,
             usuario: usuarioDB,
-            token: "Bearer " + token
+            token: "Bearer " + token,
+            idCliente: idClient
         });
 
     } catch (err) {
