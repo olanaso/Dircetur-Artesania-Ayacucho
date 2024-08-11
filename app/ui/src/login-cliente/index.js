@@ -11,7 +11,7 @@ import {showToast} from "../utils/toast.js";
 $(document).ready(function(){
     $('#btnloginc').click(async function(e){
         e.preventDefault()
-        loginDeCliente()
+        await loginDeCliente()
     })
 })
 
@@ -22,10 +22,15 @@ async function loginDeCliente(){
     try{
         const result = await loginCliente(usuario, clave)
         if(result){
+            // Guardar el rol del usuario en localStorage
+            saveDataToLocalStorage('rolid', result.rol);
             showToast('success', 'Cliente logueado correctamente')
+            window.location.href = '/principal.html';
         }
     }catch(e){
         showToast('error', 'Error al loguear el cliente')
         console.error(e)
+    } finally {
+        $('#btnloginc').prop('disabled', false).text('Ingresar');
     }
 }
