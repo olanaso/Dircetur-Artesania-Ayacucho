@@ -203,9 +203,16 @@ async function save(req, res, next) {
         // Envía el ID del objeto creado junto con el objeto
         const data = {
             message: "Cuenta creada con exito",
+            token: await tokenSign(object),
             rolid: object.rolid
         }
-        res.cookie('token', data.token, { maxAge: 24 * 60 * 60 * 1000 })
+        console.log(data)
+
+
+        //hice 2 intentos de cookies
+        // const token = tokenSign(object)
+        // req.session.token = token
+        // res.cookie('token', data.token, { maxAge: 24 * 60 * 60 * 1000 })
         return res.status(200).send({data});
     } catch (e) {
         await t.rollback();
