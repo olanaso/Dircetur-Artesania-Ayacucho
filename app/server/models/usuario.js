@@ -1,8 +1,9 @@
 const db = require('../config/db');
 sequelize = db.sequelize;
 Sequelize = db.Sequelize;
+cliente = require('./cliente')
 
-module.exports = sequelize.define('usuario', {
+const usuario = sequelize.define('usuario', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -65,3 +66,12 @@ module.exports = sequelize.define('usuario', {
     timestamps: true,  // Para permitir que Sequelize maneje `createdAt` y `updatedAt`
     underscored: true, // Esto asegurará que las columnas creadas automáticamente tengan nombres en formato underscore y no camelCase
 });
+
+
+usuario.findUsuarioAndClienteId = function(models){
+
+}
+
+
+
+module.exports = usuario

@@ -23,7 +23,6 @@ async function loginDeCliente(){
         const result = await loginCliente(usuario, clave)
         if(result){
             // Guardar el rol del usuario en localStorage
-            saveDataToLocalStorage('rolid', result.rol);
             showToast('success', 'Cliente logueado correctamente')
             window.location.href = '/principal.html';
         }

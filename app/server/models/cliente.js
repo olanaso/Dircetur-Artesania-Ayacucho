@@ -2,7 +2,7 @@ const db = require('../config/db');
 sequelize = db.sequelize;
 Sequelize = db.Sequelize;
 
-module.exports = sequelize.define('cliente', {
+const cliente = sequelize.define('cliente', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -130,3 +130,15 @@ module.exports = sequelize.define('cliente', {
     tableName: 'cliente',
     timestamps: true
 });
+
+
+cliente.findIdByCorreo = async function(correo){
+    clienteEncontrado = await cliente.findOne({
+        where: {
+            correo: correo
+        }
+    });
+    return clienteEncontrado ? clienteEncontrado.id : null
+}
+
+module.exports = cliente
