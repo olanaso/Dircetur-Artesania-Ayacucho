@@ -14,6 +14,7 @@ const rol = require('../models/rol');
 const menu = require('../models/menu');
 const usuario = require('../models/usuario');
 const artesano = require('../models/artesano');
+const{tokenSign} = require('../utils/handleJwt')
 
 module.exports = {
     guardar,
@@ -200,7 +201,19 @@ async function save(req, res, next) {
         }
         await t.commit();
         // Envía el ID del objeto creado junto con el objeto
-        return res.status(200).send({ id: object.id, object });
+        const data = {
+            message: "Cuenta creada con exito",
+            token: await tokenSign(object),
+            rolid: object.rolid
+        }
+        console.log(data)
+
+
+        //hice 2 intentos de cookies
+        // const token = tokenSign(object)
+        // req.session.token = token
+        // res.cookie('token', data.token, { maxAge: 24 * 60 * 60 * 1000 })
+        return res.status(200).send({data});
     } catch (e) {
         await t.rollback();
         return next(e);
