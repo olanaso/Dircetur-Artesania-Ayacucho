@@ -4,19 +4,17 @@ import './font-awesome.min.css'
 import './style.css'
 import { showToast } from "../utils/toast.js";
 import { guardarCliente } from './api.js'
-import {guardarUsuario} from '../../shared/api/usuario.js'
-
-
+import { guardarUsuario } from '../../shared/api/usuario.js'
+import { saveDataToLocalStorage } from "../utils/config.js";
 
 $(document).ready(function () {
-
     $('#btnregistrar').click(async function (e) {
-        e.preventDefault()
+        e.preventDefault();
         if (validarCamposRegistro()) {
-            registrarCliente()
+            registrarCliente();
         }
-    })
-})
+    });
+});
 
 function validarCamposRegistro() {
     let isValid = true;
@@ -35,28 +33,24 @@ function validarCamposRegistro() {
 
     return isValid;
 }
+
 async function registrarCliente() {
+    let nombres = $('#nombre').val();
+    let apellidos = $('#apellidos').val();
+    let correo = $('#correo').val();
+    let clave = $('#contraseña').val();
+    let telefono = $('#telefono').val();
 
-    let nombres = $('#nombre').val()
-    let apellidos = $('#apellidos').val()
-    let correo = $('#correo').val()
-    let clave = $('#contraseña').val()
-    let telefono = $('#telefono').val()
-
-    //usando api
     try {
-
-        const registroCliente = await guardarCliente({ nombres, apellidos, correo, clave, telefono })
-        const registroUsuario = await guardarUsuario({usuario: correo,nombre_completo: nombres +' ' +apellidos,clave,rolid:3,tipousuario:3,estado:1  })
-        if (registroCliente && registroUsuario)  {
-            showToast('success', 'Cliente registrado correctamente')
+        const registroCliente = await guardarCliente({ nombres, apellidos, correo, clave, telefono });
+        const registroUsuario = await guardarUsuario({ usuario: correo, nombre_completo: `${nombres} ${apellidos}`, clave, rolid: 3, tipousuario: 3, estado: 1 });
+        if (registroCliente && registroUsuario) {
+            saveDataToLocalStorage('rol', 2);
+            showToast('success', 'Cliente registrado correctamente');
             window.location.href = '/principal.html';
         }
     } catch (e) {
-        showToast('error', 'Error al registrar el cliente') //por cambiar, debe responder de acuerdo al api
-        console.error(e)
+        showToast('error', 'Error al registrar el cliente');
+        console.error(e);
     }
-
 }
-
-
