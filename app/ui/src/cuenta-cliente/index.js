@@ -1,14 +1,50 @@
-import {listarDatosCliente}  from './api.js'
+import { listarDatosCliente } from './api.js';
 
-async function cargarCategoria(){
+// async function  cargarCategoria() {
+//     console.log("Inicio")
+//     listarDatosCliente().then(datosCliente => {
+//         cargarFormulario(datosCliente);
+//     }).catch(error => {
+//         console.error(error);
+//     });
+// }
+
+/**
+ * Funcion que obtiene los datos del endpoint y llama a la funcion necesaria para
+ * mostrar los datos en el formulario
+ *
+ * @returns {Promise<void>}
+ */
+async function cargarDatos(){
     try{
+        console.log("Inicio")
         const datosCliente = await listarDatosCliente()
-        cargarFormulario(datosCliente)
+        console.log("DATOS CLIENTE", datosCliente)
+        cargarFormulario(datosCliente);
     }catch(error){
-        console.error(error)
+        console.error(error);
     }
 }
 
-function cargarFormulario(datosCliente){
+/**
+ *
+ * Funcion que carga los datos del cliente en el formulario
+ * @param datosCliente
+ */
+function cargarFormulario(datosCliente) {
+    $('#name').val(datosCliente.nombres);
+    $('#phone').val(datosCliente.telefono);
+    $('#country').val(datosCliente.pais);
+    $('#city').val(datosCliente.ciudad);
+    $('#email').val(datosCliente.correo);
+    $('#document-type').val(datosCliente.tipoDocumento);
+    $('#document-number').val(datosCliente.numeroDocumento);
+    $('#region').val(datosCliente.region);
+    $('#address').val(datosCliente.direccion);
 
+    // Si deseas mostrar la imagen de perfil
+    $('.profile-img').attr('src', datosCliente.fotoPerfil || 'default-image-path.jpg');
 }
+
+// Ejecutar la función cuando se carga la página
+$(document).ready(cargarDatos());
