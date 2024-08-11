@@ -6,15 +6,15 @@ export async function guardarCliente(cliente){
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(cliente),
-        credentials: 'include'
+        body: JSON.stringify(cliente)
     }
     try{
         const response = await fetch(baseUrl + '/cliente/save',settings)
         const data = await response.json()
-        console.log("funcionaa")
-        if(data && data.data.rolid){
-            saveDataToLocalStorage('rol', data.data.rolid)
+        console.log("Token:", data.data.token)
+        if(data && data.data.token){
+            saveDataToLocalStorage('accessToken', data.token)
+            saveDataToLocalStorage('rol', data.rolid)
         }
         return data
     }catch(error){
