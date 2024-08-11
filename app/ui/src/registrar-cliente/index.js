@@ -14,7 +14,6 @@ $(document).ready(function () {
         e.preventDefault()
         if (validarCamposRegistro()) {
             registrarCliente()
-            window.location.href = '#'; 
         }
     })
 })
@@ -51,6 +50,7 @@ async function registrarCliente() {
         const registroUsuario = await guardarUsuario({usuario: correo,nombre_completo: nombres +' ' +apellidos,clave,rolid:3,tipousuario:3,estado:1  })
         if (registroCliente && registroUsuario)  {
             showToast('success', 'Cliente registrado correctamente')
+            window.location.href = '/principal.html';
         }
     } catch (e) {
         showToast('error', 'Error al registrar el cliente') //por cambiar, debe responder de acuerdo al api
