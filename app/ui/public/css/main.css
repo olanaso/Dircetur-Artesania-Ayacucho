@@ -4,7 +4,7 @@
 
 /************************************************
 	************************************************
-										Body CSS
+										Body CSS							
 	************************************************
 ************************************************/
 html {
@@ -109,7 +109,7 @@ body.error-bg {
 
 /************************************************
 	************************************************
-										Common CSS
+										Common CSS							
 	************************************************
 ************************************************/
 a {
@@ -145,7 +145,7 @@ hr {
 
 /************************************************
 	************************************************
-											Reusable CSS
+											Reusable CSS							
 	************************************************
 ************************************************/
 /*************** Card Fixed Heights ***************/
@@ -314,7 +314,7 @@ hr {
 
 /************************************************
 	************************************************
-										Layout CSS
+										Layout CSS							
 	************************************************
 ************************************************/
 .app {
@@ -1057,14 +1057,14 @@ hr {
 
 /************************************************
 	************************************************
-											Main CSS
+											Main CSS							
 	************************************************
 ************************************************/
 /*************** Logo ***************/
 .logo {
   display: block;
   margin: auto;
-  text-align: center;
+  text-align: center; 
 }
 
 .logo img {
@@ -1373,7 +1373,7 @@ a.onoffcanvas-toggler i {
 
 /************************************************
 	************************************************
-											Widgets
+											Widgets										
 	************************************************
 ************************************************/
 /*************** Stats Widget ***************/
@@ -2311,7 +2311,7 @@ ul.order-list li:last-child {
 }
 
 .toggle-switch .switch:after {
-
+  
   position: absolute;
   content: "\e901";
   font-size: .75rem;
@@ -2882,7 +2882,7 @@ ul#newsticker li:hover {
 
 /************************************************
 	************************************************
-											Pages
+											Pages							
 	************************************************
 ************************************************/
 /*************** Invoice Page ***************/
@@ -3183,7 +3183,7 @@ a.blog-sm p.blog-date:after {
 
 /************************************************
 	************************************************
-							Plugins Overwrite CSS
+							Plugins Overwrite CSS							
 	************************************************
 ************************************************/
 /*************** Map/Chart/Graph Heights ***************/
@@ -4121,7 +4121,7 @@ a.blog-sm p.blog-date:after {
 
 /************************************************
 	************************************************
-							Bootstrap Overwrite CSS
+							Bootstrap Overwrite CSS							
 	************************************************
 ************************************************/
 /*************** Modals ***************/
@@ -4669,11 +4669,11 @@ a.blog-sm p.blog-date:after {
   padding: 1rem;
   position: relative;
   line-height: 14px;
-
+  
 }
 
 .long-text {
-
+ 
   width: 100%;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -5579,7 +5579,7 @@ label {
 /*css erick*/
 .iestpdetails{
   background: #f5f6fa;
-
+ 
 }
 
 .bt-virtual{
@@ -5598,7 +5598,7 @@ label {
 .detail-prog{
   font-size: 10px !important;
   color: #000000;
-
+  
 }
 .red{
   color: red;
@@ -5697,7 +5697,7 @@ label {
 }
 
 .card {
-  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.16), 0 0px 00px 0 rgba(0, 0, 0, 0.12);
+   box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.16), 0 0px 00px 0 rgba(0, 0, 0, 0.12); 
 }
 
 .card-book{
@@ -5707,7 +5707,7 @@ label {
   background: #F6F6F6;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-  width: 200px !important;
+width: 200px !important;
 }
 
 .rating {
@@ -5723,8 +5723,8 @@ label {
 
 .card-img-top{
   width: 199px;
-  height: 220px;
-  flex-shrink: 0;
+height: 220px;
+flex-shrink: 0;
 }
 .sutitle-body{
   color: #888888;
@@ -5738,7 +5738,7 @@ label {
 .input-group-text{
   background-color: #F1F6FC !important;
   border: 0px solid #ced4da;
-  border-radius: 0px;
+   border-radius: 0px;
 }
 .form-control:focus {
   border: 0px solid #da1113;
@@ -5781,7 +5781,7 @@ label {
   border-color: red;
   color: white;
   font-size: 16px;
-  background-color: red;
+  background-color: red; 
   margin-left: 30px;
 }
 .black{
@@ -5799,14 +5799,14 @@ label {
 
 .custom-btn:hover {
   background-color: white;
-  color: red;
+  color: red; 
 }
 
 
 /* Ajuste del card */
 .custom-card-img {
-  max-width: 200px;
-  height: 220px;
+  max-width: 200px; 
+  height: 220px; 
 }
 
 .custom-card{
@@ -5830,7 +5830,7 @@ label {
 .btncopytext{
   background-color: rgba(0, 0, 0, 0);
   border: 0px solid;
-
+  
 }
 
 .btn-primary:disabled {
@@ -5846,11 +5846,11 @@ label {
 }
 
 @media (min-width: 768px){
-  .col-md-2-5 {
+.col-md-2-5 {
     -ms-flex: 0 0 19.00%;
     flex: 0 0 19.0%;
     max-width: 19.0%;
-  }
+}
 }
 
 
@@ -5883,7 +5883,7 @@ label {
 }
 
 .btnssocial {
-
+ 
   text-align: center;
 }
 
@@ -5916,6 +5916,104 @@ label {
 .contenedorimgenlogin img {
   max-width: 100%;       /* Asegura que la imagen no exceda el ancho del contenedor */
   max-height: 100%;      /* Asegura que la imagen no exceda la altura del contenedor */
-
-
 }
+
+/* PAG ARTESANOS */
+.content-page-artesano {
+  padding: 5px;
+}
+.info-user {
+  display: flex;
+  justify-content: space-between;
+}
+.calification {
+  justify-content: center;
+}
+.calification > i {
+  margin-left: 4px;
+  color: #ff9f41;
+}
+.content-info-artesano {
+  width: 100%;
+}
+.content-info-text {
+  display: flex;
+  justify-content: space-between;
+}
+.info-user-image {
+  width: 150px;
+  height: 120px;
+  border-radius: 9px;
+}
+
+.location {
+  margin-bottom: 5px;
+}
+.especialidad-content-video {
+  display: flex;
+}
+.location > i {
+  font-size: 25px !important;
+  margin-right: 5px;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 10%;
+}
+.phone > i {
+  font-size: 19px !important;
+  margin-right: 5px;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 10%;
+}
+
+.reconocimiento-card {
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.09);
+  padding: 8px;
+  margin-bottom: 20px;
+}
+.reconocimiento-card-text {
+  font-size: 14px;
+}
+
+.info-user,
+.especialidad,
+.ubicacion,
+.reconocimiento {
+  margin-top: 50px;
+}
+@media (max-width: 768px) {
+  .info-user {
+    display: block;
+  }
+  .especialidad-content-video {
+    display: block;
+  }
+  .info-user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (max-width: 580px) {
+  .content-info-text {
+    display: block;
+  }
+}
+@media (min-width: 768px) {
+  .content-info-text {
+    display: block;
+  }
+  .info-user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (min-width: 1100px) {
+  .content-info-text {
+    display: flex;
+  }
+}
+

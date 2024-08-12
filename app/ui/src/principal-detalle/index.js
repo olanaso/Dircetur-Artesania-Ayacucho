@@ -60,8 +60,9 @@ async function infoProd() {
     const listTallas = JSON.parse(JSON.parse(producto.lst_talla))
     const listOfertas = JSON.parse(JSON.parse(producto.lst_ofertas))
     const listOtrosCostos = JSON.parse(JSON.parse(producto.lst_otros_costos))
+    const listMediosPago = JSON.parse(JSON.parse(artesano.lst_mediospago))
 
-    console.log('coloes: ', listOfertas);
+    console.log('coloes: ', listMediosPago);
     if (listColores.length > 0) {
         for(let color of listColores){
             $('#Colores').append(
@@ -167,21 +168,48 @@ async function infoProd() {
     $('#materialesProd').text(producto.materiales_es)
     $('#pesoProd').text(`${producto.peso} Kg.`)
     $('#tecnicasProd').text(producto.tecnicas_es)
+    $('#tiempoElaboracion').text(`${producto.tiempo_elaboracion} días`)
 
 
     $('#datosArtesano').append(`
-        <p id="nombreArtesano">${artesano.nombres} ${artesano.apellidos}
+        <div style=" width: 100px; heigth:100px;">
+            <img class="sp-image" src="${artesano.foto1}" alt="" style="width: 100%; border-radius: 50%;">
+        </div>
+        
+        <p id="nombreArtesano" class="m-2">${artesano.nombres} ${artesano.apellidos}
             <br>
             <a style="color: red;" href="principal-artesano.html?id=${artesano.id}">Ver mas... <i class="fas fa-plus-circle"></i></a>
             
         </p>
-        <div >
-            <img class="sp-image" src="${artesano.foto1}" alt="" style="width: 100%;">
-        </div>
+        
 
         `)
     $('#telArtesano').text(artesano.celular)
     $('#correoArtesano').text(artesano.correo)
+
+    if (producto.precios_envio == 1) {
+        $('#preciosEnv').append(`
+            <p>Precio local: ${producto.precio_local}</p>
+            <p>Precio nacional: ${producto.precio_nacional}</p>
+            <p>Precio extranjero: ${producto.precio_extranjero}</p>
+        `)
+    } else {
+        $('#preciosEnv').append(`
+            <p>Coordinar con el artesano sobre el envío</p>
+        `)
+    }
+
+    if (listMediosPago.length > 0) {
+        for (let pago of listMediosPago){
+            $('#mediosPago').append(`
+                <div style="border:solid 1px #f4c23d; text-align: center;">${pago.Pago}</div>
+            `)
+        }
+    } else {
+        $('#mediosPago').append(`
+            <p>Coordinar con el artesano el medio de pago</p>
+        `)
+    }
     
 }
 
