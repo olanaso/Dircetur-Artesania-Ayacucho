@@ -16,7 +16,8 @@ const usuario = require('../models/usuario');
 const artesano = require('../models/artesano');
 const cliente = require('../models/cliente')
 const{tokenSign} = require('../utils/handleJwt')
-
+const { handleHttpError } = require('../utils/handleError');
+const {matchedData} = require('express-validator')
 module.exports = {
     guardar,
     actualizar,
@@ -46,18 +47,14 @@ function guardar (req, res) {
         })
 
 }
-function actualizar (req, res) {
-    model.findOne({
-        where: { dni: req.params.dni }
-
-    })
-        .then(object => {
-            object.update(req.body)
-                .then(object => res.status(200).json(object))
-                .catch(error => res.status(400).send(error))
-        }
-        )
-        .catch(error => res.status(400).send(error));
+async function actualizar (req, res) {
+    try{
+        const id = req.params.id
+        const body = req.body
+        console.log(req.body)
+    }catch(e){
+        handleHttpError(res, "Error updating item", 500)
+    }
 }
 
 function eliminar (req, res) {
