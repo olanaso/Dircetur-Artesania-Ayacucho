@@ -1,4 +1,4 @@
-import { listarDatosCliente } from './api.js';
+import {listarDatosCliente} from './api.js';
 
 // async function  cargarCategoria() {
 //     console.log("Inicio")
@@ -15,13 +15,13 @@ import { listarDatosCliente } from './api.js';
  *
  * @returns {Promise<void>}
  */
-async function cargarDatos(){
-    try{
+async function cargarDatos() {
+    try {
         console.log("Inicio")
         const datosCliente = await listarDatosCliente()
         console.log("DATOS CLIENTE", datosCliente)
         cargarFormulario(datosCliente);
-    }catch(error){
+    } catch (error) {
         console.error(error);
     }
 }
@@ -47,4 +47,36 @@ function cargarFormulario(datosCliente) {
 }
 
 // Ejecutar la función cuando se carga la página
-$(document).ready(cargarDatos());
+$(document).ready(function () {
+    //ocurre al ingresar a la pagina
+    cargarDatos()
+    //funcion que ocurre si se le da click
+    $('#btnSaveChanges').click(async function (e) {
+        e.preventDefault();
+        actualizarCliente()
+    })
+
+});
+
+async function actualizarUsuariom() {
+    const data = {
+        nombre_completo: $('#name').val(),
+        telefono: $('#phone').val(),
+        pais: $('#country').val(),
+        ciudad: $('#city').val(),
+        numero_documento: $('#document-number').val(),
+        region: $('#region').val(),
+        direccion: $('#address').val()
+
+    }
+    const jsonData = JSON.stringify(data)
+    try{
+        const actualizarUsuario = actualizarCliente()
+    }catch(e){
+        console.error("Hubo un error actualizando el cliente", e)
+    }
+
+
+}
+
+
