@@ -34,17 +34,16 @@ async function actualizar(req, res) {
         const usuarioEncontrado = await usuario.findUsuarioById(idUsuario) //Con esto encuentro el usuario con el id(En nuestro contexto ese id esta en el local storage
         const nombreDelUsuarioEncontrado = usuarioEncontrado.nombre_completo // nombre que voy a dividir para el cliente
         //divison del nombre completo del usuario en nombres y apellidos
+
         const partes = nombreDelUsuarioEncontrado.split(' ')
         const nombres = partes.slice(0,2).join(' ') // Tomo los dos primeros elementos del array y los uno con un espacio
         const apellidos = partes.slice(2).join(' ') // Tomo los elementos restantes y los uno con un espacio
 
+
+        console.log(req.body.pais)
         //Actualizo Cliente
-        await model.update({nombres, apellidos, restOfbody},{where:{id}})
+        await model.update({nombres, apellidos, ...restOfbody},{where:{id}}) // Actualizo el cliente con los datos que me llegan en el body y los nombres y apellidos obtenidos por el split
         return res.status(200).send({message:"Cliente actualizado correctamente"})
-
-
-        console.log(nombres)
-        console.log(apellidos)
 
 
     }catch(e){
