@@ -6,54 +6,56 @@ import {obtenerProducto, obtenerArtesano} from './api'
 
 let cantidadMaxima
 //  href = /clientes-detalle.html?id=${data.id}
-document.addEventListener('DOMContentLoaded', () => {
-    //cargarSliders()
-    infoProd();
+document.addEventListener('DOMContentLoaded', async () => {
+    await infoProd();
 });
+
+async function infoProd() {
+    const productoId = getQueryParameter('id');
+    const producto = await obtenerProducto(productoId);
+    const artesano = await obtenerArtesano(producto.artesano_id);
+
+// Parse the JSON string
+    const imagenesProd = JSON.parse(producto.lst_imagenes);
+    console.log("imagenesProd: ", imagenesProd);
+    const srcValues = imagenesProd.map(item => item.src);
+
+    const listVideos = JSON.parse(producto.lst_videos);
+    const listVideosEnlace = JSON.parse(producto.lst_videoenlace);
+
+    // Initialize S1 and S2 with the main image
+    let S1 = `<div class="sp-slide" data-index="0">
+                <div class="sp-image-container">
+                    <img class="sp-image" src="${producto.imagen_principal}" alt="Imagen Principal">
+                </div>
+             </div>`;
+    let S2 = `<div class="sp-thumbnail-container">
+                <img class="sp-thumbnail" src="${producto.imagen_principal}" alt="Imagen Principal">
+             </div>`;
+
+    // Loop through each image in imagenesProd
+    let index = 1;
+    for (let imagen of imagenesProd) {
+        S1 += `<div class="sp-slide" data-index="${index}">
+                <div class="sp-image-container">
+                    <img class="sp-image" src="${imagen.src}" alt="Imagen ${index}">
+                </div>
+               </div>`;
+        S2 += `<div class="sp-thumbnail-container">
+                <img class="sp-thumbnail" src="${imagen.src}" alt="Imagen ${index}">
+               </div>`;
+        index++;
+    }
+
+    // Append S1 and S2 to the respective HTML elements
+    $('#slider1').empty().append(S1);
+    $('#slider2').empty().append(S2);
+
 
 function getQueryParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
-
-
-
-async function infoProd() {
-    const producto = await obtenerProducto(getQueryParameter('id'));
-    const artesano = await obtenerArtesano(producto.artesano_id)
-    cantidadMaxima = producto.cantidad
-    /*Carga de imágene sy videos*/
-     const imagenesProd = JSON.parse(JSON.parse(producto.lst_imagenes))
-     const listVideos = JSON.parse(JSON.parse(producto.lst_videos))
-     const listVideosEnlace = JSON.parse(JSON.parse(producto.lst_videoenlace))
-     let S1 = `<div class="sp-slide" data-index="0">
-                    <div class="sp-image-container">
-                        <img class="sp-image" src="${producto.imagen_principal}" alt="">
-                    </div>
-                </div>`
-     let S2 = `<div class="sp-thumbnail-container">
-                    <img class="sp-thumbnail" src="${producto.imagen_principal}" alt="">
-                </div>`
-    
-    
-    let index = 1
-    for(let imagen of imagenesProd){
-        S1 += `<div class="sp-slide" data-index="${index}">
-                    <div class="sp-image-container">
-                        <img class="sp-image" src="${imagen.src}" alt="">
-                    </div>
-                </div>`
-        S2 += `<div class="sp-thumbnail-container">
-                    <img class="sp-thumbnail" src="${imagen.src}" alt="">
-                </div>`
-        index++
-    }
-    /*
-    $('#slider1').empty()
-    $('#slider1').append(S1)
-    $('#slider2').empty()
-    $('#slider2').append(S2)
-    */
 
     /*carga de datos sobre producto y artesano*/
     const listColores = JSON.parse(JSON.parse(producto.lst_colores))
