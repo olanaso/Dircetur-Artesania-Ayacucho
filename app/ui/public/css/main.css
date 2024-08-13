@@ -4093,70 +4093,6 @@ a.blog-sm p.blog-date:after {
   animation-delay: 0.1s;
   left: 128px;
 }
-/* Add this CSS to your main CSS file or within a <style> tag in your HTML */
-/* Add this CSS to your main CSS file or within a <style> tag in your HTML */
-.sp-image-container {
-  position: relative;
-  width: 100%;
-  margin: 0 auto; /* Center the container */
-  aspect-ratio: 1/1;
-  overflow: hidden;
-}
-
-.sp-image {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  height: 70%;
-  object-fit: contain;
-}
-
-
-#single-car {
-  display: flex;
-  flex-direction: column;
-}
-
-.sp-slides-container {
-  order: 1;
-}
-
-.sp-thumbnails-container {
-  order: 2;
-}
-
-/* Hide any unwanted numbers or elements */
-.sp-slide[data-index]::before,
-.sp-thumbnail-container[data-index]::before {
-  content: none;
-}
-.sp-image-container:hover .sp-arrow {
-  display: block;
-  color: black !important;
-}
-
-.sp-thumbnail-container {
-  position: relative;
-  width: 100%;
- aspect-ratio: 1/1;
-  object-fit: contain;
-}
-
-
-.sp-thumbnail {
-  position: absolute;
-  top: 0;
-  left: 32px;
-  width: 60%;
-  height: 60%;
-  object-fit: contain;
-}
-
-.sp-thumbnail:hover {
-  background-color: rgb(183, 182, 182);
-}
 
 .loading-wrapper .loading span:nth-of-type(2) {
   background: #0bed13;
@@ -5242,10 +5178,8 @@ a.blog-sm p.blog-date:after {
 
 .tab-content {
   padding: 1rem;
-     border: 3px solid #9d9d9d;
-
-  border-right: 0;
-  border-left: 0;
+  border: 1px solid #e1e5f1;
+  border-top: 0;
 }
 
 .tab-content.plain {
@@ -6024,7 +5958,7 @@ label {
   border-radius: 10%;
 }
 .similar-info {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 .reconocimiento-card {
   border-radius: 5px;
