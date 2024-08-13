@@ -51,7 +51,11 @@ async function actualizar (req, res) {
     try{
         const id = req.params.id
         const body = req.body
-        console.log(req.body)
+        // console.log("El request es:",req.body)
+        // console.log(req.params.id)
+        const data = await usuario.update(body, {where: {id}})
+        console.log("Data es", data)
+        return res.status(200).send({data})
     }catch(e){
         handleHttpError(res, "Error updating item", 500)
     }
