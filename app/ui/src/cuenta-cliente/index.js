@@ -52,6 +52,7 @@ function cargarFormulario(datosCliente) {
     $('#country').val(datosCliente.pais);
     $('#city').val(datosCliente.ciudad);
     $('#email').val(datosCliente.correo);
+    console.log("EL CORREO Es", datosCliente.correo)
     $('#document-type').val(datosCliente.tipoDocumento);
     $('#document-number').val(datosCliente.numeroDocumento);
     $('#region').val(datosCliente.region);

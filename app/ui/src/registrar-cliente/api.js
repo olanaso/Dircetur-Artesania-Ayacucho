@@ -11,6 +11,7 @@ export async function guardarCliente(cliente){
     try{
         const response = await fetch(baseUrl + '/cliente/save',settings)
         const data = await response.json()
+
         return data
     }catch(error){
         console.log('error', error)
