@@ -52,6 +52,7 @@ async function actualizar (req, res) {
         const id = req.params.id
         const body = req.body
         console.log(req.body)
+
     }catch(e){
         handleHttpError(res, "Error updating item", 500)
     }
@@ -204,7 +205,8 @@ async function save(req, res, next) {
             token: await tokenSign(object),
             rolid: object.rolid,
             id: object.id,
-            idCliente: await cliente.findIdByCorreo(object.correo)
+            //funciona para crear cliente, pero al editar uno desde admin sale error
+            // idCliente: await cliente.findIdByCorreo(object.correo)
         }
         console.log(data)
 
