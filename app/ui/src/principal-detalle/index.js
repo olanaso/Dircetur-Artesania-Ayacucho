@@ -2,7 +2,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import {saveDataToLocalStorage} from '../utils/config'
 import {hideLoading} from '../utils/init'
 import {obtenerParametrosURL} from '../utils/path'
-import {obtenerProducto, obtenerArtesano} from './api'
+import {obtenerProducto, obtenerArtesano, listarProductos} from './api'
 
 let cantidadMaxima
 //  href = /clientes-detalle.html?id=${data.id}
@@ -275,5 +275,6 @@ function setupQuantityControls() {
         }
     });
 }
+
 
 
