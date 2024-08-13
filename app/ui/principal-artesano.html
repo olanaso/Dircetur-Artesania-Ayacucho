@@ -14,16 +14,22 @@
 		content="Biblioteca, Virtual, Biblioideas, Instituto, Libros, Publicaciones, Educación, Lectura, Aprendizaje, Cultura" />
 	<meta name="author" content="Biblioideas" />
 	<link rel="shortcut icon" href="img/fav.png" />
-	<title>Artesania - Login</title>
+	<title>Artesania - Artesano </title>
 
+	<!-- ICON BOOTSTRAP -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<!-- BOOTSTRAP -->
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<!-- Common CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-	<!-- Mian and Login css -->
-	<link rel="stylesheet" href="css/main.css" />
 
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="src/principal-artesano/main.css" />
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 
@@ -78,9 +84,9 @@
 		<div class="col-10">
 			<div class="info-user">
 				<div class="col-4 col-lg-4 col-md-5 col-sm-12 col-xs-12 info-user-profile">
-					<div class="card d-flex-column align-items-center" style="width: 18rem;">
-						<img id="foto1Artesano" src="" class="card-img-top d-block" alt="Foto del Artesano">
-						<div class="card-body">
+					<div class="card d-flex-column align-items-center" style="width: 19rem">
+						<img id="foto1Artesano" src="" class="card-img-top  d-block" alt="Foto del Artesano">
+						<div class="card-body card-body-image1">
 							<h5 class="card-title text-center">Artesano</h5>
 							<div class="d-flex calification">
 								<i class="fa fa-star "></i>
@@ -92,12 +98,12 @@
 							<p class="card-text">
 							</p>
 							<div class="location col-md-12 col-sm-12 col-xs-12 ">
-								<i class="fa fa-map-marker bg-orange"></i><span id="calleArtesano">Calle 123 Mz. L
+								<i class="bi bi-geo-alt-fill"></i><span id="calleArtesano">Calle 123 Mz. L
 									Lte.</span>
 							</div>
 
 							<div class="phone col-md-12 col-sm-12 col-xs-12">
-								<i class="fa fa-phone bg-orange"></i><span id="celularArtesano">
+								<i class="bi bi-telephone"></i><span id="celularArtesano">
 								</span>
 							</div>
 						</div>
@@ -168,8 +174,10 @@
 						</p>
 					</div>
 					<div class="col-4 col-lg-5 col-md-4">
-						<video src="/assets/HTML 5 Video.mp4" controls></video>
+						<iframe class="video-artesano" id="videoArtesano" src="" frameborder="0"
+							allowfullscreen></iframe>
 					</div>
+
 				</div>
 			</div>
 			<div class="ubicacion col-12">
