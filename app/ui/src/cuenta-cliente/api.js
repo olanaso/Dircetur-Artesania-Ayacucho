@@ -9,7 +9,7 @@ import {getDataFromLocalStorage} from "../utils/config.js";
 export async function listarDatosCliente(){
     const idUsuario = getDataFromLocalStorage('id')
     const idCliente = getDataFromLocalStorage('idCliente')
-
+    console.log("LOS REALES DATOS", idUsuario, idCliente)
     try{
         const responseCliente = await fetch(baseUrl + `/cliente/${idCliente}`)
         const responseUsuario = await fetch(baseUrl + `/usuario/${idUsuario}`)
