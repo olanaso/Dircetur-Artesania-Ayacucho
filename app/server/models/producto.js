@@ -251,3 +251,6 @@ module.exports = sequelize.define('producto', {
     tableName: 'producto', 
     timestamps: true
 });
+
+
+

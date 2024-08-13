@@ -14,54 +14,62 @@
 		content="Biblioteca, Virtual, Biblioideas, Instituto, Libros, Publicaciones, Educación, Lectura, Aprendizaje, Cultura" />
 	<meta name="author" content="Biblioideas" />
 	<link rel="shortcut icon" href="img/fav.png" />
-	<title>Artesania - Login</title>
+	<title>Artesania - Artesano </title>
 
+	<!-- ICON BOOTSTRAP -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<!-- BOOTSTRAP -->
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<!-- Common CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-	<!-- Mian and Login css -->
-	<link rel="stylesheet" href="css/main.css" />
 
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="src/principal-artesano/main.css" />
 	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>  
+	<script src="js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
-	
+
 	<div class="preloader" style="display: none;">
-        <div class="preloader-bounce">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-	
-	<div id="search">
-	    <button type="button" class="close">×</button>
-	    <form>
-	        <input type="search" value="" placeholder="Escribe palabras clave aquí">
-	        <button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
-	    </form>
+		<div class="preloader-bounce">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
 	</div>
 
-    <header class="site-header wow fadeIn" data-wow-duration="1s"
-            style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
-        <div id="main-header" class="main-header">
-        </div>
-    </header>
+	<div id="search">
+		<button type="button" class="close">×</button>
+		<form>
+			<input type="search" value="" placeholder="Escribe palabras clave aquí">
+			<button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
+		</form>
+	</div>
 
+	<header class="site-header wow fadeIn" data-wow-duration="1s"
+		style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
+		<div id="main-header" class="main-header">
+		</div>
+	</header>
 
-	<div class="page-heading wow fadeIn animated" data-wow-duration="0.5s" style="visibility: visible;-webkit-animation-duration: 0.5s; -moz-animation-duration: 0.5s; animation-duration: 0.5s;">
+	<div class="page-heading wow fadeIn animated" data-wow-duration="0.5s"
+		style="visibility: visible;-webkit-animation-duration: 0.5s; -moz-animation-duration: 0.5s; animation-duration: 0.5s;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="heading-content-bg wow fadeIn animated" data-wow-delay="0.75s" data-wow-duration="1s" style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.75s; -moz-animation-delay: 0.75s; animation-delay: 0.75s;">
+					<div class="heading-content-bg wow fadeIn animated" data-wow-delay="0.75s" data-wow-duration="1s"
+						style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.75s; -moz-animation-delay: 0.75s; animation-delay: 0.75s;">
 						<div class="row">
 							<div class="heading-content col-md-12">
-								<p><a href="principal.html">Inicio</a> / <em> Producto</em> / <em> Sobre el artesano</em></p>
+								<p><a href="principal.html">Inicio</a> / <em> Producto</em> / <em> Sobre el
+										artesano</em></p>
 								<h2>Sobre el <em> Artesano</em></h2>
 							</div>
 						</div>
@@ -76,10 +84,9 @@
 		<div class="col-10">
 			<div class="info-user">
 				<div class="col-4 col-lg-4 col-md-5 col-sm-12 col-xs-12 info-user-profile">
-					<div class="card d-flex-column align-items-center" style="width: 18rem;">
-						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX-cskA2FbOzFi7ACNiGruheINgAXEqFL1TQ&s"
-							 class="card-img-top d-block" alt="...">
-						<div class="card-body">
+					<div class="card d-flex-column align-items-center" style="width: 19rem">
+						<img id="foto1Artesano" src="" class="card-img-top  d-block" alt="Foto del Artesano">
+						<div class="card-body card-body-image1">
 							<h5 class="card-title text-center">Artesano</h5>
 							<div class="d-flex calification">
 								<i class="fa fa-star "></i>
@@ -91,13 +98,13 @@
 							<p class="card-text">
 							</p>
 							<div class="location col-md-12 col-sm-12 col-xs-12 ">
-								<i class="fa fa-map-marker bg-orange"></i><span id="">Calle 123 Mz. L
+								<i class="bi bi-geo-alt-fill"></i><span id="calleArtesano">Calle 123 Mz. L
 									Lte.</span>
 							</div>
 
 							<div class="phone col-md-12 col-sm-12 col-xs-12">
-								<i class="fa fa-phone bg-orange"></i><span id="">+51 123
-									489-5748</span>
+								<i class="bi bi-telephone"></i><span id="celularArtesano">
+								</span>
 							</div>
 						</div>
 					</div>
@@ -108,26 +115,20 @@
 							<div class="">
 								<h2>Sobre el artesano</h2>
 								<p style="color: black; margin-top: 0;">
-									<strong> Nombre completo del artesano :</strong> <span id="nombreTaller">Lorem ipsum
-										dolor
-										sit
+									<strong> Nombre completo del artesano :</strong> <span id="namesArtesano"> </span>
+								</p>
+								<p style="color: black; margin-top: 0;">
+									<strong> Correo :</strong> <span id="correoArtesano">
 									</span>
 								</p>
 								<p style="color: black; margin-top: 0;">
-									<strong> Correo :</strong> <span id="nombreTaller">Waldir.medoza.27@unsch.edu.pe
-									</span>
-								</p>
-								<p style="color: black; margin-top: 0;">
-									<strong> Lugar de procedencia :</strong> <span id="nombreTaller"> jron quinua 504 -
-										san
-										juan
-										bautis-Ayacucho
+									<strong> Lugar de procedencia :</strong> <span id="lugarProcArtesano">
 									</span>
 								</p>
 							</div>
 							<div class="d-flex justify-content-center align-items-center">
-								<img class="info-user-image" src="https://htmlreference.io/images/traffic.jpg"
-									 alt="imagen-user">
+								<img class="info-user-image" src="" alt="imagen-user" id="foto2Artesano">
+
 							</div>
 						</div>
 
@@ -135,14 +136,15 @@
 							<h2>Información del taller</h2>
 							<p style="color: black; margin-top: 0;">
 								<strong>Nombre del taller:</strong> <span id="nombreTaller">taller angelitos de dios
-									lalla
+									taller
 								</span>
 							</p>
 							<p style="color: black; margin-top: 0;">
-								<strong> Ruc del taller:</strong> <span id="nombreTaller">152754752745 </span>
+								<strong> Ruc del taller:</strong> <span id="rucTaller">152754752745 </span>
 							</p>
 							<p style="color: black; margin-top: 0;">
-								<strong> Dirección física :</strong> <span id="nombreTaller"> jron quinua 504 - san juan
+								<strong> Dirección física :</strong> <span id="direccionTaller"> jron quinua 504 - san
+									juan
 									bautis-Ayacucho -Huamanga
 								</span>
 							</p>
@@ -158,86 +160,39 @@
 					<div class="col-8 col-lg-7 col-md-8 ">
 
 						<p style="color: black; margin-top: 0;">
-							<strong>Habilidades de un artesano:</strong> <br> <span id="habilidades"
-																					style="all:unset ;"></span>
+							<strong>Habilidades de un artesano:</strong> <br>
+							<span id="habilidades"></span>
 						</p>
+
 						<p style="color: black; margin-top: 0;">
 							<strong>Tipos de artesanía que produce:</strong> <br> <span id="tiposArtesania"
-																						style="all:unset ;"></span>
+								style="all:unset ;"></span>
 						</p>
 						<p style="color: black; margin-top: 0;">
-							<strong>Línea artesanal:</strong> <br> <span id="lineaArtesanal"> datos de linea
-								artesanal</span>
+							<strong>Línea artesanal:</strong> <br> <span id="lineaArtesanal">
+							</span>
 						</p>
 					</div>
 					<div class="col-4 col-lg-5 col-md-4">
-						<video src="/assets/HTML 5 Video.mp4" controls></video>
+						<iframe class="video-artesano" id="videoArtesano" src="" frameborder="0"
+							allowfullscreen></iframe>
 					</div>
+
 				</div>
 			</div>
 			<div class="ubicacion col-12">
 				<div class="sep-section-heading">
-					<h2>Ubicación <em> Artesano</em></h2>
+					<h2>Ubicación <em>Artesano</em></h2>
 				</div>
-				<iframe
-						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.1174474422196!2d-74.22644438854083!3d-13.154990963472002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91127df133a829bb%3A0xfec6c24d939b5a05!2sJir%C3%B3n%20Quinua%2C%20Ayacucho!5e0!3m2!1ses-419!2spe!4v1723338645440!5m2!1ses-419!2spe"
-						width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-						referrerpolicy="no-referrer-when-downgrade"></iframe>
+				<div class="map-container">
+					<div id="map"></div>
+				</div>
+
 			</div>
-			<div class="reconocimiento">
+			<div class="reconocimiento " id="listReconocimientos">
 				<div class="sep-section-heading">
 					<h2>Reconocimientos del <em> Artesano</em></h2>
 				</div>
-				<div class="reconocimiento-card" style="width: 100;">
-
-					<p style="color: black; margin-top: 0;">
-						<strong>Reconocimiento por ........</strong>
-
-					</p>
-					<p style="color: black; margin-top: 0;">
-						<strong>Otorgado por la Dirección Regional de Comercio
-							Exterior y Turismo de Ayacucho</strong>
-
-					</p>
-					<p class="card-text reconocimiento-card-text">Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit. Voluptatem ipsa
-						fugiat
-						hic natus eum, repellendus quod temporibus. Autem ullam vero iusto quisquam, expedita modi
-						eveniet
-						maxime libero odio laborum quod adipisci dolorem necessitatibus debitis officia, doloribus
-						molestiae
-						reiciendis. Cumque sint quidem officiis ex nesciunt excepturi repellat, alias architecto
-						corporis,
-						quisquam aspernatur id iste facilis temporibus atque dignissimos beatae dolore at dolorem illum
-						obcaecati. Tempora eius cum enim ipsa dolor molestiae ad quae fugiat atque reiciendis! Amet,
-						reiciendis. Harum nulla beatae illum placeat ut dolore aut earum consequatur laboriosam!</p>
-				</div>
-				<div class="reconocimiento-card " style="width: 100;">
-
-					<p style="color: black; margin-top: 0;">
-						<strong>Reconocimiento por ........</strong>
-
-					</p>
-					<p style="color: black; margin-top: 0;">
-						<strong>Otorgado por la Dirección Regional de Comercio
-							Exterior y Turismo de Ayacucho</strong>
-
-					</p>
-					<p class="card-text reconocimiento-card-text">Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit. Voluptatem ipsa
-						fugiat
-						hic natus eum, repellendus quod temporibus. Autem ullam vero iusto quisquam, expedita modi
-						eveniet
-						maxime libero odio laborum quod adipisci dolorem necessitatibus debitis officia, doloribus
-						molestiae
-						reiciendis. Cumque sint quidem officiis ex nesciunt excepturi repellat, alias architecto
-						corporis,
-						quisquam aspernatur id iste facilis temporibus atque dignissimos beatae dolore at dolorem illum
-						obcaecati. Tempora eius cum enim ipsa dolor molestiae ad quae fugiat atque reiciendis! Amet,
-						reiciendis. Harum nulla beatae illum placeat ut dolore aut earum consequatur laboriosam!</p>
-				</div>
-
-
 			</div>
 			<section class="top-slider-features top-slider-features2 wow fadeIn animated" data-wow-duration="1.5s">
 				<div class="sep-section-heading">
@@ -250,15 +205,15 @@
 								<div id="owl-top-features2" class="owl-carousel owl-theme">
 									<div class="item car-item">
 										<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
-											 style="visibility: visible;">
+											style="visibility: visible;">
 											<div class="thumb-content" style="position: relative;">
 												<div class="thumb-inner" style="position: relative;">
 													<a href="principal-detalle.html"><img src="/img/car_item_2.jpg"
-																						  alt=""></a>
+															alt=""></a>
 													<div class="car-banner"
-														 style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
+														style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
 														<a href="principal-detalle.html" class="car-banner-link"
-														   style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En
+															style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En
 															venta</a>
 													</div>
 												</div>
@@ -276,15 +231,15 @@
 									</div>
 									<div class="item car-item">
 										<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
-											 style="visibility: visible;">
+											style="visibility: visible;">
 											<div class="thumb-content" style="position: relative;">
 												<div class="thumb-inner" style="position: relative;">
 													<a href="principal-detalle.html"><img src="/img/car_item_3.jpg"
-																						  alt=""></a>
+															alt=""></a>
 													<div class="car-banner"
-														 style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
+														style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
 														<a href="principal-detalle.html" class="car-banner-link"
-														   style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En
+															style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En
 															venta</a>
 													</div>
 												</div>
@@ -302,15 +257,15 @@
 									</div>
 									<div class="item car-item">
 										<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
-											 style="visibility: visible;">
+											style="visibility: visible;">
 											<div class="thumb-content" style="position: relative;">
 												<div class="thumb-inner" style="position: relative;">
 													<a href="principal-detalle.html"><img src="/img/car_item_4.jpg"
-																						  alt=""></a>
+															alt=""></a>
 													<div class="car-banner"
-														 style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
+														style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
 														<a href="principal-detalle.html" class="car-banner-link"
-														   style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En
+															style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En
 															venta</a>
 													</div>
 												</div>
@@ -388,13 +343,12 @@
 			</div>
 		</div>
 	</footer>
-	
+
 
 
 </body>
 
-<script type="module" src="src/principal/index.js"></script> 
-<script type="module" src="src/principal-artesano/index.js"></script> 
+
 
 <!-- Slider Pro Js -->
 <script src="assets/js/sliderpro.min.js"></script>
@@ -403,18 +357,19 @@
 <script src="assets/js/slick.js"></script>
 
 <!-- Owl Carousel Js -->
-<script src="assets/js/owl.carousel.min.js"></script> 
+<script src="assets/js/owl.carousel.min.js"></script>
 
 <!-- Boostrap Js -->
 <script src="assets/js/wow.animation.js"></script>
 
 <!-- Custom Js -->
-<script src="assets/js/custom.js"></script>  
+<script src="assets/js/custom.js"></script>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-
+<script type="module" src="src/principal/index.js"></script>
+<script type="module" src="src/principal-artesano/index.js"></script>
 
 <!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
 

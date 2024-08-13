@@ -11,43 +11,36 @@ document.addEventListener('DOMContentLoaded', () => {
     productos()
 });
 
-async function cargarProductos(productos){
-
-    $('#contenedorProductos').empty()
-    let cards = ''
+async function cargarProductos(productos) {
+    $('#contenedorProductos').empty();
+    let cards = '';
     for (let data of productos) {
-        //console.log(data);
-        
-      //let cleanUrl = data.imagen.replace(/"/g, '');
         cards += `
             <div class="col-md-4 col-sm-6">
-							<div class="car-item wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
-								<div class="thumb-content">
-									<div class="car-banner">
-										<a href="principal-detalle.html">En Venta</a>
-									</div>
-									<div class="thumb-inner">
-										<a href="principal-detalle.html"><img src=${data.imagen_principal} alt=""></a>
-									</div>
-								</div>
-								<div class="down-content">
-									<a href="principal-detalle.html"><h4>${data.nombres_es}</h4></a>
-									<span>S/. 1,200.00 </span>
-									<p>${data.resumen_es}</p>
-									<div class="similar-info">
-										<div class="primary-button">
-											<a href="principal-detalle.html?id=${data.id}">Ver mas<i class="fa fa-dollar"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>`
-        
-            //console.log(cards);
-            
+                <div class="car-item wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+                    <div class="thumb-content">
+                        <div class="car-banner">
+                            <a href="principal-detalle.html?id=${data.id}">En Venta</a>
+                        </div>
+                        <div class="thumb-inner">
+                            <a href="principal-detalle.html?id=${data.id}"><img src=${data.imagen_principal} alt=""></a>
+                        </div>
+                    </div>
+                    <div class="down-content">
+                        <a href="principal-detalle.html?id=${data.id}"><h4>${data.nombres_es}</h4></a>
+                        <span>S/. 1,200.00 </span>
+                        <p>${data.resumen_es}</p>
+                        <div class="similar-info">
+                            <div class="primary-button">
+                                <a href="principal-detalle.html?id=${data.id}">Ver mas<i class="fa fa-dollar"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
     }
-    $('#contenedorProductos').append(cards)
-    }
+    $('#contenedorProductos').append(cards);
+}
 async function productos() {
     const formData = {
         categoria: $('#brand').prop('selectedIndex') == "0" ? '': $('#brand option:selected').val(),
