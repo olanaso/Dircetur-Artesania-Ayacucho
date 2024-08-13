@@ -8,6 +8,8 @@ let cantidadMaxima
 //  href = /clientes-detalle.html?id=${data.id}
 document.addEventListener('DOMContentLoaded', async () => {
     await infoProd();
+    setupQuantityControls();
+
 });
 
 async function infoProd() {
@@ -15,15 +17,11 @@ async function infoProd() {
     const producto = await obtenerProducto(productoId);
     const artesano = await obtenerArtesano(producto.artesano_id);
 
-// Parse the JSON string
-    const imagenesProd = JSON.parse(producto.lst_imagenes);
-    console.log("imagenesProd: ", imagenesProd);
-    const srcValues = imagenesProd.map(item => item.src);
+    // Asegurarse de que producto.lst_imagenes sea una cadena JSON válida
+    const imagenesProd = JSON.parse(JSON.parse(producto.lst_imagenes.replace(/\/\//g, '/')));
+    console.log('imagenesProd: ', imagenesProd);
 
-    const listVideos = JSON.parse(producto.lst_videos);
-    const listVideosEnlace = JSON.parse(producto.lst_videoenlace);
-
-    // Initialize S1 and S2 with the main image
+    // Inicializar S1 y S2 con la imagen principal
     let S1 = `<div class="sp-slide" data-index="0">
                 <div class="sp-image-container">
                     <img class="sp-image" src="${producto.imagen_principal}" alt="Imagen Principal">
@@ -31,18 +29,22 @@ async function infoProd() {
              </div>`;
     let S2 = `<div class="sp-thumbnail-container">
                 <img class="sp-thumbnail" src="${producto.imagen_principal}" alt="Imagen Principal">
-             </div>`;
+              </div>`;
 
-    // Loop through each image in imagenesProd
+    // Recorrer cada imagen en imagenesProd
     let index = 1;
     for (let imagen of imagenesProd) {
+        // Corregir la URL si tiene una sola barra después del protocolo
+        if (imagen.src.startsWith('http:/') && !imagen.src.startsWith('http://')) {
+            imagen.src = imagen.src.replace('http:/', 'http://');
+        }
         S1 += `<div class="sp-slide" data-index="${index}">
                 <div class="sp-image-container">
-                    <img class="sp-image" src="${imagen.src}" alt="Imagen ${index}">
+                    <img class="sp-image" src="${imagen.src}" alt="Imagen ${producto.nombres_es}">
                 </div>
                </div>`;
         S2 += `<div class="sp-thumbnail-container">
-                <img class="sp-thumbnail" src="${imagen.src}" alt="Imagen ${index}">
+                <img class="sp-thumbnail" src="${imagen.src}" alt="Imagen ${producto.nombres_es}">
                </div>`;
         index++;
     }
@@ -52,11 +54,41 @@ async function infoProd() {
     $('#slider2').empty().append(S2);
 
 
+    $('#slider1').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        fade: true,
+        asNavFor: '#slider2',
+        prevArrow: $('.sp-arrow.sp-previous-arrow'),
+        nextArrow: $('.sp-arrow.sp-next-arrow'),
+        initialSlide: 0
+    });
+    $('#slider2').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: '#slider1',
+        dots: true,
+        centerMode: true,
+        focusOnSelect: true,
+        prevArrow: $('.sp-arrow.sp-previous-arrow'),
+        nextArrow: $('.sp-arrow.sp-next-arrow'),
+        initialSlide: 0
+    });
+
+    $('#slider1').slick('slickGoTo', 0, true);
+    $('#slider2').slick('slickGoTo', 0, true);
+
+    // Bug al cargar vista no salia la primera imagen (posible solucion)
+    $('.sp-arrow.sp-next-arrow').click();
+    setTimeout(() => {
+        $('.sp-arrow.sp-previous-arrow').click();
+    }, 500);
+
 function getQueryParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
-
     /*carga de datos sobre producto y artesano*/
     const listColores = JSON.parse(JSON.parse(producto.lst_colores))
     const listTallas = JSON.parse(JSON.parse(producto.lst_talla))
@@ -92,7 +124,7 @@ function getQueryParameter(name) {
         for(let costos of listOtrosCostos){
             $('#otrosCostos').append(
                 `<option value="${costos.id}">${costos.nombre} (S/ ${costos.precio})</option>`
-            )
+            );
         }
     }
     //cantidad
@@ -212,51 +244,36 @@ function getQueryParameter(name) {
             <p>Coordinar con el artesano el medio de pago</p>
         `)
     }
-    
+
 }
 
 
 //funcionalidad para elegir cantidad:
-/*
-$('#increment-btn').on('click', function() {
-    console.log('aaa', cantidadMaxima);
-    let currentValue = parseInt($('#counter-value').val());
-    if (currentValue < cantidadMaxima) {
-        currentValue++;
-        
-        $('#counter-value').val(currentValue.toString());
-        $('#decrement-btn').prop('disabled', false); // Habilitar botón de decremento
-    }
-    if (currentValue === cantidadMaxima) {
-        $('#increment-btn').prop('disabled', true); // Deshabilitar botón de incremento
-    }
-});
-*/
-var cantidadProd = 0
-$('#increment-btn').on('click', function() {
-    if (cantidadProd < cantidadMaxima) {
-        cantidadProd++;
-    } else if (cantidadProd = cantidadProd++){
-        cantidadProd = 0
-    }
-    $('#counter-value').val(cantidadProd);
-});
+function setupQuantityControls() {
+    const cantidadMaxima = 10; // Set this to the actual maximum quantity
+    let cantidadProd = 0;
 
-// Decrementar el valor del contador
-/*
-$('#decrement-btn').on('click', function() {
-    let currentValue = parseInt($('#counter-value').val());
-    if (currentValue > 1) {
-        currentValue--;
-        $('#counter-value').val(currentValue);
-        $('#increment-btn').prop('disabled', false); // Habilitar botón de incremento
-    }
-    if (currentValue === 0) {
-        $('#decrement-btn').prop('disabled', true); // Deshabilitar botón de decremento
-    }
-});
-*/
-$('#decrement-btn').on('click', function() {
-    if (cantidadProd > 0) { --cantidadProd }
-    $('#counter-value').val(cantidadProd);
-});
+    document.getElementById('increment-btn').addEventListener('click', function() {
+        if (cantidadProd < cantidadMaxima) {
+            cantidadProd++;
+            document.getElementById('counter-value').value = cantidadProd;
+            document.getElementById('decrement-btn').disabled = false; // Enable decrement button
+        }
+        if (cantidadProd === cantidadMaxima) {
+            this.disabled = true;
+        }
+    });
+
+    document.getElementById('decrement-btn').addEventListener('click', function() {
+        if (cantidadProd > 0) {
+            cantidadProd--;
+            document.getElementById('counter-value').value = cantidadProd;
+            document.getElementById('increment-btn').disabled = false; // Enable increment button
+        }
+        if (cantidadProd === 0) {
+            this.disabled = true;
+        }
+    });
+}
+
+

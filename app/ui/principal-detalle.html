@@ -54,7 +54,7 @@
 		</div>
 	</header>
  
- 
+
 	<div class="page-heading wow fadeIn animated" data-wow-duration="0.5s" style="visibility: visible;-webkit-animation-duration: 0.5s; -moz-animation-duration: 0.5s; animation-duration: 0.5s;">
 		<div class="container">
 			<div class="row">
@@ -81,29 +81,29 @@
 							<div class="sp-slides-container">
 								<div class="sp-mask sp-grab">
 									<div class="sp-slides" id="slider1">
-										<div class="sp-slide" data-index="0">
+										<div class="sp-slide" index="0">
 											<div class="sp-image-container">
-												<img class="sp-image" src="/img/car_item_2.jpg" alt="">
+												<img class="sp-image" src="" alt="">
 											</div>
 										</div>
-										<div class="sp-slide" data-index="1">
+										<div class="sp-slide" index="1">
 											<div class="sp-image-container">
-												<img class="sp-image" src="/img/car_item_3.jpg" alt="">
+												<img class="sp-image" src="" alt="">
 											</div>
 										</div>
-										<div class="sp-slide" data-index="2">
+										<div class="sp-slide" index="2">
 											<div class="sp-image-container">
-												<img class="sp-image" src="/img/car_item_4.jpg" alt="">
+												<img class="sp-image" src="" alt="">
 											</div>
 										</div>
-										<div class="sp-slide" data-index="3">
+										<div class="sp-slide" index="3">
 											<div class="sp-image-container">
-												<img class="sp-image" src="/img/car_item_5.jpg" alt="">
+												<img class="sp-image" src="" alt="">
 											</div>
 										</div>
-										<div class="sp-slide sp-selected" data-index="4">
+										<div class="sp-slide sp-selected" index="4">
 											<div class="sp-image-container">
-												<img class="sp-image" src="/img/car_item_2.jpg" alt="">
+												<img class="sp-image" src="" alt="">
 											</div>
 										</div>
 									</div>
@@ -116,25 +116,22 @@
 							<div class="sp-thumbnails-container sp-bottom-thumbnails">
 								<div class="sp-thumbnails sp-grab" id="slider2">
 									<div class="sp-thumbnail-container">
-										<img class="sp-thumbnail" src="/img/car_item_2.jpg" alt="">
+										<img class="sp-thumbnail" src="" alt="">
 									</div>
 									<div class="sp-thumbnail-container">
-										<img class="sp-thumbnail" src="/img/car_item_3.jpg" alt="">
+										<img class="sp-thumbnail" src="" alt="">
 									</div>
 									<div class="sp-thumbnail-container">
-										<img class="sp-thumbnail" src="/img/car_item_4.jpg" alt="">
+										<img class="sp-thumbnail" src="" alt="">
 									</div>
 									<div class="sp-thumbnail-container">
-										<img class="sp-thumbnail" src="/img/car_item_5.jpg" alt="">
+										<img class="sp-thumbnail" src="" alt="">
 									</div>
 									<div class="sp-thumbnail-container sp-selected-thumbnail">
-										<img class="sp-thumbnail" src="/img/car_item_2.jpg" alt="">
+										<img class="sp-thumbnail" src="" alt="">
 									</div>
 								</div>
-								<div class="sp-thumbnail-arrows sp-fade-thumbnail-arrows">
-									<div class="sp-thumbnail-arrow sp-previous-thumbnail-arrow"></div>
-									<div class="sp-thumbnail-arrow sp-next-thumbnail-arrow"></div>
-								</div>
+
 							</div>
 						</div>
 
@@ -175,16 +172,16 @@
 								</div>
 								<div class="col-md-6" style="margin-bottom: 20px;">
 									<p style="color: rgb(12, 11, 11); margin-top: 0;">Cantidad				</p>
-									<div class="counter-container">
-										<button id="decrement-btn" class="counter-button" style="background-color: #f4c23d; border-radius: 50%; color: #fff;width: 28px; height: 28px;">-</button>
-										<input id="counter-value" type="text" class="counter-value" type="number" min="0" value="0" readonly>
-										<button id="increment-btn" class="counter-button" style="background-color: #f4c23d; border-radius: 50%; color: #fff;width: 28px; height: 28px;">+</button>
+									<div class="quantity-controls-container">
+										<button id="decrement-btn">-</button>
+										<input type="number" id="counter-value" value="0" readonly>
+										<button id="increment-btn">+</button>
 									</div>
 
 								</div>
 								<div class="col-md-6">
 								</br>
-							</br>
+							    </br>
 									<div class="product-info">
 										<p style="color: red; margin-top: 0;">tiempo estimado de envío:3-7 días</p>
 									</div>
@@ -228,161 +225,223 @@
 			</div>
 		</div>
 	</div>
-
-	 <section>
-    <div class="more-details">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <div class="item wow fadeInUp animated w-100" data-wow-duration="0.5s">
-							<div class="sep-section-heading">
-								<h2>Resumen <em>Producto</em></h2>
+	<section class="top-slider-features top-slider-features2 wow fadeIn animated" data-wow-duration="1.5s">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="slider-top-features">
+						<h7 class="section-title bold">Artesanías en Oferta</h7>
+						<div id="owl-top-features2" class="owl-carousel owl-theme">
+							<div class="item car-item">
+								<div class="car-item wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;">
+									<div class="thumb-content" style="position: relative;">
+										<div class="thumb-inner" style="position: relative;">
+											<a href="principal-detalle.html"><img src="/img/car_item_2.jpg" alt=""></a>
+											<div class="car-banner" style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
+												<a href="principal-detalle.html" class="car-banner-link" style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En venta</a>
+											</div>
+										</div>
+									</div>
+									<div class="down-content">
+										<a href="principal-detalle.html"><h4>Producto 1</h4></a>
+										<span>S/. 1,200.00</span>
+										<p>Nombre: Artesano.</p>
+										<p>Categoria: Categoria 1</p>
+										<p>Palabra Calve</p>
+									</div>
+								</div>
 							</div>
-                        <p id="resumenProd">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
-                    </div>
-					
-                </div> 
-                <div class="col-md-6 wow fadeInUp animated w-100 mb-3" data-wow-duration="1s">
-                    <div class="item w-100">
-						<div class="sep-section-heading">
-							<h2>Sobre el <em>Artesano</em></h2>
+							<div class="item car-item">
+								<div class="car-item wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;">
+									<div class="thumb-content" style="position: relative;">
+										<div class="thumb-inner" style="position: relative;">
+											<a href="principal-detalle.html"><img src="/img/car_item_3.jpg" alt=""></a>
+											<div class="car-banner" style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
+												<a href="principal-detalle.html" class="car-banner-link" style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En venta</a>
+											</div>
+										</div>
+									</div>
+									<div class="down-content">
+										<a href="principal-detalle.html"><h4>Producto 2</h4></a>
+										<span>S/. 1,200.00</span>
+										<p>Nombre: Artesano.</p>
+										<p>Categoria: Categoria 2</p>
+										<p>Palabra Calve</p>
+									</div>
+								</div>
+							</div>
+							<div class="item car-item">
+								<div class="car-item wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;">
+									<div class="thumb-content" style="position: relative;">
+										<div class="thumb-inner" style="position: relative;">
+											<a href="principal-detalle.html"><img src="/img/car_item_4.jpg" alt=""></a>
+											<div class="car-banner" style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
+												<a href="principal-detalle.html" class="car-banner-link" style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En venta</a>
+											</div>
+										</div>
+									</div>
+									<div class="down-content">
+										<a href="principal-detalle.html"><h4>Producto 3</h4></a>
+										<span>S/. 1,200.00</span>
+										<p>Nombre: Artesano.</p>
+										<p>Categoria: Categoria 3</p>
+										<p>Palabra Calve</p>
+									</div>
+								</div>
+							</div>
+							<!-- Agrega más elementos aquí según sea necesario -->
 						</div>
-						<div id="datosArtesano" style="display: flex;flex-wrap: nowrap;align-content: stretch;align-items: center;flex-direction: row;">
-							
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	<section>
+		<div class="more-details">
+			<div class="custom-container col-md-12" style="padding-left: 0; padding-right: 0; border-left: none; border-right: none;">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="nav nav-tabs" id="productTabs" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="product-tab" data-toggle="tab" href="#product" role="tab" aria-controls="product" aria-selected="true">Sobre el producto</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="specifications-tab" data-toggle="tab" href="#specifications" role="tab" aria-controls="specifications" aria-selected="false">Especificaciones</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="vendor-tab" data-toggle="tab" href="#vendor" role="tab" aria-controls="vendor" aria-selected="false">Vendedor</a>
+							</li>
+						</ul>
+						<div class="tab-content" id="productTabsContent">
+							<div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">
+								<div class="row">
+									<div class="col-md-6 mb-3">
+										<div class="item w-100" data-wow-duration="0.5s">
+											<div class="sep-section-heading">
+												<h2>Resumen <em>Producto</em></h2>
+											</div>
+											<div class="section-content">
+												<p id="resumenProd"></p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 mb-3">
+										<div class="item w-100" data-wow-duration="0.5s">
+											<div class="sep-section-heading">
+												<h2>Descripción <em>Producto</em></h2>
+											</div>
+											<div class="section-content">
+												<p id="descripcionProd"></p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 mb-3">
+										<div class="item w-100" data-wow-duration="0.5s">
+											<div class="sep-section-heading">
+												<h2>Cualidades <em>Producto</em></h2>
+											</div>
+											<div class="section-content">
+												<p id="cualidadesProd"></p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 mb-3">
+										<div class="item w-100" data-wow-duration="0.5s">
+											<div class="sep-section-heading">
+												<h2>Palabras <em>clave</em></h2>
+											</div>
+											<div class="section-content">
+												<p id="palabrasClave"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
+								<div class="row">
+									<div class="col-md-12 mb-3">
+										<div class="item w-100" data-wow-duration="0.5s">
+											<table class="table table-striped">
+												<tbody>
+												<tr>
+													<th scope="row">Número piezas</th>
+													<td id="cantPiezas"></td>
+												</tr>
+												<tr>
+													<th scope="row">Medidas (centímetros)</th>
+													<td id="medidasProd"></td>
+												</tr>
+												<tr>
+													<th scope="row">Descripción materiales</th>
+													<td id="materialesProd"></td>
+												</tr>
+												<tr>
+													<th scope="row">Peso (kilogramos)</th>
+													<td id="pesoProd"></td>
+												</tr>
+												<tr>
+													<th scope="row">Técnicas empleadas</th>
+													<td id="tecnicasProd"></td>
+												</tr>
+												<tr>
+													<th scope="row">Costos envío</th>
+													<td id="preciosEnv"></td>
+												</tr>
+												<tr>
+													<th scope="row">Tiempo elaboración</th>
+													<td id="tiempoElaboracion"></td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="vendor" role="tabpanel" aria-labelledby="vendor-tab">
+								<div class="row">
+									<div class="col-md-6 mb-3">
+										<div class="item w-100" data-wow-duration="0.5s">
+											<div class="sep-section-heading">
+												<h2>Sobre el <em>Artesano</em></h2>
+											</div>
+											<div id="datosArtesano" style="display: flex;flex-wrap: nowrap;align-content: stretch;align-items: center;flex-direction: row;"></div>
+										</div>
+									</div>
+									<div class="col-md-6 mb-3">
+										<div class="item w-100" data-wow-duration="0.5s">
+											<div class="sep-section-heading">
+												<h2>Datos <em>Contacto</em></h2>
+											</div>
+											<div class="contact-info">
+												<div class="row">
+													<div class="phone col-md-12 col-sm-6 col-xs-6">
+														<i class="fa fa-phone"></i><span id="telArtesano">+1 123 489-5748</span>
+													</div>
+													<div class="mail col-md-12 col-sm-6 col-xs-6">
+														<i class="fa fa-envelope"></i><span id="correoArtesano">youremail@gmail.com</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 mb-3">
+										<div class="item w-100" data-wow-duration="0.5s">
+											<div class="sep-section-heading">
+												<h2> Medios de pago <em>disponibles</em></h2>
+											</div>
+											<div class="" id="mediosPago"></div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="item wow fadeInUp animated w-100" data-wow-duration="0.5s">
-                        <div class="sep-section-heading">
-                            <h2>Descripción <em>Producto</em></h2>
-                        </div>
-                        <p id="descripcionProd">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
-                    </div>
-                </div> 
-                <div class="col-md-6 wow fadeInUp animated mb-3" data-wow-duration="1s">
-                    <div class="item w-100">
-                        <div class="sep-section-heading">
-                            <h2>Datos <em>Contacto</em></h2>
-                        </div>
-                        <div class="contact-info">
-                            <div class="row">
-                                <div class="phone col-md-12 col-sm-6 col-xs-6">
-                                    <i class="fa fa-phone"></i><span id="telArtesano">+1 123 489-5748</span>
-                                </div>
-                                <div class="mail col-md-12 col-sm-6 col-xs-6">
-                                    <i class="fa fa-envelope"></i><span id="correoArtesano">youremail@gmail.com</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6 mb-3">
-                    <div class="item wow fadeInUp animated w-100" data-wow-duration="0.5s">
-                        <div class="sep-section-heading">
-                            <h2>Cualidades <em>Producto</em></h2>
-                        </div>
-                        <p id="cualidadesProd">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
-                    </div>
-                </div> 
-                <div class="col-md-6 wow fadeInUp animated mb-3" data-wow-duration="1s">
-                    <div class="item w-100">
-                        <div class="sep-section-heading">
-                            <h2>Sobre la <em>Valoraciones</em></h2>
-                        </div>
-                         
-                    </div>
-                </div>
-
-				
-                <div class="col-md-6 mb-3">
-                    <div class="item wow fadeInUp animated w-100" data-wow-duration="0.5s">
-                        <div class="sep-section-heading">
-                            <h2>Palabras <em>clave</em></h2>
-                        </div>
-                        <p id="palabrasClave">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
-                    </div>
-                </div> 
-                <div class="col-md-6 wow fadeInUp animated mb-3" data-wow-duration="1s">
-                    <div class="item w-100">
-                        <div class="sep-section-heading">
-                            <h2> Medios de pago <em>disponibles</em></h2>
-                        </div>
-						<div class="" id="mediosPago">
-
-						</div>
-                        
-                        
-                    </div>
-                </div>
-				
-                <div class="col-md-6">
-                    <div class="item wow fadeInUp animated w-100 mb-3" data-wow-duration="0.5s">
-                        <div class="sep-section-heading">
-                            <h2>Número <em>piezas</em></h2>
-                        </div>
-                        <p id="cantPiezas">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
-                    </div>
-                </div> 
-                <div class="col-md-6 wow fadeInUp animated mb-3" data-wow-duration="1s">
-                    <div class="item w-100">
-                        <div class="sep-section-heading">
-                            <h2> Medidas <em>centimetros</em></h2>
-                        </div>
-						<p id="medidasProd"></p>
-                        
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="item wow fadeInUp animated w-100" data-wow-duration="0.5s">
-                        <div class="sep-section-heading">
-                            <h2>Descripción <em>materiales</em></h2>
-                        </div>
-                        <p id="materialesProd">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure nulla, sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.</p>
-                    </div>
-                </div> 
-                <div class="col-md-6 wow fadeInUp animated mb-3" data-wow-duration="1s">
-                    <div class="item w-100">
-                        <div class="sep-section-heading">
-                            <h2> Peso <em>kilogramos</em></h2>
-                        </div>
-						<p id="pesoProd"></p>
-                        
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="item wow fadeInUp animated w-100" data-wow-duration="0.5s">
-                        <div class="sep-section-heading">
-                            <h2>Técnicas <em>empleadas</em></h2>
-                        </div>
-                        <p id="tecnicasProd"></p>
-                    </div>
-                </div> 
-                <div class="col-md-6 wow fadeInUp animated mb-3" data-wow-duration="1s">
-                    <div class="item w-100">
-                        <div class="sep-section-heading">
-                            <h2> Costos <em>envío</em></h2>
-                        </div>
-						<div class="" id="preciosEnv"></div>
-                        
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="item wow fadeInUp animated w-100" data-wow-duration="0.5s">
-                        <div class="sep-section-heading">
-                            <h2>Tiempo <em>elaboración</em></h2>
-                        </div>
-                        <p id="tiempoElaboracion"></p>
-                    </div>
-                </div> 
-
-
-
-            </div>
-        </div>
-    </div>
+					</div>
+				</div>
+			</div>
+		</div>
 </section>
 
 

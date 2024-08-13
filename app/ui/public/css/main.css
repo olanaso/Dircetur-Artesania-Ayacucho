@@ -4097,33 +4097,67 @@ a.blog-sm p.blog-date:after {
 /* Add this CSS to your main CSS file or within a <style> tag in your HTML */
 .sp-image-container {
   position: relative;
-  width: 50%;
+  width: 100%;
+  margin: 0 auto; /* Center the container */
   aspect-ratio: 1/1;
+  overflow: hidden;
 }
 
 .sp-image {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+
+#single-car {
+  display: flex;
+  flex-direction: column;
+}
+
+.sp-slides-container {
+  order: 1;
+}
+
+.sp-thumbnails-container {
+  order: 2;
+}
+
+/* Hide any unwanted numbers or elements */
+.sp-slide[data-index]::before,
+.sp-thumbnail-container[data-index]::before {
+  content: none;
+}
+.sp-image-container:hover .sp-arrow {
+  display: block;
+  color: black !important;
 }
 
 .sp-thumbnail-container {
   position: relative;
-  width: 50%;
+  width: 100%;
  aspect-ratio: 1/1;
+  object-fit: contain;
 }
+
 
 .sp-thumbnail {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  left: 32px;
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
 }
+
+.sp-thumbnail:hover {
+  background-color: rgb(183, 182, 182);
+}
+
 .loading-wrapper .loading span:nth-of-type(2) {
   background: #0bed13;
   animation-delay: 0.2s;
@@ -5208,8 +5242,10 @@ a.blog-sm p.blog-date:after {
 
 .tab-content {
   padding: 1rem;
-  border: 1px solid #e1e5f1;
-  border-top: 0;
+     border: 3px solid #9d9d9d;
+
+  border-right: 0;
+  border-left: 0;
 }
 
 .tab-content.plain {
@@ -5987,7 +6023,9 @@ label {
   border: 1px solid black;
   border-radius: 10%;
 }
-
+.similar-info {
+  margin-top: 10px;
+}
 .reconocimiento-card {
   border-radius: 5px;
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.09);
@@ -6039,4 +6077,98 @@ label {
   .content-info-text {
     display: flex;
   }
+}
+
+
+.quantity-controls-container {
+  border: 2px solid #ccc;
+  background-color: #f0f0f0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.quantity-controls-container button {
+  font-size: 20px; /* Increase the font size */
+  padding: 10px; /* Adjust padding if necessary */
+  border: none; /* Remove default border */
+  background-color: transparent; /* Make background transparent */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.quantity-controls-container button:hover {
+  color: black; /* Change text color to black on hover */
+  font-weight: bold;
+}
+
+.quantity-controls-container button:disabled {
+  cursor: not-allowed;
+}
+
+.quantity-controls-container input {
+  position: relative;
+  width: 35px;
+  text-align: center;
+  border: none;
+  background-color: #f0f0f0;
+  margin-left:20px;
+}
+.quantity-controls-container button:focus,
+.quantity-controls-container input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.sp-next-arrow:after, .sp-next-arrow:before, .sp-previous-arrow:after, .sp-previous-arrow:before {
+  background-color: #000 !important;
+}
+
+.nav-tabs .nav-link {
+  color: #000;
+  font-weight: bold;
+  border: none;
+}
+
+
+.nav-tabs .nav-link.active {
+  color: #ff9f41;
+}
+
+.tab-content > .tab-pane {
+  padding-top: 10px;
+}
+.table-striped tbody tr:nth-child(odd) {
+  background-color: rgba(255, 249, 196, 0.2);
+}
+.custom-container {
+  margin: 0 auto; /* Center the container */
+  max-width: 74%;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+  border-top: 2px solid #dee2e6;
+}
+
+.table .table {
+  background-color: #fff;
 }
