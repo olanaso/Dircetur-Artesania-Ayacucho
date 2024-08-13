@@ -1,9 +1,10 @@
 const db = require('../config/db');
 sequelize = db.sequelize; 
 Sequelize = db.Sequelize;
+const categoria = require ('./categoria')
 
 
-module.exports = sequelize.define('producto', {
+const product = sequelize.define('producto', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -251,6 +252,16 @@ module.exports = sequelize.define('producto', {
     tableName: 'producto', 
     timestamps: true
 });
+
+product.findAllProductsByCategoryId = function(categoryId){
+    product.belongsTo(categoria, {
+        foreignKey: 'categoria_id',
+        as: 'categoria'
+    })
+    return product.findAll({where:{categoria_id : categoryId}, include : 'categoria'})
+}
+
+module.exports = product
 
 
 

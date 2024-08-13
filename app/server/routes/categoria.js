@@ -12,6 +12,7 @@ router.get('/categoria/:id', controller.obtener);
 router.get('/categoria', controller.listar);
 router.post('/categoria/save/', controller.save);
 router.get('/categorias', controller.filtrar);
+router.get('/v1/categorias/:abreviatura', controller.getIdCategoriaByAbreviatura);
 
 router.post('/categoria/fileupload', uploadarchivoDDP, controller.uploadImgCategoria);
 
