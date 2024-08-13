@@ -1,7 +1,7 @@
 const sequelize = require('sequelize');
 const model = require('../models/cliente');
 const { Op } = require('sequelize');
-const {handleHttpError} = require('../utils/handleValidator')
+const {handleHttpError} = require('../utils/handleError')
 const usuario = require('../models/usuario')
 
 module.exports = {
@@ -31,6 +31,7 @@ async function actualizar(req, res) {
     try{
         const id = req.params.id
         const {idUsuario, ...restOfbody} = req.body // Con esto estoy sacando el idUsuario del body
+        console.log("El IDUSUARIO", idUsuario)
         const usuarioEncontrado = await usuario.findUsuarioById(idUsuario) //Con esto encuentro el usuario con el id(En nuestro contexto ese id esta en el local storage
         const nombreDelUsuarioEncontrado = usuarioEncontrado.nombre_completo // nombre que voy a dividir para el cliente
         //divison del nombre completo del usuario en nombres y apellidos
@@ -40,14 +41,16 @@ async function actualizar(req, res) {
         const apellidos = partes.slice(2).join(' ') // Tomo los elementos restantes y los uno con un espacio
 
 
-        console.log(req.body.pais)
+        console.log(restOfbody.pais)
         //Actualizo Cliente
-        await model.update({nombres, apellidos, ...restOfbody},{where:{id}}) // Actualizo el cliente con los datos que me llegan en el body y los nombres y apellidos obtenidos por el split
+        console.log(id)
+        await model.update({nombres, apellidos, ...restOfbody},{where:{id}})// Actualizo el cliente con los datos que me llegan en el body y los nombres y apellidos obtenidos por el split
         return res.status(200).send({message:"Cliente actualizado correctamente"})
 
 
     }catch(e){
         handleHttpError(res,"Error actualizando",500)
+        console.error(e)
     }
 }
 

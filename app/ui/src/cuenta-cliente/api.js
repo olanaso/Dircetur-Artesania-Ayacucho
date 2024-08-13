@@ -51,9 +51,7 @@ export async function actualizarCliente(data){
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: new JSON.stringify({
-            nombre_completo: data.name
-        }),
+        body: new URLSearchParams(data)
     };
 
     //Settings para actualizar la tabla de clientes
@@ -62,13 +60,14 @@ export async function actualizarCliente(data){
         headers:{
             "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: new JSON.stringify(data) //Vuelvo la data en json y la envio
+        body: new URLSearchParams(data) //Vuelvo la data en json y la envio
     }
 
+
     try{
-        const responseActualizarUsuario = await fetch(baseUrl + '/usuario/${idUsuario}', settingsUsuario)
+        const responseActualizarUsuario = await fetch(baseUrl + `/usuario/${idUsuario}`, settingsUsuario)
         const responseActualizarCliente = await fetch(baseUrl + `/cliente/${idCliente}`, settingsCliente)
     }catch(e){
-        console.error("Erro al actualizar el cliente", e)
+        console.error("Error al actualizar el cliente", e)
     }
 }

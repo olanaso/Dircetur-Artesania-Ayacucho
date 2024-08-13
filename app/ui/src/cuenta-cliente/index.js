@@ -1,4 +1,19 @@
-import {listarDatosCliente} from './api.js';
+import {actualizarCliente, listarDatosCliente} from './api.js';
+import {getDataFromLocalStorage} from "../utils/config.js";
+
+// Ejecutar la función cuando se carga la página
+$(document).ready(function () {
+    //ocurre al ingresar a la pagina
+    cargarDatos()
+    //funcion que ocurre si se le da click
+    $('#btnSaveChanges').click(async function (e) {
+        e.preventDefault();
+        actualizarCuentaCliente()
+    })
+
+});
+
+
 
 // async function  cargarCategoria() {
 //     console.log("Inicio")
@@ -46,19 +61,11 @@ function cargarFormulario(datosCliente) {
     $('.profile-img').attr('src', datosCliente.fotoPerfil || 'default-image-path.jpg');
 }
 
-// Ejecutar la función cuando se carga la página
-$(document).ready(function () {
-    //ocurre al ingresar a la pagina
-    cargarDatos()
-    //funcion que ocurre si se le da click
-    $('#btnSaveChanges').click(async function (e) {
-        e.preventDefault();
-        actualizarCliente()
-    })
 
-});
+async function actualizarCuentaCliente() {
+    const idUsuario = getDataFromLocalStorage('id').toString()
+    console.log("TIPO", typeof idUsuario)
 
-async function actualizarUsuariom() {
     const data = {
         nombre_completo: $('#name').val(),
         telefono: $('#phone').val(),
@@ -66,12 +73,12 @@ async function actualizarUsuariom() {
         ciudad: $('#city').val(),
         numero_documento: $('#document-number').val(),
         region: $('#region').val(),
-        direccion: $('#address').val()
-
+        direccion: $('#address').val(),
+        idUsuario: idUsuario
     }
-    const jsonData = JSON.stringify(data)
     try{
-        const actualizarUsuario = actualizarCliente()
+        // const jsonData = JSON.stringify(data)
+        const actualizarUsuario = await actualizarCliente(data)
     }catch(e){
         console.error("Hubo un error actualizando el cliente", e)
     }
