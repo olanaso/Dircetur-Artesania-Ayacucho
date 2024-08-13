@@ -6068,7 +6068,9 @@ label {
 .nav-tabs .nav-link.active {
   color: #ff9f41;
 }
-
+.top-slider-features {
+  margin-top: 150px !important;/* Adjust the value as needed */
+}
 .tab-content > .tab-pane {
   padding-top: 10px;
 }
