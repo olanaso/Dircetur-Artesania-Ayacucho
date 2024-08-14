@@ -7,9 +7,8 @@ import {obtenerProducto, obtenerArtesano, listarProductos, listarProductosPorCat
 let cantidadMaxima
 //  href = /clientes-detalle.html?id=${data.id}
 document.addEventListener('DOMContentLoaded', async () => {
-    await infoProd();
+    infoProd();
     setupQuantityControls();
-
 });
 
 async function infoProd() {
@@ -27,27 +26,33 @@ async function infoProd() {
 
     let categoriaId = categoriaMap[producto.categoria_id] || producto.categoria_id.toString();
     let productosRecomendadosPorCategoria = await listarProductosPorCategoria(categoriaId);
-    console.log('productosRecomendadosPorCategoria: ', JSON.stringify(productosRecomendadosPorCategoria, null, 2));
-    const productosContainer = document.getElementById('lists-recommenders');
-    if (!productosContainer) {
-        console.error('Element with id "lists-recommenders" not found.');
-        return;
-    }
-    productosContainer.innerHTML = ''; // Clear any existing content
 
-    for (let i = 0; i < productosRecomendadosPorCategoria.length; i++) {
-        const productoRecomendado = productosRecomendadosPorCategoria[i];
-        const productoElement = document.createElement('div');
-        productoElement.className = 'producto-item';
-        productoElement.innerHTML = `
-                <div>
-                    <h4>${producto.nombres_es}</h4>
-                    <p>Precio: S/. ${producto.precio}</p>
-                </div>
-            `;
-        productosContainer.appendChild(productoElement);
+
+    // Parse the fetched data using JSON.parse
+    let productosRecomendados =JSON.stringify(productosRecomendadosPorCategoria);
+    console.log('productosRecomendados: ', productosRecomendados);
+    console.log("MENSAJE", typeof productosRecomendados);
+    console.log("MENSAJE2", productosRecomendados.length)
+    const longitud = Object.keys(productosRecomendados).length;
+    console.log("MENSAJE3", longitud);
+    // Generate HTML for recommended products
+    let recommendedProductsHtml = '';
+
+    for (let i = 0; i < productosRecomendados.length; i++) {
+
+        let productos = productosRecomendados[i];
+
+        recommendedProductsHtml += `
+            <div class="recommended-product">
+                <img src="${productos.imagen_principal}" alt="${productos.nombres_es}">
+                <p>${productos.nombres_es}</p>
+                <p>Precio: S/. ${productos.precio}</p>
+            </div>
+        `;
     }
 
+
+    $('#recommended-products').html(recommendedProductsHtml);
 
 
     // Asegurarse de que producto.lst_imagenes sea una cadena JSON válida
