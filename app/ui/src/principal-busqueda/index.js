@@ -1,4 +1,3 @@
-
 import {listarCategorias,listarProductos} from './api'
 
 import { validarHTML5 } from '../utils/validateForm';
@@ -72,48 +71,48 @@ async function filtrarClientesAction() {
     const btnFiltrar = document.getElementById('filtrar-Cliente');
 
     btnFiltrar.addEventListener('click', async (event) => {
-        event.preventDefault();
-        const nombre = document.getElementById('nombre-Cliente').value;
-        const apellido = document.getElementById('apellido-Cliente').value;
-        const correo = document.getElementById('correo-Cliente').value;
+      event.preventDefault();
+      const nombre = document.getElementById('nombre-Cliente').value;
+      const apellido = document.getElementById('apellido-Cliente').value;
+      const correo = document.getElementById('correo-Cliente').value;
 
-        currentPage = 1;
+      currentPage = 1;
 
 
-        // Construir el objeto de filtro
-        currentFilter = {
-            nombres: nombre,
-            apellidos: apellido,
-            correo: correo
+      // Construir el objeto de filtro
+      currentFilter = {
+        nombres: nombre,
+        apellidos: apellido,
+        correo: correo
+      };
+      try {
+        // Filtrar pedidos con los parámetros actuales
+        const filtro = {
+          ...currentFilter,
+          page: currentPage,
+          limit: DEFAULT_PAGE_LIMIT
         };
-        try {
-            // Filtrar pedidos con los parámetros actuales
-            const filtro = {
-                ...currentFilter,
-                page: currentPage,
-                limit: DEFAULT_PAGE_LIMIT
-            };
-            //console.log("filtro:", filtro)
-            const clientesFiltrados = await filtrarClientes(filtro);
+        //console.log("filtro:", filtro)
+        const clientesFiltrados = await filtrarClientes(filtro);
 
-            cargarTabla(clientesFiltrados.clientes);
+        cargarTabla(clientesFiltrados.clientes);
 
-            totalPages = Math.ceil(clientesFiltrados.totalItems / DEFAULT_PAGE_LIMIT);
-            actualizarControlesPaginacion(totalPages, clientesFiltrados.totalItems);
-        } catch (error) {
-            console.error('Error al filtrar pedidos:', error);
-        }
+        totalPages = Math.ceil(clientesFiltrados.totalItems / DEFAULT_PAGE_LIMIT);
+        actualizarControlesPaginacion(totalPages, clientesFiltrados.totalItems);
+      } catch (error) {
+        console.error('Error al filtrar pedidos:', error);
+      }
 
     });
-}
+  }
 
 async function cargarSelectorCategoria() {
     const categorias = await listarCategorias()
     let insertOptions = '';
     const Select = document.getElementById('brand');
     categorias.forEach(cat => {
-        insertOptions += `<option value="${cat.id}">${cat.denominacion}</option>`;
+      insertOptions += `<option value="${cat.id}">${cat.denominacion}</option>`;
     });
     let options = `<option value ="0">Seleccione Categoría</option>` + insertOptions
     Select.innerHTML = options;
-}
+  }
