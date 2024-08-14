@@ -122,10 +122,13 @@ async function infoArtesanoById() {
 
   const especialidades = listEspecialidadesTecnicas[0];
   const listLineaArtesanal = [];
-  if (especialidades.ceramica === 1) listLineaArtesanal.push("ceramica");
+  const desotro =especialidades.desotro
   if (especialidades.piedra === 1) listLineaArtesanal.push("piedra");
+  if (especialidades.ceramica === 1) listLineaArtesanal.push("ceramica");
   if (especialidades.talabarteria === 1)
     listLineaArtesanal.push("talabarteria");
+  if (especialidades.otro === 1 &&  desotro) listLineaArtesanal.push(desotro);
+
   const lineaArtesanal = listLineaArtesanal.join(" , ");
 
   // Actualizar elementos del DOM
