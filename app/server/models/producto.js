@@ -260,7 +260,7 @@ product.findAllProductsByCategoryId = async function(categoryId){
     })
     return await product.findAll({where:{categoria_id : categoryId}})
 }
-
+//cuando pongo las relaciones afuera de la funcion ,la funcion no se cae
 product.belongsTo(artesano, {
     foreignKey: 'artesano_id',
     as: 'datos_artesano'
