@@ -271,7 +271,20 @@ product.belongsTo(categoria, {
     as: 'categoria_producto'
 })
 product.findAllProductsByArtesanoId = async function(artesanoId) {
-    return await product.findAll({where:{artesano_id : artesanoId}, include: ['datos_artesano', 'categoria_producto']})
+    return await product.findAll({where:{artesano_id : artesanoId},
+        include: [
+            {
+                model:artesano,
+                as: 'datos_artesano',
+                attributes: ['nombres']
+            },
+            {
+                model: categoria,
+                as: 'categoria_producto',
+                attributes: ['denominacion']
+            }
+        ]
+    })
 }
 
 module.exports = product
