@@ -17,8 +17,22 @@ module.exports = {
     buscar,
     uploadFilproducto,
     reportegeneral, productoFiltrados,
-    getProductsByCategoryAbbreviation
+    getProductsByCategoryAbbreviation,
+    getProductsByArtesanoId
 };
+
+
+async function getProductsByArtesanoId(req,res){
+    try{
+        const {id} = req.params
+        console.log(id)
+        const data = await product.findAllProductsByArtesanoId(id)
+        res.status(200).send({data})
+    }catch(e){
+        console.error(e)
+        handleHttpError(res,"Ocurrio un error obteniendo el recuros", 500)
+    }
+}
 
 async function getProductsByCategoryAbbreviation(req, res){
     try{

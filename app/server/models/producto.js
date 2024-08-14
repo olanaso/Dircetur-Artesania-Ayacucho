@@ -2,6 +2,7 @@ const db = require('../config/db');
 sequelize = db.sequelize; 
 Sequelize = db.Sequelize;
 const categoria = require ('./categoria')
+const artesano = require('./artesano')
 
 
 const product = sequelize.define('producto', {
@@ -260,7 +261,22 @@ product.findAllProductsByCategoryId = async function(categoryId){
     return await product.findAll({where:{categoria_id : categoryId}})
 }
 
+product.belongsTo(artesano, {
+    foreignKey: 'artesano_id',
+    as: 'datos_artesano'
+})
+
+product.belongsTo(categoria, {
+    foreignKey: 'categoria_id',
+    as: 'categoria_producto'
+})
+product.findAllProductsByArtesanoId = async function(artesanoId) {
+    return await product.findAll({where:{artesano_id : artesanoId}, include: ['datos_artesano', 'categoria_producto']})
+}
+
 module.exports = product
+
+
 
 
 
