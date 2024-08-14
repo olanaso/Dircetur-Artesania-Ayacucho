@@ -2,7 +2,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import {saveDataToLocalStorage} from '../utils/config'
 import {hideLoading} from '../utils/init'
 import {obtenerParametrosURL} from '../utils/path'
-import {obtenerProducto, obtenerArtesano, listarProductos} from './api'
+import {obtenerProducto, obtenerArtesano, listarProductos, listarProductosPorCategoria} from './api'
 
 let cantidadMaxima
 //  href = /clientes-detalle.html?id=${data.id}
@@ -16,6 +16,39 @@ async function infoProd() {
     const productoId = getQueryParameter('id');
     const producto = await obtenerProducto(productoId);
     const artesano = await obtenerArtesano(producto.artesano_id);
+
+
+    let categoriaMap = {
+        101: 'TE',
+        108: 'CER',
+        113: 'PT'
+    };
+
+
+    let categoriaId = categoriaMap[producto.categoria_id] || producto.categoria_id.toString();
+    let productosRecomendadosPorCategoria = await listarProductosPorCategoria(categoriaId);
+    console.log('productosRecomendadosPorCategoria: ', JSON.stringify(productosRecomendadosPorCategoria, null, 2));
+    const productosContainer = document.getElementById('lists-recommenders');
+    if (!productosContainer) {
+        console.error('Element with id "lists-recommenders" not found.');
+        return;
+    }
+    productosContainer.innerHTML = ''; // Clear any existing content
+
+    for (let i = 0; i < productosRecomendadosPorCategoria.length; i++) {
+        const productoRecomendado = productosRecomendadosPorCategoria[i];
+        const productoElement = document.createElement('div');
+        productoElement.className = 'producto-item';
+        productoElement.innerHTML = `
+                <div>
+                    <h4>${producto.nombres_es}</h4>
+                    <p>Precio: S/. ${producto.precio}</p>
+                </div>
+            `;
+        productosContainer.appendChild(productoElement);
+    }
+
+
 
     // Asegurarse de que producto.lst_imagenes sea una cadena JSON válida
     const imagenesProd = JSON.parse(JSON.parse(producto.lst_imagenes.replace(/\/\//g, '/')));
@@ -53,7 +86,6 @@ async function infoProd() {
     $('#slider1').empty().append(S1);
     $('#slider2').empty().append(S2);
 
-
     $('#slider1').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -89,6 +121,8 @@ async function infoProd() {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
     }
+
+
     /*carga de datos sobre producto y artesano*/
     const listColores = JSON.parse(JSON.parse(producto.lst_colores))
     const listTallas = JSON.parse(JSON.parse(producto.lst_talla))
