@@ -255,10 +255,9 @@ const product = sequelize.define('producto', {
 
 product.findAllProductsByCategoryId = async function(categoryId){
     product.belongsTo(categoria, {
-        foreignKey: 'categoria_id',
-        as: 'categoria'
+        foreignKey: 'categoria_id'
     })
-    return await product.findAll({where:{categoria_id : categoryId}, include : 'categoria'})
+    return await product.findAll({where:{categoria_id : categoryId}})
 }
 
 module.exports = product
