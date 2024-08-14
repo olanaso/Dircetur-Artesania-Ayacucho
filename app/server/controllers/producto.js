@@ -1,9 +1,11 @@
 const sequelize = require('sequelize');
 const product = require('../models/producto');
+const categoria = require('../models/categoria')
 const { Op } = require('sequelize');
 const PARAMETROS = require("../helpers/parametros");
 const moment = require('moment');
 const { DECIMAL } = require('sequelize');
+const {handleHttpError} = require("../utils/handleError");
 
 module.exports = {
     guardar,
@@ -14,8 +16,29 @@ module.exports = {
     save,
     buscar,
     uploadFilproducto,
-    reportegeneral, productoFiltrados
+    reportegeneral, productoFiltrados,
+    getProductsByCategoryAbbreviation
 };
+
+async function getProductsByCategoryAbbreviation(req, res){
+    try{
+
+        const {abreviatura} = req.params
+        console.log(abreviatura)
+        const idCategoria = await  categoria.findCategoryIdByAbreviatura(abreviatura)
+        console.log(idCategoria)
+        const data = await product.findAllProductsByCategoryId(idCategoria)
+        console.log(data)
+        res.status(200).send({data})
+
+
+
+    } catch(e){
+        console.log(e)
+        handleHttpError(res,"Ocurrio un error obteniendo el recuros", 500)
+    }
+
+}
 
 function guardar (req, res) {
 
