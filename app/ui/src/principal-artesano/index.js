@@ -15,9 +15,6 @@ import { loadPartials } from "../utils/viewpartials.js";
 hideLoading();
 document.addEventListener("DOMContentLoaded", () => {
   infoArtesanoById();
-  // infoProductByArtesano();
-  //  cargarProducts();
-
 });
 
 $(document).ready(async function () {
@@ -63,49 +60,6 @@ function getQueryParameter(name) {
   return urlParams.get(name);
 }
 
-async function infoProductByArtesano() {
-  const productoByArtesano = await obtenerProducByArtesano(
-    getQueryParameter("id")
-  );
-  console.log("> data product: ", productoByArtesano);
-  console.log("> data test: ", productoByArtesano[0].nombres_es);
-
-  if (productoByArtesano.length > 0) {
-    for (let data of productoByArtesano) {
-      console.log("> data:", data);
-      $("#owl-top-features2").append(`
-      <div class="item car-item">
-      <div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
-        style="visibility: visible;">
-        <div class="thumb-content" style="position: relative;">
-          <div class="thumb-inner" style="position: relative;">
-            <a href="principal-detalle.html"><img src=${data.imagen_principal}
-                alt=""></a>
-            <div class="car-banner"
-              style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
-              <a href="principal-detalle.html" class="car-banner-link"
-                style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En
-                venta</a>
-            </div>
-          </div>
-        </div>
-        <div class="down-content">
-          <a href="principal-detalle.html">
-            <h4>${data.nombres_es.slice(0, 10)}</h4>
-          </a>
-          <span>S/. 1,200.00</span>
-          <p>Nombre: Artesano.</p>
-          <p>Categoria: Categoria 1</p>
-          <p>Palabra Calve</p>
-        </div>
-      </div>
-    </div>
-      `);
-    }
-  } else {
-    // Manejar el caso donde no hay reconocimientos si es necesario
-  }
-}
 
 async function infoArtesanoById() {
   const artesano = await obtenerArtesanoById(getQueryParameter("id"));
@@ -195,13 +149,10 @@ async function cargarProducts() {
   const productoByArtesano = await obtenerProducByArtesano(
     getQueryParameter("id")
   );
-  //console.log(categorias)
   $("#owl-top-features").empty();
   let cards = "";
-  for (let data of productoByArtesano) {
-
-    //let cleanUrl = data.imagen.replace(/"/g, '');
-    cards += `
+  for (let data of productoByArtesano.data) {
+        cards += `
     <div class="item car-item">
     <div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
       style="visibility: visible;">
@@ -219,17 +170,13 @@ async function cargarProducts() {
       </div>
       <div class="down-content">
         <a href="principal-detalle.html">
-          <h4>${data.nombres_es.slice(0, 10)}</h4>
+          <h4>${data.nombres_es.length > 20 ? data.nombres_es.slice(0, 20) + '...' : data.nombres_es}</h4>
         </a>
-        <span>S/. 1,200.00</span>
-        <p>Nombre: Artesano.</p>
-        <p>Categoria: Categoria 1</p>
-        <p>Palabra Calve</p>
+        <span>S/. ${ data.precio}</span>
+        <p>${data.categoria_producto.denominacion}</p>
       </div>
     </div>
   </div>`;
-
-    console.log(" > cards  :", cards);
   }
   $("#owl-top-features2").append(cards);
 
