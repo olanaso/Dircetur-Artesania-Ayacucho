@@ -1,5 +1,7 @@
-const model = require('../models/categoria');
+const categoria = require('../models/categoria');
 const { Op } = require('sequelize');
+const {matchedData} = require('express-validator')
+const {handleHttpError} = require("../utils/handleError");
 
 module.exports = {
     guardar,
@@ -9,11 +11,23 @@ module.exports = {
     listar,
     save,
     filtrar,
-    uploadImgCategoria
+    uploadImgCategoria,
+    getIdCategoriaByAbreviatura
 };
+async function getIdCategoriaByAbreviatura(req,res){
+    try {
+        const {abreviatura} = req.params
+        console.log(abreviatura)
 
+        const data = await categoria.findCategoryIdByAbreviatura(abreviatura)
+        console.log("La respuesta es ",data)
+        return res.send({data})
+    }catch(e){
+        handleHttpError(res,"Error obteniendo el recurso", 500)
+    }
+}
 function guardar(req, res) {
-    model.create(req.body)
+    categoria.create(req.body)
         .then(object => {
             res.status(200).json(object);
         })
@@ -23,7 +37,7 @@ function guardar(req, res) {
 }
 
 function actualizar(req, res) {
-    model.findOne({
+    categoria.findOne({
         where: { id: req.params.id }
     })
         .then(object => {
@@ -35,7 +49,7 @@ function actualizar(req, res) {
 }
 
 function eliminar(req, res) {
-    model.findOne({
+    categoria.findOne({
         where: { id: req.body.id }
     })
         .then(object => {
@@ -46,7 +60,7 @@ function eliminar(req, res) {
 }
 
 function obtener(req, res) {
-    model.findOne({
+    categoria.findOne({
         where: { id: req.params.id }
     })
         .then(resultset => {
@@ -58,7 +72,7 @@ function obtener(req, res) {
 }
 
 function listar(req, res) {
-    model.findAll()
+    categoria.findAll()
         .then(resultset => {
             res.status(200).json(resultset);
         })
@@ -68,9 +82,9 @@ function listar(req, res) {
 }
 
 async function save(req, res, next) {
-    const t = await model.sequelize.transaction();
+    const t = await categoria.sequelize.transaction();
     try {
-        let object = await model.findOne({
+        let object = await categoria.findOne({
             where: {
                 id: req.body.id ? req.body.id : 0
             }
@@ -84,7 +98,7 @@ async function save(req, res, next) {
             object.usuaregistra_id = req.userId;
             await object.save({ t });
         } else {
-            object = await model.create({ ...req.body }, { t });
+            object = await categoria.create({ ...req.body }, { t });
         }
         t.commit().then();
         return res.status(200).send(object);
@@ -110,7 +124,7 @@ async function filtrar(req, res) {
             }
         }
 
-        const categorias = await model.findAll({ where: whereCondition });
+        const categorias = await categoria.findAll({ where: whereCondition });
 
         res.json(categorias);
     } catch (error) {

@@ -302,6 +302,9 @@ async function loginpersonal (req, res) {
 
  
         }
+        console.log("El usuario", usuarioDB.correo)
+        //Encuentro el id del cliente por el correo, este id es usado por el front, lo almacena en local storage
+        //que despues es usado para x cosaas idk xd
         const idClient = await cliente.findIdByCorreo(usuarioDB.correo)
         res.status(200).json({
             islogueado: true,
