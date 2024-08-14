@@ -18,47 +18,59 @@ function getQueryParameter(name) {
 }
 
 async function infoArtesanoById() {
-  const artesano = await obtenerArtesano(getQueryParameter("id"));
-  const listTaller = JSON.parse(JSON.parse(artesano.lst_taller));
-  const listEspecialidadesTecnicas = JSON.parse(
-    JSON.parse(artesano.lst_especialidadtecnicas)
-  );
-  const listReconocimientos = JSON.parse(
-    JSON.parse(artesano.lst_reconocimientos)
-  );
-  $("#foto1Artesano").attr("src", artesano.foto1).show();
-  $("#foto2Artesano").attr("src", artesano.foto2).show();
-  $("#celularArtesano").text(`+51 ${artesano.celular}`);
-  $("#calleArtesano").text(`${artesano.calle}`);
-  $("#namesArtesano").text(`${artesano.nombres} ${artesano.apellidos}`);
-  $("#correoArtesano").text(`${artesano.correo}`);
-  $("#lugarProcArtesano").text(`${artesano.lugarProcedencia}`);
-  $("#nombreTaller").text(listTaller[0].nombretaller);
-  $("#rucTaller").text(listTaller[0].ructaller);
-  $("#direccionTaller").text(listTaller[0].direccionfisica);
-  $("#atencionTaller").text(listTaller[0].horarioatencion);
-  $("#habilidades").text(listEspecialidadesTecnicas[0].descripcionhabilidades);
-  $("#tiposArtesania").text(listEspecialidadesTecnicas[0].tipoartesania);
-  $("#lineaArtesanal").text(listEspecialidadesTecnicas[0].tipoartesania);
-  initMap(listTaller[0].latitud, listTaller[0].longitud);
+    const artesano = await obtenerArtesano(getQueryParameter("id"));
+    const listTaller = JSON.parse(JSON.parse(artesano.lst_taller));
+    const lst_videoenlace = JSON.parse(JSON.parse(artesano.lst_videoenlace));
   
-  if (listReconocimientos.length > 0) {
-    for (let reconocimiento of listReconocimientos) {
-      $("#listReconocimientos").append(`
-        <div class="sep-section-heading">
-            <div class="certificate">
-                <div class="title">${reconocimiento.Título}</div>
-                <div class="subtitle">Otorgado por ${reconocimiento.Entidad} </div>
-                <div class="content">
-                    ${reconocimiento.Descripcion}
-                </div>
-            </div>
-        </div>
-    `);
+    const listEspecialidadesTecnicas = JSON.parse(
+      JSON.parse(artesano.lst_especialidadtecnicas)
+    );
+    const listReconocimientos = JSON.parse(
+      JSON.parse(artesano.lst_reconocimientos)
+    );
+    console.log(" >DATA VIDEO: ", lst_videoenlace);
+  
+    // Actualizar elementos del DOM
+    $("#foto1Artesano").attr("src", artesano.foto1).show();
+    $("#foto2Artesano").attr("src", artesano.foto2).show();
+    $("#celularArtesano").text(`+51 ${artesano.celular}`);
+    $("#calleArtesano").text(`${artesano.calle}`);
+    $("#namesArtesano").text(`${artesano.nombres} ${artesano.apellidos}`);
+    $("#correoArtesano").text(`${artesano.correo}`);
+    $("#lugarProcArtesano").text(`${artesano.lugarProcedencia}`);
+    $("#nombreTaller").text(listTaller[0].nombretaller);
+    $("#rucTaller").text(listTaller[0].ructaller);
+    $("#direccionTaller").text(listTaller[0].direccionfisica);
+    $("#atencionTaller").text(listTaller[0].horarioatencion);
+    $("#habilidades").text(listEspecialidadesTecnicas[0].descripcionhabilidades);
+    $("#tiposArtesania").text(listEspecialidadesTecnicas[0].tipoartesania);
+    $("#lineaArtesanal").text(listEspecialidadesTecnicas[0].tipoartesania);
+    initMap(listTaller[0].latitud, listTaller[0].longitud);
+  
+    // Actualizar el iframe
+    if (lst_videoenlace.length > 0) {
+      $("#videoArtesano").attr("src", lst_videoenlace[0].src);
     }
-  } else {
+  
+    if (listReconocimientos.length > 0) {
+      for (let reconocimiento of listReconocimientos) {
+        $("#listReconocimientos").append(`
+          <div class="sep-section-heading">
+              <div class="certificate">
+                  <div class="title">${reconocimiento.Título}</div>
+                  <div class="subtitle">Otorgado por ${reconocimiento.Entidad} </div>
+                  <div class="content">
+                      ${reconocimiento.Descripcion}
+                  </div>
+              </div>
+          </div>
+      `);
+      }
+    } else {
+      // Manejar el caso donde no hay reconocimientos si es necesario
+    }
   }
-}
+  
 
 async function infoArtesano() {
   const artesano = await obtenerArtesano(getQueryParameter("id"));

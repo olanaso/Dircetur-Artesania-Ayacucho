@@ -2778,11 +2778,11 @@ ul#newsticker li:hover {
   background-color: #da1113;
   /* Fallback Color */
   background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(#f14749),
-    to(#da1113)
+          linear,
+          left top,
+          left bottom,
+          from(#f14749),
+          to(#da1113)
   );
   /* Saf4+, Chrome */
   background-image: -webkit-linear-gradient(top, #f14749, #da1113);
@@ -4140,7 +4140,7 @@ a.blog-sm p.blog-date:after {
 .sp-thumbnail-container {
   position: relative;
   width: 100%;
- aspect-ratio: 1/1;
+  aspect-ratio: 1/1;
   object-fit: contain;
 }
 
@@ -4190,7 +4190,7 @@ a.blog-sm p.blog-date:after {
 
 /************************************************
 	************************************************
-							Bootstrap Overwrite CSS							
+							Bootstrap Overwrite CSS
 	************************************************
 ************************************************/
 /*************** Modals ***************/
@@ -5242,7 +5242,7 @@ a.blog-sm p.blog-date:after {
 
 .tab-content {
   padding: 1rem;
-     border: 3px solid #9d9d9d;
+  border: 3px solid #9d9d9d;
 
   border-right: 0;
   border-left: 0;

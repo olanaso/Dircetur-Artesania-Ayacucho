@@ -11,6 +11,10 @@ export async function guardarCliente(cliente){
     try{
         const response = await fetch(baseUrl + '/cliente/save',settings)
         const data = await response.json()
+        if(data.id){
+            saveDataToLocalStorage('idCliente', data.id)
+
+        }
         return data
     }catch(error){
         console.log('error', error)

@@ -13,6 +13,7 @@ export async function loginCliente(usuario,clave){
     try{
         const response = await fetch(baseUrl + "/login", settings)
         const data = await response.json()
+        //almaceno la data importante en local storage
         if(data && data.token){
             saveDataToLocalStorage('rol', data.usuario.rolid)
             saveDataToLocalStorage('token', data.token)

@@ -51,7 +51,11 @@ async function actualizar (req, res) {
     try{
         const id = req.params.id
         const body = req.body
-        console.log(req.body)
+        // console.log("El request es:",req.body)
+        // console.log(req.params.id)
+        const data = await usuario.update(body, {where: {id}})
+        console.log("Data es", data)
+        return res.status(200).send({data})
     }catch(e){
         handleHttpError(res, "Error updating item", 500)
     }
@@ -204,7 +208,8 @@ async function save(req, res, next) {
             token: await tokenSign(object),
             rolid: object.rolid,
             id: object.id,
-            idCliente: await cliente.findIdByCorreo(object.correo)
+            //funciona para crear cliente, pero al editar uno desde admin sale error
+            // idCliente: await cliente.findIdByCorreo(object.correo)
         }
         console.log(data)
 
@@ -297,6 +302,9 @@ async function loginpersonal (req, res) {
 
  
         }
+        console.log("El usuario", usuarioDB.correo)
+        //Encuentro el id del cliente por el correo, este id es usado por el front, lo almacena en local storage
+        //que despues es usado para x cosaas idk xd
         const idClient = await cliente.findIdByCorreo(usuarioDB.correo)
         res.status(200).json({
             islogueado: true,

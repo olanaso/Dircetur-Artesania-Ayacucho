@@ -1,0 +1,121 @@
+:root {
+  --yellow-color: #f4c23d;
+  --secondary-color: #aeb1af;
+  --black-color: rgb(3, 3, 3);
+}
+
+/* PAG ARTESANOS */
+.content-page-artesano {
+  padding: 5px;
+}
+.info-user {
+  display: flex;
+  justify-content: space-between;
+}
+.calification {
+  justify-content: center;
+}
+.calification > i {
+  margin-left: 4px;
+  color: #f4c23d;
+}
+
+.content-info-artesano {
+  width: 100%;
+}
+.content-info-text {
+  display: flex;
+  justify-content: space-between;
+}
+.card-img-top {
+  width: 90%;
+  height: 225px;
+}
+.card-body-image1 {
+  padding: 12px !important;
+}
+.info-user-image {
+  width: 150px;
+  height: 120px;
+  border-radius: 9px;
+}
+
+.location {
+  margin-bottom: 10px;
+}
+.especialidad-content-video {
+  display: flex;
+}
+.location > i {
+  background: var(--yellow-color);
+  font-size: 14px !important;
+  margin-right: 4px;
+  padding: 4px;
+  border: 1px solid black;
+  border-radius: 10%;
+}
+.phone > i {
+  background: var(--yellow-color);
+  font-size: 14px !important;
+  margin-right: 4px;
+  padding: 4px;
+  border: 1px solid black;
+  border-radius: 10%;
+}
+.video-artesano {
+  width: 460px;
+  height: 215px;
+  box-shadow: 1px 1px 1px 2.5px var(--black-color);
+  border-radius: 8px;
+}
+.reconocimiento-card {
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.09);
+  padding: 8px;
+  margin-bottom: 20px;
+}
+.reconocimiento-card-text {
+  font-size: 14px;
+}
+.map-container {
+  margin-top: 150px;
+}
+
+.especialidad,
+.ubicacion,
+.reconocimiento {
+  margin-top: 40px;
+}
+@media (max-width: 768px) {
+  .info-user {
+    display: block;
+  }
+  .especialidad-content-video {
+    display: block;
+  }
+  .info-user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (max-width: 580px) {
+  .content-info-text {
+    display: block;
+  }
+}
+@media (min-width: 768px) {
+  .content-info-text {
+    display: block;
+  }
+  .info-user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (min-width: 1100px) {
+  .content-info-text {
+    display: flex;
+  }
+}

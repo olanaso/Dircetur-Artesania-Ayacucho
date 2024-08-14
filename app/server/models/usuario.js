@@ -68,8 +68,8 @@ const usuario = sequelize.define('usuario', {
 });
 
 
-usuario.findUsuarioAndClienteId = function(models){
-
+usuario.findUsuarioById = function(id){
+    return usuario.findOne({where:{id}})
 }
 
 
