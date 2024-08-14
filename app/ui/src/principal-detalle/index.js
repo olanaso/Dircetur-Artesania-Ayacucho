@@ -85,10 +85,10 @@ async function infoProd() {
         $('.sp-arrow.sp-previous-arrow').click();
     }, 500);
 
-function getQueryParameter(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
-}
+    function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
     /*carga de datos sobre producto y artesano*/
     const listColores = JSON.parse(JSON.parse(producto.lst_colores))
     const listTallas = JSON.parse(JSON.parse(producto.lst_talla))
@@ -275,6 +275,3 @@ function setupQuantityControls() {
         }
     });
 }
-
-
-
