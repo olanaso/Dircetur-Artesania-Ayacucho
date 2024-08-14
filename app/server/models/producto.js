@@ -2,6 +2,7 @@ const db = require('../config/db');
 sequelize = db.sequelize; 
 Sequelize = db.Sequelize;
 const categoria = require ('./categoria')
+const artesano = require('./artesano')
 
 
 const product = sequelize.define('producto', {
@@ -259,8 +260,45 @@ product.findAllProductsByCategoryId = async function(categoryId){
     })
     return await product.findAll({where:{categoria_id : categoryId}})
 }
+//cuando pongo las relaciones afuera de la funcion ,la funcion no se cae
+product.belongsTo(artesano, {
+    foreignKey: 'artesano_id',
+    as: 'datos_artesano'
+})
+
+product.belongsTo(categoria, {
+    foreignKey: 'categoria_id',
+    as: 'categoria_producto'
+})
+
+
+/**
+ * Funcion para encontrar todos los productos de un
+ * artesano y jala datos de la tabla artesano y categoria
+ * @param artesanoId : id del artesano
+ * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
+ */
+product.findAllProductsByArtesanoId = async function(artesanoId) {
+    return await product.findAll({where:{artesano_id : artesanoId},
+        include: [
+            //Eligiendo que atributos de los alias quiero que vaya en el response
+            {
+                model:artesano,
+                as: 'datos_artesano',
+                attributes: ['nombres']
+            },
+            {
+                model: categoria,
+                as: 'categoria_producto',
+                attributes: ['denominacion']
+            }
+        ]
+    })
+}
 
 module.exports = product
+
+
 
 
 
