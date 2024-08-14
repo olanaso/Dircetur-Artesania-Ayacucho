@@ -5,6 +5,7 @@ export async function listarProductos(filtro) {
         const params = new URLSearchParams(filtro);
         const response = await fetch(`${baseUrl}/prductosFiltrados?${params}`, { method: 'GET' });
         const result = await response.json();
+        console.log("productos: ", typeof result);
         return result;
     } catch (error) {
         console.error('Error:', error);

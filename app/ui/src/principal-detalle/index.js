@@ -25,11 +25,12 @@ async function infoProd() {
 
 
     let categoriaId = categoriaMap[producto.categoria_id] || producto.categoria_id.toString();
-    let productosRecomendadosPorCategoria = await listarProductosPorCategoria(categoriaId);
+    let productosRecomendadosPorCategoria = await listarProductosPorCategoria(categoriaId);// Este let es un array de objetos
 
+    console.log ("MENSAJEEEEEEEEEEEEEEEEEEEEEE", productosRecomendadosPorCategoria);
 
     // Parse the fetched data using JSON.parse
-    let productosRecomendados =JSON.stringify(productosRecomendadosPorCategoria);
+    let productosRecomendados =JSON.parse(JSON.stringify(productosRecomendadosPorCategoria));
     console.log('productosRecomendados: ', productosRecomendados);
     console.log("MENSAJE", typeof productosRecomendados);
     console.log("MENSAJE2", productosRecomendados.length)

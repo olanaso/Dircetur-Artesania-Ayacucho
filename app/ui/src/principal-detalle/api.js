@@ -34,7 +34,7 @@ export async function listarProductosPorCategoria(categoriaID) {
     try {
         const response = await fetch(`${baseUrl}/v1/productos/categoria/${categoriaID}`, { method: 'GET' });
         const result = await response.json();
-        console.log("productos: ", result);
+        console.log("productos: ", typeof result);
         return result;
     } catch (error) {
         console.error('Error:', error);
