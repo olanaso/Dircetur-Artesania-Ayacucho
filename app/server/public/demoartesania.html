@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Biblioideas: Biblioteca Virtual del Instituto" />
+	<meta name="keywords"
+		content="Biblioteca, Virtual, Biblioideas, Instituto, Libros, Publicaciones, Educación, Lectura, Aprendizaje, Cultura" />
+	<meta name="author" content="Biblioideas" />
+	<link rel="shortcut icon" href="img/fav.png" />
+	<title>Artesania - Login</title>
+
+	<!-- Common CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
+
+	<!-- Mian and Login css -->
+	<link rel="stylesheet" href="css/main.css" />
+
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+  <script type="module" crossorigin src="/assets/demoartesania-0827c7f3.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
+</head>
+
+<body class="login-bg">
+
+	<div class="loading-wrapper">
+		<div class="loading">
+			<div class="img"></div>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="contenedor-logo-iestp">
+			<img id="logoiestp" src="" alt="">
+		</div>
+
+		<div class="login-screen row align-items-center">
+
+
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+				<form id="form" action="javascript:void(0)">
+					<div class="login-container">
+						<div class="row no-gutters">
+							<div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
+								<div class="login-box">
+									<a href="#" class="login-logo">
+										<img src="img/lead.svg" alt="Lead Admin Dashboard" />
+									</a>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="basic-addon1">
+												<i class="icon-account_circle"></i>
+											</span>
+										</div>
+										<input required id="txtusuario" type="text" class="form-control"
+											oninvalid="this.setCustomValidity('Por favor, ingresa el DNI o correo electronico')"
+											oninput="this.setCustomValidity('')" placeholder="Usuario o Email"
+											aria-label="username" aria-describedby="username">
+									</div>
+									<br>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="basic-addon1">
+												<i class="icon-verified_user"></i>
+											</span>
+										</div>
+										<input required id="txtclave" type="password" class="form-control"
+											oninvalid="this.setCustomValidity('Por favor, ingresa la clave de acceso')"
+											oninput="this.setCustomValidity('')" title="Ingrese la clave de acceso"
+											placeholder="Contraseña" aria-label="Password" aria-describedby="password">
+									</div>
+									<div class="actions clearfix">
+										<a href="recuperar-cuenta.html">¿Olvidaste tu contraseña?</a>
+										<button id="btnlogin" type="submit" class="btn btn-primary">Login</button>
+									</div>
+
+								</div>
+								<div id="error_msj" class="col-xl-12 col-lg-12 col-md-12 col-sm-12"
+									style="display: none;">
+									<div class="alert custom alert-danger">
+										<i class="icon-warning2"></i>Usuario o clave incorrecto
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
+								<div class="login-slider"></div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer class="main-footer no-bdr fixed-btm">
+		<div class="container">
+			Copyright Artesania 2023.
+		</div>
+	</footer>
+</body>
+
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
+
+</html>

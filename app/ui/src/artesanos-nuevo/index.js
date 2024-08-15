@@ -5,10 +5,11 @@ import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 import { geteditarArtesano, geteditarLogin, llenardepartamento, llenarprovincia, llenardistrito, guardarArtesano, buscarDNI, guardarArtesanoUsuario } from './api';
 import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
-import { getDataFromLocalStorage, } from '../utils/config'
+
 import { showToast } from '../utils/toast';
 import '../artesanos-detalle/style.css'
 import { guardarUsuario } from '../../shared/api/usuario.js'
+import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
 
 
 hideLoading();
@@ -158,6 +159,21 @@ async function buscarUsuario () {
 
 
   });
+
+  function redirigirDetalleArtesano (idArtesano) {
+    // Obtiene la URL base dinámica
+    const urlBase = window.location.origin;
+
+    // Construye la URL completa añadiendo la ruta dinámica y el ID del artesano
+    const urlCompleta = `${urlBase}/artesanos-detalle.html?id=${idArtesano}`;
+
+    // Redirige a la URL construida
+    window.location.href = urlCompleta;
+  }
+
+  // Ejemplo de uso:
+
+
   /*********** */
   $('#btnguardarcambio').on('click', async function (e) {
 
@@ -374,9 +390,11 @@ async function buscarUsuario () {
 
             let resultlogin = await guardarArtesanoUsuario(artesano, ousuario);
             if (resultlogin) {
-              showToast('Se actualizo los datos correctamente')
+              showToast('Se registro los datos correctamente')
               hideLoading()
               $('#myModal').css('display', 'none');
+
+              redirigirDetalleArtesano(resultlogin?.artesano_result?.id);
             }
             else {
               showToast('Ocurrio un error.')
@@ -1666,7 +1684,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInputId: 'uploadPrincipalImage',
     progressBarId: 'progressBar',
     statusElementId: 'status',
-    uploadUrl: 'http://localhost:3001/api/artesano/fileupload',
+    uploadUrl: baseUrl + '/artesano/fileupload',
     callback: handleUploadResponseimgprincipal,
     folder: '/artesano/img/'
   });
@@ -1677,14 +1695,14 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInputId: 'uploadVideo',
     progressBarId: 'progressBar',
     statusElementId: 'status',
-    uploadUrl: 'http://localhost:3001/api/producto/fileupload',
+    uploadUrl: baseUrl + '/producto/fileupload',
     callback: handleUploadResponselistavideo,
     folder: '/producto/video/',
   });
 });
 function handleUploadResponselistavideo (response) {
 
-  $('#videoPreview').attr('src', 'http://localhost:3001/' + response.path).show();
+  $('#videoPreview').attr('src', getBaseUrl(baseUrl) + '/' + response.path).show();
 
 }
 
@@ -1694,7 +1712,7 @@ function handleUploadResponseimgprincipal (response) {
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      $('#principalImagePreview').attr('src', 'http://localhost:3001/' + response.path).show();
+      $('#principalImagePreview').attr('src', getBaseUrl(baseUrl) + '/' + response.path).show();
       $('#principalImageName').val(file.name);
     }
     reader.readAsDataURL(file);
@@ -1714,7 +1732,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInputId: 'uploadPrincipal2Image',
     progressBarId: 'progressBar2',
     statusElementId: 'status',
-    uploadUrl: 'http://localhost:3001/api/artesano/fileupload',
+    uploadUrl: baseUrl + '/artesano/fileupload',
     callback: handleUploadResponseimgprincipal2,
     folder: '/artesano/img/'
   });
@@ -1727,7 +1745,7 @@ function handleUploadResponseimgprincipal2 (response) {
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      $('#principalImage2Preview').attr('src', 'http://localhost:3001/' + response.path).show();
+      $('#principalImage2Preview').attr('src', getBaseUrl(baseUrl) + '/' + response.path).show();
       $('#principalImage2Name').val(file.name);
     }
     reader.readAsDataURL(file);

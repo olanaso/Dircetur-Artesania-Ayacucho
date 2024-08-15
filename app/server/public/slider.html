@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+	
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="Lead Admin Panel" />
+		<meta name="keywords" content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="shortcut icon" href="img/fav.png" />
+		<title>Slider</title>
+		
+		<!-- Common CSS -->
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
+		<link rel="stylesheet" href="/css/main.css" />
+ 
+
+		<script type="module" crossorigin src="/assets/slider-b6952885.js"></script>
+		<link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
+		<link rel="modulepreload" crossorigin href="/assets/viewpartials-7a86f681.js">
+		<link rel="modulepreload" crossorigin href="/assets/config-ef5f6dbc.js">
+		<link rel="modulepreload" crossorigin href="/assets/uploadVictor-fc196769.js">
+		<link rel="modulepreload" crossorigin href="/assets/alert-3bd678b2.js">
+		<link rel="modulepreload" crossorigin href="/assets/init-52a8aa54.js">
+	</head>
+	<body>
+
+		<!-- Loading starts -->
+		<div class="loading-wrapper">
+			<div class="loading">
+				<div class="img"></div>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<!-- Loading ends -->
+
+		<!-- BEGIN .app-wrap -->
+		<div class="app-wrap">
+			<!-- BEGIN .app-heading -->
+		<header class="app-header" id="app-header">
+		</header>
+	
+			<!-- END: .app-heading -->
+			<!-- BEGIN .app-container -->
+			<div class="app-container">
+				<!-- BEGIN .app-side -->
+			<aside class="app-side" id="app-side"></aside>
+				<!-- END: .app-side -->
+
+				<!-- BEGIN .app-main -->
+				<div class="app-main">
+					<!-- BEGIN .main-heading -->
+					<header class="main-heading">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+									<div class="page-icon">
+										<i class="icon-tag"></i>
+									</div>
+									<div class="page-title">
+										<h5>Slider</h5>
+										<nav aria-label="breadcrumb">
+											<ol class="breadcrumb">
+												<li class="breadcrumb-item"><a href="inicio.html">Administrador</a></li>
+												<li class="breadcrumb-item"><a href="#">Catálogo</a></li>
+												<li class="breadcrumb-item active" aria-current="page">Slider</li>
+											</ol>
+										</nav>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</header>
+					<!-- END: .main-heading -->
+					<!-- BEGIN .main-content -->
+					<div class="main-content">
+						<div class="card">
+							<div class="card-body">
+								<!-- ModalCreación -->
+								<div class="modal fade" id="modalSliderC" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Añadir</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<form id="formSliderC">
+												<div class="modal-body">
+													<div class="form-group">
+														<label for="frase">Frase</label>
+														<input type="text" class="form-control" id="frase" placeholder="frase"  maxlength="250" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');">
+												 
+													</div>
+													<span class="text-primary">*</span><label>Imagen de Slider</label>
+													<div class="form-group">
+														<input type="file" id="myfile" name="myfile" required accept="image/*">
+														<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+														<div id="status"></div>
+													</div>
+													<div class="form-group">
+														<img id="principalImagePreview" src="" alt="Vista previa de la imagen principal" class="img-thumbnail" style="display: none; width: 200px; height: 150px;">
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-primary"
+														data-dismiss="modal">Cancelar</button>
+													<button type="submit" id="registrar-categoria"
+														class="btn btn-info">Guardar</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- Fin ModalCreacion -->
+								<!-- ModalEdición -->
+								<div class="modal fade" id="modalSliderE" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Editar Slider</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<form id="formSliderE" data-id="">
+												<div class="modal-body">
+													<div class="form-group">
+														<label for="frase">Frase</label> 
+
+															<input type="text" class="form-control" id="fraseE" placeholder="frase"  maxlength="250" required oninput="this.value = this.value.replace(/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜ ]/g, '');">
+												 
+													</div>
+													<span class="text-primary">*</span><label for="myfile-editar">Actualizar imagen</label>
+													<div class="form-group">
+														
+														<input type="file" id="myfile-editar" name="myfile-editar" accept="image/*">
+														<progress id="progressBar-editar" value="0" max="100"
+															style="width: 100%;"></progress>
+														<div id="status-editar"></div>
+													</div>
+	
+													<!-- visualizar la imagen -->
+													<div class="form-group">
+														<img id="SliderImagePreviewEdit" alt="Vista previa de la imagen"
+															class="img-thumbnail"
+															style="display: none; width: 200px; height: 150px;">
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-primary"
+														data-dismiss="modal">Cancelar</button>
+													<button type="submit" id="registrar-categoria"
+														class="btn btn-info">Guardar</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- Fin ModalEdición-->
+								
+								<div class="card">
+									
+									<div class="card-header">Lista de Slider</div>
+									<div class="card-body" > 
+										<div class="d-flex justify-content-end mt-3 mb-3">
+											<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalSliderC">añadir<i class="icon icon-circle-with-plus mr-1"></i></button>
+										</div>
+										<div   id="listaSlider">
+										<table class="table m-0" id="tablaSlider">
+											<thead class="thead-default">
+												<tr>
+													<th>Imagen</th>
+													<th>Frase</th>
+													<th>Acciones</th>
+												</tr>
+											</thead>
+											<tbody>
+
+											</tbody>
+										</table>
+									</div>
+									</div>
+									<div class="card-footer">
+										<!-- Paginación -->
+										<nav aria-label="Page navigation example">
+											<div class="row">
+												<div class="col-sm-12 col-md-5">
+													<div class="text-primary" id="paginationInfo" role="status" aria-live="polite">
+														<!-- Aquí se generará dinámicamente la información de paginación -->
+													</div>
+												</div>
+												<div class="col-sm-12 col-md-7">
+													<ul class="pagination justify-content-end" id="paginationControls">
+														<!-- Aquí se generará dinámicamente los controles de paginación -->
+													</ul>
+												</div>
+											</div>
+										</nav>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+						
+
+					</div>
+					<!-- END: .main-content -->
+				</div>
+				<!-- END: .app-main -->
+			</div>
+			<!-- END: .app-container -->
+			<!-- BEGIN .main-footer -->
+			<footer class="main-footer fixed-btm">
+				Copyright Lead Admin 2019.
+			</footer>
+			<!-- END: .main-footer -->
+		</div>
+		<!-- END: .app-wrap -->
+
+		<!-- jQuery first, then Tether, then other JS. -->
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="vendor/leadMenu/leadMenu.js"></script>
+		<script src="vendor/onoffcanvas/onoffcanvas.js"></script>
+		<script src="js/moment.js"></script>
+
+		<!-- Slimscroll JS -->
+		<script src="vendor/slimscroll/slimscroll.min.js"></script>
+		<script src="vendor/slimscroll/custom-scrollbar.js"></script>
+
+		<!-- Chartist JS 
+		<script src="vendor/chartist/js/chartist.min.js"></script>
+		<script src="vendor/chartist/js/chartist-tooltip.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart1.js"></script>
+		<script src="vendor/chartist/js/custom/custom-area-chart.js"></script>
+		<script src="vendor/chartist/js/custom/donut-chart2.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart4.js"></script>-->
+
+		<!-- Common JS -->
+		<script src="js/common.js"></script>
+		
+	</body>
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+</html>

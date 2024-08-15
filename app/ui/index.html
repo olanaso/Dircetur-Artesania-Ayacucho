@@ -9,110 +9,602 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<meta name="description" content="Lead Admin Panel" />
+	<meta name="description" content="Biblioideas: Biblioteca Virtual del Instituto" />
 	<meta name="keywords"
-		content="Login, Lead Login, Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
-	<meta name="author" content="Bootstrap Gallery" />
+		content="Biblioteca, Virtual, Biblioideas, Instituto, Libros, Publicaciones, Educación, Lectura, Aprendizaje, Cultura" />
+	<meta name="author" content="Biblioideas" />
 	<link rel="shortcut icon" href="img/fav.png" />
-	<title>Artesanias Ayacucho - Login</title>
+	<title>Artesanias de Ayacucho | Portada</title>
 
 	<!-- Common CSS -->
-	<link rel="stylesheet" href="/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 	<!-- Mian and Login css -->
-	<link rel="stylesheet" href="/css/main.css" />
+	<link rel="stylesheet" href="css/main.css" />
 
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 
 </head>
 
-<body class="login-bg">
+<body>
 
-	<div class="loading-wrapper">
-		<div class="loading">
-			<div class="img"></div>
-			<span></span>
-			<span></span>
+	<div class="preloader" style="display: none;">
+		<div class="preloader-bounce">
 			<span></span>
 			<span></span>
 			<span></span>
 		</div>
 	</div>
 
-	<div class="container">
-		<div class="contenedor-logo-iestp">
-			<img id="logoiestp" src="" alt="">
+	<div id="search">
+		<button type="button" class="close">×</button>
+		<form>
+			<input type="search" value="" placeholder="Escribe palabras clave aquí">
+			<button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
+		</form>
+	</div>
+
+	<header class="site-header wow fadeIn" data-wow-duration="1s"
+		style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
+		<div id="main-header" class="main-header">
 		</div>
+	</header>
 
-		<div class="login-screen row align-items-center">
+	<div class="Modern-Slider" id="modernSlider">
+		<div class="item">
+			<div class="img-fill">
+				<img src="img/main_slide_01.jpg" alt="">
+				<div class="info">
+					<div>
+						<h5>Ayacucho tiene la mejor opción</h5>
+						<h3>Buscando lo perfecto<em>Artesanias</em>?</h3>
+						<h6 class="secondary-button">
+							<a href="#">Registrate <i class="fa fa-user-plus"></i></a>
+						</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="img-fill">
+				<img src="img/main_slide_02.jpg" alt="">
+				<div class="info">
+					<div>
+						<h5>Ayacucho tiene la mejor opción</h5>
+						<h3>Buscando lo perfecto en <em>Artesanias</em>?</h3>
+						<h6 class="secondary-button">
+							<a href="#">Registrate <i class="fa fa-user-plus"></i></a>
+						</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="img-fill">
+				<img src="img/main_slide_03.jpg" alt="">
+				<div class="info">
+					<div>
+						<h5>Ayacucho tiene la mejor opción</h5>
+						<h3>Buscando lo perfecto en <em>Artesanias</em>?</h3>
+						<h6 class="secondary-button">
+							<a href="#">Registrate <i class="fa fa-user-plus"></i></a>
+						</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-				<form id="form" action="javascript:void(0)">
-					<div class="login-container">
-						<div class="row no-gutters">
-							<div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
-								<div class="login-box">
-									<a href="#" class="login-logo">
-										<img src="img/lead.png" alt="Lead Admin Dashboard" />
-									</a>
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text" id="basic-addon1">
-												<i class="icon-account_circle"></i>
-											</span>
-										</div>
-										<input required id="txtusuario" type="text" class="form-control"
-											oninvalid="this.setCustomValidity('Por favor, ingresa el DNI o correo electronico')"
-											oninput="this.setCustomValidity('')" placeholder="Usuario o Email"
-											aria-label="username" aria-describedby="username">
-									</div>
-									<br>
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text" id="basic-addon1">
-												<i class="icon-verified_user"></i>
-											</span>
-										</div>
-										<input required id="txtclave" type="password" class="form-control"
-											oninvalid="this.setCustomValidity('Por favor, ingresa la clave de acceso')"
-											oninput="this.setCustomValidity('')" title="Ingrese la clave de acceso"
-											placeholder="Contraseña" aria-label="Password" aria-describedby="password">
-									</div>
-									<div class="actions clearfix">
-										<a href="recuperar-cuenta.html">¿Olvidaste tu contraseña?</a>
-										<button id="btnlogin" type="submit" class="btn btn-primary">Login</button>
-									</div>
-
+	<section class="top-slider-features wow fadeIn animated" data-wow-duration="1.5s">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12" style="  text-align: center;">
+					<div class="slider-top-features">
+						<h7 class="section-title" style="font-weight: bold;">Categorías de los productos artesanales
+						</h7>
+						<div id="owl-top-features" class="owl-carousel owl-theme d-flex justify-content-around">
+							<div class="item car-item">
+								<div class="thumb-content">
+									<a href="principal-detalle.html"><img src="/img/car_item_2.jpg" alt="Car 1"></a>
 								</div>
-								<div id="error_msj" class="col-xl-12 col-lg-12 col-md-12 col-sm-12"
-									style="display: none;">
-									<div class="alert custom alert-danger">
-										<i class="icon-warning2"></i>Usuario o clave incorrecto
+								<div class="down-content">
+									<a href="principal-detalle.html">
+										<h4>Categoria 1</h4>
+									</a>
+								</div>
+							</div>
+							<div class="item car-item">
+								<div class="thumb-content">
+									<a href="principal-detalle.html"><img src="/img/car_item_3.jpg" alt="Car 2"></a>
+								</div>
+								<div class="down-content">
+									<a href="principal-detalle.html">
+										<h4>Categoria 2</h4>
+									</a>
+								</div>
+							</div>
+							<div class="item car-item">
+								<div class="thumb-content">
+									<a href="principal-detalle.html"><img src="/img/car_item_4.jpg" alt="Car 2"></a>
+								</div>
+								<div class="down-content">
+									<a href="principal-detalle.html">
+										<h4>Categoria 3</h4>
+									</a>
+								</div>
+							</div>
+							<div class="item car-item">
+								<div class="thumb-content">
+									<a href="principal-detalle.html"><img src="/img/car_item_5.jpg" alt="Car 2"></a>
+								</div>
+								<div class="down-content">
+									<a href="principal-detalle.html">
+										<h4>Categoria 4</h4>
+									</a>
+								</div>
+							</div>
+							<div class="item car-item">
+								<div class="thumb-content">
+									<a href="principal-detalle.html"><img src="/img/car_item_6.jpg" alt="Car 2"></a>
+								</div>
+								<div class="down-content">
+									<a href="principal-detalle.html">
+										<h4>Categoria 5</h4>
+									</a>
+								</div>
+							</div>
+							<!-- Agrega más elementos aquí según sea necesario -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="features-search-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="service-item wow fadeIn animated" data-wow-duration="0.75s"
+									style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+									<i class="fa fa-shopping-cart"></i>
+									<div class="text-content">
+										<h6>Originalidad y Unicidad</h6>
+										<p>Las artesanías suelen ser únicas y ofrecer un estilo personalizado difícil de
+											encontrar en productos industriales masivos.</p>
 									</div>
 								</div>
 							</div>
-							<div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
-								<div class="contenedorimgenlogin">
-									<img id="imgbanner" src="/img/login-slider.jpg" alt="Descripción de la imagen">
+							<div class="col-md-6">
+								<div class="service-item wow fadeIn animated" data-wow-duration="0.75s"
+									style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+									<i class="fa fa-search"></i>
+									<div class="text-content">
+										<h6>Calidad y Durabilidad</h6>
+										<p>Son hechas a mano con materiales de alta calidad, resultan en productos
+											duraderos y con un acabado detallado.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="service-item wow fadeIn animated" data-wow-duration="0.75s"
+									style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+									<i class="fa fa-users"></i>
+									<div class="text-content">
+										<h6>Apoyo a los Artistas Locales</h6>
+										<p>Comprar artesanías apoya a los artistas locales, fortalece la economía y
+											fomenta las tradiciones culturales.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="service-item wow fadeIn animated" data-wow-duration="0.75s"
+									style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+									<i class="fa fa-globe"></i>
+									<div class="text-content">
+										<h6>Historia y Tradición</h6>
+										<p>Muchas artesanías llevan consigo historia y tradición cultural, agregando
+											valor emocional y significado cultural al objeto.</p>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</form>
+					<div class="col-md-4">
+						<div class="search-content wow fadeIn animated" data-wow-duration="0.75s"
+							style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+							<div class="search-heading">
+								<div class="icon">
+									<i class="fa fa-search"></i>
+								</div>
+								<div class="text-content">
+									<h2>BÚSQUEDA RÁPIDA</h2>
+									<span>HICIMOS UNA BÚSQUEDA RÁPIDA SOLO PARA TI.</span>
+								</div>
+							</div>
+							<div class="search-form">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="input-select">
+											<select name="brand" id="brand">
+												<option value="-1">Seleccione Categoria</option>
+												<option>categoria1</option>
+												<option>categoria2</option>
+												<option>categoria3</option>
+												<option>categoria4</option>
+												<option>categoria5</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="input-select">
+											<select name="mark" id="mark">
+												<option value="-1">Seleccione Otros</option>
+												<option>En oferta</option>
+												<option>Destacados</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="input-select">
+											<select name="min-price" id="min-price">
+												<option value="-1">Precio Minimo</option>
+												<option>S/.100</option>
+												<option>S/.500</option>
+												<option>S/.1.000</option>
+												<option>S/.1.500</option>
+												<option>S/.2.000</option>
+												<option>S/.2.500</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="input-select">
+											<select name="max-price" id="max-price">
+												<option value="-1">Precio Maximo</option>
+												<option>S/.5.000</option>
+												<option>S/.7.500</option>
+												<option>S/.10.000</option>
+												<option>S/.15.500</option>
+												<option>S/.20.000</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="secondary-button">
+											<a href="principal-busqueda.html">Buscar <i class="fa fa-search"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-	<footer class="main-footer no-bdr fixed-btm">
+	</section>
+
+
+	<!-- HTML -->
+	<section class="top-slider-features top-slider-features2 wow fadeIn animated" data-wow-duration="1.5s">
 		<div class="container">
-			Copyright Artesanias Ayacucho 2024.
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="slider-top-features">
+						<h7 class="section-title bold">Artesanías en Oferta</h7>
+						<div id="owl-top-features2" class="owl-carousel owl-theme">
+							<div class="item car-item">
+								<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
+									style="visibility: visible;">
+									<div class="thumb-content" style="position: relative;">
+										<div class="thumb-inner" style="position: relative;">
+											<a href="principal-detalle.html"><img src="/img/car_item_2.jpg" alt=""></a>
+											<div class="car-banner"
+												style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
+												<a href="principal-detalle.html" class="car-banner-link"
+													style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En
+													venta</a>
+											</div>
+										</div>
+									</div>
+									<div class="down-content">
+										<a href="principal-detalle.html">
+											<h4>Producto 1</h4>
+										</a>
+										<span>S/. 1,200.00</span>
+										<p>Nombre: Artesano.</p>
+										<p>Categoria: Categoria 1</p>
+										<p>Palabra Calve</p>
+									</div>
+								</div>
+							</div>
+							<div class="item car-item">
+								<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
+									style="visibility: visible;">
+									<div class="thumb-content" style="position: relative;">
+										<div class="thumb-inner" style="position: relative;">
+											<a href="principal-detalle.html"><img src="/img/car_item_3.jpg" alt=""></a>
+											<div class="car-banner"
+												style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
+												<a href="principal-detalle.html" class="car-banner-link"
+													style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En
+													venta</a>
+											</div>
+										</div>
+									</div>
+									<div class="down-content">
+										<a href="principal-detalle.html">
+											<h4>Producto 2</h4>
+										</a>
+										<span>S/. 1,200.00</span>
+										<p>Nombre: Artesano.</p>
+										<p>Categoria: Categoria 2</p>
+										<p>Palabra Calve</p>
+									</div>
+								</div>
+							</div>
+							<div class="item car-item">
+								<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
+									style="visibility: visible;">
+									<div class="thumb-content" style="position: relative;">
+										<div class="thumb-inner" style="position: relative;">
+											<a href="principal-detalle.html"><img src="/img/car_item_4.jpg" alt=""></a>
+											<div class="car-banner"
+												style="position: absolute;top: 96%;left: 20%;transform: translate(-50%, -50%);">
+												<a href="principal-detalle.html" class="car-banner-link"
+													style="background-color: #f4c23d;border-radius: 3px;color: #1e1e1e;font-size: 13px;font-weight: 700;text-transform: uppercase;width: 85px;height: 36px;text-align: center;line-height: 36px;display: inline-block;">En
+													venta</a>
+											</div>
+										</div>
+									</div>
+									<div class="down-content">
+										<a href="principal-detalle.html">
+											<h4>Producto 3</h4>
+										</a>
+										<span>S/. 1,200.00</span>
+										<p>Nombre: Artesano.</p>
+										<p>Categoria: Categoria 3</p>
+										<p>Palabra Calve</p>
+									</div>
+								</div>
+							</div>
+							<!-- Agrega más elementos aquí según sea necesario -->
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+	</section>
+
+
+
+
+
+	<section>
+		<div class="recent-cars">
+			<div class="container">
+				<div class="recent-car-content">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="section-heading">
+								<div class="icon">
+									<i class="fas fa-shopping-cart"></i>
+								</div>
+								<div class="text-content">
+									<h2>PRODUCTOS RECIENTES</h2>
+									<span>CONSULTA NUESTRAS PUBLICACIONES RECIENTES</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-6">
+							<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
+								style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+								<div class="thumb-content">
+									<div class="car-banner">
+										<a href="principal-detalle.html">En Venta</a>
+									</div>
+									<div class="thumb-inner">
+										<a href="principal-detalle.html"><img src="/img/car_item_2.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="down-content">
+									<a href="principal-detalle.html">
+										<h4>Olla de barro</h4>
+									</a>
+									<span>S/. 1,200.00 </span>
+									<p>Una olla de barro es un recipiente tradicional de cocina hecho de arcilla,
+										utilizado en diversas culturas para preparar y cocinar alimentos</p>
+									<div class="similar-info">
+										<div class="primary-button">
+											<a href="#">Ver mas<i class="fa fa-dollar"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
+								style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+								<div class="thumb-content">
+									<div class="car-banner">
+										<a href="principal-detalle.html">En Venta</a>
+									</div>
+									<div class="thumb-inner">
+										<a href="principal-detalle.html"><img src="/img/car_item_3.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="down-content">
+									<a href="principal-detalle.html">
+										<h4>Ceramica de Barro</h4>
+									</a>
+									<span>S/. 49,700.00 </span>
+									<p>La cerámica de barro es un tipo de alfarería que se elabora a partir de arcilla,
+										maleable y abundante. </p>
+									<div class="similar-info">
+										<div class="primary-button">
+											<a href="#">Ver mas<i class="fas fa-ellipsis-h"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
+								style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+								<div class="thumb-content">
+									<div class="car-banner">
+										<a href="principal-detalle.html">En Venta</a>
+									</div>
+									<div class="thumb-inner">
+										<a href="principal-detalle.html"><img src="/img/car_item_4.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="down-content">
+									<a href="principal-detalle.html">
+										<h4>Olla de barro</h4>
+									</a>
+									<span>S/. 1,200.00 </span>
+									<p>Una olla de barro es un recipiente tradicional de cocina hecho de arcilla,
+										utilizado en diversas culturas para preparar y cocinar alimentos</p>
+									<div class="similar-info">
+										<div class="primary-button">
+											<a href="#">Ver mas<i class="fas fa-ellipsis-h"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
+								style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+								<div class="thumb-content">
+									<div class="car-banner">
+										<a href="principal-detalle.html">En Venta</a>
+									</div>
+									<div class="thumb-inner">
+										<a href="principal-detalle.html"><img src="/img/car_item_5.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="down-content">
+									<a href="principal-detalle.html">
+										<h4>Olla de barro</h4>
+									</a>
+									<span>S/. 1,200.00 </span>
+									<p>Una olla de barro es un recipiente tradicional de cocina hecho de arcilla,
+										utilizado en diversas culturas para preparar y cocinar alimentos</p>
+									<div class="similar-info">
+										<div class="primary-button">
+											<a href="#">Ver mas<i class="fas fa-ellipsis-h"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
+								style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+								<div class="thumb-content">
+									<div class="car-banner">
+										<a href="principal-detalle.html">En Venta</a>
+									</div>
+									<div class="thumb-inner">
+										<a href="principal-detalle.html"><img src="/img/car_item_2.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="down-content">
+									<a href="principal-detalle.html">
+										<h4>Olla de barro</h4>
+									</a>
+									<span>S/. 1,200.00 </span>
+									<p>Una olla de barro es un recipiente tradicional de cocina hecho de arcilla,
+										utilizado en diversas culturas para preparar y cocinar alimentos</p>
+									<div class="similar-info">
+										<div class="primary-button">
+											<a href="#">Ver mas<i class="fas fa-ellipsis-h"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="car-item wow fadeIn animated" data-wow-duration="0.75s"
+								style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+								<div class="thumb-content">
+									<div class="car-banner">
+										<a href="principal-detalle.html">En Venta</a>
+									</div>
+									<div class="thumb-inner">
+										<a href="principal-detalle.html"><img src="/img/car_item_3.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="down-content">
+									<a href="principal-detalle.html">
+										<h4>Olla de barro</h4>
+									</a>
+									<span>S/. 1,200.00 </span>
+									<p>Una olla de barro es un recipiente tradicional de cocina hecho de arcilla,
+										utilizado en diversas culturas para preparar y cocinar alimentos</p>
+									<div class="similar-info">
+										<div class="primary-button">
+											<a href="#">Ver mas<i class="fas fa-ellipsis-h"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="d-flex justify-content-center">
+		<h6 class="secondary-button">
+			<a href="principal-busqueda.html">Explora más artesanías</a>
+		</h6>
+	</section>
+
+
+
+
+	<footer id="main-footer">
 	</footer>
+
+
+
 </body>
 
-<script type="module" src="src/login/index.js"></script>
+<script type="module" src="src/principal/index.js"></script>
+
+<!-- Slider Pro Js -->
+<script src="assets/js/sliderpro.min.js"></script>
+
+<!-- Slick Slider Js -->
+<script src="assets/js/slick.js"></script>
+
+<!-- Owl Carousel Js -->
+<script src="assets/js/owl.carousel.min.js"></script>
+
+<!-- Boostrap Js -->
+<script src="assets/js/wow.animation.js"></script>
+
+<!-- Custom Js -->
+<script src="assets/js/custom.js"></script>
+
+<script type="module" src="src/Shared/navbar.js"></script>
+
+
+
 <!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
 
 </html>

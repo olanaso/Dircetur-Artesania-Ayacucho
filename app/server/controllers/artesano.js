@@ -201,6 +201,8 @@ async function saveUsuarioArtesano (req, res, next) {
 
         }
 
+        let artesano_result = null;
+
         let objectArtesano = await modelArtesano.findOne({
             where: {
                 usuario_id: usuario_result.id ? usuario_result.id : 0
@@ -219,7 +221,7 @@ async function saveUsuarioArtesano (req, res, next) {
 
         } else {  //registro de nuevo usuario
             artesano.usuario_id = usuario_result.id;
-            artesano = await modelArtesano.create({ ...artesano }, { transaction: t });
+            artesano_result = await modelArtesano.create({ ...artesano }, { transaction: t });
 
         }
 
@@ -229,7 +231,7 @@ async function saveUsuarioArtesano (req, res, next) {
 
         await t.commit();
         // Envía el ID del objeto creado junto con el objeto
-        return res.status(200).send({ id: artesano.artesanoId, artesano, usuario });
+        return res.status(200).send({ id: artesano.artesanoId, artesano_result, usuario_result });
 
     } catch (e) {
         await t.rollback();

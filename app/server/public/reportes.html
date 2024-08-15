@@ -1,258 +1,162 @@
 <!doctype html>
 <html lang="en">
-
-<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
-
-<head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<meta name="description" content="Lead Admin Panel" />
-	<meta name="keywords"
-		content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
-	<meta name="author" content="Bootstrap Gallery" />
-	<link rel="shortcut icon" href="/img/fav.png" />
-	<title>Administración de usuarios - BiblioIdeas</title>
-
-	<!-- Common CSS -->
-	<link rel="stylesheet" href="/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
-	<link rel="stylesheet" href="/css/main.css" />
-
-  <script type="module" crossorigin src="/assets/reportes-cfda968a.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/init-35cba5cd.js">
-  <link rel="modulepreload" crossorigin href="/assets/viewpartials-7a86f681.js">
-</head>
-
-<body>
-	<!-- Loading starts -->
-	<div class="loading-wrapper">
-		<div class="loading">
-			<div class="img"></div>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-	</div>
-
-	<!-- BEGIN .app-wrap -->
-	<div class="app-wrap">
-		<!-- Headerg -->
-		<header class="app-header" id="app-header">
-		</header>
-
-		<!-- END: .app-heading -->
-		<!-- BEGIN .app-container -->
-		<div class="app-container">
-			<!-- Menu -->
-			<aside class="app-side" id="app-side"></aside>
-			<!-- END: .app-side -->
-
-			<!-- BEGIN .app-main -->
-			<div class="app-main">
-				<!-- BEGIN .main-heading -->
-				<header class="main-heading">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
-								<div class="page-icon">
-									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="35" viewBox="0 0 16 20" fill="none">
-										<path d="M9 7H14.5L9 1.5V7ZM2 0H10L16 6V18C16 18.5304 15.7893 19.0391 15.4142 19.4142C15.0391 19.7893 14.5304 20 14 20H2C1.46957 20 0.960859 19.7893 0.585786 19.4142C0.210714 19.0391 0 18.5304 0 18V2C0 0.89 0.89 0 2 0ZM3 18H5V12H3V18ZM7 18H9V10H7V18ZM11 18H13V14H11V18Z" fill="#E80000"/>
-										</svg>
-								</div>
-								<div class="page-title">
-									<h5>Reportes de BiblioIDEAS</h5>
-									<h6 class="sub-heading">Se muestra los reportes necesarios para el trabajo de los administradores del sistema.</h6>
-								</div>
-							</div>
-							<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-								<div class="right-actions">
-									<span class="last-login"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</header>
-				<!-- END: .main-heading -->
-				<!-- BEGIN .main-content -->
-				<div class="main-content">
-
-
-
-					<!-- Row start -->
-					<div class="row gutters">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div class="card" style="border: solid 1px #E4E7F2;">
-
-								<div class="card-body">
-
-
-
-								
-										<div >
-											<ul class="nav nav-tabs" id="myTab" role="tablist">
-												<li class="nav-item">
-													<a class="nav-link active" id="home-tab" data-toggle="tab"
-														href="#home" role="tab" aria-controls="home"
-														aria-selected="true">Reporte de usuarios</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab"
-														href="#profile" role="tab" aria-controls="profile"
-														aria-selected="false">Reporte de libros</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab"
-														href="#profile2" role="tab" aria-controls="profile"
-														aria-selected="false">Reporte de accesos</a>
-												</li>
-												<!-- <li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab"
-														href="#profile3" role="tab" aria-controls="profile"
-														aria-selected="false">Estadisticas</a>
-												</li> -->
-
-											</ul>
-
-											<div class="tab-content" id="myTabContent">
-												<div class="tab-pane fade show active" id="home" role="tabpanel"
-													aria-labelledby="home-tab">
-													
-													
-													<div class="row mt-3">
-														
-														<div class="col-12 col-md-6">
-															<button id="btndescargarusuarios" type="button" class="btn btn-primary">
-																<svg xmlns="http://www.w3.org/2000/svg" width="40" height="44" viewBox="0 0 40 44" fill="none">
-																	<path d="M6 13V4C6 3.46957 6.21071 2.96086 6.58579 2.58579C6.96086 2.21071 7.46957 2 8 2H36C36.5304 2 37.0391 2.21071 37.4142 2.58579C37.7893 2.96086 38 3.46957 38 4V40C38 40.5304 37.7893 41.0391 37.4142 41.4142C37.0391 41.7893 36.5304 42 36 42H8C7.46957 42 6.96086 41.7893 6.58579 41.4142C6.21071 41.0391 6 40.5304 6 40V31" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-																	<path d="M29 13H32M26 21H32M26 29H32" stroke="white" stroke-width="4" stroke-linecap="round"/>
-																	<path d="M8 19L14 25M14 19L8 25M2 13H20V31H2V13Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-																	</svg>
-																Descargar todos los usuarios del IESTP</button>
-														</div>
-													</div>
-												</div>
-												<div class="tab-pane fade" id="profile" role="tabpanel"
-													aria-labelledby="profile-tab">
-													<div class="row mt-3">
-														
-														<div class="col-12 col-md-6">
-															<button id="btndescargarlibros" type="button" class="btn btn-primary">
-																<svg xmlns="http://www.w3.org/2000/svg" width="40" height="44" viewBox="0 0 40 44" fill="none">
-																	<path d="M6 13V4C6 3.46957 6.21071 2.96086 6.58579 2.58579C6.96086 2.21071 7.46957 2 8 2H36C36.5304 2 37.0391 2.21071 37.4142 2.58579C37.7893 2.96086 38 3.46957 38 4V40C38 40.5304 37.7893 41.0391 37.4142 41.4142C37.0391 41.7893 36.5304 42 36 42H8C7.46957 42 6.96086 41.7893 6.58579 41.4142C6.21071 41.0391 6 40.5304 6 40V31" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-																	<path d="M29 13H32M26 21H32M26 29H32" stroke="white" stroke-width="4" stroke-linecap="round"/>
-																	<path d="M8 19L14 25M14 19L8 25M2 13H20V31H2V13Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-																	</svg>
-																Descargar el listado de libros del IESTP</button>
-														</div>
-													</div>
-												</div>
-
-												<div class="tab-pane fade" id="profile2" role="tabpanel"
-													aria-labelledby="profile-tab">
-													<div class="row mt-3">
-														<div class="col-12 col-md-2 font-weight-bold">
-															<p> Fecha inicio </p>
-														</div>
-														<div class="col-9 col-md-4">
-															<input id="txt_fechini" class="form-control form-control-sm" type="date">
-														</div>
-														
-													</div>
-													<div class="row mt-3">
-														<div class="col-12 col-md-2 font-weight-bold">
-															<p>  Fecha fin </p>
-														</div>
-														<div class="col-12 col-md-4">
-															<input id="txt_fechfin" class="form-control form-control-sm" type="date">
-														</div>
-													</div>
-
-													<div class="row mt-3">
-														
-														<div class="col-12 col-md-6">
-															<button id="btndescargaraccesos" type="button" class="btn btn-primary">
-																<svg xmlns="http://www.w3.org/2000/svg" width="40" height="44" viewBox="0 0 40 44" fill="none">
-																	<path d="M6 13V4C6 3.46957 6.21071 2.96086 6.58579 2.58579C6.96086 2.21071 7.46957 2 8 2H36C36.5304 2 37.0391 2.21071 37.4142 2.58579C37.7893 2.96086 38 3.46957 38 4V40C38 40.5304 37.7893 41.0391 37.4142 41.4142C37.0391 41.7893 36.5304 42 36 42H8C7.46957 42 6.96086 41.7893 6.58579 41.4142C6.21071 41.0391 6 40.5304 6 40V31" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-																	<path d="M29 13H32M26 21H32M26 29H32" stroke="white" stroke-width="4" stroke-linecap="round"/>
-																	<path d="M8 19L14 25M14 19L8 25M2 13H20V31H2V13Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-																	</svg>
-																Descargar el listado de accesos al IESTP</button>
-														</div>
-													</div>
-												</div>
-
-												<div class="tab-pane fade" id="profile3" role="tabpanel"
-													aria-labelledby="profile-tab">
-													<div class="row mt-3">
-														
-														<div class="col-12 col-md-6">
-															<a id="btnirestadisticas" href="#" class="btn btn-primary" style="color:#E4E7F2">
-																<svg xmlns="http://www.w3.org/2000/svg" width="28" height="30" viewBox="0 0 28 30" fill="none">
-																	<path d="M7.46667 13.125H13.0667V30H7.46667V13.125ZM9.33333 28.125H11.2V15H9.33333V28.125ZM14.9333 16.875H20.5333V30H14.9333V16.875ZM16.8 28.125H18.6667V18.75H16.8V28.125ZM0 20.625H5.6V30H0V20.625ZM1.86667 28.125H3.73333V22.5H1.86667V28.125ZM22.4 9.375H28V30H22.4V9.375ZM24.2667 28.125H26.1333V11.25H24.2667V28.125ZM20.2563 9.09668C20.441 9.49707 20.5333 9.90234 20.5333 10.3125C20.5333 10.7031 20.4604 11.0693 20.3146 11.4111C20.1688 11.7529 19.9694 12.0508 19.7167 12.3047C19.4639 12.5586 19.1674 12.7588 18.8271 12.9053C18.4868 13.0518 18.1222 13.125 17.7333 13.125C17.3444 13.125 16.9799 13.0518 16.6396 12.9053C16.2993 12.7588 16.0028 12.5586 15.75 12.3047C15.4972 12.0508 15.2979 11.7529 15.1521 11.4111C15.0063 11.0693 14.9333 10.7031 14.9333 10.3125V10.1367C14.9333 10.0781 14.9382 10.0195 14.9479 9.96094L12.2063 8.58398C11.9535 8.83789 11.6569 9.0332 11.3167 9.16992C10.9764 9.30664 10.6264 9.375 10.2667 9.375C9.85833 9.375 9.45486 9.28223 9.05625 9.09668L5.32292 12.8467C5.50764 13.2471 5.6 13.6523 5.6 14.0625C5.6 14.4531 5.52708 14.8193 5.38125 15.1611C5.23542 15.5029 5.03611 15.8008 4.78333 16.0547C4.53056 16.3086 4.23403 16.5088 3.89375 16.6553C3.55347 16.8018 3.18889 16.875 2.8 16.875C2.41111 16.875 2.04653 16.8018 1.70625 16.6553C1.36597 16.5088 1.06944 16.3086 0.816667 16.0547C0.563889 15.8008 0.364583 15.5029 0.21875 15.1611C0.0729167 14.8193 0 14.4531 0 14.0625C0 13.6719 0.0729167 13.3057 0.21875 12.9639C0.364583 12.6221 0.563889 12.3242 0.816667 12.0703C1.06944 11.8164 1.36597 11.6162 1.70625 11.4697C2.04653 11.3232 2.41111 11.25 2.8 11.25C3.20833 11.25 3.61181 11.3428 4.01042 11.5283L7.74375 7.77832C7.55903 7.37793 7.46667 6.97266 7.46667 6.5625C7.46667 6.17188 7.53958 5.80566 7.68542 5.46387C7.83125 5.12207 8.03056 4.82422 8.28333 4.57031C8.53611 4.31641 8.83264 4.11621 9.17292 3.96973C9.51319 3.82324 9.87778 3.75 10.2667 3.75C10.6556 3.75 11.0201 3.82324 11.3604 3.96973C11.7007 4.11621 11.9972 4.31641 12.25 4.57031C12.5028 4.82422 12.7021 5.12207 12.8479 5.46387C12.9938 5.80566 13.0667 6.17188 13.0667 6.5625V6.73828C13.0667 6.79688 13.0618 6.85547 13.0521 6.91406L15.7938 8.29102C16.0465 8.03711 16.3431 7.8418 16.6833 7.70508C17.0236 7.56836 17.3736 7.5 17.7333 7.5C18.1417 7.5 18.5451 7.59277 18.9438 7.77832L22.6771 4.02832C22.4924 3.62793 22.4 3.22266 22.4 2.8125C22.4 2.42188 22.4729 2.05566 22.6188 1.71387C22.7646 1.37207 22.9639 1.07422 23.2167 0.820312C23.4694 0.566406 23.766 0.366211 24.1063 0.219727C24.4465 0.0732422 24.8111 0 25.2 0C25.5889 0 25.9535 0.0732422 26.2938 0.219727C26.634 0.366211 26.9306 0.566406 27.1833 0.820312C27.4361 1.07422 27.6354 1.37207 27.7813 1.71387C27.9271 2.05566 28 2.42188 28 2.8125C28 3.20312 27.9271 3.56934 27.7813 3.91113C27.6354 4.25293 27.4361 4.55078 27.1833 4.80469C26.9306 5.05859 26.634 5.25879 26.2938 5.40527C25.9535 5.55176 25.5889 5.625 25.2 5.625C24.7917 5.625 24.3882 5.53223 23.9896 5.34668L20.2563 9.09668ZM2.8 15C3.05278 15 3.27153 14.9072 3.45625 14.7217C3.64097 14.5361 3.73333 14.3164 3.73333 14.0625C3.73333 13.8086 3.64097 13.5889 3.45625 13.4033C3.27153 13.2178 3.05278 13.125 2.8 13.125C2.54722 13.125 2.32847 13.2178 2.14375 13.4033C1.95903 13.5889 1.86667 13.8086 1.86667 14.0625C1.86667 14.3164 1.95903 14.5361 2.14375 14.7217C2.32847 14.9072 2.54722 15 2.8 15ZM25.2 1.875C24.9472 1.875 24.7285 1.96777 24.5438 2.15332C24.359 2.33887 24.2667 2.55859 24.2667 2.8125C24.2667 3.06641 24.359 3.28613 24.5438 3.47168C24.7285 3.65723 24.9472 3.75 25.2 3.75C25.4528 3.75 25.6715 3.65723 25.8563 3.47168C26.041 3.28613 26.1333 3.06641 26.1333 2.8125C26.1333 2.55859 26.041 2.33887 25.8563 2.15332C25.6715 1.96777 25.4528 1.875 25.2 1.875ZM10.2667 7.5C10.5194 7.5 10.7382 7.40723 10.9229 7.22168C11.1076 7.03613 11.2 6.81641 11.2 6.5625C11.2 6.30859 11.1076 6.08887 10.9229 5.90332C10.7382 5.71777 10.5194 5.625 10.2667 5.625C10.0139 5.625 9.79514 5.71777 9.61042 5.90332C9.42569 6.08887 9.33333 6.30859 9.33333 6.5625C9.33333 6.81641 9.42569 7.03613 9.61042 7.22168C9.79514 7.40723 10.0139 7.5 10.2667 7.5ZM17.7333 11.25C17.9861 11.25 18.2049 11.1572 18.3896 10.9717C18.5743 10.7861 18.6667 10.5664 18.6667 10.3125C18.6667 10.0586 18.5743 9.83887 18.3896 9.65332C18.2049 9.46777 17.9861 9.375 17.7333 9.375C17.4806 9.375 17.2618 9.46777 17.0771 9.65332C16.8924 9.83887 16.8 10.0586 16.8 10.3125C16.8 10.5664 16.8924 10.7861 17.0771 10.9717C17.2618 11.1572 17.4806 11.25 17.7333 11.25Z" fill="white"/>
-																	</svg>
-																	Ir panel de Estadisticas</a>
-														</div>
-													</div>
-												</div>
-												</div>
-
-
-
-
-										</div>
-										<!-- Grid Admin Usuarios -->
-								
-
-
-								</div>
-							</div>
-						</div>
-
-					</div>
-					<!-- Row end -->
-
-					<!-- Row start -->
-
-					<!-- Row end -->
-
-
-
-
-				</div>
-				<!-- END: .main-content -->
-			</div>
-			<!-- END: .app-main -->
-
-		</div>
-		<!-- END: .app-container -->
-		<!-- BEGIN .main-footer -->
-		<footer class="main-footer fixed-btm">
-			Copyright BiblioIDEAS 2023.
-		</footer>
-		<!-- END: .main-footer -->
-	</div>
-	<!-- END: .app-wrap -->
-
-	<!-- jQuery first, then Tether, then other JS. -->
-	<script src="/js/jquery.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/vendor/leadMenu/leadMenu.js"></script>
-	<script src="/vendor/onoffcanvas/onoffcanvas.js"></script>
-	<script src="/js/moment.js"></script>
-	<script src="/js/jquery.twbsPagination.min.js"></script>
-	<script src="/js/alasql.js"></script>
-	<script src="/js/xlsx.core.min.js"></script>
-
-	<!-- Common JS -->
-	<script src="/js/common.js"></script>
 	
-</body>
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="Lead Admin Panel" />
+		<meta name="keywords" content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="shortcut icon" href="img/fav.png" />
+		<title>Reportes</title>
+		
+		<!-- Common CSS -->
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
+		<link rel="stylesheet" href="/css/main.css" />
 
-<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
+		<!-- Other CSS includes plugins - Cleanedup unnecessary CSS -->
+		<!-- Chartist css --> 
 
+		
+
+		<script type="module" crossorigin src="/assets/reportes-8585fb4b.js"></script>
+		<link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
+		<link rel="modulepreload" crossorigin href="/assets/viewpartials-7a86f681.js">
+		<link rel="modulepreload" crossorigin href="/assets/config-ef5f6dbc.js">
+		<link rel="modulepreload" crossorigin href="/assets/init-52a8aa54.js">
+		<link rel="modulepreload" crossorigin href="/assets/toast-8abe4fe9.js">
+		<link rel="stylesheet" href="/assets/reportes-d151fb1f.css">
+	</head>
+	<body>
+
+		<!-- Loading starts -->
+		<div class="loading-wrapper">
+			<div class="loading">
+				<div class="img"></div>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<!-- Loading ends -->
+
+		<!-- BEGIN .app-wrap -->
+		<div class="app-wrap">
+			<!-- BEGIN .app-heading -->
+		<header class="app-header" id="app-header">
+		</header> 
+			<!-- END: .app-heading -->
+			<!-- BEGIN .app-container -->
+			<div class="app-container">
+				<!-- BEGIN .app-side -->
+			<aside class="app-side" id="app-side"></aside>
+				<!-- END: .app-side -->
+
+				<!-- BEGIN .app-main -->
+				<div class="app-main">
+					<!-- BEGIN .main-heading -->
+					<header class="main-heading">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+									<div class="page-icon">
+										<i class="icon-file-text"></i>
+									</div>
+									<div class="page-title">
+										<h5>Reportes</h5>
+										<nav aria-label="breadcrumb">
+											<ol class="breadcrumb">
+												<li class="breadcrumb-item"><a href="#">Administrador</a></li>
+												<li class="breadcrumb-item active" aria-current="page">Reportes</li>
+											</ol>
+										</nav>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</header>
+					<!-- END: .main-heading -->
+					<!-- BEGIN .main-content -->
+					<div class="main-content">
+						<div class="card">
+							<div class="card-body">
+								<div class="filterContent">
+									<form class="mt-2 mb-2 p-3" id="filtrarCliente">
+										<div class="row gutters">
+											<div class="col">
+												<label for="reportType">Escoge el tipo de reporte que desees generar</label>
+												<select id="reportType" class="form-control">
+													<option value=""> -- Selecciona el reporte --</option>
+													<option value="productos">Listado de productos</option>
+													<option value="artesanos">Listado de artesanos</option>
+													<option value="clientes">Listado de clientes</option>
+												</select>
+											</div>	
+										</div>
+										<div id="checkboxContainer" class="col mt-3"></div>
+										<div class="d-flex justify-content-end mt-3">
+											<!--<button class="btn btn-primary btn-sm" id="btn-reporte">Generar reporte <i class="icon icon-funnel"></i></button>-->
+											<button class="btn btn-primary btn-sm" id="btn-exportarexcel">Exportar reporte <i class="icon icon-funnel"></i></button>
+										</div>
+									</form>
+
+									<div id="tablaReportes"></div>
+								</div>
+								
+							</div>
+						</div>
+						
+
+					</div>
+					<!-- END: .main-content -->
+				</div>
+				<!-- END: .app-main -->
+			</div>
+			<!-- END: .app-container -->
+			<!-- BEGIN .main-footer -->
+			<footer class="main-footer fixed-btm">
+				Copyright Lead Admin 2019.
+			</footer>
+			<!-- END: .main-footer -->
+		</div>
+		<!-- END: .app-wrap -->
+
+		<!-- jQuery first, then Tether, then other JS. -->
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="vendor/leadMenu/leadMenu.js"></script>
+		<script src="vendor/onoffcanvas/onoffcanvas.js"></script>
+		<script src="js/moment.js"></script>
+
+		<!-- Slimscroll JS -->
+		<script src="vendor/slimscroll/slimscroll.min.js"></script>
+		<script src="vendor/slimscroll/custom-scrollbar.js"></script>
+
+		<!-- Chartist JS  
+		<script src="vendor/chartist/js/chartist.min.js"></script>
+		<script src="vendor/chartist/js/chartist-tooltip.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart1.js"></script>
+		<script src="vendor/chartist/js/custom/custom-area-chart.js"></script>
+		<script src="vendor/chartist/js/custom/donut-chart2.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart4.js"></script> -->
+
+		<!-- Common JS -->
+		<script src="js/common.js"></script>
+		<script src="/js/alasql.js"></script>
+		<script src="/js/xlsx.core.min.js"></script>
+		<script src="/js/xlsx.full.min.js"></script>
+	
+		
+	</body>
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
 </html>

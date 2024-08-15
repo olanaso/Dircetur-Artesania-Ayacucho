@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Biblioideas: Biblioteca Virtual del Instituto" />
+	<meta name="keywords"
+		content="Biblioteca, Virtual, Biblioideas, Instituto, Libros, Publicaciones, Educación, Lectura, Aprendizaje, Cultura" />
+	<meta name="author" content="Biblioideas" />
+	<link rel="shortcut icon" href="img/fav.png" />
+	<title>Artesania - proceso de compra</title>
+
+	<!-- Common CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+	<!-- Mian and Login css -->
+	<link rel="stylesheet" href="css/main.css" />
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+  <script type="module" crossorigin src="/assets/principal-proceso-compra-14e25a1d.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
+  <link rel="modulepreload" crossorigin href="/assets/viewpartials-7a86f681.js">
+  <link rel="modulepreload" crossorigin href="/assets/config-ef5f6dbc.js">
+  <link rel="modulepreload" crossorigin href="/assets/init-52a8aa54.js">
+  <link rel="modulepreload" crossorigin href="/assets/navbar-79b7ff75.js">
+  <link rel="modulepreload" crossorigin href="/assets/principal-90e94c9b.js">
+  <link rel="modulepreload" crossorigin href="/assets/toast-8abe4fe9.js">
+  <link rel="stylesheet" href="/assets/principal copy-6da31630.css">
+  <link rel="stylesheet" href="/assets/principal-proceso-compra-a9bc3366.css">
+</head>
+
+<body>
+
+	<div class="preloader" style="display: none;">
+		<div class="preloader-bounce">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+
+	<div id="search">
+		<button type="button" class="close">×</button>
+		<form>
+			<input type="search" value="" placeholder="Escribe palabras clave aquí">
+			<button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
+		</form>
+	</div>
+
+	<!--HEADER-->
+	<header class="site-header wow fadeIn" data-wow-duration="1s"
+		style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
+		<div id="main-header" class="main-header">
+		</div>
+	</header>
+
+	<div class="page-heading wow fadeIn animated" data-wow-duration="0.5s"
+		style="visibility: visible;-webkit-animation-duration: 0.5s; -moz-animation-duration: 0.5s; animation-duration: 0.5s;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="heading-content-bg wow fadeIn animated" data-wow-delay="0.75s" data-wow-duration="1s"
+						style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.75s; -moz-animation-delay: 0.75s; animation-delay: 0.75s;">
+						<div class="row">
+							<div class="heading-content col-md-12">
+								<p><a href="principal.html">Inicio</a> / <em>proceso de compra</em></p>
+								<h2>Mi<em> proceso de compra</em></h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- main content section -->
+	<div class="container wow fadeInUp animated animated" data-wow-duration="1s"
+		style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
+		<div class="sep-section-heading">
+			<h2>Continua con <em>tu proceso de compra</em></h2>
+		</div>
+		<div class="stepper-wrapper">
+			<div class="stepper-item active">
+				<div class="step-counter">1</div>
+				<div class="step-title">Identificación</div>
+			</div>
+			<div class="stepper-item">
+				<div class="step-counter">2</div>
+				<div class="step-title">Información</div>
+			</div>
+			<div class="stepper-item">
+				<div class="step-counter">3</div>
+				<div class="step-title">Solicita tipo de comprobante</div>
+			</div>
+			<div class="stepper-item">
+				<div class="step-counter">4</div>
+				<div class="step-title">Realiza pago</div>
+			</div>
+			<div class="stepper-item">
+				<div class="step-counter">5</div>
+				<div class="step-title">Confirmación</div>
+			</div>
+		</div>
+		<form id="multiStepForm">
+			<div class="step active" id="step1">
+				<h3 class="step-title">Identificación</h3>
+				<div class="form-group">
+					<label for="step1Field1">Field 1</label>
+					<input type="text" class="form-control" id="step1Field1" required>
+				</div>
+				<div class="row justify-content-end p-3">
+					<button type="button" class="btn btn-next next">Siguiente</button>
+				</div>
+			</div>
+			<div class="step" id="step2">
+				<h3 class="step-title">Completar información</h3>
+				<div class="row mb-3">
+					<div class="col-md-6">
+						<label for="step2CorreoElectronico" class="form-label">Correo electrónico:</label>
+						<input type="email" class="form-control" id="step2CorreoElectronico" placeholder="" disabled>
+					</div>
+					<div class="col-md-6">
+						<label for="step2NombreCompleto" class="form-label">Nombre completo:</label>
+						<input type="text" class="form-control" id="step2NombreCompleto" placeholder="" disabled>
+					</div>
+				</div>
+				<hr>
+				<div class="row mb-3">
+					<div class="col-md-4 col-sm-12">
+						<label for="step2TipoDocumento" class="form-label">Tipo de documento:</label>
+						<select class="form-select form-control" id="step2TipoDocumento" required>
+							<option value="DNI">DNI</option>
+							<option value="Pasaporte">Pasaporte</option>
+						</select>
+					</div>
+					<div class="col-md-8 col-sm-12 mt-3 mt-md-0">
+						<label for="step2NumeroDocumento" class="form-label">Número de documento:</label>
+						<input type="number" class="form-control" id="step2NumeroDocumento"
+							placeholder="Número de documento" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
+					</div>
+				</div>
+				<hr>
+				<div class="row mb-3">
+					<div class="col-md-4 col-sm-6">
+						<label for="step2Pais" class="form-label">País:</label>
+						<select class="form-control form-select" id="step2Pais" required>
+							<option value="">Seleccione</option>
+							<option value="Perú">Perú</option>
+							<option value="Otro">Otro</option>
+						</select>
+					</div>
+					<div class="col-md-4 col-sm-6 mt-3 mt-sm-0">
+						<label for="step2Region" class="form-label">Región:</label>
+						<select class="form-select form-control" id="step2Region" required>
+							<option value="">Seleccione</option>
+							<option value="Ayacucho">Ayacucho</option>
+							<option value="Otro">Otro</option>
+						</select>
+					</div>
+					<div class="col-md-4 col-sm-6 mt-3 mt-md-0">
+						<label for="step2Ciudad" class="form-label">Ciudad:</label>
+						<select class="form-select form-control" id="step2Ciudad" required>
+							<option value="">Seleccione</option>
+							<option value="Huamanga">Huamanga</option>
+							<option value="Otro">Otro</option>
+						</select>
+					</div>
+					<div class="col-md-4 col-sm-6 mt-3">
+						<label for="step2Direccion" class="form-label">Dirección (para el envío):</label>
+						<input type="text" class="form-control" id="step2Direccion" placeholder="Av ejemplo Nº 135" required>
+					</div>
+				</div>
+				<hr>
+				<div class="row justify-content-between p-3">
+					<button type="button" class="btn btn-prev prev">Anterior</button>
+					<button type="button" class="btn btn-next next">Siguiente</button>
+				</div>
+			</div>
+			<div class="step" id="step3">
+				<h3 class="step-title">Escoge un tipo de comprobante para solicitar</h3>
+				<hr>
+				<span>*Si seleciona boleta ingrese DNI, si selecciona factura ingrese RUC</span>
+				<hr>
+				<div class="row mb-3">
+					<div class="col-md-4 col-sm-12">
+						<select class="form-select form-control" id="step3TipoComprobante" required>
+							<option value="">Seleccione</option>
+							<option value="Boleta">Boleta</option>
+							<option value="Factura">Factura</option>
+							<option value="Recibo por honorarios">Recibo por honorarios</option>
+						</select>
+					</div>
+					<div class="col-md-8 col-sm-12 mt-3 mt-md-0">
+						<input type="number" class="form-control" id="step3NumeroDocumento"
+							placeholder="Número de documento" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
+					</div>
+				</div>
+				<div class="row justify-content-between p-3">
+					<button type="button" class="btn btn-prev prev">Anterior</button>
+					<button type="button" class="btn btn-next next">Siguiente</button>
+				</div>
+			</div>
+			<div class="step" id="step4">
+				<h3 class="step-title">Realiza pago</h3>
+				<hr>
+				<span>* Seleccione un medio de pago y realize la operación de trasnferencia con la información y monto total correspondiente </span>
+				<hr>
+				<div class="row mb-3">
+					<!-- Resumen de la compra -->
+					<div class="col-md-6">
+						<h4 class="step-subtitle">Resumen de tu compra:</h4>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Productos</th>
+									<th>Precio</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Producto A (1 unidad)</td>
+									<td>S/40.00</td>
+								</tr>
+								<tr>
+									<td>Producto B (2 unidades)</td>
+									<td>S/80.00</td>
+								</tr>
+								<tr>
+									<td>Producto C (1 unidad)</td>
+									<td>S/40.00</td>
+								</tr>
+								<tr>
+									<th>Total a pagar:</th>
+									<th>S/160.00</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- Métodos de pago -->
+					<div class="col-md-6">
+						<h4 class="step-subtitle">Realiza el pago por estos medios:</h4>
+						<hr>
+						<!-- Transferencia -->
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="paymentMethod" id="step4Transferencia"
+								value="transferencia">
+							<label class="form-check-label" for="step4Transferencia">
+								Transferencia (CTA del artesano)
+							</label>
+							<small class="form-text">Nº cuenta: 455454 545455, CCI:
+								546488455151588454545545</small>
+							<small class="form-text">Subir captura de voucher de pago en el siguiente
+								paso</small>
+						</div>
+
+						<!-- Pagar con YAPE -->
+						<div class="form-check mt-3">
+							<input class="form-check-input" type="radio" name="paymentMethod" id="step4Yape"
+								value="yape">
+							<label class="form-check-label" for="step4Yape">
+								Pagar con YAPE (Número del artesano)
+							</label>
+							<small class="form-text">Número: 999 999 999</small>
+							<small class="form-text">Subir captura de pantalla de pago en el siguiente
+								paso</small>
+						</div>
+
+						<!-- Pago efectivo -->
+						<div class="form-check mt-3">
+							<input class="form-check-input" type="radio" name="paymentMethod" id="step4Efectivo"
+								value="efectivo">
+							<label class="form-check-label" for="step4Efectivo">
+								Pago efectivo
+							</label>
+							<small class="form-text text">Pago contra entrega previo acuerdo con el
+								artesano</small>
+						</div>
+
+						<!-- Términos y condiciones -->
+						<div class="form-check mt-3 mb-3">
+							<input type="checkbox" class="form-check-input" id="step4Terminos">
+							<label class="form-check-label" for="step4Terminos">
+								Estoy de acuerdo con los 
+								<a class="text-underline-accept" href="#" target="_blank"> términos y condiciones</a>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-between p-3">
+					<button type="button" class="btn btn-prev prev">Anterior</button>
+					<button type="button" class="btn btn-next next">Siguiente</button>
+				</div>
+			</div>
+			<div class="step" id="step5">
+				<h3 class="step-title">Confirma el pago realizando subiendo el comprobante</h3>
+				<div class="border p-3">
+					<!-- Subir comprobante -->
+					<div class="form-group">
+						<label for="step5Comprobante" class="btn btn-outline-secondary">
+							<input type="file" id="step5Comprobante" style="display: none;">
+							<i class="fa fa-upload"></i> Elige el archivo
+						</label>
+						<span id="step5NombreArchivo"></span>
+						<a href="#" class="btn btn-warning btn-sm ml-3" id="step5VerComprobante">
+							<i class="fa fa-paperclip"></i> Ver comprobante
+						</a>
+					</div>
+
+					<!-- Botón subir comprobante -->
+					<button type="button" class="btn btn-success btn-block" id="step5_subirComprobante">
+						Subir comprobante de pago para finalizar pedido
+					</button>
+				</div>
+				<div class="row justify-content-between p-3">
+					<button type="button" class="btn btn-prev prev">Anterior</button>
+					<button type="submit" class="btn btn-next next">Finalizar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
+	<footer id="main-footer">
+	</footer>
+
+
+
+</body>
+<!--footer y nav-->
+
+
+
+<!-- Slider Pro Js -->
+<script src="assets/js/sliderpro.min.js"></script>
+
+<!-- Slick Slider Js -->
+<script src="assets/js/slick.js"></script>
+
+<!-- Owl Carousel Js -->
+<script src="assets/js/owl.carousel.min.js"></script>
+
+<!-- Boostrap Js -->
+<script src="assets/js/wow.animation.js"></script>
+
+<!-- Custom Js -->
+<script src="assets/js/custom.js"></script>
+
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
+
+</html>
