@@ -16,7 +16,7 @@ async function infoProd() {
     const producto = await obtenerProducto(productoId);
     const artesano = await obtenerArtesano(producto.artesano_id);
 
-    let categoriaMap = {
+   /* let categoriaMap = {
         101: 'TE',
         108: 'CER',
         113: 'PT'
@@ -51,7 +51,7 @@ async function infoProd() {
     }
 
     $('#recommended-products').html(recommendedProductsHtml);
-
+*/
 
     // Asegurarse de que producto.lst_imagenes sea una cadena JSON válida
     const imagenesProd = JSON.parse(JSON.parse(producto.lst_imagenes.replace(/\/\//g, '/')));
