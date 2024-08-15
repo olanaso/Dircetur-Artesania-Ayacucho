@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Lead Admin Panel" />
+	<meta name="keywords"
+		content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+	<meta name="author" content="Bootstrap Gallery" />
+	<link rel="shortcut icon" href="img/fav.png" />
+	<title>Ventas</title>
+
+	<!-- Common CSS -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="/css/main.css" />
+ 
+
+  <script type="module" crossorigin src="/assets/ventaartesano-6d1f2ffc.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
+  <link rel="modulepreload" crossorigin href="/assets/viewpartials-7a86f681.js">
+  <link rel="modulepreload" crossorigin href="/assets/config-ef5f6dbc.js">
+  <link rel="modulepreload" crossorigin href="/assets/alert-3bd678b2.js">
+  <link rel="modulepreload" crossorigin href="/assets/init-52a8aa54.js">
+</head>
+
+<body>
+
+	<!-- Loading starts -->
+	<div class="loading-wrapper">
+		<div class="loading">
+			<div class="img"></div>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<!-- Loading ends -->
+
+	<!-- BEGIN .app-wrap -->
+	<div class="app-wrap">
+		<!-- BEGIN .app-heading -->
+		<header class="app-header" id="app-header">
+		</header>
+
+		<!-- END: .app-heading -->
+		<!-- BEGIN .app-container -->
+		<div class="app-container">
+			<!-- BEGIN .app-side -->
+			<aside class="app-side" id="app-side"></aside>
+			<!-- END: .app-side -->
+
+			<!-- BEGIN .app-main -->
+			<div class="app-main">
+				<!-- BEGIN .main-heading -->
+				<header class="main-heading">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+								<div class="page-icon">
+									<i class="icon-shopping-cart"></i>
+								</div>
+								<div class="page-title">
+									<h5>Ventas</h5>
+									<nav aria-label="breadcrumb">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item"><a href="inicio.html">Artesano</a></li>
+											<li class="breadcrumb-item active" aria-current="page">Ventas</li>
+										</ol>
+									</nav>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</header>
+
+				<!-- END: .main-heading -->
+				<!-- BEGIN .main-content -->
+				<div class="main-content">
+					<div class="card">
+						<div class="card-body">
+							<div class="card" style="min-height: 80px;">
+								<div class="card-header">Filtrar pedido</div>
+								<div class="card-body">
+									<form id="filtrarPedido">
+										<div class="row gutters mb-4">
+											<div class="col-md-4 col-sm-6 mb-3"> 
+												<input type="number" class="form-control" placeholder="Número de pedido"
+													id="num-pedido">
+											</div>
+											<div class="col-md-4 col-sm-6 mb-3"> 
+												<input type="text" class="form-control" placeholder="Nombre del cliente"
+													id="nombre-cliente">
+											</div>
+											<!--<div class="col-md-4 col-sm-6 mb-3">
+												<label for="nombre-artesano">Nombre del artesano</label>
+												<input type="text" class="form-control" placeholder="Nombre del artesano"
+													id="nombre-artesano">
+											</div> -->
+											<div class="col-md-4 col-sm-6 mb-3 date-placeholder"
+												data-placeholder="Fecha del pedido"> 
+												<input type="date" class="form-control" id="fecha-pedido">
+											</div>
+											<div class="col-md-4 col-sm-6 mb-3"> 
+												<select id="estado" class="form-control" name="estado">
+													<option value="" selected>Todos</option>
+													<option value="pendiente">Pendiente</option>
+													<option value="pagado">Pagado</option>
+													<option value="enviado">Enviado</option>
+													<option value="finalizado">Finalizado</option>
+													<option value="anulado">Anulado</option>
+												</select>
+											</div>
+											<div class="col-md-12 text-right">
+												<button id="filtrar-pedido" type="submit" class="btn btn-primary btn-sm">Filtrar <i
+														class="icon icon-funnel"></i></button>
+														<button id="limpiar-filtro" type="reset"  class="btn btn-info btn-sm">Limpiar</button>
+											</div>
+										</div>
+									</form>
+								</div>
+
+							</div>
+
+							<div class="card">
+								<div class="card-header">Lista de pedidos</div>
+								<div class="card-body overflow-scroll">
+									<table class="table m-0" id="tablaPedidos">
+										<thead class="thead-default">
+											<tr>
+												<th>N° Pedido</th>
+												<th>Cliente</th> 
+												<th>Fecha pedido</th>
+												<th>Fecha modificación</th>
+												<th>Estado</th>
+												<th>Acciones</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row">1</th>
+												<td>undefined</td> 
+												<td>undefined</td>
+												<td>undefined</td>
+												<td>undefined</td>
+												<td>
+													<button type="button" class="btn btn-info btn-sm"><i
+															class="icon icon-eye"></i></button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer">
+							<!-- Paginación -->
+							<nav aria-label="Page navigation example">
+								<div class="row">
+									<div class="col-sm-12 col-md-5">
+										<div class="text-primary" id="paginationInfo" role="status" aria-live="polite">
+											<!-- Aquí se generará dinámicamente la información de paginación -->
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-7">
+										<ul class="pagination justify-content-end" id="paginationControls">
+											<!-- Aquí se generará dinámicamente los controles de paginación -->
+										</ul>
+									</div>
+								</div>
+							</nav>
+						</div>
+						
+						
+						
+					</div>
+
+
+				</div>
+				<!-- END: .main-content -->
+			</div>
+			<!-- END: .app-main -->
+		</div>
+		<!-- END: .app-container -->
+		<!-- BEGIN .main-footer -->
+		<footer class="main-footer fixed-btm">
+			Copyright Lead Admin 2019.
+		</footer>
+		<!-- END: .main-footer -->
+	</div>
+	<!-- END: .app-wrap -->
+
+	<!-- jQuery first, then Tether, then other JS. -->
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="vendor/leadMenu/leadMenu.js"></script>
+	<script src="vendor/onoffcanvas/onoffcanvas.js"></script>
+	<script src="js/moment.js"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="vendor/slimscroll/slimscroll.min.js"></script>
+	<script src="vendor/slimscroll/custom-scrollbar.js"></script>
+
+	<!-- Chartist JS  
+	<script src="vendor/chartist/js/chartist.min.js"></script>
+	<script src="vendor/chartist/js/chartist-tooltip.js"></script>
+	<script src="vendor/chartist/js/custom/custom-line-chart.js"></script>
+	<script src="vendor/chartist/js/custom/custom-line-chart1.js"></script>
+	<script src="vendor/chartist/js/custom/custom-area-chart.js"></script>
+	<script src="vendor/chartist/js/custom/donut-chart2.js"></script>
+	<script src="vendor/chartist/js/custom/custom-line-chart4.js"></script>-->
+
+	<!-- Common JS -->
+	<script src="js/common.js"></script>
+
+	
+</body>
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+
+</html>

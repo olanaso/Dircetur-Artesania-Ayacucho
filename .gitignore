@@ -1,8 +1,8 @@
 # Ignorar todos los directorios node_modules en cualquier lugar del proyecto
 **/node_modules/
-
+*.zip
 #**/public/
-
+.idea/
 # Logs
 logs
 *.log

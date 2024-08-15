@@ -1,21 +1,23 @@
 const sequelize = require('sequelize');
 const model = require('../models/artesano');
+const modelUsuario = require('../models/usuario');
 const { Op } = require('sequelize');
 const PARAMETROS = require("../helpers/parametros");
 const moment = require('moment');
- 
- 
+
+
 
 module.exports = {
     guardar,
     actualizar,
     eliminar,
     obtener,
-    listar, 
+    listar,
     save,
     buscar,
     obtenerDNI,
-    uploadFilartesano
+    uploadFilartesano,
+    saveUsuarioArtesano
 };
 
 function guardar (req, res) {
@@ -84,12 +86,12 @@ function obtenerDNI (req, res) {
             res.status(400).send(error)
         })
 }
- 
 
- 
-function listar(req, res) {
-    let sql = ``; 
-        sql = 
+
+
+function listar (req, res) {
+    let sql = ``;
+    sql =
         `
         SELECT 
         a.id,
@@ -104,8 +106,8 @@ function listar(req, res) {
     INNER JOIN usuario c ON c.id = a.usuario_id
     ORDER BY a.id DESC
     LIMIT 50;
-    `    
-    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+    `
+    model.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -115,19 +117,19 @@ function listar(req, res) {
 }
 
 
-function buscar(req, res) {
+function buscar (req, res) {
 
-    
-    const { 
+
+    const {
         nombre = '',
-        correo = '', 
+        correo = '',
     } = req.query;
-    
-    
 
-    
-    let sql = ``; 
-        sql = 
+
+
+
+    let sql = ``;
+    sql =
         `
         SELECT 
         a.id,
@@ -141,24 +143,24 @@ function buscar(req, res) {
     FROM artesano a 
     INNER JOIN usuario c ON c.id = a.usuario_id 
     `;
-     
+
 
     if (nombre !== '') {
         sql += ` AND CONCAT(a.nombres, ' - ', a.apellidos) LIKE '%${nombre}%'`;
-    } 
+    }
 
     if (correo !== '') {
         sql += ` AND a.correo LIKE '%${correo}%'`;
     }
-  
- 
+
+
     sql += `
         ORDER BY a.id DESC
         LIMIT 50;
     `;
 
-    
-    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+
+    model.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -169,7 +171,76 @@ function buscar(req, res) {
 
 
 /*Guarda los datos generales de un predio*/
-async function save(req, res, next) {
+
+async function saveUsuarioArtesano (req, res, next) {
+    const t = await model.sequelize.transaction();
+    try {
+        const { usuario, artesano } = req.body;
+
+        //Guardar usuario 
+        let modelArtesano = model;
+
+        let objectUsuario = await modelUsuario.findOne({
+            where: {
+                id: usuario.id ? usuario.id : 0
+            }
+        });
+        let usuario_result = objectUsuario;
+
+        if (objectUsuario != null) { //proceso de actualizacion
+            let obj = { ...objectUsuario.dataValues, ...usuario };
+            for (const prop in obj) {
+                objectUsuario[prop] = obj[prop];
+            }
+            objectUsuario.usuaregistra_id = req.userId;
+            await objectUsuario.save({ transaction: t });
+
+        } else {  //registro de nuevo usuario
+            // usuario.id = artesano.id;
+            usuario_result = await modelUsuario.create({ ...usuario }, { transaction: t });
+
+        }
+
+        let artesano_result = null;
+
+        let objectArtesano = await modelArtesano.findOne({
+            where: {
+                usuario_id: usuario_result.id ? usuario_result.id : 0
+            }
+        });
+
+        //Guardado de artesano
+
+        if (objectArtesano != null) { //proceso de actualizacion
+            let obj = { ...objectArtesano.dataValues, ...artesano };
+            for (const prop in obj) {
+                objectArtesano[prop] = obj[prop];
+            }
+            objectArtesano.usuario_id = usuario_result.id;
+            await objectArtesano.save({ transaction: t });
+
+        } else {  //registro de nuevo usuario
+            artesano.usuario_id = usuario_result.id;
+            artesano_result = await modelArtesano.create({ ...artesano }, { transaction: t });
+
+        }
+
+
+
+        //Gudardao de usuario
+
+        await t.commit();
+        // Envía el ID del objeto creado junto con el objeto
+        return res.status(200).send({ id: artesano.artesanoId, artesano_result, usuario_result });
+
+    } catch (e) {
+        await t.rollback();
+        return next(e);
+    }
+}
+
+
+async function save (req, res, next) {
     const t = await model.sequelize.transaction();
     try {
         let object = await model.findOne({
@@ -199,9 +270,9 @@ async function save(req, res, next) {
 
 
 
-async function uploadFilartesano(req, res, next) {
+async function uploadFilartesano (req, res, next) {
     try {
-        let folder = 'files-app' + req.query.folder; 
+        let folder = 'files-app' + req.query.folder;
         let filenamesaved = req.filenamesaved;
         if (!filenamesaved) throw {
             error: "No se logro subir el archivo",

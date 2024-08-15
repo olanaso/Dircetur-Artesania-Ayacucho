@@ -3,12 +3,12 @@ import { FileUploader } from '../utils/upload.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 import { showToast } from '../utils/toast';
+import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
+
+import { loadPartials } from '../utils/viewpartials';
+import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
 
 
-import { loadPartials } from '../utils/viewpartials';   
-import { showLoading, hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
-
- 
 hideLoading();
 // Uso de la función
 (async function () {
@@ -17,12 +17,12 @@ hideLoading();
     { path: 'partials/shared/menu.html', container: 'app-side' },
 
 
-  ]; 
+  ];
   try {
     await loadPartials(partials);
-    import ('../utils/common')
+    import('../utils/common')
 
-   
+
     // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
     console.log('Las vistas parciales se han cargado correctamente!');
     // Por ejemplo, podrías iniciar tu aplicación aquí.
@@ -35,10 +35,10 @@ hideLoading();
 
 function startApp () {
   //checkadminsession(); 
-  setTimeout(function() {
+  setTimeout(function () {
     llenarinformacionIESTPProg();
     //marcarSubMenuSeleccionado();
-}, 500); 
+  }, 500);
 
 }
 /*async function checkadminsession () {
@@ -47,7 +47,7 @@ function startApp () {
     location.href = "sinacceso.html"
   }
 }*/
- 
+
 
 
 
@@ -56,7 +56,7 @@ function startApp () {
 
 
 let imagen_principal = "";
-async function cargarCategoria() {
+async function cargarCategoria () {
   try {
     const categorias = await listarCategorias();
     cargarTabla(categorias);
@@ -64,8 +64,8 @@ async function cargarCategoria() {
     console.error('Error:', error);
   }
 }
- 
-function cargarTabla(categorias) {
+
+function cargarTabla (categorias) {
   const tablaCategoria = document.getElementById('tablaCategoria');
   const tablaCategoriaBody = tablaCategoria.getElementsByTagName('tbody')[0];
 
@@ -100,7 +100,7 @@ function cargarTabla(categorias) {
   });
 }
 
-async function eliminarCategoria(id) {
+async function eliminarCategoria (id) {
 
   alertDialog.createAlertDialog(
     'confirm',
@@ -124,7 +124,7 @@ async function eliminarCategoria(id) {
 
 }
 
-async function editarCategoria(categoria) {
+async function editarCategoria (categoria) {
   const form = document.getElementById('actualizar-categoria-form');
   const modal = document.getElementById('modalCategoriaEditar');
   const abreviaturaInput = document.getElementById('abreviatura-editar');
@@ -140,7 +140,7 @@ async function editarCategoria(categoria) {
   $(modal).modal('show');
 
   const guardarBtn = document.getElementById('guardarCambios');
-  
+
   // Eliminar todos los eventos de click previamente agregados
   const nuevoGuardarBtn = guardarBtn.cloneNode(true);
   guardarBtn.parentNode.replaceChild(nuevoGuardarBtn, guardarBtn);
@@ -176,7 +176,7 @@ async function editarCategoria(categoria) {
   });
 }
 
-async function registrarCategoria() {
+async function registrarCategoria () {
   const btnRegistrar = document.getElementById('registrar-categoria');
   const form = document.getElementById('registrar-categoria-form');
 
@@ -219,7 +219,7 @@ async function registrarCategoria() {
   });
 }
 
-async function filtrarCategoriasAction() {
+async function filtrarCategoriasAction () {
   const btnFiltrar = document.getElementById('filtrar-categoria');
 
   btnFiltrar.addEventListener('click', async (event) => {
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInputId: 'myfile',
     progressBarId: 'progressBar',
     statusElementId: 'status',
-    uploadUrl: 'http://localhost:3001/api/categoria/fileupload',
+    uploadUrl: baseUrl + '/categoria/fileupload',
     folder: '/categorias/',
     callback: handleUploadResponse
   });
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInputId: 'myfile-editar',
     progressBarId: 'progressBar-editar',
     statusElementId: 'status-editar',
-    uploadUrl: 'http://localhost:3001/api/categoria/fileupload',
+    uploadUrl: baseUrl + '/categoria/fileupload',
     folder: '/categorias/',
     callback: handleEditUploadResponse
   });
@@ -262,27 +262,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
-document.getElementById('myfile').addEventListener('change', function() {
+document.getElementById('myfile').addEventListener('change', function () {
   var file = this.files[0];
   var fileType = file.type;
   var allowedTypes = ['image/png', 'image/jpeg'];
 
   if (!allowedTypes.includes(fileType)) {
-      alert('Solo se permiten archivos PNG o JPG');
-      this.value = '';
+    alert('Solo se permiten archivos PNG o JPG');
+    this.value = '';
   }
 });
-document.getElementById('myfile-editar').addEventListener('change', function() {
+document.getElementById('myfile-editar').addEventListener('change', function () {
   var file = this.files[0];
   var fileType = file.type;
   var allowedTypes = ['image/png', 'image/jpeg'];
 
   if (!allowedTypes.includes(fileType)) {
-      alert('Solo se permiten archivos PNG o JPG');
-      this.value = '';
+    alert('Solo se permiten archivos PNG o JPG');
+    this.value = '';
   }
 });
-function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
+function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
 
   const fileInput = document.getElementById(fileInputId);
   const inputName = fileInput.name;
@@ -297,18 +297,18 @@ function initializeFileUploader({ fileInputId, progressBarId, statusElementId, u
   }
 }
 
-function handleUploadResponse(response) {
+function handleUploadResponse (response) {
 
   let file = $('#myfile').prop('files')[0];
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      $('#principalImagePreview').attr('src', 'http://localhost:3001/' + response.ruta).show();
+      $('#principalImagePreview').attr('src', getBaseUrl(baseUrl) + '/' + response.ruta).show();
       $('#principalImageName').val(file.name);
     }
     reader.readAsDataURL(file);
 
-    imagen_principal = 'http://localhost:3001/' + response.ruta;
+    imagen_principal = getBaseUrl(baseUrl) + '/' + response.ruta;
 
     //alert('registro de la imagen correctamente')
   } else {
@@ -317,16 +317,16 @@ function handleUploadResponse(response) {
 
 }
 
-function handleEditUploadResponse(response) {
+function handleEditUploadResponse (response) {
   let file = $('#myfile-editar').prop('files')[0];
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      $('#CategoriaImagePreviewEdit').attr('src', 'http://localhost:3001/' + response.ruta).show();
+      $('#CategoriaImagePreviewEdit').attr('src', getBaseUrl(baseUrl) + '/' + response.ruta).show();
     }
     reader.readAsDataURL(file);
 
-    imagen_principal = 'http://localhost:3001/' + response.ruta;
+    imagen_principal = getBaseUrl(baseUrl) + '/' + response.ruta;
 
     alert('Actualización de la imagen correctamente');
   } else {
@@ -340,22 +340,20 @@ function handleEditUploadResponse(response) {
 $('#modalCategoria').on('shown.bs.modal', function () {
   $('#abreviatura').val('');
   $('#denominacion').val('');
-  $('#descripcion').val(''); 
+  $('#descripcion').val('');
   $('#myfile').val('');
   $('#status').html('');
 
-  
+
   $('#principalImagePreview').attr('src', '').css('display', 'none');
 });
 
-function limpiar()
-{ 
+function limpiar () {
   $('#abreviatura').val('');
   $('#denominacion').val('');
-  $('#descripcion').val(''); 
+  $('#descripcion').val('');
   $('#myfile').val('');
   $('#principalImagePreview').attr('src', '').css('display', 'none');
   $('#status').html('');
 }
 
- 
