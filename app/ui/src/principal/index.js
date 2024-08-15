@@ -137,10 +137,10 @@ async function cargarCategorias() {
         cards += `
             <div class="item car-item">
                 <div class="thumb-content">
-                    <a href="productos_por_categoria.html?categoriaId=${data.abreviatura}"><img src=${data.foto_referente} alt=${data.abreviatura}></a>
+                    <a href="#"><img src=${data.foto_referente} alt=${data.abreviatura}></a>
                 </div>
                 <div class="down-content">
-                    <a href="productos_por_categoria.html?categoriaId=${data.abreviatura}"><h4>${data.denominacion}</h4></a> 
+                    <a href="#"><h4>${data.denominacion}</h4></a> 
                 </div>
             </div>`;
     }
