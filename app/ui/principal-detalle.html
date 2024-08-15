@@ -140,14 +140,17 @@
 						</div>
 
 
-					</div>
-					<div class="col-md-6">
-						<div class="car-details">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="product-info" id="GralProd">
-										<h4 id="nombreProd">Olla de Barro</h4>
-									</div>
+	</div>
+				<div class="col-md-6">
+					<div class="car-details">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="product-info" id="GralProd">
+									<h4 id="nombreProd"></h4>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="stock-info">
 								</div>
 								<div class="col-md-6">
 									<div class="stock-info">
@@ -230,53 +233,39 @@
 			</div>
 		</div>
 	</div>
-	</div>
-	<section class="products-recommenders">
-		<div class="container">
+</div>
+</div>
+
+
+<div id="recommended-products"></div>
+
+<section>
+
+	<div class="more-details">
+		<div class="custom-container col-md-12" style="padding-left: 0; padding-right: 0; border-left: none; border-right: none;">
 			<div class="row">
-				<div class="col-md-12 text-center">
-					<h7 class="section-title bold">Productos Recomendados</h7>
-					<div id="lists-recommenders">
-						<!-- Product items will be dynamically inserted here by JavaScript -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<section>
-		<div class="more-details">
-			<div class="custom-container col-md-12"
-				style="padding-left: 0; padding-right: 0; border-left: none; border-right: none;">
-				<div class="row">
-					<div class="col-md-12">
-						<ul class="nav nav-tabs" id="productTabs" role="tablist">
-							<li class="nav-item">
-								<a class="nav-link active" id="product-tab" data-toggle="tab" href="#product" role="tab"
-									aria-controls="product" aria-selected="true">Sobre el producto</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" id="specifications-tab" data-toggle="tab" href="#specifications"
-									role="tab" aria-controls="specifications" aria-selected="false">Especificaciones</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" id="vendor-tab" data-toggle="tab" href="#vendor" role="tab"
-									aria-controls="vendor" aria-selected="false">Vendedor</a>
-							</li>
-						</ul>
-						<div class="tab-content" id="productTabsContent">
-							<div class="tab-pane fade show active" id="product" role="tabpanel"
-								aria-labelledby="product-tab">
-								<div class="row">
-									<div class="col-md-6 mb-3">
-										<div class="item w-100" data-wow-duration="0.5s">
-											<div class="sep-section-heading">
-												<h2>Resumen <em>Producto</em></h2>
-											</div>
-											<div class="section-content">
-												<p id="resumenProd"></p>
-											</div>
+				<div class="col-md-12">
+					<ul class="nav nav-tabs" id="productTabs" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="product-tab" data-toggle="tab" href="#product" role="tab" aria-controls="product" aria-selected="true">Sobre el producto</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="specifications-tab" data-toggle="tab" href="#specifications" role="tab" aria-controls="specifications" aria-selected="false">Especificaciones</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="vendor-tab" data-toggle="tab" href="#vendor" role="tab" aria-controls="vendor" aria-selected="false">Vendedor</a>
+						</li>
+					</ul>
+					<div class="tab-content" id="productTabsContent">
+						<div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<div class="item w-100" data-wow-duration="0.5s">
+										<div class="sep-section-heading">
+											<h2>Resumen <em>Producto</em></h2>
+										</div>
+										<div class="section-content">
+											<p id="resumenProd"></p>
 										</div>
 									</div>
 									<div class="col-md-6 mb-3">

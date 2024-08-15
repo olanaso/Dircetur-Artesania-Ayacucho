@@ -128,29 +128,23 @@ async function cargarSliders(){
 
   }
 
-  async function cargarCategorias(){
-    const categorias =  await listarCategorias()
-    //console.log(categorias)
-    $('#owl-top-features').empty()
-    let cards = ''
+// app/ui/src/principal/index.js
+async function cargarCategorias() {
+    const categorias = await listarCategorias();
+    $('#owl-top-features').empty();
+    let cards = '';
     for (let data of categorias) {
-        //console.log(data);
-
-      //let cleanUrl = data.imagen.replace(/"/g, '');
         cards += `
             <div class="item car-item">
                 <div class="thumb-content">
-                    <a href="principal-detalle.html"><img src=${data.foto_referente} alt=${data.abreviatura}></a>
+                    <a href="productos_por_categoria.html?categoriaId=${data.abreviatura}"><img src=${data.foto_referente} alt=${data.abreviatura}></a>
                 </div>
                 <div class="down-content">
-                    <a href="principal-detalle.html"><h4>${data.denominacion}</h4></a> 
+                    <a href="productos_por_categoria.html?categoriaId=${data.abreviatura}"><h4>${data.denominacion}</h4></a> 
                 </div>
-            </div>`
-
-            //console.log(cards);
-
+            </div>`;
     }
-    $('#owl-top-features').append(cards)
+    $('#owl-top-features').append(cards);
 
     // Reinitialize Owl Carousel
     $("#owl-top-features").owlCarousel({
@@ -162,8 +156,7 @@ async function cargarSliders(){
         autoplayTimeout: 5000,
         autoplayHoverPause: true
     });
-  }
-
+}
 
 // Llamar a la función de inicialización del mapa cuando el documento esté listo
 //document.addEventListener('DOMContentLoaded', initMap);
