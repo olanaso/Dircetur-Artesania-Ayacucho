@@ -103,10 +103,17 @@ async function infoArtesanoById() {
   initMap(listTaller[0].latitud, listTaller[0].longitud);
 
   // Actualizar el iframe
+  /*
   if (lst_videoenlace.length > 0) {
     $("#videoArtesano").attr("src", lst_videoenlace[0].src);
   }
-
+*/
+  if (lst_videoenlace.length > 0) {
+    const videoUrl = lst_videoenlace[0].src;
+    console.log(  "> url",videoUrl )
+    const embedUrl = videoUrl.replace("watch?v=", "embed/");
+    $("#videoArtesano").attr("src", embedUrl).show();
+  }
   if (listReconocimientos.length > 0) {
     for (let reconocimiento of listReconocimientos) {
       $("#listReconocimientos").append(`
