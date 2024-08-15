@@ -34,9 +34,10 @@ section {
 .primary-button a {
   display: inline-block;
   background: #2959ad;
+  margin-top:20px;
   padding: 10px 15px;
   text-align: center;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   font-size: 12px;
   font-weight: 600;
   border-radius: 5px;
@@ -1450,6 +1451,7 @@ section.top-slider-features .slider-top-features .owl-dots {
 .recent-cars .car-item .thumb-content .car-banner a {
     background-color: #f4c23d;
     border-radius: 3px;
+    margin-top:10px;
     color: #1e1e1e;
     font-size: 13px;
     font-weight: 700;
@@ -1458,7 +1460,8 @@ section.top-slider-features .slider-top-features .owl-dots {
     height: 36px;
     text-align: center;
     line-height: 36px;
-    display: inline-block
+    display: inline-block;
+  outline: none;
 }
  .on-grids .car-item,
  .recent-cars .car-item {
@@ -1606,6 +1609,7 @@ section.top-slider-features .slider-top-features .owl-dots {
     bottom: -18px;
     margin-right: 26px
 }
+
 
 .on-listing .car-item .thumb-content .car-banner a {
     background-color: #f4c23d;

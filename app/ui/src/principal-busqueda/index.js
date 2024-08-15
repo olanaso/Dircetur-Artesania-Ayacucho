@@ -30,7 +30,7 @@ async function cargarProductos(productos) {
                     <div class="down-content">
                         <a href="principal-detalle.html?id=${data.id}"><h4>${data.nombres_es}</h4></a>
                         <span>S/. ${data.precio} </span>
-                         <p>${data.resumen_es}</p>
+                     
                         <div class="similar-info">
                             <div class="primary-button">
                                 <a href="principal-detalle.html?id=${data.id}">Ver más</a>
