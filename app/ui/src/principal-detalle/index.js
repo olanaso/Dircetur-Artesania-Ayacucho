@@ -16,43 +16,6 @@ async function infoProd () {
     const producto = await obtenerProducto(productoId);
     const artesano = await obtenerArtesano(producto.artesano_id);
 
-
-    // let categoriaMap = {
-    //     101: 'TE',
-    //     108: 'CER',
-    //     113: 'PT'
-    // };
-
-    // let categoriaId = categoriaMap[producto.categoria_id] || producto.categoria_id.toString();
-    // let productosRecomendadosPorCategoria = await listarProductosPorCategoria(categoriaId);
-
-    // console.log("MENSAJEEEEEEEEEEEEEEEEEEEEEE", productosRecomendadosPorCategoria);
-
-    // // Extract the data array from the fetched productosRecomendadosPorCategoria object
-    // let productosRecomendados = productosRecomendadosPorCategoria.data;
-    // console.log('productosRecomendados: ', productosRecomendados);
-    // console.log("MENSAJE", typeof productosRecomendados);
-    // console.log("MENSAJE2", productosRecomendados.length);
-    // const longitud = Object.keys(productosRecomendados).length;
-    // console.log("MENSAJE3", longitud);
-
-    // // Generate HTML for recommended products
-    // let recommendedProductsHtml = '';
-
-    // for (let i = 0; i < productosRecomendados.length; i++) {
-    //     let productos = productosRecomendados[i];
-
-    //     recommendedProductsHtml += `
-    //         <div class="recommended-product">
-    //             <img src="${productos.imagen_principal}" alt="${productos.nombres_es}">
-    //             <p>${productos.nombres_es}</p>
-    //             <p>Precio: S/. ${productos.precio}</p>
-    //         </div>
-    //     `;
-    // }
-
-    // $('#recommended-products').html(recommendedProductsHtml);
-
     /* let categoriaMap = {
          101: 'TE',
          108: 'CER',
@@ -86,7 +49,6 @@ async function infoProd () {
              </div>
          `;
      }
-
 
      $('#recommended-products').html(recommendedProductsHtml);
  */
