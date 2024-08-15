@@ -9,7 +9,7 @@ export async function listarProductos(filtro) {
     } catch (error) {
         console.error('Error:', error);
     }
-  }
+}
 
 export async function listarCategorias(page, limit) {
     try {

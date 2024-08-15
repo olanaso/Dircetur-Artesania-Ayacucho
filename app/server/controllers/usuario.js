@@ -14,7 +14,10 @@ const rol = require('../models/rol');
 const menu = require('../models/menu');
 const usuario = require('../models/usuario');
 const artesano = require('../models/artesano');
-
+const cliente = require('../models/cliente')
+const{tokenSign} = require('../utils/handleJwt')
+const { handleHttpError } = require('../utils/handleError');
+const {matchedData} = require('express-validator')
 module.exports = {
     guardar,
     actualizar,
@@ -44,18 +47,18 @@ function guardar (req, res) {
         })
 
 }
-function actualizar (req, res) {
-    model.findOne({
-        where: { dni: req.params.dni }
-
-    })
-        .then(object => {
-            object.update(req.body)
-                .then(object => res.status(200).json(object))
-                .catch(error => res.status(400).send(error))
-        }
-        )
-        .catch(error => res.status(400).send(error));
+async function actualizar (req, res) {
+    try{
+        const id = req.params.id
+        const body = req.body
+        // console.log("El request es:",req.body)
+        // console.log(req.params.id)
+        const data = await usuario.update(body, {where: {id}})
+        console.log("Data es", data)
+        return res.status(200).send({data})
+    }catch(e){
+        handleHttpError(res, "Error updating item", 500)
+    }
 }
 
 function eliminar (req, res) {
@@ -200,7 +203,22 @@ async function save(req, res, next) {
         }
         await t.commit();
         // Envía el ID del objeto creado junto con el objeto
-        return res.status(200).send({ id: object.id, object });
+        const data = {
+            message: "Cuenta creada con exito",
+            token: await tokenSign(object),
+            rolid: object.rolid,
+            id: object.id,
+            //funciona para crear cliente, pero al editar uno desde admin sale error
+            // idCliente: await cliente.findIdByCorreo(object.correo)
+        }
+        console.log(data)
+
+
+        //hice 2 intentos de cookies
+        // const token = tokenSign(object)
+        // req.session.token = token
+        // res.cookie('token', data.token, { maxAge: 24 * 60 * 60 * 1000 })
+        return res.status(200).send({data});
     } catch (e) {
         await t.rollback();
         return next(e);
@@ -284,11 +302,15 @@ async function loginpersonal (req, res) {
 
  
         }
-
+        console.log("El usuario", usuarioDB.correo)
+        //Encuentro el id del cliente por el correo, este id es usado por el front, lo almacena en local storage
+        //que despues es usado para x cosaas idk xd
+        const idClient = await cliente.findIdByCorreo(usuarioDB.correo)
         res.status(200).json({
             islogueado: true,
             usuario: usuarioDB,
-            token: "Bearer " + token
+            token: "Bearer " + token,
+            idCliente: idClient
         });
 
     } catch (err) {

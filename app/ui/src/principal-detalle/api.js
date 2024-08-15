@@ -18,3 +18,25 @@ export async function obtenerArtesano(idartesano) {
         console.error('Error:', error);
     }
 }
+
+export async function listarProductos(filtro) {
+    try {
+        const params = new URLSearchParams(filtro);
+        const response = await fetch(`${baseUrl}/prductosFiltrados?${params}`, { method: 'GET' });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+export async function listarProductosPorCategoria(categoriaID) {
+    try {
+        const response = await fetch(`${baseUrl}/v1/productos/categoria/${categoriaID}`, { method: 'GET' });
+        const result = await response.json();
+        console.log("productos: ", result);
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}

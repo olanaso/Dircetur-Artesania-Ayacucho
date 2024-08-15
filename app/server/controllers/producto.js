@@ -1,9 +1,11 @@
 const sequelize = require('sequelize');
-const model = require('../models/producto');
+const product = require('../models/producto');
+const categoria = require('../models/categoria')
 const { Op } = require('sequelize');
 const PARAMETROS = require("../helpers/parametros");
 const moment = require('moment');
 const { DECIMAL } = require('sequelize');
+const {handleHttpError} = require("../utils/handleError");
 
 module.exports = {
     guardar,
@@ -14,12 +16,47 @@ module.exports = {
     save,
     buscar,
     uploadFilproducto,
-    reportegeneral, productoFiltrados
+    reportegeneral, productoFiltrados,
+    getProductsByCategoryAbbreviation,
+    getProductsByArtesanoId
 };
+
+
+async function getProductsByArtesanoId(req,res){
+    try{
+        const {id} = req.params
+        console.log(id)
+        const data = await product.findAllProductsByArtesanoId(id)
+        res.status(200).send({data})
+    }catch(e){
+        console.error(e)
+        handleHttpError(res,"Ocurrio un error obteniendo el recuros", 500)
+    }
+}
+
+async function getProductsByCategoryAbbreviation(req, res){
+    try{
+
+        const {abreviatura} = req.params
+        console.log(abreviatura)
+        const idCategoria = await  categoria.findCategoryIdByAbreviatura(abreviatura)
+        console.log(idCategoria)
+        const data = await product.findAllProductsByCategoryId(idCategoria)
+        console.log(data)
+        res.status(200).send({data})
+
+
+
+    } catch(e){
+        console.log(e)
+        handleHttpError(res,"Ocurrio un error obteniendo el recuros", 500)
+    }
+
+}
 
 function guardar (req, res) {
 
-    model.create(req.body)
+    product.create(req.body)
         .then(object => {
             res.status(200).json(object);
         })
@@ -31,7 +68,7 @@ function guardar (req, res) {
 
 function actualizar (req, res) {
 
-    model.findOne({
+    product.findOne({
         where: { id: req.params.id }
 
     })
@@ -46,7 +83,7 @@ function actualizar (req, res) {
 
 function eliminar (req, res) {
 
-    model
+    product
         .findOne({
             where: { id: req.body.id }
         })
@@ -61,7 +98,7 @@ function eliminar (req, res) {
 
 function obtener (req, res) {
 
-    model.findOne({
+    product.findOne({
         where: { id: req.params.id }
     })
         .then(resultset => {
@@ -96,7 +133,7 @@ function reportegeneral(req, res) {
             (SELECT COUNT(*) FROM artesano) AS artesano,
             (SELECT COUNT(*) FROM categoria) AS categoria;
     `    
-    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+    product.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -122,7 +159,7 @@ function listar(req, res) {
     order by a.id desc
     limit 50
     `    
-    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+    product.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -191,7 +228,7 @@ function buscar(req, res) {
     `;
 
     
-    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+    product.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -203,9 +240,9 @@ function buscar(req, res) {
 
 /*Guarda los datos generales de un predio*/
 async function save(req, res, next) {
-    const t = await model.sequelize.transaction();
+    const t = await product.sequelize.transaction();
     try {
-        let object = await model.findOne({
+        let object = await product.findOne({
             where: {
                 id: req.body.id ? req.body.id : 0
             }
@@ -219,7 +256,7 @@ async function save(req, res, next) {
             object.usuaregistra_id = req.userId;
             await object.save({ transaction: t });
         } else {
-            object = await model.create({ ...req.body }, { transaction: t });
+            object = await product.create({ ...req.body }, { transaction: t });
         }
         await t.commit();
         // Envía el ID del objeto creado junto con el objeto
@@ -277,7 +314,7 @@ async function productoFiltrados(req, res) {
                 [Op.lte]: precio_max
             };
         }
-        const productos = await model.findAll({ where: filters });
+        const productos = await product.findAll({ where: filters });
 
         if (productos) {
             res.status(200).json(productos);

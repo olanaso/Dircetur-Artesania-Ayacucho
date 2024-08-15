@@ -25,6 +25,7 @@
     <script src="js/bootstrap.min.js"></script>
 
 </head>
+
 <body>
 <div class="preloader" style="display: none;">
     <div class="preloader-bounce">
@@ -50,56 +51,57 @@
 </header>
 
 <section>
-    <div class="d-flex justify-content-center align-items-center min-vh-100">
-        <div class="col-md-6">
-            <form class="p-4 border rounded border-dark" style="background: #ed1e78">
-                <!-- Email input -->
-                <div class=" d-flex align-items-center justify-content-center text-white text-bold ">
-                    <h2>INICIAR SESIÓN</h2>
-                </div>
-                <label class="form-label" for="form2Example1">Correo</label>
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="email" id="form2Example1" class="form-control" />
-                </div>
-
-                <!-- Password input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label" for="form2Example2">Contraseña</label>
-                    <input type="password" id="form2Example2" class="form-control" />
-                </div>
-
-                <!-- 2 column grid layout for inline styling -->
-                <div class="row mb-4">
-                    <div class="col d-flex justify-content-center">
-                        <!-- Checkbox -->
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                            <label class="form-check-label" for="form2Example31"> Recordar </label>
+    <div class="features-search-section mt-5">
+        <div class="container">
+            <div class="row justify-content-center align-center">
+                <div class="col-md-6">
+                    <div class="search-content wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+                        <div class="search-heading">
+                            <div class="icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="text-content">
+                                <h2>INICIAR SESIÓN</h2>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col text-end">
-                        <!-- Simple link -->
-                        <a href="#!">Olvidaste tu contraseña?</a>
+                        <form class="search-form form-login-client" id="loginForm">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-sesion">
+                                        <label for="txtusuario">Correo:</label>
+                                        <input class="input-solo" type="text" name="correo" id="txtusuario" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-sesion">
+                                        <label for="txtclave">Contraseña:</label>
+                                        <input class="input-solo" type="password" name="contraseña" id="txtclave" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="recordar" checked>
+                                        <label class="form-check-label" for="recordar"> Recordar </label>
+                                    </div>
+                                    <div class="text-center">
+                                        <a href="#!">Olvidaste tu contraseña?</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn-login-client btn w-100" type="submit" id="btnloginc">Iniciar sesión</button>
+                                </div>
+                                <div class="col-md-12 text-center mt-3">
+                                    <p>No tienes cuenta? <a href="registrar-cliente.html">Registrate</a></p>
+                                    <p>o inicia sesión con:</p>
+                                    <button type="button" class="btn btn-link btn-floating mx-1">
+                                        <i class="fab fa-google"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-                <!-- Submit button -->
-                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Iniciar sesion</button>
-
-
-                <!-- Register buttons -->
-                <div class="text-center">
-                    <p>No tienes cuenta? <a href="#!">Registrate</a></p>
-                    <p>o inicia sesion con:</p>
-
-                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-google "></i>
-                        </button>
-
-
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </section>
@@ -114,6 +116,9 @@
 
 <!--footer y nav-->
 <script type="module" src="src/principal/index.js"></script>
+
 <script type="module" src="src/login-cliente/index.js"></script>
+<script type="module" src="src/Shared/navbar.js"></script>
+
 
 </html>

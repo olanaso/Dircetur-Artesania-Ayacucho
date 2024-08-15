@@ -2,58 +2,126 @@ import { validarHTML5 } from '../utils/validateForm';
 import {saveDataToLocalStorage} from '../utils/config'
 import {hideLoading} from '../utils/init'
 import {obtenerParametrosURL} from '../utils/path'
-import {obtenerProducto, obtenerArtesano} from './api'
+import {obtenerProducto, obtenerArtesano, listarProductos, listarProductosPorCategoria} from './api'
 
 let cantidadMaxima
 //  href = /clientes-detalle.html?id=${data.id}
-document.addEventListener('DOMContentLoaded', () => {
-    //cargarSliders()
-    infoProd();
+document.addEventListener('DOMContentLoaded', async () => {
+    await infoProd();
+    setupQuantityControls();
+
 });
 
-function getQueryParameter(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
-}
-
-
-
 async function infoProd() {
-    const producto = await obtenerProducto(getQueryParameter('id'));
-    const artesano = await obtenerArtesano(producto.artesano_id)
-    cantidadMaxima = producto.cantidad
-    /*Carga de imágene sy videos*/
-     const imagenesProd = JSON.parse(JSON.parse(producto.lst_imagenes))
-     const listVideos = JSON.parse(JSON.parse(producto.lst_videos))
-     const listVideosEnlace = JSON.parse(JSON.parse(producto.lst_videoenlace))
-     let S1 = `<div class="sp-slide" data-index="0">
-                    <div class="sp-image-container">
-                        <img class="sp-image" src="${producto.imagen_principal}" alt="">
-                    </div>
-                </div>`
-     let S2 = `<div class="sp-thumbnail-container">
-                    <img class="sp-thumbnail" src="${producto.imagen_principal}" alt="">
-                </div>`
-    
-    
-    let index = 1
-    for(let imagen of imagenesProd){
-        S1 += `<div class="sp-slide" data-index="${index}">
-                    <div class="sp-image-container">
-                        <img class="sp-image" src="${imagen.src}" alt="">
-                    </div>
-                </div>`
-        S2 += `<div class="sp-thumbnail-container">
-                    <img class="sp-thumbnail" src="${imagen.src}" alt="">
-                </div>`
-        index++
+    const productoId = getQueryParameter('id');
+    const producto = await obtenerProducto(productoId);
+    const artesano = await obtenerArtesano(producto.artesano_id);
+
+
+    let categoriaMap = {
+        101: 'TE',
+        108: 'CER',
+        113: 'PT'
+    };
+
+
+    let categoriaId = categoriaMap[producto.categoria_id] || producto.categoria_id.toString();
+    let productosRecomendadosPorCategoria = await listarProductosPorCategoria(categoriaId);
+    console.log('productosRecomendadosPorCategoria: ', JSON.stringify(productosRecomendadosPorCategoria, null, 2));
+    const productosContainer = document.getElementById('lists-recommenders');
+    if (!productosContainer) {
+        console.error('Element with id "lists-recommenders" not found.');
+        return;
     }
-    /*
-    $('#slider1').empty()
-    $('#slider1').append(S1)
-    $('#slider2').empty()
-    $('#slider2').append(S2)
-    */
+    productosContainer.innerHTML = ''; // Clear any existing content
+
+    for (let i = 0; i < productosRecomendadosPorCategoria.length; i++) {
+        const productoRecomendado = productosRecomendadosPorCategoria[i];
+        const productoElement = document.createElement('div');
+        productoElement.className = 'producto-item';
+        productoElement.innerHTML = `
+                <div>
+                    <h4>${producto.nombres_es}</h4>
+                    <p>Precio: S/. ${producto.precio}</p>
+                </div>
+            `;
+        productosContainer.appendChild(productoElement);
+    }
+
+
+
+    // Asegurarse de que producto.lst_imagenes sea una cadena JSON válida
+    const imagenesProd = JSON.parse(JSON.parse(producto.lst_imagenes.replace(/\/\//g, '/')));
+    console.log('imagenesProd: ', imagenesProd);
+
+    // Inicializar S1 y S2 con la imagen principal
+    let S1 = `<div class="sp-slide" data-index="0">
+                <div class="sp-image-container">
+                    <img class="sp-image" src="${producto.imagen_principal}" alt="Imagen Principal">
+                </div>
+             </div>`;
+    let S2 = `<div class="sp-thumbnail-container">
+                <img class="sp-thumbnail" src="${producto.imagen_principal}" alt="Imagen Principal">
+              </div>`;
+
+    // Recorrer cada imagen en imagenesProd
+    let index = 1;
+    for (let imagen of imagenesProd) {
+        // Corregir la URL si tiene una sola barra después del protocolo
+        if (imagen.src.startsWith('http:/') && !imagen.src.startsWith('http://')) {
+            imagen.src = imagen.src.replace('http:/', 'http://');
+        }
+        S1 += `<div class="sp-slide" data-index="${index}">
+                <div class="sp-image-container">
+                    <img class="sp-image" src="${imagen.src}" alt="Imagen ${producto.nombres_es}">
+                </div>
+               </div>`;
+        S2 += `<div class="sp-thumbnail-container">
+                <img class="sp-thumbnail" src="${imagen.src}" alt="Imagen ${producto.nombres_es}">
+               </div>`;
+        index++;
+    }
+
+    // Append S1 and S2 to the respective HTML elements
+    $('#slider1').empty().append(S1);
+    $('#slider2').empty().append(S2);
+
+    $('#slider1').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        fade: true,
+        asNavFor: '#slider2',
+        prevArrow: $('.sp-arrow.sp-previous-arrow'),
+        nextArrow: $('.sp-arrow.sp-next-arrow'),
+        initialSlide: 0
+    });
+    $('#slider2').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: '#slider1',
+        dots: true,
+        centerMode: true,
+        focusOnSelect: true,
+        prevArrow: $('.sp-arrow.sp-previous-arrow'),
+        nextArrow: $('.sp-arrow.sp-next-arrow'),
+        initialSlide: 0
+    });
+
+    $('#slider1').slick('slickGoTo', 0, true);
+    $('#slider2').slick('slickGoTo', 0, true);
+
+    // Bug al cargar vista no salia la primera imagen (posible solucion)
+    $('.sp-arrow.sp-next-arrow').click();
+    setTimeout(() => {
+        $('.sp-arrow.sp-previous-arrow').click();
+    }, 500);
+
+    function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
 
     /*carga de datos sobre producto y artesano*/
     const listColores = JSON.parse(JSON.parse(producto.lst_colores))
@@ -90,7 +158,7 @@ async function infoProd() {
         for(let costos of listOtrosCostos){
             $('#otrosCostos').append(
                 `<option value="${costos.id}">${costos.nombre} (S/ ${costos.precio})</option>`
-            )
+            );
         }
     }
     //cantidad
@@ -210,51 +278,34 @@ async function infoProd() {
             <p>Coordinar con el artesano el medio de pago</p>
         `)
     }
-    
+
 }
 
 
 //funcionalidad para elegir cantidad:
-/*
-$('#increment-btn').on('click', function() {
-    console.log('aaa', cantidadMaxima);
-    let currentValue = parseInt($('#counter-value').val());
-    if (currentValue < cantidadMaxima) {
-        currentValue++;
-        
-        $('#counter-value').val(currentValue.toString());
-        $('#decrement-btn').prop('disabled', false); // Habilitar botón de decremento
-    }
-    if (currentValue === cantidadMaxima) {
-        $('#increment-btn').prop('disabled', true); // Deshabilitar botón de incremento
-    }
-});
-*/
-var cantidadProd = 0
-$('#increment-btn').on('click', function() {
-    if (cantidadProd < cantidadMaxima) {
-        cantidadProd++;
-    } else if (cantidadProd = cantidadProd++){
-        cantidadProd = 0
-    }
-    $('#counter-value').val(cantidadProd);
-});
+function setupQuantityControls() {
+    const cantidadMaxima = 10; // Set this to the actual maximum quantity
+    let cantidadProd = 0;
 
-// Decrementar el valor del contador
-/*
-$('#decrement-btn').on('click', function() {
-    let currentValue = parseInt($('#counter-value').val());
-    if (currentValue > 1) {
-        currentValue--;
-        $('#counter-value').val(currentValue);
-        $('#increment-btn').prop('disabled', false); // Habilitar botón de incremento
-    }
-    if (currentValue === 0) {
-        $('#decrement-btn').prop('disabled', true); // Deshabilitar botón de decremento
-    }
-});
-*/
-$('#decrement-btn').on('click', function() {
-    if (cantidadProd > 0) { --cantidadProd }
-    $('#counter-value').val(cantidadProd);
-});
+    document.getElementById('increment-btn').addEventListener('click', function() {
+        if (cantidadProd < cantidadMaxima) {
+            cantidadProd++;
+            document.getElementById('counter-value').value = cantidadProd;
+            document.getElementById('decrement-btn').disabled = false; // Enable decrement button
+        }
+        if (cantidadProd === cantidadMaxima) {
+            this.disabled = true;
+        }
+    });
+
+    document.getElementById('decrement-btn').addEventListener('click', function() {
+        if (cantidadProd > 0) {
+            cantidadProd--;
+            document.getElementById('counter-value').value = cantidadProd;
+            document.getElementById('increment-btn').disabled = false; // Enable increment button
+        }
+        if (cantidadProd === 0) {
+            this.disabled = true;
+        }
+    });
+}

@@ -96,11 +96,12 @@ function listar(req, res) {
             p.ancho,
             p.materiales_es,
             p.cantidad,
-            p.tipo_estado
+            p.tipo_estado,
+            p.precio
     from producto as  p
     inner join categoria c on p.categoria_id=c.id 
     where p.artesano_id= '${req.params.id}'
-    `    
+    `
     model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
         .then(resultset => {
             res.status(200).json(resultset)

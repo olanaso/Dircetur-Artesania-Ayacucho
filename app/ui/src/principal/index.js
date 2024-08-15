@@ -10,7 +10,11 @@ import './owl-carousel.css'
 import './sliderPro.css'
 import './animated.css'
 import './font-awesome.min.css'
+import '../../src/Shared/navbar.js'
+import {modificarNavbarSegunRol, cerrarSesion} from '../Shared/navbar.js'
+
 import {loadPartials} from "../utils/viewpartials.js";
+import {showToast} from "../utils/toast.js";
 
 hideLoading();
 // Uso de la función
@@ -36,9 +40,17 @@ hideLoading();
 })();
 
 function startApp() {
-    setTimeout(function () {
-        //funcion para llenar en otros caoss
-    }, 500);
+     // Colocar el código que deseas ejecutar después de cargar las vistas parciales.
+        modificarNavbarSegunRol();
+        const cerrarSesionLink = document.getElementById('cerrar-sesion-link');
+        if (cerrarSesionLink) {
+            cerrarSesionLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                cerrarSesion();
+            });
+        }
+
+
 }
 
 
@@ -59,7 +71,7 @@ $(document).ready(async function(){
            nextArrow: $('.NextArrow')
        });
    }
-   
+
    //initMap();
 });
 
@@ -123,7 +135,7 @@ async function cargarSliders(){
     let cards = ''
     for (let data of categorias) {
         //console.log(data);
-        
+
       //let cleanUrl = data.imagen.replace(/"/g, '');
         cards += `
             <div class="item car-item">
@@ -134,9 +146,9 @@ async function cargarSliders(){
                     <a href="principal-detalle.html"><h4>${data.denominacion}</h4></a> 
                 </div>
             </div>`
-        
+
             //console.log(cards);
-            
+
     }
     $('#owl-top-features').append(cards)
 
@@ -152,10 +164,11 @@ async function cargarSliders(){
     });
   }
 
-  
+
 // Llamar a la función de inicialización del mapa cuando el documento esté listo
 //document.addEventListener('DOMContentLoaded', initMap);
 document.addEventListener('DOMContentLoaded', () => {
     //cargarSliders()
     //cargarCategorias()
+
   });

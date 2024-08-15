@@ -3,7 +3,7 @@ const db = require('../config/db');
 const sequelize = db.sequelize;
 const Sequelize = db.Sequelize;
 
-module.exports = sequelize.define('categoria', {
+const categoria = sequelize.define('categoria', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -56,3 +56,11 @@ module.exports = sequelize.define('categoria', {
     tableName: 'categoria',
     timestamps: true
 });
+
+categoria.findCategoryIdByAbreviatura = async function(abreviatura){
+    const categoriaEncontrada =  await categoria.findOne({where: {abreviatura}})
+    return categoriaEncontrada.id
+}
+
+
+module.exports = categoria

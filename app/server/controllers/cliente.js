@@ -1,6 +1,8 @@
 const sequelize = require('sequelize');
 const model = require('../models/cliente');
 const { Op } = require('sequelize');
+const {handleHttpError} = require('../utils/handleError')
+const usuario = require('../models/usuario')
 
 module.exports = {
     guardar,
@@ -25,17 +27,31 @@ function guardar(req, res) {
 
 }
 
-function actualizar(req, res) {
+async function actualizar(req, res) {
+    try{
+        const id = req.params.id
+        const {idUsuario, ...restOfbody} = req.body // Con esto estoy sacando el idUsuario del body
+        console.log("El IDUSUARIO", idUsuario)
+        const usuarioEncontrado = await usuario.findUsuarioById(idUsuario) //Con esto encuentro el usuario con el id(En nuestro contexto ese id esta en el local storage
+        const nombreDelUsuarioEncontrado = usuarioEncontrado.nombre_completo // nombre que voy a dividir para el cliente
+        //divison del nombre completo del usuario en nombres y apellidos
 
-    model.findOne({
-        where: {id: req.params.id}
-    })
-        .then(object => {
-            object.update(req.body)
-                .then(object => res.status(200).json(object))
-                .catch(error => res.status(400).send(error))
-        })
-        .catch(error => res.status(400).send(error));
+        const partes = nombreDelUsuarioEncontrado.split(' ')
+        const nombres = partes.slice(0,2).join(' ') // Tomo los dos primeros elementos del array y los uno con un espacio
+        const apellidos = partes.slice(2).join(' ') // Tomo los elementos restantes y los uno con un espacio
+
+
+        console.log(restOfbody.pais)
+        //Actualizo Cliente
+        console.log(id)
+        await model.update({nombres, apellidos, ...restOfbody},{where:{id}})// Actualizo el cliente con los datos que me llegan en el body y los nombres y apellidos obtenidos por el split
+        return res.status(200).send({message:"Cliente actualizado correctamente"})
+
+
+    }catch(e){
+        handleHttpError(res,"Error actualizando",500)
+        console.error(e)
+    }
 }
 
 function eliminar(req, res) {
