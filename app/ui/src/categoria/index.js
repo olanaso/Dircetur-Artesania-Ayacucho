@@ -303,7 +303,7 @@ function handleUploadResponse (response) {
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      $('#principalImagePreview').attr('src', getBaseUrl(baseUrl) + response.ruta).show();
+      $('#principalImagePreview').attr('src', getBaseUrl(baseUrl) + '/' + response.ruta).show();
       $('#principalImageName').val(file.name);
     }
     reader.readAsDataURL(file);
