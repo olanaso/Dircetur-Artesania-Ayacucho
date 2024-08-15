@@ -20,7 +20,6 @@ export async function login(usuario,clave){
       }
 }
 
-
 export async function listarSliders(page, limit) {
   try {
       const response = await fetch(`${baseUrl}/sliders?page=${page}&limit=${limit}`, { method: 'GET' });

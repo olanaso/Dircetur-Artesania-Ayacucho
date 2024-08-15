@@ -1,0 +1,1294 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Lead Admin Panel" />
+	<meta name="keywords"
+		content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+	<meta name="author" content="Bootstrap Gallery" />
+	<link rel="shortcut icon" href="/img/fav.png" />
+	<title>Administración </title>
+
+	<!-- Common CSS -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="/css/main.css" />
+
+  <script type="module" crossorigin src="/assets/artesanos-detalle-c8bfb8e6.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
+  <link rel="modulepreload" crossorigin href="/assets/viewpartials-7a86f681.js">
+  <link rel="modulepreload" crossorigin href="/assets/uploadJorge-fc196769.js">
+  <link rel="modulepreload" crossorigin href="/assets/alert-3bd678b2.js">
+  <link rel="modulepreload" crossorigin href="/assets/config-ef5f6dbc.js">
+  <link rel="modulepreload" crossorigin href="/assets/init-52a8aa54.js">
+  <link rel="modulepreload" crossorigin href="/assets/toast-8abe4fe9.js">
+  <link rel="stylesheet" href="/assets/style-db5afb59.css">
+</head>
+
+<body>
+	<!-- Loading starts -->
+	<div class="loading-wrapper">
+		<div class="loading">
+			<div class="img"></div>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+
+	<!-- BEGIN .app-wrap -->
+	<div class="app-wrap">
+		<!-- Headerg -->
+		<header class="app-header" id="app-header">
+		</header>
+
+		<!-- END: .app-heading -->
+		<!-- BEGIN .app-container -->
+		<div class="app-container">
+			<!-- Menu -->
+			<aside class="app-side" id="app-side"></aside>
+			<!-- END: .app-side -->
+
+			<!-- BEGIN .app-main -->
+			<div class="app-main">
+				<!-- BEGIN .main-heading -->
+				<header class="main-heading">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+								<div class="page-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="33" height="35" viewBox="0 0 20 15"
+										fill="none">
+										<path
+											d="M14 13.0001V15.0001H0V13.0001C0 13.0001 0 9.00005 7 9.00005C14 9.00005 14 13.0001 14 13.0001ZM10.5 3.50005C10.5 2.80782 10.2947 2.13113 9.91014 1.55556C9.52556 0.979985 8.97893 0.531381 8.33939 0.266474C7.69985 0.00156766 6.99612 -0.067744 6.31718 0.0673043C5.63825 0.202353 5.01461 0.535695 4.52513 1.02518C4.03564 1.51466 3.7023 2.1383 3.56725 2.81724C3.4322 3.49617 3.50152 4.1999 3.76642 4.83944C4.03133 5.47899 4.47993 6.02561 5.0555 6.4102C5.63108 6.79478 6.30777 7.00005 7 7.00005C7.92826 7.00005 8.8185 6.6313 9.47487 5.97493C10.1313 5.31855 10.5 4.42831 10.5 3.50005ZM13.94 9.00005C14.5547 9.4758 15.0578 10.0805 15.4137 10.7716C15.7696 11.4626 15.9697 12.2233 16 13.0001V15.0001H20V13.0001C20 13.0001 20 9.37005 13.94 9.00005ZM13 5.2579e-05C12.3117 -0.00378014 11.6385 0.202008 11.07 0.590053C11.6774 1.43879 12.0041 2.45634 12.0041 3.50005C12.0041 4.54377 11.6774 5.56132 11.07 6.41005C11.6385 6.7981 12.3117 7.00389 13 7.00005C13.9283 7.00005 14.8185 6.6313 15.4749 5.97493C16.1313 5.31855 16.5 4.42831 16.5 3.50005C16.5 2.57179 16.1313 1.68156 15.4749 1.02518C14.8185 0.368802 13.9283 5.2579e-05 13 5.2579e-05Z"
+											fill="#E80000" />
+									</svg>
+								</div>
+								<div class="page-title">
+									<h6>Artesanos</h6>
+									<nav aria-label="breadcrumb">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item"><a href="/inicio.html">Administrador</a></li>
+											<li class="breadcrumb-item"><a href="/artesanos.html">Usuarios</a></li>
+											<li class="breadcrumb-item active" aria-current="page">Artesanos</li>
+										</ol>
+									</nav>
+								</div>
+							</div>
+							<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+								<div class="right-actions">
+									<span class="last-login"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<!-- END: .main-heading -->
+				<!-- BEGIN .main-content -->
+				<div class="main-content">
+
+
+					<div class="card">
+						<div class="card-body">
+
+							<div class="card">
+								<div class="card-header" id="tituloartesano">Nuevo artesano</div>
+								<div class="card-body">
+									<ul class="nav nav-tabs" id="myTab" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active" id="home-tab1" data-toggle="tab" href="#home1"
+												role="tab" aria-controls="home1" aria-selected="true">Información
+												Personal</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="home-tab2" data-toggle="tab" href="#home2"
+												role="tab" aria-controls="home2" aria-selected="false">Información del
+												Taller</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="home-tab3" data-toggle="tab" href="#home3"
+												role="tab" aria-controls="home3" aria-selected="false">Especialidad y
+												Técnicas</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="home-tab4" data-toggle="tab" href="#home4"
+												role="tab" aria-controls="home4" aria-selected="false">Contacto</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="home-tab5" data-toggle="tab" href="#home5"
+												role="tab" aria-controls="home5" aria-selected="false">Medios de
+												Pago</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="home-tab6" data-toggle="tab" href="#home6"
+												role="tab" aria-controls="home6"
+												aria-selected="false">Reconocimientos</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="home-tab7" data-toggle="tab" href="#home7"
+												role="tab" aria-controls="home7" aria-selected="false">Video
+												Presentación</a>
+										</li>
+									</ul>
+
+									<div class="tab-content" id="myTabContent">
+										<div class="tab-pane fade show active" id="home1" role="tabpanel"
+											aria-labelledby="home-tab1">
+											<form id="form" action="javascript:void(0)">
+												<div class="row mt-4">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> DNI:
+														</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control"
+															placeholder="Ingrese el DNI" id="dni" maxlength="8"
+															minlength="8" required
+															oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> RUC:
+														</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control"
+															placeholder="Ingrese el RUC" id="ruc" maxlength="11"
+															minlength="11" required
+															oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Nombres:
+														</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control" id="nombres"
+															placeholder="Ingrese el nombres" required readonly>
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Apellidos:
+														</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control" id="apellidos"
+															placeholder="Ingrese el apellidos" required readonly>
+													</div>
+												</div>
+
+
+												<div class="row mt-4">
+
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Usuario:
+														</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control"
+															placeholder="Ingrese el Usuario" id="usuario" maxlength="20"
+															minlength="20" required
+															oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');">
+														<span class="error" id="usuarioError"></span>
+													</div>
+
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Contraseña:
+														</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="password" class="form-control" id="contrasena"
+															maxlength="20" required placeholder="Contraseña">
+														<span class="error" id="contrasenaError"></span>
+													</div>
+
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Repita Contraseña:
+														</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="password" class="form-control"
+															id="repetirContrasena" maxlength="20" required
+															placeholder="Repita Contraseña">
+														<span class="error" id="repetirContrasenaError"></span>
+													</div>
+													<div class="col-sm-2">
+													</div>
+													<div class="col-sm-4">
+
+														<a id="btnvalidar" class="btn btn-info"
+															style="color: white;">Validar usuario</a>
+													</div>
+												</div>
+
+												<hr>
+
+												<div class="row mt-4">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Correo:
+														</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="email" class="form-control"
+															placeholder="Ingrese el correo" id="correo" maxlength="150"
+															minlength="20" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+															required>
+
+
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Celular:
+														</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control"
+															placeholder="Ingrese el celular" id="celular" maxlength="9"
+															minlength="9" required
+															oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Lugar de Nacimiento:</h6>
+													</div>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" id="lugar_nacimiento"
+															maxlength="150" placeholder="Ingrese el lugar nacimiento">
+													</div>
+
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Región:</h6>
+													</div>
+													<div class="col-sm-4">
+														<select class="form-control" id="region">
+															<option value="0">Seleccionar</option>
+														</select>
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Provincia:</h6>
+													</div>
+													<div class="col-sm-4">
+														<select class="form-control" id="provincia">
+															<option value="0">Seleccionar</option>
+														</select>
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Distrito:</h6>
+													</div>
+													<div class="col-sm-4">
+														<select class="form-control" id="distrito">
+															<option value="0">Seleccionar</option>
+														</select>
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Lengua materna:</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control" id="lengua_materna"
+															maxlength="150" placeholder="Ingrese el lengua materna">
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Foto 1:</h6>
+													</div>
+													<div class="col-sm-4">
+														<div class="d-flex">
+															<img id="imagenFoto1" src="/img/sin_imagen.jpg"
+																alt="Imagen principal" class="img-thumbnail"
+																style="width: 200px; height: 150px;">
+														</div>
+														<div>
+															<button type="button" class="btn btn-info"
+																data-toggle="modal"
+																data-target="#imagenFoto1Modal">Editar</button>
+															<button type="button" class="btn btn-primary"
+																id="limpiarFoto1Btn">Limpiar</button>
+														</div>
+													</div>
+
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Foto 2:</h6>
+													</div>
+													<div class="col-sm-4">
+														<div class="d-flex">
+															<img id="imagenFoto2" src="/img/sin_imagen.jpg"
+																alt="Imagen principal" class="img-thumbnail"
+																style="width: 200px; height: 150px;">
+														</div>
+														<div>
+															<button type="button" class="btn btn-info"
+																data-toggle="modal"
+																data-target="#imagenFoto2Modal">Editar</button>
+															<button type="button" class="btn btn-primary"
+																id="limpiarFoto2Btn">Limpiar</button>
+														</div>
+													</div>
+												</div>
+
+											</form>
+
+											<!-- Modal foto 1 Principal -->
+											<div class="modal fade" id="imagenFoto1Modal" tabindex="-1"
+												aria-labelledby="imagenPrincipalModalLabel" aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h6 class="modal-title" id="imagenPrincipalModalLabel">
+																Editar Imagen Principal</h6>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form id="imagenPrincipalForm">
+																<div class="form-group">
+																	<label for="uploadPrincipalImage"><span
+																			class="text-primary">*</span> Subir
+																		imagen:</label>
+																	<div class="d-flex align-items-center">
+																		<input type="file"
+																			class="form-control-file mr-2"
+																			name="uploadPrincipalImage"
+																			id="uploadPrincipalImage" accept="image/*">
+																		<input type="text" class="form-control mr-2"
+																			id="principalImageName"
+																			style="display: none;">
+																		<!-- <button type="button" class="btn btn-warning" id="visualizarPrincipalBtn">Visualizar</button> -->
+
+																	</div>
+																	<progress id="progressBar" value="0" max="100"
+																		style="width: 100%;"></progress>
+																	<div id="status" style="display: none;"></div>
+																</div>
+																<div class="form-group" style="text-align: center;">
+																	<img id="principalImagePreview" src=""
+																		alt="Vista previa de la imagen principal"
+																		class="img-thumbnail"
+																		style="display: none; width: 200px; height: 150px;">
+																</div>
+															</form>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-danger"
+																data-dismiss="modal">Cancelar</button>
+															<button type="button" class="btn btn-primary"
+																id="guardarPrincipalBtn">Guardar</button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+
+											<!-- Modal foto 1 Principal -->
+											<div class="modal fade" id="imagenFoto2Modal" tabindex="-1"
+												aria-labelledby="imagenPrincipal2ModalLabel" aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h6 class="modal-title" id="imagenPrincipal2ModalLabel">
+																Editar Imagen Principal</h6>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form id="imagenPrincipal2Form">
+																<div class="form-group">
+																	<label for="uploadPrincipal2Image"><span
+																			class="text-primary">*</span> Subir
+																		imagen:</label>
+																	<div class="d-flex align-items-center">
+																		<input type="file"
+																			class="form-control-file mr-2"
+																			name="uploadPrincipal2Image"
+																			id="uploadPrincipal2Image" accept="image/*">
+																		<input type="text" class="form-control mr-2"
+																			id="principalImage2Name"
+																			style="display: none;">
+																		<!-- <button type="button" class="btn btn-warning" id="visualizarPrincipalBtn">Visualizar</button> -->
+
+																	</div>
+																	<progress id="progressBar2" value="0" max="100"
+																		style="width: 100%;"></progress>
+																	<div id="status" style="display: none;"></div>
+																</div>
+																<div class="form-group" style="text-align: center;">
+																	<img id="principalImage2Preview" src=""
+																		alt="Vista previa de la imagen principal"
+																		class="img-thumbnail"
+																		style="display: none; width: 200px; height: 150px;">
+																</div>
+															</form>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-danger"
+																data-dismiss="modal">Cancelar</button>
+															<button type="button" class="btn btn-primary"
+																id="guardarPrincipal2Btn">Guardar</button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+
+
+
+
+
+										</div>
+										<div class="tab-pane fade" id="home2" role="tabpanel"
+											aria-labelledby="home-tab2">
+											<form id="form" action="javascript:void(0)">
+												<div class="row mt-4">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Nombre:</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control"
+															placeholder="Ingrese el nombre del taller" id="nombretaller"
+															maxlength="150" minlength="8"
+															oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Horario de Atención:</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control" id="horarioatencion"
+															maxlength="100"
+															placeholder="Ingrese el horario de atención">
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Ruc:</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control"
+															placeholder="Ingrese el RUC" id="ructaller" maxlength="11"
+															minlength="11" required
+															oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+
+
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Dirección Física:</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control" id="direccionfisica"
+															maxlength="150" placeholder="Ingrese la dirección física">
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Latitud:</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control"
+															placeholder="Ingrese latitud" id="latitud">
+
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Longitud:</h6>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" class="form-control"
+															placeholder="Ingrese longitud" id="longitud">
+
+													</div>
+												</div>
+
+
+											</form>
+
+
+										</div>
+										<div class="tab-pane fade" id="home3" role="tabpanel"
+											aria-labelledby="home-tab3">
+											<form id="form" action="javascript:void(0)">
+
+												<div class="row mt-4">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Descripción de habilidades:</h6>
+													</div>
+													<div class="col-sm-10">
+														<textarea id="descripcionhabilidades"
+															placeholder="Ingrese descripción de habilidades"
+															maxlength="300" minlength="20"
+															class="form-control form-control-sm"></textarea>
+
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Tipos de artesanía que produce:</h6>
+													</div>
+													<div class="col-sm-10">
+														<textarea id="tipoartesania"
+															placeholder="Ingrese Tipos de artesanía que produce"
+															maxlength="300" minlength="20"
+															class="form-control form-control-sm"></textarea>
+													</div>
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															Línea artesanal:</h6>
+													</div>
+													<div class="col-sm-10">
+														<input type="checkbox" id="ceramica" name="ceramica"
+															value="Cerámica">
+														<label for="ceramica">Cerámica</label>
+														<input type="checkbox" id="piedra" name="piedra"
+															value="Piedra de Huamanga">
+														<label for="piedra">Piedra de Huamanga</label>
+														<input type="checkbox" id="talabarteria" name="talabarteria"
+															value="Talabartería">
+														<label for="talabarteria">Talabartería</label>
+														<input type="checkbox" id="otro" name="otro" value="Otro">
+														<label for="otro">Otro</label>
+														<input type="text" class="form-control"
+															placeholder="Ingrese otra linea artesanal" id="desotro"
+															maxlength="30" minlength="8" disabled
+															oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+
+													</div>
+
+												</div>
+											</form>
+										</div>
+										<div class="tab-pane fade" id="home4" role="tabpanel"
+											aria-labelledby="home-tab4">
+											<form id="form" action="javascript:void(0)">
+												<h6>Nuevo Contacto</h6>
+
+												<div class="row mt-3">
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Seleccione tipo:
+														</h6>
+													</div>
+													<div class="col-9 col-md-9">
+														<select class="form-control" id="tiporedsocial">
+															<option value="0">Seleccionar</option>
+															<option value="1">Red Social - Facebook</option>
+															<option value="2">Red Social - Instagram</option>
+															<option value="3">Red Social - Youtube</option>
+															<option value="4">Red Social - Twitter</option>
+															<option value="5">Red Social - WhastApp</option>
+															<option value="6">Red Social - Telegram</option>
+														</select>
+													</div>
+
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Usuario / Número:
+														</h6>
+													</div>
+													<div class="col-9 col-md-9">
+														<input type="text" class="form-control"
+															placeholder="Ingrese el usuario / número" id="usuarionumero"
+															maxlength="30" minlength="8"
+															oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+
+													</div>
+
+													<div class="col-sm-2">
+														<h6 class="sub-heading"
+															style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+															<span class="text-primary">*</span> Enlace de contacto:
+														</h6>
+													</div>
+													<div class="col-9 col-md-9">
+														<input type="text" class="form-control"
+															placeholder="Ingrese el usuario / número"
+															id="enlacecontacto" maxlength="150" minlength="8">
+
+													</div>
+
+													<div class="col-10 col-md-11" style="text-align: right;">
+														<button type="button"
+															class="btn btn-info btn-sm btn-add-contacto"
+															id="addcontactoButton">Añadir <i
+																class="icon icon-circle-with-plus"></i></button>
+													</div>
+												</div>
+												<hr>
+
+												<h6>Lista de contactos</h6>
+												<table class="table table-bordered cost-table">
+													<thead>
+														<tr>
+															<th>N°</th>
+															<th>Tipo de Contacto</th>
+															<th>Usuario</th>
+															<th>Link</th>
+															<th>Acción</th>
+														</tr>
+													</thead>
+													<tbody id="listaContacto">
+														<!-- Filas de costos se agregarán aquí -->
+													</tbody>
+												</table>
+
+											</form>
+
+										</div>
+
+										<div class="tab-pane fade" id="home5" role="tabpanel"
+											aria-labelledby="home-tab5">
+											<form id="form" action="javascript:void(0)">
+
+												<div class="card" style="min-height: 70px;">
+													<div class="card-body">
+
+														<div class="row mt-4">
+															<div class="col-md-12 text-right">
+																<button type="button"
+																	class="btn btn-info btn-sm btn-add-offer"
+																	data-toggle="modal"
+																	data-target="#addmediopagoModal">Añadir <i
+																		class="icon icon-circle-with-plus"></i></button>
+
+															</div>
+														</div>
+														<hr>
+														<table class="table table-bordered offer-table">
+															<thead>
+																<tr>
+																	<th>N°</th>
+																	<th>Banco</th>
+																	<th>Nombre Titular</th>
+																	<th>Nro. cta. corriente</th>
+																	<th>Nro. cta. Interbancaria</th>
+																	<th>Acciones</th>
+																</tr>
+															</thead>
+															<tbody id="listaMediopago">
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</form>
+											<!-- Modal Medio de Pago -->
+											<div class="modal fade" id="addmediopagoModal" tabindex="-1"
+												aria-labelledby="addmediopagoModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-xl">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h6 class="modal-title" id="addmediopagoModalLabel">Medio de
+																Pago</h6>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form id="mediopagoForm">
+
+																<div class="row mt-4">
+																	<div class="col-1 col-md-3">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Medio de
+																			Pago:
+																		</h6>
+																	</div>
+																	<div class="col-9 col-md-8">
+																		<select class="form-control" id="tipomediopago">
+																			<option value="0">Seleccionar</option>
+																			<option value="1">BCP</option>
+																			<option value="2">Banco de la Nación
+																			</option>
+																			<option value="3">BBVA</option>
+																			<option value="4">YAPE</option>
+																			<option value="5">PLIN</option>
+																		</select>
+																	</div>
+																	<div class="col-1 col-md-3">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Nombre
+																			del Banco:
+																		</h6>
+																	</div>
+																	<div class="col-9 col-md-8">
+																		<input type="text" class="form-control"
+																			placeholder="Ingrese el nombre del banco"
+																			id="nombrebanco" maxlength="100"
+																			minlength="8"
+																			oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+
+																	</div>
+																	<div class="col-1 col-md-3">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Nombre
+																			Titular:
+																		</h6>
+																	</div>
+																	<div class="col-9 col-md-8">
+																		<input type="text" class="form-control"
+																			placeholder="Ingrese el nombre titular"
+																			id="nombretitular" maxlength="100"
+																			minlength="8"
+																			oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+
+																	</div>
+																	<div class="col-1 col-md-3">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Nro de
+																			Cuenta Corriente:
+																		</h6>
+																	</div>
+																	<div class="col-9 col-md-8">
+																		<input type="text" class="form-control"
+																			placeholder="Ingrese el nro de cuenta corriente"
+																			id="cuentacorriente" maxlength="100"
+																			minlength="8"
+																			oninput="this.value = this.value.replace(/[^0-9\-]/g, '');">
+
+																	</div>
+																	<div class="col-1 col-md-3">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Nro de
+																			Cuenta Interbancaria:
+																		</h6>
+																	</div>
+																	<div class="col-9 col-md-8">
+																		<input type="text" class="form-control"
+																			placeholder="Ingrese el nro de cuenta interbancaria"
+																			id="cuentainterbancaria" maxlength="100"
+																			minlength="8"
+																			oninput="this.value = this.value.replace(/[^0-9\-]/g, '');">
+
+																	</div>
+																</div>
+
+
+																<hr>
+
+																<h6>Comprobantes de pago</h6>
+																<div class="row mt-4">
+																	<div class="col-9 col-md-2">
+																		<label for="envioNacional">Boleta:</label>
+																		<div class="custom-switch">
+																			<input type="checkbox"
+																				class="custom-control-input"
+																				id="boleta">
+																			<label class="custom-control-label"
+																				for="boleta"
+																				style="padding: 10px;margin-top: 17px;"></label>
+																		</div>
+																	</div>
+																	<div class="col-9 col-md-2">
+																		<label for="envioNacional">Factura:</label>
+																		<div class="custom-switch">
+																			<input type="checkbox"
+																				class="custom-control-input"
+																				id="factura">
+																			<label class="custom-control-label"
+																				for="factura"
+																				style="padding: 10px;margin-top: 17px;"></label>
+																		</div>
+																	</div>
+																	<div class="col-9 col-md-6">
+																		<label for="envioNacional">Recibo por
+																			Honorarios:</label>
+																		<div class="custom-switch">
+																			<input type="checkbox"
+																				class="custom-control-input"
+																				id="recibohonorario">
+																			<label class="custom-control-label"
+																				for="recibohonorario"
+																				style="padding: 10px;margin-top: 17px;"></label>
+																		</div>
+																	</div>
+
+																</div>
+																<hr>
+
+																<h6>Envíos</h6>
+																<div class="row mt-4">
+																	<div class="col-9 col-md-2">
+																		<label for="envioNacional">Local:</label>
+																		<div class="custom-switch">
+																			<input type="checkbox"
+																				class="custom-control-input" id="local">
+																			<label class="custom-control-label"
+																				for="local"
+																				style="padding: 10px;margin-top: 17px;"></label>
+																		</div>
+																	</div>
+																	<div class="col-9 col-md-2">
+																		<label
+																			for="envioNacional">Departamental:</label>
+																		<div class="custom-switch">
+																			<input type="checkbox"
+																				class="custom-control-input"
+																				id="departamental">
+																			<label class="custom-control-label"
+																				for="departamental"
+																				style="padding: 10px;margin-top: 17px;"></label>
+																		</div>
+																	</div>
+																	<div class="col-9 col-md-6">
+																		<label
+																			for="envioNacional">Internacional:</label>
+																		<div class="custom-switch">
+																			<input type="checkbox"
+																				class="custom-control-input"
+																				id="internacional">
+																			<label class="custom-control-label"
+																				for="internacional"
+																				style="padding: 10px;margin-top: 17px;"></label>
+																		</div>
+																	</div>
+
+																</div>
+
+
+															</form>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary"
+																data-dismiss="modal">Cancelar</button>
+															<button type="button" class="btn btn-info"
+																id="guardarMediopagoBtn"
+																style="color: white;">Guardar</button>
+															<button type="button" class="btn btn-info"
+																id="editarMediopagoBtn"
+																style="color: white;">Guardar</button>
+
+
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="tab-pane fade" id="home6" role="tabpanel"
+											aria-labelledby="home-tab6">
+											<form id="form" action="javascript:void(0)">
+
+												<div class="card" style="min-height: 70px;">
+													<div class="card-body">
+
+														<div class="row mt-4">
+															<div class="col-md-12 text-right">
+																<button type="button"
+																	class="btn btn-info btn-sm btn-add-offer"
+																	data-toggle="modal"
+																	data-target="#addreconocimmientoModal">Añadir <i
+																		class="icon icon-circle-with-plus"></i></button>
+
+															</div>
+														</div>
+														<hr>
+														<table class="table table-bordered offer-table">
+															<thead>
+																<tr>
+																	<th>N°</th>
+																	<th>Título</th>
+																	<th>Entidad que lo reconoce</th>
+																	<th>Descripción</th>
+																	<th>Acciones</th>
+																</tr>
+															</thead>
+															<tbody id="listaReconocimiento">
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</form>
+											<!-- Modal Reconocimiento -->
+											<div class="modal fade" id="addreconocimmientoModal" tabindex="-1"
+												aria-labelledby="addreconocimmientoModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-xl">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h6 class="modal-title" id="addreconocimmientoModalLabel">
+																Nuevo Reconocimiento</h6>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form id="reconocimientoForm">
+
+																<div class="row mt-4">
+																	<div class="col-1 col-md-3">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Título:
+																		</h6>
+																	</div>
+																	<div class="col-9 col-md-8">
+																		<input type="text" class="form-control"
+																			placeholder="Ingrese el titulo"
+																			id="tituloreconocimiento" maxlength="100"
+																			minlength="8"
+																			oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+
+																	</div>
+																	<div class="col-1 col-md-3">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Entidad
+																			que lo reconoce:
+																		</h6>
+																	</div>
+																	<div class="col-9 col-md-8">
+																		<input type="text" class="form-control"
+																			placeholder="Ingrese la entidad que lo reconoce"
+																			id="entidadreconoce" maxlength="100"
+																			minlength="8"
+																			oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+
+																	</div>
+																	<div class="col-1 col-md-3">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span>
+																			Descripción:
+																		</h6>
+																	</div>
+																	<div class="col-9 col-md-8">
+																		<textarea type="text" class="form-control"
+																			id="descripcionreconocimiento"
+																			placeholder="Ingrese la descripcion"
+																			maxlength="300" minlength="8"
+																			oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');"></textarea>
+
+
+																	</div>
+																</div>
+															</form>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary"
+																data-dismiss="modal">Cancelar</button>
+															<button type="button" class="btn btn-info"
+																id="guardarreconocimientoBtn"
+																style="color: white;">Guardar</button>
+															<button type="button" class="btn btn-info"
+																id="editarreconocimientoBtn"
+																style="color: white;">Guardar</button>
+
+
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+
+										<div class="tab-pane fade" id="home7" role="tabpanel"
+											aria-labelledby="home-tab7">
+
+											<h6>Escoge una opción para subir el video:</h6>
+											<ul class="nav nav-tabs" id="myTab" role="tablist">
+												<li class="nav-item">
+													<a class="nav-link active" id="upload-tab" data-toggle="tab"
+														href="#upload" role="tab" aria-controls="upload"
+														aria-selected="true">Sube el video</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" id="link-tab" data-toggle="tab" href="#link"
+														role="tab" aria-controls="link" aria-selected="false">Sube el
+														enlace del video</a>
+												</li>
+											</ul>
+											<div class="tab-content" id="myTabContent">
+												<div class="tab-pane fade show active" id="upload" role="tabpanel"
+													aria-labelledby="upload-tab">
+
+													<h6>Sube el video del presentación</h6>
+													<form id="videoForm">
+														<div class="card" style="min-height: 70px;">
+															<div class="card-body">
+
+																<div class="row mt-4">
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Nombre
+																			del video:
+																		</h6>
+																	</div>
+																	<div class="col-sm-9">
+																		<input type="text" class="form-control"
+																			id="videoName" maxlength="100"
+																			placeholder="Ingrese el nombre del video">
+																	</div>
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span>
+																			Seleccionar:
+																		</h6>
+																	</div>
+																	<div class="col-sm-9">
+																		<div class="d-flex align-items-center">
+																			<input type="file" id="uploadVideo"
+																				name="uploadVideo" accept="video/*">
+																			<span id="fileSize" class="mr-2"></span>
+																			<div class="progress mr-2"
+																				style="flex-grow: 1;">
+																				<div id="uploadProgress"
+																					class="progress-bar"
+																					role="progressbar"
+																					style="width: 0%;">0%</div>
+																			</div>
+																			<button type="button"
+																				class="btn btn-danger btn-sm"
+																				data-toggle="tooltip"
+																				data-original-title="cancelar"
+																				id="cancelUpload">&times;</button>
+																		</div>
+																		<progress id="progressBar" value="0" max="100"
+																			style="width: 100%;"></progress>
+																		<div id="status" style="display: none;"></div>
+																		<img id="videoPreview" src="/img/sin_imagen.jpg"
+																			style="display: none;">
+																		<small class="text-danger">El archivo no debe
+																			pesar más de 100mb</small>
+																	</div>
+
+																	<div class="col-md-12 text-right">
+																		<button type="button"
+																			class="btn btn-info btn-sm"
+																			id="registerVideo">Añadir <i
+																				class="icon icon-circle-with-plus"></i></button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</form>
+													<hr>
+													<h6>Lista de videos</h6>
+													<table class="table table-bordered offer-table">
+														<thead>
+															<tr>
+																<th style="width: 5%;">N°</th>
+																<th style="width: 30%;">Nombre del video</th>
+																<th style="width: 45%;">Enlace del video</th>
+																<th style="width: 20%;">Acción</th>
+															</tr>
+														</thead>
+														<tbody id="videoList">
+
+														</tbody>
+													</table>
+												</div>
+											</div>
+
+
+
+
+										</div>
+										<div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab">
+											<h6>Sube el enlace del video</h6>
+											<form id="linkForm">
+
+												<div class="card" style="min-height: 70px;">
+													<div class="card-body">
+
+														<div class="row mt-4">
+															<div class="col-sm-2">
+																<h6 class="sub-heading"
+																	style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																	<span class="text-primary">*</span> Nombre del
+																	video:
+																</h6>
+															</div>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	id="linkVideoName" maxlength="100"
+																	placeholder="Ingrese el nombre del video">
+															</div>
+															<div class="col-sm-2">
+																<h6 class="sub-heading"
+																	style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																	<span class="text-primary">*</span> Enlace del
+																	video:
+																</h6>
+															</div>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" id="videoLink"
+																	maxlength="150"
+																	placeholder="Ingrese el enlace del video">
+															</div>
+															<div class="col-md-12 text-right">
+																<button type="button" class="btn btn-info btn-sm"
+																	id="addVideoLink">
+																	Añadir <i class="icon icon-circle-with-plus"></i>
+																</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+											<hr>
+											<h6>Lista de videos</h6>
+											<table class="table table-bordered offer-table">
+												<thead>
+													<tr>
+														<th style="width: 5%;">N°</th>
+														<th style="width: 30%;">Nombre del video</th>
+														<th style="width: 45%;">Enlace del video</th>
+														<th style="width: 20%;">Acción</th>
+													</tr>
+												</thead>
+												<tbody id="videoList2">
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							<!-- Modal para ver video -->
+							<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h6 class="modal-title" id="videoModalLabel">Ver Video</h6>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<iframe id="videoPlayer" style="width: 100%; height: 500px;" frameborder="0"
+												allowfullscreen></iframe>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+
+					</div>
+
+					<hr>
+					<div class="modal-footer">
+						<a href="/artesanos.html" class="btn btn-primary">Cancelar</a>
+						<a id="btnguardarcambio" class="btn btn-info" style="color: white;">Registrar</a>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- <div>
+	</div> -->
+	<!-- END: .main-content -->
+	<div>
+	</div>
+	<!-- END: .app-main -->
+	<!-- <div>
+	</div> -->
+	<!-- END: .app-container -->
+	<!-- BEGIN .main-footer -->
+	<footer class="main-footer fixed-btm">
+		Copyright Artesanias Ayacucho 2024.
+	</footer>
+	<!-- END: .main-footer -->
+	<!-- </div> -->
+
+
+
+	<!-- END: .app-wrap -->
+
+	<!-- jQuery first, then Tether, then other JS. -->
+	<script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/vendor/leadMenu/leadMenu.js"></script>
+	<script src="/vendor/onoffcanvas/onoffcanvas.js"></script>
+	<script src="/js/moment.js"></script>
+	<script src="/js/jquery.twbsPagination.min.js"></script>
+	<script src="/js/alasql.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+
+
+	<!-- Common JS -->
+	<script src="/js/common.js"></script>
+	
+
+
+</body>
+
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:33:03 GMT -->
+
+</html>

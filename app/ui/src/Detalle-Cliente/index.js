@@ -1,45 +1,46 @@
 import { actualizarCliente, obtenerCliente } from '../Clientes/api';
 import { enviarCorreo } from './api.js';
-import {loadData, handleCountryChange, handleStateChange} from '../utils/ubicaciones';
+import { loadData, handleCountryChange, handleStateChange } from '../utils/ubicaciones';
 import { FileUploader } from '../utils/uploadVictor.js';
 import { AlertDialog } from "../utils/alert";
+import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
 const alertDialog = new AlertDialog();
 
 
-import { loadPartials } from '../utils/viewpartials';   
-import { hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
+import { loadPartials } from '../utils/viewpartials';
+import { hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
 
- 
+
 hideLoading();
 // Uso de la función
 (async function () {
-  let partials = [
-    { path: 'partials/shared/header.html', container: 'app-header' },
-    { path: 'partials/shared/menu.html', container: 'app-side' },
+    let partials = [
+        { path: 'partials/shared/header.html', container: 'app-header' },
+        { path: 'partials/shared/menu.html', container: 'app-side' },
 
 
-  ]; 
-  try {
-    await loadPartials(partials);
-    import ('../utils/common')
+    ];
+    try {
+        await loadPartials(partials);
+        import('../utils/common')
 
-   
-    // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
-    console.log('Las vistas parciales se han cargado correctamente!');
-    // Por ejemplo, podrías iniciar tu aplicación aquí.
 
-    startApp();
-  } catch (e) {
-    console.error(e);
-  }
+        // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
+        console.log('Las vistas parciales se han cargado correctamente!');
+        // Por ejemplo, podrías iniciar tu aplicación aquí.
+
+        startApp();
+    } catch (e) {
+        console.error(e);
+    }
 })();
 
 function startApp () {
-  //checkadminsession(); 
-  setTimeout(function() {
-    llenarinformacionIESTPProg();
-   // marcarSubMenuSeleccionado();
-}, 500); 
+    //checkadminsession(); 
+    setTimeout(function () {
+        llenarinformacionIESTPProg();
+        // marcarSubMenuSeleccionado();
+    }, 500);
 
 }
 /*async function checkadminsession () {
@@ -73,13 +74,13 @@ const rcontraseñaC = document.getElementById('rContraseñaC');
 //tab estado cuenta
 const estado = document.getElementById('estado')
 
-function getQueryParameter(name) {
+function getQueryParameter (name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
 
-async function llenarCampos(idCliente) {
-    
+async function llenarCampos (idCliente) {
+
     const cliente = await obtenerCliente(idCliente);
     console.log("cliente: ", cliente)
     //tab información
@@ -97,12 +98,12 @@ async function llenarCampos(idCliente) {
 
     if (cliente.foto_perfil == "") {
         $('#imagenPrincipal').attr('src', imagen_principal);
-    }else{
+    } else {
         let cleanUrl = cliente.foto_perfil.replace(/"/g, '');
         $('#imagenPrincipal').attr('src', cleanUrl);
     }
-    
-    
+
+
     //tab cuenta
 
     //tab reclamo cliente
@@ -112,7 +113,7 @@ async function llenarCampos(idCliente) {
     estado.checked = !cliente.estado;
 }
 
-function llenar_tablaReclamos(lista){
+function llenar_tablaReclamos (lista) {
     const list_reclamos = JSON.parse(lista);
     if (list_reclamos != null) {
         $('#listReclamos').empty()
@@ -147,9 +148,9 @@ function llenar_tablaReclamos(lista){
             </table>`
         $('#listReclamos').append(tabla_result)
     }
-   
+
 }
-async function cargarYSeleccionarUbicaciones(cliente) {
+async function cargarYSeleccionarUbicaciones (cliente) {
     // Cargar datos iniciales (paises)
     await loadData();
 
@@ -181,7 +182,7 @@ async function cargarYSeleccionarUbicaciones(cliente) {
     }
 }
 
-function waitForOptions(selectElement) {
+function waitForOptions (selectElement) {
     return new Promise((resolve) => {
         const checkOptions = () => {
             if (selectElement.options.length > 1) {
@@ -204,28 +205,28 @@ $(document).on('click', '#actualizar-informacion', async function (e) {
             'Cancelar',
             'Continuar',
             async () => {
-              try {
-                const result = await actualizarCliente(getQueryParameter('id'), {
-                    nombres: nombreC.value,
-                    apellidos: apellidosC.value,
-                    correo: correoC.value,
-                    telefono: telefonoC.value,
-                    direccion: direccionC.value,
-                    pais: paisC.selectedOptions[0].text,
-                    region: regionC.selectedOptions[0].text,
-                    ciudad: ciudadC.selectedOptions[0].text,
-                    tipo_documento: tipodocC.value,
-                    numero_documento: numerodocC.value,
-                    direccion_envio: dirEnvioC.value,
-                });
-        
-                console.log('Cliente actualizada:', result);
-              } catch (error) {
-                console.error('Error:', error);
-              }
+                try {
+                    const result = await actualizarCliente(getQueryParameter('id'), {
+                        nombres: nombreC.value,
+                        apellidos: apellidosC.value,
+                        correo: correoC.value,
+                        telefono: telefonoC.value,
+                        direccion: direccionC.value,
+                        pais: paisC.selectedOptions[0].text,
+                        region: regionC.selectedOptions[0].text,
+                        ciudad: ciudadC.selectedOptions[0].text,
+                        tipo_documento: tipodocC.value,
+                        numero_documento: numerodocC.value,
+                        direccion_envio: dirEnvioC.value,
+                    });
+
+                    console.log('Cliente actualizada:', result);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             }
-          );
- 
+        );
+
 
 
     } catch (error) {
@@ -239,7 +240,7 @@ $(document).on('click', '.btn-editarF', async function (e) {
     $('#ClienteImagePreview').attr('src', $('#imagenPrincipal').attr('src')).show()
 });
 
-$(document).on('click', '#btn-actualizarFoto', async function (e){
+$(document).on('click', '#btn-actualizarFoto', async function (e) {
     e.preventDefault();
     try {
         const result = await actualizarCliente(getQueryParameter('id'), {
@@ -253,7 +254,7 @@ $(document).on('click', '#btn-actualizarFoto', async function (e){
     }
 })
 
-$(document).on('click', '.btn-eliminarF', async function (e){
+$(document).on('click', '.btn-eliminarF', async function (e) {
     e.preventDefault();
     alertDialog.createAlertDialog(
         'confirm',
@@ -261,7 +262,7 @@ $(document).on('click', '.btn-eliminarF', async function (e){
         '¿Estás seguro de que deseas eliminar el slider?',
         'Cancelar',
         'Continuar',
-        async() => {
+        async () => {
             try {
                 const result = await actualizarCliente(getQueryParameter('id'), {
                     foto_perfil: ""
@@ -272,7 +273,7 @@ $(document).on('click', '.btn-eliminarF', async function (e){
                 console.error('Error al eliminar la foto de perfil:', error);
             }
         }
-    );  
+    );
 })
 
 $(document).on('click', '#actualizar-cuenta', async function (e) {
@@ -286,13 +287,13 @@ $(document).on('click', '#actualizar-cuenta', async function (e) {
 
 
 //ver reclamo
-async function mostrarDataModal(clienteID) {
+async function mostrarDataModal (clienteID) {
     $(document).on('click', '.btn-verR', async function (e) {
-        
+
         const id = $(this).data('id');
         try {
             const cliente = await obtenerCliente(clienteID);
-            
+
 
             for (let data of JSON.parse(cliente.list_reclamos)) {
                 console.log(data)
@@ -301,7 +302,7 @@ async function mostrarDataModal(clienteID) {
                     $('#modalverReclamo #fechaReclamo').val(data.fecha_reclamo)
                     $('#modalverReclamo #descripcionR').val(data.descripcion)
                     $('#modalverReclamo #estadoR').val(data.estado)
-                }   
+                }
             }
         } catch (error) {
             console.error('Error:', error);
@@ -311,7 +312,7 @@ async function mostrarDataModal(clienteID) {
 
 
 //correos
-async function enviarCorreoCliente(correoCliente, mensaje) {
+async function enviarCorreoCliente (correoCliente, mensaje) {
     try {
         const emailData = {
             from: 'tineo.max.clever@cidie.edu.pe',
@@ -411,7 +412,7 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
     const inputName = fileInput.name;
     const progressBar = document.getElementById(progressBarId);
     const statusElement = document.getElementById(statusElementId);
-  
+
     if (fileInput && progressBar && statusElement) {
         const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
         uploader.attachToFileInput(fileInput);
@@ -420,7 +421,7 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
     }
 }
 
-document.getElementById('myfile').addEventListener('change', function() {
+document.getElementById('myfile').addEventListener('change', function () {
     var file = this.files[0];
     var fileType = file.type;
     var allowedTypes = ['image/png', 'image/jpeg'];
@@ -431,7 +432,7 @@ document.getElementById('myfile').addEventListener('change', function() {
     }
 });
 
-function handleUploadResponse(response) {
+function handleUploadResponse (response) {
     alert('registro correcto')
     alert(response.ruta)
 
@@ -439,19 +440,19 @@ function handleUploadResponse(response) {
     if (file) {
         let reader = new FileReader();
         reader.onload = function (e) {
-        $('#ClienteImagePreview').attr('src', 'http://localhost:3001/' + response.ruta).show();
-        $('#principalImageName').val(file.name);
+            $('#ClienteImagePreview').attr('src', getBaseUrl(baseUrl) + '/' + response.ruta).show();
+            $('#principalImageName').val(file.name);
         }
         reader.readAsDataURL(file);
 
-        imagen_principal = 'http://localhost:3001/' + response.ruta;
+        imagen_principal = getBaseUrl(baseUrl) + '/' + response.ruta;
     } else {
         alert("Por favor, seleccione un archivo para visualizar.");
     }
 }
 
 
-document.addEventListener('DOMContentLoaded', (event)=> {
+document.addEventListener('DOMContentLoaded', (event) => {
     event.preventDefault();
     loadData().then(() => {
         const clienteId = getQueryParameter('id');
@@ -473,10 +474,10 @@ document.addEventListener('DOMContentLoaded', (event)=> {
             fileInputId: 'myfile',
             progressBarId: 'progressBar',
             statusElementId: 'status',
-            uploadUrl: 'http://localhost:3001/api/fileupload4',
+            uploadUrl: baseUrl + '/fileupload4',
             folder: '/cliente/img/',
             callback: handleUploadResponse
         });
     });
-    
+
 });

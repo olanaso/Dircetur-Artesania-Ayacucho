@@ -9,7 +9,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const router = require('./routes'); 
+const router = require('./routes');
 /*Define la ruta de los archivos dentro del servidor*/
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -56,7 +56,7 @@ router(app);
 /*Inicializar servidor*/
 
 //app.set('port', process.env.PORT );
-
-app.listen(3001, function () {
-  console.log('Example app listening on port 3001!');
+let port = 3002
+app.listen(port, function () {
+  console.log('Example app listening on port !' + port);
 });
