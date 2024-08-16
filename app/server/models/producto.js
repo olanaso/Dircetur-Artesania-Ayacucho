@@ -254,6 +254,11 @@ const product = sequelize.define('producto', {
     timestamps: true
 });
 
+/**
+ * Funcion para encontrar todos los productos de por el id de la categoria
+ * @param categoryId
+ * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
+ */
 product.findAllProductsByCategoryId = async function(categoryId){
     product.belongsTo(categoria, {
         foreignKey: 'categoria_id'
@@ -261,11 +266,13 @@ product.findAllProductsByCategoryId = async function(categoryId){
     return await product.findAll({where:{categoria_id : categoryId}})
 }
 //cuando pongo las relaciones afuera de la funcion ,la funcion no se cae
+//producto pertenece a artesano, la foreign key es artesano_id dentro del mismo product
 product.belongsTo(artesano, {
     foreignKey: 'artesano_id',
     as: 'datos_artesano'
 })
 
+//producto pertenece a categoria, la foreign key es categoria_id dentro del mismo product
 product.belongsTo(categoria, {
     foreignKey: 'categoria_id',
     as: 'categoria_producto'
