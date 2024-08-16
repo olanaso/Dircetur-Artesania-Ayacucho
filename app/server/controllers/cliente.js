@@ -109,31 +109,29 @@ function listar(req, res) {
     });
 }
 
+/**
+ * Funcion para crear un cliente, al crear el cliente se crea el usuario
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function save(req, res, next) {
-    const t = await model.sequelize.transaction();
-    try {
+    const t = await model.sequelize.transaction() //transaccion
+    try{
+        const requestUsuario = req.body
+        const usuarioCreado = await usuario.create(requestUsuario,
+            {transaction: t}) //se crea el usuario
+        //se actualiza el request para que tenga el id del usuario
+        const requestCliente = {...requestUsuario, usuario_id : usuarioCreado.id}
+        //se crea el nuevo cliente
+        const clienteCreado = await model.create(requestCliente)
 
-        let object = await model.findOne({
-            where: {
-                id: req.body.id ? req.body.id : 0
-            }
-        });
-
-        if (object != null) {
-            let obj = {...object.dataValues, ...req.body}
-            for (const prop in obj) {
-                object[prop] = obj[prop]
-            }
-            object.id= req.id;
-            await object.save({t});
-        } else {
-            object = await model.create({ ...req.body }, { t });
-        }
-        t.commit().then();
-        return res.status(200).send(object);
-    } catch (e) {
-        t.rollback();
-        return next(e);
+        res.status(200).send({message:"Cliente creado correctamente"})
+        return await t.commit()
+    }catch(e){
+        await t.rollback()
+        console.error(e)
+        handleHttpError(res, "Error creando cliente", 500)
     }
 }
 
