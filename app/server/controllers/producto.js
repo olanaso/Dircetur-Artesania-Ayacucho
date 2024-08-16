@@ -21,11 +21,15 @@ module.exports = {
     getProductsByArtesanoId
 };
 
-
+/**
+ * funcion para obtener los productos de a traves del id de un artesano
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function getProductsByArtesanoId(req,res){
     try{
         const {id} = req.params
-        console.log(id)
         const data = await product.findAllProductsByArtesanoId(id)
         res.status(200).send({data})
     }catch(e){
@@ -34,19 +38,21 @@ async function getProductsByArtesanoId(req,res){
     }
 }
 
+/**
+ * funcion para obtener los productos de a traves de la abreviatura de una categoria
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function getProductsByCategoryAbbreviation(req, res){
     try{
-
+        //obtenemos la abreviatura de la categoria que viene en el request
         const {abreviatura} = req.params
-        console.log(abreviatura)
+        //encuentro el id de la categoria a traves de la abreviatura
         const idCategoria = await  categoria.findCategoryIdByAbreviatura(abreviatura)
-        console.log(idCategoria)
+        //Obtengo todos los productos de la categoria a traves del id de la cateogria
         const data = await product.findAllProductsByCategoryId(idCategoria)
-        console.log(data)
         res.status(200).send({data})
-
-
-
     } catch(e){
         console.log(e)
         handleHttpError(res,"Ocurrio un error obteniendo el recuros", 500)
