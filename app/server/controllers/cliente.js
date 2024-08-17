@@ -51,19 +51,28 @@ async function actualizar(req, res) {
     }
 }
 
-function eliminar(req, res) {
-    model
-        .findOne({
-            where: {id: req.body.id}
-        })
-        .then(object => {
-                object.destroy();
-                res.status(200).json(object);
-        })
-        .catch(error => res.status(400).send(error));
+async function eliminar(req, res) {
+    const t = await model.sequelize.transaction()
+    const {id} = req.params
+    try{
+        //encuentro el cliente con el id
+        const clienteEncontrado = await model.findClienteById(id)
+        const usuarioId = clienteEncontrado.usuario_id
+        //Encuentro el usuario por su id
+        const usuarioEncontrado = await usuario.findUsuarioById(usuarioId)
+        //Elimino
+        await usuarioEncontrado.destroy()
+        await clienteEncontrado.destroy()
+        res.status(200).send({message: "Cliente eliminado correctamente"})
+        return await t.commit()
+
+    }catch(e){
+        await t.rollback()
+        console.error(e)
+        handleHttpError(res, "Error eliminando cliente", 500)
+    }
+
 }
-
-
 function obtener(req, res) {
 
     model.findOne({

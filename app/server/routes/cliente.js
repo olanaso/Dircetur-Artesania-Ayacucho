@@ -6,7 +6,7 @@ const {validatorUpdateCliente} = require('../validators/cliente')
 
 router.post('/cliente', controller.guardar);
 router.put('/cliente/:id',validatorUpdateCliente, controller.actualizar);
-router.delete('/cliente', controller.eliminar);
+router.delete('/cliente/:id', controller.eliminar);
 router.get('/cliente/:id', controller.obtener);
 router.get('/cliente', controller.listar);
 router.post('/cliente/save/', controller.save);
