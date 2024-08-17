@@ -16,42 +16,51 @@ async function infoProd() {
     const producto = await obtenerProducto(productoId);
     const artesano = await obtenerArtesano(producto.artesano_id);
 
-    /* let categoriaMap = {
-         101: 'TE',
-         108: 'CER',
-         113: 'PT'
-     };
+    $(document).ready(async function() {
+        let categoriaMap = {
+            101: 'TE',
+            108: 'CER',
+            113: 'PT',
+            131: 'RET',
+            132: 'OH'
+        };
 
-     let categoriaId = categoriaMap[producto.categoria_id] || producto.categoria_id.toString();
-     let productosRecomendadosPorCategoria = await listarProductosPorCategoria(categoriaId);
+        let categoriaId = categoriaMap[producto.categoria_id] || producto.categoria_id.toString();
+        let productosRecomendadosPorCategoria = await listarProductosPorCategoria(categoriaId);
 
-     console.log("MENSAJEEEEEEEEEEEEEEEEEEEEEE", productosRecomendadosPorCategoria);
+        console.log("MENSAJEEEEEEEEEEEEEEEEEEEEEE", productosRecomendadosPorCategoria);
 
-     // Extract the data array from the fetched productosRecomendadosPorCategoria object
-     let productosRecomendados = productosRecomendadosPorCategoria.data;
-     console.log('productosRecomendados: ', productosRecomendados);
-     console.log("MENSAJE", typeof productosRecomendados);
-     console.log("MENSAJE2", productosRecomendados.length);
-     const longitud = Object.keys(productosRecomendados).length;
-     console.log("MENSAJE3", longitud);
+        // Extract the data array from the fetched productosRecomendadosPorCategoria object
+        let productosRecomendados = productosRecomendadosPorCategoria.data;
 
-     // Generate HTML for recommended products
-     let recommendedProductsHtml = '';
+        // Generate HTML for recommended products
+        let recommendedProductsHtml = '';
 
-     for (let i = 0; i < productosRecomendados.length; i++) {
-         let productos = productosRecomendados[i];
+        for (let i = 0; i < productosRecomendados.length; i++) {
+            let productos = productosRecomendados[i];
 
-         recommendedProductsHtml += `
-             <div class="recommended-product">
-                 <img src="${productos.imagen_principal}" alt="${productos.nombres_es}">
-                 <p>${productos.nombres_es}</p>
-                 <p>Precio: S/. ${productos.precio}</p>
-             </div>
-         `;
-     }
+            recommendedProductsHtml += `
+            <div class="recommended-product">
+            <div class="recommended-product-card">
+                <img src="${productos.imagen_principal}" alt="${productos.nombres_es}">
+                <p class="text-limited">${productos.nombres_es}</p>
+                <p class="text-limited">Precio: S/. ${productos.precio}</p>
+                </div>
+            </div>
+        `;
 
-     $('#recommended-products').html(recommendedProductsHtml);
- */
+        }
+
+        $('#recommended-products').html(recommendedProductsHtml);
+
+        // Initialize Slick Carousel
+        $('#recommended-products').slick({
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            prevArrow: $('.left-arrow'),
+            nextArrow: $('.right-arrow')
+        });
+    });
 
     // Asegurarse de que producto.lst_imagenes sea una cadena JSON válida
     const imagenesProd = JSON.parse(JSON.parse(producto.lst_imagenes.replace(/\/\//g, '/')));
@@ -284,7 +293,29 @@ async function infoProd() {
 
 }
 
+document.querySelectorAll('.accordion-header').forEach(button => {
+    button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
 
+        // Close all other accordion sections
+        document.querySelectorAll('.accordion-content').forEach(section => {
+            if (section !== content) {
+                section.style.maxHeight = null;
+                section.classList.remove('show');
+                section.previousElementSibling.classList.remove('active');
+            }
+        });
+
+        // Toggle the clicked section
+        if (content.classList.contains('show')) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+        content.classList.toggle('show');
+        button.classList.toggle('active');
+    });
+});
 //funcionalidad para elegir cantidad:
 function setupQuantityControls() {
     const cantidadMaxima = 10; // Set this to the actual maximum quantity
