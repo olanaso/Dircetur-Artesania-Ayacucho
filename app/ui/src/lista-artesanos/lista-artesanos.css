@@ -1,0 +1,117 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.team-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 0 auto 20px auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.team-category {
+    width: 30%;
+    margin-right: 20px;
+    margin-bottom: 0;
+    position: -webkit-sticky; /* Para compatibilidad con Safari */
+    position: sticky;
+    top: 0;
+    align-self: flex-start; /* Se asegura que quede pegado al inicio */
+    z-index: 10; /* Mantener visible sobre otros elementos */
+    padding-top: 20px;
+    font-weight:bold ;
+}
+
+.team-category h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.team-members {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.team-member {
+    background-color: white;
+    width: 40%;
+    height: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Ensure content does not overflow */
+}
+
+.team-member h3 {
+    font-size: 24px;
+    margin: 10px 0;
+    padding: 0 10px; /* Adjust padding to fit within the card */
+}
+
+.team-member p {
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0;
+    padding: 0 10px; /* Adjust padding to fit within the card */
+}
+.team-member:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.01);
+}
+
+.team-member img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+    margin-left:-20px;
+    margin-top: -20px;
+    margin-bottom: 15px;
+}
+
+
+
+
+.custom-rectangle {
+    position: absolute;
+    top: 980px;
+    right: 0;
+    width: 700px;
+    height: 300px;
+    background-color: #DC4405;
+    z-index: -10;
+    border-radius: 0 0 0 100px;
+}
+@media (max-width: 768px) {
+    .team-section {
+        flex-direction: column;
+    }
+
+    .team-category, .team-members {
+        width: 100%;
+    }
+
+
+    .team-member img {
+        width: 110%; /* Adjust image width to fit within the card */
+    }
+    .team-member {
+        width: 100%;
+    }
+
+    .custom-rectangle {
+        width: 60%;
+        height: 300px;
+        border-radius: 0;
+    }
+}

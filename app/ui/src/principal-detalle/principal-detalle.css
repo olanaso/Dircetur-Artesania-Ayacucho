@@ -6279,58 +6279,57 @@ label {
 
 /*Acordeon*/
 .accordion {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.accordion-item {
-    border-bottom: 1px solid #ddd;
-}
-
-.accordion-item:last-child {
-    border-bottom: none;
-}
-
-.accordion-header {
-    background-color: #f9f9f9;
+    background-color: #eee;
+    color: #444;
     cursor: pointer;
-    padding: 15px;
+    padding: 18px;
     width: 100%;
     text-align: left;
     border: none;
     outline: none;
+    transition: background-color 0.4s;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
 }
 
-.accordion-header:hover {
-    background-color: #f1f1f1;
+.accordion .icon {
+    margin-left: auto; /* Push the icon to the far right */
 }
 
-.accordion-content {
+.accordion:hover {
+    background-color: #ccc;
+}
+
+.accordion.active {
+    background-color: #ccc;
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    padding: 0 15px;
-    background-color: white;
+    transition: max-height 0.4s ease-out;
 }
 
-.accordion-content.show {
-    padding: 15px;
-}
-.arrow {
-    transition: transform 0.3s ease;
+.icon {
+    display: inline-block;
+    transition: transform 0.4s;
 }
 
-.accordion-header.active .arrow {
+.icon.rotate {
     transform: rotate(180deg);
+}
+
+.accordion em {
+    color: red; /* Change this to the desired color */
+}
+
+.icon.rotate {
+    transform: rotate(180deg);
+}
+.accordion em {
+    color: red; /* Change this to the desired color */
+left:100px;
 }

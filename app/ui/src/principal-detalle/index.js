@@ -293,29 +293,26 @@ async function infoProd() {
 
 }
 
-document.querySelectorAll('.accordion-header').forEach(button => {
-    button.addEventListener('click', () => {
-        const content = button.nextElementSibling;
+const acc = document.getElementsByClassName("accordion");
+let i;
 
-        // Close all other accordion sections
-        document.querySelectorAll('.accordion-content').forEach(section => {
-            if (section !== content) {
-                section.style.maxHeight = null;
-                section.classList.remove('show');
-                section.previousElementSibling.classList.remove('active');
-            }
-        });
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
 
-        // Toggle the clicked section
-        if (content.classList.contains('show')) {
-            content.style.maxHeight = null;
+        const panel = this.nextElementSibling;
+        const icon = this.querySelector('.icon');
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+            icon.classList.remove('rotate');
+            icon.textContent = "+";
         } else {
-            content.style.maxHeight = content.scrollHeight + "px";
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            icon.classList.add('rotate');
+            icon.textContent = "-";
         }
-        content.classList.toggle('show');
-        button.classList.toggle('active');
     });
-});
+}
 //funcionalidad para elegir cantidad:
 function setupQuantityControls() {
     const cantidadMaxima = 10; // Set this to the actual maximum quantity

@@ -230,7 +230,7 @@
 <div class="carousel-wrapper">
 	<div class="carousel-container">
 		<div id="recommended-products" class="carousel">
-			<!-- Recommended products will be injected here -->
+
 		</div>
 		<button class="carousel-arrow left-arrow">&lt;</button>
 		<button class="carousel-arrow right-arrow">&gt;</button>
@@ -256,51 +256,24 @@
 					</ul>
 					<div class="tab-content" id="productTabsContent">
 						<div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">
-							<div class="accordion" id="productAccordion">
-								<div class="accordion-item">
-									<button class="accordion-header" data-toggle="collapse" data-target="#resumenSection">
-										Resumen <em>Producto</em>
-										<span class="arrow">&#9660;</span>
-									</button>
-									<div id="resumenSection" class="accordion-content">
-										<div class="section-content">
-											<p id="resumenProd"></p>
-										</div>
-									</div>
-								</div>
-								<div class="accordion-item">
-									<button class="accordion-header" data-toggle="collapse" data-target="#descripcionSection">
-										Descripción <em>Producto</em>
-										<span class="arrow">&#9660;</span>
-									</button>
-									<div id="descripcionSection" class="accordion-content">
-										<div class="section-content">
-											<p id="descripcionProd"></p>
-										</div>
-									</div>
-								</div>
-								<div class="accordion-item">
-									<button class="accordion-header" data-toggle="collapse" data-target="#cualidadesSection">
-										Cualidades <em>Producto</em>
-										<span class="arrow">&#9660;</span>
-									</button>
-									<div id="cualidadesSection" class="accordion-content">
-										<div class="section-content">
-											<p id="cualidadesProd"></p>
-										</div>
-									</div>
-								</div>
-								<div class="accordion-item">
-									<button class="accordion-header" data-toggle="collapse" data-target="#palabrasClaveSection">
-										Palabras <em>clave</em>
-										<span class="arrow">&#9660;</span>
-									</button>
-									<div id="palabrasClaveSection" class="accordion-content">
-										<div class="section-content">
-											<p id="palabrasClave"></p>
-										</div>
-									</div>
-								</div>
+							<button class="accordion">Resumen <em>Producto</em> <span class="icon">+</span></button>
+							<div class="panel">
+								<p id="resumenProd"></p>
+							</div>
+
+							<button class="accordion">Descripción <em>Producto</em> <span class="icon">+</span></button>
+							<div class="panel">
+								<p id="descripcionProd"></p>
+							</div>
+
+							<button class="accordion">Cualidades <em>Producto</em> <span class="icon">+</span></button>
+							<div class="panel">
+								<p id="cualidadesProd"></p>
+							</div>
+
+							<button class="accordion">Palabras <em>clave</em> <span class="icon">+</span></button>
+							<div class="panel">
+								<p id="palabrasClave"></p>
 							</div>
 						</div>
 						<div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
