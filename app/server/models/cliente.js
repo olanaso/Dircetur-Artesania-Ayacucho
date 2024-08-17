@@ -145,4 +145,13 @@ cliente.findIdByCorreo = async function(correo){
     return clienteEncontrado ? clienteEncontrado.id : null
 }
 
+/**
+ * Funcion que encuentra el cliente por su id
+ * @param id
+ * @returns {Promise<cliente | null>}
+ */
+cliente.findClienteById = async function(id){
+    return cliente.findOne({where: {id}})
+}
+
 module.exports = cliente

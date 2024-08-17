@@ -48,6 +48,7 @@ function guardar (req, res) {
 
 }
 async function actualizar (req, res) {
+
     try{
         const id = req.params.id
         const body = req.body
