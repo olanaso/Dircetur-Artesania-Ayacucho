@@ -40,15 +40,15 @@ hideLoading();
 })();
 
 function startApp() {
-     // Colocar el código que deseas ejecutar después de cargar las vistas parciales.
-        modificarNavbarSegunRol();
-        const cerrarSesionLink = document.getElementById('cerrar-sesion-link');
-        if (cerrarSesionLink) {
-            cerrarSesionLink.addEventListener('click', (event) => {
-                event.preventDefault();
-                cerrarSesion();
-            });
-        }
+    // Colocar el código que deseas ejecutar después de cargar las vistas parciales.
+    modificarNavbarSegunRol();
+    const cerrarSesionLink = document.getElementById('cerrar-sesion-link');
+    if (cerrarSesionLink) {
+        cerrarSesionLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            cerrarSesion();
+        });
+    }
 
 
 }
@@ -57,22 +57,22 @@ function startApp() {
 $(document).ready(async function(){
     //await cargarSliders();
     await cargarCategorias();
-   if ($('.Modern-Slider').length) {
-       $('.Modern-Slider').slick({
-           // Tus opciones de configuración aquí
-           dots: true,
-           infinite: true,
-           speed: 500,
-           slidesToShow: 1,
-           slidesToScroll: 1,
-           autoplay: true,
-           autoplaySpeed: 2000,
-           prevArrow: $('.PrevArrow'),
-           nextArrow: $('.NextArrow')
-       });
-   }
+    if ($('.Modern-Slider').length) {
+        $('.Modern-Slider').slick({
+            // Tus opciones de configuración aquí
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            prevArrow: $('.PrevArrow'),
+            nextArrow: $('.NextArrow')
+        });
+    }
 
-   //initMap();
+    //initMap();
 });
 
 function initMap() {
@@ -96,7 +96,7 @@ async function cargarSliders(){
     $('#modernSlider').empty()
     let filas = ''
     for (let data of sliders.sliders) {
-      let cleanUrl = data.imagen.replace(/"/g, '');
+        let cleanUrl = data.imagen.replace(/"/g, '');
         filas += `
             <div class="item">
             <div class="img-fill">
@@ -126,7 +126,7 @@ async function cargarSliders(){
         nextArrow: $('.NextArrow')
     });
 
-  }
+}
 
 // app/ui/src/principal/index.js
 async function cargarCategorias() {
@@ -136,13 +136,13 @@ async function cargarCategorias() {
     for (let data of categorias) {
         cards += `
             <div class="item car-item">
-                <div class="thumb-content">
-                    <a href="#"><img src=${data.foto_referente} alt=${data.abreviatura}></a>
-                </div>
-                <div class="down-content">
-                    <a href="#"><h4>${data.denominacion}</h4></a> 
-                </div>
-            </div>`;
+              <div class="thumb-content">
+               <a href="productos_por_categoria.html?categoriaId=${data.abreviatura}"><img src="${data.foto_referente}" alt="${data.abreviatura}"></a>
+              </div>
+              <div class="down-content">
+               <a href="productos_por_categoria.html?categoriaId=${data.abreviatura}"><h4>${data.denominacion}</h4></a> 
+              </div>
+           </div>`;
     }
     $('#owl-top-features').append(cards);
 
@@ -164,4 +164,4 @@ document.addEventListener('DOMContentLoaded', () => {
     //cargarSliders()
     //cargarCategorias()
 
-  });
+});
