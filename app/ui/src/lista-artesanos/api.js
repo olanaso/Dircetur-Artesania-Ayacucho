@@ -1,7 +1,7 @@
 // File: app/ui/src/lista-artesanos/api.js
 import { baseUrl } from '../utils/config';
 
-export async function listarArtesanoById(idArtesano) {
+export async function listarArtesanosPorCategoriaArtesania() {
     try {
         const requestOptions ={
             method: 'GET'
