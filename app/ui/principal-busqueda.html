@@ -11,7 +11,7 @@
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<meta name="description" content="Biblioideas: Biblioteca Virtual del Instituto" />
 	<meta name="keywords"
-		  content="Biblioteca, Virtual, Biblioideas, Instituto, Libros, Publicaciones, Educación, Lectura, Aprendizaje, Cultura" />
+		content="Biblioteca, Virtual, Biblioideas, Instituto, Libros, Publicaciones, Educación, Lectura, Aprendizaje, Cultura" />
 	<meta name="author" content="Biblioideas" />
 	<link rel="shortcut icon" href="img/fav.png" />
 	<title>Artesania - Login</title>
@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 	<!-- Mian and Login css -->
-	<link rel="stylesheet" href="../ui/public/css/main.css" />
+	<link rel="stylesheet" href="src/principal-busqueda/principal-busqueda.css" />
 
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -31,115 +31,41 @@
 
 <body>
 
-<div class="preloader" style="display: none;">
-	<div class="preloader-bounce">
-		<span></span>
-		<span></span>
-		<span></span>
-	</div>
-</div>
-
-<div id="search">
-	<button type="button" class="close">×</button>
-	<form>
-		<input type="search" value="" placeholder="Escribe palabras clave aquí">
-		<button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
-	</form>
-</div>
-
-<!--HEADER-->
-<header class="site-header wow fadeIn" data-wow-duration="1s"
-		style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
-	<div id="main-header" class="main-header">
-	</div>
-</header>
-
-
-<div class="page-heading wow fadeIn animated" data-wow-duration="0.5s" style="visibility: visible;-webkit-animation-duration: 0.5s; -moz-animation-duration: 0.5s; animation-duration: 0.5s;">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="heading-content-bg wow fadeIn animated" data-wow-delay="0.75s" data-wow-duration="1s" style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.75s; -moz-animation-delay: 0.75s; animation-delay: 0.75s;">
-					<div class="row">
-						<div class="heading-content col-md-12">
-							<p><a href="principal.html">Inicio</a> / <em> Producto</em> / <em> Filtros</em></p>
-							<h2>BÚSQUEDA  <em> RÁPIDA</em></h2>
-						</div>
-					</div>
-				</div>
-			</div>
+	<div class="preloader" style="display: none;">
+		<div class="preloader-bounce">
+			<span></span>
+			<span></span>
+			<span></span>
 		</div>
 	</div>
-</div>
 
-<section style="padding: 0px 0px 0px 0px;">
-	<div class="features-search-section">
+	<div id="search">
+		<button type="button" class="close">×</button>
+		<form>
+			<input type="search" value="" placeholder="Escribe palabras clave aquí">
+			<button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
+		</form>
+	</div>
+
+	<!--HEADER-->
+	<header class="site-header wow fadeIn" data-wow-duration="1s"
+		style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
+		<div id="main-header" class="main-header">
+		</div>
+	</header>
+
+
+	<div class="page-heading wow fadeIn animated" data-wow-duration="0.5s"
+		style="visibility: visible;-webkit-animation-duration: 0.5s; -moz-animation-duration: 0.5s; animation-duration: 0.5s;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="search-content wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
-						<div class="search-heading">
-							<div class="icon">
-								<i class="fa fa-search"></i>
-							</div>
-							<div class="text-content">
-								<h2>BÚSQUEDA RÁPIDA</h2>
-								<span>HICIMOS UNA BÚSQUEDA RÁPIDA SOLO PARA TI.</span>
-							</div>
-						</div>
-						<div class="search-form">
-							<div class="row">
-								<div class="col-md-3">
-									<div class="input-select">
-										<select name="brand" id="brand">
-											<option value="-1">Seleccione Categoria</option>
-											<option>categoria1</option>
-											<option>categoria2</option>
-											<option>categoria3</option>
-											<option>categoria4</option>
-											<option>categoria5</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="input-select">
-										<select name="mark" id="mark">
-											<option value="-1">Seleccione Otros</option>
-											<option>En oferta</option>
-											<option>Destacados</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="input-select">
-										<select name="min-price" id="min-price">
-											<option value="-1">Precio Minimo</option>
-											<option>S/.100</option>
-											<option>S/.500</option>
-											<option>S/.1.000</option>
-											<option>S/.1.500</option>
-											<option>S/.2.000</option>
-											<option>S/.2.500</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="input-select">
-										<select name="max-price" id="max-price">
-											<option value="-1">Precio Maximo</option>
-											<option>S/.5.000</option>
-											<option>S/.7.500</option>
-											<option>S/.10.000</option>
-											<option>S/.15.500</option>
-											<option>S/.20.000</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="secondary-button">
-										<a href="principal-busqueda.html">Buscar <i class="fa fa-search"></i></a>
-									</div>
-								</div>
+					<div class="heading-content-bg wow fadeIn animated" data-wow-delay="0.75s" data-wow-duration="1s"
+						style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.75s; -moz-animation-delay: 0.75s; animation-delay: 0.75s;">
+						<div class="row">
+							<div class="heading-content col-md-12">
+								<p><a href="principal.html">Inicio</a> / <em> Producto</em> / <em> Filtros</em></p>
+								<h2>BÚSQUEDA <em> RÁPIDA</em></h2>
 							</div>
 						</div>
 					</div>
@@ -147,31 +73,87 @@
 			</div>
 		</div>
 	</div>
-</section>
-<div id="owl-top-features2" class="owl-carousel owl-theme"></div>
-<section style="padding: 20px 0px 0px 0px;">
-	<div class="recent-cars">
-		<div class="container">
-			<div class="recent-car-content">
+	<section style="padding: 0px 0px 0px 0px;">
+		<div class="features-search-section">
+			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="section-heading">
-							<div class="icon">
-								<i class="fas fa-shopping-cart"></i>
+						<div class="search-content wow fadeIn animated" data-wow-duration="0.75s"
+							 style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+							<div class="search-heading">
+								<div class="icon">
+									<i class="fa fa-search"></i>
+								</div>
+								<div class="text-content">
+									<h2>BÚSQUEDA RÁPIDA</h2>
+									<span>HICIMOS UNA BÚSQUEDA RÁPIDA SOLO PARA TI.</span>
+								</div>
 							</div>
-							<div class="contador-productos">
-								<h2></h2>
-								<span></span>
+							<div class="search-form">
+								<div class="row">
+									<div class="col-md-3">
+										<div class="input-select">
+											<input type="text" id="filterName" placeholder="Nombre del producto">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="input-select">
+											<input type="number" id="filterPriceMin" placeholder="Precio Mínimo">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="input-select">
+											<input type="number" id="filterPriceMax" placeholder="Precio Máximo">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="secondary-button">
+											<a href="#" id="filterButton">Buscar <i class="fa fa-search"></i></a>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="secondary-button">
+											<a href="#" id="clearButton">Limpiar</a>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row" id="contenedorProductos">
+			</div>
+		</div>
+	</section>
+	<div id="owl-top-features2" class="owl-carousel owl-theme"></div>
+	<section style="padding: 20px 0px 0px 0px;">
+		<div class="recent-cars">
+			<div class="container">
+				<div class="recent-car-content">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="section-heading">
+								<div class="icon">
+									<i class="fas fa-shopping-cart"></i>
+								</div>
+								<div class="contador-productos">
+									<h2></h2>
+									<span></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" id="contenedorProductos">
+					</div>
+
+					<div id="paginationControls">
+						<button id="prevPage" class="pagination-button">Anterior</button>
+						<div id="pageInfo"></div>
+						<button id="nextPage" class="pagination-button">Siguiente</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
 
 
 
@@ -180,8 +162,8 @@
 
 
 
-<footer id="main-footer">
-</footer>
+	<footer id="main-footer">
+	</footer>
 
 
 
@@ -191,26 +173,21 @@
 <script type="module" src="src/principal-busqueda/index.js"></script>
 
 <!-- Slider Pro Js -->
-<script src="assets/js/sliderpro.min.js"></script>
+<script src="js/sliderpro.min.js"></script>
 
 <!-- Slick Slider Js -->
-<script src="assets/js/slick.js"></script>
+<script src="js/slick.js"></script>
 
 <!-- Owl Carousel Js -->
-<script src="assets/js/owl.carousel.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
 
 <!-- Boostrap Js -->
-<script src="assets/js/wow.animation.js"></script>
+<script src="js/wow.animation.js"></script>
 
 <!-- Custom Js -->
-<script src="assets/js/custom.js"></script>
+<script src="js/custom.js"></script>
 
 
 <!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
 
 </html>
-
-
-
-
-

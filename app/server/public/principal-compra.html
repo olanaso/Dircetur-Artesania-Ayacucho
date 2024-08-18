@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Biblioideas: Biblioteca Virtual del Instituto" />
+    <meta name="keywords"
+        content="Biblioteca, Virtual, Biblioideas, Instituto, Libros, Publicaciones, Educación, Lectura, Aprendizaje, Cultura" />
+    <meta name="author" content="Biblioideas" />
+    <link rel="shortcut icon" href="img/fav.png" />
+    <title>Artesania - carrito compras</title>
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Mian and Login css -->
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="module" crossorigin src="/assets/principal-compra-4b6cb6d2.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
+    <link rel="modulepreload" crossorigin href="/assets/viewpartials-7a86f681.js">
+    <link rel="modulepreload" crossorigin href="/assets/config-ef5f6dbc.js">
+    <link rel="modulepreload" crossorigin href="/assets/init-52a8aa54.js">
+    <link rel="modulepreload" crossorigin href="/assets/navbar-79b7ff75.js">
+    <link rel="modulepreload" crossorigin href="/assets/principal-90e94c9b.js">
+    <link rel="stylesheet" href="/assets/principal copy-6da31630.css">
+    <link rel="stylesheet" href="/assets/principal-compra-e3852332.css">
+</head>
+
+<body>
+
+    <div class="preloader" style="display: none;">
+        <div class="preloader-bounce">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div id="search">
+        <button type="button" class="close">×</button>
+        <form>
+            <input type="search" value="" placeholder="Escribe palabras clave aquí">
+            <button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+    <!-- Main Header -->
+    <header class="site-header wow fadeIn" data-wow-duration="1s"
+        style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
+        <div id="main-header" class="main-header">
+        </div>
+    </header>
+
+    <div class="page-heading wow fadeIn animated" data-wow-duration="0.5s"
+        style="visibility: visible;-webkit-animation-duration: 0.5s; -moz-animation-duration: 0.5s; animation-duration: 0.5s;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-content-bg wow fadeIn animated" data-wow-delay="0.75s" data-wow-duration="1s"
+                        style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.75s; -moz-animation-delay: 0.75s; animation-delay: 0.75s;">
+                        <div class="row">
+                            <div class="heading-content col-md-12">
+                                <p><a href="principal.html">Inicio</a> / <em>Carrito de compras</em></p>
+                                <h2>Mi<em> Carrito de compras</em></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- main content section -->
+    <div class="container wow fadeInUp animated animated" data-wow-duration="1s"
+        style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
+        <!-- Artisan 1 -->
+        <div class="card mb-4 box-style-card">
+            <div class="card-header">
+                <div class="sep-section-heading">
+                    <h2>Hecho por: <em>Nombre del artesano 1</em></h2>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="media mb-3">
+                            <img src="https://via.placeholder.com/150" class="mr-3 custom-img-size"
+                                alt="Imagen producto">
+                            <div class="media-body">
+                                <h5 class="mt-0">Nombre del producto</h5>
+                                <p>Característica: Rojo, 30x30cm</p>
+                                <p>Precio: S/. 40.00</p>
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="input-group mr-3" style="width: 120px;">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-secondary btn-decrease"
+                                                type="button">-</button>
+                                        </div>
+                                        <input type="text" class="form-control product-quantity" value="1" readonly>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary btn-increase"
+                                                type="button">+</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-delete-list btn-sm">Borrar del carrito</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="media mb-3">
+                            <img src="https://via.placeholder.com/150" class="mr-3 custom-img-size"
+                                alt="Imagen producto">
+                            <div class="media-body">
+                                <h5 class="mt-0">Nombre del producto</h5>
+                                <p>Característica: Rojo, 30x30cm</p>
+                                <p>Precio: S/. 120.00</p>
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="input-group mr-3" style="width: 120px;">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-secondary btn-decrease"
+                                                type="button">-</button>
+                                        </div>
+                                        <input type="text" class="form-control product-quantity" value="1" readonly>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary btn-increase"
+                                                type="button">+</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-delete-list btn-sm">Borrar del carrito</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card card-info-buy">
+                            <div class="card-body">
+                                <h5 class="card-buy-title">Resumen de la compra:</h5>
+                                <hr>
+                                <p>Subtotal: S/. 160.00</p>
+                                <hr>
+                                <p>Total a pagar: S/. 170.00 <br><small class="text-info">Incluye impuestos</small></p>
+                                <hr>
+                                <button class="btn btn-buy btn-block">Continua con tu compra</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Artisan 2 -->
+        <div class="card mb-4 box-style-card">
+            <div class="card-header">
+                <div class="sep-section-heading">
+                    <h2>Hecho por: <em>Nombre del artesano 2</em></h2>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="media mb-3">
+                            <img src="https://via.placeholder.com/150" class="mr-3 custom-img-size"
+                                alt="Imagen producto">
+                            <div class="media-body">
+                                <h5 class="mt-0">Nombre del producto</h5>
+                                <p>Característica: Rojo, 30x30cm</p>
+                                <p>Precio: S/. 40.00</p>
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="input-group mr-3" style="width: 120px;">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-secondary btn-decrease"
+                                                type="button">-</button>
+                                        </div>
+                                        <input type="text" class="form-control product-quantity" value="1" readonly>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary btn-increase"
+                                                type="button">+</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-delete-list btn-sm">Borrar del carrito</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card card-info-buy">
+                            <div class="card-body">
+                                <h5 class="card-buy-title">Resumen de la compra:</h5>
+                                <hr>
+                                <p>Subtotal: S/. 40.00</p>
+                                <hr>
+                                <p>Total a pagar: S/. 47.20 <br><small class="text-info">Incluye impuestos</small></p>
+                                <button class="btn btn-block btn-buy">Continua con tu compra</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer id="main-footer">
+    </footer>
+
+
+
+</body>
+
+
+
+
+<!-- Slider Pro Js -->
+<script src="js/sliderpro.min.js"></script>
+
+<!-- Slick Slider Js -->
+<script src="js/slick.js"></script>
+
+<!-- Owl Carousel Js -->
+<script src="js/owl.carousel.min.js"></script>
+
+<!-- Boostrap Js -->
+<script src="js/wow.animation.js"></script>
+
+<!-- Custom Js -->
+<script src="js/custom.js"></script>
+
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
+
+</html>

@@ -4,7 +4,7 @@
 
 /************************************************
 	************************************************
-										Body CSS							
+										Body CSS
 	************************************************
 ************************************************/
 html {
@@ -109,7 +109,7 @@ body.error-bg {
 
 /************************************************
 	************************************************
-										Common CSS							
+										Common CSS
 	************************************************
 ************************************************/
 a {
@@ -145,7 +145,7 @@ hr {
 
 /************************************************
 	************************************************
-											Reusable CSS							
+											Reusable CSS
 	************************************************
 ************************************************/
 /*************** Card Fixed Heights ***************/
@@ -314,7 +314,7 @@ hr {
 
 /************************************************
 	************************************************
-										Layout CSS							
+										Layout CSS
 	************************************************
 ************************************************/
 .app {
@@ -1057,7 +1057,7 @@ hr {
 
 /************************************************
 	************************************************
-											Main CSS							
+											Main CSS
 	************************************************
 ************************************************/
 /*************** Logo ***************/
@@ -1373,7 +1373,7 @@ a.onoffcanvas-toggler i {
 
 /************************************************
 	************************************************
-											Widgets										
+											Widgets
 	************************************************
 ************************************************/
 /*************** Stats Widget ***************/
@@ -2881,7 +2881,7 @@ ul#newsticker li:hover {
 
 /************************************************
 	************************************************
-											Pages							
+											Pages
 	************************************************
 ************************************************/
 /*************** Invoice Page ***************/
@@ -3182,7 +3182,7 @@ a.blog-sm p.blog-date:after {
 
 /************************************************
 	************************************************
-							Plugins Overwrite CSS							
+							Plugins Overwrite CSS
 	************************************************
 ************************************************/
 /*************** Map/Chart/Graph Heights ***************/
@@ -4114,7 +4114,7 @@ a.blog-sm p.blog-date:after {
 
 /************************************************
 	************************************************
-							Bootstrap Overwrite CSS							
+							Bootstrap Overwrite CSS
 	************************************************
 ************************************************/
 /*************** Modals ***************/
@@ -4662,11 +4662,11 @@ a.blog-sm p.blog-date:after {
   padding: 1rem;
   position: relative;
   line-height: 14px;
-  
+
 }
 
 .long-text {
- 
+
   width: 100%;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -5571,7 +5571,7 @@ label {
 /*css erick*/
 .iestpdetails{
   background: #f5f6fa;
- 
+
 }
 
 .bt-virtual{
@@ -5590,7 +5590,7 @@ label {
 .detail-prog{
   font-size: 10px !important;
   color: #000000;
-  
+
 }
 .red{
   color: red;
@@ -5689,7 +5689,7 @@ label {
 }
 
 .card {
-   box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.16), 0 0px 00px 0 rgba(0, 0, 0, 0.12); 
+  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.16), 0 0px 00px 0 rgba(0, 0, 0, 0.12);
 }
 
 .card-book{
@@ -5699,7 +5699,7 @@ label {
   background: #F6F6F6;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-width: 200px !important;
+  width: 200px !important;
 }
 
 .rating {
@@ -5715,8 +5715,8 @@ width: 200px !important;
 
 .card-img-top{
   width: 199px;
-height: 220px;
-flex-shrink: 0;
+  height: 220px;
+  flex-shrink: 0;
 }
 .sutitle-body{
   color: #888888;
@@ -5730,7 +5730,7 @@ flex-shrink: 0;
 .input-group-text{
   background-color: #F1F6FC !important;
   border: 0px solid #ced4da;
-   border-radius: 0px;
+  border-radius: 0px;
 }
 .form-control:focus {
   border: 0px solid #da1113;
@@ -5773,7 +5773,7 @@ flex-shrink: 0;
   border-color: red;
   color: white;
   font-size: 16px;
-  background-color: red; 
+  background-color: red;
   margin-left: 30px;
 }
 .black{
@@ -5791,14 +5791,14 @@ flex-shrink: 0;
 
 .custom-btn:hover {
   background-color: white;
-  color: red; 
+  color: red;
 }
 
 
 /* Ajuste del card */
 .custom-card-img {
-  max-width: 200px; 
-  height: 220px; 
+  max-width: 200px;
+  height: 220px;
 }
 
 .custom-card{
@@ -5822,7 +5822,7 @@ flex-shrink: 0;
 .btncopytext{
   background-color: rgba(0, 0, 0, 0);
   border: 0px solid;
-  
+
 }
 
 .btn-primary:disabled {
@@ -5838,11 +5838,11 @@ flex-shrink: 0;
 }
 
 @media (min-width: 768px){
-.col-md-2-5 {
+  .col-md-2-5 {
     -ms-flex: 0 0 19.00%;
     flex: 0 0 19.0%;
     max-width: 19.0%;
-}
+  }
 }
 
 
@@ -5862,7 +5862,7 @@ flex-shrink: 0;
 }
 
 .btnssocial {
- 
+
   text-align: center;
 }
 

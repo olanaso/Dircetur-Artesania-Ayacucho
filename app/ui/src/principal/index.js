@@ -29,9 +29,7 @@ hideLoading();
         import('../utils/common')
 
 
-        // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
         console.log('Las vistas parciales se han cargado correctamente!');
-        // Por ejemplo, podrías iniciar tu aplicación aquí.
 
         startApp();
     } catch (e) {
@@ -40,15 +38,15 @@ hideLoading();
 })();
 
 function startApp() {
-     // Colocar el código que deseas ejecutar después de cargar las vistas parciales.
-        modificarNavbarSegunRol();
-        const cerrarSesionLink = document.getElementById('cerrar-sesion-link');
-        if (cerrarSesionLink) {
-            cerrarSesionLink.addEventListener('click', (event) => {
-                event.preventDefault();
-                cerrarSesion();
-            });
-        }
+    // Colocar el código que deseas ejecutar después de cargar las vistas parciales.
+    modificarNavbarSegunRol();
+    const cerrarSesionLink = document.getElementById('cerrar-sesion-link');
+    if (cerrarSesionLink) {
+        cerrarSesionLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            cerrarSesion();
+        });
+    }
 
 
 }
@@ -57,22 +55,22 @@ function startApp() {
 $(document).ready(async function(){
     //await cargarSliders();
     await cargarCategorias();
-   if ($('.Modern-Slider').length) {
-       $('.Modern-Slider').slick({
-           // Tus opciones de configuración aquí
-           dots: true,
-           infinite: true,
-           speed: 500,
-           slidesToShow: 1,
-           slidesToScroll: 1,
-           autoplay: true,
-           autoplaySpeed: 2000,
-           prevArrow: $('.PrevArrow'),
-           nextArrow: $('.NextArrow')
-       });
-   }
+    if ($('.Modern-Slider').length) {
+        $('.Modern-Slider').slick({
+            // Tus opciones de configuración aquí
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            prevArrow: $('.PrevArrow'),
+            nextArrow: $('.NextArrow')
+        });
+    }
 
-   //initMap();
+    //initMap();
 });
 
 function initMap() {
@@ -96,7 +94,7 @@ async function cargarSliders(){
     $('#modernSlider').empty()
     let filas = ''
     for (let data of sliders.sliders) {
-      let cleanUrl = data.imagen.replace(/"/g, '');
+        let cleanUrl = data.imagen.replace(/"/g, '');
         filas += `
             <div class="item">
             <div class="img-fill">
@@ -126,31 +124,25 @@ async function cargarSliders(){
         nextArrow: $('.NextArrow')
     });
 
-  }
+}
 
-  async function cargarCategorias(){
-    const categorias =  await listarCategorias()
-    //console.log(categorias)
-    $('#owl-top-features').empty()
-    let cards = ''
+// app/ui/src/principal/index.js
+async function cargarCategorias() {
+    const categorias = await listarCategorias();
+    $('#owl-top-features').empty();
+    let cards = '';
     for (let data of categorias) {
-        //console.log(data);
-
-      //let cleanUrl = data.imagen.replace(/"/g, '');
         cards += `
             <div class="item car-item">
-                <div class="thumb-content">
-                    <a href="principal-detalle.html"><img src=${data.foto_referente} alt=${data.abreviatura}></a>
-                </div>
-                <div class="down-content">
-                    <a href="principal-detalle.html"><h4>${data.denominacion}</h4></a> 
-                </div>
-            </div>`
-
-            //console.log(cards);
-
+              <div class="thumb-content">
+               <a href="productos_por_categoria.html?categoriaId=${data.abreviatura}"><img src="${data.foto_referente}" alt="${data.abreviatura}"></a>
+              </div>
+              <div class="down-content">
+               <a href="productos_por_categoria.html?categoriaId=${data.abreviatura}"><h4>${data.denominacion}</h4></a> 
+              </div>
+           </div>`;
     }
-    $('#owl-top-features').append(cards)
+    $('#owl-top-features').append(cards);
 
     // Reinitialize Owl Carousel
     $("#owl-top-features").owlCarousel({
@@ -162,8 +154,7 @@ async function cargarSliders(){
         autoplayTimeout: 5000,
         autoplayHoverPause: true
     });
-  }
-
+}
 
 // Llamar a la función de inicialización del mapa cuando el documento esté listo
 //document.addEventListener('DOMContentLoaded', initMap);
@@ -171,4 +162,4 @@ document.addEventListener('DOMContentLoaded', () => {
     //cargarSliders()
     //cargarCategorias()
 
-  });
+});

@@ -1,0 +1,146 @@
+body {
+    background-color: #f5f5f5;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+.product-card {
+    border: 1px solid #cccccc;
+    border-radius: 12px;
+    overflow: hidden;
+    top: 0;
+    margin-bottom: 40px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    background-color: #ffffff;
+    position: relative;
+    border-bottom: 4px solid #007bff;
+}
+
+.product-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    border-bottom: 4px solid #f4c23d;
+}
+
+.thumb-inner img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+}
+
+.thumb-inner img:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.product-details {
+    padding: 20px;
+    text-align: left;
+}
+.product-details h4 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+    text-decoration: none;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.product-details a:hover {
+    text-decoration: none;
+}
+
+.product-details span {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #2959ad;
+    font-weight: bold;
+}
+
+.primary-button a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #2959ad;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+}
+
+.primary-button a:hover {
+    background-color: #f4c23d;
+    transform: translateY(-2px);
+}
+
+.product-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #f4c23d;
+    color: white;
+    padding: 5px 10px;
+    clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);
+    transition: background-color 0.3s ease;
+}
+
+.product-banner h3 {
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    margin: 0;
+    line-height: 1.5;
+}
+.section-heading {
+    margin-top: -60px;
+}
+
+.section-heading .icon {
+    margin-left: 10px;
+
+}
+
+.section-heading .contador-productos h2 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+/* Paginación */
+#paginationControls {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+#paginationControls button {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#paginationControls button:hover {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+#paginationControls button.active {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}

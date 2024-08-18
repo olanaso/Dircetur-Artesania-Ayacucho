@@ -1,6 +1,6 @@
 const controller = require('../controllers').artesano;
 const { Router } = require('express');
-const { uploadarchivoArtesano} = require('../midleware/uploadJorge');
+const { uploadarchivoArtesano } = require('../midleware/uploadJorge');
 const router = Router();
 
 router.post('/artesano', controller.guardar);
@@ -9,10 +9,12 @@ router.delete('/artesano', controller.eliminar);
 router.get('/artesano/:id', controller.obtener);
 //router.get('/artesanos', controller.listar);
 router.post('/artesano/save/', controller.save);
-router.get('/artesanos',  controller.buscar);
-router.get('/artesano-dni/:dni', controller.obtenerDNI); 
+router.post('/artesano/saveusuarioartesano/', controller.saveUsuarioArtesano);
+router.get('/artesanos', controller.buscar);
+router.get('/artesano-dni/:dni', controller.obtenerDNI);
 router.post('/artesano/fileupload', uploadarchivoArtesano, controller.uploadFilartesano);
-
+router.get('/v1/artesanos/categorias', controller.getAllArtesanosByCategoria)
 module.exports = router;
- 
+
+
  

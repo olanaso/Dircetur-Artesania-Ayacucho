@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Verifica tu certificado</title>
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<style>
+		.custom-purple-bg {
+			background-color: #993399;
+		}
+
+		.custom-purple-hover-bg:hover {
+			background-color: #872b87;
+		}
+
+		.custom-purple-text {
+			color: #993399;
+		}
+	</style>
+  <script type="module" crossorigin src="/assets/busqueda-certificado-eb4bcf59.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
+  <link rel="modulepreload" crossorigin href="/assets/validateForm-1578b31b.js">
+  <link rel="modulepreload" crossorigin href="/assets/config-ef5f6dbc.js">
+  <link rel="stylesheet" href="/assets/busqueda-certificado-acda086e.css">
+</head> 
+<body>
+	<div class="max-w-4xl mx-auto px-4 py-6">
+		<div class="mb-6 ">
+			<div class="logo-image  items-center justify-center">
+				<center>
+					<a href="https://centrodegestion.org/" title="CENTRO DE GESTIÓN ESTRATÉGICA A&amp;T - Artesania">
+						<img class="logo-img" src="https://centrodegestion.org/templates/jd_chicago/images/logo.png"
+							alt="CENTRO DE GESTIÓN ESTRATÉGICA A&amp;T - Artesania">
+
+					</a>
+					<small class="site-slogan">
+						<p class="text-lg font-semibold mt-2">¡Verifica tu certificado!</p>
+					</small>
+				</center>
+			</div>
+
+		</div>
+
+		<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">  
+			<form id="form" action="javascript:void(0)">
+				<div class="mb-4">
+					<label class="block text-gray-700 text-sm font-bold mb-2" for="certificate_code">
+						Ingrese código del certificado o el Nombre del estudiante
+					</label>
+					<input required
+						class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+						id="searchBox" type="text" placeholder="Código o nombre">
+				</div>
+				<div class="flex items-center justify-between">
+					<button id="btnbuscar"
+						class="custom-purple-bg custom-purple-hover-bg text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center">
+						<i class="fas fa-search mr-2"></i>
+						Búscar certificado
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+
+
+
+
+		<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+			<div class="mb-6">
+				<span class="text-sm text-gray-600">Resultados: <label id="txtcantidadbuscada">-</label></span>
+				<div id="listacertificados"></div>
+
+			</div>
+		</div>
+	</div>
+	<script src="/js/jquery.js"></script>
+	
+
+</html>

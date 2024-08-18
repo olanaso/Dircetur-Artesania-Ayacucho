@@ -1,11 +1,12 @@
 import { FileUploader } from '../utils/upload.js';
+import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeFileUploader({
         fileInputId: 'myfile',
         progressBarId: 'progressBar',
         statusElementId: 'status',
-        uploadUrl: 'http://localhost:3001/api/fileupload2',
+        uploadUrl: baseUrl + '/fileupload2',
         callback: handleUploadResponse
     });
 });

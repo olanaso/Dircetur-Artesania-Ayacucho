@@ -1,21 +1,66 @@
 import { validarHTML5 } from '../utils/validateForm';
-import {saveDataToLocalStorage} from '../utils/config'
-import {hideLoading} from '../utils/init'
-import {obtenerParametrosURL} from '../utils/path'
-import {obtenerProducto, obtenerArtesano, listarProductos} from './api'
+import { saveDataToLocalStorage } from '../utils/config'
+import { hideLoading } from '../utils/init'
+import { obtenerParametrosURL } from '../utils/path'
+import { obtenerProducto, obtenerArtesano, listarProductos, listarProductosPorCategoria } from './api'
 
 let cantidadMaxima
 //  href = /clientes-detalle.html?id=${data.id}
 document.addEventListener('DOMContentLoaded', async () => {
-    await infoProd();
+    infoProd();
     setupQuantityControls();
-
 });
 
-async function infoProd() {
+async function infoProd () {
     const productoId = getQueryParameter('id');
     const producto = await obtenerProducto(productoId);
     const artesano = await obtenerArtesano(producto.artesano_id);
+
+    $(document).ready(async function() {
+        let categoriaMap = {
+            101: 'TE',
+            108: 'CER',
+            113: 'PT',
+            131: 'RET',
+            132: 'OH'
+        };
+
+        let categoriaId = categoriaMap[producto.categoria_id] || producto.categoria_id.toString();
+        let productosRecomendadosPorCategoria = await listarProductosPorCategoria(categoriaId);
+
+        console.log("MENSAJEEEEEEEEEEEEEEEEEEEEEE", productosRecomendadosPorCategoria);
+
+        // Extract the data array from the fetched productosRecomendadosPorCategoria object
+        let productosRecomendados = productosRecomendadosPorCategoria.data;
+
+        // Generate HTML for recommended products
+        let recommendedProductsHtml = '';
+
+        for (let i = 0; i < productosRecomendados.length; i++) {
+            let productos = productosRecomendados[i];
+
+            recommendedProductsHtml += `
+            <div class="recommended-product">
+            <div class="recommended-product-card">
+                <img src="${productos.imagen_principal}" alt="${productos.nombres_es}">
+                <p class="text-limited">${productos.nombres_es}</p>
+                <p class="text-limited">Precio: S/. ${productos.precio}</p>
+                </div>
+            </div>
+        `;
+
+        }
+
+        $('#recommended-products').html(recommendedProductsHtml);
+
+        // Initialize Slick Carousel
+        $('#recommended-products').slick({
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            prevArrow: $('.left-arrow'),
+            nextArrow: $('.right-arrow')
+        });
+    });
 
     // Asegurarse de que producto.lst_imagenes sea una cadena JSON válida
     const imagenesProd = JSON.parse(JSON.parse(producto.lst_imagenes.replace(/\/\//g, '/')));
@@ -53,7 +98,6 @@ async function infoProd() {
     $('#slider1').empty().append(S1);
     $('#slider2').empty().append(S2);
 
-
     $('#slider1').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -85,10 +129,12 @@ async function infoProd() {
         $('.sp-arrow.sp-previous-arrow').click();
     }, 500);
 
-    function getQueryParameter(name) {
+    function getQueryParameter (name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
     }
+
+
     /*carga de datos sobre producto y artesano*/
     const listColores = JSON.parse(JSON.parse(producto.lst_colores))
     const listTallas = JSON.parse(JSON.parse(producto.lst_talla))
@@ -98,30 +144,30 @@ async function infoProd() {
 
     console.log('coloes: ', listMediosPago);
     if (listColores.length > 0) {
-        for(let color of listColores){
+        for (let color of listColores) {
             $('#Colores').append(
                 `<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" style="background: ${color.color};width: 30px;height: 30px;"> </button>`
             )
         }
-    }else{
+    } else {
         $('#Colores').append(
             `<p>No hay colores disponibles</p>`
         )
     }
     if (listTallas.length > 0) {
-        for(let talla of listTallas){
+        for (let talla of listTallas) {
             $('#tallas').append(
                 `<button id="sizeButton-6-US" type="button" class="size-button selected rebranded red-text" >${talla.talla} </button>`
             )
         }
-    }else{
+    } else {
         $('#tallas').append(
             `<p>No hay tallas disponibles</p>`
         )
     }
 
     if (listOtrosCostos.length > 0) {
-        for(let costos of listOtrosCostos){
+        for (let costos of listOtrosCostos) {
             $('#otrosCostos').append(
                 `<option value="${costos.id}">${costos.nombre} (S/ ${costos.precio})</option>`
             );
@@ -136,7 +182,7 @@ async function infoProd() {
                 </span>
             </p>`
         )
-    } else if (producto.cantidad >5) {
+    } else if (producto.cantidad > 5) {
         $('.stock-info').append(
             `<p id="cantidadProd" style="margin-bottom: 0;margin-top: 0px !important;">${producto.cantidad} disponibles 
                 <span id="disponible" style="display: inline-block; background-color: rgb(0 0 255 / 58%); color: white; padding: 3px 8px; border-radius: 5px; margin-left: 5px; cursor: pointer;">
@@ -234,7 +280,7 @@ async function infoProd() {
     }
 
     if (listMediosPago.length > 0) {
-        for (let pago of listMediosPago){
+        for (let pago of listMediosPago) {
             $('#mediosPago').append(`
                 <div style="border:solid 1px #f4c23d; text-align: center;">${pago.Pago}</div>
             `)
@@ -247,13 +293,32 @@ async function infoProd() {
 
 }
 
+const acc = document.getElementsByClassName("accordion");
+let i;
 
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+
+        const panel = this.nextElementSibling;
+        const icon = this.querySelector('.icon');
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+            icon.classList.remove('rotate');
+            icon.textContent = "+";
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            icon.classList.add('rotate');
+            icon.textContent = "-";
+        }
+    });
+}
 //funcionalidad para elegir cantidad:
-function setupQuantityControls() {
+function setupQuantityControls () {
     const cantidadMaxima = 10; // Set this to the actual maximum quantity
     let cantidadProd = 0;
 
-    document.getElementById('increment-btn').addEventListener('click', function() {
+    document.getElementById('increment-btn').addEventListener('click', function () {
         if (cantidadProd < cantidadMaxima) {
             cantidadProd++;
             document.getElementById('counter-value').value = cantidadProd;
@@ -264,7 +329,7 @@ function setupQuantityControls() {
         }
     });
 
-    document.getElementById('decrement-btn').addEventListener('click', function() {
+    document.getElementById('decrement-btn').addEventListener('click', function () {
         if (cantidadProd > 0) {
             cantidadProd--;
             document.getElementById('counter-value').value = cantidadProd;
