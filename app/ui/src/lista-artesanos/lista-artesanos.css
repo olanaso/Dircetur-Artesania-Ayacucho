@@ -1,6 +1,47 @@
 body {
     background-color: #f4f4f4;
 }
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#search-input {
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-right: 40px; /* Space for the clear button */
+}
+
+#search-button {
+    padding: 10px;
+    margin-left: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#clear-button {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+
+#search-button.loading {
+    cursor: not-allowed;
+    background-color: #ccc;
+}
 
 .intro-section {
     position: relative;
