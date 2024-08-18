@@ -3,6 +3,7 @@ sequelize = db.sequelize;
 Sequelize = db.Sequelize;
 const categoria = require ('./categoria')
 const artesano = require('./artesano')
+const {Op} = require('sequelize')
 
 
 const product = sequelize.define('producto', {
@@ -308,6 +309,27 @@ product.findAllArtesanoIdByCategoriaId = async function(id)  {
     return artesanos.map(artesano => artesano.artesano_id)
 }
 
+/**
+ * Funcion  para encontrar todos los id de artesanos y categorias por el id de la categoria
+ * @param categorias = objeto
+ * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
+ */
+product.findAllArtesanoIdAndCategoriaIdByCategorias = async function(categorias){
+    const artesanosPorCategoria = await product.findAll({
+        attributes: ['categoria_id', 'artesano_id'],
+        where: {
+            categoria_id : {
+                [Op.in] : categorias.map(cat => cat.id)
+            }
+        }
+    })
+    //no retorno valores repetidos
+    const uniqueArtesanosPorCategoria = artesanosPorCategoria.reduce((unique, item) => {
+        return unique.some(uniqueItem => uniqueItem.categoria_id === item.categoria_id && uniqueItem.artesano_id === item.artesano_id) ? unique : [...unique, item];
+    }, []);
+
+    return uniqueArtesanosPorCategoria;
+}
 module.exports = product
 
 
