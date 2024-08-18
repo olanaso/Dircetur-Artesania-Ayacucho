@@ -4,12 +4,15 @@ import { baseUrl } from '../utils/config';
 export async function listarArtesanosPorCategoriaArtesania() {
     try {
         const requestOptions ={
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }
-        const response = await fetch(`${baseUrl}/v1/artesanos/categorias}`, requestOptions);
-        const result = await response.json();
+        const response = await fetch(`${baseUrl}/v1/artesanos/categorias`, requestOptions);
+        const result = await response.json()
         console.log("DATAAA", result)
-        return result.data; // Return the data property from the response
+        return result; // Return the data property from the response
     } catch (error) {
         console.error('Error:', error);
     }

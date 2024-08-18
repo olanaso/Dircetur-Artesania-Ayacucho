@@ -1,3 +1,25 @@
+import {listarArtesanosPorCategoriaArtesania} from "./api.js";
+
+//Llamando funcion al ingresar
+$(document).ready(function () {
+    mostrarListaArtesanosPorCategoria()
+})
+
+
+
+async function mostrarListaArtesanosPorCategoria(){
+    try{
+        const response = await listarArtesanosPorCategoriaArtesania();
+        console.log("RESPUESTAAA", response)
+
+
+        //funcion de maku para llenar los datos
+
+    }catch(e){
+        console.error(e)
+    }
+}
+
 /*
 import { listarArtesanoById } from './api.js';
 
