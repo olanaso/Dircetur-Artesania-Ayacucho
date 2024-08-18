@@ -131,7 +131,11 @@ const cliente = sequelize.define('cliente', {
     timestamps: true
 });
 
-
+/**
+ * Funcion que  encuentra el id de un cliente por su correo
+ * @param correo
+ * @returns {Promise<id|null>}
+ */
 cliente.findIdByCorreo = async function(correo){
     clienteEncontrado = await cliente.findOne({
         where: {
@@ -139,6 +143,25 @@ cliente.findIdByCorreo = async function(correo){
         }
     });
     return clienteEncontrado ? clienteEncontrado.id : null
+}
+
+/**
+ * Funcion que encuentra el cliente por su id
+ * @param id
+ * @returns {Promise<cliente | null>}
+ */
+cliente.findClienteById = async function(id){
+    return cliente.findOne({where: {id}})
+}
+
+/**
+ * Funcion que encuentra el id de un usuario por el id de un cliente
+ * @param id
+ * @returns {Promise<usuario_id|null>}
+ */
+cliente.findUsuarioIdByClienteId = async function(id){
+    usuario = await cliente.findOne({where: {id}})
+    return usuario ? usuario.usuario_id : null
 }
 
 module.exports = cliente

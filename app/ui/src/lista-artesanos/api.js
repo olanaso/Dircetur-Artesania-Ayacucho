@@ -1,24 +1,17 @@
 // File: app/ui/src/lista-artesanos/api.js
 import { baseUrl } from '../utils/config';
 
-export async function listarArtesanoById(idArtesano) {
+export async function listarArtesanosPorCategoriaArtesania() {
     try {
-        const response = await fetch(`${baseUrl}/artesano/${idArtesano}`, {
+        const requestOptions ={
             method: 'GET',
-        });
-        const result = await response.json();
-        return result.data; // Return the data property from the response
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-export async function obtenerProducByArtesano(idArtesano) {
-    try {
-        const response = await fetch(`${baseUrl}/v1/productos/artesanos/${idArtesano}`, {
-            method: 'GET',
-        });
-        const result = await response.json();
-        return result.data; // Return the data property from the response
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        const response = await fetch(`${baseUrl}/v1/artesanos/categorias`, requestOptions);
+        const result = await response.json()
+        return result; // Return the data property from the response
     } catch (error) {
         console.error('Error:', error);
     }
