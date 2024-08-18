@@ -1,9 +1,10 @@
 /* jshint indent: 1 */
 const db = require('../config/db');
 sequelize = db.sequelize;
-Sequelize = db.Sequelize;
+Sequelize = db.Sequelize
+const categoria = require('./categoria')
 
-module.exports = sequelize.define('artesano', {
+const artesano = sequelize.define('artesano', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -142,3 +143,38 @@ module.exports = sequelize.define('artesano', {
     timestamps: true
 
 });
+
+// artesano.hasMany(product, {
+//     foreignKey: 'artesano_id', //foreign key dentro de la tabla product
+//     as: 'productos'
+// })
+//
+// product.belongsTo(categoria, {
+//     foreignKey: 'categoria_id', //foreign key del modelo actual producto
+//     as: 'categoria'
+// })
+
+// artesano.findCategoriasAndArtesanosByCategoriaId = async function(idCategoria){
+//     return await producto.findAll(
+//         {where: {categoria_id : idCategoria},
+//             include: [
+//                 {
+//                     model: artesano,
+//                     as: 'datos_artesano',
+//                     attributes: ['nombres', 'apellidos']
+//                 },
+//                 {
+//                     model: categoria,
+//                     as: 'categoria',
+//                     attributes: ['denominacion']
+//                 }
+//             ]
+//         })
+// }
+
+
+
+
+
+
+module.exports = artesano

@@ -303,6 +303,11 @@ product.findAllProductsByArtesanoId = async function(artesanoId) {
     })
 }
 
+product.findAllArtesanoIdByCategoriaId = async function(id)  {
+    const artesanos = await product.findAll({where: {categoria_id : id}})
+    return artesanos.map(artesano => artesano.artesano_id)
+}
+
 module.exports = product
 
 

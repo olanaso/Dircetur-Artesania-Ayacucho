@@ -12,8 +12,13 @@ module.exports = {
     save,
     filtrar,
     uploadImgCategoria,
-    getIdCategoriaByAbreviatura
+    getIdCategoriaByAbreviatura,
+
 };
+
+
+
+
 async function getIdCategoriaByAbreviatura(req,res){
     try {
         const {abreviatura} = req.params
