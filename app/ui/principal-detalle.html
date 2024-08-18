@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 	<!-- Mian and Login css -->
-	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="src/principal-detalle/principal-detalle.css" />
 
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -227,7 +227,15 @@
 </div>
 
 
-<div id="recommended-products"></div>
+<div class="carousel-wrapper">
+	<div class="carousel-container">
+		<div id="recommended-products" class="carousel">
+
+		</div>
+		<button class="carousel-arrow left-arrow">&lt;</button>
+		<button class="carousel-arrow right-arrow">&gt;</button>
+	</div>
+</div>
 
 <section>
 
@@ -248,47 +256,24 @@
 					</ul>
 					<div class="tab-content" id="productTabsContent">
 						<div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">
-							<div class="row">
-								<div class="col-md-6 mb-3">
-									<div class="item w-100" data-wow-duration="0.5s">
-										<div class="sep-section-heading">
-											<h2>Resumen <em>Producto</em></h2>
-										</div>
-										<div class="section-content">
-											<p id="resumenProd"></p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 mb-3">
-									<div class="item w-100" data-wow-duration="0.5s">
-										<div class="sep-section-heading">
-											<h2>Descripción <em>Producto</em></h2>
-										</div>
-										<div class="section-content">
-											<p id="descripcionProd"></p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 mb-3">
-									<div class="item w-100" data-wow-duration="0.5s">
-										<div class="sep-section-heading">
-											<h2>Cualidades <em>Producto</em></h2>
-										</div>
-										<div class="section-content">
-											<p id="cualidadesProd"></p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 mb-3">
-									<div class="item w-100" data-wow-duration="0.5s">
-										<div class="sep-section-heading">
-											<h2>Palabras <em>clave</em></h2>
-										</div>
-										<div class="section-content">
-											<p id="palabrasClave"></p>
-										</div>
-									</div>
-								</div>
+							<button class="accordion">Resumen <em>Producto</em> <span class="icon">+</span></button>
+							<div class="panel">
+								<p id="resumenProd"></p>
+							</div>
+
+							<button class="accordion">Descripción <em>Producto</em> <span class="icon">+</span></button>
+							<div class="panel">
+								<p id="descripcionProd"></p>
+							</div>
+
+							<button class="accordion">Cualidades <em>Producto</em> <span class="icon">+</span></button>
+							<div class="panel">
+								<p id="cualidadesProd"></p>
+							</div>
+
+							<button class="accordion">Palabras <em>clave</em> <span class="icon">+</span></button>
+							<div class="panel">
+								<p id="palabrasClave"></p>
 							</div>
 						</div>
 						<div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
@@ -393,7 +378,9 @@
 
 <!-- Slick Slider Js -->
 <script src="assets/js/slick.js"></script>
-
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <!-- Owl Carousel Js -->
 <script src="assets/js/owl.carousel.min.js"></script>
 

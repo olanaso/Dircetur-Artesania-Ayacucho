@@ -19,6 +19,7 @@ body {
     border-bottom: 4px solid #007bff;
 }
 
+
 .product-card:hover {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
     transform: translateY(-10px);
@@ -67,7 +68,8 @@ body {
     font-weight: bold;
 }
 
-.primary-button a {
+
+.product-card-link .primary-button a {
     display: inline-block;
     margin-top: 10px;
     padding: 10px 20px;
@@ -79,7 +81,7 @@ body {
     text-decoration: none;
 }
 
-.primary-button a:hover {
+.product-card-link .primary-button a:hover {
     background-color: #f4c23d;
     transform: translateY(-2px);
 }
@@ -143,4 +145,47 @@ body {
     background-color: #007bff;
     color: white;
     border: none;
+}
+
+.features-search-section {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+}
+
+.search-content {
+    box-shadow: 0 2px 4px rgba(1, 0, 0, 0.5)!important;
+}
+
+.search-heading .icon {
+    font-size: 24px;
+    color: #007bff;
+    margin-right: 10px;
+}
+
+.search-form {
+margin-left: 45px;
+}
+
+.search-form .input-select {
+    margin-bottom: 15px;
+}
+
+.search-form .input-select input {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.secondary-button a {
+    display: inline-block!important;
+    padding: 13px 25px!important;
+    color: #fff!important;
+    border-radius: 4px!important;
+    text-decoration: none!important;
+    transition: background-color 0.3s!important;
+}
+
+.secondary-button a:hover {
+    background-color: #0056b3   !important;
 }

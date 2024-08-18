@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Mian and Login css -->
-    <link rel="stylesheet" href="../ui/public/css/main.css" />
+    <link rel="stylesheet" href="src/productos_por_categoria/filtro.css" />
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -30,6 +30,30 @@
 </head>
 
 <body>
+<header class="site-header wow fadeIn" data-wow-duration="1s"
+        style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
+    <div id="main-header" class="main-header">
+    </div>
+</header>
+
+<div class="page-heading wow fadeIn animated" data-wow-duration="0.5s" style="visibility: visible;-webkit-animation-duration: 0.5s; -moz-animation-duration: 0.5s; animation-duration: 0.5s;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading-content-bg wow fadeIn animated" data-wow-delay="0.75s" data-wow-duration="1s" style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.75s; -moz-animation-delay: 0.75s; animation-delay: 0.75s;">
+                    <div class="row">
+                        <div class="heading-content col-md-12">
+                            <p><a href="principal.html"></a> / <em> </em> / <em> </em></p>
+                            <h2></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="header-background"></div>
 <div class="preloader" style="display: none;">
     <div class="preloader-bounce">
         <span></span>
@@ -61,10 +85,14 @@
         </div>
     </div>
 </section>
+<footer id="main-footer">
+</footer>
 
 </body>
 <script type="module" src="src/productos_por_categoria/index.js"></script>
 <script src="assets/js/sliderpro.min.js"></script>
+<script type="module" src="src/principal/index.js"></script>
+
 
 <!-- Slick Slider Js -->
 <script src="assets/js/slick.js"></script>

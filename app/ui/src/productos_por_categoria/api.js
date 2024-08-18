@@ -12,3 +12,12 @@ export async function filtrarproductoscategoria(categoriaId) {
         console.error('Error:', error);
     }
 }
+export async function listarCategoria() {
+    try {
+        const response = await fetch(`${baseUrl}/categoria`, { method: 'GET' });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
