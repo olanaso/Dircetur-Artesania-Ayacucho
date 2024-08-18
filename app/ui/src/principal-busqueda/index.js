@@ -1,49 +1,105 @@
-import { listarCategorias, listarProductos } from './api';
+import { filtrarproductosporcategoria, listarProductos } from './api';
 import { validarHTML5 } from '../utils/validateForm';
 import { saveDataToLocalStorage } from '../utils/config';
-import { hideLoading } from '../utils/init';
 import { obtenerParametrosURL } from '../utils/path';
 
 document.addEventListener('DOMContentLoaded', async () => {
+    console.log('DOM fully loaded and parsed');
     const productos = await listarProductos();
+    console.log('Productos listados:', productos);
     cargarProductos(productos);
 
-    document.getElementById('filterButton').addEventListener('click', (event) => {
+    const filterButton = document.getElementById('filterButton');
+    const clearButton = document.getElementById('clearButton');
+
+    if (!filterButton) {
+        console.error('filterButton not found');
+        return;
+    }
+    if (!clearButton) {
+        console.error('clearButton not found');
+        return;
+    }
+
+    filterButton.addEventListener('click', async (event) => {
         event.preventDefault();
-        const filteredProducts = filtrarProductos(productos);
+        console.log('Filter button clicked');
+        setLoadingState(true);
+        const filteredProducts = await filtrarProductos(productos);
+        console.log('Productos filtrados:', filteredProducts);
         cargarProductos(filteredProducts);
+        setLoadingState(false);
     });
 
-    document.getElementById('clearButton').addEventListener('click', (event) => {
+    clearButton.addEventListener('click', (event) => {
         event.preventDefault();
+        console.log('Clear button clicked');
+        setLoadingState(true);
         clearFilters();
         cargarProductos(productos);
+        setLoadingState(false);
     });
 
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
-            document.getElementById('filterButton').click();
+            console.log('Enter key pressed');
+            filterButton.click();
         }
     });
 });
 
-function filtrarProductos(productos) {
+function setLoadingState(isLoading) {
+    const filterButton = document.getElementById('filterButton');
+    if (isLoading) {
+        console.log('Setting loading state to true');
+        filterButton.innerHTML = 'Buscando';
+        filterButton.classList.add('loading');
+        filterButton.disabled = true;
+    } else {
+        console.log('Setting loading state to false');
+        filterButton.innerHTML = '<i class="fa fa-search"></i>';
+        filterButton.classList.remove('loading');
+        filterButton.disabled = false;
+    }
+}
+
+async function filtrarProductos(productos) {
     const filterName = document.getElementById('filterName').value.toLowerCase();
     const filterPriceMin = parseFloat(document.getElementById('filterPriceMin').value) || 0;
     const filterPriceMax = parseFloat(document.getElementById('filterPriceMax').value) || Infinity;
+    const categoriaId = document.getElementById('category-filter').value;
 
-    return productos.filter(producto => {
+    let filteredProducts = productos.filter(producto => {
         const nombre = producto.nombres_es.toLowerCase();
         const precio = parseFloat(producto.precio.replace('S/.', ''));
-        return nombre.includes(filterName) && precio >= filterPriceMin && precio <= filterPriceMax;
+        const categoriaMatch = !categoriaId || producto.categoriaid === categoriaId;
+        return nombre.includes(filterName) && precio >= filterPriceMin && precio <= filterPriceMax && categoriaMatch;
+    });
+
+    if (categoriaId) {
+        const result = await filtrarproductosporcategoria(categoriaId);
+        filteredProducts = result.data.filter(producto => {
+            const nombre = producto.nombres_es.toLowerCase();
+            const precio = parseFloat(producto.precio.replace('S/.', ''));
+            return nombre.includes(filterName) && precio >= filterPriceMin && precio <= filterPriceMax;
+        });
+    }
+
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(filteredProducts);
+        }, 500);
     });
 }
 
 function clearFilters() {
+    setLoadingState(true);
     document.getElementById('filterName').value = '';
     document.getElementById('filterPriceMin').value = '';
     document.getElementById('filterPriceMax').value = '';
+    document.getElementById('category-filter').value = '';
+    setLoadingState(false);
 }
 
 const itemsPerPage = 9;

@@ -189,3 +189,50 @@ margin-left: 45px;
 .secondary-button a:hover {
     background-color: #0056b3   !important;
 }
+button#filterButton.loading {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+button#filterButton {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+button#filterButton i {
+    font-size: 16px;
+}
+
+button#filterButton.loading i {
+    display: none;
+}
+
+button#filterButton.loading::after {
+    content: '\f002'; /* Unicode for FontAwesome search icon */
+    font-family: 'FontAwesome';
+    font-size: 16px;
+    margin-left: 5px;
+    animation: ellipsis 1.25s infinite;
+}
+
+@keyframes ellipsis {
+    0% { content: '\f002'; }
+    25% { content: ''; }
+    50% { content: '.'; }
+    75% { content: '..'; }
+    100% { content: '...'; }
+}

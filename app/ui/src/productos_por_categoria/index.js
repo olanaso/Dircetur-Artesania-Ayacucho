@@ -1,4 +1,4 @@
-import { filtrarproductoscategoria, listarCategoria } from './api.js';
+import { filtrarproductoscategoria } from './api.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);

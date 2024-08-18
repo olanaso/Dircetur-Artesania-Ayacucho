@@ -34,7 +34,7 @@ body {
     background-color: transparent;
     cursor: pointer;
     transition: transform 0.3s ease;
-    position: relative; /* Ensure it doesn't affect the clear button */
+    position: relative;
 }
 
 #search-button:focus {
