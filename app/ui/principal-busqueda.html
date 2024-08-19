@@ -93,6 +93,16 @@
 								<div class="row">
 									<div class="col-md-3">
 										<div class="input-select">
+											<select id="category-filter">
+												<option value="">Seleccione una categoría</option>
+												<option value="CER">Cerámica</option>
+												<option value="PT">Piedra Tallada</option>
+												<option value="TE">Textilería</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="input-select">
 											<input type="text" id="filterName" placeholder="Nombre del producto">
 										</div>
 									</div>
@@ -106,24 +116,15 @@
 											<input type="number" id="filterPriceMax" placeholder="Precio Máximo">
 										</div>
 									</div>
-									<div class="col-md-2">
+
+									<div class="col-md-1">
 										<div class="secondary-button">
-											<button id="filterButton"><i class="fa fa-search"></i></button>
+											<button id="filterButton"><i class="fa fa-filter"></i></button>
 										</div>
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-1">
 										<div class="secondary-button">
-											<a href="#" id="clearButton">Limpiar</a>
-										</div>
-									</div>
-									<div class="col-md-3">
-										<div class="input-select">
-											<select id="category-filter">
-												<option value="">Seleccione una categoría</option>
-												<option value="CER">Cerámica</option>
-												<option value="PT">Piedra Tallada</option>
-												<option value="TE">Textilería</option>
-											</select>
+											<button id="clearButton"><i class="fa fa-times"></i></button>
 										</div>
 									</div>
 								</div>

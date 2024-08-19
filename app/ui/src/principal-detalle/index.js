@@ -39,14 +39,17 @@ async function infoProd () {
         for (let i = 0; i < productosRecomendados.length; i++) {
             let productos = productosRecomendados[i];
 
-            recommendedProductsHtml += `
+            recommendedProductsHtml += `     
+            <a href="principal-detalle.html?id=${productos.id}">
             <div class="recommended-product">
             <div class="recommended-product-card">
                 <img src="${productos.imagen_principal}" alt="${productos.nombres_es}">
                 <p class="text-limited">${productos.nombres_es}</p>
-                <p class="text-limited">Precio: S/. ${productos.precio}</p>
+                <p class="text-limited">${productos.resumen_es}</p>
+                <p class="price-design">S/. ${productos.precio}</p>        
                 </div>
             </div>
+            
         `;
 
         }
@@ -58,7 +61,30 @@ async function infoProd () {
             slidesToShow: 4,
             slidesToScroll: 4,
             prevArrow: $('.left-arrow'),
-            nextArrow: $('.right-arrow')
+            nextArrow: $('.right-arrow'),
+            responsive: [
+                {
+                    breakpoint: 1024, // For screens smaller than 1024px
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 768, // For screens smaller than 768px
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 480, // For screens smaller than 480px
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         });
     });
 
@@ -252,18 +278,17 @@ async function infoProd () {
 
 
     $('#datosArtesano').append(`
-        <div style=" width: 100px; heigth:100px;">
-            <img class="sp-image" src="${artesano.foto1}" alt="" style="width: 100%; border-radius: 50%;">
-        </div>
-        
-        <p id="nombreArtesano" class="m-2">${artesano.nombres} ${artesano.apellidos}
-            <br>
-            <a style="color: red;" href="principal-artesano.html?id=${artesano.id}">Ver mas... <i class="fas fa-plus-circle"></i></a>
-            
-        </p>
-        
-
-        `)
+    <div style="width: 120px; height: 120px;">
+        <img class="artesano-image" src="${artesano.foto1}" alt="" >
+    </div>
+    <p id="nombreArtesano" class="m-2" style="font-size: 20px; font-weight: 600;">
+        ${artesano.nombres} ${artesano.apellidos}
+        <br>
+        <a class="ver-mas-btn" href="principal-artesano.html?id=${artesano.id}" style="display: inline-block; padding: 10px 20px; background-color: #f4c23d; color: #fff; border-radius: 5px; text-decoration: none; font-weight: 800; margin-left: 50px; margin-top:20px;">
+    Ver más... <i class="fas fa-plus-circle"></i>
+</a>
+    </p>
+`)
     $('#telArtesano').text(artesano.celular)
     $('#correoArtesano').text(artesano.correo)
 
@@ -298,8 +323,18 @@ let i;
 
 for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
+        // Close all other panels
+        for (let j = 0; j < acc.length; j++) {
+            if (acc[j] !== this) {
+                acc[j].classList.remove("active");
+                acc[j].nextElementSibling.style.maxHeight = null;
+                acc[j].querySelector('.icon').classList.remove('rotate');
+                acc[j].querySelector('.icon').textContent = "+";
+            }
+        }
 
+        // Toggle the clicked panel
+        this.classList.toggle("active");
         const panel = this.nextElementSibling;
         const icon = this.querySelector('.icon');
         if (panel.style.maxHeight) {

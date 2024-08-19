@@ -51,16 +51,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function setLoadingState(isLoading) {
     const filterButton = document.getElementById('filterButton');
+    const clearButton = document.querySelector('.fa-times').parentElement;
+
     if (isLoading) {
         console.log('Setting loading state to true');
         filterButton.innerHTML = 'Buscando';
         filterButton.classList.add('loading');
         filterButton.disabled = true;
+        clearButton.classList.add('move-right');
     } else {
         console.log('Setting loading state to false');
-        filterButton.innerHTML = '<i class="fa fa-search"></i>';
+        filterButton.innerHTML = '<i class="fa fa-filter"></i>';
         filterButton.classList.remove('loading');
         filterButton.disabled = false;
+        clearButton.classList.remove('move-right');
     }
 }
 

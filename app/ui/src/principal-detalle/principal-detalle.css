@@ -4114,6 +4114,24 @@ a.blog-sm p.blog-date:after {
 }
 
 
+.artesano-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left:70%;
+    border-radius: 50%;
+    margin: 0 auto;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border: 2px solid #f4c23d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.artesano-image:hover {
+    transform: scale(1.1);
+}
 #single-car {
     display: flex;
     flex-direction: column;
@@ -6195,12 +6213,21 @@ label {
 
 .text-limited {
     width: 300px;
-    margin: 0 auto;
+    height:40px;
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.price-design {
+    font-family:"Roboto", sans-serif;
+    font-size: 18px;
+    color: #f4c23d;
+    font-weight: bold;
+    margin-top: 10px;
+    left: 1px;
 
+}
 .recommended-product-card {
     flex: 0 0 33.33%;
     width: 90%;
@@ -6212,12 +6239,13 @@ label {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-bottom: 2px solid transparent;
     margin-left: 12px;
 }
 .recommended-product-card p {
     text-align: left;
     position: relative;
-    left: -20px;
+    right: 20px;
 }
 .recommended-product {
     display: flex;
@@ -6228,7 +6256,7 @@ label {
 
 .recommended-product-card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border-bottom: 4px solid #f4c23d;
+    border-bottom: 2px solid #f4c23d;
 }
 
 .recommended-product-card img {
@@ -6279,7 +6307,7 @@ label {
 
 /*Acordeon*/
 .accordion {
-    background-color: #eee;
+    background: linear-gradient(125deg, #ffffff, rgba(196, 187, 10, 0.68));
     color: #444;
     cursor: pointer;
     padding: 18px;
@@ -6287,10 +6315,18 @@ label {
     text-align: left;
     border: none;
     outline: none;
-    transition: background-color 0.4s;
+    transition: background-color 0.4s, box-shadow 0.4s;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px; /* Add space between accordion items */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "Antarctica VAR", sans-serif;
+    text-transform: none;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 1.2rem;
 }
 
 .accordion .icon {
@@ -6298,21 +6334,34 @@ label {
 }
 
 .accordion:hover {
-    background-color: #ccc;
+    background-color: #f8f8f8;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.accordion.active {
-    background-color: #ccc;
+.accordion:focus {
+    outline: none;
 }
 
 .panel {
-    padding: 0 18px;
-    background-color: white;
+    padding: 0 20px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease-out;
+    transition: max-height 0.4s ease-out, padding 0.4s;
+    border-left: 2px solid #444;
+    border-right: 2px solid #444;
+    border-radius: 12px;
+    margin-bottom: 20px;
 }
-
+.panel p {
+    margin: 0;
+    padding: 15px 0;
+    font-family: "Antarctica VAR", sans-serif;
+    text-transform: none;
+    font-weight: bold;
+    font-style: normal;
+    color: black;
+    font-size: 1.2rem;
+}
 .icon {
     display: inline-block;
     transition: transform 0.4s;
@@ -6323,13 +6372,87 @@ label {
 }
 
 .accordion em {
-    color: red; /* Change this to the desired color */
+    font-family: "Antarctica VAR", sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-style: normal;
+    color: #f4c23d;
+    font-size: 1.3rem;
+
+    padding: 0 20px;
+}
+/* Alignment and Spacing */
+.vendor-profile {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #f4c23d;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.icon.rotate {
-    transform: rotate(180deg);
+.vendor-profile .section {
+    margin-bottom: 30px; /* Increased spacing */
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    border: 1px solid #ddd; /* Light border */
 }
-.accordion em {
-    color: red; /* Change this to the desired color */
-left:100px;
+
+.vendor-profile .contact-info .row div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.vendor-profile .contact-info i {
+    color: #f4c23d;
+    margin-right: 10px;
+}
+
+/* Typography */
+.vendor-profile h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.vendor-profile .contact-info span {
+    font-size: 16px;
+}
+
+.vendor-profile #nombreArtesano {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Colors */
+.vendor-profile a {
+    color: #f4c23d;
+}
+
+.vendor-profile a:hover {
+    color: #d4a017;
+}
+
+/* "Ver más..." Button */
+.vendor-profile a.ver-mas-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f4c23d;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.vendor-profile a.ver-mas-btn:hover {
+    background-color: #d4a017;
+}
+
+.contact-info i {
+    font-size: 16px;
+    margin-right: 10px;
+    border: none;
 }
