@@ -1,8 +1,8 @@
-import { validarHTML5 } from '../utils/validateForm';
-import { saveDataToLocalStorage } from '../utils/config'
-import { hideLoading } from '../utils/init'
-import { obtenerParametrosURL } from '../utils/path'
-import { obtenerProducto, obtenerArtesano, listarProductos, listarProductosPorCategoria } from './api'
+import {validarHTML5} from '../utils/validateForm';
+import {saveDataToLocalStorage} from '../utils/config'
+import {hideLoading} from '../utils/init'
+import {obtenerParametrosURL} from '../utils/path'
+import {obtenerProducto, obtenerArtesano, listarProductos, listarProductosPorCategoria} from './api'
 
 let cantidadMaxima
 //  href = /clientes-detalle.html?id=${data.id}
@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupQuantityControls();
 });
 
-async function infoProd () {
+async function infoProd() {
     const productoId = getQueryParameter('id');
     const producto = await obtenerProducto(productoId);
     const artesano = await obtenerArtesano(producto.artesano_id);
 
-    $(document).ready(async function() {
+    $(document).ready(async function () {
         let categoriaMap = {
             101: 'TE',
             108: 'CER',
@@ -129,7 +129,7 @@ async function infoProd () {
         $('.sp-arrow.sp-previous-arrow').click();
     }, 500);
 
-    function getQueryParameter (name) {
+    function getQueryParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
     }
@@ -297,7 +297,7 @@ const acc = document.getElementsByClassName("accordion");
 let i;
 
 for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
+    acc[i].addEventListener("click", function () {
         this.classList.toggle("active");
 
         const panel = this.nextElementSibling;
@@ -313,8 +313,9 @@ for (i = 0; i < acc.length; i++) {
         }
     });
 }
+
 //funcionalidad para elegir cantidad:
-function setupQuantityControls () {
+function setupQuantityControls() {
     const cantidadMaxima = 10; // Set this to the actual maximum quantity
     let cantidadProd = 0;
 
