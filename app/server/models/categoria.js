@@ -72,5 +72,16 @@ categoria.findAllCategoriasId = async function(){
     return categorias.map(categoria => categoria.id)
 }
 
+/**
+ * metodo que encuentra todas las categorias y solo devuelve el id y la denominacion
+ * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
+ */
+categoria.findAllIdAndDenominacion = async function(){
+    const result = await categoria.findAll({
+        attributes: ['id', 'denominacion']
+    })
+    return result
+}
+
 
 module.exports = categoria

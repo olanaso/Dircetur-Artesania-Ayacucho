@@ -3,6 +3,7 @@ const db = require('../config/db');
 sequelize = db.sequelize;
 Sequelize = db.Sequelize
 const categoria = require('./categoria')
+const {Op} = require('sequelize')
 
 const artesano = sequelize.define('artesano', {
     id: {
@@ -144,34 +145,20 @@ const artesano = sequelize.define('artesano', {
 
 });
 
-// artesano.hasMany(product, {
-//     foreignKey: 'artesano_id', //foreign key dentro de la tabla product
-//     as: 'productos'
-// })
-//
-// product.belongsTo(categoria, {
-//     foreignKey: 'categoria_id', //foreign key del modelo actual producto
-//     as: 'categoria'
-// })
-
-// artesano.findCategoriasAndArtesanosByCategoriaId = async function(idCategoria){
-//     return await producto.findAll(
-//         {where: {categoria_id : idCategoria},
-//             include: [
-//                 {
-//                     model: artesano,
-//                     as: 'datos_artesano',
-//                     attributes: ['nombres', 'apellidos']
-//                 },
-//                 {
-//                     model: categoria,
-//                     as: 'categoria',
-//                     attributes: ['denominacion']
-//                 }
-//             ]
-//         })
-// }
-
+/**
+ * Obtener todos los artesanos por ids de un arreglo
+ * @params ids = arreglo
+ */
+artesano.findArtesanosByIds = async function (ids){
+    return await artesano.findAll({
+        where: {
+            id: {
+                [Op.in] : ids
+            }
+        },
+        attributes: ['id', 'nombres', 'foto1', 'foto2']
+    })
+}
 
 
 

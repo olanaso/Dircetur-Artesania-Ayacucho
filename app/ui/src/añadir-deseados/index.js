@@ -1,3 +1,7 @@
+import { addToWishlist } from './api';
+
+import { addToWishlist } from '../añadir-deseados/api';
+
 let currentPage = 1;
 const productsPerPage = 3;
 const products = [
@@ -41,7 +45,7 @@ function renderProducts() {
                 <p class="price-value">S/${product.price}</p>
             </div>
             <div class="product-actions">
-                <div class="custom-button-wrapper custom-button">
+                <div class="custom-button-wrapper custom-button" onclick="addToWishlist(${product.id}, 2)">
                     <div class="custom-text">Añadir al carrito</div>
                     <span class="custom-icon">
                         <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
@@ -92,6 +96,7 @@ function updatePaginationButtons() {
     document.querySelector('.btn-prev').style.display = currentPage > 1 ? 'inline-block' : 'none';
     document.querySelector('.btn-next').style.display = currentPage < totalPages ? 'inline-block' : 'none';
 }
+
 document.querySelector('.btn-prev').addEventListener('click', () => {
     if (currentPage > 1) {
         currentPage--;
@@ -108,7 +113,6 @@ document.querySelector('.btn-next').addEventListener('click', () => {
         updatePaginationButtons();
     }
 });
-
 
 function increaseQuantity(productId) {
     const product = products.find(p => p.id === productId);

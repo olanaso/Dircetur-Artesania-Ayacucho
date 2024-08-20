@@ -3,6 +3,19 @@ import { saveDataToLocalStorage } from '../utils/config';
 import { hideLoading } from '../utils/init';
 import { obtenerParametrosURL } from '../utils/path';
 import { obtenerProducto, obtenerArtesano, listarProductos, listarProductosPorCategoria } from './api';
+import { addToWishlist } from '../añadir-deseados/api.js';
+
+function getArtesanoId() {
+    return document.getElementById('nombreArtesano').dataset.artesanoId;
+}
+
+document.querySelector('.add-to-wishlist a').addEventListener('click', (event) => {
+    event.preventDefault();
+    const productId = getQueryParameter('id');
+    const artesanoId = getArtesanoId();
+    console.log(`Adding product ${productId} to wishlist for artesano ${artesanoId}`);
+    addToWishlist(productId, artesanoId);
+});
 
 let cantidadMaxima;
 
@@ -268,12 +281,12 @@ async function infoProd() {
     <div style="width: 120px; height: 120px;">
         <img class="artesano-image" src="${artesano.foto1}" alt="${artesano.nombres}" >
     </div>
-    <p id="nombreArtesano" class="m-2" style="font-size: 20px; font-weight: 600;">
+    <p id="nombreArtesano" class="m-2" style="font-size: 20px; font-weight: 600;" data-artesano-id="${artesano.id}">
         ${artesano.nombres} ${artesano.apellidos}
         <br>
         <a class="ver-mas-btn" href="principal-artesano.html?id=${artesano.id}" >
-    Ver más... <i class="fas fa-plus-circle"></i>
-</a>
+            Ver más... <i class="fas fa-plus-circle"></i>
+        </a>
     </p>
 `);
     $('#telArtesano').text(artesano.celular);

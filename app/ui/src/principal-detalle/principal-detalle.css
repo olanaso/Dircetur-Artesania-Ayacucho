@@ -6109,6 +6109,7 @@ label {
     width: 67%;
     overflow: hidden;
 }
+
 .carousel-container h1{
     text-align: left;
     font-family: "Antarctica VAR", sans-serif;
@@ -6139,8 +6140,8 @@ label {
     color: #f4c23d;
     font-weight: bold;
     margin-top: 10px;
-    left: 1px;
-
+    left:60px;
+    text-align: center;
 }
 .recommended-product-card {
     flex: 0 0 33.33%;
@@ -6202,31 +6203,26 @@ label {
     position: absolute;
     top: 50%;
     transform: translatex(-50%);
-    background-color: #f4c23d;
-    color: white;
     border: none;
-    padding: 20px;
+    padding: 10px;
     cursor: pointer;
     z-index: 1000;
     display: block;
 
 }
 
-.carousel-arrow:hover {
-    background-color: rgba(189, 179, 26, 0.65);
-}
 .carousel-arrow:focus {
     outline: none;
 }
 
 .left-arrow {
     display: block;
-    left: 45px;
+    left: 35px;
 }
 
 .right-arrow {
     display: block;
-    right: -17px;
+    left: 98.15%;
 }
 
 
@@ -6335,7 +6331,7 @@ label {
 
 .similar-info .primary-button {
     flex: 1;
-    margin: 0 5px; /* Add spacing between buttons */
+    margin: 0 5px;
     text-align: center;
 
 }
@@ -6353,7 +6349,7 @@ label {
 .similar-info .primary-button a:hover {
     background-color: #f4c23d;
 }
-/* Center the specific section for "Sobre el Artesano" */
+
 #vendor .section:first-of-type {
     display: flex;
     flex-direction: column;
@@ -6373,12 +6369,12 @@ label {
 }
 
 .vendor-profile .section {
-    margin-bottom: 30px; /* Increased spacing */
+    margin-bottom: 30px;
     background-color: #fff;
     padding: 15px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    border: 1px solid #ddd; /* Light border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
 }
 
 .vendor-profile .contact-info .row div {

@@ -33,51 +33,43 @@ module.exports = {
 async function getAllArtesanosByCategoria(req,res){
     const t = await artesano.sequelize.transaction()
     try{
-        //id de las categorias
-        const idCategorias = await categoria.findAllCategoriasId()
-        //set con id de artesanos, set para que no guarde repetidos
-        let allArtesanosId = new Set()
 
-        for(let idCategoria of idCategorias){
-            //obtengo todos los ids de los artesanos que han trabajado con esa categoria
-            const artesanosId = await product.findAllArtesanoIdByCategoriaId(idCategoria)
-            allArtesanosId[idCategoria] = [...new Set(artesanosId)]
-        }
+        //obtengo todas los id de las categorias y sus denominaciones
+        const categorias
+            = await categoria.findAllIdAndDenominacion() //id y categoria
 
-        const resultadoFinal = []
+        //obtengo el id del artesano y el de la categoria de los productos que ha trabajado
+        const artesanosPorCategoria
+            = await product.findAllArtesanoIdAndCategoriaIdByCategorias(categorias)
 
-        for(const[categoriaId, artesanoIds] of Object.entries(allArtesanosId)){
-            if(artesanoIds.length > 0){
-                //encuentra artesanos por ids dentro del arreglo artesanoIds
-                const artesanosEncontrados = await artesano.findAll({
-                    where: {
-                        id : {
-                            [Op.in] : artesanoIds
-                        }
-                    }
-                })
-                //Encuentro la categoria de los artesanos de acuerdo a su id
-                const categoriaEncontrada = await categoria.findOne({where: {id: categoriaId}})
+        //areglo con ids de artesano
+        const artesanosIds = [...new Set(artesanosPorCategoria.map(artesano => artesano.artesano_id))]
 
-                if(categoriaEncontrada) {
-                    resultadoFinal.push({
-                        categoria: categoriaEncontrada.denominacion,
-                        // selecciono nombres, foto y id
-                        artesanos: artesanosEncontrados.map(artesano => ({
-                            id: artesano.id,
-                            nombres: artesano.nombres,
-                            foto1: artesano.foto1,
-                            foto2: artesano.foto2
-                        }))
-                    });
-                }
+        //encuentro los artesanos por ids
+        const artesanosEncontrados = await artesano.findArtesanosByIds(artesanosIds)
+
+
+        //resultado final haciendo uso de map, filter y find
+        const resultadoFinal = categorias.map( categoria => {
+            const artesanosFiltrados
+                = artesanosPorCategoria.filter(apc =>
+                apc.categoria_id === categoria.id).map(apc => {
+                    const artesano = artesanosEncontrados.find(a => a.id === apc.artesano_id)
+                    return artesano ? {id: artesano.id, nombres: artesano.nombres, foto1: artesano.foto1, foto2: artesano.foto2} : null
+            })
+                .filter(artesano => artesano !== null)
+
+            return {
+                categoria: categoria.denominacion, //categoria
+                artesanos: artesanosFiltrados   //array con artesanos que trabajan en esa categoria
             }
-        }
+        }).filter(categoria => categoria.artesanos.length >0)
 
-        console.log("El resultado final es:", resultadoFinal)
-        console.log("Los ids del artesano son:", allArtesanosId)
+        res.status(200)
         res.json(resultadoFinal)
+
         return await t.commit()
+
     }catch(e){
         await t.rollback()
         console.error(e)
