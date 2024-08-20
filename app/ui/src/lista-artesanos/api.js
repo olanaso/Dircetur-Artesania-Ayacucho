@@ -11,7 +11,6 @@ export async function listarArtesanosPorCategoriaArtesania() {
         }
         const response = await fetch(`${baseUrl}/v1/artesanos/categorias`, requestOptions);
         const result = await response.json()
-        console.log("DATAAA", result)
         return result; // Return the data property from the response
     } catch (error) {
         console.error('Error:', error);

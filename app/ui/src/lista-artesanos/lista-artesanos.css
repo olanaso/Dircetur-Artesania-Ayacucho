@@ -1,7 +1,84 @@
+/* General Styles */
 body {
     background-color: #f4f4f4;
 }
+/* Search Section */
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
 
+#search-input {
+    width: 100%;
+    padding: 10px 10px 10px 0;
+    margin: 20px 0;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 2px solid #f3e1c0;
+    background-color: transparent; /* Remove background color */
+    transition: border-color 0.3s ease;
+}
+
+#search-input:focus {
+    outline: none;
+    border-bottom: 2px solid #DC4405;
+}
+
+#search-button {
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 1px;
+    font-size: 1rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: relative; /* Ensure it doesn't affect the clear button */
+}
+
+#search-button:focus {
+    outline: none;
+}
+
+#search-button.loading {
+    cursor: not-allowed;
+    background-color: #f3e1c0;
+    border-radius: 12px;
+    transform: scale(1.1);
+    animation: breathing 2s ease-in-out infinite;
+}
+
+#clear-button {
+    position: absolute;
+    right:50px; /* Adjusted to be closer to the input */
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#clear-button:hover {
+    color: #DC4405;
+}
+
+#clear-button:focus {
+    outline: none;
+}
+
+@keyframes breathing {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Intro Section */
 .intro-section {
     position: relative;
     padding: 0 175px;
@@ -35,6 +112,7 @@ body {
     text-align: justify;
 }
 
+/* Team Section */
 .team-section {
     display: flex;
     flex-direction: row;
@@ -44,6 +122,7 @@ body {
     max-width: 1200px;
 }
 
+/* Team Category */
 .team-category {
     width: 30%;
     margin-right: 20px;
@@ -69,13 +148,7 @@ body {
     padding: 0 10px;
 }
 
-.team-members {
-    width: 70%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
+/* Team Member */
 .team-member {
     background-color: white;
     width: calc(50% - 10px);
@@ -87,6 +160,7 @@ body {
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
+    border: solid 2px transparent;
 }
 
 .team-member h3 {
@@ -114,17 +188,39 @@ body {
 .team-member:hover {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     transform: scale(1.01);
+    border: solid 2px #DC4405;
+}
+
+.team-members {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
 .team-member img {
-    width: 111%;
-    height: auto;
-    border-radius: 8px 8px 0 0;
-    margin-left:-20px;
-    margin-top: -20px;
-    margin-bottom: 15px;
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+    aspect-ratio: 1/1;
+    border-top: solid grey 2px;
+    border-bottom: solid grey 2px;
+    width: 300px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.team-member img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.team-member:nth-child(2n) {
+    margin-top: 20px;
+}
+
+/* Custom Rectangle */
 .custom-rectangle {
     position: absolute;
     width: 700px;
@@ -149,10 +245,7 @@ body {
     right: 0;
 }
 
-.team-member:nth-child(2n) {
-    margin-top: 20px;
-}
-
+/* Media Queries */
 @media (max-width: 748px) {
     .intro-section {
         padding: 0 20px;
@@ -199,8 +292,7 @@ body {
     }
 
     .team-member img {
-        width: 111%;
-        max-height: 200px;
+        max-width: 200px; /* Adjust max-width for medium screens */
     }
 
     .team-member h3, .team-member p {
@@ -208,7 +300,7 @@ body {
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1111px) {
     .intro-section {
         padding: 0 50px;
         margin-bottom: 0;
@@ -250,14 +342,12 @@ body {
     }
 
     .team-member {
-
         height: auto;
         overflow: hidden;
     }
 
     .team-member img {
-        width: 100%;
-        max-height: 300px;
+        max-width: 250px; /* Adjust max-width for medium screens */
     }
 
     .team-member h3, .team-member p {
@@ -268,8 +358,8 @@ body {
         width: 70%;
         height: 400px;
     }
+
     .custom-rectangle:nth-of-type(3) {
         display: none;
     }
-
 }

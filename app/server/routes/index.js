@@ -23,6 +23,7 @@ const productoartesano = require('./productoartesano');
 const ventapedido = require('./ventapedido');
 const ubigeo = require('./ubigeo');
 const pedidodetalle = require('./pedidodetalle');
+const productosFavoritos = require('./productos-favoritos')
 
 
 module.exports = (app) => {
@@ -50,6 +51,7 @@ module.exports = (app) => {
     app.use('/api', ventapedido);
     app.use('/api', ubigeo);
     app.use('/api', pedidodetalle);
+    app.use('/api', productosFavoritos)
 
     
 };
