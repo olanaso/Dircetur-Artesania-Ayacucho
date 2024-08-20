@@ -78,8 +78,21 @@ section {
     border-radius: 0.5rem;
     box-shadow: rgba(68, 63, 63, 0.16) 0px 24px 64px 0px;
     transition: 0.24s;
+    padding: 0;
+    margin:0;
 }
 
+.articleee {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: rgba(68, 63, 63, 0.16) 0px 24px 64px 0px;
+    transition: 0.24s;
+    display: grid
+}
+.video{
+    margin-top: 90px;
+
+}
 .styled-hr {
     height: 3px;
     background: linear-gradient(to right, #000000, #555555, #000000);
@@ -96,6 +109,7 @@ section {
 .card-body-image1 {
     padding: 12px !important;
 }
+
 
 .info-user-image {
     width: 150px;
@@ -143,7 +157,7 @@ section {
 
 .video-artesano {
     width: 100%;
-    max-height: 220px;
+    height: 200px;
     box-shadow: 1px 1px 1px 2.5px var(--black-color);
     border-radius: 8px;
 }
