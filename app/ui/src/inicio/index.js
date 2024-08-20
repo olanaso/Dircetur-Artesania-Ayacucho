@@ -176,7 +176,7 @@ $(function () {
 			fill: true,
 			lineWidth: 1,
 			order: true,
-			lineWidth: 0,
+	
 			fillColor: { colors: [ { opacity: 1 }, { opacity: 1 } ] }
 		},
 		shadowSize: 0,
