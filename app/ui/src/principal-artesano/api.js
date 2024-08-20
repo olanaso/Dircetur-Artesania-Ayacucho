@@ -1,7 +1,6 @@
 import { baseUrl } from "../utils/config";
 
 
-
 export async function obtenerArtesanoById(idArtesano) {
   try {
     const response = await fetch(`${baseUrl}/artesano/${idArtesano}`, {
