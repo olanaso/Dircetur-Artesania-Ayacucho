@@ -2,6 +2,12 @@ const sequelize = require('sequelize')
 const {handleHttpError} = require('../utils/handleError')
 const productosFavoritos = require('../models/productos_favoritos')
 
+/**
+ * Obtener todos los productos deseados de un cliente
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function getAllByClientId(req, res){
     const {idCliente} = req.params
     try{
@@ -12,6 +18,7 @@ async function getAllByClientId(req, res){
         handleHttpError(res, "Error obteniendo recursos", 500)
     }
 }
+
 async function save (req, res){
     try{
         const body = req.body

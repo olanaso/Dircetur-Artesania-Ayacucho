@@ -35,16 +35,21 @@ productosFavoritos.belongsTo(producto, {
     as: 'datosProducto'
 })
 
+/**
+ * Obtener todos los productos deseados de un cliente por su id
+ * @param idCliente
+ * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
+ */
 productosFavoritos.findAllWishProductsByClientId = async (idCliente) => {
     return await productosFavoritos.findAll(
         {where : {id_cliente: idCliente},
             attributes: ['id_producto', 'id_cliente'],
-        include: [
+        include: [  // include para traer los datos del del producto
             {
                 model: producto,
                 as: 'datosProducto',
                 attributes: ['artesano_id', 'nombres_es', 'precio', 'imagen_principal', 'lst_imagenes'],
-                include: [
+                include: [ //include para traer los datos del artesano
                     {
                         model: artesano,
                         as: 'datos_artesano',
