@@ -38,7 +38,7 @@
 			<span></span>
 		</div>
 	</div>
-
+	<div id="loadingIndicator" style="display: none;">Cargando...</div>
 	<div id="search">
 		<button type="button" class="close">×</button>
 		<form>
@@ -91,7 +91,26 @@
 							</div>
 							<div class="search-form">
 								<div class="row">
-									<div class="col-md-3">
+									<div class="col-md-2">
+										<div class="input-select">
+											<select id="category-filter">
+												<option value="">Categoría</option>
+												<option value="CER">Cerámica</option>
+												<option value="PT">Piedra Tallada</option>
+												<option value="TE">Textilería</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="input-select">
+											<select id="oferta-filter">
+												<option value="">Otros</option>
+												<option value="PT">En oferta</option>
+												<option value="TE">Destacados</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-2">
 										<div class="input-select">
 											<input type="text" id="filterName" placeholder="Nombre del producto">
 										</div>
@@ -106,14 +125,15 @@
 											<input type="number" id="filterPriceMax" placeholder="Precio Máximo">
 										</div>
 									</div>
-									<div class="col-md-2">
+
+									<div class="col-md-1">
 										<div class="secondary-button">
-											<a href="#" id="filterButton">Buscar <i class="fa fa-search"></i></a>
+											<button id="filterButton"><i class="fa fa-filter"></i></button>
 										</div>
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-1">
 										<div class="secondary-button">
-											<a href="#" id="clearButton">Limpiar</a>
+											<button id="clearButton"><i class="fa fa-times"></i></button>
 										</div>
 									</div>
 								</div>

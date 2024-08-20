@@ -16,7 +16,7 @@ body {
     font-size: 1rem;
     border: none;
     border-bottom: 2px solid #f3e1c0;
-    background-color: transparent; /* Remove background color */
+    background-color: transparent;
     transition: border-color 0.3s ease;
 }
 
@@ -34,7 +34,7 @@ body {
     background-color: transparent;
     cursor: pointer;
     transition: transform 0.3s ease;
-    position: relative; /* Ensure it doesn't affect the clear button */
+    position: relative;
 }
 
 #search-button:focus {
@@ -51,7 +51,7 @@ body {
 
 #clear-button {
     position: absolute;
-    right:50px; /* Adjusted to be closer to the input */
+    right:50px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
@@ -129,8 +129,8 @@ body {
     margin-bottom: 0;
     position: sticky;
     top: 0;
-    align-self: flex-start; /* Se asegura que quede pegado al inicio */
-    z-index: 10; /* Mantener visible sobre otros elementos */
+    align-self: flex-start;
+    z-index: 10;
     padding: 20px;
     padding-top: 200px;
     border-radius: 8px;
@@ -201,7 +201,7 @@ body {
 
 .team-member img {
     display: block;
-    margin: 0 auto; /* Center the image horizontally */
+    margin: 0 auto;
     aspect-ratio: 1/1;
     border-top: solid grey 2px;
     border-bottom: solid grey 2px;
@@ -220,7 +220,7 @@ body {
     margin-top: 20px;
 }
 
-/* Custom Rectangle */
+/* Custom Rectangle
 .custom-rectangle {
     position: absolute;
     width: 700px;
@@ -244,7 +244,7 @@ body {
     top: 430%;
     right: 0;
 }
-
+ */
 /* Media Queries */
 @media (max-width: 748px) {
     .intro-section {
@@ -292,7 +292,7 @@ body {
     }
 
     .team-member img {
-        max-width: 200px; /* Adjust max-width for medium screens */
+        max-width: 200px;
     }
 
     .team-member h3, .team-member p {
@@ -347,7 +347,7 @@ body {
     }
 
     .team-member img {
-        max-width: 250px; /* Adjust max-width for medium screens */
+        max-width: 250px;
     }
 
     .team-member h3, .team-member p {

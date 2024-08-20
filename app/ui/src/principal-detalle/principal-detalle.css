@@ -101,11 +101,6 @@ body.login-bg {
     background-position: center center;
 }
 
-body.error-bg {
-    background: url("../img/login-slider.jpg") no-repeat;
-    background-size: cover;
-    background-position: center center fixed;
-}
 
 /************************************************
 	************************************************
@@ -137,11 +132,7 @@ ul li {
     list-style-type: none;
 }
 
-hr {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-top: 1px solid #e1e5f1;
-}
+
 
 /************************************************
 	************************************************
@@ -4093,70 +4084,7 @@ a.blog-sm p.blog-date:after {
     animation-delay: 0.1s;
     left: 128px;
 }
-/* Add this CSS to your main CSS file or within a <style> tag in your HTML */
-/* Add this CSS to your main CSS file or within a <style> tag in your HTML */
-.sp-image-container {
-    position: relative;
-    width: 100%;
-    margin: 0 auto; /* Center the container */
-    aspect-ratio: 1/1;
-    overflow: hidden;
-}
 
-.sp-image {
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    height: 70%;
-    object-fit: contain;
-}
-
-
-#single-car {
-    display: flex;
-    flex-direction: column;
-}
-
-.sp-slides-container {
-    order: 1;
-}
-
-.sp-thumbnails-container {
-    order: 2;
-}
-
-/* Hide any unwanted numbers or elements */
-.sp-slide[data-index]::before,
-.sp-thumbnail-container[data-index]::before {
-    content: none;
-}
-.sp-image-container:hover .sp-arrow {
-    display: block;
-    color: black !important;
-}
-
-.sp-thumbnail-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: contain;
-}
-
-
-.sp-thumbnail {
-    position: absolute;
-    top: 0;
-    left: 32px;
-    width: 60%;
-    height: 60%;
-    object-fit: contain;
-}
-
-.sp-thumbnail:hover {
-    background-color: rgb(183, 182, 182);
-}
 
 .loading-wrapper .loading span:nth-of-type(2) {
     background: #0bed13;
@@ -6023,9 +5951,7 @@ label {
     border: 1px solid black;
     border-radius: 10%;
 }
-.similar-info {
-    margin-top: 10px;
-}
+
 .reconocimiento-card {
     border-radius: 5px;
     box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.09);
@@ -6058,41 +5984,26 @@ label {
         align-items: center;
     }
 }
-@media (max-width: 580px) {
-    .content-info-text {
-        display: block;
-    }
-}
-@media (min-width: 768px) {
-    .content-info-text {
-        display: block;
-    }
-    .info-user-profile {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-@media (min-width: 1100px) {
-    .content-info-text {
-        display: flex;
-    }
-}
+
 
 
 .quantity-controls-container {
-    border: 2px solid #ccc;
+    border: 2px solid black;
+    border-radius: 10px;
+    border-bottom: 5px solid black;
     background-color: #f0f0f0;
     padding: 0;
     display: flex;
     align-items: center;
-    border-radius: 10px;
-    width: fit-content;
+    width: 50%;
+
 }
 
 .quantity-controls-container button {
     font-size: 20px; /* Increase the font size */
-    padding: 10px; /* Adjust padding if necessary */
+    padding: 5px; /* Adjust padding if necessary */
+    width: 50%;
+    margin-left: 0;
     border: none; /* Remove default border */
     background-color: transparent; /* Make background transparent */
     cursor: pointer; /* Change cursor to pointer */
@@ -6113,7 +6024,7 @@ label {
     text-align: center;
     border: none;
     background-color: #f0f0f0;
-    margin-left:20px;
+    margin-left:15px;
 }
 .quantity-controls-container button:focus,
 .quantity-controls-container input:focus {
@@ -6144,35 +6055,45 @@ label {
     background-color: rgba(255, 249, 196, 0.2);
 }
 .custom-container {
-    margin: 0 auto;
-    max-width: 74%;
+    margin: 30px auto;
+    max-width: 66%;
 }
 
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-
+#productTabsContent .table {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "Antarctica VAR", sans-serif;
+    text-transform: none;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1rem;
 }
 
-.table th,
-.table td {
+#productTabsContent .table th,
+#productTabsContent .table td {
     padding: 0.75rem;
     vertical-align: top;
     border-top: 1px solid #dee2e6;
 }
 
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
+#productTabsContent .table th {
+    font-weight: 800;
+    color: #f4c23d;
 }
 
-.table tbody + tbody {
-    border-top: 2px solid #dee2e6;
+#productTabsContent .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(194, 184, 75, 0.09);
 }
 
-.table .table {
+#productTabsContent .table tbody + tbody {
+    border-top: 2px solid rgba(51, 51, 51, 0.59);
+}
+
+#productTabsContent .table .table {
     background-color: #fff;
+}
+
+#productTabsContent .table tbody tr:hover {
+    background-color: rgba(244, 194, 61, 0.2);
 }
 
 .carousel-wrapper {
@@ -6183,9 +6104,22 @@ label {
 
 .carousel-container {
     top: 50px;
+    right: 10px;
     position: relative;
-    width: 75%;
+    width: 67%;
     overflow: hidden;
+}
+
+.carousel-container h1{
+    text-align: left;
+    font-family: "Antarctica VAR", sans-serif;
+    text-transform: none;
+    font-weight: bold;
+    font-style: normal;
+    color: black;
+    font-size: 1.7rem;
+    margin-left: 1.4rem;
+    margin-bottom: 30px;
 }
 
 .carousel {
@@ -6195,12 +6129,20 @@ label {
 
 .text-limited {
     width: 300px;
-    margin: 0 auto;
+    height:40px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+.price-design {
+    font-family:"Roboto", sans-serif;
+    font-size: 18px;
+    color: #f4c23d;
+    font-weight: bold;
+    margin-top: 10px;
+    left:60px;
+    text-align: center;
+}
 .recommended-product-card {
     flex: 0 0 33.33%;
     width: 90%;
@@ -6212,12 +6154,13 @@ label {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-bottom: 2px solid transparent;
     margin-left: 12px;
 }
 .recommended-product-card p {
     text-align: left;
     position: relative;
-    left: -20px;
+    right: 20px;
 }
 .recommended-product {
     display: flex;
@@ -6228,7 +6171,7 @@ label {
 
 .recommended-product-card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border-bottom: 4px solid #f4c23d;
+    border-bottom: 2px solid #f4c23d;
 }
 
 .recommended-product-card img {
@@ -6259,58 +6202,96 @@ label {
 .carousel-arrow {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    transform: translatex(-50%);
     border: none;
     padding: 10px;
     cursor: pointer;
     z-index: 1000;
+    display: block;
+
+}
+
+.carousel-arrow:focus {
+    outline: none;
 }
 
 .left-arrow {
-    left: 10px;
+    display: block;
+    left: 35px;
 }
 
 .right-arrow {
-    right: 10px;
+    display: block;
+    left: 98.15%;
 }
 
 
 /*Acordeon*/
 .accordion {
-    background-color: #eee;
+    background: linear-gradient(135deg, #ffffff, rgba(196, 187, 10, 0.68));
     color: #444;
     cursor: pointer;
     padding: 18px;
     width: 100%;
     text-align: left;
     border: none;
-    outline: none;
-    transition: background-color 0.4s;
+    transition: background-color 0.4s, box-shadow 0.4s, max-height 0.4s ease-out, padding 0.4s;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "Antarctica VAR", sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    opacity: 0.8;
+    word-wrap: break-word;
 }
 
 .accordion .icon {
-    margin-left: auto; /* Push the icon to the far right */
+    margin-left: auto;
 }
 
-.accordion:hover {
-    background-color: #ccc;
+.accordion .icon {
+    margin-left: auto;
 }
 
 .accordion.active {
-    background-color: #ccc;
+    background-color: transparent;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.accordion:hover {
+    opacity: 1;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.accordion:focus {
+    outline: none;
 }
 
 .panel {
-    padding: 0 18px;
-    background-color: white;
+    padding: 0 20px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease-out;
+    transition: max-height 0.4s ease-out, padding 0.4s;
+    border-left: 2px solid #444;
+    border-right: 2px solid #444;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.panel p {
+    margin: 0;
+    padding: 15px 0;
+    font-family: "Antarctica VAR", sans-serif;
+    text-transform: none;
+    font-weight: bold;
+    font-style: normal;
+    color: black;
+    font-size: 1.2rem;
 }
 
 .icon {
@@ -6323,13 +6304,408 @@ label {
 }
 
 .accordion em {
-    color: red; /* Change this to the desired color */
+    font-family: "Antarctica VAR", sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-style: normal;
+    color: #f4c23d;
+    font-size: 1.3rem;
+    padding: 0 20px;
+}
+.similar-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.icon.rotate {
-    transform: rotate(180deg);
+.similar-info .quantity-controls-container {
+    margin-bottom: 20px;
+
 }
-.accordion em {
-    color: red; /* Change this to the desired color */
-left:100px;
+
+.similar-info .button-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.similar-info .primary-button {
+    flex: 1;
+    margin: 0 5px;
+    text-align: center;
+
+}
+
+.similar-info .primary-button a {
+    display: block;
+    padding: 10px 0;
+    width: 100%;
+    background-color: #2959ad;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+}
+
+.similar-info .primary-button a:hover {
+    background-color: #f4c23d;
+}
+
+#vendor .section:first-of-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.vendor-profile {
+    padding: 20px;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    border: 1px solid #f4c23d;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Center the element */
+
+}
+
+.vendor-profile .section {
+    margin-bottom: 30px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+.vendor-profile .contact-info .row div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+}
+
+.vendor-profile .contact-info i {
+    color: #f4c23d;
+    margin-right: 10px;
+}
+
+/* Typography */
+.vendor-profile h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.vendor-profile .contact-info span {
+    font-size: 16px;
+}
+
+.vendor-profile #nombreArtesano {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Colors */
+.vendor-profile a {
+    color: #f4c23d;
+}
+
+.vendor-profile a:hover {
+    color: #d4a017;
+}
+
+/* "Ver más..." Button */
+.vendor-profile a.ver-mas-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #f4c23d;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+
+.vendor-profile a.ver-mas-btn:hover {
+    background-color: #d4a017;
+    transform: scale(1.1);
+}
+
+.contact-info i {
+    font-size: 16px;
+    margin-right: 10px;
+    border: none;
+}
+.sp-image-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto; /* Center the container */
+    aspect-ratio: 1/1;
+    overflow: hidden;
+}
+
+.sp-image {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+
+.artesano-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left:70%;
+    border-radius: 50%;
+    margin: 0 auto;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border: 2px solid #f4c23d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.artesano-image:hover {
+    transform: scale(1.1);
+}
+#single-car {
+    display: flex;
+    flex-direction: column;
+}
+
+.sp-slides-container {
+    order: 1;
+}
+
+.sp-thumbnails-container {
+    order: 2;
+}
+
+/* Hide any unwanted numbers or elements */
+.sp-slide[data-index]::before,
+.sp-thumbnail-container[data-index]::before {
+    content: none;
+}
+.sp-image-container:hover .sp-arrow {
+    display: block;
+    color: black !important;
+}
+
+.sp-thumbnail-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
+
+
+.sp-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 32px;
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+}
+
+.sp-thumbnail:hover {
+    background-color: rgb(183, 182, 182);
+}
+
+hr{
+    border: 0;
+    border-top: 2px solid rgba(0, 0, 0, 0.59);
+    margin-bottom: 40px;
+}
+@media (max-width: 768px) {
+    .product-name {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .sp-image-container {
+        width: 110%;
+        height: auto;
+        right: 20px;
+    }
+
+    .sp-slides-container {
+        order: 2;
+    }
+    .sp-thumbnails-container {
+        display: none;
+    }
+
+    .carousel-arrow {
+        display: none;
+    }
+
+    .left-arrow {
+        display: none;
+    }
+
+    .right-arrow {
+        display: none;
+    }
+    .carousel-indicators {
+        display: none;
+    }
+    .nav-tabs {
+        flex-direction: column;
+    }
+
+    .nav-tabs .nav-item {
+        margin-bottom: 10px;
+    }
+
+    .tab-content {
+        padding: 10px;
+    }
+
+    .vendor-profile {
+        padding: 10px;
+    }
+
+    .vendor-profile .section {
+        margin-bottom: 20px;
+    }
+
+    .vendor-profile .contact-info .row div {
+        margin-bottom: 5px;
+    }
+
+    .vendor-profile h2 {
+        font-size: 24px;
+    }
+
+    .vendor-profile .contact-info span {
+        font-size: 14px;
+    }
+    .panel p {
+        font-size:1.2em;
+    }
+    .custom-container {
+        max-width: 90%;
+    }
+
+    #productTabsContent .table {
+        font-size: 0.875rem;
+    }
+
+    #productTabsContent .table th,
+    #productTabsContent .table td {
+        padding: 0.5rem;
+    }
+    .vendor-profile #nombreArtesano {
+        font-size: 18px;
+    }
+
+    .vendor-profile a.ver-mas-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .similar-info .primary-button {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Adjust the gap as needed */
+    }
+
+    .similar-info .primary-button a {
+        width: 100%; /* Adjust width to fit the container */
+        background-color: #2959ad;
+        color: white;
+        text-decoration: none;
+        border-radius: 12px;
+        padding: 10px; /* Add padding for better appearance */
+    }
+    /* Adjustments for accordion */
+    .accordion em {
+        font-size: 0.9rem;
+    }
+    .carousel-container {
+       width:90%;
+    }
+
+    .carousel-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .carousel-arrow {
+        width: 30px;
+        height: 30px;
+    }
+    .accordion .icon {
+        margin-left: 10px;
+    }
+    .quantity-controls-container {
+        width: 30%;
+
+
+    }
+    .quantity-controls-container input {
+        width:30%;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .quantity-controls-container {
+        width: 30%;
+
+
+    }
+    .quantity-controls-container input {
+        width:30%;
+        margin-left: 0;
+    }
+
+
+    .similar-info .primary-button a {
+
+        padding: 20px;
+    }
+
+
+    .sp-slides-container {
+        order: 1;
+    }
+    .sp-thumbnails-container {
+        display: none;
+    }
+    .custom-container {
+        max-width: 90%;
+        margin: 10px auto;
+    }
+
+    #productTabsContent .table th,
+    #productTabsContent .table td {
+        padding: 0.25rem;
+        font-size: 0.75rem;
+    }
+
+    #productTabsContent .table th {
+        font-weight: 700;
+    }
+    .carousel-container {
+        width: 90%;
+    }
+
+    .panel p {
+        font-size:1em;
+    }
+
+    .carousel-container h1 {
+        font-size: 1.5rem;
+    }
+
 }

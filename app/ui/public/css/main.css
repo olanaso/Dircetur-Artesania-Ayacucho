@@ -1061,19 +1061,18 @@ hr {
 	************************************************
 ************************************************/
 /*************** Logo ***************/
-.logo {
-  display: block;
-  margin: auto;
+.logo-container {
   text-align: center;
+  position: relative;
+  z-index: 1000;
 }
 
-.logo img {
-  max-height: 40px;
-  margin: 12px auto;
+.logo-image {
+  height: 60px;
 }
 
 @media (max-width: 576px) {
-  .logo img {
+  .logo image {
     max-height: 24px;
     margin: 18px auto;
   }

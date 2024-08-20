@@ -1,3 +1,4 @@
+/* Body */
 body {
     background-color: #f5f5f5;
     background-size: contain;
@@ -7,6 +8,7 @@ body {
     padding: 0;
 }
 
+/* Product Card */
 .product-card {
     border: 1px solid #cccccc;
     border-radius: 12px;
@@ -18,7 +20,6 @@ body {
     position: relative;
     border-bottom: 4px solid #007bff;
 }
-
 
 .product-card:hover {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
@@ -43,6 +44,7 @@ body {
     padding: 20px;
     text-align: left;
 }
+
 .product-details h4 {
     margin: 0;
     font-size: 1.1em;
@@ -67,7 +69,6 @@ body {
     color: #2959ad;
     font-weight: bold;
 }
-
 
 .product-card-link .primary-button a {
     display: inline-block;
@@ -104,13 +105,15 @@ body {
     margin: 0;
     line-height: 1.5;
 }
+
+/* Section Heading */
 .section-heading {
     margin-top: -60px;
 }
 
 .section-heading .icon {
     margin-left: 10px;
-
+    margin-top: 70px;
 }
 
 .section-heading .contador-productos h2 {
@@ -118,7 +121,7 @@ body {
     margin: 0;
 }
 
-/* Paginación */
+/* Pagination */
 #paginationControls {
     display: flex;
     justify-content: center;
@@ -147,45 +150,251 @@ body {
     border: none;
 }
 
-.features-search-section {
-    background-color: #f8f9fa;
+/* Search Section Styles */
+.search-section {
     padding: 20px 0;
+    background-color: #f8f9fa;
 }
 
 .search-content {
-    box-shadow: 0 2px 4px rgba(1, 0, 0, 0.5)!important;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.search-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+    text-align: center;
+}
 .search-heading .icon {
     font-size: 24px;
     color: #007bff;
-    margin-right: 10px;
+
 }
 
-.search-form {
-margin-left: 45px;
+.search-heading .text-content h2 {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+}
+
+.search-heading .text-content span {
+    font-size: 14px;
+    color: #666;
 }
 
 .search-form .input-select {
-    margin-bottom: 15px;
+    margin-bottom: 1px;
 }
 
 .search-form .input-select input {
+    width: 110%;
+
+    padding: 7.5px;
+    border: none;
+    border-radius: 14px;
+    font-size: 14px;
+    outline: none;
+    background-color: white;
+    border-bottom: 4px solid transparent;
+    transition: border-bottom 0.3s ease;
+}
+.search-form .input-select select{
     width: 100%;
-    padding: 11px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    background-color: white;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s ease;
+}
+.search-form .input-select input:focus,
+.search-form .input-select select:hover {
+    border-bottom: 4px solid #007bff;
+    box-shadow:  0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-.secondary-button a {
-    display: inline-block!important;
-    padding: 13px 25px!important;
-    color: #fff!important;
-    border-radius: 4px!important;
-    text-decoration: none!important;
-    transition: background-color 0.3s!important;
+/* Additional Button Styles */
+.secondary-button button {
+    display: inline-block;
+    width: 50px;
+    padding: 9px;
+    background-color: #2959ad;
+    color: white;
+    border: 1px solid #2959ad;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
 }
 
-.secondary-button a:hover {
-    background-color: #0056b3   !important;
+.secondary-button button:hover {
+    background-color: #f4c23d;
+
+}
+
+.move-right {
+    transform: translateX(10px);
+    transition: transform 0.3s ease;
+}
+
+button#filterButton.loading {
+    background-color: #f4c23d;
+    color: black;
+    cursor: not-allowed;
+    display: inline-block;
+    padding: 9px;
+    width: 160%;
+    border: none;
+    border-radius: 12px;
+}
+
+button#filterButton {
+    background-color: #2959ad;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+}
+button#filterButton:hover {
+    background-color: #f4c23d;
+}
+button#filterButton i {
+    font-size: 16px;
+}
+
+button#filterButton.loading i {
+    display: none;
+}
+
+button#filterButton.loading::after {
+    content: '\f002'; /* Unicode for FontAwesome search icon */
+    font-family: 'FontAwesome';
+    font-size: 16px;
+    margin-left: 5px;
+    animation: ellipsis 1.25s infinite;
+}
+
+/* Keyframes */
+@keyframes ellipsis {
+    0% { content: '\f002'; }
+    25% { content: ''; }
+    50% { content: '.'; }
+    75% { content: '..'; }
+    100% { content: '...'; }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .search-section {
+        padding: 10px 0;
+    }
+
+    .search-content {
+        padding: 15px;
+    }
+
+    .search-heading .text-content h2 {
+        font-size: 20px;
+    }
+
+    .search-heading .text-content span {
+        font-size: 12px;
+    }
+
+    .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* Stack elements vertically */
+        gap: 10px; /* Space between elements */
+    }
+
+    .search-form .input-select {
+        margin-left: 50px;
+        width: 80%; /* Full width for input fields */
+        max-width: 100%; /* Ensure input fields do not exceed 100% width */
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-form .input-select input,
+    .search-form .input-select select {
+        width: 100%; /* Full width within the flex container */
+        padding: 7px;
+        margin-bottom: 20px;
+        font-size: 13px;
+    }
+
+    button#filterButton,
+    button#clearButton {
+        width: 50%; /* Full width for buttons */
+        padding: 10px;
+        font-size: 14px;
+        margin-left: 115px;
+        margin-bottom:20px;
+        display: block; /* Ensure buttons are block elements */
+    }
+
+    button#filterButton.loading {
+        width: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-heading .text-content h2 {
+        font-size: 18px;
+    }
+
+    .search-heading .text-content span {
+        font-size: 10px;
+    }
+
+    .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* Stack elements vertically */
+        gap: 10px; /* Space between elements */
+    }
+
+    .search-form .input-select {
+        width: 80%; /* Full width for input fields */
+        max-width: 100%; /* Ensure input fields do not exceed 100% width */
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-form .input-select input,
+    .search-form .input-select select {
+        width: 100%; /* Full width within the flex container */
+        margin-right: 20px;
+        max-width: 100%;
+
+    }
+
+    button#filterButton,
+    button#clearButton {
+        width: 50%; /* Full width for buttons */
+        padding: 8px;
+        font-size: 12px;
+        margin-left: 90px;
+        margin-bottom:20px;
+        display: block; /* Ensure buttons are block elements */
+    }
+
+    button#filterButton.loading {
+        width: 50%;
+    }
 }

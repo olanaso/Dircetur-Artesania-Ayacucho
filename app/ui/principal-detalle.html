@@ -39,13 +39,7 @@
 	</div>
 </div>
 
-<div id="search">
-	<button type="button" class="close">×</button>
-	<form>
-		<input type="search" value="" placeholder="Escribe palabras clave aquí">
-		<button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
-	</form>
-</div>
+
 
 <!--HEADER-->
 <header class="site-header wow fadeIn" data-wow-duration="1s"
@@ -152,6 +146,9 @@
 								<div class="product-info" id="oferta">
 								</div>
 							</div>
+							<div class="col-md-12">
+								<hr>
+							</div>
 							<div class="col-md-6">
 								<p style="color: rgb(12, 11, 11); margin-top: 0;">Escoge según el color:</p>
 								<div id="Colores">
@@ -168,10 +165,11 @@
 								<div id="tallas">
 								</div>
 							</div>
-							<div class="col-md-6" >
+							<div class="col-md-12">
+								<hr>
 							</div>
 							<div class="col-md-6" style="margin-bottom: 20px;">
-								<p style="color: rgb(12, 11, 11); margin-top: 0;">Cantidad				</p>
+								<p style="color: rgb(12, 11, 11); margin-top: 0;font-size:16px; font-weight: 800;">Cantidad:				</p>
 								<div class="quantity-controls-container">
 									<button id="decrement-btn">-</button>
 									<input type="number" id="counter-value" value="0" readonly>
@@ -180,43 +178,25 @@
 
 							</div>
 							<div class="col-md-6">
-								</br>
-								</br>
+
 								<div class="product-info">
-									<p style="color: red; margin-top: 0;">tiempo estimado de envío:3-7 días</p>
+									<p style="color: red; margin-top: 0;">Tiempo estimado de envío: 3-7 días</p>
 								</div>
 							</div>
-							</br>
-							</br>
-							</br>
-							</br>
+
 						</div>
 					</div>
-					<!--<div class="container">
-                        <div class="row">
-                            <ul class="car-info col-md-6">
-                                <li><i class="flaticon flaticon-calendar"></i><p>2016/2017</p></li>
-                                <li><i class="flaticon flaticon-speed"></i><p>240p/h</p></li>
-                                <li><i class="flaticon flaticon-road"></i><p>20.000km - 40.000km</p></li>
-                                <li><i class="flaticon flaticon-fuel"></i><p>Diesel</p></li>
-                            </ul>
-                            <ul class="car-info col-md-6">
-                                <li><i class="flaticon flaticon-art"></i><p>White</p></li>
-                                <li><i class="flaticon flaticon-shift"></i><p>Automatic</p></li>
-                                <li><i class="flaticon flaticon-car"></i><p>4/5</p></li>
-                                <li><i class="flaticon flaticon-motor"></i><p>3000cm3</p></li>
-                            </ul>
-                        </div>
-                    </div> -->
 					<div class="similar-info d-flex justify-content-between">
-						<div class="primary-button">
-							<a href="#">Añadir Carrito <i class="fas fa-shopping-cart cart-icon"></i></a>
-						</div>
-						<div class="primary-button">
-							<a href="/añadir-deseados.html">Añadir Deseados <i class="fas fa-shopping-cart cart-icon"></i></a>
-						</div>
-						<div class="primary-button">
-							<a href="#">Comprar Ahora <i class="fas fa-shopping-cart cart-icon"></i></a>
+						<div class="button-row">
+							<div class="primary-button add-to-cart">
+								<a href="#">Añadir Carrito <i class="fas fa-shopping-cart cart-icon"></i></a>
+							</div>
+							<div class="primary-button add-to-wishlist">
+								<a href="#">Añadir Deseados <i class="fas fa-shopping-cart cart-icon"></i></a>
+							</div>
+							<div class="primary-button buy-now">
+								<a href="#">Comprar Ahora <i class="fas fa-shopping-cart cart-icon"></i></a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -229,6 +209,7 @@
 
 <div class="carousel-wrapper">
 	<div class="carousel-container">
+		<h1>COMPARA PRODUCTOS SIMILARES</h1>
 		<div id="recommended-products" class="carousel">
 
 		</div>
@@ -317,39 +298,33 @@
 							</div>
 						</div>
 						<div class="tab-pane fade" id="vendor" role="tabpanel" aria-labelledby="vendor-tab">
-							<div class="row">
-								<div class="col-md-6 mb-3">
-									<div class="item w-100" data-wow-duration="0.5s">
-										<div class="sep-section-heading">
-											<h2>Sobre el <em>Artesano</em></h2>
-										</div>
-										<div id="datosArtesano" style="display: flex;flex-wrap: nowrap;align-content: stretch;align-items: center;flex-direction: row;"></div>
+							<div class="vendor-profile">
+								<div class="section">
+									<div class="sep-section-heading">
+										<h2>Sobre el <em>Artesano</em></h2>
 									</div>
+									<div id="datosArtesano"></div>
 								</div>
-								<div class="col-md-6 mb-3">
-									<div class="item w-100" data-wow-duration="0.5s">
-										<div class="sep-section-heading">
-											<h2>Datos <em>Contacto</em></h2>
-										</div>
-										<div class="contact-info">
-											<div class="row">
-												<div class="phone col-md-12 col-sm-6 col-xs-6">
-													<i class="fa fa-phone"></i><span id="telArtesano">+1 123 489-5748</span>
-												</div>
-												<div class="mail col-md-12 col-sm-6 col-xs-6">
-													<i class="fa fa-envelope"></i><span id="correoArtesano">youremail@gmail.com</span>
-												</div>
+								<div class="section">
+									<div class="sep-section-heading">
+										<h2>Datos <em>Contacto</em></h2>
+									</div>
+									<div class="contact-info">
+										<div class="row">
+											<div class="col-12">
+												<i class="fa fa-phone"></i><span id="telArtesano"></span>
+											</div>
+											<div class="col-12">
+												<i class="fa fa-envelope"></i><span id="correoArtesano"></span>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col-md-6 mb-3">
-									<div class="item w-100" data-wow-duration="0.5s">
-										<div class="sep-section-heading">
-											<h2> Medios de pago <em>disponibles</em></h2>
-										</div>
-										<div class="" id="mediosPago"></div>
+								<div class="section">
+									<div class="sep-section-heading">
+										<h2>Medios de pago <em>disponibles</em></h2>
 									</div>
+									<div id="mediosPago"></div>
 								</div>
 							</div>
 						</div>

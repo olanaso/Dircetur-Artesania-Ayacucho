@@ -1,6 +1,24 @@
 const sequelize = require('sequelize')
 const {handleHttpError} = require('../utils/handleError')
 const productosFavoritos = require('../models/productos_favoritos')
+
+/**
+ * Obtener todos los productos deseados de un cliente
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function getAllByClientId(req, res){
+    const {idCliente} = req.params
+    try{
+        response = await productosFavoritos.findAllWishProductsByClientId(idCliente)
+        res.status(200).send({data: response})
+    }catch(e){
+        console.error(e)
+        handleHttpError(res, "Error obteniendo recursos", 500)
+    }
+}
+
 async function save (req, res){
     try{
         const body = req.body
@@ -8,8 +26,8 @@ async function save (req, res){
         const data = await productosFavoritos.create(body)
         res.status(200).send({data})
     }catch(e) {
-        handleHttpError(res,"Error creando recuro", 500)
         console.error(e)
+        handleHttpError(res,"Error creando recuro", 500)
     }
 }
 
@@ -24,4 +42,4 @@ async function deleted(req, res){
     }
 }
 
-module.exports ={save, deleted}
+module.exports ={save, deleted, getAllByClientId}
