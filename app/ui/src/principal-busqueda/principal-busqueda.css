@@ -113,6 +113,7 @@ body {
 
 .section-heading .icon {
     margin-left: 10px;
+    margin-top: 70px;
 }
 
 .section-heading .contador-productos h2 {
@@ -188,18 +189,19 @@ body {
 }
 
 .search-form .input-select {
-    margin-bottom: 15px;
+    margin-bottom: 1px;
 }
 
 .search-form .input-select input {
-    width: 100%;
-    padding: 10px;
+    width: 110%;
+
+    padding: 7.5px;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     font-size: 14px;
     outline: none;
     background-color: white;
-    border-bottom: 2px solid transparent;
+    border-bottom: 4px solid transparent;
     transition: border-bottom 0.3s ease;
 }
 .search-form .input-select select{
@@ -207,7 +209,7 @@ body {
     padding: 10px;
     border: none;
     border-radius: 12px;
-    font-size: 25px;
+    font-size: 15px;
     outline: none;
     background-color: white;
     border-bottom: 2px solid transparent;
@@ -291,4 +293,108 @@ button#filterButton.loading::after {
     50% { content: '.'; }
     75% { content: '..'; }
     100% { content: '...'; }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .search-section {
+        padding: 10px 0;
+    }
+
+    .search-content {
+        padding: 15px;
+    }
+
+    .search-heading .text-content h2 {
+        font-size: 20px;
+    }
+
+    .search-heading .text-content span {
+        font-size: 12px;
+    }
+
+    .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* Stack elements vertically */
+        gap: 10px; /* Space between elements */
+    }
+
+    .search-form .input-select {
+        margin-left: 50px;
+        width: 80%; /* Full width for input fields */
+        max-width: 100%; /* Ensure input fields do not exceed 100% width */
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-form .input-select input,
+    .search-form .input-select select {
+        width: 100%; /* Full width within the flex container */
+        padding: 7px;
+        margin-bottom: 20px;
+        font-size: 13px;
+    }
+
+    button#filterButton,
+    button#clearButton {
+        width: 50%; /* Full width for buttons */
+        padding: 10px;
+        font-size: 14px;
+        margin-left: 115px;
+        margin-bottom:20px;
+        display: block; /* Ensure buttons are block elements */
+    }
+
+    button#filterButton.loading {
+        width: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-heading .text-content h2 {
+        font-size: 18px;
+    }
+
+    .search-heading .text-content span {
+        font-size: 10px;
+    }
+
+    .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* Stack elements vertically */
+        gap: 10px; /* Space between elements */
+    }
+
+    .search-form .input-select {
+        width: 80%; /* Full width for input fields */
+        max-width: 100%; /* Ensure input fields do not exceed 100% width */
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-form .input-select input,
+    .search-form .input-select select {
+        width: 100%; /* Full width within the flex container */
+        margin-right: 20px;
+        max-width: 100%;
+
+    }
+
+    button#filterButton,
+    button#clearButton {
+        width: 50%; /* Full width for buttons */
+        padding: 8px;
+        font-size: 12px;
+        margin-left: 90px;
+        margin-bottom:20px;
+        display: block; /* Ensure buttons are block elements */
+    }
+
+    button#filterButton.loading {
+        width: 50%;
+    }
 }

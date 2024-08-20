@@ -3567,7 +3567,15 @@ footer .footer-item .our-gallery ul li {
   margin-right: 6px;
   margin-bottom: 10px
 }
+.logo-container {
+  text-align: center;
+  position: relative;
+  z-index: 1000;
+}
 
+.logo-image {
+  height: 60px;
+}
 footer .footer-item .our-gallery ul li img {
   width: 100%;
   -webkit-transition: all 0.3s;
@@ -3659,8 +3667,6 @@ footer .sub-footer p a:hover {
   width: 40px;
   text-align: center;
 }
-
-
 
 
 

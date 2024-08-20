@@ -4,9 +4,7 @@ import { saveDataToLocalStorage } from '../utils/config';
 import { obtenerParametrosURL } from '../utils/path';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('DOM fully loaded and parsed');
     const productos = await listarProductos();
-    console.log('Productos listados:', productos);
     cargarProductos(productos);
 
     const filterButton = document.getElementById('filterButton');
@@ -21,46 +19,44 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    // Evento para el botón de filtrar
     filterButton.addEventListener('click', async (event) => {
         event.preventDefault();
-        console.log('Filter button clicked');
         setLoadingState(true);
         const filteredProducts = await filtrarProductos(productos);
-        console.log('Productos filtrados:', filteredProducts);
         cargarProductos(filteredProducts);
         setLoadingState(false);
     });
 
+    // Evento para el botón de limpiar filtros
     clearButton.addEventListener('click', (event) => {
         event.preventDefault();
-        console.log('Clear button clicked');
         setLoadingState(true);
         clearFilters();
         cargarProductos(productos);
         setLoadingState(false);
     });
 
+    // Evento para el botón de Enter
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
-            console.log('Enter key pressed');
             filterButton.click();
         }
     });
 });
 
+// Función para establecer el estado de carga
 function setLoadingState(isLoading) {
     const filterButton = document.getElementById('filterButton');
     const clearButton = document.querySelector('.fa-times').parentElement;
 
     if (isLoading) {
-        console.log('Setting loading state to true');
         filterButton.innerHTML = 'Buscando';
         filterButton.classList.add('loading');
         filterButton.disabled = true;
         clearButton.classList.add('move-right');
     } else {
-        console.log('Setting loading state to false');
         filterButton.innerHTML = '<i class="fa fa-filter"></i>';
         filterButton.classList.remove('loading');
         filterButton.disabled = false;
@@ -68,6 +64,7 @@ function setLoadingState(isLoading) {
     }
 }
 
+// Función para filtrar productos
 async function filtrarProductos(productos) {
     const filterName = document.getElementById('filterName').value.toLowerCase();
     const filterPriceMin = parseFloat(document.getElementById('filterPriceMin').value) || 0;
@@ -97,6 +94,17 @@ async function filtrarProductos(productos) {
     });
 }
 
+// Evento para el botón de filtrar
+filterButton.addEventListener('click', async (event) => {
+    event.preventDefault();
+    setLoadingState(true);
+    currentPage = 1; // Resetear a la página 1
+    const filteredProducts = await filtrarProductos(productos);
+    cargarProductos(filteredProducts);
+    setLoadingState(false);
+});
+
+// Función para limpiar filtros
 function clearFilters() {
     setLoadingState(true);
     document.getElementById('filterName').value = '';
@@ -110,12 +118,14 @@ const itemsPerPage = 9;
 let currentPage = 1;
 let totalPages = 1;
 
+// Función para cargar productos
 async function cargarProductos(productos) {
     totalPages = Math.ceil(productos.length / itemsPerPage);
     renderPage(productos, currentPage);
     updatePaginationControls(productos);
 }
 
+// Función para renderizar la página
 function renderPage(productos, page) {
     $('#contenedorProductos').empty();
     const start = (page - 1) * itemsPerPage;
@@ -190,6 +200,7 @@ function renderPage(productos, page) {
     `;
 }
 
+// Función para actualizar los controles de paginación
 function updatePaginationControls(productos) {
     const paginationContainer = document.getElementById('paginationControls');
     paginationContainer.innerHTML = '';
@@ -203,6 +214,16 @@ function updatePaginationControls(productos) {
     }
 
     if (currentPage > 1) {
+        const firstButton = document.createElement('button');
+        firstButton.textContent = '<<';
+        firstButton.addEventListener('click', () => {
+            currentPage = 1;
+            renderPage(productos, currentPage);
+            updatePaginationControls(productos);
+            window.scrollTo({ top: 300, behavior: 'smooth' });
+        });
+        paginationContainer.appendChild(firstButton);
+
         const prevButton = document.createElement('button');
         prevButton.textContent = 'Anterior';
         prevButton.addEventListener('click', () => {
@@ -239,5 +260,15 @@ function updatePaginationControls(productos) {
             window.scrollTo({ top: 300, behavior: 'smooth' });
         });
         paginationContainer.appendChild(nextButton);
+
+        const lastButton = document.createElement('button');
+        lastButton.textContent = '>>';
+        lastButton.addEventListener('click', () => {
+            currentPage = totalPages;
+            renderPage(productos, currentPage);
+            updatePaginationControls(productos);
+            window.scrollTo({ top: 300, behavior: 'smooth' });
+        });
+        paginationContainer.appendChild(lastButton);
     }
 }

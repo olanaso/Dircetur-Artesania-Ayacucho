@@ -60,7 +60,15 @@ section {
   color: #1e1e1e;
   background-color: #f4c23d;
 }
+.logo-container {
+  text-align: center;
+  position: relative;
+  z-index: 1000;
+}
 
+.logo-image {
+  height: 60px;
+}
 #search button {
   display: inline-block;
   background: #2959ad !important;
