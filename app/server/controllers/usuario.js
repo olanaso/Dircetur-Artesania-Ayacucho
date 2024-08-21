@@ -37,19 +37,20 @@ async function loginCliente(req, res){
     try{
         const {clave} = req.body
         //encuentra el cliente que coincida con clave y contrasenia
-        const client = await  usuario.findOne({where:
+        const user = await  usuario.findOne({where:
                 {usuario:req.body.usuario, clave}
         })
         //validaciones de rol y cliente existente
-        if(!client){
+        if(!user){
             return res.status(400).send({message: "Usuario o contraseña incorrectos"})
         }
-        if(client.rolid !== 3){
+        if(user.rolid !== 3){
             return res.status(400).send({message: "Solo puedes ingresar con una cuenta de cliente"})
         }
         const data = {
-            token: jwt.sign({ client }, '2C44-4D44-WppQ38S', { expiresIn: '1d' }),
-            id: client.id
+            token: jwt.sign({ client: user }, '2C44-4D44-WppQ38S', { expiresIn: '1d' }),
+            id: user.id,
+            idCliente: await cliente.findClienteIdByUsuarioId(user.id)
         }
         return res.status(200).send({data})
     }catch(e){

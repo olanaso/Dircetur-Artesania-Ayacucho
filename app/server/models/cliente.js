@@ -165,3 +165,10 @@ cliente.findUsuarioIdByClienteId = async function(id){
 }
 
 module.exports = cliente
+
+cliente.findClienteIdByUsuarioId = async function(id){
+    clienteEncontrado = await cliente.findOne({
+        where: {usuario_id : id}
+    })
+    return clienteEncontrado ? clienteEncontrado.id : null
+}
