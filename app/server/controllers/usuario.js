@@ -28,10 +28,35 @@ module.exports = {
     obtenerDNI, loginpersonal,
     verificarToken,
     recuperarcuenta, cambiarContrasenia,importarUsuarios
-    ,reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp 
+    ,reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp ,
+    loginCliente
 
 };
 
+async function loginCliente(req, res){
+    try{
+        const {clave} = req.body
+        //encuentra el cliente que coincida con clave y contrasenia
+        const client = await  usuario.findOne({where:
+                {usuario:req.body.usuario, clave}
+        })
+        //validaciones de rol y cliente existente
+        if(!client){
+            return res.status(400).send({message: "Usuario o contraseña incorrectos"})
+        }
+        if(client.rolid !== 3){
+            return res.status(400).send({message: "Solo puedes ingresar con una cuenta de cliente"})
+        }
+        const data = {
+            token: jwt.sign({ client }, '2C44-4D44-WppQ38S', { expiresIn: '1d' }),
+            id: client.id
+        }
+        return res.status(200).send({data})
+    }catch(e){
+        console.error(e)
+        handleHttpError(res,"Error al iniciar sesion",500)
+    }
+}
 function guardar (req, res) {
 
 

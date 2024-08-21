@@ -14,6 +14,7 @@ router.post('/usuario_save',  controller.save);
 router.post('/cambiar_contrasenia',  controller.cambiarContrasenia);
 router.get('/loginpersonal',  controller.loginpersonal);
 router.post('/login',  controller.loginpersonal);
+router.post('/v1/login-clientes', controller.loginCliente)
 router.post('/protegido',authenticateToken, checkRol(["1", "2"]),  controller.verificarToken);
 router.post('/recuperarcuenta',  controller.recuperarcuenta);
 router.post('/importarUsuarios',  controller.importarUsuarios);
