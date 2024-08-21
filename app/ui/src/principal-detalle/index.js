@@ -3,19 +3,21 @@ import { saveDataToLocalStorage } from '../utils/config';
 import { hideLoading } from '../utils/init';
 import { obtenerParametrosURL } from '../utils/path';
 import { obtenerProducto, obtenerArtesano, listarProductos, listarProductosPorCategoria } from './api';
-import { addToWishlist } from '../añadir-deseados/api.js';
+import {addProductToWishlist} from '../añadir-deseados/api.js';
+import { getDataFromLocalStorage } from '../utils/config';
 
-function getArtesanoId() {
-    return document.getElementById('nombreArtesano').dataset.artesanoId;
+function getClientId() {
+    return getDataFromLocalStorage('idCliente');
 }
 
 document.querySelector('.add-to-wishlist a').addEventListener('click', (event) => {
     event.preventDefault();
     const productId = getQueryParameter('id');
-    const artesanoId = getArtesanoId();
-    console.log(`Adding product ${productId} to wishlist for artesano ${artesanoId}`);
-    addToWishlist(productId, artesanoId);
+    const clientId = getClientId();
+    console.log(`Adding product ${productId} to wishlist for client ${clientId}`);
+    addProductToWishlist(productId, clientId);
 });
+
 
 let cantidadMaxima;
 
