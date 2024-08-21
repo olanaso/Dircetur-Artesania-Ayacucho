@@ -38,15 +38,16 @@ async function registrarCliente() {
     let nombres = $('#nombre').val();
     let apellidos = $('#apellidos').val();
     let correo = $('#correo').val();
+    let usuario = $('#usuario').val();
     let clave = $('#contraseña').val();
     let telefono = $('#telefono').val();
 
     try {
-        const registroCliente = await guardarCliente({ nombres, apellidos, correo, clave, telefono });
-        const registroUsuario = await guardarUsuario({ usuario: correo, nombre_completo: `${nombres} ${apellidos}`,correo, clave, rolid: 3, tipousuario: 3, estado: 1 });
-        if (registroCliente && registroUsuario) {
+        const registroCliente = await guardarCliente({ nombres, apellidos, correo,usuario, clave, telefono, nombre_completo: `${nombres} ${apellidos}`,rolid: 3, tipousuario: 3, estado: 1 });
+        // const registroUsuario = await guardarUsuario({ nombre_completo: `${nombres} ${apellidos}`,correo, clave, rolid: 3, tipousuario: 3, estado: 1 });
+        if (registroCliente) {
             showToast('success', 'Cliente registrado correctamente');
-            window.location.href = '/principal.html';
+            // window.location.href = '/principal.html';
         }
     } catch (e) {
         showToast('error', 'Error al registrar el cliente');
