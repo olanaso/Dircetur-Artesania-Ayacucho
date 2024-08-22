@@ -33,8 +33,9 @@ async function cargarDatos() {
     try {
         console.log("Inicio")
         const datosCliente = await listarDatosCliente()
-        console.log("DATOS CLIENTE", datosCliente)
-        cargarFormulario(datosCliente);
+        const resultCliente = await datosCliente.json()
+        console.log("DATOS CLIENTE", resultCliente)
+        cargarFormulario(resultCliente);
     } catch (error) {
         console.error(error);
     }
@@ -43,19 +44,18 @@ async function cargarDatos() {
 /**
  *
  * Funcion que carga los datos del cliente en el formulario
- * @param datosCliente
+ * @param resultCliente
  */
-function cargarFormulario(datosCliente) {
-    $('#name').val(datosCliente.nombres);
-    $('#phone').val(datosCliente.telefono);
-    $('#country').val(datosCliente.pais);
-    $('#city').val(datosCliente.ciudad);
-    $('#email').val(datosCliente.correo);
-    console.log("EL CORREO Es", datosCliente.correo)
-    $('#document-type').val(datosCliente.tipoDocumento);
-    $('#document-number').val(datosCliente.numeroDocumento);
-    $('#region').val(datosCliente.region);
-    $('#address').val(datosCliente.direccion);
+function cargarFormulario(resultCliente) {
+    $('#name').val(resultCliente.clienteData.nombre_completo);
+    $('#phone').val(resultCliente.clienteData.telefono);
+    $('#country').val(resultCliente.clienteData.pais);
+    $('#city').val(resultCliente.clienteData.ciudad);
+    $('#email').val(resultCliente.clienteData.correo);
+    $('#document-type').val(resultCliente.clienteData.tipo_documento);
+    $('#document-number').val(resultCliente.clienteData.numero_documento);
+    $('#region').val(resultCliente.clienteData.region);
+    $('#address').val(resultCliente.clienteData.direccion);
 
     // Si deseas mostrar la imagen de perfil
     $('.profile-img').attr('src', datosCliente.fotoPerfil || 'default-image-path.jpg');

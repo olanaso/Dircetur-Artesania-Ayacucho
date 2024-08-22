@@ -1,4 +1,5 @@
 const db = require('../config/db');
+const usuario = require('./usuario')
 sequelize = db.sequelize;
 Sequelize = db.Sequelize;
 
@@ -131,6 +132,11 @@ const cliente = sequelize.define('cliente', {
     timestamps: true
 });
 
+cliente.belongsTo(usuario, {
+    foreignKey: 'usuario_id',
+    as: 'datosUsuario'
+})
+
 /**
  * Funcion que  encuentra el id de un cliente por su correo
  * @param correo
@@ -160,8 +166,8 @@ cliente.findClienteById = async function(id){
  * @returns {Promise<usuario_id|null>}
  */
 cliente.findUsuarioIdByClienteId = async function(id){
-    usuario = await cliente.findOne({where: {id}})
-    return usuario ? usuario.usuario_id : null
+    usuariom = await cliente.findOne({where: {id}})
+    return usuariom ? usuariom.usuario_id : null
 }
 
 module.exports = cliente
@@ -171,4 +177,19 @@ cliente.findClienteIdByUsuarioId = async function(id){
         where: {usuario_id : id}
     })
     return clienteEncontrado ? clienteEncontrado.id : null
+}
+
+cliente.FindUserAndClienteDataByClienteId = async function(id){
+    return cliente.findOne({
+        where: {id},
+        attributes: {exclude:
+                ['usuariomodificacion_id',  'usuariocreacion_id', 'createdAt', 'updatedAt'] },
+        include: [
+            {
+                model: usuario,
+                as: 'datosUsuario',
+                attributes: ['usuario', 'nombre_completo']
+            }
+        ]
+    })
 }

@@ -73,17 +73,22 @@ async function eliminar(req, res) {
     }
 
 }
-function obtener(req, res) {
+async function obtener(req, res) {
+    const {id} = req.params
+    console.log(id)
+    try{
+        clienteData = await model.FindUserAndClienteDataByClienteId(id)
 
-    model.findOne({
-        where: {id: req.params.id}
-    })
-        .then(resultset => {
-            res.status(200).json(resultset)
-        })
-        .catch(error => {
-            res.status(400).send(error)
-        })
+        if(clienteData){
+            return res.status(200).send({clienteData})
+        }
+        handleHttpError(res, "El cliente no existe", 404)
+
+    }catch(e){
+        console.error(e)
+        handleHttpError(res, "Error obteniendo datos del cliente", 500)
+    }
+
 }
 
 const DEFAULT_PAGE_LIMIT = 10; // Número predeterminado de resultados por página
