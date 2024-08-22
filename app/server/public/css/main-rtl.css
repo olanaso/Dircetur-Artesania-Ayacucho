@@ -70,7 +70,11 @@ body {
     background: url("../img/login-slider.jpg") no-repeat;
     background-size: cover;
     background-position: center center fixed; }
-
+body.register-bg {
+  background: url("../img/login-slider.jpg") no-repeat;
+  background-size: cover;
+  background-position: center center fixed;
+}
 /************************************************
 	************************************************
 										Common CSS							
