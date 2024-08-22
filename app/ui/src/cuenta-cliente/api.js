@@ -13,22 +13,6 @@ export async function listarDatosCliente(){
     try{
         const responseCliente = await fetch(baseUrl + `/cliente/${idCliente}`)
 
-        // const resultCliente = await responseCliente.json()
-
-        // console.log(resultCliente, resultUsuario)
-        //     const result = {
-        //     // ...resultUsuario, resultCliente
-        //     nombres: resultUsuario.nombre_completo,
-        //     telefono: resultCliente.telefono,
-        //     pais: resultCliente.pais,
-        //     ciudad: resultCliente.ciudad,
-        //     correo: resultCliente.correo,
-        //     tipoDocumento: resultCliente.tipo_documento,
-        //     numeroDocumento: resultCliente.numero_documento,
-        //     region: resultCliente.region,
-        //     direccion: resultCliente.direccion,
-        //     fotoPerfil: resultCliente.foto_perfil
-        // }
         return responseCliente
     }catch(e){
         console.error("Error al listar los datos del cliente:", e)
