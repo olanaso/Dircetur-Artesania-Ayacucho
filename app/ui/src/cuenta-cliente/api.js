@@ -28,13 +28,13 @@ export async function actualizarCliente(data){
     data.idUsuario = getDataFromLocalStorage('id')
 
     //Settings para actualizar la tabla de usuarios
-    const settingsUsuario = {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams(data)
-    };
+    // const settingsUsuario = {
+    //     method: "PUT",
+    //     headers: {
+    //         "Content-Type": "application/x-www-form-urlencoded",
+    //     },
+    //     body: new URLSearchParams(data)
+    // };
 
     //Settings para actualizar la tabla de clientes
     const settingsCliente = {
@@ -48,7 +48,7 @@ export async function actualizarCliente(data){
 
     try{
         const responseActualizarUsuario = await fetch(baseUrl + `/usuario/${idUsuario}`, settingsUsuario)
-        const responseActualizarCliente = await fetch(baseUrl + `/cliente/${idCliente}`, settingsCliente)
+        // const responseActualizarCliente = await fetch(baseUrl + `/cliente/${idCliente}`, settingsCliente)
     }catch(e){
         console.error("Error al actualizar el cliente", e)
     }

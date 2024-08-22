@@ -14,15 +14,6 @@ $(document).ready(function () {
 
 
 
-// async function  cargarCategoria() {
-//     console.log("Inicio")
-//     listarDatosCliente().then(datosCliente => {
-//         cargarFormulario(datosCliente);
-//     }).catch(error => {
-//         console.error(error);
-//     });
-// }
-
 /**
  * Funcion que obtiene los datos del endpoint y llama a la funcion necesaria para
  * mostrar los datos en el formulario
@@ -67,14 +58,13 @@ async function actualizarCuentaCliente() {
     console.log("TIPO", typeof idUsuario)
 
     const data = {
-        nombre_completo: $('#name').val(),
+        nombres: $('#name').val(),
+        apellidos: $('#lastName').val(),
         telefono: $('#phone').val(),
         pais: $('#country').val(),
         ciudad: $('#city').val(),
         numero_documento: $('#document-number').val(),
-        region: $('#region').val(),
         direccion: $('#address').val(),
-        idUsuario: idUsuario
     }
     try{
         // const jsonData = JSON.stringify(data)
