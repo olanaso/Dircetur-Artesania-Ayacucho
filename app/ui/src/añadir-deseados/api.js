@@ -46,22 +46,19 @@ export async function addProductToWishlist(productId, clientId) {
         throw error;
     }
 }
-
-export async function removeProductFromWishlist(productId, clientId) {
+export async function deleteProductoDeseado({ productId, clientId }) {
     const settings = {
         method: "DELETE",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: new URLSearchParams({ productId, clientId }),
     };
 
     try {
         const response = await fetch(`${baseUrl}/v1/productos-favoritos/${productId}/${clientId}`, settings);
-        const data = await response.json();
-        console.log('Product removed from wishlist:', data);
-        return data;
+        return response.ok;
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error al eliminar el producto deseado:", error);
+        return false;
     }
 }
