@@ -42,10 +42,10 @@ async function loginCliente(req, res){
         })
         //validaciones de rol y cliente existente
         if(!user){
-            return res.status(400).send({message: "Usuario o contraseña incorrectos"})
+            return res.status(400).send({error: "Usuario o contraseña incorrectos"})
         }
         if(user.rolid !== 3){
-            return res.status(400).send({message: "Solo puedes ingresar con una cuenta de cliente"})
+            return res.status(400).send({error: "Solo puedes ingresar con una cuenta de cliente"})
         }
         const data = {
             token: jwt.sign({ client: user }, '2C44-4D44-WppQ38S', { expiresIn: '1d' }),

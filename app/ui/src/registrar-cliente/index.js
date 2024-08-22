@@ -46,8 +46,8 @@ async function registrarCliente() {
         const registroCliente = await guardarCliente({ nombres, apellidos, correo,usuario, clave, telefono, nombre_completo: `${nombres} ${apellidos}`,rolid: 3, tipousuario: 3, estado: 1 });
         // const registroUsuario = await guardarUsuario({ nombre_completo: `${nombres} ${apellidos}`,correo, clave, rolid: 3, tipousuario: 3, estado: 1 });
         if (registroCliente) {
-            showToast('success', 'Cliente registrado correctamente');
-            // window.location.href = '/principal.html';
+            showToast( 'Cliente registrado correctamente');
+            window.location.href = '/registro-completo.html';
         }
     } catch (e) {
         showToast('error', 'Error al registrar el cliente');
