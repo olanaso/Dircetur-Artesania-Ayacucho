@@ -63,7 +63,7 @@ function renderProducts() {
 <div class="product-card" data-product-id="${product.id_producto}" data-client-id="${getDataFromLocalStorage('idCliente')}" data-lst-imagenes='${datosProducto.lst_imagenes}'>
     <div class="product-info">
         <div class="product-image">
-      
+     
             <img src="${datosProducto.imagen_principal}" alt="${datosProducto.nombres_es}">
         </div>
         <div class="product-details">
@@ -101,6 +101,14 @@ function renderProducts() {
 </div>
         `;
     }).join('');
+    document.querySelectorAll('.custom-button-wrapper.custom-button .custom-text').forEach(button => {
+        if (button.textContent.trim() === 'Ver Detalles') {
+            button.parentElement.addEventListener('click', function() {
+                const productId = this.closest('.product-card').dataset.productId;
+                window.location.href = `principal-detalle.html?id=${productId}`;
+            });
+        }
+    });
 }
 
 function renderPagination() {

@@ -32,7 +32,12 @@ export function cerrarSesion() {
 export function updateDeseadosCount(count) {
     const countElement = document.getElementById('deseados-count');
     if (countElement) {
-        countElement.textContent = count;
+        if (count === 0) {
+            countElement.style.display = 'none';
+        } else {
+            countElement.style.display = 'block';
+            countElement.textContent = count;
+        }
     }
 }
 

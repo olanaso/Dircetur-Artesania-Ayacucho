@@ -1,5 +1,6 @@
 import { baseUrl } from '../utils/config';
 import { updateDeseadosCount } from '../Shared/navbar.js';
+import {showToast} from "../utils/toast.js";
 
 export async function listarDeseados(clientId) {
     try {
@@ -35,8 +36,15 @@ export async function addProductToWishlist(productId, clientId) {
         });
 
         if (!response.ok) {
+            if (response.status === 400) {
+                const errorData = await response.json();
+                const errorMessage = errorData.errors[0].msg; // Extract the first error message
+                showToast(errorMessage);
+                return null;
+            }
             throw new Error('Network response was not ok');
         }
+        showToast('Producto agregado correctamente');
 
         const result = await response.json();
         console.log('Product added to wishlist:', result);

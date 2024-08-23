@@ -250,6 +250,28 @@ section {
   animation: bounce 0.6s infinite alternate;
   background: #2959ad
 }
+@keyframes fallIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.toast-bi {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #c4bb0a;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
 .deseados-count {
   background-color: red;
   color: white;
@@ -258,34 +280,10 @@ section {
   font-size: 15px;
   font-weight: bold;
   position: absolute;
-  margin-top: -10px;
-  margin-left: -7px;
+  margin-top: -25px;
+  margin-left: 8px;
   transition: opacity 0.5s ease-in-out;
-}
-
-.deseados-count.shake {
-  display: inline-block;
-  animation: shake 0.5s;
-}
-
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  50% {
-    transform: translateX(5px);
-  }
-  75% {
-    transform: translateX(-5px);
-  }
-}
-
-.deseados-count.appear {
-  display: inline-block;
-  opacity: 1;
+  animation: fallIn 0.5s ease-in-out;
 }
 .preloader-bounce>span:nth-child(2) {
   -webkit-animation-delay: 0.2s;
