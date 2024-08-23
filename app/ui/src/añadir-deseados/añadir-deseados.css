@@ -151,6 +151,12 @@ hr{
     height: 100%;
     object-fit: contain;
     margin-left: -10px;
+    transition: transform 0.3s ease;
+
+}
+
+.product-image img:hover {
+    transform: scale(1.2);
 }
 .artisan-link {
     color: #f82b2b;
@@ -169,7 +175,7 @@ hr{
 }
 
 .product-name {
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: bold;
     margin-top: 30px;
 }
@@ -250,6 +256,10 @@ hr{
     color: black;
     font-size: 2.5em;
     text-align: left;
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: italic;
 }
 .title {
     margin-top: 70px;
@@ -260,7 +270,7 @@ hr{
 }
 
 .title i {
-    margin-right: 15px;
+
     font-size: 1em;
     color: #ff6f61;
     animation: heartbeat 2s infinite;
