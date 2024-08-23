@@ -1,5 +1,6 @@
 import {actualizarCliente, listarDatosCliente} from './api.js';
 import {getDataFromLocalStorage} from "../utils/config.js";
+import {showToast} from "../utils/toast.js";
 
 // Ejecutar la función cuando se carga la página
 $(document).ready(function () {
@@ -38,14 +39,14 @@ async function cargarDatos() {
  * @param resultCliente
  */
 function cargarFormulario(resultCliente) {
-    $('#name').val(resultCliente.clienteData.nombre_completo);
+    $('#name').val(resultCliente.clienteData.nombres);
+    $('#lastName').val(resultCliente.clienteData.apellidos);
     $('#phone').val(resultCliente.clienteData.telefono);
     $('#country').val(resultCliente.clienteData.pais);
     $('#city').val(resultCliente.clienteData.ciudad);
     $('#email').val(resultCliente.clienteData.correo);
     $('#document-type').val(resultCliente.clienteData.tipo_documento);
     $('#document-number').val(resultCliente.clienteData.numero_documento);
-    $('#region').val(resultCliente.clienteData.region);
     $('#address').val(resultCliente.clienteData.direccion);
 
     // Si deseas mostrar la imagen de perfil
@@ -61,15 +62,25 @@ async function actualizarCuentaCliente() {
         nombres: $('#name').val(),
         apellidos: $('#lastName').val(),
         telefono: $('#phone').val(),
+        correo: $('#email').val(),
         pais: $('#country').val(),
         ciudad: $('#city').val(),
+        tipo_documento: $('#document-type').val(),
         numero_documento: $('#document-number').val(),
         direccion: $('#address').val(),
     }
     try{
         // const jsonData = JSON.stringify(data)
-        const actualizarUsuario = await actualizarCliente(data)
+        const actualizarUsuarioResponse = await actualizarCliente(data)
+        const actualizarUsuarioData = await JSON.stringify(actualizarUsuarioResponse)
+        if(actualizarUsuarioResponse.status === 200){
+            showToast(actualizarUsuarioData.message)
+        }
+        else{
+            throw new Error(actualizarUsuarioData.error)
+        }
     }catch(e){
+        showToast(e)
         console.error("Hubo un error actualizando el cliente", e)
     }
 

@@ -47,8 +47,9 @@ export async function actualizarCliente(data){
 
 
     try{
-        const responseActualizarUsuario = await fetch(baseUrl + `/usuario/${idUsuario}`, settingsUsuario)
-        // const responseActualizarCliente = await fetch(baseUrl + `/cliente/${idCliente}`, settingsCliente)
+        // const responseActualizarUsuario = await fetch(baseUrl + `/usuario/${idUsuario}`, settingsUsuario)
+        const responseActualizarCliente = await fetch(baseUrl + `/cliente/${idCliente}`, settingsCliente)
+        return responseActualizarCliente
     }catch(e){
         console.error("Error al actualizar el cliente", e)
     }

@@ -38,8 +38,9 @@ async function actualizar(req, res) {
         //Encuentro el usuario con la llave foranea que almacena el cliente
         const usuarioEncontrado = await usuario.findUsuarioById(clienteEncontrado.usuario_id)
        //retiro valores del request que no voy a actualizar porque no existen en usuario
-        const {direccion, region, ciudad, pais, tipo_documento, numero_documento,
+        let {direccion, region, ciudad, pais, tipo_documento, numero_documento,
         direccion_envio, foto_perfil, list_reclamos, usuario_id, ...requestForUser} = request
+        requestForUser.nombre_completo = request.nombres + " " + request.apellidos
         await usuarioEncontrado.update(requestForUser)
 
         res.status(200).send({message: "Cliente actualizado correctamente"})
