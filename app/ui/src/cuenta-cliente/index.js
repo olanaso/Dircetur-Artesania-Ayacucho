@@ -1,3 +1,7 @@
+import './flaticon.css'
+import './main.css'
+import './font-awesome.min.css'
+
 import {actualizarCliente, listarDatosCliente} from './api.js';
 import {getDataFromLocalStorage} from "../utils/config.js";
 import {showToast} from "../utils/toast.js";
@@ -55,6 +59,7 @@ function cargarFormulario(resultCliente) {
 
 
 async function actualizarCuentaCliente() {
+    $('#btnSaveChanges').prop('disabled', true).text('Guardando...')
     const idUsuario = getDataFromLocalStorage('id').toString()
     console.log("TIPO", typeof idUsuario)
 
@@ -72,8 +77,10 @@ async function actualizarCuentaCliente() {
     try{
         // const jsonData = JSON.stringify(data)
         const actualizarUsuarioResponse = await actualizarCliente(data)
-        const actualizarUsuarioData = await JSON.stringify(actualizarUsuarioResponse)
+        const actualizarUsuarioData = await actualizarUsuarioResponse.json()
+
         if(actualizarUsuarioResponse.status === 200){
+            console.log("La data",actualizarUsuarioData.message)
             showToast(actualizarUsuarioData.message)
         }
         else{
@@ -82,6 +89,8 @@ async function actualizarCuentaCliente() {
     }catch(e){
         showToast(e)
         console.error("Hubo un error actualizando el cliente", e)
+    } finally{
+        $('#btnSaveChanges').prop('disabled', false).text('Guardar Cambios')
     }
 
 
