@@ -1,8 +1,11 @@
+// src/a%C3%B1adir-deseados/index.js
 import { getDataFromLocalStorage, saveDataToLocalStorage } from "../utils/config.js";
-import { listarDeseados, deleteProductoDeseado } from "./api.js";
+import { listarDeseados, deleteProductoDeseado, addProductToWishlist } from "./api.js";
 import { AlertDialog } from "../utils/alert";
 import { showToast } from "../utils/toast.js";
 import { showLoading, hideLoading } from "../utils/init.js";
+import { updateDeseadosCount } from '../Shared/navbar.js';
+import './añadir-deseados.css';
 
 const alertDialog = new AlertDialog();
 
@@ -17,12 +20,14 @@ const productsPerPage = 3;
 async function ObtenerDeseados() {
     try {
         showLoading();
-        const response = await listarDeseados(getDataFromLocalStorage('idCliente'));
+        const clientId = getDataFromLocalStorage('idCliente');
+        const response = await listarDeseados(clientId);
         console.log(response);
 
         products = response.data;
         renderProducts();
         renderPagination();
+        updateDeseadosCount(products.length);
     } catch (e) {
         console.error(e);
     } finally {
@@ -31,7 +36,22 @@ async function ObtenerDeseados() {
 }
 
 function renderProducts() {
+
     const productContainer = document.querySelector('.product-list');
+    if (products.length === 0) {
+        productContainer.innerHTML = `
+            <div class="no-products">
+                <img src="../../public/img/broken-heart.png" class="broken-heart-img" alt="Broken Heart">
+                <h2>Oops... aún no has agregado productos a tu lista de deseados</h2>
+                <p>Presiona el siguiente botón para explorar nuestros productos</p>
+                <button id="explore-products-button" class="explore-button">Explorar Productos</button>
+            </div>
+        `;
+        document.getElementById('explore-products-button').addEventListener('click', () => {
+            window.location.href = 'principal-busqueda.html';
+        });
+        return;
+    }
     const start = (currentPage - 1) * productsPerPage;
     const end = start + productsPerPage;
     const paginatedProducts = products.slice(start, end);
@@ -39,44 +59,50 @@ function renderProducts() {
     productContainer.innerHTML = paginatedProducts.map(product => {
         const datosProducto = product.datosProducto;
         return `
-            <div class="product-card" data-product-id="${product.id_producto}" data-client-id="${getDataFromLocalStorage('idCliente')}" data-lst-imagenes='${datosProducto.lst_imagenes}'>
-                <div class="product-info">
-                    <div class="product-image">
-                        <i class="fa fa-heart-broken trash-icon btn_EliminarDeseado"></i>
-                        <img src="${datosProducto.imagen_principal}" alt="${datosProducto.nombres_es}">
-                    </div>
-                    <div class="product-details">
-                        <h3 class="product-name">${datosProducto.nombres_es}</h3>
-                        <p class="product-maker">Hecho por: ${datosProducto.datos_artesano.nombres} ${datosProducto.datos_artesano.apellidos}</p>
-                    </div>
-                </div>
-                <div class="product-price-actions">
-                    <div class="product-price">
-                        <p class="price-label">Precio:</p>
-                        <p class="price-value">S/${datosProducto.precio}</p>
-                    </div>
-                    <div class="product-actions">
-                        <div class="custom-button-wrapper custom-button">
-                            <div class="custom-text">Añadir al carrito</div>
-                            <span class="custom-icon">
-                                <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+       
+<div class="product-card" data-product-id="${product.id_producto}" data-client-id="${getDataFromLocalStorage('idCliente')}" data-lst-imagenes='${datosProducto.lst_imagenes}'>
+    <div class="product-info">
+        <div class="product-image">
+      
+            <img src="${datosProducto.imagen_principal}" alt="${datosProducto.nombres_es}">
+        </div>
+        <div class="product-details">
+            <h3 class="product-name">${datosProducto.nombres_es}</h3>
+            <p class="product-maker">Hecho por: ${datosProducto.datos_artesano.nombres} ${datosProducto.datos_artesano.apellidos}</p>
+         <div class="product-price">
+            <p class="price-label">Precio:</p>
+            <p class="price-value">S/${datosProducto.precio}</p>
+        </div>
+        <div class="product-price-actions">
+       
+        <div class="product-actions">
+            <div class="custom-button-wrapper custom-button">
+                <div class="custom-text">Añadir al carrito</div>
+                <span class="custom-icon">
+                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
+                    </svg>
+                </span>
             </div>
+            <div class="custom-button-wrapper custom-button">
+                <div class="custom-text">Ver Detalles</div>
+                <span class="custom-icon">
+                    <svg viewBox="0 0 16 16" class="bi bi-eye" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 3.5a5.5 5.5 0 0 1 5.5 5.5A5.5 5.5 0 0 1 8 14.5a5.5 5.5 0 0 1-5.5-5.5A5.5 5.5 0 0 1 8 3.5zm0 1a4.5 4.5 0 0 0-4.5 4.5A4.5 4.5 0 0 0 8 13.5a4.5 4.5 0 0 0 4.5-4.5A4.5 4.5 0 0 0 8 4.5zm0 1a3.5 3.5 0 0 1 3.5 3.5A3.5 3.5 0 0 1 8 12.5a3.5 3.5 0 0 1-3.5-3.5A3.5 3.5 0 0 1 8 5.5zm0 1a2.5 2.5 0 0 0-2.5 2.5A2.5 2.5 0 0 0 8 11.5a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 8 6.5z"></path>
+                    </svg>
+                </span>
+            </div>
+        </div>
+    </div>
+    </div>
+        <i class="fa fa-heart-broken trash-icon btn_EliminarDeseado"></i>
+
+     </div>
+</div>
         `;
     }).join('');
-
-    document.querySelectorAll('.product-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const productId = this.getAttribute('data-product-id');
-            window.location.href = `principal-detalle.html?id=${productId}`;
-        });
-    });
 }
+
 function renderPagination() {
     const totalPages = Math.ceil(products.length / productsPerPage);
     const pageNumbersContainer = document.querySelector('.page-numbers');
@@ -156,4 +182,15 @@ $(document).on('click', '.btn_EliminarDeseado', async function(e) {
             }
         }
     );
+});
+
+document.getElementById('add-to-wishlist-button').addEventListener('click', async function() {
+    let productId = $(this).closest('.product-card').data('product-id');
+    let clientId = $(this).closest('.product-card').data('client-id');
+    if (clientId) {
+        await listarDeseados(clientId, productId); // Verificar si el producto ya está en la lista de deseados
+        await addProductToWishlist(productId, clientId);
+        const updatedWishlist = await listarDeseados(clientId);
+        updateDeseadosCount(updatedWishlist.data.length);
+    }
 });

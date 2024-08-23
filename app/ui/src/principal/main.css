@@ -250,7 +250,43 @@ section {
   animation: bounce 0.6s infinite alternate;
   background: #2959ad
 }
+.deseados-count {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 15px;
+  font-weight: bold;
+  position: absolute;
+  margin-top: -10px;
+  margin-left: -7px;
+  transition: opacity 0.5s ease-in-out;
+}
 
+.deseados-count.shake {
+  display: inline-block;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+.deseados-count.appear {
+  display: inline-block;
+  opacity: 1;
+}
 .preloader-bounce>span:nth-child(2) {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;

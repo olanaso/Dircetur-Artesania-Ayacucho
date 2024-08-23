@@ -1,5 +1,5 @@
-// src/a%C3%B1adir-deseados/api.js
 import { baseUrl } from '../utils/config';
+import { updateDeseadosCount } from '../Shared/navbar.js';
 
 export async function listarDeseados(clientId) {
     try {
@@ -15,7 +15,7 @@ export async function listarDeseados(clientId) {
         return result;
     } catch (error) {
         console.error('Error:', error);
-    }
+}
 }
 
 export async function addProductToWishlist(productId, clientId) {
@@ -40,6 +40,11 @@ export async function addProductToWishlist(productId, clientId) {
 
         const result = await response.json();
         console.log('Product added to wishlist:', result);
+
+        // Actualizar el contador de deseados
+        const updatedWishlist = await listarDeseados(clientId);
+        updateDeseadosCount(updatedWishlist.data.length);
+
         return result;
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
