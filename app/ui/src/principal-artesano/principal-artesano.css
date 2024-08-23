@@ -102,8 +102,13 @@ section {
 }
 
 .card-img-top {
-    width: 90%;
+    width: 70%;
     height: 225px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 1px solid black;
+    mix-blend-mode: multiply;
 }
 
 .card-body-image1 {
@@ -249,6 +254,7 @@ section {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    border-bottom: 4px solid transparent;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     margin-left: 12px;
 }
