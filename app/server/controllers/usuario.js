@@ -29,10 +29,32 @@ module.exports = {
     verificarToken,
     recuperarcuenta, cambiarContrasenia,importarUsuarios
     ,reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp ,
-    loginCliente
+    loginCliente, actualizarContraseniaCiente
 
 };
 
+/**
+ * Metodo que actualiza la contrasenia cliente
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function actualizarContraseniaCiente(req,res){
+    const {id} = req.params
+    const{contraseniaNueva} = req.body
+    try{
+        //cambio la clave por contrasenia nueva donde el id coincida
+        await usuario.update({clave: contraseniaNueva}, {where: {id}})
+        res.status(200).send({message: "Contraseña actualizada"})
+    }catch(e){
+        console.error(e)
+        handleHttpError(res,"Ocurrio un error actualizando la contraseña",500)
+    }
+
+
+
+
+}
 async function loginCliente(req, res){
     try{
         const {clave} = req.body
