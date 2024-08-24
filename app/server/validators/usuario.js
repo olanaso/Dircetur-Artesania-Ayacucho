@@ -20,6 +20,13 @@ const validatorUpdatePasswordCliente = [
             throw new Error("La contraseña no coincide con la actual")
         }
     }),
+    //validacion de si la contrasenia nueva es la misma que la actual
+    check('clave').custom(async(clave, {req}) =>{
+        const{contraseniaNueva} = req.body
+        if(clave === contraseniaNueva){
+            throw new Error("La contraseña nueva es la misma que la actual")
+        }
+    }),
     //validacion de contrasenia nueva
     check('contraseniaNueva').notEmpty().withMessage('El campo de contraseña nueva es obligatorio'),
     check('contraseniaConfirmacion').notEmpty().withMessage('El campo de confirmación es obligatorio'),
