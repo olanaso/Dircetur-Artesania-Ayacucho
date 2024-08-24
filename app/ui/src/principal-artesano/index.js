@@ -79,7 +79,7 @@ async function infoArtesanoById() {
             $("#listReconocimientos").append(`
           <div class="sep-section-heading">
               <div class="certificate-artesano">
-                  <div class="title">${reconocimiento.Título}</div>
+                  <div class="title">${reconocimiento.Título} </div>
                   <div class="subtitle">Otorgado por ${reconocimiento.Entidad} </div>
                   <div class="content">
                       ${reconocimiento.Descripcion}
@@ -112,63 +112,66 @@ function initMap(latitud, longitud) {
 }
 
 async function cargarProducts() {
-    // const categorias =  await listarCategorias()
-    const productoByArtesano = await obtenerProducByArtesano(
-        getQueryParameter("id")
-    );
-    console.log("> CANTD PRODUCT: ", productoByArtesano.data.length)
-    // $("#owl-top-features").empty();
+    const productoByArtesano = await obtenerProducByArtesano(getQueryParameter("id"));
+    console.log("> CANTD PRODUCT: ", productoByArtesano.data.length);
+
     let cards = "";
     for (let data of productoByArtesano.data) {
         cards += `
-<a href="principal-detalle.html?id=${data.id}">
-      <div class="productos-artesano">
-          <div class="productos-artesano-card">
-             <img src="${data.imagen_principal}" alt="Producto">
-                  <p class="text-limited">${data.nombres_es}</p>
-                <p class="text-limited"><strong>Precio:</strong> S/. ${data.precio}</p>
-                  <p class="text-limited text-limited-category">${data.categoria_producto.denominacion}</p>
-             </div>
-      </div>
+<a href="principal-detalle.html?id=${data.id}" style="text-decoration: none;">
+    <div class="productos-artesano">
+        <div class="productos-artesano-card">
+            <img src="${data.imagen_principal}" alt="Producto">
+            <p class="text-limited">${data.nombres_es}</p>
+            <p class="text-limited"><strong>Precio:</strong> S/. ${data.precio}</p>
+            <p class="text-limited text-limited-category">${data.categoria_producto.denominacion}</p>
+        </div>
+    </div>
 `;
     }
     $("#products-artesano").html(cards);
+
     // Initialize Slick Carousel
-    $('#products-artesano').slick({
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        prevArrow: $('#left-arrow'),
-        nextArrow: $('#right-arrow'),
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
+    function initializeSlick() {
+        $('#products-artesano').not('.slick-initialized').slick({
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            prevArrow: $('#left-arrow'),
+            nextArrow: $('#right-arrow'),
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
 
-        ]
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+
+
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+    }
+
+    initializeSlick();
+
+    $(window).on('resize', function() {
+        $('#products-artesano').slick('resize');
     });
-
 }
