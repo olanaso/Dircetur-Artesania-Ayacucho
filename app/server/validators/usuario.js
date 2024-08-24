@@ -17,7 +17,7 @@ const validatorUpdatePasswordCliente = [
         const{id} = req.params
         const usuarioEncontrado = await usuario.findUsuarioById(id)
         if(clave !== usuarioEncontrado.clave){
-            throw new Error("La contraña no coincide con la actual")
+            throw new Error("La contraseña no coincide con la actual")
         }
     }),
     //validacion de contrasenia nueva

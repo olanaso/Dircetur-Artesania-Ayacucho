@@ -22,19 +22,10 @@ export async function listarDatosCliente(){
 
 
 export async function actualizarCliente(data){
-    const idUsuario = getDataFromLocalStorage('id')
     const idCliente = getDataFromLocalStorage('idCliente')
     //asignando el idUsuario al json de data
     data.idUsuario = getDataFromLocalStorage('id')
 
-    //Settings para actualizar la tabla de usuarios
-    // const settingsUsuario = {
-    //     method: "PUT",
-    //     headers: {
-    //         "Content-Type": "application/x-www-form-urlencoded",
-    //     },
-    //     body: new URLSearchParams(data)
-    // };
 
     //Settings para actualizar la tabla de clientes
     const settingsCliente = {
@@ -53,4 +44,22 @@ export async function actualizarCliente(data){
     }catch(e){
         console.error("Error al actualizar el cliente", e)
     }
+}
+
+export async function actualizarContrasenia(data){
+    const idUsuario = getDataFromLocalStorage('id')
+    const settings = {
+        method: "PUT",
+        headers:{
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(data)
+    }
+    try{
+        const response = await fetch(baseUrl + `/v1/contrasenia-clientes/${idUsuario}`, settings)
+        return response
+    }catch(e){
+        console.error("Error al hacer la peticion", e)
+    }
+
 }

@@ -2,7 +2,7 @@ import './flaticon.css'
 import './main.css'
 import './font-awesome.min.css'
 
-import {actualizarCliente, listarDatosCliente} from './api.js';
+import {actualizarCliente, listarDatosCliente, actualizarContrasenia} from './api.js';
 import {getDataFromLocalStorage} from "../utils/config.js";
 import {showToast} from "../utils/toast.js";
 
@@ -14,6 +14,11 @@ $(document).ready(function () {
     $('#btnSaveChanges').click(async function (e) {
         e.preventDefault();
         actualizarCuentaCliente()
+    })
+    //funcion que ocurre si se le da click a cambiar contra
+    $('#btnResetPassword').click(async function(e){
+        e.preventDefault()
+        actualizarContra()
     })
 });
 
@@ -94,6 +99,31 @@ async function actualizarCuentaCliente() {
     }
 
 
+}
+
+async function actualizarContra(){
+    $('#btnResetPassword').prop('disabled', true).text('Cambiando...')
+    const data = {
+        clave: $('#old-password').val(),
+        contraseniaNueva: $('#new-password').val(),
+        contraseniaConfirmacion: $('#confirm-password').val()
+    }
+    try{
+        const actualizarContraResponse = await actualizarContrasenia(data)
+        console.log("El response", actualizarContraResponse )
+        const actualizarContraResponseData = await actualizarContraResponse.json()
+        if(actualizarContraResponse.status === 200){
+            showToast(actualizarContraResponseData.message)
+        }
+        else{
+            throw new Error(actualizarContraResponseData.error[0].msg)
+        }
+    }catch(e){
+        showToast(e)
+        console.log("Hubo un error actualizando la contraseña", e)
+    }finally{
+        $('#btnResetPassword').prop('disabled', false).text('Cambiar Contraseña')
+    }
 }
 
 
