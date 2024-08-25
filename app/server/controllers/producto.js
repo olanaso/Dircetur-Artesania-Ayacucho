@@ -24,7 +24,11 @@ module.exports = {
 
 
 async function filtro(req,res){
-    const {cat = [], of, des, pmin, pmax } = req.query;
+    const {cat = [], of, des, pmin } = req.query;
+    let {pmax} = req.query
+    if(pmax <= pmin) {
+        pmax = 9999
+    }
     console.log(cat, of, des, pmin, pmax)
     const categorias = Array.isArray(cat) ? cat: [cat]
     console.log(typeof cat)
@@ -44,6 +48,7 @@ async function filtro(req,res){
         }
         if( pmin >0 || pmax>0)
         sql += ` AND p.precio >= ${pmin} AND p.precio <= ${pmax}`
+
 
         if (des === 1){
             sql += ` AND p.tipo_estado = 'destacado'`
