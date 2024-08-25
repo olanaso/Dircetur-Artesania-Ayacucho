@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+	
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="Lead Admin Panel" />
+		<meta name="keywords" content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="shortcut icon" href="img/fav.png" />
+		<title>Lead Admin Dashboard</title>
+		
+		<!-- Common CSS -->
+		
+		<link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
+		
+
+		<!-- Other CSS includes plugins - Cleanedup unnecessary CSS -->
+		<!-- Chartist css -->
+		<link href="vendor/chartist/css/chartist.min.css" rel="stylesheet" />
+		<link href="vendor/chartist/css/chartist-custom.css" rel="stylesheet" />
+
+		<link rel="stylesheet" href="/assets/usuarios-6a95ecd8.css">
+		<link rel="stylesheet" href="/assets/main-edc25fd7.css">
+	</head>
+	<body>
+
+		<!-- Loading starts -->
+		<div class="loading-wrapper">
+			<div class="loading">
+				<div class="img"></div>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<!-- Loading ends -->
+
+		<!-- BEGIN .app-wrap -->
+		<div class="app-wrap">
+			<!-- BEGIN .app-heading -->
+			<header class="app-header">
+				<div class="container-fluid">
+					<div class="row gutters">
+						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+							<a class="mini-nav-btn" href="#" id="app-side-mini-toggler">
+								<i class="icon-menu5"></i>
+							</a>
+							<a href="#app-side" data-toggle="onoffcanvas" class="onoffcanvas-toggler" aria-expanded="true">
+								<i class="icon-chevron-thin-left"></i>
+							</a>
+						</div>
+						<div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11 m-auto d-flex justify-content-end gap-3 flex-wrap">
+							<div class="d-flex align-items-center">
+								<p class="mb-1">Bienvenido <span id="userName">Juan perez</span></p>
+								<p class="mb-1 ml-2"> Último acceso:<span id="lastLogin">13/09/2021</span></p>
+							</div>
+							<div class="d-flex align-items-center ml-3">
+								<p class="mb-1">rol <span>Administrador</span></p>
+							</div>
+							<div class="ml-3">
+								<button type="button" class="btn btn-outline-secondary btn-rounded btn-sm">Cambiar contraseña</button>
+								<button type="button" class="btn btn-outline-primary btn-rounded btn-sm">Cerrar sesión</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<!-- END: .app-heading -->
+			<!-- BEGIN .app-container -->
+			<div class="app-container">
+				<!-- BEGIN .app-side -->
+				<aside class="app-side" id="app-side">
+					<!-- BEGIN .side-content -->
+					<div class="side-content ">
+						<!-- BEGIN .side-nav -->
+						<nav class="side-nav">
+							<!-- BEGIN: side-nav-content -->
+							<ul class="unifyMenu" id="unifyMenu">
+								<li class="active selected">
+									<a href="/">
+										<span class="has-icon">
+											<i class="icon-home"></i>
+										</span>
+										<span class="nav-title">Administrador</span>
+									</a>
+								</li>
+								<li>
+									<a href="" class="has-arrow" aria-expanded="false">
+										<span class="has-icon">
+											<i class="icon-tag"></i>
+										</span>
+										<span class="nav-title">Catálogo</span>
+									</a>
+									<ul aria-expanded="false">
+										<li>
+											<a href="/categorias.html">Categorías</a>
+										</li>
+										<li>
+											<a href="/productos.html">Productos</a>
+										</li>
+										<li>
+											<a href="/slider.html">Slider</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/ventas.html">
+										<span class="has-icon">
+											<i class="icon-shopping-cart"></i>
+										</span>
+										<span class="nav-title">Ventas</span>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="has-arrow" aria-expanded="false">
+										<span class="has-icon">
+											<i class="icon-user2"></i>
+										</span>
+										<span class="nav-title">Usuarios</span>
+									</a>
+									<ul aria-expanded="false">
+										<li>
+											<a href="/artesanos.html">Artesano</a>
+										</li>
+										<li>
+											<a href="/clientes.html">Cliente</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/reportes.html">
+										<span class="has-icon">
+											<i class="icon-file-text"></i>
+										</span>
+										<span class="nav-title">Reportes</span>
+									</a>
+								</li>								
+							</ul>
+							<!-- END: side-nav-content -->
+						</nav>
+						<!-- END: .side-nav -->
+					</div>
+					<!-- END: .side-content -->
+				</aside>
+				<!-- END: .app-side -->
+
+				<!-- BEGIN .app-main -->
+				<div class="app-main">
+					<!-- BEGIN .main-heading -->
+					<header class="main-heading">
+						<div class="container-fluid">
+							<h5>Categoría</h5>
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">Home</a></li>
+									<li class="breadcrumb-item"><a href="#">Analytics</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Reports</li>
+								</ol>
+							</nav>
+						</div>
+					</header>
+					<!-- END: .main-heading -->
+					<!-- BEGIN .main-content -->
+					<div class="main-content">
+						<div class="card">
+							<div class="card-header">Filtrar categoría</div>
+							<div class="card-body">
+								<div class="row gutters">
+									<div class="col">
+										<input type="text" class="form-control" placeholder="ID de categoría">
+									</div>
+									<div class="col">
+										<input type="text" class="form-control" placeholder="Abreviatura">
+									</div>
+									<div class="col">
+										<input type="text" class="form-control" placeholder="Nombre/Denominación">
+									</div>
+									<div class="col">
+										<button class="btn btn-primary">Filtrar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+
+					</div>
+					<!-- END: .main-content -->
+				</div>
+				<!-- END: .app-main -->
+			</div>
+			<!-- END: .app-container -->
+			<!-- BEGIN .main-footer -->
+			<footer class="main-footer fixed-btm">
+				Copyright Lead Admin 2019.
+			</footer>
+			<!-- END: .main-footer -->
+		</div>
+		<!-- END: .app-wrap -->
+
+		<!-- jQuery first, then Tether, then other JS. -->
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="vendor/leadMenu/leadMenu.js"></script>
+		<script src="vendor/onoffcanvas/onoffcanvas.js"></script>
+		<script src="js/moment.js"></script>
+
+		<!-- Slimscroll JS -->
+		<script src="vendor/slimscroll/slimscroll.min.js"></script>
+		<script src="vendor/slimscroll/custom-scrollbar.js"></script>
+
+		<!-- Chartist JS -->
+		<script src="vendor/chartist/js/chartist.min.js"></script>
+		<script src="vendor/chartist/js/chartist-tooltip.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart1.js"></script>
+		<script src="vendor/chartist/js/custom/custom-area-chart.js"></script>
+		<script src="vendor/chartist/js/custom/donut-chart2.js"></script>
+		<script src="vendor/chartist/js/custom/custom-line-chart4.js"></script>
+
+		<!-- Common JS -->
+		<script src="js/common.js"></script>
+		
+	</body>
+
+<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:26 GMT -->
+</html>

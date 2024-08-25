@@ -1,4 +1,4 @@
-import {baseUrl} from "../../src/utils/config.js";
+import {baseUrl, saveDataToLocalStorage} from "../../src/utils/config.js";
 
 export async function guardarUsuario(usuario) {
     if (usuario.usuarioid !== 0) {
@@ -16,6 +16,12 @@ export async function guardarUsuario(usuario) {
     try {
         const response = await fetch(baseUrl + "/usuario_save/", settings);
         const data = await response.json();
+        if(data && data.data.token){
+            saveDataToLocalStorage('accessToken', data.data.token)
+            saveDataToLocalStorage('rol', data.data.rolid)
+            saveDataToLocalStorage('id', data.data.id)
+            saveDataToLocalStorage('idCLiente', data.data.idCliente)
+        }
         return data; // Ahora data contiene el ID del objeto creado y otros datos
     } catch (error) {
         console.error("Error:", error);

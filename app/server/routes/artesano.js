@@ -13,7 +13,7 @@ router.post('/artesano/saveusuarioartesano/', controller.saveUsuarioArtesano);
 router.get('/artesanos', controller.buscar);
 router.get('/artesano-dni/:dni', controller.obtenerDNI);
 router.post('/artesano/fileupload', uploadarchivoArtesano, controller.uploadFilartesano);
-
+router.get('/v1/artesanos/categorias', controller.getAllArtesanosByCategoria)
 module.exports = router;
 
 

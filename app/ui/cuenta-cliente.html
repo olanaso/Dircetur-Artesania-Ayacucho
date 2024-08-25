@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Biblioideas: Biblioteca Virtual del Instituto" />
+    <meta name="keywords"
+          content="Biblioteca, Virtual, Biblioideas, Instituto, Libros, Publicaciones, Educación, Lectura, Aprendizaje, Cultura" />
+    <meta name="author" content="Biblioideas" />
+    <link rel="shortcut icon" href="img/fav.png" />
+    <title>Artesania - Profile Form</title>
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="src/cuenta-cliente/profile.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="preloader" style="display: none;">
+    <div class="preloader-bounce">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<div id="search">
+    <button type="button" class="close">×</button>
+    <form>
+        <input type="search" value="" placeholder="Escribe palabras clave aquí">
+        <button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
+    </form>
+</div>
+
+<!--HEADER-->
+<header class="site-header wow fadeIn" data-wow-duration="1s"
+        style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;">
+    <div id="main-header" class="main-header">
+    </div>
+</header>
+
+<section>
+
+    <div class="personal-info-section mt-5">
+        <div class="container">
+            <div class="row justify-content-center align-center">
+                <div class="col-md-10">
+                    <h1><i class="fas fa-user-circle"></i>Mi cuenta</h1>
+                    <hr>
+                    <div class="personal-info-content wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+                        <div class="info-heading">
+                            <div class="icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="text-content">
+                                <h2>Datos Personales</h2>
+                            </div>
+                        </div>
+                        <form class="info-form personal-info-form" id="personalInfoForm">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <label for="name">Nombres:</label>
+                                        <input class="input-field" type="text" name="name" id="name" required>
+                                    </div>
+
+
+                                    <div class="input-group">
+                                        <label for="phone">Teléfono:</label>
+                                        <input class="input-field" type="text" name="phone" id="phone" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="country">País:</label>
+                                        <input class="input-field" type="text" name="country" id="country" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="city">Ciudad:</label>
+                                        <input class="input-field" type="text" name="city" id="city" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <label for="name">Apellidos:</label>
+                                        <input class="input-field" type="text" name="lastName" id="lastName" required>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label for="email">Correo:</label>
+                                        <input class="input-field" type="email" name="email" id="email" required disabled>
+                                    </div>
+                                    <div class="input-group padding-top">
+                                        <div class="input-select">
+                                            <label for="document-type">Tipo de Documento:</label>
+                                            <select class="input-options" name="document-type" id="document-type" required>
+                                                <option value="DNI">DNI</option>
+                                                <option value="passport">Pasaporte</option>
+                                                <option value="other">Otro</option>
+                                            </select>
+                                            <input class="input-field" type="text" name="document-number" id="document-number" placeholder="Número de Documento" required>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="address">Dirección:</label>
+                                        <input class="input-field" type="text" name="address" id="address" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <div class="profile-picture">
+                                        <img src="aca ira alguna logica para la img" alt="Profile Picture" class="profile-img">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="upload-photo">Subir Imagen:</label>
+                                        <input class="input-field" type="file" name="upload-photo" id="upload-photo" required>
+                                    </div>
+                                    <button class="btn-save-changes btn w-100" type="submit" id="btnSaveChanges">Guardar Cambios</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="personal-info-section mt-3">
+        <div class="container">
+            <div class="row justify-content-center align-center">
+                <div class="col-md-8">
+                    <div class="personal-info-content wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+                        <div class="info-heading">
+                            <div class="icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <div class="text-content">
+                                <h2>Cambiar Contraseña</h2>
+                            </div>
+                        </div>
+                        <form class="info-form personal-info-form" id="passwordResetForm">
+                            <div class="input-group">
+                                <label for="old-password">Contraseña Actual:</label>
+                                <input class="input-field" type="password" name="old-password" id="old-password" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="new-password">Nueva Contraseña:</label>
+                                <input class="input-field" type="password" name="new-password" id="new-password" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="confirm-password">Repetir Contraseña:</label>
+                                <input class="input-field" type="password" name="confirm-password" id="confirm-password" required>
+                            </div>
+                            <button class="btn-save-changes btn w-100" type="submit" id="btnResetPassword">Cambiar Contraseña</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="main-footer">
+</footer>
+
+</body>
+
+<!--footer y nav-->
+<script type="module" src="src/principal/index.js"></script>
+<!--En login cliente estan los estilos, si lo borro deja de funcionar idk -->
+<script type="module" src="src/login-cliente/index.js"></script>
+<!--aca estan las peticiones a lado del servidor-->
+<script type="module" src="src/cuenta-cliente/index.js"></script>
+<script type="module" src="src/Shared/navbar.js"></script>
+
+</html>

@@ -1,6 +1,8 @@
 const sequelize = require('sequelize');
 const model = require('../models/cliente');
 const { Op } = require('sequelize');
+const {handleHttpError} = require('../utils/handleError')
+const usuario = require('../models/usuario')
 
 module.exports = {
     guardar,
@@ -25,43 +27,69 @@ function guardar(req, res) {
 
 }
 
-function actualizar(req, res) {
+async function actualizar(req, res) {
+    const t = await model.sequelize.transaction()
+    try{
+        const id = req.params.id
+        const clienteEncontrado = await model.findClienteById(id) //Con esto encuentro el cliente con el id
+        const request = req.body
+        console.log(clienteEncontrado)
+        await clienteEncontrado.update(request) //actualizo el usuario encontrado en la base de datos
+        //Encuentro el usuario con la llave foranea que almacena el cliente
+        const usuarioEncontrado = await usuario.findUsuarioById(clienteEncontrado.usuario_id)
+       //retiro valores del request que no voy a actualizar porque no existen en usuario
+        let {direccion, region, ciudad, pais, tipo_documento, numero_documento,
+        direccion_envio, foto_perfil, list_reclamos, usuario_id, ...requestForUser} = request
+        requestForUser.nombre_completo = request.nombres + " " + request.apellidos
+        await usuarioEncontrado.update(requestForUser)
 
-    model.findOne({
-        where: {id: req.params.id}
-    })
-        .then(object => {
-            object.update(req.body)
-                .then(object => res.status(200).json(object))
-                .catch(error => res.status(400).send(error))
-        })
-        .catch(error => res.status(400).send(error));
+        res.status(200).send({message: "Cliente actualizado correctamente"})
+        return await t.commit()
+    }catch(e){
+        await t.rollback()
+        handleHttpError(res,"Error actualizando",500)
+        console.error(e)
+    }
 }
 
-function eliminar(req, res) {
-    model
-        .findOne({
-            where: {id: req.body.id}
-        })
-        .then(object => {
-                object.destroy();
-                res.status(200).json(object);
-        })
-        .catch(error => res.status(400).send(error));
+async function eliminar(req, res) {
+    const t = await model.sequelize.transaction()
+    const {id} = req.params
+    try{
+        //encuentro el cliente con el id
+        const clienteEncontrado = await model.findClienteById(id)
+        const usuarioId = clienteEncontrado.usuario_id
+        //Encuentro el usuario por su id
+        const usuarioEncontrado = await usuario.findUsuarioById(usuarioId)
+        //Elimino
+        await usuarioEncontrado.destroy()
+        await clienteEncontrado.destroy()
+        res.status(200).send({message: "Cliente eliminado correctamente"})
+        return await t.commit()
+
+    }catch(e){
+        await t.rollback()
+        console.error(e)
+        handleHttpError(res, "Error eliminando cliente", 500)
+    }
+
 }
+async function obtener(req, res) {
+    const {id} = req.params
+    console.log(id)
+    try{
+        clienteData = await model.FindUserAndClienteDataByClienteId(id)
 
+        if(clienteData){
+            return res.status(200).send({clienteData})
+        }
+        handleHttpError(res, "El cliente no existe", 404)
 
-function obtener(req, res) {
+    }catch(e){
+        console.error(e)
+        handleHttpError(res, "Error obteniendo datos del cliente", 500)
+    }
 
-    model.findOne({
-        where: {id: req.params.id}
-    })
-        .then(resultset => {
-            res.status(200).json(resultset)
-        })
-        .catch(error => {
-            res.status(400).send(error)
-        })
 }
 
 const DEFAULT_PAGE_LIMIT = 10; // Número predeterminado de resultados por página
@@ -93,31 +121,31 @@ function listar(req, res) {
     });
 }
 
+/**
+ * Funcion para crear un cliente, al crear el cliente se crea el usuario
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function save(req, res, next) {
-    const t = await model.sequelize.transaction();
-    try {
+    const t = await model.sequelize.transaction() //transaccion
+    try{
+        let requestOriginal = req.body
+        //agrego nombre y le asigno el valor de nombres al request
+        const requestUsuario = {...requestOriginal, nombre: requestOriginal.nombres} //agrego nombre y le asigno el valor de nombres del request a nombre
+        const usuarioCreado = await usuario.create(requestUsuario,
+            {transaction: t}) //se crea el usuario
+        //se actualiza el request para que tenga el id del usuario
+        const requestCliente = {...requestOriginal, usuario_id : usuarioCreado.id}
+        //se crea el nuevo cliente
+        const clienteCreado = await model.create(requestCliente)
 
-        let object = await model.findOne({
-            where: {
-                id: req.body.id ? req.body.id : 0
-            }
-        });
-
-        if (object != null) {
-            let obj = {...object.dataValues, ...req.body}
-            for (const prop in obj) {
-                object[prop] = obj[prop]
-            }
-            object.id= req.id;
-            await object.save({t});
-        } else {
-            object = await model.create({ ...req.body }, { t });
-        }
-        t.commit().then();
-        return res.status(200).send(object);
-    } catch (e) {
-        t.rollback();
-        return next(e);
+        res.status(200).send({message:"Cliente creado correctamente"})
+        return await t.commit()
+    }catch(e){
+        await t.rollback()
+        console.error(e)
+        handleHttpError(res, "Error creando cliente", 500)
     }
 }
 

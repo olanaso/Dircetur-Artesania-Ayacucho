@@ -1,9 +1,12 @@
 const db = require('../config/db');
 sequelize = db.sequelize; 
 Sequelize = db.Sequelize;
+const categoria = require ('./categoria')
+const artesano = require('./artesano')
+const {Op} = require('sequelize')
 
 
-module.exports = sequelize.define('producto', {
+const product = sequelize.define('producto', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -251,3 +254,85 @@ module.exports = sequelize.define('producto', {
     tableName: 'producto', 
     timestamps: true
 });
+
+/**
+ * Funcion para encontrar todos los productos de por el id de la categoria
+ * @param categoryId
+ * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
+ */
+product.findAllProductsByCategoryId = async function(categoryId){
+    product.belongsTo(categoria, {
+        foreignKey: 'categoria_id'
+    })
+    return await product.findAll({where:{categoria_id : categoryId}})
+}
+//cuando pongo las relaciones afuera de la funcion ,la funcion no se cae
+//producto pertenece a artesano, la foreign key es artesano_id dentro del mismo product
+product.belongsTo(artesano, {
+    foreignKey: 'artesano_id',
+    as: 'datos_artesano'
+})
+
+//producto pertenece a categoria, la foreign key es categoria_id dentro del mismo product
+product.belongsTo(categoria, {
+    foreignKey: 'categoria_id',
+    as: 'categoria_producto'
+})
+
+
+/**
+ * Funcion para encontrar todos los productos de un
+ * artesano y jala datos de la tabla artesano y categoria
+ * @param artesanoId : id del artesano
+ * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
+ */
+product.findAllProductsByArtesanoId = async function(artesanoId) {
+    return await product.findAll({where:{artesano_id : artesanoId},
+        include: [
+            //Eligiendo que atributos de los alias quiero que vaya en el response
+            {
+                model:artesano,
+                as: 'datos_artesano',
+                attributes: ['nombres']
+            },
+            {
+                model: categoria,
+                as: 'categoria_producto',
+                attributes: ['denominacion']
+            }
+        ]
+    })
+}
+
+product.findAllArtesanoIdByCategoriaId = async function(id)  {
+    const artesanos = await product.findAll({where: {categoria_id : id}})
+    return artesanos.map(artesano => artesano.artesano_id)
+}
+
+/**
+ * Funcion  para encontrar todos los id de artesanos y categorias por el id de la categoria
+ * @param categorias = objeto
+ * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
+ */
+product.findAllArtesanoIdAndCategoriaIdByCategorias = async function(categorias){
+    const artesanosPorCategoria = await product.findAll({
+        attributes: ['categoria_id', 'artesano_id'],
+        where: {
+            categoria_id : {
+                [Op.in] : categorias.map(cat => cat.id)
+            }
+        }
+    })
+    //no retorno valores repetidos
+    const uniqueArtesanosPorCategoria = artesanosPorCategoria.reduce((unique, item) => {
+        return unique.some(uniqueItem => uniqueItem.categoria_id === item.categoria_id && uniqueItem.artesano_id === item.artesano_id) ? unique : [...unique, item];
+    }, []);
+
+    return uniqueArtesanosPorCategoria;
+}
+module.exports = product
+
+
+
+
+

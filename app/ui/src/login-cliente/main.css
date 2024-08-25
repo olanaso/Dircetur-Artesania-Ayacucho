@@ -57,6 +57,7 @@ section {
     background-color: #f4c23d
 }
 
+
 #search button {
     display: inline-block;
     background: #2959ad!important;
@@ -2805,24 +2806,33 @@ section.top-slider-features2 {
 }
 
 .features-search-section .search-content {
-    /*background-color: #2959ad;*/
-    background-color: #ed1e78;
-    border-radius: 5px;
+
+    background-color: #282826;
+    border-radius: 10px;
     -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.1);
     padding: 0px 30px 30px 30px;
     width: 100%;
-    border-top: 3px solid #f4c23d
+    border-top: 3px solid #f4c23d;
+    color: #fff
+
 }
 
 @media (max-width:991px) {
     .features-search-section .search-content {
         margin-top: 25px
     }
+    .features-search-section .profile-content {
+        margin-top: 25px
+    }
 }
 
 .features-search-section .search-content .search-heading {
     text-align: center
+}
+
+.features-search-section a {
+    color: white
 }
 
 .features-search-section .search-content .search-heading .icon {
@@ -2856,10 +2866,10 @@ section.top-slider-features2 {
     content: ''
 }
 
-.features-search-section .search-content .search-heading .text-content h2 {
-    margin-top: 0px;
+.features-search-section .search-content .search-heading .text-content h2{
+    margin-top: 10px;
     margin-bottom: 5px;
-    font-size: 20px;
+    font-size: 2.5em;
     color: #fff;
     font-weight: 700;
     text-transform: uppercase
@@ -2884,11 +2894,18 @@ section.top-slider-features2 {
     color: #fff;
     font-weight: 600;
     line-height: 40px;
-    width: 100%;
+    width: 40%;
     height: 40px;
     padding-left: 10px;
     border: 1px solid #eee;
+    border-radius: 5px;
     background-color: transparent
+}
+.input-select {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    position: relative;
 }
 
 @media (max-width:991px) {
@@ -3678,28 +3695,191 @@ footer .sub-footer p a:hover {
     text-align: justify;
     margin-top: 20px;
 }
-.input-solo{
-    width:100%
+
+
+
+.input-solo {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    margin-bottom: 40px;
+}
+.input-solo:focus {
+    border-color: #f4c23d;
+    outline: none
+}
+
+.input-select {
+    position: relative;
+}
+
+.input-select label {
+    position: absolute;
+    top: -25px;
+    padding: 0 5px;
+    font-size: 15px;
+    color: white;
+    z-index: 1
+}
+.form-check {
+    margin-top: -30px;
+}
+.btn.btn-primary.btn-block.mb-4 {
+    color: #000000;
 }
 
 .btn.btn-primary.btn-block.mb-4 {
-    color: #000000; /* This sets the text color to black */
-}
-
-.btn.btn-primary.btn-block.mb-4 {
-    background-color: #f4c23d; /* Replace #yourColor with the color you want */
-    border-color: #f4c23d; /* Replace #yourColor with the color you want */
+    background-color: #f4c23d;
+    border-color: #f4c23d;
 }
 
 .btn.btn-primary.btn-block.mb-4:hover{
-    background-color: white; /* Replace #yourColor with the color you want */
-    border-color: white; /* Replace #yourColor with the color you want */
+    background-color: white;
+    border-color: white;
 }
 
 .fab.fa-google {
-    color: #f4c23d; /* Replace #yourColor with the color you want */
+    color: #f4c23d;
 }
 
 .fab.fa-google:hover{
     color: white;
 }
+
+#btnloginc {
+    background-color: #f4c23d;
+    color: #ffffff;
+    border: 2px solid #f4c23d;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+#btnloginc:hover {
+    background-color: #d4a32b;
+    color: #ffffff;
+    border: 2px solid #fab31e;
+}
+.text-center {
+    text-align: center;
+}
+
+
+/* Personal Info Section */
+.personal-info-section {
+    padding: 0 0;
+}
+
+.personal-info-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-heading {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.info-heading .icon {
+    font-size: 2em;
+    margin-right: 10px;
+}
+
+.info-heading .text-content h2 {
+    margin: 0;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-field:focus {
+    border-color: #f4c23d;
+    outline: none;
+}
+
+.input-group.padding-top {
+    padding-top: 28px;
+}
+
+.input-options {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    color:black;
+}
+
+.input-select label{
+    color:black;
+}
+.input-options:focus {
+
+    border-color: #f4c23d;
+    outline: none;
+}
+.profile-picture {
+    margin-bottom: 107px;
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 80px;
+}
+
+.btn-save-changes {
+    background-color: #f4c23d;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-save-changes:hover {
+    background-color: #d4a32b;
+}
+
+
+/* Product List */
+
+.product-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeInUp 0.5s ease;
+
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+

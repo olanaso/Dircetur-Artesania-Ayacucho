@@ -1,8 +1,9 @@
 const db = require('../config/db');
+const usuario = require('./usuario')
 sequelize = db.sequelize;
 Sequelize = db.Sequelize;
 
-module.exports = sequelize.define('cliente', {
+const cliente = sequelize.define('cliente', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -130,3 +131,65 @@ module.exports = sequelize.define('cliente', {
     tableName: 'cliente',
     timestamps: true
 });
+
+cliente.belongsTo(usuario, {
+    foreignKey: 'usuario_id',
+    as: 'datosUsuario'
+})
+
+/**
+ * Funcion que  encuentra el id de un cliente por su correo
+ * @param correo
+ * @returns {Promise<id|null>}
+ */
+cliente.findIdByCorreo = async function(correo){
+    clienteEncontrado = await cliente.findOne({
+        where: {
+            correo: correo
+        }
+    });
+    return clienteEncontrado ? clienteEncontrado.id : null
+}
+
+/**
+ * Funcion que encuentra el cliente por su id
+ * @param id
+ * @returns {Promise<cliente | null>}
+ */
+cliente.findClienteById = async function(id){
+    return cliente.findOne({where: {id}})
+}
+
+/**
+ * Funcion que encuentra el id de un usuario por el id de un cliente
+ * @param id
+ * @returns {Promise<usuario_id|null>}
+ */
+cliente.findUsuarioIdByClienteId = async function(id){
+    usuariom = await cliente.findOne({where: {id}})
+    return usuariom ? usuariom.usuario_id : null
+}
+
+module.exports = cliente
+
+cliente.findClienteIdByUsuarioId = async function(id){
+    clienteEncontrado = await cliente.findOne({
+        where: {usuario_id : id}
+    })
+    return clienteEncontrado ? clienteEncontrado.id : null
+}
+
+cliente.FindUserAndClienteDataByClienteId = async function(id){
+    return cliente.findOne({
+        where: {id},
+        attributes: {exclude:
+                ['usuariomodificacion_id',  'usuariocreacion_id', 'createdAt', 'updatedAt'] },
+        include: [
+            {
+                model: usuario,
+                as: 'datosUsuario',
+                attributes: ['usuario', 'nombre_completo']
+            }
+        ]
+    })
+}

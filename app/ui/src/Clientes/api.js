@@ -1,7 +1,7 @@
 import { baseUrl, getDataFromLocalStorage } from '../utils/config';
-//const baseUrl = 'http://localhost:3001';
 
-export async function listarClientes(page, limit) {
+
+export async function listarClientes (page, limit) {
     try {
         const response = await fetch(`${baseUrl}/cliente?page=${page}&limit=${limit}`);
         const result = await response.json();
@@ -12,7 +12,7 @@ export async function listarClientes(page, limit) {
     }
 }
 
-export async function filtrarClientes(filtro) {
+export async function filtrarClientes (filtro) {
     try {
         const params = new URLSearchParams(filtro);
         const response = await fetch(baseUrl + `/clientes?${params}`);
@@ -24,7 +24,7 @@ export async function filtrarClientes(filtro) {
     }
 }
 
-export async function borrarCliente(id) {
+export async function borrarCliente (id) {
     try {
         const requestOptions = {
             method: 'DELETE',
@@ -32,7 +32,7 @@ export async function borrarCliente(id) {
             body: JSON.stringify({ id })
         };
 
-        const response = await fetch(baseUrl+'/cliente', requestOptions);
+        const response = await fetch(baseUrl + '/cliente', requestOptions);
         const result = await response.json();
 
         return result;
@@ -41,7 +41,7 @@ export async function borrarCliente(id) {
     }
 }
 
-export async function actualizarCliente(id, data) {
+export async function actualizarCliente (id, data) {
     try {
         const requestOptions = {
             method: 'PUT',
@@ -64,7 +64,7 @@ export async function actualizarCliente(id, data) {
 }
 
 
-export async function guardarcliente(data) {
+export async function guardarcliente (data) {
     try {
         const requestOptions = {
             method: 'POST',
@@ -81,11 +81,11 @@ export async function guardarcliente(data) {
     }
 }
 
-export async function obtenerCliente(id) {
+export async function obtenerCliente (id) {
     try {
-        const response = await fetch(baseUrl+ `/cliente/${id}`, { method: 'GET' });
+        const response = await fetch(baseUrl + `/cliente/${id}`, { method: 'GET' });
         const result = await response.json();
-        
+
         return result;
     } catch (error) {
         console.error('Error:', error);

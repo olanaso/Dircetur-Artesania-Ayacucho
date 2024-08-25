@@ -1,7 +1,8 @@
 
 //export const baseUrl = 'https://api-certificados.centrodegestion.org'; 
-export const baseUrl='http://localhost:3001/api';
-export const baseUrldni='https://dni.biblio-ideas.com/api';
+// export const baseUrl = 'http://148.113.196.34:80/api';
+export const baseUrl = 'http://localhost:3002/api';
+export const baseUrldni = 'https://dni.biblio-ideas.com/api';
 //} Function to save data in localStorage
 export function saveDataToLocalStorage (key, data) {
   try {
@@ -17,6 +18,11 @@ export function saveDataToLocalStorage (key, data) {
   }
 }
 
+
+export function getBaseUrl (url) {
+  const urlObj = new URL(url);
+  return `${urlObj.protocol}//${urlObj.hostname}:${urlObj.port}`;
+}
 
 // Function to get data from localStorage
 export function getDataFromLocalStorage (key) {

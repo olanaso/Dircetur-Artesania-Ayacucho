@@ -2,7 +2,7 @@ const db = require('../config/db');
 sequelize = db.sequelize;
 Sequelize = db.Sequelize;
 
-module.exports = sequelize.define('usuario', {
+const usuario = sequelize.define('usuario', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -65,3 +65,16 @@ module.exports = sequelize.define('usuario', {
     timestamps: true,  // Para permitir que Sequelize maneje `createdAt` y `updatedAt`
     underscored: true, // Esto asegurará que las columnas creadas automáticamente tengan nombres en formato underscore y no camelCase
 });
+
+/**
+ * Funcion que encuentra el usuario por id
+ * @param id
+ * @returns {Promise<Usuario | null>}
+ */
+usuario.findUsuarioById = function(id){
+    return usuario.findOne({where:{id}})
+}
+
+
+
+module.exports = usuario

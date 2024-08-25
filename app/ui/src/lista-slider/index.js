@@ -1,11 +1,13 @@
-import {guardarSlider, listarSliders, eliminarSlider, obtenerSlider, actualizarSlider} from './api';
+import { guardarSlider, listarSliders, eliminarSlider, obtenerSlider, actualizarSlider } from './api';
 import { FileUploader } from '../utils/uploadVictor.js';
 import { AlertDialog } from "../utils/alert";
+
+import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
 const alertDialog = new AlertDialog();
 
 
-import { loadPartials } from '../utils/viewpartials';   
-import {  hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
+import { loadPartials } from '../utils/viewpartials';
+import { hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
 
 
 hideLoading();
@@ -16,12 +18,12 @@ hideLoading();
     { path: 'partials/shared/menu.html', container: 'app-side' },
 
 
-  ]; 
+  ];
   try {
     await loadPartials(partials);
-    import ('../utils/common')
+    import('../utils/common')
 
-   
+
     // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
     console.log('Las vistas parciales se han cargado correctamente!');
     // Por ejemplo, podrías iniciar tu aplicación aquí.
@@ -34,10 +36,10 @@ hideLoading();
 
 function startApp () {
   //checkadminsession(); 
-  setTimeout(function() {
+  setTimeout(function () {
     llenarinformacionIESTPProg();
-   // marcarSubMenuSeleccionado();
-}, 500); 
+    // marcarSubMenuSeleccionado();
+  }, 500);
 
 }
 /*async function checkadminsession () {
@@ -46,7 +48,7 @@ function startApp () {
     location.href = "sinacceso.html"
   }
 }*/
- 
+
 
 
 
@@ -66,26 +68,26 @@ const DEFAULT_PAGE_LIMIT = 10;
 let currentPage = 1;
 let totalPages = 0; // Declarar totalPages para que esté accesible globalmente
 
- 
+
 
 //carga de imagenes
 document.addEventListener('DOMContentLoaded', () => {
   //cargarTablaSliders();
   listarSlider()
   initializeFileUploader({
-      fileInputId: 'myfile',
-      progressBarId: 'progressBar',
-      statusElementId: 'status',
-      uploadUrl: 'http://localhost:3001/api/fileupload4',
-      folder: '/slider/img/',
-      callback: handleUploadResponse
+    fileInputId: 'myfile',
+    progressBarId: 'progressBar',
+    statusElementId: 'status',
+    uploadUrl: baseUrl + '/fileupload4',
+    folder: '/slider/img/',
+    callback: handleUploadResponse
   });
   initializeFileUploader({
     fileInputId: 'myfile-editar',
     progressBarId: 'progressBar-editar',
     statusElementId: 'status-editar',
     folder: '/slider/img/',
-    uploadUrl: 'http://localhost:3001/api/fileupload4',
+    uploadUrl: baseUrl + '/fileupload4',
     callback: handleEditUploadResponse
   });
 });
@@ -98,40 +100,40 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
   const statusElement = document.getElementById(statusElementId);
 
   if (fileInput && progressBar && statusElement) {
-      const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
-      uploader.attachToFileInput(fileInput);
+    const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
+    uploader.attachToFileInput(fileInput);
   } else {
-      console.error('Initialization failed: One or more elements not found.');
+    console.error('Initialization failed: One or more elements not found.');
   }
 }
 
-function handleUploadResponse(response) {
+function handleUploadResponse (response) {
 
   let file = $('#myfile').prop('files')[0];
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      $('#principalImagePreview').attr('src', 'http://localhost:3001/' + response.ruta).show();
+      $('#principalImagePreview').attr('src', getBaseUrl(baseUrl) + '/' + response.ruta).show();
       $('#principalImageName').val(file.name);
     }
     reader.readAsDataURL(file);
 
-    imagen_principal = 'http://localhost:3001/' + response.ruta;
+    imagen_principal = getBaseUrl(baseUrl) + '/' + response.ruta;
   } else {
     alert("Por favor, seleccione un archivo para visualizar.");
   }
 }
 
-function handleEditUploadResponse(response) {
+function handleEditUploadResponse (response) {
   let file = $('#myfile-editar').prop('files')[0];
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      $('#SliderImagePreviewEdit').attr('src', 'http://localhost:3001/' + response.ruta).show();
+      $('#SliderImagePreviewEdit').attr('src', getBaseUrl(baseUrl) + '/' + response.ruta).show();
     }
     reader.readAsDataURL(file);
 
-    imagen_principal = 'http://localhost:3001/' + response.ruta;
+    imagen_principal = getBaseUrl(baseUrl) + '/' + response.ruta;
 
     alert('Actualización de la imagen correctamente');
   } else {
@@ -141,30 +143,30 @@ function handleEditUploadResponse(response) {
 //fin carga de imagen
 
 //verificador de imágenes
-document.getElementById('myfile').addEventListener('change', function() {
-    var file = this.files[0];
-    var fileType = file.type;
-    var allowedTypes = ['image/png', 'image/jpeg'];
-
-    if (!allowedTypes.includes(fileType)) {
-        alert('Solo se permiten archivos PNG o JPG');
-        this.value = '';
-    }
-});
-document.getElementById('myfile-editar').addEventListener('change', function() {
+document.getElementById('myfile').addEventListener('change', function () {
   var file = this.files[0];
   var fileType = file.type;
   var allowedTypes = ['image/png', 'image/jpeg'];
 
   if (!allowedTypes.includes(fileType)) {
-      alert('Solo se permiten archivos PNG o JPG');
-      this.value = '';
+    alert('Solo se permiten archivos PNG o JPG');
+    this.value = '';
+  }
+});
+document.getElementById('myfile-editar').addEventListener('change', function () {
+  var file = this.files[0];
+  var fileType = file.type;
+  var allowedTypes = ['image/png', 'image/jpeg'];
+
+  if (!allowedTypes.includes(fileType)) {
+    alert('Solo se permiten archivos PNG o JPG');
+    this.value = '';
   }
 });
 //fi verificador de imágenes
 
 //cargar datos a la tabla:
-async function listarSlider() {
+async function listarSlider () {
   try {
     let sliders = await listarSliders(currentPage, DEFAULT_PAGE_LIMIT);
     cargarTabla(sliders.sliders);
@@ -175,12 +177,12 @@ async function listarSlider() {
   }
 }
 
-function cargarTabla(sliders){
+function cargarTabla (sliders) {
   $('#listaSlider').empty()
   let filas = ''
   for (let data of sliders) {
     let cleanUrl = data.imagen.replace(/"/g, '');
-      filas += `<tr>
+    filas += `<tr>
             <td class="border-b border-gray-200 bg-white text-sm">
               <img src="${cleanUrl}" alt="Imagen del slider" width="100">
             </td>
@@ -222,14 +224,14 @@ document.getElementById('formSliderC').addEventListener('submit', async (event) 
 
   //imagen
   var principalImagePreview = document.getElementById('principalImagePreview');
-    // Obtener el valor del atributo src
+  // Obtener el valor del atributo src
   var foto_referente = principalImagePreview.src;
-  
+
   const formData = {
     descripcion: frase,
     imagen: foto_referente
   };
-  
+
   const form = document.getElementById('formSliderC')
   try {
     if (!form.checkValidity()) {
@@ -238,16 +240,16 @@ document.getElementById('formSliderC').addEventListener('submit', async (event) 
     }
     const result = await guardarSlider(formData);
     if (result) {
-        $('#frase').val('')
-        $('#imgSlider').val('')
-        $('#modalSliderC').modal('hide');
-        listarSlider();
-        limpiar();
+      $('#frase').val('')
+      $('#imgSlider').val('')
+      $('#modalSliderC').modal('hide');
+      listarSlider();
+      limpiar();
     } else {
-        console.error('Error al guardar el slider');
+      console.error('Error al guardar el slider');
     }
   } catch (error) {
-      console.error('Error:', error);
+    console.error('Error:', error);
   }
 });
 
@@ -263,18 +265,18 @@ $(document).on('click', '.btn-eliminarS', async function (e) {
     '¿Estás seguro de que deseas eliminar el slider?',
     'Cancelar',
     'Continuar',
-    async() => {
+    async () => {
       try {
         const result = await eliminarSlider(id);
         if (result) {
-            console.log("Slider eliminado exitosamente");
-            // Recargar la tabla de sliders
-            await listarSlider();
+          console.log("Slider eliminado exitosamente");
+          // Recargar la tabla de sliders
+          await listarSlider();
         } else {
-            console.error("Error al eliminar el slider:");
+          console.error("Error al eliminar el slider:");
         }
       } catch (error) {
-          console.error('Error:', error);
+        console.error('Error:', error);
       }
     }
   );
@@ -283,63 +285,63 @@ $(document).on('click', '.btn-eliminarS', async function (e) {
 //editar slider
 $(document).on('click', '.btn-editarS', async function (e) {
   const id = $(this).data('id');
-  
-  try {
-      const slider = await obtenerSlider(id);
-      let cleanUrl = slider.imagen.replace(/"/g, '');
-      $('#SliderImagePreviewEdit').attr('src', cleanUrl).show();
-      $('#formSliderE').attr('data-id', slider.id);
 
-      $('#fraseE').val(slider.descripcion); 
-      $('#myfile-editar').val(slider.imagen);    
+  try {
+    const slider = await obtenerSlider(id);
+    let cleanUrl = slider.imagen.replace(/"/g, '');
+    $('#SliderImagePreviewEdit').attr('src', cleanUrl).show();
+    $('#formSliderE').attr('data-id', slider.id);
+
+    $('#fraseE').val(slider.descripcion);
+    $('#myfile-editar').val(slider.imagen);
 
 
   } catch (error) {
-      console.error('Error:', error);
+    console.error('Error:', error);
   }
 });
 
 $(document).on('submit', '#formSliderE', async function (e) {
   e.preventDefault();
-    const id = $(this).data('id');
-    const fraseE = document.getElementById('fraseE').value;
-    const fileInput = document.getElementById('myfile-editar');
+  const id = $(this).data('id');
+  const fraseE = document.getElementById('fraseE').value;
+  const fileInput = document.getElementById('myfile-editar');
 
-    const formDataE = {
-      descripcion: fraseE
-    };
+  const formDataE = {
+    descripcion: fraseE
+  };
 
-    if (fileInput.files[0]) {
-      formDataE.imagen= imagen_principal
-    } else {
-      formDataE.imagen = $('#SliderImagePreviewEdit').attr('src');
-    }
+  if (fileInput.files[0]) {
+    formDataE.imagen = imagen_principal
+  } else {
+    formDataE.imagen = $('#SliderImagePreviewEdit').attr('src');
+  }
   try {
-    
+
     const result = await actualizarSlider(id, formDataE);
-    if (result) { 
-        $('#fraseE').val('')
-        $('#imgSliderE').val('')
-        console.log("Slider actualizado exitosamente");
-        $('#modalSliderE').modal('hide');
-        listarSlider();
+    if (result) {
+      $('#fraseE').val('')
+      $('#imgSliderE').val('')
+      console.log("Slider actualizado exitosamente");
+      $('#modalSliderE').modal('hide');
+      listarSlider();
     } else {
-        console.error("Error al actualizar el slider:", result.message);
+      console.error("Error al actualizar el slider:", result.message);
     }
   } catch (error) {
-      console.error('Error:', error);
+    console.error('Error:', error);
   }
 });
 
 
 
 // controles de paginación:
-function actualizarControlesPaginacion(totalPages, totalItems) {
+function actualizarControlesPaginacion (totalPages, totalItems) {
   // Calculamos el rango mostrado actualmente
   const fromItem = (currentPage - 1) * DEFAULT_PAGE_LIMIT + 1;
   let toItem = currentPage * DEFAULT_PAGE_LIMIT;
   if (toItem > totalItems) {
-      toItem = totalItems;
+    toItem = totalItems;
   }
 
   // Actualizamos la información de paginación
@@ -355,7 +357,7 @@ function actualizarControlesPaginacion(totalPages, totalItems) {
   previousBtn.className = 'paginate_button page-item previous';
   previousBtn.id = 'apiCallbacks_previous';
   if (currentPage === 1) {
-      previousBtn.classList.add('disabled');
+    previousBtn.classList.add('disabled');
   }
   const previousLink = document.createElement('a');
   previousLink.className = 'page-link';
@@ -369,94 +371,94 @@ function actualizarControlesPaginacion(totalPages, totalItems) {
   const maxVisiblePages = 3; // Número máximo de páginas visibles antes de mostrar los puntos suspensivos
 
   if (totalPages <= maxVisiblePages) {
-      // Si hay pocas páginas, mostrar todas
-      for (let i = 1; i <= totalPages; i++) {
-          const pageBtn = document.createElement('li');
-          pageBtn.className = 'paginate_button page-item';
-          if (i === currentPage) {
-              pageBtn.classList.add('active');
-          }
-          const pageLink = document.createElement('a');
-          pageLink.className = 'page-link';
-          pageLink.href = '#';
-          pageLink.textContent = i;
-          pageLink.addEventListener('click', () => cambiarPagina(i));
-          pageBtn.appendChild(pageLink);
-          paginationControls.appendChild(pageBtn);
+    // Si hay pocas páginas, mostrar todas
+    for (let i = 1; i <= totalPages; i++) {
+      const pageBtn = document.createElement('li');
+      pageBtn.className = 'paginate_button page-item';
+      if (i === currentPage) {
+        pageBtn.classList.add('active');
       }
+      const pageLink = document.createElement('a');
+      pageLink.className = 'page-link';
+      pageLink.href = '#';
+      pageLink.textContent = i;
+      pageLink.addEventListener('click', () => cambiarPagina(i));
+      pageBtn.appendChild(pageLink);
+      paginationControls.appendChild(pageBtn);
+    }
   } else {
-      // Mostrar la primera página
-      const firstPageBtn = document.createElement('li');
-      firstPageBtn.className = 'paginate_button page-item';
-      if (currentPage === 1) {
-          firstPageBtn.classList.add('active');
-      }
-      const firstPageLink = document.createElement('a');
-      firstPageLink.className = 'page-link';
-      firstPageLink.href = '#';
-      firstPageLink.textContent = 1;
-      firstPageLink.addEventListener('click', () => cambiarPagina(1));
-      firstPageBtn.appendChild(firstPageLink);
-      paginationControls.appendChild(firstPageBtn);
+    // Mostrar la primera página
+    const firstPageBtn = document.createElement('li');
+    firstPageBtn.className = 'paginate_button page-item';
+    if (currentPage === 1) {
+      firstPageBtn.classList.add('active');
+    }
+    const firstPageLink = document.createElement('a');
+    firstPageLink.className = 'page-link';
+    firstPageLink.href = '#';
+    firstPageLink.textContent = 1;
+    firstPageLink.addEventListener('click', () => cambiarPagina(1));
+    firstPageBtn.appendChild(firstPageLink);
+    paginationControls.appendChild(firstPageBtn);
 
-      // Agregar puntos suspensivos al inicio si no se muestra la primera página
-      if (currentPage > Math.floor(maxVisiblePages / 2) + 1) {
-          const ellipsisStart = document.createElement('li');
-          ellipsisStart.className = 'paginate_button page-item disabled';
-          ellipsisStart.id = 'apiCallbacks_ellipsis';
-          const ellipsisLinkStart = document.createElement('a');
-          ellipsisLinkStart.className = 'page-link';
-          ellipsisLinkStart.href = '#';
-          ellipsisLinkStart.textContent = '…';
-          ellipsisStart.appendChild(ellipsisLinkStart);
-          paginationControls.appendChild(ellipsisStart);
-      }
+    // Agregar puntos suspensivos al inicio si no se muestra la primera página
+    if (currentPage > Math.floor(maxVisiblePages / 2) + 1) {
+      const ellipsisStart = document.createElement('li');
+      ellipsisStart.className = 'paginate_button page-item disabled';
+      ellipsisStart.id = 'apiCallbacks_ellipsis';
+      const ellipsisLinkStart = document.createElement('a');
+      ellipsisLinkStart.className = 'page-link';
+      ellipsisLinkStart.href = '#';
+      ellipsisLinkStart.textContent = '…';
+      ellipsisStart.appendChild(ellipsisLinkStart);
+      paginationControls.appendChild(ellipsisStart);
+    }
 
-      // Mostrar las páginas visibles
-      let startPage = Math.max(currentPage - Math.floor(maxVisiblePages / 2), 2);
-      let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages - 1);
+    // Mostrar las páginas visibles
+    let startPage = Math.max(currentPage - Math.floor(maxVisiblePages / 2), 2);
+    let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages - 1);
 
-      for (let i = startPage; i <= endPage; i++) {
-          const pageBtn = document.createElement('li');
-          pageBtn.className = 'paginate_button page-item';
-          if (i === currentPage) {
-              pageBtn.classList.add('active');
-          }
-          const pageLink = document.createElement('a');
-          pageLink.className = 'page-link';
-          pageLink.href = '#';
-          pageLink.textContent = i;
-          pageLink.addEventListener('click', () => cambiarPagina(i));
-          pageBtn.appendChild(pageLink);
-          paginationControls.appendChild(pageBtn);
+    for (let i = startPage; i <= endPage; i++) {
+      const pageBtn = document.createElement('li');
+      pageBtn.className = 'paginate_button page-item';
+      if (i === currentPage) {
+        pageBtn.classList.add('active');
       }
+      const pageLink = document.createElement('a');
+      pageLink.className = 'page-link';
+      pageLink.href = '#';
+      pageLink.textContent = i;
+      pageLink.addEventListener('click', () => cambiarPagina(i));
+      pageBtn.appendChild(pageLink);
+      paginationControls.appendChild(pageBtn);
+    }
 
-      // Agregar puntos suspensivos al final si no se muestra la última página
-      if (endPage < totalPages - 1) {
-          const ellipsisEnd = document.createElement('li');
-          ellipsisEnd.className = 'paginate_button page-item disabled';
-          ellipsisEnd.id = 'apiCallbacks_ellipsis';
-          const ellipsisLinkEnd = document.createElement('a');
-          ellipsisLinkEnd.className = 'page-link';
-          ellipsisLinkEnd.href = '#';
-          ellipsisLinkEnd.textContent = '…';
-          ellipsisEnd.appendChild(ellipsisLinkEnd);
-          paginationControls.appendChild(ellipsisEnd);
-      }
+    // Agregar puntos suspensivos al final si no se muestra la última página
+    if (endPage < totalPages - 1) {
+      const ellipsisEnd = document.createElement('li');
+      ellipsisEnd.className = 'paginate_button page-item disabled';
+      ellipsisEnd.id = 'apiCallbacks_ellipsis';
+      const ellipsisLinkEnd = document.createElement('a');
+      ellipsisLinkEnd.className = 'page-link';
+      ellipsisLinkEnd.href = '#';
+      ellipsisLinkEnd.textContent = '…';
+      ellipsisEnd.appendChild(ellipsisLinkEnd);
+      paginationControls.appendChild(ellipsisEnd);
+    }
 
-      // Mostrar la última página
-      const lastPageBtn = document.createElement('li');
-      lastPageBtn.className = 'paginate_button page-item';
-      if (currentPage === totalPages) {
-          lastPageBtn.classList.add('active');
-      }
-      const lastPageLink = document.createElement('a');
-      lastPageLink.className = 'page-link';
-      lastPageLink.href = '#';
-      lastPageLink.textContent = totalPages;
-      lastPageLink.addEventListener('click', () => cambiarPagina(totalPages));
-      lastPageBtn.appendChild(lastPageLink);
-      paginationControls.appendChild(lastPageBtn);
+    // Mostrar la última página
+    const lastPageBtn = document.createElement('li');
+    lastPageBtn.className = 'paginate_button page-item';
+    if (currentPage === totalPages) {
+      lastPageBtn.classList.add('active');
+    }
+    const lastPageLink = document.createElement('a');
+    lastPageLink.className = 'page-link';
+    lastPageLink.href = '#';
+    lastPageLink.textContent = totalPages;
+    lastPageLink.addEventListener('click', () => cambiarPagina(totalPages));
+    lastPageBtn.appendChild(lastPageLink);
+    paginationControls.appendChild(lastPageBtn);
   }
 
   // Crear botón Next
@@ -464,7 +466,7 @@ function actualizarControlesPaginacion(totalPages, totalItems) {
   nextBtn.className = 'paginate_button page-item next';
   nextBtn.id = 'apiCallbacks_next';
   if (currentPage === totalPages) {
-      nextBtn.classList.add('disabled');
+    nextBtn.classList.add('disabled');
   }
   const nextLink = document.createElement('a');
   nextLink.className = 'page-link';
@@ -475,45 +477,44 @@ function actualizarControlesPaginacion(totalPages, totalItems) {
   paginationControls.appendChild(nextBtn);
 }
 
-async function cambiarPagina(page) {
+async function cambiarPagina (page) {
   if (page !== currentPage) {
-      currentPage = page;
-      await listarSlider();
+    currentPage = page;
+    await listarSlider();
   }
 }
 
-async function onClickNextPage(event) {
+async function onClickNextPage (event) {
   event.preventDefault();
   if (currentPage < totalPages) {
-      currentPage++;
-      await listarSlider();
+    currentPage++;
+    await listarSlider();
   }
 }
 
-async function onClickPrevPage(event) {
+async function onClickPrevPage (event) {
   event.preventDefault();
   if (currentPage > 1) {
-      currentPage--;
-      await listarSlider();
+    currentPage--;
+    await listarSlider();
   }
 }
 
 $('#modalSliderC').on('shown.bs.modal', function () {
-  $('#frase').val(''); 
+  $('#frase').val('');
   $('#myfile').val('');
   $('#status').html('');
 
-  
+
   $('#principalImagePreview').attr('src', '').css('display', 'none');
 });
 
-function limpiar()
-{
-  $('#frase').val(''); 
+function limpiar () {
+  $('#frase').val('');
   $('#myfile').val('');
   $('#status').html('');
 
-  
+
   $('#principalImagePreview').attr('src', '').css('display', 'none');
 
 }

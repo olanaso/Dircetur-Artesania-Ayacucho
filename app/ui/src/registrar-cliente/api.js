@@ -1,4 +1,4 @@
-import {baseUrl} from "../utils/config.js";
+import {baseUrl, saveDataToLocalStorage} from "../utils/config.js";
 
 export async function guardarCliente(cliente){
     const settings = {

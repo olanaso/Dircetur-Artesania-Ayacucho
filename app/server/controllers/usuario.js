@@ -14,7 +14,10 @@ const rol = require('../models/rol');
 const menu = require('../models/menu');
 const usuario = require('../models/usuario');
 const artesano = require('../models/artesano');
-
+const cliente = require('../models/cliente')
+const{tokenSign} = require('../utils/handleJwt')
+const { handleHttpError } = require('../utils/handleError');
+const {matchedData} = require('express-validator')
 module.exports = {
     guardar,
     actualizar,
@@ -25,10 +28,58 @@ module.exports = {
     obtenerDNI, loginpersonal,
     verificarToken,
     recuperarcuenta, cambiarContrasenia,importarUsuarios
-    ,reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp 
+    ,reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp ,
+    loginCliente, actualizarContraseniaCiente
 
 };
 
+/**
+ * Metodo que actualiza la contrasenia cliente
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function actualizarContraseniaCiente(req,res){
+    const {id} = req.params
+    const{contraseniaNueva} = req.body
+    try{
+        //cambio la clave por contrasenia nueva donde el id coincida
+        await usuario.update({clave: contraseniaNueva}, {where: {id}})
+        res.status(200).send({message: "Contraseña actualizada"})
+    }catch(e){
+        console.error(e)
+        handleHttpError(res,"Ocurrio un error actualizando la contraseña",500)
+    }
+
+
+
+
+}
+async function loginCliente(req, res){
+    try{
+        const {clave} = req.body
+        //encuentra el cliente que coincida con clave y contrasenia
+        const user = await  usuario.findOne({where:
+                {usuario:req.body.usuario, clave}
+        })
+        //validaciones de rol y cliente existente
+        if(!user){
+            return res.status(400).send({error: "Usuario o contraseña incorrectos"})
+        }
+        if(user.rolid !== 3){
+            return res.status(400).send({error: "Solo puedes ingresar con una cuenta de cliente"})
+        }
+        const data = {
+            token: jwt.sign({ client: user }, '2C44-4D44-WppQ38S', { expiresIn: '1d' }),
+            id: user.id,
+            idCliente: await cliente.findClienteIdByUsuarioId(user.id)
+        }
+        return res.status(200).send({data})
+    }catch(e){
+        console.error(e)
+        handleHttpError(res,"Error al iniciar sesion",500)
+    }
+}
 function guardar (req, res) {
 
 
@@ -44,18 +95,19 @@ function guardar (req, res) {
         })
 
 }
-function actualizar (req, res) {
-    model.findOne({
-        where: { dni: req.params.dni }
+async function actualizar (req, res) {
 
-    })
-        .then(object => {
-            object.update(req.body)
-                .then(object => res.status(200).json(object))
-                .catch(error => res.status(400).send(error))
-        }
-        )
-        .catch(error => res.status(400).send(error));
+    try{
+        const id = req.params.id
+        const body = req.body
+        // console.log("El request es:",req.body)
+        // console.log(req.params.id)
+        const data = await usuario.update(body, {where: {id}})
+        console.log("Data es", data)
+        return res.status(200).send({data})
+    }catch(e){
+        handleHttpError(res, "Error updating item", 500)
+    }
 }
 
 function eliminar (req, res) {
@@ -200,7 +252,22 @@ async function save(req, res, next) {
         }
         await t.commit();
         // Envía el ID del objeto creado junto con el objeto
-        return res.status(200).send({ id: object.id, object });
+        const data = {
+            message: "Cuenta creada con exito",
+            token: await tokenSign(object),
+            rolid: object.rolid,
+            id: object.id,
+            //funciona para crear cliente, pero al editar uno desde admin sale error
+            // idCliente: await cliente.findIdByCorreo(object.correo)
+        }
+        console.log(data)
+
+
+        //hice 2 intentos de cookies
+        // const token = tokenSign(object)
+        // req.session.token = token
+        // res.cookie('token', data.token, { maxAge: 24 * 60 * 60 * 1000 })
+        return res.status(200).send({data});
     } catch (e) {
         await t.rollback();
         return next(e);
@@ -284,11 +351,15 @@ async function loginpersonal (req, res) {
 
  
         }
-
+        console.log("El usuario", usuarioDB.correo)
+        //Encuentro el id del cliente por el correo, este id es usado por el front, lo almacena en local storage
+        //que despues es usado para x cosaas idk xd
+        const idClient = await cliente.findIdByCorreo(usuarioDB.correo)
         res.status(200).json({
             islogueado: true,
             usuario: usuarioDB,
-            token: "Bearer " + token
+            token: "Bearer " + token,
+            idCliente: idClient
         });
 
     } catch (err) {

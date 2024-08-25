@@ -1,43 +1,43 @@
 import { obtenerPedido, actualizarPedido, enviarCorreo } from '../historial-atencion/api';
 import { FileUploader } from '../utils/upload.js';
 import { AlertDialog } from "../utils/alert";
-const alertDialog = new AlertDialog(); 
-import { loadPartials } from '../utils/viewpartials';  
-import {  hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
-
+const alertDialog = new AlertDialog();
+import { loadPartials } from '../utils/viewpartials';
+import { hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
+import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
 
 
 
 hideLoading();
 // Uso de la función
 (async function () {
-  let partials = [
-    { path: 'partials/shared/header.html', container: 'app-header' },
-    { path: 'partials/shared/menu.html', container: 'app-side' },
+    let partials = [
+        { path: 'partials/shared/header.html', container: 'app-header' },
+        { path: 'partials/shared/menu.html', container: 'app-side' },
 
 
-  ]; 
-  try {
-    await loadPartials(partials);
-    import ('../utils/common')
+    ];
+    try {
+        await loadPartials(partials);
+        import('../utils/common')
 
-   
-    // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
-    console.log('Las vistas parciales se han cargado correctamente!');
-    // Por ejemplo, podrías iniciar tu aplicación aquí.
 
-    startApp();
-  } catch (e) {
-    console.error(e);
-  }
+        // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
+        console.log('Las vistas parciales se han cargado correctamente!');
+        // Por ejemplo, podrías iniciar tu aplicación aquí.
+
+        startApp();
+    } catch (e) {
+        console.error(e);
+    }
 })();
 
 function startApp () {
-  //checkadminsession(); 
-  setTimeout(function() {
-    llenarinformacionIESTPProg();
-   // marcarSubMenuSeleccionado();
-}, 500); 
+    //checkadminsession(); 
+    setTimeout(function () {
+        llenarinformacionIESTPProg();
+        // marcarSubMenuSeleccionado();
+    }, 500);
 
 }
 /*async function checkadminsession () {
@@ -105,7 +105,7 @@ const direccionRecepcion = document.getElementById('direccion-recepcion');
 const montoTotal = document.getElementById('total-pedido');
 
 
-async function cargarCampos(idPedido) {
+async function cargarCampos (idPedido) {
     const pedido = await obtenerPedido(idPedido);
 
     cargarTablaProductos(pedido);
@@ -129,10 +129,10 @@ async function cargarCampos(idPedido) {
     wspCliente.setAttribute('href', `https://wa.me/${pedido.cliente['telefono']}`);
     wspClienteReclamos.setAttribute('href', `https://wa.me/${pedido.cliente['telefono']}`);
     //imagenCompra.setAttribute('src', pedido.imagen_pago);
-    
+
     $('#imagen-Compra').attr('src', pedido.imagen_pago);
 }
-function cargarTablaProductos(pedidos) {
+function cargarTablaProductos (pedidos) {
     var sumaSubtotal = 0;
     const tablaDatosPedido = document.getElementById('tablaDatosPedido');
     const tablaDatosPedidoBody = tablaDatosPedido.getElementsByTagName('tbody')[0];
@@ -156,7 +156,7 @@ function cargarTablaProductos(pedidos) {
     });
     montoTotal.innerHTML = `Total: S/ ${sumaSubtotal}`;
 }
-function cargarTablaHistoriaPedido(pedidos) {
+function cargarTablaHistoriaPedido (pedidos) {
     const tablaDatosPedido = document.getElementById('tablaHistoriaPedidos');
     const tablaHistoriaPedido = tablaDatosPedido.getElementsByTagName('tbody')[0];
     if (pedidos.list_atencion == null) {
@@ -210,7 +210,7 @@ function cargarTablaHistoriaPedido(pedidos) {
 
 }
 
-function cargarTablaHistoriaReclamos(pedidos) {
+function cargarTablaHistoriaReclamos (pedidos) {
     const tablaHistoriaReclamos = document.getElementById('tablaHistoriaReclamos');
     const tablaDatosHistoria = tablaHistoriaReclamos.getElementsByTagName('tbody')[0];
 
@@ -237,12 +237,12 @@ function cargarTablaHistoriaReclamos(pedidos) {
 }
 
 
-function getQueryParameter(name) {
+function getQueryParameter (name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
 
-function formatearFecha(fecha) {
+function formatearFecha (fecha) {
     const date = new Date(fecha);
 
     const anio = date.getUTCFullYear(); // Obtener el año (ej. 2024)
@@ -252,7 +252,7 @@ function formatearFecha(fecha) {
     return `${dia}/${mes}/${anio}`;
 }
 
-function generarID() {
+function generarID () {
     let id = '';
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -264,7 +264,7 @@ function generarID() {
     return id;
 }
 
-async function actualizarHistorialPedido(numPedido) {
+async function actualizarHistorialPedido (numPedido) {
     const form = document.getElementById('form-actualizar-historia');
 
     form.addEventListener('submit', async (event) => {
@@ -322,7 +322,7 @@ async function actualizarHistorialPedido(numPedido) {
 }
 
 
-async function enviarCorreoCliente(correoCliente, nuevaAtencion) {
+async function enviarCorreoCliente (correoCliente, nuevaAtencion) {
     alertDialog.createAlertDialog(
         'confirm',
         'Confirmar',
@@ -424,7 +424,7 @@ async function enviarCorreoCliente(correoCliente, nuevaAtencion) {
 
 }
 
-function enviarMensajeCliente(telefonoCliente, nuevaAtencion) {
+function enviarMensajeCliente (telefonoCliente, nuevaAtencion) {
     var numeroCliente = encodeURIComponent(telefonoCliente);
     var estado = encodeURIComponent(nuevaAtencion.estado || "");
     var enlaceSeguimiento = encodeURIComponent(nuevaAtencion.enlaceSeguimiento || "");
@@ -475,13 +475,13 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInputId: 'myfile',
         progressBarId: 'progressBar',
         statusElementId: 'status',
-        uploadUrl: 'http://localhost:3001/api/pedido/fileupload',
+        uploadUrl: baseUrl + '/pedido/fileupload',
         folder: '/pedidos/',
         callback: handleUploadResponse
     });
 });
 
-function initializeFileUploader({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
+function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
 
     const fileInput = document.getElementById(fileInputId);
     const inputName = fileInput.name;
@@ -496,7 +496,7 @@ function initializeFileUploader({ fileInputId, progressBarId, statusElementId, u
     }
 }
 
-function handleUploadResponse(response) {
+function handleUploadResponse (response) {
     alert('registro del archivo correctamente')
-    ruta_archivo = 'http://localhost:3001/' + response.ruta;
+    ruta_archivo = getBaseUrl(baseUrl) + '/' + response.ruta;
 }

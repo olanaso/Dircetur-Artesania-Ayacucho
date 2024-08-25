@@ -1,9 +1,12 @@
 const sequelize = require('sequelize');
-const model = require('../models/artesano');
-const modelUsuario = require('../models/usuario');
+const artesano = require('../models/artesano');
+const artesanos = require('../models/usuario');
 const { Op } = require('sequelize');
 const PARAMETROS = require("../helpers/parametros");
 const moment = require('moment');
+const categoria = require('../models/categoria')
+const product = require('../models/producto')
+const {handleHttpError} = require("../utils/handleError");
 
 
 
@@ -17,12 +20,67 @@ module.exports = {
     buscar,
     obtenerDNI,
     uploadFilartesano,
-    saveUsuarioArtesano
+    saveUsuarioArtesano,
+    getAllArtesanosByCategoria
 };
+
+/**
+ * funcion para obtener la lista de artesanos de acuerdo a la categoria productos con las que han trabajado
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function getAllArtesanosByCategoria(req,res){
+    const t = await artesano.sequelize.transaction()
+    try{
+
+        //obtengo todas los id de las categorias y sus denominaciones
+        const categorias
+            = await categoria.findAllIdAndDenominacion() //id y categoria
+
+        //obtengo el id del artesano y el de la categoria de los productos que ha trabajado
+        const artesanosPorCategoria
+            = await product.findAllArtesanoIdAndCategoriaIdByCategorias(categorias)
+
+        //areglo con ids de artesano
+        const artesanosIds = [...new Set(artesanosPorCategoria.map(artesano => artesano.artesano_id))]
+
+        //encuentro los artesanos por ids
+        const artesanosEncontrados = await artesano.findArtesanosByIds(artesanosIds)
+
+
+        //resultado final haciendo uso de map, filter y find
+        const resultadoFinal = categorias.map( categoria => {
+            const artesanosFiltrados
+                = artesanosPorCategoria.filter(apc =>
+                apc.categoria_id === categoria.id).map(apc => {
+                    const artesano = artesanosEncontrados.find(a => a.id === apc.artesano_id)
+                    return artesano ? {id: artesano.id, nombres: artesano.nombres, foto1: artesano.foto1, foto2: artesano.foto2} : null
+            })
+                .filter(artesano => artesano !== null)
+
+            return {
+                categoria: categoria.denominacion, //categoria
+                artesanos: artesanosFiltrados   //array con artesanos que trabajan en esa categoria
+            }
+        }).filter(categoria => categoria.artesanos.length >0)
+
+        res.status(200)
+        res.json(resultadoFinal)
+
+        return await t.commit()
+
+    }catch(e){
+        await t.rollback()
+        console.error(e)
+        handleHttpError(res,"Ocurrio un error obteniendo los artesanos", 500)
+    }
+
+}
 
 function guardar (req, res) {
 
-    model.create(req.body)
+    artesano.create(req.body)
         .then(object => {
             res.status(200).json(object);
         })
@@ -34,7 +92,7 @@ function guardar (req, res) {
 
 function actualizar (req, res) {
 
-    model.findOne({
+    artesano.findOne({
         where: { id: req.params.id }
 
     })
@@ -49,7 +107,7 @@ function actualizar (req, res) {
 
 function eliminar (req, res) {
 
-    model
+    artesano
         .findOne({
             where: { id: req.body.id }
         })
@@ -64,7 +122,7 @@ function eliminar (req, res) {
 
 function obtener (req, res) {
 
-    model.findOne({
+    artesano.findOne({
         where: { id: req.params.id }
     })
         .then(resultset => {
@@ -76,7 +134,7 @@ function obtener (req, res) {
 }
 function obtenerDNI (req, res) {
 
-    model.findOne({
+    artesano.findOne({
         where: { dni: req.params.dni }
     })
         .then(resultset => {
@@ -107,7 +165,7 @@ function listar (req, res) {
     ORDER BY a.id DESC
     LIMIT 50;
     `
-    model.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
+    artesano.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -160,7 +218,7 @@ function buscar (req, res) {
     `;
 
 
-    model.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
+    artesano.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -173,14 +231,14 @@ function buscar (req, res) {
 /*Guarda los datos generales de un predio*/
 
 async function saveUsuarioArtesano (req, res, next) {
-    const t = await model.sequelize.transaction();
+    const t = await artesano.sequelize.transaction();
     try {
         const { usuario, artesano } = req.body;
 
         //Guardar usuario 
-        let modelArtesano = model;
+        let modelArtesano = artesano;
 
-        let objectUsuario = await modelUsuario.findOne({
+        let objectUsuario = await artesanos.findOne({
             where: {
                 id: usuario.id ? usuario.id : 0
             }
@@ -197,9 +255,11 @@ async function saveUsuarioArtesano (req, res, next) {
 
         } else {  //registro de nuevo usuario
             // usuario.id = artesano.id;
-            usuario_result = await modelUsuario.create({ ...usuario }, { transaction: t });
+            usuario_result = await artesanos.create({ ...usuario }, { transaction: t });
 
         }
+
+        let artesano_result = null;
 
         let objectArtesano = await modelArtesano.findOne({
             where: {
@@ -219,7 +279,7 @@ async function saveUsuarioArtesano (req, res, next) {
 
         } else {  //registro de nuevo usuario
             artesano.usuario_id = usuario_result.id;
-            artesano = await modelArtesano.create({ ...artesano }, { transaction: t });
+            artesano_result = await modelArtesano.create({ ...artesano }, { transaction: t });
 
         }
 
@@ -229,7 +289,7 @@ async function saveUsuarioArtesano (req, res, next) {
 
         await t.commit();
         // Envía el ID del objeto creado junto con el objeto
-        return res.status(200).send({ id: artesano.artesanoId, artesano, usuario });
+        return res.status(200).send({ id: artesano.artesanoId, artesano_result, usuario_result });
 
     } catch (e) {
         await t.rollback();
@@ -239,9 +299,9 @@ async function saveUsuarioArtesano (req, res, next) {
 
 
 async function save (req, res, next) {
-    const t = await model.sequelize.transaction();
+    const t = await artesano.sequelize.transaction();
     try {
-        let object = await model.findOne({
+        let object = await artesano.findOne({
             where: {
                 id: req.body.id ? req.body.id : 0
             }
@@ -255,7 +315,7 @@ async function save (req, res, next) {
             object.usuaregistra_id = req.userId;
             await object.save({ transaction: t });
         } else {
-            object = await model.create({ ...req.body }, { transaction: t });
+            object = await artesano.create({ ...req.body }, { transaction: t });
         }
         await t.commit();
         // Envía el ID del objeto creado junto con el objeto
