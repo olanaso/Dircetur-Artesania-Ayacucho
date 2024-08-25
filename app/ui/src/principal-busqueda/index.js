@@ -1,11 +1,32 @@
-import { filtrarproductosporcategoria, listarProductos } from './api';
+// Modificar el archivo principal para usar la nueva función
+import { filtrarproductosporcategoria, listarProductos, obtenerTodosLosArtesanos } from './api';
 import { validarHTML5 } from '../utils/validateForm';
 import { saveDataToLocalStorage } from '../utils/config';
 import { obtenerParametrosURL } from '../utils/path';
-
+const categoriaMap = {
+    101: 'Textilería',
+    108: 'Cerámica',
+    113: 'Piedra tallada'
+};
 document.addEventListener('DOMContentLoaded', async () => {
     const productos = await listarProductos();
+    const artesanos = await obtenerTodosLosArtesanos();
+
+    // Create a dictionary of artisans
+    const artesanosDict = {};
+    artesanos.forEach(artesano => {
+        artesanosDict[artesano.id] = artesano;
+    });
+
+    // Map products with their respective artisans
+    productos.forEach(producto => {
+        producto.artesano = artesanosDict[producto.artesano_id];
+    });
+
     cargarProductos(productos);
+
+    console.log(productos);
+    console.log(artesanos);
 
     const filterButton = document.getElementById('filterButton');
     const clearButton = document.getElementById('clearButton');
@@ -71,6 +92,12 @@ async function filtrarProductos(productos) {
     const filterPriceMax = parseFloat(document.getElementById('filterPriceMax').value) || Infinity;
     const categoriaId = document.getElementById('category-filter').value;
 
+    const artesanos = await obtenerTodosLosArtesanos();
+    const artesanosDict = {};
+    artesanos.forEach(artesano => {
+        artesanosDict[artesano.id] = artesano;
+    });
+
     let filteredProducts = productos.filter(producto => {
         const nombre = producto.nombres_es.toLowerCase();
         const precio = parseFloat(producto.precio.replace('S/.', ''));
@@ -86,6 +113,10 @@ async function filtrarProductos(productos) {
             return nombre.includes(filterName) && precio >= filterPriceMin && precio <= filterPriceMax;
         });
     }
+
+    filteredProducts.forEach(producto => {
+        producto.artesano = artesanosDict[producto.artesano_id];
+    });
 
     return new Promise(resolve => {
         setTimeout(() => {
@@ -143,32 +174,40 @@ function renderPage(productos, page) {
                 imagen.src = imagen.src.replace('http:/', 'http://');
             }
         }
+        function formatName(name) {
+            return name.toLowerCase().replace(/\b\w/g, char => char.toUpperCase()).replace(/ - /g, ' ');
+        }
 
         const productHtml = `
-            <div class="col-md-4 col-sm-6">
-                <div class="product-card wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
-                    <div class="thumb-content">
-                        <div class="product-banner">
-                            <h3>Nuevo</h3>
-                        </div>
-                        <div class="thumb-inner">
-                            <a href="principal-detalle.html?id=${producto.id}">
-                                <img class="product-image" src="" alt="" style="display: none;">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details">
-                        <h4>${producto.nombres_es}</h4>
-                        <span>S/. ${producto.precio}</span>
-                        <div class="similar-info">
-                            <div class="primary-button">
-                                <a href="principal-detalle.html?id=${producto.id}">Ver más</a>
-                            </div>
-                        </div>
-                    </div>
+         <div class="col-md-4 col-sm-6">
+             <div class="product-card wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+                 <div class="thumb-content">
+                     <div class="product-banner">
+                         <h3>Nuevo</h3>
+                     </div>
+                     <div class="thumb-inner">
+                         <a href="principal-detalle.html?id=${producto.id}">
+                             <img class="product-image" src="" alt="" style="display: none;">
+                         </a>
+                     </div>
+                 </div>
+                 <div class="product-details">
+                     <span>S/. ${producto.precio}</span>
+                     <p>Artesano: ${producto.artesano ? formatName(producto.artesano.completo) : 'Desconocido'}</p>
+                     <p>Categoria: ${categoriaMap[producto.categoria_id] || 'Desconocida'}</p>
+                      <div class="similar-info">
+                <div class="primary-button">
+                    <a href="principal-detalle.html?id=${producto.id}">Ver más</a>
+                </div>
+                <div class="icon-container">
+                <a href="añadir-deseados.html"><i class="fa fa-heart" id="navbar-heart-icon"></i><span id="deseados-count" class="deseados-count"></span></a>
+                    <i class="fas fa-shopping-cart"></i>
                 </div>
             </div>
-        `;
+                 </div>
+             </div>
+         </div>
+         `;
         $('#contenedorProductos').append(productHtml);
 
         const productCard = $('#contenedorProductos').children().last().find('.product-card');

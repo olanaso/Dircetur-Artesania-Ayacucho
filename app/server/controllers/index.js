@@ -22,6 +22,7 @@ const ventapedido = require('./ventapedido');
 const ubigeo = require('./ubigeo');
 const productosFavoritos = require('./productosFavoritos')
 const pedidodetalle = require('./pedidodetalle');
+const portada = require('./portada');
 
 module.exports = {
     mantenimiento,
@@ -48,5 +49,6 @@ module.exports = {
     ventapedido,
     ubigeo,
     pedidodetalle,
-    productosFavoritos
+    productosFavoritos,
+    portada
 };

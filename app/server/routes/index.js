@@ -17,13 +17,14 @@ const producto = require('./producto');
 const categoria = require('./categoria');
 const pedido = require('./pedido');
 const upload = require('./upload');
-const ubicaciones =require('./ubicaciones');
+const ubicaciones = require('./ubicaciones');
 const reportes = require('./reportes');
 const productoartesano = require('./productoartesano');
 const ventapedido = require('./ventapedido');
 const ubigeo = require('./ubigeo');
 const pedidodetalle = require('./pedidodetalle');
 const productosFavoritos = require('./productos-favoritos')
+const portada = require('./portada')
 
 
 module.exports = (app) => {
@@ -51,7 +52,7 @@ module.exports = (app) => {
     app.use('/api', ventapedido);
     app.use('/api', ubigeo);
     app.use('/api', pedidodetalle);
-    app.use('/api', productosFavoritos)
+    app.use('/api', productosFavoritos);
+    app.use('/api', portada);
 
-    
 };
