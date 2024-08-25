@@ -21,5 +21,16 @@ export async function filtrarproductosporcategoria(categoriaId) {
     }
 }
 
+// Update obtenerArtesano function
+// Modificar la función obtenerArtesanos para obtener todos los artesanos
+export async function obtenerTodosLosArtesanos() {
+    try {
+        const response = await fetch(`${baseUrl}/artesanos`, { method: 'GET' });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 
 

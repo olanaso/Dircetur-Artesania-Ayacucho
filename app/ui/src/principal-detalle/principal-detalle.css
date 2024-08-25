@@ -7,6 +7,7 @@
 										Body CSS
 	************************************************
 ************************************************/
+
 html {
     height: 100%;
 }
@@ -6525,6 +6526,122 @@ hr{
     border-top: 2px solid rgba(0, 0, 0, 0.59);
     margin-bottom: 40px;
 }
+
+/*Loading*/
+@-webkit-keyframes "loading" {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes "loading" {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes "loading" {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes "loading" {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.loading-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #f5f6fa;
+    z-index: 10000;
+}
+
+.loading-wrapper .loading {
+    position: absolute;
+    width: 180px;
+    top: 50%;
+    margin-top: -23px;
+    text-align: center;
+    left: 50%;
+    margin-left: -90px;
+}
+
+.loading-wrapper .loading span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 9px;
+    height: 3px;
+    margin: 2px;
+    position: absolute;
+    left: 114px;
+    top: 45px;
+    background: #1558d3;
+    animation: loading 1s infinite alternate;
+}
+
+.loading-wrapper .loading span:nth-of-type(1) {
+    background: #c611da;
+    animation-delay: 0.1s;
+    left: 128px;
+}
+
+#single-car {
+    display: flex;
+    flex-direction: column;
+}
+
+.loading-wrapper .loading span:nth-of-type(2) {
+    background: #0bed13;
+    animation-delay: 0.2s;
+    left: 142px;
+}
+
+.loading-wrapper .loading span:nth-of-type(3) {
+    background: #5900ff;
+    animation-delay: 0.4s;
+    left: 156px;
+}
+
+.loading-wrapper .loading span:nth-of-type(4) {
+    background: #ff6111;
+    animation-delay: 0.6s;
+    left: 170px;
+}
+
+.loading-wrapper .img {
+    width: 200px;
+    height: 200px;
+    background: url("../../public/img/lead.svg") no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -83px;
+    margin-top: -100px;
+}
+
 @media (max-width: 768px) {
     .product-name {
         font-size: 2rem;
