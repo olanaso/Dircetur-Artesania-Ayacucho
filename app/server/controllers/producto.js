@@ -18,9 +18,48 @@ module.exports = {
     uploadFilproducto,
     reportegeneral, productoFiltrados,
     getProductsByCategoryAbbreviation,
-    getProductsByArtesanoId
+    getProductsByArtesanoId,
+    filtro
 };
 
+
+async function filtro(req,res){
+    const {cat = [], of, des, pmin, pmax } = req.query;
+    console.log(cat, of, des, pmin, pmax)
+    const categorias = Array.isArray(cat) ? cat: [cat]
+    console.log(typeof cat)
+    try{
+        let sql = `
+         SELECT p.nombres_es, p.imagen_principal, p.precio, p.palabra_clave_es, p.lst_imagenes,
+            a.nombres,
+            c.abreviatura, c.denominacion, c.id
+         FROM artesania.producto p
+         INNER JOIN artesania.categoria c ON p.categoria_id = c.id
+         INNER JOIN artesania.artesano a ON p.artesano_id = a.id
+         WHERE 1 = 1
+     `;
+        if(cat.length > 0 && cat[0] !== '0'){
+            const categoriaFiltro = categorias.map(categoria => `p.categoria_id = ${categoria}` ).join(' OR ')
+            sql += ` AND (${categoriaFiltro})`
+        }
+        if( pmin >0 || pmax>0)
+        sql += ` AND p.precio >= ${pmin} AND p.precio <= ${pmax}`
+
+        if (des === 1){
+            sql += ` AND p.tipo_estado = 'destacado'`
+        }
+
+        const list = await product.sequelize.query(sql, { type: product.sequelize.QueryTypes.SELECT})
+        if(!list || list.length === 0){
+            return handleHttpError(res, "No existen los datos", 401)
+        }
+        return res.status(200).send({list})
+    }catch(e){
+        console.error(e)
+        handleHttpError(res, "Ocurrion un error", 500)
+        return
+    }
+}
 /**
  * funcion para obtener los productos de a traves del id de un artesano
  * @param req

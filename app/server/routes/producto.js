@@ -20,6 +20,7 @@ router.get('/v1/productos/artesanos/:id', controller.getProductsByArtesanoId)
 router.post('/producto/fileupload', uploadarchivoProducto, controller.uploadFilproducto);
 router.get('/reportegeneral', controller.reportegeneral);
 router.get('/prductosFiltrados', controller.productoFiltrados);
+router.get('/v1/productos', controller.filtro);
 
 
 module.exports = router;
