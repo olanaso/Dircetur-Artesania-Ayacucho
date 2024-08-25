@@ -11,7 +11,7 @@ router.get('/producto/:id', controller.obtener);
 //router.get('/productos', controller.listar);
 router.post('/producto/save', controller.save);
 // router.get('/productos', authenticateToken,  controller.buscar);
-router.get('/productos',  controller.buscar);
+// router.get('/productos',  controller.buscar);
 router.get('/v1/productos/categoria/:abreviatura', controller.getProductsByCategoryAbbreviation)
 router.get('/v1/productos/artesanos/:id', controller.getProductsByArtesanoId)
 
