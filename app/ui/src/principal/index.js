@@ -1,8 +1,8 @@
 import { validarHTML5 } from '../utils/validateForm';
-import {saveDataToLocalStorage} from '../utils/config';
-import {hideLoading} from '../utils/init';
-import {obtenerParametrosURL} from '../utils/path';
-import {login, listarSliders, listarCategorias, listarProductosRecientes} from './api';
+import { saveDataToLocalStorage } from '../utils/config';
+import { hideLoading } from '../utils/init';
+import { obtenerParametrosURL } from '../utils/path';
+import { login, listarSliders, listarCategorias, listarProductosRecientes } from './api';
 import './flaticon.css';
 import './main.css';
 import './owl-carousel.css';
@@ -10,10 +10,10 @@ import './sliderPro.css';
 import './animated.css';
 import './font-awesome.min.css';
 import '../../src/Shared/navbar.js';
-import {modificarNavbarSegunRol, cerrarSesion} from '../Shared/navbar.js';
+import { modificarNavbarSegunRol, cerrarSesion } from '../Shared/navbar.js';
 
-import {loadPartials} from "../utils/viewpartials.js";
-import {showToast} from "../utils/toast.js";
+import { loadPartials } from "../utils/viewpartials.js";
+import { showToast } from "../utils/toast.js";
 
 hideLoading();
 // Uso de la función
@@ -34,7 +34,7 @@ hideLoading();
     }
 })();
 
-function startApp() {
+function startApp () {
     // Colocar el código que deseas ejecutar después de cargar las vistas parciales.
     modificarNavbarSegunRol();
     const cerrarSesionLink = document.getElementById('cerrar-sesion-link');
@@ -46,7 +46,7 @@ function startApp() {
     }
 }
 
-$(document).ready(async function(){
+$(document).ready(async function () {
     //await cargarSliders();
     await cargarCategorias();
     await cargarProductosRecientes();
@@ -68,7 +68,7 @@ $(document).ready(async function(){
     //initMap();
 });
 
-function initMap() {
+function initMap () {
     // Coordenadas de ejemplo (Lima, Perú)
     var mymap = L.map('map').setView([-12.046374, -77.042793], 15);
 
@@ -84,8 +84,8 @@ function initMap() {
         .openPopup();
 }
 
-async function cargarSliders(){
-    const sliders =  await listarSliders(1, 10000);
+async function cargarSliders () {
+    const sliders = await listarSliders(1, 10000);
     $('#modernSlider').empty();
     let filas = '';
     for (let data of sliders.sliders) {
@@ -120,7 +120,7 @@ async function cargarSliders(){
     });
 }
 
-async function cargarCategorias() {
+async function cargarCategorias () {
     const categorias = await listarCategorias();
     $('#owl-top-features').empty();
     let cards = '';
@@ -149,7 +149,7 @@ async function cargarCategorias() {
     });
 }
 
-async function cargarProductosRecientes() {
+async function cargarProductosRecientes () {
     const productos = await listarProductosRecientes();
     const container = document.querySelector('.recent-content .row');
     container.innerHTML = '';
