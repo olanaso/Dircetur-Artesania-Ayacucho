@@ -309,6 +309,25 @@ product.findAllArtesanoIdByCategoriaId = async function(id)  {
     return artesanos.map(artesano => artesano.artesano_id)
 }
 
+product.findProductoAndArtesanoByProdId = async function(id){
+    const productoEncontrado = await product.findOne(
+        {where: {id},
+            attributes: ['nombres_es', 'artesano_id', 'lst_ofertas', 'resumen_es',
+            'descripcion_es', 'cualidades_es', 'palabra_clave_es', 'numero_piezas_es',
+            'alto', 'ancho', 'materiales_es', 'precio', 'tecnicas_es', 'cantidad',
+            'imagen_principal', 'lst_imagenes', 'lst_colores', 'lst_ofertas', 'lst_talla',
+            'lst_otros_costos', 'precio_local', 'precio_nacional', 'precio_extranjero',
+            'tiempo_elaboracion' ],
+            include: [
+                {
+                    model: artesano,
+                    attributes: ['foto1', 'correo', 'celular', 'lst_mediospago', 'lst_contactos'],
+                    as: 'datos_artesano'
+                }
+            ]
+        })
+    return productoEncontrado
+}
 /**
  * Funcion  para encontrar todos los id de artesanos y categorias por el id de la categoria
  * @param categorias = objeto

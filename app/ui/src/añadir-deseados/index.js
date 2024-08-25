@@ -101,6 +101,7 @@ function renderProducts() {
 
         productContainer.innerHTML = paginatedProducts.map(product => {
             const datosProducto = product.datosProducto;
+            console.log("Los datos", datosProducto.datos_artesano)
             return `
                 <div class="product-card" data-product-id="${product.id_producto}" data-client-id="${getDataFromLocalStorage('idCliente')}" data-lst-imagenes='${datosProducto.lst_imagenes}'>
                     <div class="product-info">

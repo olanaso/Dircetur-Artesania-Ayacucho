@@ -102,17 +102,19 @@ function eliminar (req, res) {
 }
 
 
-function obtener (req, res) {
+async function obtener (req, res) {
+    const {id} = req.params
+    console.log(id)
 
-    product.findOne({
-        where: { id: req.params.id }
-    })
-        .then(resultset => {
-            res.status(200).json(resultset)
-        })
-        .catch(error => {
-            res.status(400).send(error)
-        })
+    try{
+        const result = await product.findProductoAndArtesanoByProdId(id)
+        console.log(result)
+        res.status(200).send(result)
+
+    }catch(e){
+        console.error(e)
+        handleHttpError(res, "Ocurrio un error obteniendo el recurso", 500)
+    }
 }
 
 
