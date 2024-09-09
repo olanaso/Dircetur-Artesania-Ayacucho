@@ -1,0 +1,28 @@
+import"./modulepreload-polyfill-3cfb730f.js";import"./index-339297ac.js";import{b as w}from"./config-d2c69cb0.js";import"./preload-helper-101896b7.js";import"./init-b7ef0f37.js";import"./toast-8abe4fe9.js";import"./viewpartials-ac66bf27.js";async function P(t){try{const e=new URLSearchParams(t);return await(await fetch(`${w}/prductosFiltrados?${e}`,{method:"GET"})).json()}catch(e){console.error("Error:",e)}}async function I(t){try{return await(await fetch(`${w}/v1/productos/categoria/${t}`,{method:"GET"})).json()}catch(e){console.error("Error:",e)}}document.addEventListener("DOMContentLoaded",async()=>{const t=await P();h(t);const e=document.getElementById("filterButton"),r=document.getElementById("clearButton");if(!e){console.error("filterButton not found");return}if(!r){console.error("clearButton not found");return}e.addEventListener("click",async a=>{a.preventDefault(),d(!0);const s=await B(t);h(s),d(!1)}),r.addEventListener("click",a=>{a.preventDefault(),d(!0),L(),h(t),d(!1)}),document.addEventListener("keydown",a=>{a.key==="Enter"&&(a.preventDefault(),e.click())})});function d(t){const e=document.getElementById("filterButton"),r=document.querySelector(".fa-times").parentElement;t?(e.innerHTML="Buscando",e.classList.add("loading"),e.disabled=!0,r.classList.add("move-right")):(e.innerHTML='<i class="fa fa-filter"></i>',e.classList.remove("loading"),e.disabled=!1,r.classList.remove("move-right"))}async function B(t){const e=document.getElementById("filterName").value.toLowerCase(),r=parseFloat(document.getElementById("filterPriceMin").value)||0,a=parseFloat(document.getElementById("filterPriceMax").value)||1/0,s=document.getElementById("category-filter").value;let c=t.filter(n=>{const o=n.nombres_es.toLowerCase(),l=parseFloat(n.precio.replace("S/.","")),m=!s||n.categoriaid===s;return o.includes(e)&&l>=r&&l<=a&&m});return s&&(c=(await I(s)).data.filter(o=>{const l=o.nombres_es.toLowerCase(),m=parseFloat(o.precio.replace("S/.",""));return l.includes(e)&&m>=r&&m<=a})),new Promise(n=>{setTimeout(()=>{n(c)},500)})}filterButton.addEventListener("click",async t=>{t.preventDefault(),d(!0),i=1;const e=await B(productos);h(e),d(!1)});function L(){d(!0),document.getElementById("filterName").value="",document.getElementById("filterPriceMin").value="",document.getElementById("filterPriceMax").value="",document.getElementById("category-filter").value="",d(!1)}const g=9;let i=1;async function h(t){Math.ceil(t.length/g),u(t,i),f(t)}function u(t,e){$("#contenedorProductos").empty();const r=(e-1)*g,a=r+g;t.slice(r,a).forEach(n=>{const o=JSON.parse(JSON.parse(n.lst_imagenes.replace(/\/\//g,"/")));let l=0,m;for(let p of o)p.src.startsWith("http:/")&&!p.src.startsWith("http://")&&(p.src=p.src.replace("http:/","http://"));const b=`
+            <div class="col-md-4 col-sm-6">
+                <div class="product-card wow fadeIn animated" data-wow-duration="0.75s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+                    <div class="thumb-content">
+                        <div class="product-banner">
+                            <h3>Nuevo</h3>
+                        </div>
+                        <div class="thumb-inner">
+                            <a href="principal-detalle.html?id=${n.id}">
+                                <img class="product-image" src="" alt="" style="display: none;">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h4>${n.nombres_es}</h4>
+                        <span>S/. ${n.precio}</span>
+                        <div class="similar-info">
+                            <div class="primary-button">
+                                <a href="principal-detalle.html?id=${n.id}">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;$("#contenedorProductos").append(b);const v=$("#contenedorProductos").children().last().find(".product-card"),E=v.find(".product-image"),y=new Image;y.src=n.imagen_principal,y.onload=()=>{E.attr("src",y.src).show()},v.on("mouseover",()=>{m=setInterval(()=>{l=(l+1)%o.length,E.attr("src",o[l].src)},800)}),v.on("mouseout",()=>{clearInterval(m),E.attr("src",n.imagen_principal)})});const c=document.querySelector(".contador-productos");c.innerHTML=`
+        <h2>${t.length}</h2>
+        <span>Resultados de busqueda</span>
+    `}function f(t){const e=document.getElementById("paginationControls");e.innerHTML="";const r=Math.ceil(t.length/g),a=3;let s=Math.max(1,i-Math.floor(a/2)),c=Math.min(r,s+a-1);if(c-s+1<a&&(s=Math.max(1,c-a+1)),i>1){const n=document.createElement("button");n.textContent="<<",n.addEventListener("click",()=>{i=1,u(t,i),f(t),window.scrollTo({top:300,behavior:"smooth"})}),e.appendChild(n);const o=document.createElement("button");o.textContent="Anterior",o.addEventListener("click",()=>{i--,u(t,i),f(t),window.scrollTo({top:300,behavior:"smooth"})}),e.appendChild(o)}for(let n=s;n<=c;n++){const o=document.createElement("button");o.textContent=n,n===i&&o.classList.add("active"),o.addEventListener("click",()=>{i=n,u(t,i),f(t),window.scrollTo({top:300,behavior:"smooth"})}),e.appendChild(o)}if(i<r){const n=document.createElement("button");n.textContent="Siguiente",n.addEventListener("click",()=>{i++,u(t,i),f(t),window.scrollTo({top:300,behavior:"smooth"})}),e.appendChild(n);const o=document.createElement("button");o.textContent=">>",o.addEventListener("click",()=>{i=r,u(t,i),f(t),window.scrollTo({top:300,behavior:"smooth"})}),e.appendChild(o)}}

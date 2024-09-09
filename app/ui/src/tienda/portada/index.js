@@ -93,10 +93,10 @@ function loadCategorias (data) {
         html = html + `
         <div class="item car-item">
             <div class="thumb-content">
-            <a href="busqueda.html?abrev_categoria=${item?.abreviatura}"><img style="widht:187px;height:141px" src="${item?.foto_referente || "https://via.placeholder.com/187x141"}" alt=""></a>
+            <a href="busqueda.html?id_categoria=${item?.id}"><img style="widht:187px;height:141px" src="${item?.foto_referente || "https://via.placeholder.com/187x141"}" alt=""></a>
             </div>
             <div class="down-content">
-            <a href="busqueda.html?abrev_categoria=${item?.abreviatura}">
+            <a href="busqueda.html?id_categoria=${item?.id}">
             <h4>${item?.denominacion}</h4>
             </a>
             <span>Categoría: ${item?.abreviatura}</span>
@@ -149,18 +149,18 @@ function loadProductosOferta (data) {
     for (let item of data) {
         //alert(item.imagen)
         html = html + `
-       	<div class="col-md-4 col-sm-6">
+       	<div class="col-md-4 col-sm-12">
 							<div class="car-item wow fadeIn" data-wow-duration="0.75s">
 								<div class="thumb-content">
 									<div class="car-banner oferta">
                                    
-										<a href="producto.html?id=${item.id}">
+										<a href="../principal-detalle.html?id=181?id=${item.id}">
                                         
                                        -${item?.lst_ofertas[0]?.porcentajeDescuento || ""}%
                                         </a>
 									</div>
 									<div class="thumb-inner photo-prod">
-										<a href="producto.html?id=${item.id}"><img style="height:250px" src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" alt=""></a>
+										<a href="../principal-detalle.html?id=181?id=${item.id}"><img style="height:250px" src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" alt=""></a>
 									</div>
 								</div>
 								<div class="down-content">
@@ -169,19 +169,19 @@ function loadProductosOferta (data) {
 										<span class="text-muted"></span>
 										<span class="text-muted"><s>S/.  ${formatearNumero(item?.precio) || ""}</s></span>
 									</div>
-									  <a href="producto.html?id=${item.id}" style="color:#000">
+									  <a href="../principal-detalle.html?id=181?id=${item.id}" style="color:#000">
 									
 									<h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item?.nombres_es || ""}</h5>
 </a>
 									<p class="h4 text-danger font-weight-bold">S/.${formatearNumero(item?.lst_ofertas[0]?.precioOfertado) || ""} </p>
 									<p class="card-text text-muted">Categoría: ${item?.categoria}</p>
 									<div class="d-flex align-items-center mt-3" title="Artesano">
-									<a href="artesano.html?id=${item?.artesano_id}">
+									<a href="../principal-artesano.html?id=${item?.artesano_id}">
                                     <img class="rounded-circle mr-2"
 											src="${item?.foto1 || "https://via.placeholder.com/40"}"
 											alt="Jose Mendoza" style="width: 40px; height: 40px;">
                                             </a>
-										<span class="text-dark"> <a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></span>
+										<span class="text-dark"> <a style: "color:#dedede!important" href="../principal-artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></span>
 	
                                         	<div class="line-dec2" style:"float:right"></div>
 								
@@ -189,7 +189,7 @@ function loadProductosOferta (data) {
 									<div class="d-flex mt-4">
 
                                     <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-light"><a class="" href="producto.html?id=${item.id}">Ver más</a></button>
+  <button type="button" class="btn btn-light"><a class="" href="../principal-detalle.html?id=181?id=${item.id}">Ver más</a></button>
   <button type="button" class="btn btn-light btn-comprar" producto_id="${item.id}"><svg
 												width="15" height="15" viewBox="0 0 15 15" fill="none"
 												xmlns="http://www.w3.org/2000/svg">
@@ -236,14 +236,14 @@ function loadProductosRecientes (data) {
 							<div class="car-item wow fadeIn" data-wow-duration="0.75s">
 								<div class="thumb-content">
 									<div class="car-banner nuevo-producto">
-										<a href="producto.html?id=${item.id}">Lo nuevo</a>
+										<a href="../principal-detalle.html?id=181?id=${item.id}">Lo nuevo</a>
 									</div>
 									<div class="thumb-inner photo-prod">
-										<a href="producto.html?id=${item.id}"><img style="height:250px" src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" alt=""></a>
+										<a href="../principal-detalle.html?id=181?id=${item.id}"><img style="height:250px" src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" alt=""></a>
 									</div>
 								</div>
 								<div class="down-content">
-  <a href="producto.html?id=${item.id}" style="color:#000">
+  <a href="../principal-detalle.html?id=181?id=${item.id}" style="color:#000">
 									
 									<h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item?.nombres_es || ""}</h5>
 </a>
@@ -254,7 +254,7 @@ function loadProductosRecientes (data) {
 											src="${item?.foto1 || "https://via.placeholder.com/40"}"
 											alt="Jose Mendoza" style="width: 40px; height: 40px;">
 										<span class="text-dark">
-                                        <a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a>
+                                        <a style: "color:#dedede!important" href="../principal-artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a>
                                        
                                          
                                          </span>
@@ -264,7 +264,7 @@ function loadProductosRecientes (data) {
 										<div class="d-flex mt-4">
 
                                     <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-light"><a class="" href="producto.html?id=${item.id}">Ver más</a></button>
+  <button type="button" class="btn btn-light"><a class="" href="../principal-detalle.html?id=181?id=${item.id}">Ver más</a></button>
   <button type="button" class="btn btn-light btn-comprar" producto_id="${item.id}"><svg
 												width="15" height="15" viewBox="0 0 15 15" fill="none"
 												xmlns="http://www.w3.org/2000/svg">
@@ -326,7 +326,7 @@ function loadProductosDestacados (data) {
 								<span class="badge badge-danger" style="color: #fff;">-15%</span>
 								<span class="text-muted"><s>S/. 1770.00</s></span>
 							</div> -->
-                            <a href="producto.html?id=${item.id}" style="color:#000">
+                            <a href="../principal-detalle.html?id=181?id=${item.id}" style="color:#000">
 							<h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item.nombres_es || "-"}</h5>
                             </a>
 							<p class="h4 text-danger font-weight-bold">S/.${formatearNumero(item?.precio) || ""}</p>
@@ -335,7 +335,7 @@ function loadProductosDestacados (data) {
 
 							<div class="author-rate">
 								<img src="${item?.foto1 || "https://via.placeholder.com/40"}" alt="">
-								<h4><a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></h4>
+								<h4><a style: "color:#dedede!important" href="../principal-artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></h4>
 								<div class="line-dec2"></div>
 								<span class="btn  btn-light">Artesano</span>
 							</div>

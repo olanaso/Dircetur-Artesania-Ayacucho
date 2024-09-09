@@ -1,7 +1,7 @@
-const { listarSlider, listarCategorias, listadoProductosOferta, listadoProductosDestacados, listadoProductosRecientes, busquedaProducto, obtenerArtesano } = require('../services/portada/portada');
+const { listarSlider, listarCategorias, listadoProductosOferta, listadoProductosDestacados, listadoProductosRecientes, busquedaProducto, obtenerArtesano, PortadaBusquedaListCategorias, PortadaBusquedaListArtesanos } = require('../services/portada/portada');
 
 module.exports = {
-    ListarDatosPortada, busquedaProductoController, buscarArtesano
+    ListarDatosPortada, busquedaProductoController, buscarArtesano, portadaInitBusqueda
 };
 
 
@@ -28,6 +28,7 @@ async function busquedaProductoController (req, res) {
 }
 
 
+
 async function buscarArtesano (req, res) {
     let param = req.query;
     let resultado = await obtenerArtesano(param.id)
@@ -36,3 +37,10 @@ async function buscarArtesano (req, res) {
 
 }
 
+
+async function portadaInitBusqueda (req, res) {
+    let listArtesanos = await PortadaBusquedaListArtesanos();
+    let listCategorias = await PortadaBusquedaListCategorias()
+
+    return res.status(200).send({ listArtesanos, listCategorias });
+}

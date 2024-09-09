@@ -1,16 +1,31 @@
-import {validarHTML5} from "../utils/validateForm";
-import {saveDataToLocalStorage} from "../utils/config";
-import {hideLoading} from "../utils/init";
-import {obtenerParametrosURL} from "../utils/path";
-import {obtenerProducByArtesano, obtenerArtesanoById} from "./api";
-import "./flaticon.css";
+import { validarHTML5 } from "../utils/validateForm";
+import { saveDataToLocalStorage } from "../utils/config";
+import { hideLoading } from "../utils/init";
+import { obtenerParametrosURL } from "../utils/path";
+import { obtenerProducByArtesano, obtenerArtesanoById } from "./api";
+
 import "./principal-artesano.css";
-import "./owl-carousel.css";
-import "./sliderPro.css";
-import "./animated.css";
-import "./font-awesome.min.css";
-import "../../src/Shared/navbar.js";
-import {loadPartials} from "../utils/viewpartials.js";
+
+import { loadPartials } from "../utils/viewpartials.js";
+
+(async function () {
+    let partials = [
+        { path: 'partials/tienda/header.html', container: 'header' },
+        { path: 'partials/tienda/footer.html', container: 'footer' },
+    ];
+    try {
+
+        await loadPartials(partials);
+        // import('../utils/common');
+
+        console.log('Las vistas parciales se han cargado correctamente!');
+
+        startApp();
+    } catch (e) {
+        console.error(e);
+    }
+})();
+
 //  href = /principal-artesano.html?id=${data.id}
 hideLoading();
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,12 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarProducts();
 });
 
-function getQueryParameter(name) {
+function getQueryParameter (name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
 
-async function infoArtesanoById() {
+async function infoArtesanoById () {
     const artesano = await obtenerArtesanoById(getQueryParameter("id"));
     console.log(" >DATA artesano: ", artesano);
     const listTaller = JSON.parse(JSON.parse(artesano.lst_taller));
@@ -93,7 +108,7 @@ async function infoArtesanoById() {
     }
 }
 
-function initMap(latitud, longitud) {
+function initMap (latitud, longitud) {
     // Coordenadas de ejemplo (Lima, Perú)
     var mymap = L.map("map").setView([latitud, longitud], 15);
 
@@ -111,7 +126,7 @@ function initMap(latitud, longitud) {
         .openPopup();
 }
 
-async function cargarProducts() {
+async function cargarProducts () {
     const productoByArtesano = await obtenerProducByArtesano(getQueryParameter("id"));
     console.log("> CANTD PRODUCT: ", productoByArtesano.data.length);
 
@@ -132,7 +147,7 @@ async function cargarProducts() {
     $("#products-artesano").html(cards);
 
     // Initialize Slick Carousel
-    function initializeSlick() {
+    function initializeSlick () {
         $('#products-artesano').not('.slick-initialized').slick({
             slidesToShow: 4,
             slidesToScroll: 4,
@@ -171,7 +186,7 @@ async function cargarProducts() {
 
     initializeSlick();
 
-    $(window).on('resize', function() {
+    $(window).on('resize', function () {
         $('#products-artesano').slick('resize');
     });
 }

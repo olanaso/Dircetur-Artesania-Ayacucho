@@ -1,3 +1,4 @@
+const { buscarArtesano } = require('../../controllers/portada');
 const models = require('../../models/libro');
 
 module.exports = {
@@ -10,7 +11,9 @@ module.exports = {
     /*Servicios portada*/
     detalleProducto,
     busquedaProducto,
-    obtenerArtesano
+    obtenerArtesano,
+    PortadaBusquedaListArtesanos,
+    PortadaBusquedaListCategorias
 }
 
 async function listarSlider () {
@@ -325,7 +328,7 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
         let offset = (pagina - 1) * limit;
         //Calculo de limit offset
 
-        let orderby = ` order by `
+        let orderby = ` order by a.id`
         let opcionesordenamiento = []
         if (orden_precio) {
             opcionesordenamiento.push(`a.precio`)
@@ -438,4 +441,53 @@ WHERE id=${id}
 }
 
 
+
+
+
+async function PortadaBusquedaListCategorias (cateria_id = 0, preciomin = 0, precio_max = 9999, artesano_id = 0) {
+    try {
+
+        let sql = `
+     SELECT id, concat(abreviatura, ' - ', denominacion) categoria FROM categoria
+     `;
+
+        const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
+        console.log(list)
+        if (!list) {
+            throw {
+                error: new Error("No existen datos"),
+                message: "No existen Datos",
+                status: 401
+            };
+        }
+        return list;
+    }
+    catch (err) {
+        throw err;
+    }
+}
+
+async function PortadaBusquedaListArtesanos (cateria_id = 0, preciomin = 0, precio_max = 9999, artesano_id = 0) {
+    try {
+
+        let sql = `
+   SELECT id, concat(nombres, ' ', apellidos) artesano FROM artesano
+ORDER BY concat(nombres, ' ', apellidos)
+     `;
+
+        const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
+        console.log(list)
+        if (!list) {
+            throw {
+                error: new Error("No existen datos"),
+                message: "No existen Datos",
+                status: 401
+            };
+        }
+        return list;
+    }
+    catch (err) {
+        throw err;
+    }
+}
 

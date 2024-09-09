@@ -1,0 +1,1 @@
+async function e(r){const t=await fetch(r);if(!t.ok)throw new Error("HTTP error "+t.status);const a=await t.text();return new DOMParser().parseFromString(a,"text/html").body.firstChild}async function s(r){for(let t of r){const a=await e(t.path);document.getElementById(t.container).appendChild(a)}}export{s as l};

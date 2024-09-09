@@ -53,7 +53,12 @@ export default {
         'ventaartesano': resolve(__dirname, 'ventaartesano.html'),
         'ventas-detalle': resolve(__dirname, 'ventas-detalle.html'),
         'ventas': resolve(__dirname, 'ventas.html'),
-        'productos_por_categoria': resolve(__dirname, 'productos_por_categoria.html')
+        'productos_por_categoria': resolve(__dirname, 'productos_por_categoria.html'),
+        'tienda/index': resolve(__dirname, 'tienda/index.html'),
+        'tienda/busqueda': resolve(__dirname, 'tienda/busqueda.html'),
+        'tienda/artesano': resolve(__dirname, 'tienda/artesano.html'),
+        'tienda/artesanos': resolve(__dirname, 'tienda/artesanos.html'),
+        'tienda/producto': resolve(__dirname, 'tienda/producto.html'),
       }
     },
 
