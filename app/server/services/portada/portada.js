@@ -8,7 +8,9 @@ module.exports = {
     listadoProductosDestacados,
     listadoProductosRecientes,
     /*Servicios portada*/
-    detalleProducto
+    detalleProducto,
+    busquedaProducto,
+    obtenerArtesano
 }
 
 async function listarSlider () {
@@ -59,18 +61,27 @@ async function listarCategorias () {
 }
 
 
+function limpiarCadenaOfertas (input) {
+    return input.replace(/\\/g, '');
+}
+
+
 async function listadoProductosOferta () {
     try {
 
         let sql = `
-      SELECT *
-FROM producto
-WHERE JSON_VALID(lst_ofertas) AND TRIM(lst_ofertas) != '"[]"';
+      SELECT a.*,
+       CONCAT(b.nombres, ' ', b.apellidos) AS artesano,    b.foto1, b.id artesano_id
+        ,c.denominacion categoria,c.id categoria_id
+        FROM producto a
+ INNER JOIN artesano b ON a.artesano_id=b.id
+ INNER JOIN categoria c ON a.categoria_id=c.id
+WHERE JSON_VALID(a.lst_ofertas) AND TRIM(a.lst_ofertas) != '"[]"';
      `;
 
         //   console.log(sql)
         const data = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
-        console.log(data)
+        // console.log(data)
         if (!data) {
             throw {
                 error: new Error("No existen datos"),
@@ -90,9 +101,21 @@ WHERE JSON_VALID(lst_ofertas) AND TRIM(lst_ofertas) != '"[]"';
         const ofertasVigentes = data
             .map(item => {
 
-                console.log(item)
+                const ofertasLimpias = item.lst_ofertas.trim();
+                console.log('----------------')
+                console.log(ofertasLimpias)
+                // const ofertasSinComillas = ofertasLimpias.startsWith('"') && ofertasLimpias.endsWith('"')
+                //     ? ofertasLimpias.slice(1, -1)
+                //     : ofertasLimpias;
+
+                // Deserializar dos veces para corregir el problema de caracteres escapados
+                const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1, -1)));
+                console.log('----------------')
+                console.log(ofertasArray)
+                // Parsear el string limpio
+                //const ofertasArray = JSON.parse(ofertasSinComillas);
                 // Filtrar solo las ofertas vigentes
-                const ofertasFiltradas = JSON.parse(item.lst_ofertas).filter(oferta =>
+                const ofertasFiltradas = ofertasArray.filter(oferta =>
                     fechaActual >= oferta.fechaInicio && fechaActual <= oferta.fechaFin
                 );
 
@@ -122,9 +145,14 @@ async function listadoProductosDestacados () {
     try {
 
         let sql = `
-       SELECT *
-FROM producto a
-INNER JOIN productos_favoritos b ON a.id=b.id_producto
+       SELECT a.*,
+
+    CONCAT(b.nombres, ' ', b.apellidos) AS artesano,  b.foto1, b.id artesano_id
+     ,d.denominacion categoria,d.id categoria_id
+  FROM producto a
+ INNER JOIN artesano b ON a.artesano_id=b.id
+INNER JOIN productos_favoritos c ON a.id=c.id_producto
+ INNER JOIN categoria d ON a.categoria_id=d.id
 LIMIT 9
 
      `;
@@ -151,7 +179,12 @@ async function listadoProductosRecientes () {
     try {
 
         let sql = `
- SELECT * FROM producto
+ SELECT a.*,
+      CONCAT(b.nombres, ' ', b.apellidos) AS artesano,   b.foto1, b.id artesano_id
+       ,c.denominacion categoria,c.id categoria_id
+  FROM producto a
+ INNER JOIN artesano b ON a.artesano_id=b.id
+  INNER JOIN categoria c ON a.categoria_id=c.id
 ORDER BY id DESC
 LIMIT 9
 
@@ -238,6 +271,171 @@ WHERE a.id=${id}
     }
 }
 
+async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_min = 0, precio_max = 9999999, abrev_categoria, nombre_categoria, id_categoria, id_artesano
+    , nombre_artesano, nombre_producto, orden_precio, recientes) {
+
+    try {
+        let sql = '';
+        let where = ``;
+        //Generacion del where 
+
+        if (oferta) {
+            where += ` AND JSON_VALID(a.lst_ofertas) AND TRIM(a.lst_ofertas) != '"[]"'`
+        }
+        if (precio_min && precio_min >= 0) {
+            where += ` AND a.precio >= ${precio_min}`
+        }
+        if (precio_max && precio_max < 9999999) {
+            where += ` AND a.precio <= ${precio_max}`
+        }
+        if (abrev_categoria) {
+            where += ` AND c.abreviatura like '%${abrev_categoria}%' `
+        }
+        if (nombre_categoria) {
+            where += ` AND c.denominacion like '%${nombre_categoria}%' `
+        }
+        if (id_categoria) {
+            where += ` AND c.id = ${id_categoria} `
+        }
+
+        if (id_artesano) {
+            where += ` AND b.id = ${id_artesano} `
+        }
+
+        if (nombre_artesano) {
+            where += ` AND upper(concat(b.nombres, b.apellidos)) like '%${nombre_artesano.toUpperCase()}%' `
+        }
+        if (nombre_producto) {
+            where += ` AND upper(concat(a.resumen_es, a.nombres_eng)) like '%${nombre_producto.toUpperCase()}%' `
+        }
+
+
+
+        sql = `
+          SELECT count(1) cantidad
+                FROM producto a
+                INNER JOIN artesano b ON a.artesano_id=b.id
+                INNER JOIN categoria c ON a.categoria_id=c.id
+         WHERE 1 = 1
+     `+ where;
+
+        const [tam_consulta] = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
+        let cantidad = tam_consulta.cantidad
+
+        let offset = (pagina - 1) * limit;
+        //Calculo de limit offset
+
+        let orderby = ` order by `
+        let opcionesordenamiento = []
+        if (orden_precio) {
+            opcionesordenamiento.push(`a.precio`)
+        }
+        if (recientes) {
+            opcionesordenamiento.push(`a.createdat`)
+        }
+
+        if (orden_precio == 'true' || recientes == 'true') {
+            orderby += `${opcionesordenamiento.join(",")} ASC`
+        }
+
+        if (orden_precio == 'false' || recientes == 'false') {
+            orderby += ` ${opcionesordenamiento.join(",")} DESC`
+        }
+
+        let limitOffset = ` LIMIT ${limit} OFFSET ${offset}`
+
+        sql = `
+          SELECT a.*,
+                CONCAT(b.nombres, ' ', b.apellidos) AS artesano,   b.foto1, b.id artesano_id
+       ,c.denominacion categoria,c.id categoria_id ,c.abreviatura
+                
+                FROM producto a
+                INNER JOIN artesano b ON a.artesano_id=b.id
+                INNER JOIN categoria c ON a.categoria_id=c.id
+         WHERE 1 = 1
+     ` + where + orderby + limitOffset;
+
+
+
+        const resultados = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
+        console.log(resultados)
+        if (!resultados) {
+            throw {
+                error: new Error("No existen datos"),
+                message: "No existen Datos",
+                status: 401
+            };
+        }
+
+        return {
+            datos: resultados,
+            total_filas: cantidad,
+            pagina_actual: pagina,
+            paginas_totales: Math.ceil(cantidad / limit)
+        }
+    } catch (e) {
+        console.error(e)
+        handleHttpError(res, "Ocurrion un error", 500)
+        return
+    }
+}
+
+
+async function obtenerArtesano (id) {
+    try {
+
+        let sql = `
+SELECT * FROM artesano a
+WHERE id=${id}
+     `;
+
+        const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
+        console.log('-----------')
+        console.log(list)
+        if (!list || list.length == 0) {
+            throw {
+                error: new Error("No existen datos"),
+                message: "No existen Datos",
+                status: 401
+            };
+        }
+
+        let [artesano] = list;
+        console.log(artesano)
+
+        sql = `SELECT a.*,
+                CONCAT(b.nombres, ' ', b.apellidos) AS artesano,   b.foto1, b.id artesano_id
+       ,c.denominacion categoria,c.id categoria_id ,c.abreviatura
+                
+                FROM producto a
+                INNER JOIN artesano b ON a.artesano_id=b.id
+                INNER JOIN categoria c ON a.categoria_id=c.id
+         WHERE 1 = 1 AND a.artesano_id=${artesano.id}`
+
+
+        const productos = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
+        console.log(list)
+        if (!list) {
+            throw {
+                error: new Error("No existen datos"),
+                message: "No existen Datos",
+                status: 401
+            };
+        }
+
+        // let listaProductos = await busquedaProducto(1, 10000, null, 0, 9999999, null/*abrev_categoria*/
+        //  , null /*nombre_categoria*/, null /*id_categoria*/, artesano.id
+        // , null /*nombre_artesano*/, null /*nombre_producto*/, null /*orden_precio*/, null/*recientes*/);
+        //  return list;
+
+
+
+        return { ...artesano, productos };
+    }
+    catch (err) {
+        throw err;
+    }
+}
 
 
 

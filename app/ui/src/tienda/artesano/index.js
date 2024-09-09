@@ -1,7 +1,7 @@
 
 
 import { loadPartials } from "../../utils/viewpartials.js";
-import { getPortada } from './api';
+import { getArtesano } from './api';
 
 
 
@@ -25,17 +25,32 @@ import { getPortada } from './api';
 
 
 function startApp () {
-    cargarDataPortada()
+    cargarData()
 }
 
-async function cargarDataPortada () {
 
-    let resultado = await getPortada()
-    loadSlider(resultado.sliders)
-    loadCategorias(resultado.categorias)
-    loadProductosOferta(resultado.productosOferta)
-    loadProductosDestacados(resultado.productosDestacados)
-    loadProductosRecientes(resultado.productosRecientes)
+function obtenerParametros (url) {
+    // Crear un objeto URL para poder trabajar con la URL proporcionada
+    const urlObj = new URL(url);
+    // Crear un objeto vacío para almacenar los parámetros
+    const parametros = {};
+
+    // Iterar sobre los parámetros de búsqueda de la URL
+    for (const [clave, valor] of urlObj.searchParams) {
+        parametros[clave] = valor;
+    }
+
+    return parametros;
+}
+
+async function cargarData () {
+
+    const { id } = obtenerParametros(window.location.href)
+    // const urlCompleta = window.location.href;
+
+
+    let resultado = await getArtesano(id)
+
 }
 
 
@@ -57,7 +72,7 @@ function loadSlider (data) {
 ">${item?.descripcion}</h5>
 						<h3>Buscar la perfecta  <em>Artesania</em>?</h3>
 						<h6 class="secondary-button">
-							<a href="busqueda.html" style="color:#fff">Buscar aquí <i class="fa fa-search"></i></a>
+							<a href="#">Buscar aquí <i class="fa fa-car"></i></a>
 						</h6>
 					</div>
 				</div>

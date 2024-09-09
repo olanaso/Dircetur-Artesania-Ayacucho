@@ -3,7 +3,7 @@
 import { baseUrl, getDataFromLocalStorage } from '../../utils/config';
 
 
-export async function getPortada () {
+export async function getArtesano (id) {
     try {
 
         const myHeaders = new Headers();
@@ -13,7 +13,7 @@ export async function getPortada () {
             redirect: 'follow'
         };
 
-        const response = await fetch(baseUrl + "/portada/", requestOptions);
+        const response = await fetch(baseUrl + "/portada-artesano?id=" + id, requestOptions);
         const result = await response.json();
 
         return result;
