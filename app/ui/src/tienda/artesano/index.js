@@ -1,7 +1,7 @@
 import './styles.css';
 
 import { loadPartials } from "../../utils/viewpartials.js";
-import { getPortadaBusqueda, busquedaProductos } from './api.js';
+import { getPortadaBusqueda, busquedaProductos, obtenerArtesanoById } from './api.js';
 import { custom } from '../utils/common.js';
 
 
@@ -26,8 +26,27 @@ import { custom } from '../utils/common.js';
     }
 })();
 
+function getQueryParameter (name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+async function infoArtesanoById() {
+    const artesano = await obtenerArtesanoById(getQueryParameter("id"));
+    console.log(" >DATA artesano: ", artesano);
+    // const listTaller = JSON.parse(JSON.parse(artesano.lst_taller));
+    // const lst_videoenlace = JSON.parse(JSON.parse(artesano.lst_videoenlace));
+    // const listEspecialidadesTecnicas = JSON.parse(
+    //     JSON.parse(artesano.lst_especialidadtecnicas)
+    // );
+    // const listReconocimientos = JSON.parse(
+    //     JSON.parse(artesano.lst_reconocimientos)
+    // );
+}
+
 
 function startApp () {
+    infoArtesanoById();
     // showStep(currentStep);     // crearListaInicial();
     // cargarDataPortada();
     // rellenarFormulario();

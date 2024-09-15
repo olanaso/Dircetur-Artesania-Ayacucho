@@ -1,6 +1,6 @@
 
 
-import { baseUrl, getDataFromLocalStorage } from '../../utils/config';
+import { baseUrl } from '../../utils/config';
 
 
 export async function getPortadaBusqueda () {
@@ -41,4 +41,16 @@ export async function busquedaProductos (obj) {
         console.log('error', error);
     }
 
+}
+
+export async function obtenerArtesanoById(idArtesano) {
+    try {
+        const response = await fetch(`${baseUrl}/artesano/${idArtesano}`, {
+            method: "GET",
+        });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error("Error:", error);
+    }
 }
