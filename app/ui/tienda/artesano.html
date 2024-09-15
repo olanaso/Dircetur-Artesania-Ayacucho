@@ -199,22 +199,22 @@
 				<div class="col-md-4">
 					<div class="card " style="border-radius: 15px; border: none;">
 						<div class="card-body text-center">
-							<img src="https://via.placeholder.com/150" class="rounded-circle mb-3"
+							<img id="artesano-foto" src="https://via.placeholder.com/150" class="rounded-circle mb-3 card-img-top"
 								alt="Foto del artesano" style="border: 5px solid #f1f1f1;">
-							<h3 class="card-title" style="font-weight: bold;">ALBERTO</h3>
+							<h3 id="artesano-nombre" class="card-title" style="font-weight: bold;">ALBERTO</h3>
 							<p class="mb-2" style="font-size: 1.2rem;">
 								<span class="text-warning">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 							</p>
 							<p style="color: #777; font-size: 1rem; margin-bottom: 5px;">Asoc. Artesanos</p>
 							<p style="font-size: 1rem;">
-								<i class="fa fa-phone" style="color: #666;"></i> +51 966030046
+								<i id="artesano-telefono" class="fa fa-phone" style="color: #666;"></i>
 							</p>
 							<div class="d-flex justify-content-center mt-3">
-								<a href="https://wa.me/51966030046" class="btn btn-outline-success mx-2"
+								<a id="artesano-whatsapp" target="_blank" href="https://wa.me/51966030046" class="btn btn-outline-success mx-2"
 									style="border-radius: 50%; padding: 10px; width: 45px; height: 45px;">
 									<i class="fa fa-whatsapp"></i>
 								</a>
-								<a href="tel:+51966030046" class="btn btn-outline-info mx-2"
+								<a id="artesano-telefono-enlace" href="tel:+51966030046" class="btn btn-outline-info mx-2"
 									style="border-radius: 50%; padding: 10px; width: 45px; height: 45px;">
 									<i class="fa fa-phone"></i>
 								</a>
@@ -222,7 +222,7 @@
 									style="border-radius: 50%; padding: 10px; width: 45px; height: 45px;">
 									<i class="fa fa-facebook"></i>
 								</a>
-								<a href="https://youtube.com" class="btn btn-outline-danger mx-2"
+								<a id="artesano-youtube" target="_blank" href="https://youtube.com" class="btn btn-outline-danger mx-2"
 									style="border-radius: 50%; padding: 10px; width: 45px; height: 45px;">
 									<i class="fa fa-youtube"></i>
 								</a>
@@ -232,7 +232,7 @@
 				</div>
 				<div class="col-md-8 video-section">
 					<div class="embed-responsive embed-responsive-16by9">
-						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/jSXAIFoPp6g?autoplay=1"
+						<iframe class="embed-responsive-item" id="artesano-video" src="https://www.youtube.com/embed/jSXAIFoPp6g?autoplay=1"
 							allowfullscreen></iframe>
 					</div>
 				</div>
@@ -246,10 +246,10 @@
 							style="background-color: #ea0397; color: #fff !important;">SOBRE EL ARTESANO</div>
 						<div class="card-body">
 							<p><strong>Nombre completo:</strong>
-								<br>ALBERTO FLORES CONTRERAS
+								<br> <span id="artesano-nombre-completo">ALBERTO FLORES CONTRERAS</span>
 							</p>
-							<p><strong>Correo:</strong> <br> maki.arte46@gmail.com</p>
-							<p><strong>Lugar de procedencia:</strong> <br>Ayacucho-Huamanga</p>
+							<p><strong>Correo:</strong> <br> <span id="artesano-correo">maki.arte46@gmail.com</span> </p>
+							<p><strong>Lugar de procedencia:</strong> <br><span id="artesano-lugar-procedencia">Ayacucho-Huamanga</span></p>
 						</div>
 					</div>
 				</div>
@@ -260,9 +260,9 @@
 						<div class="card-header font-weight-bold text-primary"
 							style="background-color: #d6a135; color: #fff !important;">INFORMACIÓN DEL TALLER</div>
 						<div class="card-body">
-							<p><strong>Nombre del taller:</strong> <br> Taller Maki Arte SRL</p>
-							<p><strong>RUC del taller:</strong> <br> 20608956779</p>
-							<p><strong>Dirección física:</strong> <br> Plaza principal N° 304 Distro de Quinua</p>
+							<p><strong>Nombre del taller:</strong> <br><span id="taller-nombre">Taller Maki Arte SRL </span> </p>
+							<p><strong>RUC del taller:</strong> <br><span id="taller-ruc">20608956779</span> </p>
+							<p><strong>Dirección física:</strong> <br><span id="taller-direccion">Plaza principal N° 304 Distro de Quinua</span> </p>
 						</div>
 					</div>
 				</div>
@@ -273,11 +273,13 @@
 						<div class="card-header font-weight-bold text-primary"
 							style="background-color: #0a9cf7; color: #fff !important;">ESPECIALIDAD Y TÉCNICAS</div>
 						<div class="card-body">
-							<p><strong>Habilidades de un artesano:</strong> <br> Modelado a mano, molde prensado,
+							<p><strong>Habilidades de un artesano:</strong> <br><span id="artesano-habilidades">
+								Modelado a mano, molde prensado,
 								utilitario con
-								torno eléctrico</p>
-							<p><strong>Tipos de artesanía que produce:</strong> <br> Piezas artísticas decorativas</p>
-							<p><strong>Línea artesanal:</strong> <br> Cerámica</p>
+								torno eléctrico</span> </p>
+							<p><strong>Tipos de artesanía que produce:</strong> <br><span id="artesano-tipo-artesania">
+								Piezas artísticas decorativas</span></p>
+							<p><strong>Línea artesanal:</strong> <br><span id="artesano-linea-artesanal">Cerámica</span></p>
 						</div>
 					</div>
 				</div>
@@ -294,15 +296,15 @@
 				<div class="col-12 d-flex justify-content-between">
 					<div class="col-md-4 d-flex align-items-center">
 						<i class="fa fa-map-marker fa"></i>
-						<strong>&nbsp; Departamento:</strong>&nbsp; <span>LIMA</span>
+						<strong>&nbsp; Departamento:</strong>&nbsp; <span id="artesano-departamento">LIMA</span>
 					</div>
 					<div class="col-md-4 d-flex align-items-center">
 						<i class="fa fa-map-marker fa-3"></i>
-						<strong>&nbsp; Provincia:</strong>&nbsp; <span>LIMA</span>
+						<strong>&nbsp; Provincia:</strong>&nbsp; <span id="artesano-provincia">LIMA</span>
 					</div>
 					<div class="col-md-4 d-flex align-items-center">
 						<i class="fa fa-map-marker fa-3"></i>
-						<strong>&nbsp; Distrito:</strong>&nbsp; <span>LIMA</span>
+						<strong>&nbsp; Distrito:</strong>&nbsp; <span id="artesano-distrito">LIMA</span>
 					</div>
 				</div>
 
@@ -312,56 +314,19 @@
 			</div>
 
 			<!-- Sección de Reconocimientos -->
-			<div class="row mt-5">
+			<div class="row mt-5" id="reconocimientos">
 				<div class="col-12">
 					<h5 class="section-title">RECONOCIMIENTOS DEL ARTESANO</h5>
 					<hr>
 				</div>
 				<!-- Primer reconocimiento -->
-				<div class="col-12 mb-3" style="background-color: #2b76f7; border-radius: 5px;">
-					<div class="card recognition-card " style="color: #004085;
-    background-color: #cce5ff;
-    border-color: #b8daff;">
-						<div class="card-body">
-							<h5 class="card-title">Congreso de la República</h5>
-							<h6 class="card-subtitle mb-2">Otorgado por Gobierno Regional de Ayacucho</h6>
-							<p class="card-text">Por la trayectoria y difusión del arte popular por el Gobierno Regional
-								de
-								Ayacucho.</p>
-						</div>
-					</div>
-				</div>
+
 
 				<!-- Segundo reconocimiento -->
-				<div class="col-12 mb-3" style="background-color: #2b76f7; border-radius: 5px;">
-					<div class="card recognition-card " style="color: #004085;
-					    background-color: #cce5ff;
-					    border-color: #b8daff;">
-						<div class="card-body">
-							<h5 class="card-title">Universidad Nacional San Cristóbal de Huamanga</h5>
-							<h6 class="card-subtitle mb-2">Otorgado por Universidad Nacional San Cristóbal de Huamanga
-							</h6>
-							<p class="card-text">Reconocimiento otorgado por la Universidad Nacional San Cristóbal de
-								Huamanga por
-								su labor artística.</p>
-						</div>
-					</div>
-				</div>
+
 
 				<!-- Tercer reconocimiento -->
-				<div class="col-12 mb-3" style="background-color: #2b76f7; border-radius: 5px;">
-					<div class="card recognition-card " style="color: #004085;
-			    background-color: #cce5ff;
-			    border-color: #b8daff;">
-						<div class="card-body">
-							<h5 class="card-title">Artista Popular Municipalidad Distrital de Quinua</h5>
-							<h6 class="card-subtitle mb-2">Otorgado por Municipalidad Distrital de Quinua</h6>
-							<p class="card-text">Reconocimiento como artista popular otorgado por la Municipalidad
-								Distrital de
-								Quinua.</p>
-						</div>
-					</div>
-				</div>
+
 			</div>
 
 
@@ -399,18 +364,6 @@
 
 	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
-	<script>
-		// Inicializar el mapa con Leaflet
-		var map = L.map('map').setView([-13.6681, -74.2220], 13); // Coordenadas de Quinua, Ayacucho
-
-		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-		}).addTo(map);
-
-		var marker = L.marker([-13.6681, -74.2220]).addTo(map)
-			.bindPopup('Taller Maki Arte SRL - Quinua, Ayacucho')
-			.openPopup();
-	</script>
 
 	<script type="module" src="../src/tienda/artesano/index.js"></script>
 
