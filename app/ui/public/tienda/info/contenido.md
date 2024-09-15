@@ -1,16 +1,45 @@
-# Bienvenidos
+# Lista de Blogs
 
-Este es un ejemplo de cómo mostrar un archivo Markdown en una página web con **Bootstrap 4.3**.
+Aquí está una lista de blogs interesantes sobre varios temas:
 
-## Secciones
+---
 
-1. Instalación de dependencias.
-2. Uso de `fetch` para cargar el archivo Markdown.
-3. Conversión de Markdown a HTML usando Marked.js.
+## ![Portada del Blog 1](enlace-imagen-portada)
 
-### Código de Ejemplo
+### Blog 1: **[Nombre del Blog](enlace-del-blog)**
 
-```html
-<div class="container">
-    <h1>Este es un ejemplo de código HTML</h1>
-</div>
+- **Autor:** Nombre del autor
+- **Fecha:** Fecha de publicación
+- **Descripción:** Breve descripción del blog o artículo.
+  
+---
+
+## ![Portada del Blog 2](enlace-imagen-portada)
+
+### Blog 2: **[Nombre del Blog](enlace-del-blog)**
+
+- **Autor:** Nombre del autor
+- **Fecha:** Fecha de publicación
+- **Descripción:** Breve descripción del blog o artículo.
+
+---
+
+## ![Portada del Blog 3](enlace-imagen-portada)
+
+### Blog 3: **[Nombre del Blog](enlace-del-blog)**
+
+- **Autor:** Nombre del autor
+- **Fecha:** Fecha de publicación
+- **Descripción:** Breve descripción del blog o artículo.
+
+---
+
+## ![Portada del Blog 4](enlace-imagen-portada)
+
+### Blog 4: **[Nombre del Blog](enlace-del-blog)**
+
+- **Autor:** Nombre del autor
+- **Fecha:** Fecha de publicación
+- **Descripción:** Breve descripción del blog o artículo.
+
+---

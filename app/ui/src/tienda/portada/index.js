@@ -195,12 +195,12 @@ function loadProductosOferta (data) {
 									<p class="h4 text-danger font-weight-bold">S/.${formatearNumero(item?.lst_ofertas[0]?.precioOfertado) || ""} </p>
 									<p class="card-text text-muted">Categoría: ${item?.categoria}</p>
 									<div class="d-flex align-items-center mt-3" title="Artesano">
-									<a href="../principal-artesano.html?id=${item?.artesano_id}">
+									<a href="artesano.html?id=${item?.artesano_id}">
                                     <img class="rounded-circle mr-2"
 											src="${item?.foto1 || "https://via.placeholder.com/40"}"
 											alt="Jose Mendoza" style="width: 40px; height: 40px;">
                                             </a>
-										<span class="text-dark"> <a style: "color:#dedede!important" href="../principal-artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></span>
+										<span class="text-dark"> <a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></span>
 	
                                         	<div class="line-dec2" style:"float:right"></div>
 								
@@ -306,7 +306,7 @@ function loadProductosRecientes (data) {
 											src="${item?.foto1 || "https://via.placeholder.com/40"}"
 											alt="Jose Mendoza" style="width: 40px; height: 40px;">
 										<span class="text-dark">
-                                        <a style: "color:#dedede!important" href="../principal-artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a>
+                                        <a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a>
                                        
                                          
                                          </span>
@@ -408,7 +408,7 @@ function loadProductosDestacados (data) {
 
 							<div class="author-rate">
 								<img src="${item?.foto1 || "https://via.placeholder.com/40"}" alt="">
-								<h4><a style: "color:#dedede!important" href="../principal-artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></h4>
+								<h4><a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></h4>
 								<div class="line-dec2"></div>
 								
                                 <a href="carrito-de-compra.html?producto=${encodeURIComponent(JSON.stringify(artenia_anviar_carrito))}" title="Ir a carrito de compras">Comprar <i class="fa fa-shopping-cart"></i></a>

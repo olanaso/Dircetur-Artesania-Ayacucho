@@ -109,7 +109,9 @@ async function setArtesano (artesano_id) {
 
     $('#link_artesano').attr('href', 'artesano.html?id=' + artesano_id)
     let ARTESANO = await obtenerArtesanoById(artesano_id)
-    console.log(ARTESANO)
+
+    ARTESANO.lst_mediospago = JSON.parse(JSON.parse(ARTESANO.lst_mediospago))
+    console.log(ARTESANO.lst_mediospago)
     $('#nombre_artesano').text(ARTESANO.nombres + ' ' + ARTESANO.apellidos)
 
 }
@@ -142,22 +144,20 @@ function listarProductosComprar (artsanias_comprar) {
     $('#lista-resumen-prod-final').html('')
     for (let artesania of artsanias_comprar) {
         filas += `
-<tr>
-									<td class="d-flex align-items-center">
-										<img style="height: 100px;    max-height: 100%;   max-width: 100%;    object-fit: cover;" src="${artesania.objeto.imagen_principal || 'https://via.placeholder.com/80'}" class="rounded mr-3" alt="Producto 1">
-										${artesania.objeto.descripcion_es}
-									</td>
-									<td>${artesania.cantidad}</td>
-									<td>${formatearNumero(artesania.objeto.precio)}</td>
-									<td>${formatearNumero(artesania.cantidad * artesania.objeto.precio)} </td>
-								</tr>
+
+        <tr>
+												<td>${artesania.objeto.descripcion_es} (${artesania.cantidad} unidad)</td>
+												<td>${formatearNumero(artesania.objeto.precio)}</td>
+											</tr>
+
+
 `
-        total += artesania.cantidad * artesania.objeto.precio
+
     }
 
+    $('#lista-resumen-prod-final').html(filas)
 
-
-    $('#total_precio_carrito').text('S/.' + formatearNumero(total))
+    $('#total_final').text('S/.' + formatearNumero(total))
 
 }
 

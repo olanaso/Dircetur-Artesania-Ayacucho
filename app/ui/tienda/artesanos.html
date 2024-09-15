@@ -13,7 +13,7 @@
 	<meta name="author" content="Car Dealer Template">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Artesanos - Artesanias de Ayacucho</title>
+	<title>Nosotros- Artesanias de Ayacucho</title>
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
 
@@ -30,70 +30,291 @@
 	<link rel="stylesheet" href="assets_tienda/css/animated.css">
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 	<style>
-		.long-text {
-			width: 100%;
-			display: -webkit-box !important;
-			-webkit-box-orient: vertical;
-			-webkit-line-clamp: 2;
-			overflow: hidden;
+		.product-card {
+			border: 1px solid #ccc;
+			border-radius: 10px;
+			padding: 20px;
+			margin-bottom: 20px;
+			transition: box-shadow 0.3s ease;
 		}
 
-		.photo-prod {
+		.product-card:hover {
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+
+		.product-image {
+			width: 100px;
+			height: 100px;
+
 			display: flex;
-			justify-content: center;
 			align-items: center;
-			height: 250px;
-			/* Altura fija para el contenedor */
-			width: 100%;
-			/* Ancho ajustable según el contenedor padre */
-			overflow: hidden;
-			/* Oculta cualquier parte desbordante de la imagen */
+			justify-content: center;
+			font-size: 12px;
+			color: #777;
 		}
 
-		.photo-prod img {
-			max-height: 100%;
-			max-width: 100%;
+		.product-actions button {
+			width: 100%;
+			margin-bottom: 5px;
+		}
+
+		.btn-primary:hover {
+			background-color: #6200ea;
+			border-color: #6200ea;
+		}
+
+		.btn-info:hover {
+			background-color: #017acd;
+			border-color: #017acd;
+		}
+
+		.btn-danger:hover {
+			background-color: #b00020;
+			border-color: #b00020;
+		}
+
+		.artesano-info {
+			display: flex;
+			align-items: center;
+			margin-top: 10px;
+		}
+
+		.artesano-photo {
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
 			object-fit: cover;
-			/* Mantiene la proporción y rellena el contenedor */
+			margin-right: 10px;
 		}
 
-		.nuevo-producto a {
-			background-color: rgb(23, 186, 113) !important;
-			color: #fff !important;
+		a {
+			color: #2c3e50;
+			text-decoration: none;
+			font-weight: 600;
+			transition: color 0.3s ease;
 		}
 
-		.img-contenedor-destacados {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 150px;
-			/* Altura fija para el contenedor */
-			width: 100%;
-			/* Ancho ajustable según el contenedor padre */
-			overflow: hidden;
-			/* Oculta cualquier parte desbordante de la imagen */
+
+		@media (max-width: 576px) {
+			.product-card {
+				padding: 15px;
+			}
+
+			.product-image {
+				width: 80px;
+				height: 80px;
+			}
+
+			.input-group {
+				max-width: 100px;
+			}
+
+			.product-actions button {
+				font-size: 14px;
+				padding: 8px;
+			}
+
+			.product-actions a {
+				font-size: 14px;
+				padding: 8px;
+			}
+
+			.product-card h5 {
+				font-size: 16px;
+			}
+
+			.product-card p {
+				font-size: 14px;
+			}
 		}
 
-		.img-destacados {
-			float: center;
-			object-fit: cover;
-			max-height: 100%;
-			max-width: 100%;
-			height: 120px !important;
-			overflow: hidden;
-			display: flex;
-			justify-content: center;
-			align-items: center;
+		.section-title {
+			color: #f709f3;
+		}
+
+		.summary-table th,
+		.summary-table td {
+			text-align: left;
+			padding: 10px;
+		}
+
+		.summary-table th {
+			background-color: #f1f1f1;
+		}
+
+		.summary-table td {
+			background-color: #f9f9f9;
+		}
+
+		/* Selecciona labels asociados a inputs o textarea que son requeridos */
+		/* Estilo general para los labels */
+		.form-group label {
+			margin-right: 5px;
+		}
+
+		/* Estilo del asterisco rojo */
+		.required-asterisk::after {
+			content: " *";
+			color: red;
+			font-weight: bold;
+		}
+
+		.markdown-content {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji" !important;
+			line-height: 1.6 !important;
+			color: #24292e !important;
+			background-color: #ffffff !important;
+			padding: 20px !important;
+			margin: 0 !important;
+			border-radius: 6px !important;
+			box-shadow: 0 1px 3px rgba(27, 31, 35, 0.1) !important;
+		}
+
+		/* Headers */
+		.markdown-content h1,
+		.markdown-content h2,
+		.markdown-content h3,
+		.markdown-content h4,
+		.markdown-content h5,
+		.markdown-content h6 {
+			border-bottom: 1px solid #eaecef !important;
+			color: #333 !important;
+			font-weight: 600 !important;
+			padding-bottom: 0.3em !important;
+			margin: 1.5em 0 0.75em !important;
+		}
+
+		.markdown-content h1 {
+			font-size: 2em !important;
+			border-bottom-width: 2px !important;
+		}
+
+		.markdown-content h2 {
+			font-size: 1.75em !important;
+		}
+
+		.markdown-content h3 {
+			font-size: 1.5em !important;
+		}
+
+		.markdown-content h4 {
+			font-size: 1.25em !important;
+		}
+
+		.markdown-content h5 {
+			font-size: 1.1em !important;
+		}
+
+		.markdown-content h6 {
+			font-size: 1em !important;
+			color: #6a737d !important;
+		}
+
+		/* Paragraphs */
+		.markdown-content p {
+			margin: 0 0 1em !important;
+		}
+
+		/* Links */
+		.markdown-content a {
+			color: #0366d6 !important;
+			text-decoration: none !important;
+		}
+
+		.markdown-content a:hover {
+			text-decoration: underline !important;
+		}
+
+		/* Lists */
+		.markdown-content ul,
+		.markdown-content ol {
+			padding-left: 2em !important;
+			margin: 0 0 1em !important;
+		}
+
+		.markdown-content li {
+			margin-bottom: 0.5em !important;
+		}
+
+		.markdown-content ol {
+			list-style-type: decimal !important;
+		}
+
+		/* Blockquotes */
+		.markdown-content blockquote {
+			padding: 0.5em 1em !important;
+			margin: 0 0 1em !important;
+			color: #6a737d !important;
+			border-left: 0.25em solid #dfe2e5 !important;
+			background-color: #f6f8fa !important;
+			border-radius: 6px !important;
+		}
+
+		/* Code Blocks */
+		.markdown-content pre {
+			background-color: #f6f8fa !important;
+			padding: 16px !important;
+			overflow: auto !important;
+			font-size: 85% !important;
+			line-height: 1.45 !important;
+			border-radius: 6px !important;
+			border: 1px solid #e1e4e8 !important;
+		}
+
+		.markdown-content code {
+			font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
+			background-color: rgba(27, 31, 35, 0.05) !important;
+			padding: 0.2em 0.4em !important;
+			margin: 0 !important;
+			font-size: 85% !important;
+			border-radius: 3px !important;
+		}
+
+		.markdown-content pre code {
+			background-color: transparent !important;
+			padding: 0 !important;
+		}
+
+		/* Tables */
+		.markdown-content table {
 			width: 100% !important;
-			border-top-left-radius: calc(.25rem - 1px);
-			border-top-right-radius: calc(.25rem - 1px);
+			max-width: 100% !important;
+			margin-bottom: 1em !important;
+			border-collapse: collapse !important;
+			display: block !important;
+			overflow: auto !important;
 		}
 
-		.product-description {
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			display: block;
+		.markdown-content th,
+		.markdown-content td {
+			padding: 6px 13px !important;
+			border: 1px solid #dfe2e5 !important;
+		}
+
+		.markdown-content th {
+			font-weight: 600 !important;
+			background-color: #f6f8fa !important;
+		}
+
+		.markdown-content td {
+			background-color: #ffffff !important;
+		}
+
+		/* Horizontal Rule */
+		.markdown-content hr {
+			height: 0.25em !important;
+			padding: 0 !important;
+			margin: 24px 0 !important;
+			background-color: #e1e4e8 !important;
+			border: 0 !important;
+		}
+
+		/* Inline code */
+		.markdown-content code {
+			background-color: rgba(27, 31, 35, 0.05) !important;
+			border-radius: 3px !important;
+			padding: 0.2em 0.4em !important;
+			font-size: 85% !important;
 		}
 	</style>
 
@@ -102,11 +323,11 @@
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
 
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 </head>
 
 <body>
-
-
 	<div class="preloader">
 		<div class="preloader-bounce">
 			<span></span>
@@ -114,31 +335,17 @@
 			<span></span>
 		</div>
 	</div>
-
-	<div id="search">
-		<button type="button" class="close">×</button>
-		<form>
-			<input type="search" value="" placeholder="type keyword(s) here" />
-			<button type="submit" class="primary-button">Search <i class="fa fa-search"></i></button>
-		</form>
-	</div>
-
 	<header class="site-header wow fadeIn" data-wow-duration="1s" id="header">
-
 	</header>
-
-
 	<div class="page-heading wow fadeIn" data-wow-duration="0.5s">
 		<div class="container">
-
-
 			<div class="row">
 				<div class="col-md-12">
 					<div class="heading-content-bg wow fadeIn" data-wow-delay="0.75s" data-wow-duration="1s">
 						<div class="row">
 							<div class="heading-content col-md-12">
-								<p><a href="index.html">Inicio</a> / <em> Búsqueda </em> </p>
-								<h2>Búsqueda de <em>Artesanos</em></h2>
+								<p><a href="index.html">Inicio</a> / <em> Información </em> </p>
+								<h2>Sobre <em>Nosotros</em></h2>
 							</div>
 						</div>
 					</div>
@@ -146,485 +353,68 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="on-grids wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1s">
+
 		<div class="container">
-			<div class="recent-car-content">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="sidebar-widgets">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="sidebar-widget">
-										<div class="search-content">
-											<div class="search-heading">
-												<div class="icon">
-													<i class="fa fa-search"></i>
-												</div>
-												<div class="text-content">
-													<h2>Búsqueda de artesanos</h2>
-													<span>Selecciona las opciones de filtro</span>
-												</div>
-											</div>
-											<div class="search-form">
-												<div class="row">
-													<div class="col-md-12">
-														<input type="text" onfocus="this.value=''"
-															value="Nombre, descripción ..."
-															placeholder="Nombre y/o apellido ...">
-													</div>
-
-													<div class="col-md-12">
-														<div class="input-select">
-															<select name="mark" id="mark">
-																<option value="-1">Categoria</option>
-
-															</select>
-														</div>
-													</div>
-													<div class="col-md-12">
-														<input type="text" onfocus="this.value=''"
-															value="Nombre, descripción ..."
-															placeholder="Nombre y/o apellido ...">
-													</div>
-													<div class="col-md-12">
-														<input type="text" onfocus="this.value=''"
-															value="Tecnicas  o premios  ..."
-															placeholder="Tecnicas  o premios ...">
-													</div>
 
 
-													<div class="col-md-12">
-														<div class="secondary-button" style="background-color: #fff;">
-															<a style="background-color: #fff;" href="#">Buscar <i
-																	class="fa fa-search"></i></a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+			<div class="row">
+
+				<section class="intro-section">
+					<div class="intro-content">
+						<h1>Los Rostros Detrás del Arte</h1>
+						<p>
+							Te invitamos a conocer a los artesanos que dan vida a la cerámica, textilería y tallado en
+							piedra.
+							Cada uno tiene una historia única y un estilo distintivo. Haz clic en su perfil para
+							explorar más
+							sobre sus productos, su ubicación, y la inspiración detrás de su trabajo.
+						</p>
+						<div class="search-container">
+							<input type="text" id="search-input" placeholder="Buscar artesanos...">
+							<button id="search-button"><i class="fas fa-search"></i></button>
+							<button id="clear-button"><i class="fas fa-times"></i></button>
 						</div>
 					</div>
-					<div class="col-md-8">
-						<div class="d-flex justify-content-between align-items-center mb-3">
-							<h5>78 Resultados</h5>
-							<select class="form-control w-auto">
-								<option>Relevancia</option>
-							</select>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="car-item wow fadeIn" data-wow-duration="0.75s">
-									<div class="thumb-content">
-										<div class="car-banner nuevo-producto">
-											<a href="producto.html?id=212">Lo nuevo</a>
-										</div>
-										<div class="thumb-inner photo-prod">
-											<a href="producto.html?id=212"><img style="height:250px"
-													src="http://148.113.196.34:/files-app/producto/img//1723668611-IMG_1282-small.png"
-													alt=""></a>
-										</div>
-									</div>
-									<div class="down-content">
-										<a href="producto.html?id=212" style="color:#000">
+					<h2 id="search-result-header" style="display: none;"></h2>
+				</section>
 
-											<h5 title="Mochila bordada "
-												class="card-title font-weight-bold product-description">Mochila bordada
-											</h5>
-										</a>
-										<p class="h4 text-danger font-weight-bold">S/.65.00 </p>
-										<p class="card-text text-muted">Categoría: TEXTILERÍA</p>
-										<div class="d-flex align-items-center mt-3" title="Artesano">
-											<img class="rounded-circle mr-2"
-												src="http://148.113.196.34/files-app/artesano/img//1722963559-1.JPG"
-												alt="Jose Mendoza" style="width: 40px; height: 40px;">
-											<span class="text-dark">
-												<a style:="color:#dedede!important" href="artesano.html?id=50">
-													YOVANA MARLENI CONGA SALAS</a>
-
-
-											</span>
-											<div class="line-dec2"></div>
-
-										</div>
-										<div class="d-flex mt-4">
-
-											<div class="btn-group" role="group" aria-label="Basic example">
-												<button type="button" class="btn btn-light"><a class=""
-														href="producto.html?id=212">Ver
-														más</a></button>
-												<button type="button" class="btn btn-light btn-comprar"
-													producto_id="212"><svg width="15" height="15" viewBox="0 0 15 15"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M0 0.5C0 0.367392 0.0526784 0.240215 0.146447 0.146447C0.240215 0.0526784 0.367392 0 0.5 0H2C2.11153 3.08115e-05 2.21985 0.0373507 2.30773 0.106025C2.39561 0.174699 2.45801 0.270784 2.485 0.379L2.89 2H14.5C14.5734 2.00007 14.6459 2.0163 14.7124 2.04755C14.7788 2.0788 14.8375 2.12429 14.8844 2.1808C14.9313 2.23731 14.9651 2.30345 14.9835 2.37452C15.002 2.44558 15.0045 2.51984 14.991 2.592L13.491 10.592C13.4696 10.7066 13.4087 10.8101 13.3191 10.8846C13.2294 10.9591 13.1166 10.9999 13 11H4C3.88343 10.9999 3.77057 10.9591 3.68091 10.8846C3.59126 10.8101 3.53045 10.7066 3.509 10.592L2.01 2.607L1.61 1H0.5C0.367392 1 0.240215 0.947322 0.146447 0.853553C0.0526784 0.759785 0 0.632608 0 0.5ZM5 11C4.46957 11 3.96086 11.2107 3.58579 11.5858C3.21071 11.9609 3 12.4696 3 13C3 13.5304 3.21071 14.0391 3.58579 14.4142C3.96086 14.7893 4.46957 15 5 15C5.53043 15 6.03914 14.7893 6.41421 14.4142C6.78929 14.0391 7 13.5304 7 13C7 12.4696 6.78929 11.9609 6.41421 11.5858C6.03914 11.2107 5.53043 11 5 11ZM12 11C11.4696 11 10.9609 11.2107 10.5858 11.5858C10.2107 11.9609 10 12.4696 10 13C10 13.5304 10.2107 14.0391 10.5858 14.4142C10.9609 14.7893 11.4696 15 12 15C12.5304 15 13.0391 14.7893 13.4142 14.4142C13.7893 14.0391 14 13.5304 14 13C14 12.4696 13.7893 11.9609 13.4142 11.5858C13.0391 11.2107 12.5304 11 12 11ZM5 12C5.26522 12 5.51957 12.1054 5.70711 12.2929C5.89464 12.4804 6 12.7348 6 13C6 13.2652 5.89464 13.5196 5.70711 13.7071C5.51957 13.8946 5.26522 14 5 14C4.73478 14 4.48043 13.8946 4.29289 13.7071C4.10536 13.5196 4 13.2652 4 13C4 12.7348 4.10536 12.4804 4.29289 12.2929C4.48043 12.1054 4.73478 12 5 12ZM12 12C12.2652 12 12.5196 12.1054 12.7071 12.2929C12.8946 12.4804 13 12.7348 13 13C13 13.2652 12.8946 13.5196 12.7071 13.7071C12.5196 13.8946 12.2652 14 12 14C11.7348 14 11.4804 13.8946 11.2929 13.7071C11.1054 13.5196 11 13.2652 11 13C11 12.7348 11.1054 12.4804 11.2929 12.2929C11.4804 12.1054 11.7348 12 12 12Z"
-															fill="black"></path>
-													</svg> Comprar</button>
-												<button type="button" class="btn btn-light btn-favoritos"
-													producto_id="212"> <svg width="15" height="14" viewBox="0 0 15 14"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M7.5 13.7625L6.4125 12.7725C2.55 9.27 0 6.9525 0 4.125C0 1.8075 1.815 0 4.125 0C5.43 0 6.6825 0.6075 7.5 1.56C8.3175 0.6075 9.57 0 10.875 0C13.185 0 15 1.8075 15 4.125C15 6.9525 12.45 9.27 8.5875 12.7725L7.5 13.7625Z"
-															fill="red"></path>
-													</svg> Favorito</button>
-											</div>
-
-
-
-
-
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="car-item wow fadeIn" data-wow-duration="0.75s">
-									<div class="thumb-content">
-										<div class="car-banner nuevo-producto">
-											<a href="producto.html?id=212">Lo nuevo</a>
-										</div>
-										<div class="thumb-inner photo-prod">
-											<a href="producto.html?id=212"><img style="height:250px"
-													src="http://148.113.196.34:/files-app/producto/img//1723668611-IMG_1282-small.png"
-													alt=""></a>
-										</div>
-									</div>
-									<div class="down-content">
-										<a href="producto.html?id=212" style="color:#000">
-
-											<h5 title="Mochila bordada "
-												class="card-title font-weight-bold product-description">Mochila bordada
-											</h5>
-										</a>
-										<p class="h4 text-danger font-weight-bold">S/.65.00 </p>
-										<p class="card-text text-muted">Categoría: TEXTILERÍA</p>
-										<div class="d-flex align-items-center mt-3" title="Artesano">
-											<img class="rounded-circle mr-2"
-												src="http://148.113.196.34/files-app/artesano/img//1722963559-1.JPG"
-												alt="Jose Mendoza" style="width: 40px; height: 40px;">
-											<span class="text-dark">
-												<a style:="color:#dedede!important" href="artesano.html?id=50">
-													YOVANA MARLENI CONGA SALAS</a>
-
-
-											</span>
-											<div class="line-dec2"></div>
-
-										</div>
-										<div class="d-flex mt-4">
-
-											<div class="btn-group" role="group" aria-label="Basic example">
-												<button type="button" class="btn btn-light"><a class=""
-														href="producto.html?id=212">Ver
-														más</a></button>
-												<button type="button" class="btn btn-light btn-comprar"
-													producto_id="212"><svg width="15" height="15" viewBox="0 0 15 15"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M0 0.5C0 0.367392 0.0526784 0.240215 0.146447 0.146447C0.240215 0.0526784 0.367392 0 0.5 0H2C2.11153 3.08115e-05 2.21985 0.0373507 2.30773 0.106025C2.39561 0.174699 2.45801 0.270784 2.485 0.379L2.89 2H14.5C14.5734 2.00007 14.6459 2.0163 14.7124 2.04755C14.7788 2.0788 14.8375 2.12429 14.8844 2.1808C14.9313 2.23731 14.9651 2.30345 14.9835 2.37452C15.002 2.44558 15.0045 2.51984 14.991 2.592L13.491 10.592C13.4696 10.7066 13.4087 10.8101 13.3191 10.8846C13.2294 10.9591 13.1166 10.9999 13 11H4C3.88343 10.9999 3.77057 10.9591 3.68091 10.8846C3.59126 10.8101 3.53045 10.7066 3.509 10.592L2.01 2.607L1.61 1H0.5C0.367392 1 0.240215 0.947322 0.146447 0.853553C0.0526784 0.759785 0 0.632608 0 0.5ZM5 11C4.46957 11 3.96086 11.2107 3.58579 11.5858C3.21071 11.9609 3 12.4696 3 13C3 13.5304 3.21071 14.0391 3.58579 14.4142C3.96086 14.7893 4.46957 15 5 15C5.53043 15 6.03914 14.7893 6.41421 14.4142C6.78929 14.0391 7 13.5304 7 13C7 12.4696 6.78929 11.9609 6.41421 11.5858C6.03914 11.2107 5.53043 11 5 11ZM12 11C11.4696 11 10.9609 11.2107 10.5858 11.5858C10.2107 11.9609 10 12.4696 10 13C10 13.5304 10.2107 14.0391 10.5858 14.4142C10.9609 14.7893 11.4696 15 12 15C12.5304 15 13.0391 14.7893 13.4142 14.4142C13.7893 14.0391 14 13.5304 14 13C14 12.4696 13.7893 11.9609 13.4142 11.5858C13.0391 11.2107 12.5304 11 12 11ZM5 12C5.26522 12 5.51957 12.1054 5.70711 12.2929C5.89464 12.4804 6 12.7348 6 13C6 13.2652 5.89464 13.5196 5.70711 13.7071C5.51957 13.8946 5.26522 14 5 14C4.73478 14 4.48043 13.8946 4.29289 13.7071C4.10536 13.5196 4 13.2652 4 13C4 12.7348 4.10536 12.4804 4.29289 12.2929C4.48043 12.1054 4.73478 12 5 12ZM12 12C12.2652 12 12.5196 12.1054 12.7071 12.2929C12.8946 12.4804 13 12.7348 13 13C13 13.2652 12.8946 13.5196 12.7071 13.7071C12.5196 13.8946 12.2652 14 12 14C11.7348 14 11.4804 13.8946 11.2929 13.7071C11.1054 13.5196 11 13.2652 11 13C11 12.7348 11.1054 12.4804 11.2929 12.2929C11.4804 12.1054 11.7348 12 12 12Z"
-															fill="black"></path>
-													</svg> Comprar</button>
-												<button type="button" class="btn btn-light btn-favoritos"
-													producto_id="212"> <svg width="15" height="14" viewBox="0 0 15 14"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M7.5 13.7625L6.4125 12.7725C2.55 9.27 0 6.9525 0 4.125C0 1.8075 1.815 0 4.125 0C5.43 0 6.6825 0.6075 7.5 1.56C8.3175 0.6075 9.57 0 10.875 0C13.185 0 15 1.8075 15 4.125C15 6.9525 12.45 9.27 8.5875 12.7725L7.5 13.7625Z"
-															fill="red"></path>
-													</svg> Favorito</button>
-											</div>
-
-
-
-
-
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="car-item wow fadeIn" data-wow-duration="0.75s">
-									<div class="thumb-content">
-										<div class="car-banner nuevo-producto">
-											<a href="producto.html?id=212">Lo nuevo</a>
-										</div>
-										<div class="thumb-inner photo-prod">
-											<a href="producto.html?id=212"><img style="height:250px"
-													src="http://148.113.196.34:/files-app/producto/img//1723668611-IMG_1282-small.png"
-													alt=""></a>
-										</div>
-									</div>
-									<div class="down-content">
-										<a href="producto.html?id=212" style="color:#000">
-
-											<h5 title="Mochila bordada "
-												class="card-title font-weight-bold product-description">Mochila bordada
-											</h5>
-										</a>
-										<p class="h4 text-danger font-weight-bold">S/.65.00 </p>
-										<p class="card-text text-muted">Categoría: TEXTILERÍA</p>
-										<div class="d-flex align-items-center mt-3" title="Artesano">
-											<img class="rounded-circle mr-2"
-												src="http://148.113.196.34/files-app/artesano/img//1722963559-1.JPG"
-												alt="Jose Mendoza" style="width: 40px; height: 40px;">
-											<span class="text-dark">
-												<a style:="color:#dedede!important" href="artesano.html?id=50">
-													YOVANA MARLENI CONGA SALAS</a>
-
-
-											</span>
-											<div class="line-dec2"></div>
-
-										</div>
-										<div class="d-flex mt-4">
-
-											<div class="btn-group" role="group" aria-label="Basic example">
-												<button type="button" class="btn btn-light"><a class=""
-														href="producto.html?id=212">Ver
-														más</a></button>
-												<button type="button" class="btn btn-light btn-comprar"
-													producto_id="212"><svg width="15" height="15" viewBox="0 0 15 15"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M0 0.5C0 0.367392 0.0526784 0.240215 0.146447 0.146447C0.240215 0.0526784 0.367392 0 0.5 0H2C2.11153 3.08115e-05 2.21985 0.0373507 2.30773 0.106025C2.39561 0.174699 2.45801 0.270784 2.485 0.379L2.89 2H14.5C14.5734 2.00007 14.6459 2.0163 14.7124 2.04755C14.7788 2.0788 14.8375 2.12429 14.8844 2.1808C14.9313 2.23731 14.9651 2.30345 14.9835 2.37452C15.002 2.44558 15.0045 2.51984 14.991 2.592L13.491 10.592C13.4696 10.7066 13.4087 10.8101 13.3191 10.8846C13.2294 10.9591 13.1166 10.9999 13 11H4C3.88343 10.9999 3.77057 10.9591 3.68091 10.8846C3.59126 10.8101 3.53045 10.7066 3.509 10.592L2.01 2.607L1.61 1H0.5C0.367392 1 0.240215 0.947322 0.146447 0.853553C0.0526784 0.759785 0 0.632608 0 0.5ZM5 11C4.46957 11 3.96086 11.2107 3.58579 11.5858C3.21071 11.9609 3 12.4696 3 13C3 13.5304 3.21071 14.0391 3.58579 14.4142C3.96086 14.7893 4.46957 15 5 15C5.53043 15 6.03914 14.7893 6.41421 14.4142C6.78929 14.0391 7 13.5304 7 13C7 12.4696 6.78929 11.9609 6.41421 11.5858C6.03914 11.2107 5.53043 11 5 11ZM12 11C11.4696 11 10.9609 11.2107 10.5858 11.5858C10.2107 11.9609 10 12.4696 10 13C10 13.5304 10.2107 14.0391 10.5858 14.4142C10.9609 14.7893 11.4696 15 12 15C12.5304 15 13.0391 14.7893 13.4142 14.4142C13.7893 14.0391 14 13.5304 14 13C14 12.4696 13.7893 11.9609 13.4142 11.5858C13.0391 11.2107 12.5304 11 12 11ZM5 12C5.26522 12 5.51957 12.1054 5.70711 12.2929C5.89464 12.4804 6 12.7348 6 13C6 13.2652 5.89464 13.5196 5.70711 13.7071C5.51957 13.8946 5.26522 14 5 14C4.73478 14 4.48043 13.8946 4.29289 13.7071C4.10536 13.5196 4 13.2652 4 13C4 12.7348 4.10536 12.4804 4.29289 12.2929C4.48043 12.1054 4.73478 12 5 12ZM12 12C12.2652 12 12.5196 12.1054 12.7071 12.2929C12.8946 12.4804 13 12.7348 13 13C13 13.2652 12.8946 13.5196 12.7071 13.7071C12.5196 13.8946 12.2652 14 12 14C11.7348 14 11.4804 13.8946 11.2929 13.7071C11.1054 13.5196 11 13.2652 11 13C11 12.7348 11.1054 12.4804 11.2929 12.2929C11.4804 12.1054 11.7348 12 12 12Z"
-															fill="black"></path>
-													</svg> Comprar</button>
-												<button type="button" class="btn btn-light btn-favoritos"
-													producto_id="212"> <svg width="15" height="14" viewBox="0 0 15 14"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M7.5 13.7625L6.4125 12.7725C2.55 9.27 0 6.9525 0 4.125C0 1.8075 1.815 0 4.125 0C5.43 0 6.6825 0.6075 7.5 1.56C8.3175 0.6075 9.57 0 10.875 0C13.185 0 15 1.8075 15 4.125C15 6.9525 12.45 9.27 8.5875 12.7725L7.5 13.7625Z"
-															fill="red"></path>
-													</svg> Favorito</button>
-											</div>
-
-
-
-
-
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="car-item wow fadeIn" data-wow-duration="0.75s">
-									<div class="thumb-content">
-										<div class="car-banner nuevo-producto">
-											<a href="producto.html?id=212">Lo nuevo</a>
-										</div>
-										<div class="thumb-inner photo-prod">
-											<a href="producto.html?id=212"><img style="height:250px"
-													src="http://148.113.196.34:/files-app/producto/img//1723668611-IMG_1282-small.png"
-													alt=""></a>
-										</div>
-									</div>
-									<div class="down-content">
-										<a href="producto.html?id=212" style="color:#000">
-
-											<h5 title="Mochila bordada "
-												class="card-title font-weight-bold product-description">Mochila bordada
-											</h5>
-										</a>
-										<p class="h4 text-danger font-weight-bold">S/.65.00 </p>
-										<p class="card-text text-muted">Categoría: TEXTILERÍA</p>
-										<div class="d-flex align-items-center mt-3" title="Artesano">
-											<img class="rounded-circle mr-2"
-												src="http://148.113.196.34/files-app/artesano/img//1722963559-1.JPG"
-												alt="Jose Mendoza" style="width: 40px; height: 40px;">
-											<span class="text-dark">
-												<a style:="color:#dedede!important" href="artesano.html?id=50">
-													YOVANA MARLENI CONGA SALAS</a>
-
-
-											</span>
-											<div class="line-dec2"></div>
-
-										</div>
-										<div class="d-flex mt-4">
-
-											<div class="btn-group" role="group" aria-label="Basic example">
-												<button type="button" class="btn btn-light"><a class=""
-														href="producto.html?id=212">Ver
-														más</a></button>
-												<button type="button" class="btn btn-light btn-comprar"
-													producto_id="212"><svg width="15" height="15" viewBox="0 0 15 15"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M0 0.5C0 0.367392 0.0526784 0.240215 0.146447 0.146447C0.240215 0.0526784 0.367392 0 0.5 0H2C2.11153 3.08115e-05 2.21985 0.0373507 2.30773 0.106025C2.39561 0.174699 2.45801 0.270784 2.485 0.379L2.89 2H14.5C14.5734 2.00007 14.6459 2.0163 14.7124 2.04755C14.7788 2.0788 14.8375 2.12429 14.8844 2.1808C14.9313 2.23731 14.9651 2.30345 14.9835 2.37452C15.002 2.44558 15.0045 2.51984 14.991 2.592L13.491 10.592C13.4696 10.7066 13.4087 10.8101 13.3191 10.8846C13.2294 10.9591 13.1166 10.9999 13 11H4C3.88343 10.9999 3.77057 10.9591 3.68091 10.8846C3.59126 10.8101 3.53045 10.7066 3.509 10.592L2.01 2.607L1.61 1H0.5C0.367392 1 0.240215 0.947322 0.146447 0.853553C0.0526784 0.759785 0 0.632608 0 0.5ZM5 11C4.46957 11 3.96086 11.2107 3.58579 11.5858C3.21071 11.9609 3 12.4696 3 13C3 13.5304 3.21071 14.0391 3.58579 14.4142C3.96086 14.7893 4.46957 15 5 15C5.53043 15 6.03914 14.7893 6.41421 14.4142C6.78929 14.0391 7 13.5304 7 13C7 12.4696 6.78929 11.9609 6.41421 11.5858C6.03914 11.2107 5.53043 11 5 11ZM12 11C11.4696 11 10.9609 11.2107 10.5858 11.5858C10.2107 11.9609 10 12.4696 10 13C10 13.5304 10.2107 14.0391 10.5858 14.4142C10.9609 14.7893 11.4696 15 12 15C12.5304 15 13.0391 14.7893 13.4142 14.4142C13.7893 14.0391 14 13.5304 14 13C14 12.4696 13.7893 11.9609 13.4142 11.5858C13.0391 11.2107 12.5304 11 12 11ZM5 12C5.26522 12 5.51957 12.1054 5.70711 12.2929C5.89464 12.4804 6 12.7348 6 13C6 13.2652 5.89464 13.5196 5.70711 13.7071C5.51957 13.8946 5.26522 14 5 14C4.73478 14 4.48043 13.8946 4.29289 13.7071C4.10536 13.5196 4 13.2652 4 13C4 12.7348 4.10536 12.4804 4.29289 12.2929C4.48043 12.1054 4.73478 12 5 12ZM12 12C12.2652 12 12.5196 12.1054 12.7071 12.2929C12.8946 12.4804 13 12.7348 13 13C13 13.2652 12.8946 13.5196 12.7071 13.7071C12.5196 13.8946 12.2652 14 12 14C11.7348 14 11.4804 13.8946 11.2929 13.7071C11.1054 13.5196 11 13.2652 11 13C11 12.7348 11.1054 12.4804 11.2929 12.2929C11.4804 12.1054 11.7348 12 12 12Z"
-															fill="black"></path>
-													</svg> Comprar</button>
-												<button type="button" class="btn btn-light btn-favoritos"
-													producto_id="212"> <svg width="15" height="14" viewBox="0 0 15 14"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M7.5 13.7625L6.4125 12.7725C2.55 9.27 0 6.9525 0 4.125C0 1.8075 1.815 0 4.125 0C5.43 0 6.6825 0.6075 7.5 1.56C8.3175 0.6075 9.57 0 10.875 0C13.185 0 15 1.8075 15 4.125C15 6.9525 12.45 9.27 8.5875 12.7725L7.5 13.7625Z"
-															fill="red"></path>
-													</svg> Favorito</button>
-											</div>
-
-
-
-
-
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="car-item wow fadeIn" data-wow-duration="0.75s">
-									<div class="thumb-content">
-										<div class="car-banner nuevo-producto">
-											<a href="producto.html?id=212">Lo nuevo</a>
-										</div>
-										<div class="thumb-inner photo-prod">
-											<a href="producto.html?id=212"><img style="height:250px"
-													src="http://148.113.196.34:/files-app/producto/img//1723668611-IMG_1282-small.png"
-													alt=""></a>
-										</div>
-									</div>
-									<div class="down-content">
-										<a href="producto.html?id=212" style="color:#000">
-
-											<h5 title="Mochila bordada "
-												class="card-title font-weight-bold product-description">Mochila bordada
-											</h5>
-										</a>
-										<p class="h4 text-danger font-weight-bold">S/.65.00 </p>
-										<p class="card-text text-muted">Categoría: TEXTILERÍA</p>
-										<div class="d-flex align-items-center mt-3" title="Artesano">
-											<img class="rounded-circle mr-2"
-												src="http://148.113.196.34/files-app/artesano/img//1722963559-1.JPG"
-												alt="Jose Mendoza" style="width: 40px; height: 40px;">
-											<span class="text-dark">
-												<a style:="color:#dedede!important" href="artesano.html?id=50">
-													YOVANA MARLENI CONGA SALAS</a>
-
-
-											</span>
-											<div class="line-dec2"></div>
-
-										</div>
-										<div class="d-flex mt-4">
-
-											<div class="btn-group" role="group" aria-label="Basic example">
-												<button type="button" class="btn btn-light"><a class=""
-														href="producto.html?id=212">Ver
-														más</a></button>
-												<button type="button" class="btn btn-light btn-comprar"
-													producto_id="212"><svg width="15" height="15" viewBox="0 0 15 15"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M0 0.5C0 0.367392 0.0526784 0.240215 0.146447 0.146447C0.240215 0.0526784 0.367392 0 0.5 0H2C2.11153 3.08115e-05 2.21985 0.0373507 2.30773 0.106025C2.39561 0.174699 2.45801 0.270784 2.485 0.379L2.89 2H14.5C14.5734 2.00007 14.6459 2.0163 14.7124 2.04755C14.7788 2.0788 14.8375 2.12429 14.8844 2.1808C14.9313 2.23731 14.9651 2.30345 14.9835 2.37452C15.002 2.44558 15.0045 2.51984 14.991 2.592L13.491 10.592C13.4696 10.7066 13.4087 10.8101 13.3191 10.8846C13.2294 10.9591 13.1166 10.9999 13 11H4C3.88343 10.9999 3.77057 10.9591 3.68091 10.8846C3.59126 10.8101 3.53045 10.7066 3.509 10.592L2.01 2.607L1.61 1H0.5C0.367392 1 0.240215 0.947322 0.146447 0.853553C0.0526784 0.759785 0 0.632608 0 0.5ZM5 11C4.46957 11 3.96086 11.2107 3.58579 11.5858C3.21071 11.9609 3 12.4696 3 13C3 13.5304 3.21071 14.0391 3.58579 14.4142C3.96086 14.7893 4.46957 15 5 15C5.53043 15 6.03914 14.7893 6.41421 14.4142C6.78929 14.0391 7 13.5304 7 13C7 12.4696 6.78929 11.9609 6.41421 11.5858C6.03914 11.2107 5.53043 11 5 11ZM12 11C11.4696 11 10.9609 11.2107 10.5858 11.5858C10.2107 11.9609 10 12.4696 10 13C10 13.5304 10.2107 14.0391 10.5858 14.4142C10.9609 14.7893 11.4696 15 12 15C12.5304 15 13.0391 14.7893 13.4142 14.4142C13.7893 14.0391 14 13.5304 14 13C14 12.4696 13.7893 11.9609 13.4142 11.5858C13.0391 11.2107 12.5304 11 12 11ZM5 12C5.26522 12 5.51957 12.1054 5.70711 12.2929C5.89464 12.4804 6 12.7348 6 13C6 13.2652 5.89464 13.5196 5.70711 13.7071C5.51957 13.8946 5.26522 14 5 14C4.73478 14 4.48043 13.8946 4.29289 13.7071C4.10536 13.5196 4 13.2652 4 13C4 12.7348 4.10536 12.4804 4.29289 12.2929C4.48043 12.1054 4.73478 12 5 12ZM12 12C12.2652 12 12.5196 12.1054 12.7071 12.2929C12.8946 12.4804 13 12.7348 13 13C13 13.2652 12.8946 13.5196 12.7071 13.7071C12.5196 13.8946 12.2652 14 12 14C11.7348 14 11.4804 13.8946 11.2929 13.7071C11.1054 13.5196 11 13.2652 11 13C11 12.7348 11.1054 12.4804 11.2929 12.2929C11.4804 12.1054 11.7348 12 12 12Z"
-															fill="black"></path>
-													</svg> Comprar</button>
-												<button type="button" class="btn btn-light btn-favoritos"
-													producto_id="212"> <svg width="15" height="14" viewBox="0 0 15 14"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M7.5 13.7625L6.4125 12.7725C2.55 9.27 0 6.9525 0 4.125C0 1.8075 1.815 0 4.125 0C5.43 0 6.6825 0.6075 7.5 1.56C8.3175 0.6075 9.57 0 10.875 0C13.185 0 15 1.8075 15 4.125C15 6.9525 12.45 9.27 8.5875 12.7725L7.5 13.7625Z"
-															fill="red"></path>
-													</svg> Favorito</button>
-											</div>
-
-
-
-
-
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="car-item wow fadeIn" data-wow-duration="0.75s">
-									<div class="thumb-content">
-										<div class="car-banner nuevo-producto">
-											<a href="producto.html?id=212">Lo nuevo</a>
-										</div>
-										<div class="thumb-inner photo-prod">
-											<a href="producto.html?id=212"><img style="height:250px"
-													src="http://148.113.196.34:/files-app/producto/img//1723668611-IMG_1282-small.png"
-													alt=""></a>
-										</div>
-									</div>
-									<div class="down-content">
-										<a href="producto.html?id=212" style="color:#000">
-
-											<h5 title="Mochila bordada "
-												class="card-title font-weight-bold product-description">Mochila bordada
-											</h5>
-										</a>
-										<p class="h4 text-danger font-weight-bold">S/.65.00 </p>
-										<p class="card-text text-muted">Categoría: TEXTILERÍA</p>
-										<div class="d-flex align-items-center mt-3" title="Artesano">
-											<img class="rounded-circle mr-2"
-												src="http://148.113.196.34/files-app/artesano/img//1722963559-1.JPG"
-												alt="Jose Mendoza" style="width: 40px; height: 40px;">
-											<span class="text-dark">
-												<a style:="color:#dedede!important" href="artesano.html?id=50">
-													YOVANA MARLENI CONGA SALAS</a>
-
-
-											</span>
-											<div class="line-dec2"></div>
-
-										</div>
-										<div class="d-flex mt-4">
-
-											<div class="btn-group" role="group" aria-label="Basic example">
-												<button type="button" class="btn btn-light"><a class=""
-														href="producto.html?id=212">Ver
-														más</a></button>
-												<button type="button" class="btn btn-light btn-comprar"
-													producto_id="212"><svg width="15" height="15" viewBox="0 0 15 15"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M0 0.5C0 0.367392 0.0526784 0.240215 0.146447 0.146447C0.240215 0.0526784 0.367392 0 0.5 0H2C2.11153 3.08115e-05 2.21985 0.0373507 2.30773 0.106025C2.39561 0.174699 2.45801 0.270784 2.485 0.379L2.89 2H14.5C14.5734 2.00007 14.6459 2.0163 14.7124 2.04755C14.7788 2.0788 14.8375 2.12429 14.8844 2.1808C14.9313 2.23731 14.9651 2.30345 14.9835 2.37452C15.002 2.44558 15.0045 2.51984 14.991 2.592L13.491 10.592C13.4696 10.7066 13.4087 10.8101 13.3191 10.8846C13.2294 10.9591 13.1166 10.9999 13 11H4C3.88343 10.9999 3.77057 10.9591 3.68091 10.8846C3.59126 10.8101 3.53045 10.7066 3.509 10.592L2.01 2.607L1.61 1H0.5C0.367392 1 0.240215 0.947322 0.146447 0.853553C0.0526784 0.759785 0 0.632608 0 0.5ZM5 11C4.46957 11 3.96086 11.2107 3.58579 11.5858C3.21071 11.9609 3 12.4696 3 13C3 13.5304 3.21071 14.0391 3.58579 14.4142C3.96086 14.7893 4.46957 15 5 15C5.53043 15 6.03914 14.7893 6.41421 14.4142C6.78929 14.0391 7 13.5304 7 13C7 12.4696 6.78929 11.9609 6.41421 11.5858C6.03914 11.2107 5.53043 11 5 11ZM12 11C11.4696 11 10.9609 11.2107 10.5858 11.5858C10.2107 11.9609 10 12.4696 10 13C10 13.5304 10.2107 14.0391 10.5858 14.4142C10.9609 14.7893 11.4696 15 12 15C12.5304 15 13.0391 14.7893 13.4142 14.4142C13.7893 14.0391 14 13.5304 14 13C14 12.4696 13.7893 11.9609 13.4142 11.5858C13.0391 11.2107 12.5304 11 12 11ZM5 12C5.26522 12 5.51957 12.1054 5.70711 12.2929C5.89464 12.4804 6 12.7348 6 13C6 13.2652 5.89464 13.5196 5.70711 13.7071C5.51957 13.8946 5.26522 14 5 14C4.73478 14 4.48043 13.8946 4.29289 13.7071C4.10536 13.5196 4 13.2652 4 13C4 12.7348 4.10536 12.4804 4.29289 12.2929C4.48043 12.1054 4.73478 12 5 12ZM12 12C12.2652 12 12.5196 12.1054 12.7071 12.2929C12.8946 12.4804 13 12.7348 13 13C13 13.2652 12.8946 13.5196 12.7071 13.7071C12.5196 13.8946 12.2652 14 12 14C11.7348 14 11.4804 13.8946 11.2929 13.7071C11.1054 13.5196 11 13.2652 11 13C11 12.7348 11.1054 12.4804 11.2929 12.2929C11.4804 12.1054 11.7348 12 12 12Z"
-															fill="black"></path>
-													</svg> Comprar</button>
-												<button type="button" class="btn btn-light btn-favoritos"
-													producto_id="212"> <svg width="15" height="14" viewBox="0 0 15 14"
-														fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M7.5 13.7625L6.4125 12.7725C2.55 9.27 0 6.9525 0 4.125C0 1.8075 1.815 0 4.125 0C5.43 0 6.6825 0.6075 7.5 1.56C8.3175 0.6075 9.57 0 10.875 0C13.185 0 15 1.8075 15 4.125C15 6.9525 12.45 9.27 8.5875 12.7725L7.5 13.7625Z"
-															fill="red"></path>
-													</svg> Favorito</button>
-											</div>
-
-
-
-
-
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="page-numbers">
-									<div class="pagination-content">
-										<ul>
-											<li class="active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
 			</div>
 		</div>
 	</div>
+
+
+
+	<section>
+
+		<div class="team-section">
+			<div class="team-category">
+				<h2>Cerámica</h2>
+			</div>
+			<div class="team-members" id="ceramica-members">
+
+			</div>
+		</div>
+
+		<div class="team-section">
+			<div class="team-category">
+				<h2>Textilería</h2>
+			</div>
+			<div class="team-members" id="textileria-members">
+
+			</div>
+		</div>
+
+		<div class="team-section">
+			<div class="team-category">
+				<h2>Piedra tallada</h2>
+			</div>
+			<div class="team-members" id="piedra-tallada-members">
+
+			</div>
+		</div>
+	</section>
 
 
 
@@ -653,7 +443,9 @@
 	<!-- Custom Js -->
 	<script src="assets_tienda/js/custom.js"></script>
 
-	<script type="module" src="../src/tienda/portada/index.js"></script>
+
+
+	<script type="module" src="../src/tienda/artesanos/index.js"></script>
 
 </body>
 
