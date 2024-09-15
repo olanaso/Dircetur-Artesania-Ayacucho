@@ -157,3 +157,12 @@
 .is-invalid+.form-check-label::before {
     border-color: #dc3545;
 }
+.card-img-top {
+    width: 70%;
+    height: 225px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 1px solid black;
+    mix-blend-mode: multiply;
+}
