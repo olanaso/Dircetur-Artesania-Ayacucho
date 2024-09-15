@@ -145,6 +145,19 @@
 		.summary-table td {
 			background-color: #f9f9f9;
 		}
+
+		/* Selecciona labels asociados a inputs o textarea que son requeridos */
+		/* Estilo general para los labels */
+		.form-group label {
+			margin-right: 5px;
+		}
+
+		/* Estilo del asterisco rojo */
+		.required-asterisk::after {
+			content: " *";
+			color: red;
+			font-weight: bold;
+		}
 	</style>
 
 	<!--[if lt IE 9]>
@@ -220,8 +233,9 @@
 				</div>
 				<form id="multiStepForm">
 					<div class="step active" id="step1">
-						<h3>¡Gracias por elegir productos únicos de nuestro artesano <b>Juan
-								Perez</b>!</h3>
+						<h3>¡Gracias por elegir productos de nuestro artesano: <a id="link_artesano" href=""> <b
+									id="nombre_artesano">
+								</b> </a>!</h3>
 						Estás a punto de adquirir los siguientes artículos hechos a mano con dedicación y esmero:
 						<!-- Tabla de Productos -->
 						<table class="table table-bordered table-hover">
@@ -229,41 +243,13 @@
 								<tr>
 									<th scope="col">Producto</th>
 									<th scope="col">Cantidad</th>
-									<th scope="col">Precio Unitario</th>
+									<th scope="col">Precio Unitario (S/.)</th>
 									<th scope="col">Total</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="listproducts">
 								<!-- Producto 1 -->
-								<tr>
-									<td class="d-flex align-items-center">
-										<img src="https://via.placeholder.com/60" class="rounded mr-3" alt="Producto 1">
-										Producto 1
-									</td>
-									<td>2</td>
-									<td>$25.00</td>
-									<td>$50.00</td>
-								</tr>
-								<!-- Producto 2 -->
-								<tr>
-									<td class="d-flex align-items-center">
-										<img src="https://via.placeholder.com/60" class="rounded mr-3" alt="Producto 2">
-										Producto 2
-									</td>
-									<td>1</td>
-									<td>$15.00</td>
-									<td>$15.00</td>
-								</tr>
-								<!-- Producto 3 -->
-								<tr>
-									<td class="d-flex align-items-center">
-										<img src="https://via.placeholder.com/60" class="rounded mr-3" alt="Producto 3">
-										Producto 3
-									</td>
-									<td>3</td>
-									<td>$10.00</td>
-									<td>$30.00</td>
-								</tr>
+
 							</tbody>
 						</table>
 
@@ -271,7 +257,7 @@
 						<div class="d-flex justify-content-between align-items-center mb-3"
 							style="background-color: #e6e5e5;">
 							<h5>Total:</h5>
-							<h5 class="font-weight-bold">$95.00</h5>
+							<h5 class="font-weight-bold" id="total_precio_carrito">$95.00</h5>
 						</div>
 
 						<h4>&iexcl;Est&aacute;s a un paso de llevarte productos &uacute;nicos y aut&eacute;nticos!</h4>
@@ -279,7 +265,9 @@
 								compra"</b> y dale vida a tus
 							espacios con productos llenos de tradici&oacute;n y cultura!</p>
 
-						<div class="row justify-content-end p-3">
+						<div class="row justify-content-between p-3">
+							<a href="carrito-de-compra.html" class="btn btn-prev prev"><i class="fa fa-arrow-left"></i>
+								Volver carrito</a>
 							<button type="button" class="btn btn-next next"><i class="fa fa-shopping-cart"></i> Iniciar
 								compra</button>
 						</div>
@@ -295,32 +283,35 @@
 
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="dni">Documento de Identidad</label>
-								<input type="text" class="form-control" id="dni" placeholder="Ingrese su DNI">
+								<label for="dni">Documento de Identidad (Person ID)</label>
+								<input type="text" class="form-control" id="dni"
+									placeholder="Ingrese su DNI 8 digitos numericos" minlength="8" maxlength="8"
+									required pattern="\d\d\d\d\d\d\d\d" title="Ingrese formato de Identidad">
 							</div>
 							<div class="form-group col-md-1 align-self-end">
-								<button type="button" class="btn btn-secondary btn-block"><i
+								<button id="btn_buscar_dni" type="button" class="btn btn-secondary btn-block"><i
 										class="fa fa-search"></i></button>
 							</div>
 						</div>
 
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="nombre">Nombre</label>
-								<input type="text" class="form-control" id="nombre" placeholder="ERICK" value="ERICK">
+								<label for="nombres">Nombres</label>
+								<input type="text" class="form-control" id="nombres" placeholder="Nombres" value=""
+									required>
 							</div>
 							<div class="form-group col-md-6">
 								<label for="apellidos">Apellidos</label>
-								<input type="text" class="form-control" id="apellidos" placeholder="SIMON"
-									value="SIMON">
+								<input type="text" class="form-control" id="apellidos" placeholder="Apellidos" value=""
+									required>
 							</div>
 						</div>
 
 						<!-- Email field -->
 						<div class="form-group">
-							<label for="email">Correo</label>
-							<input type="email" class="form-control" id="email"
-								placeholder="ericks.escalanteolano@gmail.com" value="ericks.escalanteolano@gmail.com">
+							<label for="correo">Correo</label>
+							<input type="email" class="form-control" id="correo" placeholder="Ingrese correo" value=""
+								required>
 						</div>
 
 						<!-- Name and Surname fields -->
@@ -330,7 +321,7 @@
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label for="countryCode">Código País</label>
-								<select id="countryCode" class="form-control">
+								<select id="countryCode" class="form-control" required>
 									<option value="+51">+51 (Perú)</option>
 									<option value="+93">+93 (Afganistán)</option>
 									<option value="+355">+355 (Albania)</option>
@@ -577,7 +568,7 @@
 							<div class="form-group col-md-9">
 								<label for="telefono">Teléfono / Móvil</label>
 								<input type="text" class="form-control" id="telefono"
-									placeholder="Ingrese nro telefonico">
+									placeholder="Ingrese nro telefonico" pattern="\d\d\d\d\d\d\d\d\d" required>
 							</div>
 						</div>
 
@@ -587,8 +578,8 @@
 
 						<!-- Factura field -->
 						<div class="form-group">
-							<label for="factura">Seleccione comprobante</label>
-							<select id="factura" class="form-control">
+							<label for="tipocomprobante">Seleccione comprobante</label>
+							<select id="tipocomprobante" class="form-control" required>
 								<option value="" selected disabled>Seleccione una opción</option>
 								<option value="Si">Ninguno</option>
 								<option value="Si">Nota de venta</option>
@@ -598,9 +589,9 @@
 						</div>
 
 						<div class="form-group">
-							<label for="email">En caso de <strong>Factura</strong>, indicar <strong>RUC</strong></label>
-							<input type="email" class="form-control" id="email" placeholder="Ejem: 20303030061"
-								value="">
+							<label for="ruc">En caso de <strong>Factura</strong>, indicar <strong>RUC</strong></label>
+							<input type="number" class="form-control" id="ruc" placeholder="Ejem: 20303030061" value=""
+								pattern="\d\d\d\d\d\d\d\d\d\d\d">
 						</div>
 
 
@@ -610,23 +601,25 @@
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="countryCode">País</label>
-								<select id="countryCode" class="form-control">
+								<select id="countryCode" class="form-control" required>
 									<option value="+51">+51 (Perú)</option>
 									<option value="+93">+93 (Afganistán)</option>
 									<option value="+355">+355 (Albania)</option>
 								</select>
 							</div>
 							<div class="form-group col-md-4">
-								<label for="countryCode">Región</label>
-								<select id="countryCode" class="form-control">
+								<label for="region">Región</label>
+								<select id="region" class="form-control" required>
+									<option value="" selected disabled>Seleccione una opción</option>
 									<option value="+51">+51 (Perú)</option>
 									<option value="+93">+93 (Afganistán)</option>
 									<option value="+355">+355 (Albania)</option>
 								</select>
 							</div>
 							<div class="form-group col-md-4">
-								<label for="countryCode">Ciudad</label>
-								<select id="countryCode" class="form-control">
+								<label for="ciudad">Ciudad</label>
+								<select id="ciudad" class="form-control" required>
+									<option value="" selected disabled>Seleccione una opción</option>
 									<option value="+51">+51 (Perú)</option>
 									<option value="+93">+93 (Afganistán)</option>
 									<option value="+355">+355 (Albania)</option>
@@ -635,14 +628,14 @@
 						</div>
 
 						<div class="form-group">
-							<label for="email">Dirección (para el envio)</label>
-							<input type="text" class="form-control" id="email"
-								placeholder="Ingrese la direccion a donde se le enviara" value="">
+							<label for="direccion_envio"><span class="error">*</span>Dirección (para el envio) </label>
+							<input type="text" class="form-control" id="direccion_envio"
+								placeholder="Ingrese la direccion a donde se le enviara" value="" required>
 						</div>
 
 						<div class="form-group">
-							<label for="email">Mensaje al artesano</label>
-							<textarea type="text" class="form-control" id="email"
+							<label for="mensaje">Mensaje al artesano</label>
+							<textarea type="text" class="form-control" id="mensaje"
 								placeholder="Ingrese la direccion a donde se le enviara" value="">
 								</textarea>
 						</div>
@@ -658,7 +651,7 @@
 					</div>
 
 					<div class="step" id="step3">
-						<h3 class="step-title">Realiza pago</h3>
+						<h3>Realiza pago</h3>
 						<hr>
 						<span>* Seleccione un medio de pago y realize la operación de trasnferencia con la información y
 							monto
@@ -676,21 +669,24 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>Producto A (1 unidad)</td>
-											<td>S/40.00</td>
-										</tr>
-										<tr>
-											<td>Producto B (2 unidades)</td>
-											<td>S/80.00</td>
-										</tr>
-										<tr>
-											<td>Producto C (1 unidad)</td>
-											<td>S/40.00</td>
-										</tr>
+										<div id="lista-resumen-prod-final">
+											<tr>
+												<td>Producto A (1 unidad)</td>
+												<td>S/40.00</td>
+											</tr>
+											<tr>
+												<td>Producto B (2 unidades)</td>
+												<td>S/80.00</td>
+											</tr>
+											<tr>
+												<td>Producto C (1 unidad)</td>
+												<td>S/40.00</td>
+											</tr>
+										</div>
+
 										<tr>
 											<th>Total a pagar:</th>
-											<th>S/160.00</th>
+											<th id="total_final">S/160.00</th>
 										</tr>
 									</tbody>
 								</table>
@@ -819,6 +815,29 @@
 
 	<!-- Custom Js -->
 	<script src="assets_tienda/js/custom.js"></script>
+
+	<script>
+		// Función para actualizar los asteriscos en los labels de los inputs requeridos
+		function actualizarAsteriscos () {
+			// Selecciona todos los labels del formulario
+			const labels = document.querySelectorAll('label');
+
+			labels.forEach(label => {
+				const inputId = label.getAttribute('for');
+				const input = document.getElementById(inputId);
+
+				// Si el input o textarea tiene el atributo required, agrega la clase con el asterisco
+				if (input && input.hasAttribute('required')) {
+					label.classList.add('required-asterisk');
+				} else {
+					label.classList.remove('required-asterisk');
+				}
+			});
+		}
+
+		// Ejecuta la función para actualizar los asteriscos cuando la página carga
+		window.onload = actualizarAsteriscos;
+	</script>
 
 	<script type="module" src="../src/tienda/proceso-de-compra/index.js"></script>
 

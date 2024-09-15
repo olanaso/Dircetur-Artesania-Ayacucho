@@ -11,14 +11,14 @@ import { hideLoading } from '../utils/init';
 // pasos de la compra
 var currentStep = 1;
 
-function showStep(step) {
+function showStep (step) {
     $('.step').removeClass('active');
     $('#step' + step).addClass('active');
     $('.stepper-item').removeClass('active');
     $('.stepper-item').slice(0, step).addClass('active');
 }
 
-function validateStep(step) {
+function validateStep (step) {
     var isValid = true;
 
     // Validar los campos del formulario
