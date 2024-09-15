@@ -30,291 +30,391 @@
 	<link rel="stylesheet" href="assets_tienda/css/animated.css">
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 	<style>
-		.product-card {
-			border: 1px solid #ccc;
-			border-radius: 10px;
-			padding: 20px;
-			margin-bottom: 20px;
-			transition: box-shadow 0.3s ease;
-		}
-
-		.product-card:hover {
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-		}
-
-		.product-image {
-			width: 100px;
-			height: 100px;
-
+		/* Search Section */
+		.search-container {
 			display: flex;
 			align-items: center;
-			justify-content: center;
-			font-size: 12px;
-			color: #777;
+			position: relative;
 		}
 
-		.product-actions button {
+		#search-input {
 			width: 100%;
-			margin-bottom: 5px;
+			padding: 10px 10px 10px 0;
+			margin: 20px 0;
+			font-size: 1rem;
+			border: none;
+			border-bottom: 2px solid #f3e1c0;
+			background-color: transparent;
+			transition: border-color 0.3s ease;
 		}
 
-		.btn-primary:hover {
-			background-color: #6200ea;
-			border-color: #6200ea;
+		#search-input:focus {
+			outline: none;
+			border-bottom: 2px solid #DC4405;
 		}
 
-		.btn-info:hover {
-			background-color: #017acd;
-			border-color: #017acd;
-		}
-
-		.btn-danger:hover {
-			background-color: #b00020;
-			border-color: #b00020;
-		}
-
-		.artesano-info {
-			display: flex;
-			align-items: center;
-			margin-top: 10px;
-		}
-
-		.artesano-photo {
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
-			object-fit: cover;
-			margin-right: 10px;
-		}
-
-		a {
-			color: #2c3e50;
-			text-decoration: none;
-			font-weight: 600;
-			transition: color 0.3s ease;
-		}
-
-
-		@media (max-width: 576px) {
-			.product-card {
-				padding: 15px;
-			}
-
-			.product-image {
-				width: 80px;
-				height: 80px;
-			}
-
-			.input-group {
-				max-width: 100px;
-			}
-
-			.product-actions button {
-				font-size: 14px;
-				padding: 8px;
-			}
-
-			.product-actions a {
-				font-size: 14px;
-				padding: 8px;
-			}
-
-			.product-card h5 {
-				font-size: 16px;
-			}
-
-			.product-card p {
-				font-size: 14px;
-			}
-		}
-
-		.section-title {
-			color: #f709f3;
-		}
-
-		.summary-table th,
-		.summary-table td {
-			text-align: left;
+		#search-button {
 			padding: 10px;
+			margin-left: 10px;
+			margin-top: 1px;
+			font-size: 1rem;
+			border: none;
+			background-color: transparent;
+			cursor: pointer;
+			transition: transform 0.3s ease;
+			position: relative;
 		}
 
-		.summary-table th {
-			background-color: #f1f1f1;
+		#search-button:focus {
+			outline: none;
 		}
 
-		.summary-table td {
-			background-color: #f9f9f9;
+		#search-button.loading {
+			cursor: not-allowed;
+			background-color: #f3e1c0;
+			border-radius: 12px;
+			transform: scale(1.1);
+			animation: breathing 2s ease-in-out infinite;
 		}
 
-		/* Selecciona labels asociados a inputs o textarea que son requeridos */
-		/* Estilo general para los labels */
-		.form-group label {
-			margin-right: 5px;
+		#clear-button {
+			position: absolute;
+			right: 50px;
+			top: 50%;
+			transform: translateY(-50%);
+			background: none;
+			border: none;
+			font-size: 1.1rem;
+			cursor: pointer;
+			transition: color 0.3s ease, transform 0.3s ease;
 		}
 
-		/* Estilo del asterisco rojo */
-		.required-asterisk::after {
-			content: " *";
-			color: red;
+		#clear-button:hover {
+			color: #DC4405;
+		}
+
+		#clear-button:focus {
+			outline: none;
+		}
+
+		@keyframes breathing {
+
+			0%,
+			100% {
+				transform: scale(1);
+			}
+
+			50% {
+				transform: scale(1.05);
+			}
+		}
+
+		/* Intro Section */
+		.intro-section {
+			position: relative;
+			padding: 0 175px;
+			text-align: left;
+			margin-bottom: -20px;
+		}
+
+		.intro-content {
+			max-width: 680px;
+		}
+
+		.intro-content h1 {
+			font-family: "Roboto", sans-serif;
+			font-weight: 800;
+			color: inherit;
+			font-size: 4rem;
+			margin: -10px 0;
+			padding: 0 10px;
+		}
+
+		.intro-content p {
+			font-family: "Antarctica VAR", sans-serif;
+			text-transform: none;
+			font-weight: 800;
+			font-style: normal;
+			color: inherit;
+			font-size: 1.2rem;
+			margin: 40px 0;
+			padding: 0 10px;
+			line-height: 1.6;
+			text-align: justify;
+		}
+
+		/* Team Section */
+		.team-section {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			/* Cambiado a 'center' para centrar verticalmente */
+			justify-content: center;
+			/* Para centrar horizontalmente */
+			margin: 0 auto 100px auto;
+			width: 90%;
+			max-width: 1200px;
+			gap: 20px;
+			/* Añadir un espacio entre los elementos si es necesario */
+		}
+
+		/* Team Category */
+		.team-category {
+			width: 30%;
+			margin-right: 20px;
+			margin-bottom: 0;
+			position: sticky;
+			top: 0;
+			align-self: flex-start;
+			z-index: 10;
+			padding: 20px;
+			padding-top: 200px;
+			border-radius: 8px;
 			font-weight: bold;
 		}
 
-		.markdown-content {
-			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji" !important;
-			line-height: 1.6 !important;
-			color: #24292e !important;
-			background-color: #ffffff !important;
-			padding: 20px !important;
-			margin: 0 !important;
-			border-radius: 6px !important;
-			box-shadow: 0 1px 3px rgba(27, 31, 35, 0.1) !important;
+		.team-category h2 {
+			font-family: "Antarctica VAR", sans-serif;
+			text-transform: none;
+			font-weight: 800;
+			font-style: normal;
+			color: inherit;
+			font-size: 3rem;
+			margin: 10px 0;
+			padding: 0 10px;
 		}
 
-		/* Headers */
-		.markdown-content h1,
-		.markdown-content h2,
-		.markdown-content h3,
-		.markdown-content h4,
-		.markdown-content h5,
-		.markdown-content h6 {
-			border-bottom: 1px solid #eaecef !important;
-			color: #333 !important;
-			font-weight: 600 !important;
-			padding-bottom: 0.3em !important;
-			margin: 1.5em 0 0.75em !important;
+		/* Team Member */
+		.team-member {
+			background-color: white;
+			width: calc(50% - 10px);
+			height: 500px;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+			text-align: left;
+			position: relative;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			overflow: hidden;
+			border: solid 2px transparent;
 		}
 
-		.markdown-content h1 {
-			font-size: 2em !important;
-			border-bottom-width: 2px !important;
+		.team-member h3 {
+			font-family: "Antarctica VAR", sans-serif;
+			text-transform: none;
+			font-weight: 800;
+			font-style: normal;
+			color: inherit;
+			font-size: 2rem;
+			margin: 10px 0;
+			padding: 0 10px;
 		}
 
-		.markdown-content h2 {
-			font-size: 1.75em !important;
+		.team-member p {
+			font-family: "Antarctica VAR", sans-serif;
+			text-transform: none;
+			font-weight: 600;
+			font-style: normal;
+			color: inherit;
+			font-size: 1.2rem;
+			margin: 30px 0;
+			padding: 0 20px;
 		}
 
-		.markdown-content h3 {
-			font-size: 1.5em !important;
+		.team-member:hover {
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+			transform: scale(1.01);
+			border: solid 2px #DC4405;
 		}
 
-		.markdown-content h4 {
-			font-size: 1.25em !important;
+		.team-members {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px;
 		}
 
-		.markdown-content h5 {
-			font-size: 1.1em !important;
+		.team-member img {
+			display: block;
+			margin: 0 auto;
+			aspect-ratio: 1/1;
+			border-top: solid grey 2px;
+			border-bottom: solid grey 2px;
+			width: 300px;
+			border-radius: 50%;
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
 		}
 
-		.markdown-content h6 {
-			font-size: 1em !important;
-			color: #6a737d !important;
+		.team-member img:hover {
+			transform: scale(1.05);
+			box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 		}
 
-		/* Paragraphs */
-		.markdown-content p {
-			margin: 0 0 1em !important;
+		.team-member:nth-child(2n) {
+			margin-top: 20px;
 		}
 
-		/* Links */
-		.markdown-content a {
-			color: #0366d6 !important;
-			text-decoration: none !important;
+		/* Custom Rectangle
+.custom-rectangle {
+    position: absolute;
+    width: 700px;
+    height: 300px;
+    background-color: #DC4405;
+    z-index: -10;
+    border-radius: 100px 0 0 100px;
+}
+
+.custom-rectangle:nth-of-type(1) {
+    top: 110%;
+    right: 0;
+}
+
+.custom-rectangle:nth-of-type(2) {
+    top: 330%;
+    right: 0;
+}
+
+.custom-rectangle:nth-of-type(3) {
+    top: 430%;
+    right: 0;
+}
+ */
+		/* Media Queries */
+		@media (max-width: 748px) {
+			.intro-section {
+				padding: 0 20px;
+				margin-bottom: 0;
+			}
+
+			.intro-content {
+				max-width: 400px;
+				margin-left: 35px;
+			}
+
+			.intro-section h1 {
+				font-size: 2.8rem;
+			}
+
+			.intro-section p {
+				font-size: 1.2rem;
+				font-weight: normal;
+			}
+
+			.team-section {
+				flex-direction: column;
+			}
+
+			.team-category,
+			.team-members {
+				width: 100%;
+			}
+
+			.team-category {
+				margin-right: 0;
+				padding: 20px;
+				position: static;
+				padding-top: 0;
+			}
+
+			.team-category h2 {
+				margin-left: 31px;
+			}
+
+			.team-member {
+				width: 100%;
+				height: auto;
+				overflow: hidden;
+			}
+
+			.team-member img {
+				max-width: 200px;
+			}
+
+			.team-member h3,
+			.team-member p {
+				padding: 0 10px;
+			}
 		}
 
-		.markdown-content a:hover {
-			text-decoration: underline !important;
+		@media (max-width: 1111px) {
+			.intro-section {
+				padding: 0 50px;
+				margin-bottom: 0;
+			}
+
+			.intro-content {
+				max-width: 600px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			.intro-section h1 {
+				font-size: 3.5rem;
+			}
+
+			.intro-section p {
+				font-size: 1.4rem;
+				font-weight: normal;
+			}
+
+			.team-section {
+				flex-direction: row;
+				flex-wrap: wrap;
+			}
+
+			.team-category,
+			.team-members {
+				width: 100%;
+			}
+
+			.team-category {
+				margin-right: 0;
+				padding: 20px;
+				position: static;
+				padding-top: 0;
+			}
+
+			.team-category h2 {
+				margin-left: 0;
+			}
+
+			.team-member {
+				height: auto;
+				overflow: hidden;
+			}
+
+			.team-member img {
+				max-width: 250px;
+			}
+
+			.team-member h3,
+			.team-member p {
+				padding: 0 10px;
+			}
+
+			.custom-rectangle {
+				width: 70%;
+				height: 400px;
+			}
+
+			.custom-rectangle:nth-of-type(3) {
+				display: none;
+			}
 		}
 
-		/* Lists */
-		.markdown-content ul,
-		.markdown-content ol {
-			padding-left: 2em !important;
-			margin: 0 0 1em !important;
+		.check {
+			color: green;
+			font-size: 24px;
+			font-weight: bold;
 		}
 
-		.markdown-content li {
-			margin-bottom: 0.5em !important;
-		}
-
-		.markdown-content ol {
-			list-style-type: decimal !important;
-		}
-
-		/* Blockquotes */
-		.markdown-content blockquote {
-			padding: 0.5em 1em !important;
-			margin: 0 0 1em !important;
-			color: #6a737d !important;
-			border-left: 0.25em solid #dfe2e5 !important;
-			background-color: #f6f8fa !important;
-			border-radius: 6px !important;
-		}
-
-		/* Code Blocks */
-		.markdown-content pre {
-			background-color: #f6f8fa !important;
-			padding: 16px !important;
-			overflow: auto !important;
-			font-size: 85% !important;
-			line-height: 1.45 !important;
-			border-radius: 6px !important;
-			border: 1px solid #e1e4e8 !important;
-		}
-
-		.markdown-content code {
-			font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
-			background-color: rgba(27, 31, 35, 0.05) !important;
-			padding: 0.2em 0.4em !important;
-			margin: 0 !important;
-			font-size: 85% !important;
-			border-radius: 3px !important;
-		}
-
-		.markdown-content pre code {
-			background-color: transparent !important;
-			padding: 0 !important;
-		}
-
-		/* Tables */
-		.markdown-content table {
-			width: 100% !important;
-			max-width: 100% !important;
-			margin-bottom: 1em !important;
-			border-collapse: collapse !important;
-			display: block !important;
-			overflow: auto !important;
-		}
-
-		.markdown-content th,
-		.markdown-content td {
-			padding: 6px 13px !important;
-			border: 1px solid #dfe2e5 !important;
-		}
-
-		.markdown-content th {
-			font-weight: 600 !important;
-			background-color: #f6f8fa !important;
-		}
-
-		.markdown-content td {
-			background-color: #ffffff !important;
-		}
-
-		/* Horizontal Rule */
-		.markdown-content hr {
-			height: 0.25em !important;
-			padding: 0 !important;
-			margin: 24px 0 !important;
-			background-color: #e1e4e8 !important;
-			border: 0 !important;
-		}
-
-		/* Inline code */
-		.markdown-content code {
-			background-color: rgba(27, 31, 35, 0.05) !important;
-			border-radius: 3px !important;
-			padding: 0.2em 0.4em !important;
-			font-size: 85% !important;
+		.verificado {
+			font-size: 18px;
+			color: green;
+			font-weight: bold;
+			margin-left: 10px;
 		}
 	</style>
 
@@ -344,8 +444,8 @@
 					<div class="heading-content-bg wow fadeIn" data-wow-delay="0.75s" data-wow-duration="1s">
 						<div class="row">
 							<div class="heading-content col-md-12">
-								<p><a href="index.html">Inicio</a> / <em> Información </em> </p>
-								<h2>Sobre <em>Nosotros</em></h2>
+								<p><a href="index.html">Inicio</a> / <em> Artesanos </em> </p>
+								<h2>Los Rostros <em>Detrás del Arte</em></h2>
 							</div>
 						</div>
 					</div>
@@ -354,39 +454,11 @@
 		</div>
 	</div>
 
-	<div class="on-grids wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1s">
-
-		<div class="container">
-
-
-			<div class="row">
-
-				<section class="intro-section">
-					<div class="intro-content">
-						<h1>Los Rostros Detrás del Arte</h1>
-						<p>
-							Te invitamos a conocer a los artesanos que dan vida a la cerámica, textilería y tallado en
-							piedra.
-							Cada uno tiene una historia única y un estilo distintivo. Haz clic en su perfil para
-							explorar más
-							sobre sus productos, su ubicación, y la inspiración detrás de su trabajo.
-						</p>
-						<div class="search-container">
-							<input type="text" id="search-input" placeholder="Buscar artesanos...">
-							<button id="search-button"><i class="fas fa-search"></i></button>
-							<button id="clear-button"><i class="fas fa-times"></i></button>
-						</div>
-					</div>
-					<h2 id="search-result-header" style="display: none;"></h2>
-				</section>
-
-			</div>
-		</div>
-	</div>
 
 
 
-	<section>
+
+	<section style="padding: 0;">
 
 		<div class="team-section">
 			<div class="team-category">
