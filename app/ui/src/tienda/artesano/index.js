@@ -100,7 +100,17 @@ async function mostrarInformacion(artesano){
       `);
         }
     } else {
-        // Manejar el caso donde no hay reconocimientos si es necesario
+        $("#reconocimientos").append(`
+				<div class="col-12 mb-3" style="background-color: #2b76f7; border-radius: 5px;">
+					<div class="card recognition-card " style="color: #004085;
+                    background-color: #cce5ff;
+                    border-color: #b8daff;">
+						<div class="card-body">
+							<h5 class="card-title">No se encuentran reconocimientos</h5>
+						</div>
+					</div>
+				</div>
+      `);
     }
 }
 
