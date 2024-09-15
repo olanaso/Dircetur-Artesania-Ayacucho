@@ -72,8 +72,9 @@ async function mostrarInformacion(artesano){
     $("#artesano-habilidades").text(listEspecialidadesTecnicas[0].descripcionhabilidades);
     $("#artesano-tipo-artesania").text(listEspecialidadesTecnicas[0].tipoartesania);
     $("#artesano-linea-artesanal").text(lineaArtesanal); // aui el tring de los 1
+    $('#artesano-ubigeo').text(artesano.ubigeo);
     //mapa//
-    initMap(listTaller[0].latitud, listTaller[0].longitud);
+    initMap(listTaller[0].latitud, listTaller[0].longitud, listTaller[0].direccionfisica);
     //video//
     if (lst_videoenlace.length > 0) {
         const videoUrl = lst_videoenlace[0].src;
@@ -99,11 +100,21 @@ async function mostrarInformacion(artesano){
       `);
         }
     } else {
-        // Manejar el caso donde no hay reconocimientos si es necesario
+        $("#reconocimientos").append(`
+				<div class="col-12 mb-3" style="background-color: #2b76f7; border-radius: 5px;">
+					<div class="card recognition-card " style="color: #004085;
+                    background-color: #cce5ff;
+                    border-color: #b8daff;">
+						<div class="card-body">
+							<h5 class="card-title">No se encuentran reconocimientos</h5>
+						</div>
+					</div>
+				</div>
+      `);
     }
 }
 
-function initMap (latitud, longitud) {
+function initMap (latitud, longitud, ubicacion) {
     // Coordenadas de ejemplo (Lima, Perú)
     var mymap = L.map("map").setView([latitud, longitud], 15);
 
@@ -117,7 +128,7 @@ function initMap (latitud, longitud) {
     // Agregar marcador personalizado
     var marker = L.marker([latitud, longitud])
         .addTo(mymap)
-        .bindPopup("¡Aquí estoy!")
+        .bindPopup(ubicacion)
         .openPopup();
 }
 
