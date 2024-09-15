@@ -2,7 +2,7 @@
 
 import { loadPartials } from "../../utils/viewpartials.js";
 import { getPortadaBusqueda, busquedaProductos } from './api';
-
+import { custom } from '../utils/common.js';
 
 
 (async function () {
@@ -13,13 +13,15 @@ import { getPortadaBusqueda, busquedaProductos } from './api';
     try {
 
         await loadPartials(partials);
-        // import('../utils/common');
+
+        custom()
+
         console.log('Las vistas parciales se han cargado correctamente!');
 
         startApp();
     } catch (e) {
         console.error(e);
-    }
+    } ``
 })();
 
 
@@ -27,6 +29,17 @@ function startApp () {
     cargarDataPortada();
     rellenarFormulario();
     realizarBusqueda();
+    debugger
+    createMenuMobil()
+
+}
+
+function createMenuMobil () {
+
+    $("#cssmenu").menumaker({
+        title: "Menu",
+        format: "multitoggle"
+    });
 }
 
 function generarURL () {

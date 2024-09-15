@@ -30,7 +30,7 @@ $(function () {
 		$('.app-side').toggleClass('left-toggle');
 		$('.app-main').toggleClass('left-toggle');
 		$("#onoffcanvas-nav i").toggleClass('icon-menu5 icon-sort');
-	});	
+	});
 
 	$('.onoffcanvas-toggler').on('click', function () {
 		$('.onoffcanvas-toggler').trigger('click')
@@ -58,30 +58,33 @@ $(function () {
 
 // Bootstrap Popover
 $(function () {
-  $('[data-toggle="popover"]').popover()
+	$('[data-toggle="popover"]').popover()
 })
 $('.popover-dismiss').popover({
-  trigger: 'focus'
+	trigger: 'focus'
 })
 
 
 // Todays Date
-$(function() {
-	var interval = setInterval(function() {
+$(function () {
+	var interval = setInterval(function () {
 		var momentNow = moment();
 		$('#today-date').html(momentNow.format('MMMM . DD') + ' '
-		+ momentNow.format('. dddd').substring(0,5).toUpperCase());
+			+ momentNow.format('. dddd').substring(0, 5).toUpperCase());
 	}, 100);
 });
 
 
 // Task list
-$('.task-list').on('click', 'li.list', function() {
+$('.task-list').on('click', 'li.list', function () {
 	$(this).toggleClass('completed');
 });
 
 
 // Loading
-$(function() {
+$(function () {
 	$(".loading-wrapper").fadeOut(2000);
 });
+
+
+

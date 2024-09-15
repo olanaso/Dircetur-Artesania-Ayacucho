@@ -13,7 +13,7 @@
 	<meta name="author" content="Car Dealer Template">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Artesanias de Ayacucho - Portada Principal</title>
+	<title>Carrito de compras - Artesanias de Ayacucho</title>
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
 
@@ -96,8 +96,77 @@
 			display: block;
 		}
 
-		.oferta a {
+		.secondary-button button {
+			display: inline-block;
+			background: #ffffff;
+			padding: 10px 20px;
+			text-align: center;
+			letter-spacing: 0.5px;
+			font-size: 14px;
+			font-weight: 600;
+			margin: 1px solid #ffffff;
+			border-radius: 5px;
+			text-transform: uppercase;
+			color: #1e1e1e;
+			-webkit-transition: all 0.3s;
+			-o-transition: all 0.3s;
+			transition: all 0.3s;
+			width: 100%;
+		}
+
+		.input-busqueda::placeholder {
+			color: #e6e6e6;
+			/* Color del placeholder */
+
+		}
+
+		.pagination-content ul li a {
 			color: #fff !important;
+
+		}
+
+		.product-card img {
+			object-fit: cover;
+			height: 200px;
+		}
+
+		/*Ocultar */
+
+		/* Ocultar el elemento por defecto */
+		.hidden {
+			display: none;
+		}
+
+		/* Mostrar el elemento en pantallas pequeñas y superiores (≥ 640px) */
+		@media (min-width: 640px) {
+			.sm-block {
+				display: inline;
+			}
+		}
+
+		/* Mostrar el elemento en pantallas medianas y superiores (≥ 768px) */
+		@media (min-width: 768px) {
+			.md-block {
+				display: inline;
+			}
+
+			.md-hidden {
+				display: none;
+			}
+		}
+
+		/* Mostrar el elemento en pantallas grandes y superiores (≥ 1024px) */
+		@media (min-width: 1024px) {
+			.lg-block {
+				display: inline;
+			}
+		}
+
+		/* Mostrar el elemento en pantallas extra grandes y superiores (≥ 1280px) */
+		@media (min-width: 1280px) {
+			.xl-block {
+				display: block;
+			}
 		}
 	</style>
 
@@ -119,131 +188,52 @@
 		</div>
 	</div>
 
-	<div id="search">
-		<button type="button" class="close">×</button>
-		<form>
-			<input type="search" value="" placeholder="Búscar artesania" />
-			<button type="submit" class="primary-button">Búscar <i class="fa fa-search"></i></button>
-		</form>
-	</div>
+
 
 	<header class="site-header wow fadeIn" data-wow-duration="1s" id="header">
 
 	</header>
 
-	<div id="slidersList" class="Modern-Slider">
-		<!-- Slide 1 -->
 
-		<!-- // Slide 1 -->
-		<!-- Slide 2 -->
+	<div class="page-heading wow fadeIn" data-wow-duration="0.5s">
+		<div class="container">
 
-		<!-- // Slide 2 -->
-		<!-- Slide 3 -->
 
-		<!-- // Slide 3 -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="heading-content-bg wow fadeIn" data-wow-delay="0.75s" data-wow-duration="1s">
+						<div class="row">
+							<div class="heading-content col-md-12">
+								<p><a href="index.html">Inicio</a> / <em> Compras </em> </p>
+								<h2>Carrito de <em>Compras</em></h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="on-grids wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1s">
+
+		<div class="container">
+			<h1>Artesanías seleccionadas para comprar por artesano</h1>
+			<hr>
+			<div class="recent-car-content">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="d-flex justify-content-center">
+							<div class="container mt-4" style="max-width: 800px;" id="contenedor-carrito">
+
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
 	</div>
 
-
-	<section class="top-slider-features wow fadeIn" data-wow-duration="1.5s">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-md-12">
-
-					<div class="slider-top-features">
-
-						<div id="owl-top-features" class="owl-carousel owl-theme">
-
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-
-
-
-
-
-	<section>
-		<div class="recent-cars">
-			<div class="container">
-				<div class="recent-car-content">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="section-heading">
-
-								<div class="text-content">
-									<h2>Artesanias en oferta</h2>
-									<span>Descubre nuestras últimas ofertas en artesanías y llévalas contigo.</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="listaProductosOfertados" class="row">
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<section>
-
-		<div class="testimonials ">
-			<div class="container">
-				<div class="section-heading">
-					<br><br>
-					<div class="text-content">
-						<h2>Artesanias destacadas</h2>
-						<span>Explora las piezas más valoradas y populares.</span>
-					</div>
-				</div>
-				<div id="owl-testimonials" class="owl-carousel owl-theme">
-
-
-
-
-
-
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<section>
-		<div class="recent-cars">
-			<div class="container">
-				<div class="recent-car-content">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="section-heading">
-
-								<div class="text-content">
-									<h2>Novedades en artesanías</h2>
-									<span>Explora las últimas tendencias y nuevas colecciones</span>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="listaProductosNovedades" class="row">
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<section class="d-flex justify-content-center">
-			<h6 class="secondary-button">
-				<a href="busqueda.html">Explora más artesanías</a>
-			</h6>
-		</section>
-	</section>
 
 
 	<div id="footer">
@@ -271,7 +261,7 @@
 	<!-- Custom Js -->
 	<script src="assets_tienda/js/custom.js"></script>
 
-	<script type="module" src="../src/tienda/portada/index.js"></script>
+	<script type="module" src="../src/tienda/carrito-de-compra/index.js"></script>
 
 </body>
 
