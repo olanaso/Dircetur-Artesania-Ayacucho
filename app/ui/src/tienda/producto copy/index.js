@@ -1,7 +1,7 @@
 
 
 import { loadPartials } from "../../utils/viewpartials.js";
-import { getPortadaBusqueda, busquedaProductos } from './api';
+import { getPortadaBusqueda, busquedaProductos } from './api.js';
 import { custom } from '../utils/common.js';
 
 
