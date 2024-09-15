@@ -72,8 +72,9 @@ async function mostrarInformacion(artesano){
     $("#artesano-habilidades").text(listEspecialidadesTecnicas[0].descripcionhabilidades);
     $("#artesano-tipo-artesania").text(listEspecialidadesTecnicas[0].tipoartesania);
     $("#artesano-linea-artesanal").text(lineaArtesanal); // aui el tring de los 1
+    $('#artesano-ubigeo').text(artesano.ubigeo);
     //mapa//
-    initMap(listTaller[0].latitud, listTaller[0].longitud);
+    initMap(listTaller[0].latitud, listTaller[0].longitud, listTaller[0].direccionfisica);
     //video//
     if (lst_videoenlace.length > 0) {
         const videoUrl = lst_videoenlace[0].src;
@@ -103,7 +104,7 @@ async function mostrarInformacion(artesano){
     }
 }
 
-function initMap (latitud, longitud) {
+function initMap (latitud, longitud, ubicacion) {
     // Coordenadas de ejemplo (Lima, Perú)
     var mymap = L.map("map").setView([latitud, longitud], 15);
 
@@ -117,7 +118,7 @@ function initMap (latitud, longitud) {
     // Agregar marcador personalizado
     var marker = L.marker([latitud, longitud])
         .addTo(mymap)
-        .bindPopup("¡Aquí estoy!")
+        .bindPopup(ubicacion)
         .openPopup();
 }
 
