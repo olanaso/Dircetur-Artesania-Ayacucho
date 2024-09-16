@@ -33,9 +33,69 @@ function getQueryParameter (name) {
 async function infoProductoById() {
     const producto = await obtenerProducto(getQueryParameter("id"));
     console.log(" >DATA producto: ", producto);
+    mostrarInformacion(producto);
 }
 
+ function transformarMaterialesResponseToArray(materiales) {
+    return materiales.split('\n');
+}
+function transformarImagenesSecResponseToArray(imagenes) {
+    // 1er parseo
+    const innerString = JSON.parse(imagenes);
+    // 2do parseo
+    const parsedResponse = JSON.parse(innerString);
+    //map para obtener src
+    const srcArray = parsedResponse.map(item => item.src);
+    return srcArray;
 
+}
+async function mostrarInformacion(producto){
+    const listColores = JSON.parse(JSON.parse(producto.lst_colores));
+    const colores = listColores.join(", ")
+    const materiales = transformarMaterialesResponseToArray(producto.materiales_es)
+    const imagenesSecundarias = transformarImagenesSecResponseToArray(producto.lst_imagenes)
+    console.log('imagenPrincipal', producto.imagen_principal)
+    console.log('imagenesSecundarias', imagenesSecundarias)
+    $(".imagen-principal").attr("src", producto.imagen_principal).show();
+    $("#producto-nombre").text(`${producto.nombres_es}`);
+    $("#producto-precio").text(`${producto.precio} S/`);
+    $("#producto-descripcion").text(`${producto.descripcion_es}`);
+    $("#producto-alto").text(`${producto.alto} cm.`);
+    $("#producto-ancho").text(`${producto.ancho} cm.`);
+    $("#producto-color").text(`${colores}`);
+    $("#producto-cantidad").text(`${producto.cantidad}`);
+    $("#producto-cualidades").text(`${producto.cualidades_es}`);
+    $("#artesano-celular").text(`${producto.datos_artesano.celular}`);
+    $("#artesano-correo").text(`${producto.datos_artesano.correo}`);
+    //materiales
+    if(materiales.length > 0) {
+        for(let material of materiales) {
+            $("#producto-materiales").append(`
+                <ul>
+                <li><i class="fa fa-check-square"></i><span>${material}</span></li>
+                </ul>
+            `)
+        }
+    }
+    else{
+
+    }
+
+    //imagenes secundarias
+    if(imagenesSecundarias.length > 0) {
+        for(let imagen of imagenesSecundarias) {
+            console.log(imagen)
+            $("#imagen-secundaria").append(`
+									<div class="sp-slide">
+										<img class="sp-image" src="${imagen}" alt="" />
+									</div>
+            `)
+        }
+    }
+    else{
+
+    }
+}
 
 function startApp () {
 
