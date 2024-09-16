@@ -3,6 +3,7 @@
 import { loadPartials } from "../../utils/viewpartials.js";
 import { getPortadaBusqueda, busquedaProductos } from './api';
 import { custom } from '../utils/common.js';
+import {obtenerProducto} from "../producto/api.js";
 
 
 (async function () {
@@ -24,6 +25,17 @@ import { custom } from '../utils/common.js';
     } ``
 })();
 
+function getQueryParameter (name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+async function infoProductoById() {
+    const producto = await obtenerProducto(getQueryParameter("id"));
+    console.log(" >DATA producto: ", producto);
+}
+
+
 
 function startApp () {
 
@@ -33,6 +45,7 @@ function startApp () {
     // realizarBusqueda();
     debugger
     createMenuMobil()
+    infoProductoById()
 
 }
 
