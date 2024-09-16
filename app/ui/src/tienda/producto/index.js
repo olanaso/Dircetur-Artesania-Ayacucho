@@ -49,24 +49,8 @@ function transformarImagenesSecResponseToArray(imagenes) {
     return srcArray;
 
 }
-async function mostrarInformacion(producto){
-    const listColores = JSON.parse(JSON.parse(producto.lst_colores));
-    const colores = listColores.join(", ")
-    const materiales = transformarMaterialesResponseToArray(producto.materiales_es)
-    const imagenesSecundarias = transformarImagenesSecResponseToArray(producto.lst_imagenes)
-    console.log('imagenPrincipal', producto.imagen_principal)
-    console.log('imagenesSecundarias', imagenesSecundarias)
-    $(".imagen-principal").attr("src", producto.imagen_principal).show();
-    $("#producto-nombre").text(`${producto.nombres_es}`);
-    $("#producto-precio").text(`${producto.precio} S/`);
-    $("#producto-descripcion").text(`${producto.descripcion_es}`);
-    $("#producto-alto").text(`${producto.alto} cm.`);
-    $("#producto-ancho").text(`${producto.ancho} cm.`);
-    $("#producto-color").text(`${colores}`);
-    $("#producto-cantidad").text(`${producto.cantidad}`);
-    $("#producto-cualidades").text(`${producto.cualidades_es}`);
-    $("#artesano-celular").text(`${producto.datos_artesano.celular}`);
-    $("#artesano-correo").text(`${producto.datos_artesano.correo}`);
+
+function showMaterials (materiales) {
     //materiales
     if(materiales.length > 0) {
         for(let material of materiales) {
@@ -78,23 +62,55 @@ async function mostrarInformacion(producto){
         }
     }
     else{
-
+        console.log('no hay materiales')
     }
+}
+async function mostrarInformacion(producto){
+    const listColores = JSON.parse(JSON.parse(producto.lst_colores));
+    const colores = listColores.join(", ")
+    const materiales = transformarMaterialesResponseToArray(producto.materiales_es)
+    const imagenesSecundarias = transformarImagenesSecResponseToArray(producto.lst_imagenes)
+    console.log('imagenPrincipal', producto.imagen_principal)
 
+    $(".imagen-principal").attr("src", producto.imagen_principal).show();
+    $("#producto-nombre").text(`${producto.nombres_es}`);
+    $("#producto-precio").text(`${producto.precio} S/`);
+    $("#producto-descripcion").text(`${producto.descripcion_es}`);
+    $("#producto-alto").text(`${producto.alto} cm.`);
+    $("#producto-ancho").text(`${producto.ancho} cm.`);
+    $("#producto-color").text(`${colores}`);
+    $("#producto-cantidad").text(`${producto.cantidad}`);
+    $("#producto-cualidades").text(`${producto.cualidades_es}`);
+    $("#artesano-celular").text(`${producto.datos_artesano.celular}`);
+    $("#artesano-correo").text(`${producto.datos_artesano.correo}`);
+    showMaterials(materiales);
+    //probando imagen secundaria
+    // $("#imagen-secundaria").attr("src", imagenesSecundarias[0]).show();
+
+    console.log('imagenesSecundarias', imagenesSecundarias)
+
+    // $("#imagen-secundaria").attr("src", imagenesSecundarias[0]).show();
     //imagenes secundarias
     if(imagenesSecundarias.length > 0) {
-        for(let imagen of imagenesSecundarias) {
-            console.log(imagen)
-            $("#imagen-secundaria").append(`
+        console.log('length imagenesSecundarias', imagenesSecundarias.length)
+        console.log('DOM length', $("#prueba").length)
+        if ($("#imagen-secundaria").length > 0) {
+            for(let imagen of imagenesSecundarias) {
+                console.log(imagen)
+                $("#imagen-secundaria").append(`
 									<div class="sp-slide">
 										<img class="sp-image" src="${imagen}" alt="" />
 									</div>
             `)
+            }
         }
+        else{
+            console.log('there is no secunday images')
+        }
+    } else {
+        console.log("imagen-secundaria doesnt exist")
     }
-    else{
 
-    }
 }
 
 function startApp () {
