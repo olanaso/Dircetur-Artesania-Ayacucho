@@ -157,6 +157,7 @@ function listarProductosComprar (artsanias_comprar) {
 
     $('#lista-resumen-prod-final').html(filas)
 
+    $('#total_precio_carrito').text('S/.' + formatearNumero(total))
     $('#total_final').text('S/.' + formatearNumero(total))
 
 }

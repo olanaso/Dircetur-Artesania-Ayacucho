@@ -33,7 +33,7 @@ export async function busquedaProductos (obj) {
             redirect: 'follow'
         };
 
-        const response = await fetch(baseUrl + "/buscar-producto?limit=10&" + params, requestOptions);
+        const response = await fetch(baseUrl + "/buscar-producto?limit=9&" + params, requestOptions);
         const result = await response.json();
 
         return result;
