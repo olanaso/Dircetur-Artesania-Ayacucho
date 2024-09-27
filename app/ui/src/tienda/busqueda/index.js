@@ -94,7 +94,7 @@ function formatearNumero (numero) {
 function loadProductos (data) {
     const urlParams = new URLSearchParams(window.location.search);
     const page = parseInt(urlParams.get('page')) || 1;
-    const itemsPerPage = 10;
+    const itemsPerPage = 9;
     const totalRows = data.total_filas;
     const displayedItems = Math.min(page * itemsPerPage, totalRows);
 
@@ -120,6 +120,23 @@ function loadProductos (data) {
                 cualidades_es: item.descripcion_es,
                 precio: parseFloat(item.precio)
             },
+        }
+
+        let artenia_deseados = {
+
+            id: item.id + '-' + item.artesano_id,
+            artesania: {
+                id: item.id,
+                nombre_es: item.nombres_es,
+                precio: parseFloat(item.precio),
+                imagen_principal: item.imagen_principal,
+                url_carrito: encodeURIComponent(JSON.stringify(artenia_anviar_carrito))
+            },
+            artesano: {
+                id: item.artesano_id,
+                nombres: item.artesano,
+                foto1: item.foto1,
+            }
         }
         //alert(item.imagen)
         html = html + `
@@ -178,11 +195,17 @@ function loadProductos (data) {
                                     Comprar
                             </a>
                             </button>
+
+                            
                             <button type="button" class="btn btn-light btn-favoritos" producto_id="${item.id}">
-                                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <a href="productos-deseados.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
+
+  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.5 13.7625L6.4125 12.7725C2.55 9.27 0 6.9525 0 4.125C0 1.8075 1.815 0 4.125 0C5.43 0 6.6825 0.6075 7.5 1.56C8.3175 0.6075 9.57 0 10.875 0C13.185 0 15 1.8075 15 4.125C15 6.9525 12.45 9.27 8.5875 12.7725L7.5 13.7625Z" fill="red"/>
                                 </svg> 
                                 Favorito
+   </a>
+                               
                             </button>
                         </div>
                     </div>
