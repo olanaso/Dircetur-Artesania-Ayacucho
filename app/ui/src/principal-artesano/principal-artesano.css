@@ -1,0 +1,383 @@
+:root {
+    --yellow-color: #f4c23d;
+    --secondary-color: #aeb1af;
+    --black-color: rgb(3, 3, 3);
+}
+
+/* START PAG PRINICIPAL- ARTESANO */
+section {
+    padding: 80px 0px 0px 0px;
+}
+
+.content-page-artesano {
+    padding: 5px;
+}
+
+/* info user */
+.info-user-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: rgba(68, 63, 63, 0.16) 0px 24px 64px 0px;
+    transition: 0.24s;
+}
+
+.card-title-user {
+    font-weight: bold;
+}
+
+.card-title-presentation {
+    font-weight: bold;
+}
+
+.card-body-user {
+    width: 100%;
+}
+
+.info-user {
+    display: flex;
+    justify-content: space-between;
+}
+
+.calification {
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.calification > i {
+    margin-left: 4px;
+    color: #f4c23d;
+}
+
+.content-info-artesano {
+    width: 100%;
+}
+
+.content-info-text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.about-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.article-content-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: rgba(68, 63, 63, 0.16) 0px 24px 64px 0px;
+    transition: 0.24s;
+    padding: 0;
+    margin:0;
+}
+
+.articleee {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: rgba(68, 63, 63, 0.16) 0px 24px 64px 0px;
+    transition: 0.24s;
+    display: grid
+}
+.video{
+    margin-top: 30px;
+
+}
+.styled-hr {
+    height: 3px;
+    background: linear-gradient(to right, #000000, #555555, #000000);
+    width: 100%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+    margin: 10px 0px 10px 0px;
+}
+
+.card-img-top {
+    width: 70%;
+    height: 225px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 1px solid black;
+    mix-blend-mode: multiply;
+}
+
+.card-body-image1 {
+    padding: 12px !important;
+}
+
+
+.info-user-image {
+    width: 150px;
+    height: 120px;
+    border-radius: 9px;
+}
+
+.location {
+    margin-bottom: 10px;
+}
+
+.content-text-especialidad {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.especialidad-content-video {
+    display: flex;
+}
+
+.location > i {
+    background: var(--yellow-color);
+    font-size: 14px !important;
+    margin-right: 4px;
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 10%;
+}
+
+.phone > i {
+    background: var(--yellow-color);
+    font-size: 14px !important;
+    margin-right: 4px;
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 10%;
+}
+
+.content-video {
+    display: flex;
+    justify-content: end;
+}
+
+.video-artesano {
+    width: 100%;
+    height: 200px;
+    box-shadow: 1px 1px 1px 2.5px var(--black-color);
+    border-radius: 8px;
+}
+
+.reconocimiento-card {
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.09);
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+.reconocimiento-card-text {
+    font-size: 14px;
+}
+
+.map-container {
+    margin-top: 150px;
+}
+
+.especialidad,
+.ubicacion,
+.reconocimiento {
+    margin-top: 40px;
+}
+
+.certificate-artesano {
+    border-radius: 5px;
+    box-shadow: 3px 2px 7px 3px rgba(7, 2, 0, 0.15);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* carousel artesano */
+
+.carousel-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.carousel-container {
+    top: 50px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.3s ease;
+    justify-content: center;
+}
+
+.slick-slider {
+    display: flex !important;
+}
+
+.slick-list {
+    width: 93%;
+}
+
+.text-limited {
+    width: 300px;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-limited-category {
+    color: var(--yellow-color) !important;
+    font-weight: 600;
+    margin-top: 10px !important;
+}
+
+.text-limited:hover {
+    text-decoration: none;
+
+}
+
+
+.productos-artesano-card {
+    flex: 0 0 33.33%;
+    width: 90%;
+    box-sizing: border-box;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-bottom: 4px solid transparent;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-left: 12px;
+}
+
+
+.producto-artesano-card p {
+    text-align: left;
+    position: relative;
+    left: -20px;
+}
+
+.productos-artesano-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.productos-artesano-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-bottom: 4px solid #f4c23d;
+}
+
+.productos-artesano-card img {
+    width: 90%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    border-radius: 8px;
+    margin: 0 auto 10px auto;
+    display: block;
+    mix-blend-mode: multiply;
+}
+
+.productos-artesano-card .text-limited {
+    max-width: 90%;
+    margin: 0 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    color: #333;
+}
+
+.productos-artesano-card .text-limited:first-of-type {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.left-arrow {
+    left: 2px;
+    background: var(--yellow-color);
+    color: black;
+    border: 1px solid black;
+    display: inline-block !important;
+}
+
+.right-arrow {
+    right: 2px;
+    background: var(--yellow-color);
+    color: black;
+    border: 1px solid black;
+    display: inline-block !important;
+}
+
+
+@media (max-width: 768px) {
+    .info-user {
+        display: block;
+    }
+
+    .especialidad-content-video {
+        display: block;
+    }
+
+    .info-user-profile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-info-text {
+        display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .content-info-text {
+        display: block;
+    }
+
+    .info-user-profile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+}
+
+@media (min-width: 1100px) {
+    .content-info-text {
+        display: flex;
+    }
+
+    .info-user-profile {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+}
+
+
+/* END PAG PRICIPAL ARTESANO */

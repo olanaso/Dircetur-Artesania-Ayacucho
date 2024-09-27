@@ -22,20 +22,21 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 	<!-- Mian and Login css -->
-
+	
 
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 
-	<script type="module" crossorigin src="/assets/principal-busqueda-15f7c0d5.js"></script>
-	<link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
-	<link rel="modulepreload" crossorigin href="/assets/viewpartials-7a86f681.js">
-	<link rel="modulepreload" crossorigin href="/assets/config-ef5f6dbc.js">
-	<link rel="modulepreload" crossorigin href="/assets/init-52a8aa54.js">
-	<link rel="modulepreload" crossorigin href="/assets/navbar-79b7ff75.js">
-	<link rel="modulepreload" crossorigin href="/assets/principal-90e94c9b.js">
-	<link rel="stylesheet" href="/assets/principal copy-6da31630.css">
-	<link rel="stylesheet" href="/assets/main-edc25fd7.css">
+  <script type="module" crossorigin src="/assets/principal-busqueda-b4fee1e2.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
+  <link rel="modulepreload" crossorigin href="/assets/preload-helper-101896b7.js">
+  <link rel="modulepreload" crossorigin href="/assets/config-d2c69cb0.js">
+  <link rel="modulepreload" crossorigin href="/assets/init-b7ef0f37.js">
+  <link rel="modulepreload" crossorigin href="/assets/toast-8abe4fe9.js">
+  <link rel="modulepreload" crossorigin href="/assets/viewpartials-ac66bf27.js">
+  <link rel="modulepreload" crossorigin href="/assets/index-339297ac.js">
+  <link rel="stylesheet" href="/assets/index-f4f3fad5.css">
+  <link rel="stylesheet" href="/assets/principal-busqueda-e4081a8f.css">
 </head>
 
 <body>
@@ -47,7 +48,7 @@
 			<span></span>
 		</div>
 	</div>
-
+	<div id="loadingIndicator" style="display: none;">Cargando...</div>
 	<div id="search">
 		<button type="button" class="close">×</button>
 		<form>
@@ -82,14 +83,13 @@
 			</div>
 		</div>
 	</div>
-
 	<section style="padding: 0px 0px 0px 0px;">
 		<div class="features-search-section">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="search-content wow fadeIn animated" data-wow-duration="0.75s"
-							style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
+							 style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;">
 							<div class="search-heading">
 								<div class="icon">
 									<i class="fa fa-search"></i>
@@ -101,55 +101,49 @@
 							</div>
 							<div class="search-form">
 								<div class="row">
-									<div class="col-md-3">
+									<div class="col-md-2">
 										<div class="input-select">
-											<select name="brand" id="brand">
-												<option value="-1">Seleccione Categoria</option>
-												<option>categoria1</option>
-												<option>categoria2</option>
-												<option>categoria3</option>
-												<option>categoria4</option>
-												<option>categoria5</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-3">
-										<div class="input-select">
-											<select name="mark" id="mark">
-												<option value="-1">Seleccione Otros</option>
-												<option>En oferta</option>
-												<option>Destacados</option>
+											<select id="category-filter">
+												<option value="">Categoría</option>
+												<option value="CER">Cerámica</option>
+												<option value="PT">Piedra Tallada</option>
+												<option value="TE">Textilería</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-2">
 										<div class="input-select">
-											<select name="min-price" id="min-price">
-												<option value="-1">Precio Minimo</option>
-												<option>S/.100</option>
-												<option>S/.500</option>
-												<option>S/.1.000</option>
-												<option>S/.1.500</option>
-												<option>S/.2.000</option>
-												<option>S/.2.500</option>
+											<select id="oferta-filter">
+												<option value="">Otros</option>
+												<option value="PT">En oferta</option>
+												<option value="TE">Destacados</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-2">
 										<div class="input-select">
-											<select name="max-price" id="max-price">
-												<option value="-1">Precio Maximo</option>
-												<option>S/.5.000</option>
-												<option>S/.7.500</option>
-												<option>S/.10.000</option>
-												<option>S/.15.500</option>
-												<option>S/.20.000</option>
-											</select>
+											<input type="text" id="filterName" placeholder="Nombre del producto">
 										</div>
 									</div>
 									<div class="col-md-2">
+										<div class="input-select">
+											<input type="number" id="filterPriceMin" placeholder="Precio Mínimo">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="input-select">
+											<input type="number" id="filterPriceMax" placeholder="Precio Máximo">
+										</div>
+									</div>
+
+									<div class="col-md-1">
 										<div class="secondary-button">
-											<a href="principal-busqueda.html">Buscar <i class="fa fa-search"></i></a>
+											<button id="filterButton"><i class="fa fa-filter"></i></button>
+										</div>
+									</div>
+									<div class="col-md-1">
+										<div class="secondary-button">
+											<button id="clearButton"><i class="fa fa-times"></i></button>
 										</div>
 									</div>
 								</div>
@@ -179,6 +173,12 @@
 						</div>
 					</div>
 					<div class="row" id="contenedorProductos">
+					</div>
+
+					<div id="paginationControls">
+						<button id="prevPage" class="pagination-button">Anterior</button>
+						<div id="pageInfo"></div>
+						<button id="nextPage" class="pagination-button">Siguiente</button>
 					</div>
 				</div>
 			</div>

@@ -12,26 +12,8 @@ export async function listarDatosCliente(){
     console.log("LOS REALES DATOS", idUsuario, idCliente)
     try{
         const responseCliente = await fetch(baseUrl + `/cliente/${idCliente}`)
-        const responseUsuario = await fetch(baseUrl + `/usuario/${idUsuario}`)
 
-        const resultCliente = await responseCliente.json()
-        const resultUsuario = await responseUsuario.json()
-        console.log(resultCliente, resultUsuario)
-            const result = {
-            // ...resultUsuario, resultCliente
-            nombres: resultUsuario.nombre_completo,
-            telefono: resultCliente.telefono,
-            pais: resultCliente.pais,
-            ciudad: resultCliente.ciudad,
-            correo: resultCliente.correo,
-            tipoDocumento: resultCliente.tipo_documento,
-            numeroDocumento: resultCliente.numero_documento,
-            region: resultCliente.region,
-            direccion: resultCliente.direccion,
-            fotoPerfil: resultCliente.foto_perfil
-        }
-        return result
-        console.log("EL RESULT ES:",result)
+        return responseCliente
     }catch(e){
         console.error("Error al listar los datos del cliente:", e)
 
@@ -40,19 +22,10 @@ export async function listarDatosCliente(){
 
 
 export async function actualizarCliente(data){
-    const idUsuario = getDataFromLocalStorage('id')
     const idCliente = getDataFromLocalStorage('idCliente')
     //asignando el idUsuario al json de data
     data.idUsuario = getDataFromLocalStorage('id')
 
-    //Settings para actualizar la tabla de usuarios
-    const settingsUsuario = {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams(data)
-    };
 
     //Settings para actualizar la tabla de clientes
     const settingsCliente = {
@@ -65,9 +38,28 @@ export async function actualizarCliente(data){
 
 
     try{
-        const responseActualizarUsuario = await fetch(baseUrl + `/usuario/${idUsuario}`, settingsUsuario)
+        // const responseActualizarUsuario = await fetch(baseUrl + `/usuario/${idUsuario}`, settingsUsuario)
         const responseActualizarCliente = await fetch(baseUrl + `/cliente/${idCliente}`, settingsCliente)
+        return responseActualizarCliente
     }catch(e){
         console.error("Error al actualizar el cliente", e)
     }
+}
+
+export async function actualizarContrasenia(data){
+    const idUsuario = getDataFromLocalStorage('id')
+    const settings = {
+        method: "PUT",
+        headers:{
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(data)
+    }
+    try{
+        const response = await fetch(baseUrl + `/v1/contrasenia-clientes/${idUsuario}`, settings)
+        return response
+    }catch(e){
+        console.error("Error al hacer la peticion", e)
+    }
+
 }

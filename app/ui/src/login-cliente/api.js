@@ -12,16 +12,8 @@ export async function loginCliente(usuario,clave){
         }),
     }
     try{
-        const response = await fetch(baseUrl + "/login", settings)
-        const data = await response.json()
-        //almaceno la data importante en local storage
-        if(data && data.token){
-            saveDataToLocalStorage('rol', data.usuario.rolid)
-            saveDataToLocalStorage('token', data.token)
-            saveDataToLocalStorage('id', data.usuario.id)
-            saveDataToLocalStorage('idCliente', data.idCliente)
-        }
-        return data
+        const response = await fetch(baseUrl + "/v1/login-clientes", settings)
+        return response //devuelvo la respuesta (status, body, headers, etc)
     } catch(e){
         console.error('Error:', e)
     }

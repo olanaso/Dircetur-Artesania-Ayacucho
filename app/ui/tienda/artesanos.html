@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie ie9" lang="en-US">
+<![endif]-->
+<html lang="en-US">
+
+<!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:20:49 GMT -->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="HTML,CSS,XML,JavaScript">
+	<meta name="author" content="Car Dealer Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Nosotros- Artesanias de Ayacucho</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="assets_tienda/css/bootstrap.css">
+	<link rel="stylesheet" href="assets_tienda/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets_tienda/css/main.css">
+	<!-- Slider Pro Css -->
+	<link rel="stylesheet" href="assets_tienda/css/sliderPro.css">
+	<!-- Owl Carousel Css -->
+	<link rel="stylesheet" href="assets_tienda/css/owl-carousel.css">
+	<!-- Flat Icons Css -->
+	<link rel="stylesheet" href="assets_tienda/css/flaticon.css">
+	<!-- Animated Css -->
+	<link rel="stylesheet" href="assets_tienda/css/animated.css">
+	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
+	<style>
+		/* Search Section */
+		.search-container {
+			display: flex;
+			align-items: center;
+			position: relative;
+		}
+
+		#search-input {
+			width: 100%;
+			padding: 10px 10px 10px 0;
+			margin: 20px 0;
+			font-size: 1rem;
+			border: none;
+			border-bottom: 2px solid #f3e1c0;
+			background-color: transparent;
+			transition: border-color 0.3s ease;
+		}
+
+		#search-input:focus {
+			outline: none;
+			border-bottom: 2px solid #DC4405;
+		}
+
+		#search-button {
+			padding: 10px;
+			margin-left: 10px;
+			margin-top: 1px;
+			font-size: 1rem;
+			border: none;
+			background-color: transparent;
+			cursor: pointer;
+			transition: transform 0.3s ease;
+			position: relative;
+		}
+
+		#search-button:focus {
+			outline: none;
+		}
+
+		#search-button.loading {
+			cursor: not-allowed;
+			background-color: #f3e1c0;
+			border-radius: 12px;
+			transform: scale(1.1);
+			animation: breathing 2s ease-in-out infinite;
+		}
+
+		#clear-button {
+			position: absolute;
+			right: 50px;
+			top: 50%;
+			transform: translateY(-50%);
+			background: none;
+			border: none;
+			font-size: 1.1rem;
+			cursor: pointer;
+			transition: color 0.3s ease, transform 0.3s ease;
+		}
+
+		#clear-button:hover {
+			color: #DC4405;
+		}
+
+		#clear-button:focus {
+			outline: none;
+		}
+
+		@keyframes breathing {
+
+			0%,
+			100% {
+				transform: scale(1);
+			}
+
+			50% {
+				transform: scale(1.05);
+			}
+		}
+
+		/* Intro Section */
+		.intro-section {
+			position: relative;
+			padding: 0 175px;
+			text-align: left;
+			margin-bottom: -20px;
+		}
+
+		.intro-content {
+			max-width: 680px;
+		}
+
+		.intro-content h1 {
+			font-family: "Roboto", sans-serif;
+			font-weight: 800;
+			color: inherit;
+			font-size: 4rem;
+			margin: -10px 0;
+			padding: 0 10px;
+		}
+
+		.intro-content p {
+			font-family: "Antarctica VAR", sans-serif;
+			text-transform: none;
+			font-weight: 800;
+			font-style: normal;
+			color: inherit;
+			font-size: 1.2rem;
+			margin: 40px 0;
+			padding: 0 10px;
+			line-height: 1.6;
+			text-align: justify;
+		}
+
+		/* Team Section */
+		.team-section {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			/* Cambiado a 'center' para centrar verticalmente */
+			justify-content: center;
+			/* Para centrar horizontalmente */
+			margin: 0 auto 100px auto;
+			width: 90%;
+			max-width: 1200px;
+			gap: 20px;
+			/* Añadir un espacio entre los elementos si es necesario */
+		}
+
+		/* Team Category */
+		.team-category {
+			width: 30%;
+			margin-right: 20px;
+			margin-bottom: 0;
+			position: sticky;
+			top: 0;
+			align-self: flex-start;
+			z-index: 10;
+			padding: 20px;
+			padding-top: 200px;
+			border-radius: 8px;
+			font-weight: bold;
+		}
+
+		.team-category h2 {
+			font-family: "Antarctica VAR", sans-serif;
+			text-transform: none;
+			font-weight: 800;
+			font-style: normal;
+			color: inherit;
+			font-size: 3rem;
+			margin: 10px 0;
+			padding: 0 10px;
+		}
+
+		/* Team Member */
+		.team-member {
+			background-color: white;
+			width: calc(50% - 10px);
+			height: 500px;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+			text-align: left;
+			position: relative;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			overflow: hidden;
+			border: solid 2px transparent;
+		}
+
+		.team-member h3 {
+			font-family: "Antarctica VAR", sans-serif;
+			text-transform: none;
+			font-weight: 800;
+			font-style: normal;
+			color: inherit;
+			font-size: 2rem;
+			margin: 10px 0;
+			padding: 0 10px;
+		}
+
+		.team-member p {
+			font-family: "Antarctica VAR", sans-serif;
+			text-transform: none;
+			font-weight: 600;
+			font-style: normal;
+			color: inherit;
+			font-size: 1.2rem;
+			margin: 30px 0;
+			padding: 0 20px;
+		}
+
+		.team-member:hover {
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+			transform: scale(1.01);
+			border: solid 2px #DC4405;
+		}
+
+		.team-members {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px;
+		}
+
+		.team-member img {
+			display: block;
+			margin: 0 auto;
+			aspect-ratio: 1/1;
+			border-top: solid grey 2px;
+			border-bottom: solid grey 2px;
+			width: 300px;
+			border-radius: 50%;
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.team-member img:hover {
+			transform: scale(1.05);
+			box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+		}
+
+		.team-member:nth-child(2n) {
+			margin-top: 20px;
+		}
+
+		/* Custom Rectangle
+.custom-rectangle {
+    position: absolute;
+    width: 700px;
+    height: 300px;
+    background-color: #DC4405;
+    z-index: -10;
+    border-radius: 100px 0 0 100px;
+}
+
+.custom-rectangle:nth-of-type(1) {
+    top: 110%;
+    right: 0;
+}
+
+.custom-rectangle:nth-of-type(2) {
+    top: 330%;
+    right: 0;
+}
+
+.custom-rectangle:nth-of-type(3) {
+    top: 430%;
+    right: 0;
+}
+ */
+		/* Media Queries */
+		@media (max-width: 748px) {
+			.intro-section {
+				padding: 0 20px;
+				margin-bottom: 0;
+			}
+
+			.intro-content {
+				max-width: 400px;
+				margin-left: 35px;
+			}
+
+			.intro-section h1 {
+				font-size: 2.8rem;
+			}
+
+			.intro-section p {
+				font-size: 1.2rem;
+				font-weight: normal;
+			}
+
+			.team-section {
+				flex-direction: column;
+			}
+
+			.team-category,
+			.team-members {
+				width: 100%;
+			}
+
+			.team-category {
+				margin-right: 0;
+				padding: 20px;
+				position: static;
+				padding-top: 0;
+			}
+
+			.team-category h2 {
+				margin-left: 31px;
+			}
+
+			.team-member {
+				width: 100%;
+				height: auto;
+				overflow: hidden;
+			}
+
+			.team-member img {
+				max-width: 200px;
+			}
+
+			.team-member h3,
+			.team-member p {
+				padding: 0 10px;
+			}
+		}
+
+		@media (max-width: 1111px) {
+			.intro-section {
+				padding: 0 50px;
+				margin-bottom: 0;
+			}
+
+			.intro-content {
+				max-width: 600px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			.intro-section h1 {
+				font-size: 3.5rem;
+			}
+
+			.intro-section p {
+				font-size: 1.4rem;
+				font-weight: normal;
+			}
+
+			.team-section {
+				flex-direction: row;
+				flex-wrap: wrap;
+			}
+
+			.team-category,
+			.team-members {
+				width: 100%;
+			}
+
+			.team-category {
+				margin-right: 0;
+				padding: 20px;
+				position: static;
+				padding-top: 0;
+			}
+
+			.team-category h2 {
+				margin-left: 0;
+			}
+
+			.team-member {
+				height: auto;
+				overflow: hidden;
+			}
+
+			.team-member img {
+				max-width: 250px;
+			}
+
+			.team-member h3,
+			.team-member p {
+				padding: 0 10px;
+			}
+
+			.custom-rectangle {
+				width: 70%;
+				height: 400px;
+			}
+
+			.custom-rectangle:nth-of-type(3) {
+				display: none;
+			}
+		}
+
+		.check {
+			color: green;
+			font-size: 24px;
+			font-weight: bold;
+		}
+
+		.verificado {
+			font-size: 18px;
+			color: green;
+			font-weight: bold;
+			margin-left: 10px;
+		}
+	</style>
+
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+</head>
+
+<body>
+	<div class="preloader">
+		<div class="preloader-bounce">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<header class="site-header wow fadeIn" data-wow-duration="1s" id="header">
+	</header>
+	<div class="page-heading wow fadeIn" data-wow-duration="0.5s">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="heading-content-bg wow fadeIn" data-wow-delay="0.75s" data-wow-duration="1s">
+						<div class="row">
+							<div class="heading-content col-md-12">
+								<p><a href="index.html">Inicio</a> / <em> Artesanos </em> </p>
+								<h2>Los Rostros <em>Detrás del Arte</em></h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<section style="padding: 0;">
+
+		<div class="team-section">
+			<div class="team-category">
+				<h2>Cerámica</h2>
+			</div>
+			<div class="team-members" id="ceramica-members">
+
+			</div>
+		</div>
+
+		<div class="team-section">
+			<div class="team-category">
+				<h2>Textilería</h2>
+			</div>
+			<div class="team-members" id="textileria-members">
+
+			</div>
+		</div>
+
+		<div class="team-section">
+			<div class="team-category">
+				<h2>Piedra tallada</h2>
+			</div>
+			<div class="team-members" id="piedra-tallada-members">
+
+			</div>
+		</div>
+	</section>
+
+
+
+	<div id="footer">
+
+	</div>
+
+
+	<script src="assets_tienda/js/jquery-1.11.0.min.js"></script>
+
+	<!-- Slider Pro Js -->
+	<script src="assets_tienda/js/sliderpro.min.js"></script>
+
+	<!-- Slick Slider Js -->
+	<script src="assets_tienda/js/slick.js"></script>
+
+	<!-- Owl Carousel Js -->
+	<script src="assets_tienda/js/owl.carousel.min.js"></script>
+
+	<!-- Boostrap Js -->
+	<script src="assets_tienda/js/bootstrap.min.js"></script>
+
+	<!-- Boostrap Js -->
+	<script src="assets_tienda/js/wow.animation.js"></script>
+
+	<!-- Custom Js -->
+	<script src="assets_tienda/js/custom.js"></script>
+
+
+
+	<script type="module" src="../src/tienda/artesanos/index.js"></script>
+
+</body>
+
+<!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:21:58 GMT -->
+
+</html>

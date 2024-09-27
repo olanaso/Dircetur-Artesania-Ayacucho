@@ -1,5 +1,10 @@
-import {actualizarCliente, listarDatosCliente} from './api.js';
+import './flaticon.css'
+import './main.css'
+import './font-awesome.min.css'
+
+import {actualizarCliente, listarDatosCliente, actualizarContrasenia} from './api.js';
 import {getDataFromLocalStorage} from "../utils/config.js";
+import {showToast} from "../utils/toast.js";
 
 // Ejecutar la función cuando se carga la página
 $(document).ready(function () {
@@ -10,19 +15,14 @@ $(document).ready(function () {
         e.preventDefault();
         actualizarCuentaCliente()
     })
-
+    //funcion que ocurre si se le da click a cambiar contra
+    $('#btnResetPassword').click(async function(e){
+        e.preventDefault()
+        actualizarContra()
+    })
 });
 
 
-
-// async function  cargarCategoria() {
-//     console.log("Inicio")
-//     listarDatosCliente().then(datosCliente => {
-//         cargarFormulario(datosCliente);
-//     }).catch(error => {
-//         console.error(error);
-//     });
-// }
 
 /**
  * Funcion que obtiene los datos del endpoint y llama a la funcion necesaria para
@@ -34,8 +34,9 @@ async function cargarDatos() {
     try {
         console.log("Inicio")
         const datosCliente = await listarDatosCliente()
-        console.log("DATOS CLIENTE", datosCliente)
-        cargarFormulario(datosCliente);
+        const resultCliente = await datosCliente.json()
+        console.log("DATOS CLIENTE", resultCliente)
+        cargarFormulario(resultCliente);
     } catch (error) {
         console.error(error);
     }
@@ -44,19 +45,18 @@ async function cargarDatos() {
 /**
  *
  * Funcion que carga los datos del cliente en el formulario
- * @param datosCliente
+ * @param resultCliente
  */
-function cargarFormulario(datosCliente) {
-    $('#name').val(datosCliente.nombres);
-    $('#phone').val(datosCliente.telefono);
-    $('#country').val(datosCliente.pais);
-    $('#city').val(datosCliente.ciudad);
-    $('#email').val(datosCliente.correo);
-    console.log("EL CORREO Es", datosCliente.correo)
-    $('#document-type').val(datosCliente.tipoDocumento);
-    $('#document-number').val(datosCliente.numeroDocumento);
-    $('#region').val(datosCliente.region);
-    $('#address').val(datosCliente.direccion);
+function cargarFormulario(resultCliente) {
+    $('#name').val(resultCliente.clienteData.nombres);
+    $('#lastName').val(resultCliente.clienteData.apellidos);
+    $('#phone').val(resultCliente.clienteData.telefono);
+    $('#country').val(resultCliente.clienteData.pais);
+    $('#city').val(resultCliente.clienteData.ciudad);
+    $('#email').val(resultCliente.clienteData.correo);
+    $('#document-type').val(resultCliente.clienteData.tipo_documento);
+    $('#document-number').val(resultCliente.clienteData.numero_documento);
+    $('#address').val(resultCliente.clienteData.direccion);
 
     // Si deseas mostrar la imagen de perfil
     $('.profile-img').attr('src', datosCliente.fotoPerfil || 'default-image-path.jpg');
@@ -64,27 +64,66 @@ function cargarFormulario(datosCliente) {
 
 
 async function actualizarCuentaCliente() {
+    $('#btnSaveChanges').prop('disabled', true).text('Guardando...')
     const idUsuario = getDataFromLocalStorage('id').toString()
     console.log("TIPO", typeof idUsuario)
 
     const data = {
-        nombre_completo: $('#name').val(),
+        nombres: $('#name').val(),
+        apellidos: $('#lastName').val(),
         telefono: $('#phone').val(),
+        correo: $('#email').val(),
         pais: $('#country').val(),
         ciudad: $('#city').val(),
+        tipo_documento: $('#document-type').val(),
         numero_documento: $('#document-number').val(),
-        region: $('#region').val(),
         direccion: $('#address').val(),
-        idUsuario: idUsuario
     }
     try{
         // const jsonData = JSON.stringify(data)
-        const actualizarUsuario = await actualizarCliente(data)
+        const actualizarUsuarioResponse = await actualizarCliente(data)
+        const actualizarUsuarioData = await actualizarUsuarioResponse.json()
+
+        if(actualizarUsuarioResponse.status === 200){
+            console.log("La data",actualizarUsuarioData.message)
+            showToast(actualizarUsuarioData.message)
+        }
+        else{
+            throw new Error(actualizarUsuarioData.error)
+        }
     }catch(e){
+        showToast(e)
         console.error("Hubo un error actualizando el cliente", e)
+    } finally{
+        $('#btnSaveChanges').prop('disabled', false).text('Guardar Cambios')
     }
 
 
+}
+
+async function actualizarContra(){
+    $('#btnResetPassword').prop('disabled', true).text('Cambiando...')
+    const data = {
+        clave: $('#old-password').val(),
+        contraseniaNueva: $('#new-password').val(),
+        contraseniaConfirmacion: $('#confirm-password').val()
+    }
+    try{
+        const actualizarContraResponse = await actualizarContrasenia(data)
+        console.log("El response", actualizarContraResponse )
+        const actualizarContraResponseData = await actualizarContraResponse.json()
+        if(actualizarContraResponse.status === 200){
+            showToast(actualizarContraResponseData.message)
+        }
+        else{
+            throw new Error(actualizarContraResponseData.error[0].msg)
+        }
+    }catch(e){
+        showToast(e)
+        console.log("Hubo un error actualizando la contraseña", e)
+    }finally{
+        $('#btnResetPassword').prop('disabled', false).text('Cambiar Contraseña')
+    }
 }
 
 

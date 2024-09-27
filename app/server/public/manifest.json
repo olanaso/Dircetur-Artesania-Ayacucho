@@ -2,32 +2,48 @@
   "_alert-3bd678b2.js": {
     "file": "assets/alert-3bd678b2.js"
   },
-  "_api-c960120b.js": {
-    "file": "assets/api-c960120b.js",
+  "_api-21eb476b.js": {
+    "file": "assets/api-21eb476b.js",
     "imports": [
-      "_config-ef5f6dbc.js"
+      "_config-d2c69cb0.js"
     ]
   },
-  "_api-d743b32e.js": {
-    "file": "assets/api-d743b32e.js",
+  "_api-c8f0bf4b.js": {
+    "file": "assets/api-c8f0bf4b.js",
     "imports": [
-      "_config-ef5f6dbc.js"
+      "_config-d2c69cb0.js"
     ]
   },
-  "_config-ef5f6dbc.js": {
-    "file": "assets/config-ef5f6dbc.js"
+  "_config-d2c69cb0.js": {
+    "file": "assets/config-d2c69cb0.js"
   },
-  "_init-52a8aa54.js": {
-    "file": "assets/init-52a8aa54.js",
+  "_index-339297ac.js": {
+    "css": [
+      "assets/index-f4f3fad5.css"
+    ],
+    "dynamicImports": [
+      "src/utils/common.js"
+    ],
+    "file": "assets/index-339297ac.js",
     "imports": [
-      "_config-ef5f6dbc.js"
+      "_preload-helper-101896b7.js",
+      "_init-b7ef0f37.js",
+      "_config-d2c69cb0.js",
+      "_toast-8abe4fe9.js",
+      "_viewpartials-ac66bf27.js"
+    ]
+  },
+  "_init-b7ef0f37.js": {
+    "file": "assets/init-b7ef0f37.js",
+    "imports": [
+      "_config-d2c69cb0.js"
     ]
   },
   "_modulepreload-polyfill-3cfb730f.js": {
     "file": "assets/modulepreload-polyfill-3cfb730f.js"
   },
-  "_navbar-79b7ff75.js": {
-    "file": "assets/navbar-79b7ff75.js"
+  "_preload-helper-101896b7.js": {
+    "file": "assets/preload-helper-101896b7.js"
   },
   "_toast-8abe4fe9.js": {
     "file": "assets/toast-8abe4fe9.js"
@@ -44,8 +60,8 @@
   "_validateForm-1578b31b.js": {
     "file": "assets/validateForm-1578b31b.js"
   },
-  "_viewpartials-7a86f681.js": {
-    "file": "assets/viewpartials-7a86f681.js"
+  "_viewpartials-ac66bf27.js": {
+    "file": "assets/viewpartials-ac66bf27.js"
   },
   "alertas.html": {
     "file": "assets/alertas-2dcf43ec.js",
@@ -63,14 +79,15 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/artesanos-detalle-c8bfb8e6.js",
+    "file": "assets/artesanos-detalle-581f1f58.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
       "_uploadJorge-fc196769.js",
       "_alert-3bd678b2.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
@@ -83,14 +100,15 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/artesanos-nuevo-51cd1d52.js",
+    "file": "assets/artesanos-nuevo-42609270.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
       "_uploadJorge-fc196769.js",
       "_alert-3bd678b2.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
@@ -107,35 +125,41 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/artesanos-94d8ee99.js",
+    "file": "assets/artesanos-22862e32.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
       "_alert-3bd678b2.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
     "src": "artesanos.html"
   },
   "añadir-deseados.css": {
-    "file": "assets/añadir-deseados-7ab6317c.css",
+    "file": "assets/añadir-deseados-5b7f894f.css",
     "src": "añadir-deseados.css"
   },
   "añadir-deseados.html": {
-    "css": [
-      "assets/añadir-deseados-7ab6317c.css"
+    "assets": [
+      "assets/lead-66d9cce0.svg"
     ],
-    "file": "assets/añadir-deseados-4849d23f.js",
+    "css": [
+      "assets/añadir-deseados-5b7f894f.css"
+    ],
+    "file": "assets/añadir-deseados-31b23117.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "principal copy.html",
-      "_navbar-79b7ff75.js",
-      "_config-ef5f6dbc.js",
+      "_config-d2c69cb0.js",
+      "_index-339297ac.js",
+      "_alert-3bd678b2.js",
       "_toast-8abe4fe9.js",
-      "_viewpartials-7a86f681.js",
-      "_init-52a8aa54.js"
+      "_init-b7ef0f37.js",
+      "login-cliente.html",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js"
     ],
     "isEntry": true,
     "src": "añadir-deseados.html"
@@ -148,11 +172,11 @@
     "css": [
       "assets/busqueda-certificado-acda086e.css"
     ],
-    "file": "assets/busqueda-certificado-eb4bcf59.js",
+    "file": "assets/busqueda-certificado-e4d10c6b.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
       "_validateForm-1578b31b.js",
-      "_config-ef5f6dbc.js"
+      "_config-d2c69cb0.js"
     ],
     "isEntry": true,
     "src": "busqueda-certificado.html"
@@ -161,12 +185,13 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/carga-evaluaciones-dde4f449.js",
+    "file": "assets/carga-evaluaciones-14599515.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
@@ -176,15 +201,16 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/categorias-5775c27a.js",
+    "file": "assets/categorias-6f5b314b.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_config-ef5f6dbc.js",
+      "_preload-helper-101896b7.js",
+      "_config-d2c69cb0.js",
       "_upload-fc196769.js",
       "_alert-3bd678b2.js",
       "_toast-8abe4fe9.js",
-      "_init-52a8aa54.js"
+      "_viewpartials-ac66bf27.js",
+      "_init-b7ef0f37.js"
     ],
     "isEntry": true,
     "src": "categorias.html"
@@ -193,15 +219,16 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/clientes-detalle-b9e3642f.js",
+    "file": "assets/clientes-detalle-1224621d.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_api-c960120b.js",
-      "_config-ef5f6dbc.js",
+      "_preload-helper-101896b7.js",
+      "_api-21eb476b.js",
+      "_config-d2c69cb0.js",
       "_uploadVictor-fc196769.js",
       "_alert-3bd678b2.js",
-      "_init-52a8aa54.js"
+      "_viewpartials-ac66bf27.js",
+      "_init-b7ef0f37.js"
     ],
     "isEntry": true,
     "src": "clientes-detalle.html"
@@ -210,36 +237,37 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/clientes-594b9ee6.js",
+    "file": "assets/clientes-83dabf56.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_api-c960120b.js",
+      "_preload-helper-101896b7.js",
+      "_api-21eb476b.js",
       "_alert-3bd678b2.js",
-      "_init-52a8aa54.js",
-      "_config-ef5f6dbc.js"
+      "_viewpartials-ac66bf27.js",
+      "_init-b7ef0f37.js",
+      "_config-d2c69cb0.js"
     ],
     "isEntry": true,
     "src": "clientes.html"
   },
   "cuenta-cliente.css": {
-    "file": "assets/cuenta-cliente-df078e81.css",
+    "file": "assets/cuenta-cliente-3ddeb7e7.css",
     "src": "cuenta-cliente.css"
   },
   "cuenta-cliente.html": {
     "css": [
-      "assets/cuenta-cliente-df078e81.css"
+      "assets/cuenta-cliente-3ddeb7e7.css"
     ],
-    "file": "assets/cuenta-cliente-e5b89eed.js",
+    "file": "assets/cuenta-cliente-8d1f3134.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "principal copy.html",
-      "añadir-deseados.html",
-      "_config-ef5f6dbc.js",
-      "_navbar-79b7ff75.js",
-      "_viewpartials-7a86f681.js",
-      "_init-52a8aa54.js",
-      "_toast-8abe4fe9.js"
+      "_index-339297ac.js",
+      "login-cliente.html",
+      "_config-d2c69cb0.js",
+      "_toast-8abe4fe9.js",
+      "_preload-helper-101896b7.js",
+      "_init-b7ef0f37.js",
+      "_viewpartials-ac66bf27.js"
     ],
     "isEntry": true,
     "src": "cuenta-cliente.html"
@@ -263,14 +291,15 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/datosartesano-01293a0d.js",
+    "file": "assets/datosartesano-eedb4d4a.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
       "_uploadJorge-fc196769.js",
       "_alert-3bd678b2.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
@@ -285,33 +314,20 @@
     "src": "demoartesania.html"
   },
   "index.css": {
-    "file": "assets/index-5acc3ec5.css",
+    "file": "assets/index-f4f3fad5.css",
     "src": "index.css"
-  },
-  "index.html": {
-    "css": [
-      "assets/index-5acc3ec5.css"
-    ],
-    "file": "assets/index-aa23cfb0.js",
-    "imports": [
-      "_modulepreload-polyfill-3cfb730f.js",
-      "_validateForm-1578b31b.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js"
-    ],
-    "isEntry": true,
-    "src": "index.html"
   },
   "inicio.html": {
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/inicio-6171d009.js",
+    "file": "assets/inicio-d287f69d.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_init-52a8aa54.js",
-      "_config-ef5f6dbc.js"
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
+      "_init-b7ef0f37.js",
+      "_config-d2c69cb0.js"
     ],
     "isEntry": true,
     "src": "inicio.html"
@@ -327,12 +343,13 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/inicioartesano-4b0186a6.js",
+    "file": "assets/inicioartesano-d2f43ebb.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_init-52a8aa54.js",
-      "_config-ef5f6dbc.js"
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
+      "_init-b7ef0f37.js",
+      "_config-d2c69cb0.js"
     ],
     "isEntry": true,
     "src": "inicioartesano.html"
@@ -348,92 +365,111 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/lista-capacitaciones-6ae3caa8.js",
+    "file": "assets/lista-capacitaciones-03ddef75.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
     "src": "lista-capacitaciones.html"
   },
-  "main.css": {
-    "file": "assets/main-edc25fd7.css",
-    "src": "main.css"
+  "login-cliente.css": {
+    "file": "assets/login-cliente-ce41d93e.css",
+    "src": "login-cliente.css"
+  },
+  "login-cliente.html": {
+    "css": [
+      "assets/login-cliente-ce41d93e.css"
+    ],
+    "file": "assets/login-cliente-885bfb3e.js",
+    "imports": [
+      "_modulepreload-polyfill-3cfb730f.js",
+      "_index-339297ac.js",
+      "_config-d2c69cb0.js",
+      "_toast-8abe4fe9.js",
+      "_preload-helper-101896b7.js",
+      "_init-b7ef0f37.js",
+      "_viewpartials-ac66bf27.js"
+    ],
+    "isEntry": true,
+    "src": "login-cliente.html"
+  },
+  "login.css": {
+    "file": "assets/login-5acc3ec5.css",
+    "src": "login.css"
+  },
+  "login.html": {
+    "css": [
+      "assets/login-5acc3ec5.css"
+    ],
+    "file": "assets/login-e6862a04.js",
+    "imports": [
+      "_modulepreload-polyfill-3cfb730f.js",
+      "_validateForm-1578b31b.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js"
+    ],
+    "isEntry": true,
+    "src": "login.html"
   },
   "miperfil.html": {
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/miperfil-8f5d0bcb.js",
+    "file": "assets/miperfil-52dd5a57.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
     "src": "miperfil.html"
   },
-  "principal copy.css": {
-    "file": "assets/principal copy-6da31630.css",
-    "src": "principal copy.css"
-  },
-  "principal copy.html": {
-    "css": [
-      "assets/principal copy-6da31630.css"
-    ],
-    "dynamicImports": [
-      "src/utils/common.js"
-    ],
-    "file": "assets/principal-90e94c9b.js",
-    "imports": [
-      "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_init-52a8aa54.js",
-      "_config-ef5f6dbc.js",
-      "_navbar-79b7ff75.js"
-    ],
-    "isEntry": true,
-    "src": "principal copy.html"
-  },
   "principal-artesano.css": {
-    "file": "assets/principal-artesano-9494e53e.css",
+    "file": "assets/principal-artesano-e8e326d3.css",
     "src": "principal-artesano.css"
   },
   "principal-artesano.html": {
     "css": [
-      "assets/principal-artesano-9494e53e.css"
+      "assets/principal-artesano-e8e326d3.css"
     ],
-    "dynamicImports": [
-      "src/utils/common.js"
-    ],
-    "file": "assets/principal-artesano-b6fb3aa7.js",
+    "file": "assets/principal-artesano-ec5182a6.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_init-52a8aa54.js",
-      "_config-ef5f6dbc.js",
-      "_navbar-79b7ff75.js"
+      "_index-339297ac.js",
+      "_init-b7ef0f37.js",
+      "_config-d2c69cb0.js",
+      "_preload-helper-101896b7.js",
+      "_toast-8abe4fe9.js",
+      "_viewpartials-ac66bf27.js"
     ],
     "isEntry": true,
     "src": "principal-artesano.html"
   },
+  "principal-busqueda.css": {
+    "file": "assets/principal-busqueda-e4081a8f.css",
+    "src": "principal-busqueda.css"
+  },
   "principal-busqueda.html": {
     "css": [
-      "assets/main-edc25fd7.css"
+      "assets/principal-busqueda-e4081a8f.css"
     ],
-    "file": "assets/principal-busqueda-15f7c0d5.js",
+    "file": "assets/principal-busqueda-b4fee1e2.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "principal copy.html",
-      "_config-ef5f6dbc.js",
-      "_viewpartials-7a86f681.js",
-      "_init-52a8aa54.js",
-      "_navbar-79b7ff75.js"
+      "_index-339297ac.js",
+      "_config-d2c69cb0.js",
+      "_preload-helper-101896b7.js",
+      "_init-b7ef0f37.js",
+      "_toast-8abe4fe9.js",
+      "_viewpartials-ac66bf27.js"
     ],
     "isEntry": true,
     "src": "principal-busqueda.html"
@@ -449,27 +485,36 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/principal-compra-4b6cb6d2.js",
+    "file": "assets/principal-compra-838062b9.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "principal copy.html",
-      "_viewpartials-7a86f681.js",
-      "_init-52a8aa54.js",
-      "_config-ef5f6dbc.js",
-      "_navbar-79b7ff75.js"
+      "_index-339297ac.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
+      "_init-b7ef0f37.js",
+      "_config-d2c69cb0.js",
+      "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
     "src": "principal-compra.html"
   },
+  "principal-detalle.css": {
+    "file": "assets/principal-detalle-446f8477.css",
+    "src": "principal-detalle.css"
+  },
   "principal-detalle.html": {
-    "file": "assets/principal-detalle-7f7c53ec.js",
+    "css": [
+      "assets/principal-detalle-446f8477.css"
+    ],
+    "file": "assets/principal-detalle-f0d8a565.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "principal copy.html",
-      "_config-ef5f6dbc.js",
-      "_viewpartials-7a86f681.js",
-      "_init-52a8aa54.js",
-      "_navbar-79b7ff75.js"
+      "_index-339297ac.js",
+      "_config-d2c69cb0.js",
+      "_preload-helper-101896b7.js",
+      "_init-b7ef0f37.js",
+      "_toast-8abe4fe9.js",
+      "_viewpartials-ac66bf27.js"
     ],
     "isEntry": true,
     "src": "principal-detalle.html"
@@ -482,15 +527,15 @@
     "css": [
       "assets/principal-proceso-compra-a9bc3366.css"
     ],
-    "file": "assets/principal-proceso-compra-14e25a1d.js",
+    "file": "assets/principal-proceso-compra-c58857a4.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "principal copy.html",
+      "_index-339297ac.js",
       "_toast-8abe4fe9.js",
-      "_viewpartials-7a86f681.js",
-      "_init-52a8aa54.js",
-      "_config-ef5f6dbc.js",
-      "_navbar-79b7ff75.js"
+      "_preload-helper-101896b7.js",
+      "_init-b7ef0f37.js",
+      "_config-d2c69cb0.js",
+      "_viewpartials-ac66bf27.js"
     ],
     "isEntry": true,
     "src": "principal-proceso-compra.html"
@@ -502,16 +547,16 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/producto-1db10241.js",
+    "file": "assets/producto-7a94c3bf.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "principal copy.html",
-      "_viewpartials-7a86f681.js",
+      "_index-339297ac.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
       "_alert-3bd678b2.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
-      "_toast-8abe4fe9.js",
-      "_navbar-79b7ff75.js"
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
+      "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
     "src": "producto.html"
@@ -523,13 +568,14 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/productoartesano-detalle-4dbc28ab.js",
+    "file": "assets/productoartesano-detalle-e48cd4ac.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
       "_uploadJorge-fc196769.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js",
       "_alert-3bd678b2.js"
     ],
@@ -547,13 +593,14 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/productoartesano-45ae3376.js",
+    "file": "assets/productoartesano-32838ba0.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
       "_alert-3bd678b2.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
@@ -566,13 +613,14 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/productos-detalle-98593d3f.js",
+    "file": "assets/productos-detalle-1981f58e.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
       "_uploadJorge-fc196769.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js",
       "_alert-3bd678b2.js"
     ],
@@ -586,29 +634,51 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/productos-97f1d48a.js",
+    "file": "assets/productos-1c25dae7.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
+      "_preload-helper-101896b7.js",
+      "_viewpartials-ac66bf27.js",
       "_alert-3bd678b2.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_config-d2c69cb0.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
     "src": "productos.html"
   },
+  "productos_por_categoria.css": {
+    "file": "assets/productos_por_categoria-fb30dbfa.css",
+    "src": "productos_por_categoria.css"
+  },
+  "productos_por_categoria.html": {
+    "css": [
+      "assets/productos_por_categoria-fb30dbfa.css"
+    ],
+    "file": "assets/productos_por_categoria-28e860d9.js",
+    "imports": [
+      "_modulepreload-polyfill-3cfb730f.js",
+      "_config-d2c69cb0.js",
+      "_index-339297ac.js",
+      "_preload-helper-101896b7.js",
+      "_init-b7ef0f37.js",
+      "_toast-8abe4fe9.js",
+      "_viewpartials-ac66bf27.js"
+    ],
+    "isEntry": true,
+    "src": "productos_por_categoria.html"
+  },
   "public/img/lead-cloudy.html": {
     "file": "assets/lead-rainy-d811eb5a.html",
-    "src": "public/img/lead-sunny.html"
+    "src": "public/img/lead-cloudy.html"
   },
   "public/img/lead-rainy.html": {
     "file": "assets/lead-rainy-d811eb5a.html",
-    "src": "public/img/lead-sunny.html"
+    "src": "public/img/lead-cloudy.html"
   },
   "public/img/lead-sunny.html": {
     "file": "assets/lead-rainy-d811eb5a.html",
-    "src": "public/img/lead-sunny.html"
+    "src": "public/img/lead-cloudy.html"
   },
   "public/img/lead.svg": {
     "file": "assets/lead-66d9cce0.svg",
@@ -622,13 +692,17 @@
     "file": "assets/login-slider-c1e5c8f7.jpg",
     "src": "public/img/login-slider.jpg"
   },
+  "public/img/main_slide_03.jpg": {
+    "file": "assets/main_slide_03-c803abcd.jpg",
+    "src": "public/img/main_slide_03.jpg"
+  },
   "recuperar-cuenta.html": {
-    "file": "assets/recuperar-cuenta-a2cfdf66.js",
+    "file": "assets/recuperar-cuenta-b4126bea.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
       "_validateForm-1578b31b.js",
-      "_init-52a8aa54.js",
-      "_config-ef5f6dbc.js",
+      "_init-b7ef0f37.js",
+      "_config-d2c69cb0.js",
       "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
@@ -642,15 +716,15 @@
     "css": [
       "assets/registrar-cliente-9bead3b0.css"
     ],
-    "file": "assets/registrar-cliente-d451373b.js",
+    "file": "assets/registrar-cliente-f9b2f3ff.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "principal copy.html",
+      "_index-339297ac.js",
       "_toast-8abe4fe9.js",
-      "_config-ef5f6dbc.js",
-      "_viewpartials-7a86f681.js",
-      "_init-52a8aa54.js",
-      "_navbar-79b7ff75.js"
+      "_config-d2c69cb0.js",
+      "_preload-helper-101896b7.js",
+      "_init-b7ef0f37.js",
+      "_viewpartials-ac66bf27.js"
     ],
     "isEntry": true,
     "src": "registrar-cliente.html"
@@ -666,12 +740,13 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/reportes-8585fb4b.js",
+    "file": "assets/reportes-556b0328.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js",
+      "_preload-helper-101896b7.js",
+      "_config-d2c69cb0.js",
+      "_viewpartials-ac66bf27.js",
+      "_init-b7ef0f37.js",
       "_toast-8abe4fe9.js"
     ],
     "isEntry": true,
@@ -681,14 +756,15 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/slider-b6952885.js",
+    "file": "assets/slider-1a7777fa.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_config-ef5f6dbc.js",
+      "_preload-helper-101896b7.js",
+      "_config-d2c69cb0.js",
       "_uploadVictor-fc196769.js",
       "_alert-3bd678b2.js",
-      "_init-52a8aa54.js"
+      "_viewpartials-ac66bf27.js",
+      "_init-b7ef0f37.js"
     ],
     "isEntry": true,
     "src": "slider.html"
@@ -702,33 +778,143 @@
     "file": "assets/style-69699d2e.css",
     "src": "style.css"
   },
+  "tienda/assets_tienda/css/Flaticon.html": {
+    "file": "assets/Flaticon-e773b90a.html",
+    "src": "tienda/assets_tienda/css/Flaticon.html"
+  },
+  "tienda/assets_tienda/css/owl.video.play.html": {
+    "file": "assets/Flaticon-e773b90a.html",
+    "src": "tienda/assets_tienda/css/Flaticon.html"
+  },
+  "tienda/assets_tienda/fonts/Flaticon.eot": {
+    "file": "assets/Flaticon-3552c879.eot",
+    "src": "tienda/assets_tienda/fonts/Flaticon.eot"
+  },
+  "tienda/assets_tienda/fonts/Flaticon.svg": {
+    "file": "assets/Flaticon-870838ff.svg",
+    "src": "tienda/assets_tienda/fonts/Flaticon.svg"
+  },
+  "tienda/assets_tienda/fonts/Flaticon.ttf": {
+    "file": "assets/Flaticon-21245e5a.ttf",
+    "src": "tienda/assets_tienda/fonts/Flaticon.ttf"
+  },
+  "tienda/assets_tienda/fonts/Flaticon.woff": {
+    "file": "assets/Flaticon-e48767ab.woff",
+    "src": "tienda/assets_tienda/fonts/Flaticon.woff"
+  },
+  "tienda/assets_tienda/fonts/Flaticond41d.eot": {
+    "file": "assets/Flaticon-3552c879.eot",
+    "src": "tienda/assets_tienda/fonts/Flaticon.eot"
+  },
+  "tienda/assets_tienda/fonts/fontawesome-webfontd41d.eot": {
+    "file": "assets/fontawesome-webfontd41d-cbb644d0.eot",
+    "src": "tienda/assets_tienda/fonts/fontawesome-webfontd41d.eot"
+  },
+  "tienda/assets_tienda/fonts/fontawesome-webfonte0a5.eot": {
+    "file": "assets/fontawesome-webfontd41d-cbb644d0.eot",
+    "src": "tienda/assets_tienda/fonts/fontawesome-webfontd41d.eot"
+  },
+  "tienda/assets_tienda/fonts/fontawesome-webfonte0a5.svg": {
+    "file": "assets/fontawesome-webfonte0a5-bfdef833.svg",
+    "src": "tienda/assets_tienda/fonts/fontawesome-webfonte0a5.svg"
+  },
+  "tienda/assets_tienda/fonts/fontawesome-webfonte0a5.ttf": {
+    "file": "assets/fontawesome-webfonte0a5-9e540a08.ttf",
+    "src": "tienda/assets_tienda/fonts/fontawesome-webfonte0a5.ttf"
+  },
+  "tienda/assets_tienda/fonts/fontawesome-webfonte0a5.woff": {
+    "file": "assets/fontawesome-webfonte0a5-e3870de8.woff",
+    "src": "tienda/assets_tienda/fonts/fontawesome-webfonte0a5.woff"
+  },
+  "tienda/assets_tienda/fonts/fontawesome-webfonte0a5.woff2": {
+    "file": "assets/fontawesome-webfonte0a5-aadc3580.woff2",
+    "src": "tienda/assets_tienda/fonts/fontawesome-webfonte0a5.woff2"
+  },
+  "tienda/assets_tienda/images/closedhand.cur": {
+    "file": "assets/closedhand-d367ee0a.cur",
+    "src": "tienda/assets_tienda/images/closedhand.cur"
+  },
+  "tienda/assets_tienda/images/logo_black.png": {
+    "file": "assets/logo_black-fed4c4e4.png",
+    "src": "tienda/assets_tienda/images/logo_white.png"
+  },
+  "tienda/assets_tienda/images/logo_responsive_black.png": {
+    "file": "assets/logo_black-fed4c4e4.png",
+    "src": "tienda/assets_tienda/images/logo_white.png"
+  },
+  "tienda/assets_tienda/images/logo_white.png": {
+    "file": "assets/logo_black-fed4c4e4.png",
+    "src": "tienda/assets_tienda/images/logo_white.png"
+  },
+  "tienda/assets_tienda/images/openhand.cur": {
+    "file": "assets/openhand-080627fa.cur",
+    "src": "tienda/assets_tienda/images/openhand.cur"
+  },
+  "tienda/assets_tienda/images/page_heading_bg.jpg": {
+    "file": "assets/page_heading_bg-0041c4fd.jpg",
+    "src": "tienda/assets_tienda/images/page_heading_bg.jpg"
+  },
+  "tienda/index.css": {
+    "file": "assets/index-830b79bd.css",
+    "src": "tienda/index.css"
+  },
+  "tienda/index.html": {
+    "assets": [
+      "assets/fontawesome-webfontd41d-cbb644d0.eot",
+      "assets/fontawesome-webfonte0a5-aadc3580.woff2",
+      "assets/fontawesome-webfonte0a5-e3870de8.woff",
+      "assets/fontawesome-webfonte0a5-9e540a08.ttf",
+      "assets/fontawesome-webfonte0a5-bfdef833.svg",
+      "assets/page_heading_bg-0041c4fd.jpg",
+      "assets/logo_black-fed4c4e4.png",
+      "assets/openhand-080627fa.cur",
+      "assets/closedhand-d367ee0a.cur",
+      "assets/Flaticon-e773b90a.html",
+      "assets/Flaticon-3552c879.eot",
+      "assets/Flaticon-e48767ab.woff",
+      "assets/Flaticon-21245e5a.ttf",
+      "assets/Flaticon-870838ff.svg"
+    ],
+    "css": [
+      "assets/index-830b79bd.css"
+    ],
+    "file": "assets/tienda/index-9db4664f.js",
+    "imports": [
+      "_modulepreload-polyfill-3cfb730f.js",
+      "_viewpartials-ac66bf27.js",
+      "_config-d2c69cb0.js"
+    ],
+    "isEntry": true,
+    "src": "tienda/index.html"
+  },
   "uploaddemo.html": {
-    "file": "assets/uploaddemo-8f802566.js",
+    "file": "assets/uploaddemo-d4b22d5a.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
       "_upload-fc196769.js",
-      "_config-ef5f6dbc.js"
+      "_config-d2c69cb0.js"
     ],
     "isEntry": true,
     "src": "uploaddemo.html"
   },
   "usuarios.css": {
-    "file": "assets/usuarios-6a95ecd8.css",
+    "file": "assets/usuarios-3850469e.css",
     "src": "usuarios.css"
   },
   "ventaartesano-detalle.html": {
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/ventaartesano-detalle-87c8489b.js",
+    "file": "assets/ventaartesano-detalle-9183db83.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_api-d743b32e.js",
+      "_preload-helper-101896b7.js",
+      "_api-c8f0bf4b.js",
       "_upload-fc196769.js",
       "_alert-3bd678b2.js",
-      "_init-52a8aa54.js",
-      "_config-ef5f6dbc.js"
+      "_viewpartials-ac66bf27.js",
+      "_init-b7ef0f37.js",
+      "_config-d2c69cb0.js"
     ],
     "isEntry": true,
     "src": "ventaartesano-detalle.html"
@@ -737,13 +923,14 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/ventaartesano-6d1f2ffc.js",
+    "file": "assets/ventaartesano-67382cf5.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_config-ef5f6dbc.js",
+      "_preload-helper-101896b7.js",
+      "_config-d2c69cb0.js",
+      "_viewpartials-ac66bf27.js",
       "_alert-3bd678b2.js",
-      "_init-52a8aa54.js"
+      "_init-b7ef0f37.js"
     ],
     "isEntry": true,
     "src": "ventaartesano.html"
@@ -752,15 +939,16 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/ventas-detalle-80c1cede.js",
+    "file": "assets/ventas-detalle-f98110cf.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_api-d743b32e.js",
+      "_preload-helper-101896b7.js",
+      "_api-c8f0bf4b.js",
       "_upload-fc196769.js",
       "_alert-3bd678b2.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js"
+      "_config-d2c69cb0.js",
+      "_viewpartials-ac66bf27.js",
+      "_init-b7ef0f37.js"
     ],
     "isEntry": true,
     "src": "ventas-detalle.html"
@@ -769,12 +957,13 @@
     "dynamicImports": [
       "src/utils/common.js"
     ],
-    "file": "assets/ventas-13114810.js",
+    "file": "assets/ventas-695f1c4e.js",
     "imports": [
       "_modulepreload-polyfill-3cfb730f.js",
-      "_viewpartials-7a86f681.js",
-      "_config-ef5f6dbc.js",
-      "_init-52a8aa54.js"
+      "_preload-helper-101896b7.js",
+      "_config-d2c69cb0.js",
+      "_viewpartials-ac66bf27.js",
+      "_init-b7ef0f37.js"
     ],
     "isEntry": true,
     "src": "ventas.html"

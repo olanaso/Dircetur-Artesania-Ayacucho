@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Biblioideas: Biblioteca Virtual del Instituto" />
+    <meta name="keywords"
+        content="Biblioteca, Virtual, Biblioideas, Instituto, Libros, Publicaciones, Educación, Lectura, Aprendizaje, Cultura" />
+    <meta name="author" content="Biblioideas" />
+    <link rel="shortcut icon" href="img/fav.png" />
+    <title>Lista de artesanos</title>
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Main and Login css -->
+    <link rel="stylesheet" href="src/lista-artesanos/lista-artesanos.css" />
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="preloader" style="display: none;">
+        <div class="preloader-bounce">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+
+    <div class="page-heading wow fadeIn animated" data-wow-duration="0.5s"
+        style="visibility: visible;-webkit-animation-duration: 0.5s; -moz-animation-duration: 0.5s; animation-duration: 0.5s;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-content-bg wow fadeIn animated" data-wow-delay="0.75s" data-wow-duration="1s"
+                        style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.75s; -moz-animation-delay: 0.75s; animation-delay: 0.75s;">
+                        <div class="row">
+                            <div class="heading-content col-md-12">
+                                <p><a href="principal.html">Inicio</a> / <em>Carrito de compras</em></p>
+                                <h2>Lista de<em> Artesanos</em></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="intro-section">
+        <div class="intro-content">
+            <h1>Los Rostros Detrás del Arte</h1>
+            <p>
+                Te invitamos a conocer a los artesanos que dan vida a la cerámica, textilería y tallado en piedra.
+                Cada uno tiene una historia única y un estilo distintivo. Haz clic en su perfil para explorar más
+                sobre sus productos, su ubicación, y la inspiración detrás de su trabajo.
+            </p>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Buscar artesanos...">
+                <button id="search-button"><i class="fas fa-search"></i></button>
+                <button id="clear-button"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <h2 id="search-result-header" style="display: none;"></h2>
+    </section>
+
+    <section>
+
+        <div class="team-section">
+            <div class="team-category">
+                <h2>Cerámica</h2>
+            </div>
+            <div class="team-members" id="ceramica-members">
+
+            </div>
+        </div>
+
+        <div class="team-section">
+            <div class="team-category">
+                <h2>Textilería</h2>
+            </div>
+            <div class="team-members" id="textileria-members">
+
+            </div>
+        </div>
+
+        <div class="team-section">
+            <div class="team-category">
+                <h2>Piedra tallada</h2>
+            </div>
+            <div class="team-members" id="piedra-tallada-members">
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="main-footer">
+    </footer>
+
+</body>
+
+<script type="module" src="src/principal/index.js"></script>
+<script type="module" src="src/lista-artesanos/index.js"></script>
+
+<!-- Slider Pro Js -->
+<script src="js/sliderpro.min.js"></script>
+
+<!-- Slick Slider Js -->
+<script src="js/slick.js"></script>
+
+<!-- Owl Carousel Js -->
+<script src="js/owl.carousel.min.js"></script>
+
+<!-- Boostrap Js -->
+<script src="js/wow.animation.js"></script>
+
+<!-- Custom Js -->
+<script src="js/custom.js"></script>
+
+</html>

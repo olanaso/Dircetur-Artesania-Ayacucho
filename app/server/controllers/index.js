@@ -20,8 +20,9 @@ const reportes = require('./reportes');
 const productoartesano = require('./productoartesano');
 const ventapedido = require('./ventapedido');
 const ubigeo = require('./ubigeo');
-
+const productosFavoritos = require('./productosFavoritos')
 const pedidodetalle = require('./pedidodetalle');
+const portada = require('./portada');
 
 module.exports = {
     mantenimiento,
@@ -47,5 +48,7 @@ module.exports = {
     productoartesano,
     ventapedido,
     ubigeo,
-    pedidodetalle
+    pedidodetalle,
+    productosFavoritos,
+    portada
 };

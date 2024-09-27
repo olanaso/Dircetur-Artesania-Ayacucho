@@ -16,31 +16,29 @@
     <!-- Common CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="fonts/icomoon/icomoon.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Mian and Login css -->
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="src/añadir-deseados/añadir-deseados.css" />
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
 </head>
 <body>
-<div class="preloader" style="display: none;">
-    <div class="preloader-bounce">
+<div class="loading-wrapper">
+    <div class="loading">
+        <div class="img"></div>
+        <span></span>
+        <span></span>
         <span></span>
         <span></span>
         <span></span>
     </div>
 </div>
 
-<div id="search">
-    <button type="button" class="close">×</button>
-    <form>
-        <input type="search" value="" placeholder="Escribe palabras clave aquí">
-        <button type="submit" class="primary-button">Buscar <i class="fa fa-search"></i></button>
-    </form>
-</div>
+
 
 <!--HEADER-->
 <header class="site-header wow fadeIn" data-wow-duration="1s"
@@ -49,20 +47,19 @@
     </div>
 </header>
 <section>
-
     <div class="header-container">
-        <h1><i class="fas fa-list"></i> Deseados</h1>
+        <h1 class="title"><i class="fas fa-heart"></i> DESEADOS</h1>
         <hr>
+        <div class="product-list">
+            <!-- aca se muestran los productosd -->
+        </div>
+        <div class="pagination">
+            <button class="btn-prev" style="display: none;">Anterior</button>
+            <div class="page-numbers"></div>
+            <button class="btn-next">Siguiente</button>
+        </div>
     </div>
-<div class="product-list">
-    <!-- aca se muestran los productosd -->
-</div>
-<div class="pagination">
-    <button class="btn-prev" style="display: none;">Anterior</button>
-    <div class="page-numbers"></div>
-    <button class="btn-next">Siguiente</button>
-</div>
-    </section>
+</section>
 <footer id="main-footer">
 </footer>
 
@@ -71,8 +68,9 @@
 </body>
 
 <!--footer y nav-->
-<script src="src/añadir-deseados/index.js"></script>
+<script type="module" src="src/añadir-deseados/index.js"></script>
 <script type="module" src="src/principal/index.js"></script>
 <script type="module" src="src/login-cliente/index.js"></script>
 <script type="module" src="src/Shared/navbar.js"></script>
 </html>
+

@@ -1,7 +1,6 @@
 const db = require('../config/db');
 sequelize = db.sequelize;
 Sequelize = db.Sequelize;
-cliente = require('./cliente')
 
 const usuario = sequelize.define('usuario', {
     id: {
@@ -67,7 +66,11 @@ const usuario = sequelize.define('usuario', {
     underscored: true, // Esto asegurará que las columnas creadas automáticamente tengan nombres en formato underscore y no camelCase
 });
 
-
+/**
+ * Funcion que encuentra el usuario por id
+ * @param id
+ * @returns {Promise<Usuario | null>}
+ */
 usuario.findUsuarioById = function(id){
     return usuario.findOne({where:{id}})
 }

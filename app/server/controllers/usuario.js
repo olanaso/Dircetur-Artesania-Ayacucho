@@ -28,10 +28,58 @@ module.exports = {
     obtenerDNI, loginpersonal,
     verificarToken,
     recuperarcuenta, cambiarContrasenia,importarUsuarios
-    ,reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp 
+    ,reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp ,
+    loginCliente, actualizarContraseniaCiente
 
 };
 
+/**
+ * Metodo que actualiza la contrasenia cliente
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function actualizarContraseniaCiente(req,res){
+    const {id} = req.params
+    const{contraseniaNueva} = req.body
+    try{
+        //cambio la clave por contrasenia nueva donde el id coincida
+        await usuario.update({clave: contraseniaNueva}, {where: {id}})
+        res.status(200).send({message: "Contraseña actualizada"})
+    }catch(e){
+        console.error(e)
+        handleHttpError(res,"Ocurrio un error actualizando la contraseña",500)
+    }
+
+
+
+
+}
+async function loginCliente(req, res){
+    try{
+        const {clave} = req.body
+        //encuentra el cliente que coincida con clave y contrasenia
+        const user = await  usuario.findOne({where:
+                {usuario:req.body.usuario, clave}
+        })
+        //validaciones de rol y cliente existente
+        if(!user){
+            return res.status(400).send({error: "Usuario o contraseña incorrectos"})
+        }
+        if(user.rolid !== 3){
+            return res.status(400).send({error: "Solo puedes ingresar con una cuenta de cliente"})
+        }
+        const data = {
+            token: jwt.sign({ client: user }, '2C44-4D44-WppQ38S', { expiresIn: '1d' }),
+            id: user.id,
+            idCliente: await cliente.findClienteIdByUsuarioId(user.id)
+        }
+        return res.status(200).send({data})
+    }catch(e){
+        console.error(e)
+        handleHttpError(res,"Error al iniciar sesion",500)
+    }
+}
 function guardar (req, res) {
 
 
@@ -48,6 +96,7 @@ function guardar (req, res) {
 
 }
 async function actualizar (req, res) {
+
     try{
         const id = req.params.id
         const body = req.body

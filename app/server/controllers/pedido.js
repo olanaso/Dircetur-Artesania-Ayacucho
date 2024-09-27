@@ -18,6 +18,7 @@ module.exports = {
     uploadFileAtencion,
     reporte1,
     reporte2,
+    enviarPedido,
     obtener: async (req, res) => {
         const idPedido = req.params.id;
 
@@ -381,3 +382,21 @@ async function uploadFileAtencion (req, res, next) {
         return next(err);
     }
 } 
+
+
+async function enviarPedido (req, res, next){
+
+    
+    const t = await model.sequelize.transaction();
+    try {
+        //
+        
+        const object = await modelPedido.create(req.body);
+        //Valida que esta creado y envia correo
+
+        return res.status(200).send(object);
+    } catch (e) {
+        t.rollback();
+        return next(e);
+    }
+}

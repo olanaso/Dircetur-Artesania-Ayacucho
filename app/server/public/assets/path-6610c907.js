@@ -1,1 +1,0 @@
-function n(){const e=window.location.href,s=new URL(e).searchParams,r={};for(const[o,a]of s.entries())r.hasOwnProperty(o)?(Array.isArray(r[o])||(r[o]=[r[o]]),r[o].push(a)):r[o]=a;return r}export{n as o};

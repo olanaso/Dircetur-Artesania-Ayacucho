@@ -18,14 +18,62 @@ module.exports = {
     uploadFilproducto,
     reportegeneral, productoFiltrados,
     getProductsByCategoryAbbreviation,
-    getProductsByArtesanoId
+    getProductsByArtesanoId,
+    filtro
 };
 
 
+async function filtro(req,res){
+    const {cat = [], of, des, pmin } = req.query;
+    let {pmax} = req.query
+    if(pmax <= pmin) {
+        pmax = 9999
+    }
+    console.log(cat, of, des, pmin, pmax)
+    const categorias = Array.isArray(cat) ? cat: [cat]
+    console.log(typeof cat)
+    try{
+        let sql = `
+         SELECT p.nombres_es, p.imagen_principal, p.precio, p.palabra_clave_es, p.lst_imagenes,
+            a.nombres,
+            c.abreviatura, c.denominacion, c.id
+         FROM artesania.producto p
+         INNER JOIN artesania.categoria c ON p.categoria_id = c.id
+         INNER JOIN artesania.artesano a ON p.artesano_id = a.id
+         WHERE 1 = 1
+     `;
+        if(cat.length > 0 && cat[0] !== '0'){
+            const categoriaFiltro = categorias.map(categoria => `p.categoria_id = ${categoria}` ).join(' OR ')
+            sql += ` AND (${categoriaFiltro})`
+        }
+        if( pmin >0 || pmax>0)
+        sql += ` AND p.precio >= ${pmin} AND p.precio <= ${pmax}`
+
+
+        if (des === 1){
+            sql += ` AND p.tipo_estado = 'destacado'`
+        }
+
+        const list = await product.sequelize.query(sql, { type: product.sequelize.QueryTypes.SELECT})
+        if(!list || list.length === 0){
+            return handleHttpError(res, "No existen los datos", 401)
+        }
+        return res.status(200).send({list})
+    }catch(e){
+        console.error(e)
+        handleHttpError(res, "Ocurrion un error", 500)
+        return
+    }
+}
+/**
+ * funcion para obtener los productos de a traves del id de un artesano
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function getProductsByArtesanoId(req,res){
     try{
         const {id} = req.params
-        console.log(id)
         const data = await product.findAllProductsByArtesanoId(id)
         res.status(200).send({data})
     }catch(e){
@@ -34,19 +82,21 @@ async function getProductsByArtesanoId(req,res){
     }
 }
 
+/**
+ * funcion para obtener los productos de a traves de la abreviatura de una categoria
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function getProductsByCategoryAbbreviation(req, res){
     try{
-
+        //obtenemos la abreviatura de la categoria que viene en el request
         const {abreviatura} = req.params
-        console.log(abreviatura)
+        //encuentro el id de la categoria a traves de la abreviatura
         const idCategoria = await  categoria.findCategoryIdByAbreviatura(abreviatura)
-        console.log(idCategoria)
+        //Obtengo todos los productos de la categoria a traves del id de la cateogria
         const data = await product.findAllProductsByCategoryId(idCategoria)
-        console.log(data)
         res.status(200).send({data})
-
-
-
     } catch(e){
         console.log(e)
         handleHttpError(res,"Ocurrio un error obteniendo el recuros", 500)
@@ -96,17 +146,19 @@ function eliminar (req, res) {
 }
 
 
-function obtener (req, res) {
+async function obtener (req, res) {
+    const {id} = req.params
+    console.log(id)
 
-    product.findOne({
-        where: { id: req.params.id }
-    })
-        .then(resultset => {
-            res.status(200).json(resultset)
-        })
-        .catch(error => {
-            res.status(400).send(error)
-        })
+    try{
+        const result = await product.findProductoAndArtesanoByProdId(id)
+        console.log(result)
+        res.status(200).send(result)
+
+    }catch(e){
+        console.error(e)
+        handleHttpError(res, "Ocurrio un error obteniendo el recurso", 500)
+    }
 }
 
 

@@ -19,7 +19,7 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="src/cuenta-cliente/profile.css" />
-
+    <link rel="stylesheet" href="css/main.css" />
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
@@ -70,9 +70,11 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <label for="name">Nombre:</label>
+                                        <label for="name">Nombres:</label>
                                         <input class="input-field" type="text" name="name" id="name" required>
                                     </div>
+
+
                                     <div class="input-group">
                                         <label for="phone">Teléfono:</label>
                                         <input class="input-field" type="text" name="phone" id="phone" required>
@@ -88,6 +90,11 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
+                                        <label for="name">Apellidos:</label>
+                                        <input class="input-field" type="text" name="lastName" id="lastName" required>
+                                    </div>
+
+                                    <div class="input-group">
                                         <label for="email">Correo:</label>
                                         <input class="input-field" type="email" name="email" id="email" required disabled>
                                     </div>
@@ -95,16 +102,12 @@
                                         <div class="input-select">
                                             <label for="document-type">Tipo de Documento:</label>
                                             <select class="input-options" name="document-type" id="document-type" required>
-                                                <option value="dni">DNI</option>
+                                                <option value="DNI">DNI</option>
                                                 <option value="passport">Pasaporte</option>
                                                 <option value="other">Otro</option>
                                             </select>
                                             <input class="input-field" type="text" name="document-number" id="document-number" placeholder="Número de Documento" required>
                                         </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="region">Región:</label>
-                                        <input class="input-field" type="text" name="region" id="region" required>
                                     </div>
                                     <div class="input-group">
                                         <label for="address">Dirección:</label>
@@ -146,7 +149,7 @@
                         </div>
                         <form class="info-form personal-info-form" id="passwordResetForm">
                             <div class="input-group">
-                                <label for="old-password">Antigua Contraseña:</label>
+                                <label for="old-password">Contraseña Actual:</label>
                                 <input class="input-field" type="password" name="old-password" id="old-password" required>
                             </div>
                             <div class="input-group">

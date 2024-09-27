@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie ie9" lang="en-US">
+<![endif]-->
+<html lang="en-US">
+
+<!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:20:49 GMT -->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="HTML,CSS,XML,JavaScript">
+	<meta name="author" content="Car Dealer Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Carrito de compras - Artesanias de Ayacucho</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="assets_tienda/css/bootstrap.css">
+	<link rel="stylesheet" href="assets_tienda/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets_tienda/css/main.css">
+	<!-- Slider Pro Css -->
+	<link rel="stylesheet" href="assets_tienda/css/sliderPro.css">
+	<!-- Owl Carousel Css -->
+	<link rel="stylesheet" href="assets_tienda/css/owl-carousel.css">
+	<!-- Flat Icons Css -->
+	<link rel="stylesheet" href="assets_tienda/css/flaticon.css">
+	<!-- Animated Css -->
+	<link rel="stylesheet" href="assets_tienda/css/animated.css">
+	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
+	<style>
+		.long-text {
+			width: 100%;
+			display: -webkit-box !important;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+		}
+
+		.photo-prod {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 250px;
+			/* Altura fija para el contenedor */
+			width: 100%;
+			/* Ancho ajustable según el contenedor padre */
+			overflow: hidden;
+			/* Oculta cualquier parte desbordante de la imagen */
+		}
+
+		.photo-prod img {
+			max-height: 100%;
+			max-width: 100%;
+			object-fit: cover;
+			/* Mantiene la proporción y rellena el contenedor */
+		}
+
+		.nuevo-producto a {
+			background-color: rgb(23, 186, 113) !important;
+			color: #fff !important;
+		}
+
+		.img-contenedor-destacados {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 150px;
+			/* Altura fija para el contenedor */
+			width: 100%;
+			/* Ancho ajustable según el contenedor padre */
+			overflow: hidden;
+			/* Oculta cualquier parte desbordante de la imagen */
+		}
+
+		.img-destacados {
+			float: center;
+			object-fit: cover;
+			max-height: 100%;
+			max-width: 100%;
+			height: 120px !important;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100% !important;
+			border-top-left-radius: calc(.25rem - 1px);
+			border-top-right-radius: calc(.25rem - 1px);
+		}
+
+		.product-description {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			display: block;
+		}
+
+		.secondary-button button {
+			display: inline-block;
+			background: #ffffff;
+			padding: 10px 20px;
+			text-align: center;
+			letter-spacing: 0.5px;
+			font-size: 14px;
+			font-weight: 600;
+			margin: 1px solid #ffffff;
+			border-radius: 5px;
+			text-transform: uppercase;
+			color: #1e1e1e;
+			-webkit-transition: all 0.3s;
+			-o-transition: all 0.3s;
+			transition: all 0.3s;
+			width: 100%;
+		}
+
+		.input-busqueda::placeholder {
+			color: #e6e6e6;
+			/* Color del placeholder */
+
+		}
+
+		.pagination-content ul li a {
+			color: #fff !important;
+
+		}
+
+		.product-card img {
+			object-fit: cover;
+			height: 200px;
+		}
+
+		/*Ocultar */
+
+		/* Ocultar el elemento por defecto */
+		.hidden {
+			display: none;
+		}
+
+		/* Mostrar el elemento en pantallas pequeñas y superiores (≥ 640px) */
+		@media (min-width: 640px) {
+			.sm-block {
+				display: inline;
+			}
+		}
+
+		/* Mostrar el elemento en pantallas medianas y superiores (≥ 768px) */
+		@media (min-width: 768px) {
+			.md-block {
+				display: inline;
+			}
+
+			.md-hidden {
+				display: none;
+			}
+		}
+
+		/* Mostrar el elemento en pantallas grandes y superiores (≥ 1024px) */
+		@media (min-width: 1024px) {
+			.lg-block {
+				display: inline;
+			}
+		}
+
+		/* Mostrar el elemento en pantallas extra grandes y superiores (≥ 1280px) */
+		@media (min-width: 1280px) {
+			.xl-block {
+				display: block;
+			}
+		}
+	</style>
+
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+
+	<div class="preloader">
+		<div class="preloader-bounce">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+
+
+
+	<header class="site-header wow fadeIn" data-wow-duration="1s" id="header">
+
+	</header>
+
+
+	<div class="page-heading wow fadeIn" data-wow-duration="0.5s">
+		<div class="container">
+
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="heading-content-bg wow fadeIn" data-wow-delay="0.75s" data-wow-duration="1s">
+						<div class="row">
+							<div class="heading-content col-md-12">
+								<p><a href="index.html">Inicio</a> / <em> Compras </em> </p>
+								<h2>Carrito de <em>Compras</em></h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="on-grids wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1s">
+
+		<div class="container">
+			<h1>Artesanías seleccionadas para comprar por artesano</h1>
+			<hr>
+			<div class="recent-car-content">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="d-flex justify-content-center">
+							<div class="container mt-4" style="max-width: 800px;" id="contenedor-carrito">
+
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div id="footer">
+
+	</div>
+
+
+	<script src="assets_tienda/js/jquery-1.11.0.min.js"></script>
+
+	<!-- Slider Pro Js -->
+	<script src="assets_tienda/js/sliderpro.min.js"></script>
+
+	<!-- Slick Slider Js -->
+	<script src="assets_tienda/js/slick.js"></script>
+
+	<!-- Owl Carousel Js -->
+	<script src="assets_tienda/js/owl.carousel.min.js"></script>
+
+	<!-- Boostrap Js -->
+	<script src="assets_tienda/js/bootstrap.min.js"></script>
+
+	<!-- Boostrap Js -->
+	<script src="assets_tienda/js/wow.animation.js"></script>
+
+	<!-- Custom Js -->
+	<script src="assets_tienda/js/custom.js"></script>
+
+	<script type="module" src="../src/tienda/carrito-de-compra/index.js"></script>
+
+</body>
+
+<!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:21:58 GMT -->
+
+</html>

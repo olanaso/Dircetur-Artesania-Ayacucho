@@ -1,9 +1,11 @@
 /* jshint indent: 1 */
 const db = require('../config/db');
 sequelize = db.sequelize;
-Sequelize = db.Sequelize;
+Sequelize = db.Sequelize
+const categoria = require('./categoria')
+const {Op} = require('sequelize')
 
-module.exports = sequelize.define('artesano', {
+const artesano = sequelize.define('artesano', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -142,3 +144,24 @@ module.exports = sequelize.define('artesano', {
     timestamps: true
 
 });
+
+/**
+ * Obtener todos los artesanos por ids de un arreglo
+ * @params ids = arreglo
+ */
+artesano.findArtesanosByIds = async function (ids){
+    return await artesano.findAll({
+        where: {
+            id: {
+                [Op.in] : ids
+            }
+        },
+        attributes: ['id', 'nombres', 'foto1', 'foto2']
+    })
+}
+
+
+
+
+
+module.exports = artesano

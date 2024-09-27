@@ -62,5 +62,26 @@ categoria.findCategoryIdByAbreviatura = async function(abreviatura){
     return categoriaEncontrada.id
 }
 
+categoria.findAllCategoriasId = async function(){
+    //Esta opcion da un arreglo con los valores, pero en un objeto
+    // const idCategorias = await categoria.findAll({attributes: ['id']})
+    // return idCategorias
+
+    //Esta opcion da un arreglo con los valores tal cual
+    const categorias = await categoria.findAll()
+    return categorias.map(categoria => categoria.id)
+}
+
+/**
+ * metodo que encuentra todas las categorias y solo devuelve el id y la denominacion
+ * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
+ */
+categoria.findAllIdAndDenominacion = async function(){
+    const result = await categoria.findAll({
+        attributes: ['id', 'denominacion']
+    })
+    return result
+}
+
 
 module.exports = categoria
