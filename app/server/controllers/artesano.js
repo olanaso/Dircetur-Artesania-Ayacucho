@@ -184,6 +184,7 @@ function listarCombo (req, res) {
     sql =
         `
         SELECT
+        a.id,
         a.dni,
         CONCAT( a.dni,' - ',a.nombres, ' ', a.apellidos) AS completo,
         a.correo
