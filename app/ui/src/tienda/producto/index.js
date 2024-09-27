@@ -3,7 +3,7 @@
 import { loadPartials } from "../../utils/viewpartials.js";
 import { getPortadaBusqueda, busquedaProductos } from './api';
 import { custom } from '../utils/common.js';
-import {obtenerProducto} from "../producto/api.js";
+import { obtenerProducto } from "../producto/api.js";
 
 
 (async function () {
@@ -30,16 +30,16 @@ function getQueryParameter (name) {
     return urlParams.get(name);
 }
 
-async function infoProductoById() {
+async function infoProductoById () {
     const producto = await obtenerProducto(getQueryParameter("id"));
     console.log(" >DATA producto: ", producto);
     mostrarInformacion(producto);
 }
 
- function transformarMaterialesResponseToArray(materiales) {
+function transformarMaterialesResponseToArray (materiales) {
     return materiales.split('\n');
 }
-function transformarImagenesSecResponseToArray(imagenes) {
+function transformarImagenesSecResponseToArray (imagenes) {
     // 1er parseo
     const innerString = JSON.parse(imagenes);
     // 2do parseo
@@ -52,8 +52,8 @@ function transformarImagenesSecResponseToArray(imagenes) {
 
 function showMaterials (materiales) {
     //materiales
-    if(materiales.length > 0) {
-        for(let material of materiales) {
+    if (materiales.length > 0) {
+        for (let material of materiales) {
             $("#producto-materiales").append(`
                 <ul>
                 <li><i class="fa fa-check-square"></i><span>${material}</span></li>
@@ -61,20 +61,20 @@ function showMaterials (materiales) {
             `)
         }
     }
-    else{
+    else {
         console.log('no hay materiales')
     }
 }
 
-function showProductSlider(imagenesSecundarias, imagenPrincial) {
+function showProductSlider (imagenesSecundarias, imagenPrincial) {
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.sp-slides').empty();
         $('.sp-thumbnails').empty();
         console.log()
         imagenesSecundarias.forEach((imagen, index) => {
 
-            if(index === 0) {
+            if (index === 0) {
                 let slide = `
             <div class="sp-slide">
                 <img class="sp-image" src="${imagenPrincial}" alt="Slide ${index + 1}" />
@@ -142,7 +142,7 @@ function showProductSlider(imagenesSecundarias, imagenPrincial) {
     console.log('imagenesSecundarias', imagenesSecundarias)
 
 }
-async function mostrarInformacion(producto){
+async function mostrarInformacion (producto) {
     const listColores = JSON.parse(JSON.parse(producto.lst_colores));
     const colores = listColores.join(", ")
     const materiales = transformarMaterialesResponseToArray(producto.materiales_es)
@@ -160,7 +160,7 @@ async function mostrarInformacion(producto){
     $("#artesano-celular").text(`${producto.datos_artesano.celular}`);
     $("#artesano-correo").text(`${producto.datos_artesano.correo}`);
     showMaterials(materiales);
-    showProductSlider(imagenesSecundarias, producto.imagen_principal );
+    showProductSlider(imagenesSecundarias, producto.imagen_principal);
 }
 
 function startApp () {
