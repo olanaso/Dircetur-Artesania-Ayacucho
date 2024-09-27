@@ -1,7 +1,8 @@
 
 //export const baseUrl = 'https://api-certificados.centrodegestion.org'; 
 // export const baseUrl = 'http://148.113.196.34:80/api';
-export const baseUrl = 'https://app.artesaniasdeayacucho.pe/api';
+export const baseUrl = 'http://localhost:3002/api';
+//export const baseUrl = 'https://app.artesaniasdeayacucho.pe/api';
 export const baseUrldni = 'https://dni.biblio-ideas.com/api';
 //} Function to save data in localStorage
 export function saveDataToLocalStorage (key, data) {

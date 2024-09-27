@@ -1,7 +1,7 @@
 const sequelize = require('sequelize');
 const model = require('../models/cliente');
 const { Op } = require('sequelize');
-const {handleHttpError} = require('../utils/handleError')
+const { handleHttpError } = require('../utils/handleError')
 const usuario = require('../models/usuario')
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
     uploadFilimg
 };
 
-function guardar(req, res) {
+function guardar (req, res) {
 
     model.create(req.body)
         .then(object => {
@@ -27,9 +27,9 @@ function guardar(req, res) {
 
 }
 
-async function actualizar(req, res) {
+async function actualizar (req, res) {
     const t = await model.sequelize.transaction()
-    try{
+    try {
         const id = req.params.id
         const clienteEncontrado = await model.findClienteById(id) //Con esto encuentro el cliente con el id
         const request = req.body
@@ -37,25 +37,25 @@ async function actualizar(req, res) {
         await clienteEncontrado.update(request) //actualizo el usuario encontrado en la base de datos
         //Encuentro el usuario con la llave foranea que almacena el cliente
         const usuarioEncontrado = await usuario.findUsuarioById(clienteEncontrado.usuario_id)
-       //retiro valores del request que no voy a actualizar porque no existen en usuario
-        let {direccion, region, ciudad, pais, tipo_documento, numero_documento,
-        direccion_envio, foto_perfil, list_reclamos, usuario_id, ...requestForUser} = request
+        //retiro valores del request que no voy a actualizar porque no existen en usuario
+        let { direccion, region, ciudad, pais, tipo_documento, numero_documento,
+            direccion_envio, foto_perfil, list_reclamos, usuario_id, ...requestForUser } = request
         requestForUser.nombre_completo = request.nombres + " " + request.apellidos
         await usuarioEncontrado.update(requestForUser)
 
-        res.status(200).send({message: "Cliente actualizado correctamente"})
+        res.status(200).send({ message: "Cliente actualizado correctamente" })
         return await t.commit()
-    }catch(e){
+    } catch (e) {
         await t.rollback()
-        handleHttpError(res,"Error actualizando",500)
+        handleHttpError(res, "Error actualizando", 500)
         console.error(e)
     }
 }
 
-async function eliminar(req, res) {
+async function eliminar (req, res) {
     const t = await model.sequelize.transaction()
-    const {id} = req.params
-    try{
+    const { id } = req.params
+    try {
         //encuentro el cliente con el id
         const clienteEncontrado = await model.findClienteById(id)
         const usuarioId = clienteEncontrado.usuario_id
@@ -64,28 +64,42 @@ async function eliminar(req, res) {
         //Elimino
         await usuarioEncontrado.destroy()
         await clienteEncontrado.destroy()
-        res.status(200).send({message: "Cliente eliminado correctamente"})
+        res.status(200).send({ message: "Cliente eliminado correctamente" })
         return await t.commit()
 
-    }catch(e){
+    } catch (e) {
         await t.rollback()
         console.error(e)
         handleHttpError(res, "Error eliminando cliente", 500)
     }
 
 }
-async function obtener(req, res) {
-    const {id} = req.params
+
+function obtener (req, res) {
+
+    model.findOne({
+        where: { id: req.params.id }
+    })
+        .then(resultset => {
+            res.status(200).json(resultset)
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}
+
+async function obtenerMal (req, res) {
+    const { id } = req.params
     console.log(id)
-    try{
+    try {
         clienteData = await model.FindUserAndClienteDataByClienteId(id)
 
-        if(clienteData){
-            return res.status(200).send({clienteData})
+        if (clienteData) {
+            return res.status(200).send({ clienteData })
         }
         handleHttpError(res, "El cliente no existe", 404)
 
-    }catch(e){
+    } catch (e) {
         console.error(e)
         handleHttpError(res, "Error obteniendo datos del cliente", 500)
     }
@@ -94,7 +108,7 @@ async function obtener(req, res) {
 
 const DEFAULT_PAGE_LIMIT = 10; // Número predeterminado de resultados por página
 
-function listar(req, res) {
+function listar (req, res) {
     const page = parseInt(req.query.page) || 1; // Página solicitada, por defecto la primera
     const limit = parseInt(req.query.limit) || DEFAULT_PAGE_LIMIT; // Límite de resultados por página
 
@@ -104,21 +118,21 @@ function listar(req, res) {
         limit: limit,
         offset: offset
     })
-    .then(result => {
-        const { count, rows } = result;
-        const totalPages = Math.ceil(count / limit); // Calcular el número total de páginas
+        .then(result => {
+            const { count, rows } = result;
+            const totalPages = Math.ceil(count / limit); // Calcular el número total de páginas
 
-        res.status(200).json({
-            totalItems: count,
-            totalPages: totalPages,
-            currentPage: page,
-            clientes: rows
+            res.status(200).json({
+                totalItems: count,
+                totalPages: totalPages,
+                currentPage: page,
+                clientes: rows
+            });
+        })
+        .catch(error => {
+            console.error('Error al listar clientes:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
         });
-    })
-    .catch(error => {
-        console.error('Error al listar clientes:', error);
-        res.status(500).json({ message: 'Error interno del servidor' });
-    });
 }
 
 /**
@@ -127,29 +141,29 @@ function listar(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-async function save(req, res, next) {
+async function save (req, res, next) {
     const t = await model.sequelize.transaction() //transaccion
-    try{
+    try {
         let requestOriginal = req.body
         //agrego nombre y le asigno el valor de nombres al request
-        const requestUsuario = {...requestOriginal, nombre: requestOriginal.nombres} //agrego nombre y le asigno el valor de nombres del request a nombre
+        const requestUsuario = { ...requestOriginal, nombre: requestOriginal.nombres } //agrego nombre y le asigno el valor de nombres del request a nombre
         const usuarioCreado = await usuario.create(requestUsuario,
-            {transaction: t}) //se crea el usuario
+            { transaction: t }) //se crea el usuario
         //se actualiza el request para que tenga el id del usuario
-        const requestCliente = {...requestOriginal, usuario_id : usuarioCreado.id}
+        const requestCliente = { ...requestOriginal, usuario_id: usuarioCreado.id }
         //se crea el nuevo cliente
         const clienteCreado = await model.create(requestCliente)
 
-        res.status(200).send({message:"Cliente creado correctamente"})
+        res.status(200).send({ message: "Cliente creado correctamente" })
         return await t.commit()
-    }catch(e){
+    } catch (e) {
         await t.rollback()
         console.error(e)
         handleHttpError(res, "Error creando cliente", 500)
     }
 }
 
-async function filtrar(req, res) {
+async function filtrar (req, res) {
     try {
         let { nombres, apellidos, correo, page, limit } = req.query;
 
@@ -163,7 +177,7 @@ async function filtrar(req, res) {
             //whereCondition.nombres = nombres;
             whereCondition.nombres = {
                 [Op.like]: `%${nombres}%`
-              };
+            };
         }
         if (apellidos) {
             //whereCondition.apellidos = apellidos;
@@ -175,11 +189,11 @@ async function filtrar(req, res) {
         if (correo) {
             whereCondition.correo = correo;
         }
-       
+
         const clientes = await model.findAll({ where: whereCondition });
 
         const offset = (page - 1) * limit; // Calcular el desplazamiento
-        const result = await model.findAndCountAll({ 
+        const result = await model.findAndCountAll({
             where: whereCondition,
             limit: limit,
             offset: offset

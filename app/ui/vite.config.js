@@ -59,7 +59,7 @@ export default {
         'tienda/artesano': resolve(__dirname, 'tienda/artesano.html'),
         'tienda/artesanos': resolve(__dirname, 'tienda/artesanos.html'),
         'tienda/producto': resolve(__dirname, 'tienda/producto.html'),
-        'tienda/artesano': resolve(__dirname, 'tienda/artesano.html'),
+
         'tienda/carrito-de-compra': resolve(__dirname, 'tienda/carrito-de-compra.html'),
         'tienda/proceso-de-compra': resolve(__dirname, 'tienda/proceso-de-compra.html'),
         'tienda/productos-deseados': resolve(__dirname, 'tienda/productos-deseados.html'),

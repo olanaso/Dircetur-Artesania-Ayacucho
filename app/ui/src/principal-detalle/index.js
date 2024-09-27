@@ -2,11 +2,11 @@ import { validarHTML5 } from '../utils/validateForm';
 import { saveDataToLocalStorage } from '../utils/config';
 import { hideLoading } from '../utils/init';
 import { obtenerParametrosURL } from '../utils/path';
-import { obtenerProducto, obtenerArtesano, listarProductos, listarProductosPorCategoria } from './api';
-import {addProductToWishlist} from '../añadir-deseados/api.js';
+import { obtenerProducto, obtenerArtesano, listarProductos, listarProductosPorCategoria, listarArtesanosCombo } from './api';
+import { addProductToWishlist } from '../añadir-deseados/api.js';
 import { getDataFromLocalStorage } from '../utils/config';
 
-function getClientId() {
+function getClientId () {
     return getDataFromLocalStorage('idCliente');
 }
 
@@ -24,9 +24,35 @@ let cantidadMaxima;
 document.addEventListener('DOMContentLoaded', async () => {
     infoProd();
     setupQuantityControls();
+    alert(1)
+    cargar();
+
 });
 
-async function infoProd() {
+async function cargar () {
+
+    debugger
+    let datos = await listarArtesanosCombo()
+
+    $('#drp-artesano-dni').select2({
+        placeholder: 'Seleccione una opción',
+        allowClear: true,
+        data: datos.map(function (item) {
+            return {
+                id: item.id,
+                text: item.nombre
+            };
+        })
+    });
+
+    // Mostrar el valor seleccionado en el input
+    $('#drp-artesano-dni').on('select2:select', function (e) {
+        var data = e.params.data;
+        $('#dni').val(data.text);  // Asigna el texto seleccionado al input
+    });
+}
+
+async function infoProd () {
     const productoId = getQueryParameter('id');
     const producto = await obtenerProducto(productoId);
     const artesano = await obtenerArtesano(producto.artesano_id);
@@ -323,7 +349,7 @@ const acc = document.getElementsByClassName("accordion");
 let i;
 
 for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
+    acc[i].addEventListener("click", function () {
         for (let j = 0; j < acc.length; j++) {
             if (acc[j] !== this) {
                 acc[j].classList.remove("active");
@@ -348,7 +374,7 @@ for (i = 0; i < acc.length; i++) {
     });
 }
 
-function setupQuantityControls() {
+function setupQuantityControls () {
     const cantidadMaxima = 10;
     let cantidadProd = 0;
 
@@ -375,7 +401,7 @@ function setupQuantityControls() {
     });
 }
 
-function getQueryParameter(name) {
+function getQueryParameter (name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }

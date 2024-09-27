@@ -6,7 +6,7 @@ const PARAMETROS = require("../helpers/parametros");
 const moment = require('moment');
 const categoria = require('../models/categoria')
 const product = require('../models/producto')
-const {handleHttpError} = require("../utils/handleError");
+const { handleHttpError } = require("../utils/handleError");
 
 
 
@@ -21,7 +21,8 @@ module.exports = {
     obtenerDNI,
     uploadFilartesano,
     saveUsuarioArtesano,
-    getAllArtesanosByCategoria
+    getAllArtesanosByCategoria,
+    listarCombo
 };
 
 /**
@@ -30,9 +31,9 @@ module.exports = {
  * @param res
  * @returns {Promise<void>}
  */
-async function getAllArtesanosByCategoria(req,res){
+async function getAllArtesanosByCategoria (req, res) {
     const t = await artesanoModel.sequelize.transaction()
-    try{
+    try {
 
         //obtengo todas los id de las categorias y sus denominaciones
         const categorias
@@ -50,30 +51,30 @@ async function getAllArtesanosByCategoria(req,res){
 
 
         //resultado final haciendo uso de map, filter y find
-        const resultadoFinal = categorias.map( categoria => {
+        const resultadoFinal = categorias.map(categoria => {
             const artesanosFiltrados
                 = artesanosPorCategoria.filter(apc =>
-                apc.categoria_id === categoria.id).map(apc => {
-                    const artesano = artesanosEncontrados.find(a => a.id === apc.artesano_id)
-                    return artesano ? {id: artesano.id, nombres: artesano.nombres, foto1: artesano.foto1, foto2: artesano.foto2} : null
-            })
-                .filter(artesano => artesano !== null)
+                    apc.categoria_id === categoria.id).map(apc => {
+                        const artesano = artesanosEncontrados.find(a => a.id === apc.artesano_id)
+                        return artesano ? { id: artesano.id, nombres: artesano.nombres, foto1: artesano.foto1, foto2: artesano.foto2 } : null
+                    })
+                    .filter(artesano => artesano !== null)
 
             return {
                 categoria: categoria.denominacion, //categoria
                 artesanos: artesanosFiltrados   //array con artesanos que trabajan en esa categoria
             }
-        }).filter(categoria => categoria.artesanos.length >0)
+        }).filter(categoria => categoria.artesanos.length > 0)
 
         res.status(200)
         res.json(resultadoFinal)
 
         return await t.commit()
 
-    }catch(e){
+    } catch (e) {
         await t.rollback()
         console.error(e)
-        handleHttpError(res,"Ocurrio un error obteniendo los artesanos", 500)
+        handleHttpError(res, "Ocurrio un error obteniendo los artesanos", 500)
     }
 
 }
@@ -175,6 +176,32 @@ function listar (req, res) {
 }
 
 
+
+
+function listarCombo (req, res) {
+
+    let sql = ``;
+    sql =
+        `
+        SELECT
+        a.dni,
+        CONCAT( a.dni,' - ',a.nombres, ' ', a.apellidos) AS completo,
+        a.correo
+        FROM artesano a
+        INNER JOIN usuario c ON c.id = a.usuario_id
+        WHERE c.tipousuario = 2
+        ORDER BY completo asc
+
+    `
+    artesanoModel.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
+        .then(resultset => {
+            res.status(200).json(resultset)
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}
+
 function buscar (req, res) {
 
 
@@ -259,13 +286,13 @@ async function saveUsuarioArtesano (req, res, next) {
             usuario_result = await artesanos.create({ ...usuario }, { transaction: t });
 
         }
-        console.log('El id!!', usuario.id )
+        console.log('El id!!', usuario.id)
         let artesano_result = null;
 
         let objectArtesano = await artesanoModel.findArtesanoByUserId(usuario.id)
 
 
-        console.log('model artesano',modelArtesano)
+        console.log('model artesano', modelArtesano)
         //Guardado de artesano
 
         if (objectArtesano != null) { //proceso de actualizacion

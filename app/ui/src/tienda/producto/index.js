@@ -25,12 +25,26 @@ import { obtenerProducto } from "../producto/api.js";
     } ``
 })();
 
+
+function startApp () {
+    createMenuMobil()
+    //createSlidersProd()
+    // cargarDataPortada();
+    // rellenarFormulario();
+    // realizarBusqueda();
+
+    infoProductoById()
+
+}
+
+
 function getQueryParameter (name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
 
 async function infoProductoById () {
+
     const producto = await obtenerProducto(getQueryParameter("id"));
     console.log(" >DATA producto: ", producto);
     mostrarInformacion(producto);
@@ -68,77 +82,38 @@ function showMaterials (materiales) {
 
 function showProductSlider (imagenesSecundarias, imagenPrincial) {
 
-    $(document).ready(function () {
-        $('.sp-slides').empty();
-        $('.sp-thumbnails').empty();
-        console.log()
-        imagenesSecundarias.forEach((imagen, index) => {
+    let imagenes = [imagenPrincial, ...imagenesSecundarias]
+    let sp_slides = ``
+    let sp_thumbnails = ``
+    for (let imagen of imagenes) {
+        sp_slides += `
+        <div class="sp-slide ">
+									<img class="sp-image" src="${imagen}" alt="" />
+								</div>
+        `
+        sp_thumbnails += `<img style="heigth:120;width:180px" class="sp-thumbnail" src="${imagen}" alt="" />`
+    }
 
-            if (index === 0) {
-                let slide = `
-            <div class="sp-slide">
-                <img class="sp-image" src="${imagenPrincial}" alt="Slide ${index + 1}" />
-            </div>
-                        <div class="sp-slide">
-                <img class="sp-image" src="${imagen}" alt="Slide ${index + 1}" />
-            </div>
-            `;
+    $('#id-sp-slides').html('');
+    $('#id-sp-thumbnails').html('');
+    $('#id-sp-slides').append(sp_slides);
+    $('#id-sp-thumbnails').append(sp_thumbnails);
 
-                let thumbnail = `
-            <img class="sp-thumbnail" src="${imagenPrincial}" alt="Thumbnail ${index + 1}" />
-                        <img class="sp-thumbnail" src="${imagen}" alt="Thumbnail ${index + 1}" />
-            `;
+    $('#single-car').sliderPro({
+        width: 570,
+        height: 450,
+        fade: true,
+        arrows: true,
+        buttons: false,
+        fullScreen: true,
+        shuffle: true,
+        smallSize: 500,
+        mediumSize: 1000,
+        largeSize: 3000,
+        thumbnailArrows: true,
+        autoplay: false
+    });
 
-                $('.sp-slides').append(slide);
-                $('.sp-thumbnails').append(thumbnail);
-            }
-            else {
-                console.log('imagen del for', imagen)
-                let slide = `
-            <div class="sp-slide">
-                <img class="sp-image" src="${imagen}" alt="Slide ${index + 1}" />
-            </div>
-            `;
-
-                let thumbnail = `
-            <img class="sp-thumbnail" src="${imagen}" alt="Thumbnail ${index + 1}" />
-            `;
-
-                $('.sp-slides').append(slide);
-                $('.sp-thumbnails').append(thumbnail);
-            }
-        });
-
-
-
-        $('#single-car').sliderPro({
-            width: 550,
-            height: 500,
-            arrows: true,
-            buttons: false,
-            thumbnailsPosition: 'bottom',
-            thumbnailWidth: 80,
-            thumbnailHeight: 80,
-            autoplay: false,
-            breakpoints: {
-                800: {
-                    width: 100,
-                    height: 100,
-                    thumbnailsPosition: 'bottom',
-                    thumbnailWidth: 100,
-                    thumbnailHeight: 60,
-                },
-                500: {
-                    width: 100,
-                    height: 200,
-                    thumbnailsPosition: 'bottom',
-                    thumbnailWidth: 110,
-                    thumbnailHeight: 50,
-                }
-            }
-        });
-
-    })
     console.log('imagenesSecundarias', imagenesSecundarias)
 
 }
@@ -159,20 +134,9 @@ async function mostrarInformacion (producto) {
     $("#producto-cualidades").text(`${producto.cualidades_es}`);
     $("#artesano-celular").text(`${producto.datos_artesano.celular}`);
     $("#artesano-correo").text(`${producto.datos_artesano.correo}`);
+
     showMaterials(materiales);
     showProductSlider(imagenesSecundarias, producto.imagen_principal);
-}
-
-function startApp () {
-
-    createSlidersProd()
-    // cargarDataPortada();
-    // rellenarFormulario();
-    // realizarBusqueda();
-    debugger
-    createMenuMobil()
-    infoProductoById()
-
 }
 
 function createSlidersProd () {
