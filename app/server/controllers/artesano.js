@@ -306,7 +306,7 @@ async function saveUsuarioArtesano (req, res, next) {
 
         } else {  //registro de nuevo usuario
             artesano.usuario_id = usuario_result.id;
-            artesano_result = await modelArtesano.create({ ...artesano }, { transaction: t });
+            artesano_result = await artesanoModel.create({ ...artesano }, { transaction: t });
 
         }
 
