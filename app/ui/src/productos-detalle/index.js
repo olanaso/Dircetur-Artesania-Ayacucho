@@ -1,7 +1,7 @@
 import { loadPartials } from '../utils/viewpartials';
 import { validarHTML5 } from '../utils/validateForm';
 import { FileUploader } from '../utils/uploadJorge.js';
-import { buscarProducto, geteditarproducto, lstcategoria, guardarProducto, buscarartesanoDNI, buscarartesanoid } from './api';
+import { buscarProducto, geteditarproducto, lstcategoria, guardarProducto, buscarartesanoDNI, buscarartesanoid, listarArtesanosCombo } from './api';
 
 import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
 import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
@@ -34,12 +34,16 @@ hideLoading();
 })();
 
 function startApp () {
+
+  //alert(1)
   //checkadminsession(); 
   setTimeout(function () {
     llenarinformacionIESTPProg();
     //marcarSubMenuSeleccionado();
     buscarUsuario();
+    cargar();
   }, 500);
+
 
 
 
@@ -63,7 +67,40 @@ let contadorOfertas = 0;
 let contadorCostos = 0;
 
 
-var artesano_id = 0;
+let artesano_id = null;
+
+
+
+async function cargar () {
+
+  debugger
+  //alert(1)
+  let datos = await listarArtesanosCombo()
+  console.log(datos)
+
+  $('#drp-artesano-dni').select2({
+    placeholder: 'Seleccione una opción',
+    allowClear: true,
+    data: datos.map(function (item) {
+      return {
+        id: item.dni,
+        text: item.completo,
+        artesano_id: item.id
+      };
+    })
+  });
+
+
+  // Mostrar el valor seleccionado en el input
+  $('#drp-artesano-dni').on('select2:select', function (e) {
+    var data = e.params.data;
+    $('#dni').val(data.id);  // Asigna el texto seleccionado al input
+    $('#nombrecompleto').val(data.text.split(' - ')[1]);
+    console.log('id del artesano', data.artesano_id)
+    artesano_id = data.artesano_id
+  });
+}
+
 
 
 async function buscarUsuario () {
@@ -252,7 +289,6 @@ async function buscarUsuario () {
       let restar_stock = $('#restarStock').is(':checked') ? 1 : 0;
       let tipo_estado = $('#estadoAgotado').val()
       let fecha_disponible = $('#fechaDisponible').val()
-
       let categoria_id = $('#lstcategoria').val()
 
 

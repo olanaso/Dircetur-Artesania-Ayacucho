@@ -1,12 +1,12 @@
 const sequelize = require('sequelize');
-const artesano = require('../models/artesano');
+const artesanoModel = require('../models/artesano');
 const artesanos = require('../models/usuario');
 const { Op } = require('sequelize');
 const PARAMETROS = require("../helpers/parametros");
 const moment = require('moment');
 const categoria = require('../models/categoria')
 const product = require('../models/producto')
-const {handleHttpError} = require("../utils/handleError");
+const { handleHttpError } = require("../utils/handleError");
 
 
 
@@ -21,7 +21,8 @@ module.exports = {
     obtenerDNI,
     uploadFilartesano,
     saveUsuarioArtesano,
-    getAllArtesanosByCategoria
+    getAllArtesanosByCategoria,
+    listarCombo
 };
 
 /**
@@ -30,9 +31,9 @@ module.exports = {
  * @param res
  * @returns {Promise<void>}
  */
-async function getAllArtesanosByCategoria(req,res){
-    const t = await artesano.sequelize.transaction()
-    try{
+async function getAllArtesanosByCategoria (req, res) {
+    const t = await artesanoModel.sequelize.transaction()
+    try {
 
         //obtengo todas los id de las categorias y sus denominaciones
         const categorias
@@ -46,41 +47,41 @@ async function getAllArtesanosByCategoria(req,res){
         const artesanosIds = [...new Set(artesanosPorCategoria.map(artesano => artesano.artesano_id))]
 
         //encuentro los artesanos por ids
-        const artesanosEncontrados = await artesano.findArtesanosByIds(artesanosIds)
+        const artesanosEncontrados = await artesanoModel.findArtesanosByIds(artesanosIds)
 
 
         //resultado final haciendo uso de map, filter y find
-        const resultadoFinal = categorias.map( categoria => {
+        const resultadoFinal = categorias.map(categoria => {
             const artesanosFiltrados
                 = artesanosPorCategoria.filter(apc =>
-                apc.categoria_id === categoria.id).map(apc => {
-                    const artesano = artesanosEncontrados.find(a => a.id === apc.artesano_id)
-                    return artesano ? {id: artesano.id, nombres: artesano.nombres, foto1: artesano.foto1, foto2: artesano.foto2} : null
-            })
-                .filter(artesano => artesano !== null)
+                    apc.categoria_id === categoria.id).map(apc => {
+                        const artesano = artesanosEncontrados.find(a => a.id === apc.artesano_id)
+                        return artesano ? { id: artesano.id, nombres: artesano.nombres, foto1: artesano.foto1, foto2: artesano.foto2 } : null
+                    })
+                    .filter(artesano => artesano !== null)
 
             return {
                 categoria: categoria.denominacion, //categoria
                 artesanos: artesanosFiltrados   //array con artesanos que trabajan en esa categoria
             }
-        }).filter(categoria => categoria.artesanos.length >0)
+        }).filter(categoria => categoria.artesanos.length > 0)
 
         res.status(200)
         res.json(resultadoFinal)
 
         return await t.commit()
 
-    }catch(e){
+    } catch (e) {
         await t.rollback()
         console.error(e)
-        handleHttpError(res,"Ocurrio un error obteniendo los artesanos", 500)
+        handleHttpError(res, "Ocurrio un error obteniendo los artesanos", 500)
     }
 
 }
 
 function guardar (req, res) {
 
-    artesano.create(req.body)
+    artesanoModel.create(req.body)
         .then(object => {
             res.status(200).json(object);
         })
@@ -92,7 +93,7 @@ function guardar (req, res) {
 
 function actualizar (req, res) {
 
-    artesano.findOne({
+    artesanoModel.findOne({
         where: { id: req.params.id }
 
     })
@@ -107,7 +108,7 @@ function actualizar (req, res) {
 
 function eliminar (req, res) {
 
-    artesano
+    artesanoModel
         .findOne({
             where: { id: req.body.id }
         })
@@ -122,7 +123,7 @@ function eliminar (req, res) {
 
 function obtener (req, res) {
 
-    artesano.findOne({
+    artesanoModel.findOne({
         where: { id: req.params.id }
     })
         .then(resultset => {
@@ -134,7 +135,7 @@ function obtener (req, res) {
 }
 function obtenerDNI (req, res) {
 
-    artesano.findOne({
+    artesanoModel.findOne({
         where: { dni: req.params.dni }
     })
         .then(resultset => {
@@ -165,7 +166,7 @@ function listar (req, res) {
     ORDER BY a.id DESC
     LIMIT 50;
     `
-    artesano.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
+    artesanoModel.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -174,6 +175,33 @@ function listar (req, res) {
         })
 }
 
+
+
+
+function listarCombo (req, res) {
+
+    let sql = ``;
+    sql =
+        `
+        SELECT
+        a.id,
+        a.dni,
+        CONCAT( a.dni,' - ',a.nombres, ' ', a.apellidos) AS completo,
+        a.correo
+        FROM artesano a
+        INNER JOIN usuario c ON c.id = a.usuario_id
+        WHERE c.tipousuario = 2
+        ORDER BY completo asc
+
+    `
+    artesanoModel.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
+        .then(resultset => {
+            res.status(200).json(resultset)
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}
 
 function buscar (req, res) {
 
@@ -218,7 +246,7 @@ function buscar (req, res) {
     `;
 
 
-    artesano.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
+    artesanoModel.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -231,9 +259,10 @@ function buscar (req, res) {
 /*Guarda los datos generales de un predio*/
 
 async function saveUsuarioArtesano (req, res, next) {
-    const t = await artesano.sequelize.transaction();
+    const t = await artesanoModel.sequelize.transaction();
     try {
         const { usuario, artesano } = req.body;
+        console.log('usuario', usuario)
 
         //Guardar usuario 
         let modelArtesano = artesano;
@@ -258,15 +287,13 @@ async function saveUsuarioArtesano (req, res, next) {
             usuario_result = await artesanos.create({ ...usuario }, { transaction: t });
 
         }
-
+        console.log('El id!!', usuario.id)
         let artesano_result = null;
 
-        let objectArtesano = await modelArtesano.findOne({
-            where: {
-                usuario_id: usuario_result.id ? usuario_result.id : 0
-            }
-        });
+        let objectArtesano = await artesanoModel.findArtesanoByUserId(usuario.id)
 
+
+        console.log('model artesano', modelArtesano)
         //Guardado de artesano
 
         if (objectArtesano != null) { //proceso de actualizacion
@@ -279,7 +306,7 @@ async function saveUsuarioArtesano (req, res, next) {
 
         } else {  //registro de nuevo usuario
             artesano.usuario_id = usuario_result.id;
-            artesano_result = await modelArtesano.create({ ...artesano }, { transaction: t });
+            artesano_result = await artesanoModel.create({ ...artesano }, { transaction: t });
 
         }
 
@@ -299,9 +326,9 @@ async function saveUsuarioArtesano (req, res, next) {
 
 
 async function save (req, res, next) {
-    const t = await artesano.sequelize.transaction();
+    const t = await artesanoModel.sequelize.transaction();
     try {
-        let object = await artesano.findOne({
+        let object = await artesanoModel.findOne({
             where: {
                 id: req.body.id ? req.body.id : 0
             }
@@ -315,7 +342,7 @@ async function save (req, res, next) {
             object.usuaregistra_id = req.userId;
             await object.save({ transaction: t });
         } else {
-            object = await artesano.create({ ...req.body }, { transaction: t });
+            object = await artesanoModel.create({ ...req.body }, { transaction: t });
         }
         await t.commit();
         // Envía el ID del objeto creado junto con el objeto

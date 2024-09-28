@@ -160,6 +160,10 @@ artesano.findArtesanosByIds = async function (ids){
     })
 }
 
+artesano.findArtesanoByUserId = async function(id) {
+    return await artesano.findOne({where: {usuario_id: id}})
+}
+
 
 
 

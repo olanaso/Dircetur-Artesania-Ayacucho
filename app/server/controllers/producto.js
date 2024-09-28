@@ -5,14 +5,14 @@ const { Op } = require('sequelize');
 const PARAMETROS = require("../helpers/parametros");
 const moment = require('moment');
 const { DECIMAL } = require('sequelize');
-const {handleHttpError} = require("../utils/handleError");
+const { handleHttpError } = require("../utils/handleError");
 
 module.exports = {
     guardar,
     actualizar,
     eliminar,
     obtener,
-    listar, 
+    listar,
     save,
     buscar,
     uploadFilproducto,
@@ -23,16 +23,16 @@ module.exports = {
 };
 
 
-async function filtro(req,res){
-    const {cat = [], of, des, pmin } = req.query;
-    let {pmax} = req.query
-    if(pmax <= pmin) {
+async function filtro (req, res) {
+    const { cat = [], of, des, pmin } = req.query;
+    let { pmax } = req.query
+    if (pmax <= pmin) {
         pmax = 9999
     }
     console.log(cat, of, des, pmin, pmax)
-    const categorias = Array.isArray(cat) ? cat: [cat]
+    const categorias = Array.isArray(cat) ? cat : [cat]
     console.log(typeof cat)
-    try{
+    try {
         let sql = `
          SELECT p.nombres_es, p.imagen_principal, p.precio, p.palabra_clave_es, p.lst_imagenes,
             a.nombres,
@@ -42,24 +42,24 @@ async function filtro(req,res){
          INNER JOIN artesania.artesano a ON p.artesano_id = a.id
          WHERE 1 = 1
      `;
-        if(cat.length > 0 && cat[0] !== '0'){
-            const categoriaFiltro = categorias.map(categoria => `p.categoria_id = ${categoria}` ).join(' OR ')
+        if (cat.length > 0 && cat[0] !== '0') {
+            const categoriaFiltro = categorias.map(categoria => `p.categoria_id = ${categoria}`).join(' OR ')
             sql += ` AND (${categoriaFiltro})`
         }
-        if( pmin >0 || pmax>0)
-        sql += ` AND p.precio >= ${pmin} AND p.precio <= ${pmax}`
+        if (pmin > 0 || pmax > 0)
+            sql += ` AND p.precio >= ${pmin} AND p.precio <= ${pmax}`
 
 
-        if (des === 1){
+        if (des === 1) {
             sql += ` AND p.tipo_estado = 'destacado'`
         }
 
-        const list = await product.sequelize.query(sql, { type: product.sequelize.QueryTypes.SELECT})
-        if(!list || list.length === 0){
+        const list = await product.sequelize.query(sql, { type: product.sequelize.QueryTypes.SELECT })
+        if (!list || list.length === 0) {
             return handleHttpError(res, "No existen los datos", 401)
         }
-        return res.status(200).send({list})
-    }catch(e){
+        return res.status(200).send({ list })
+    } catch (e) {
         console.error(e)
         handleHttpError(res, "Ocurrion un error", 500)
         return
@@ -71,14 +71,14 @@ async function filtro(req,res){
  * @param res
  * @returns {Promise<void>}
  */
-async function getProductsByArtesanoId(req,res){
-    try{
-        const {id} = req.params
+async function getProductsByArtesanoId (req, res) {
+    try {
+        const { id } = req.params
         const data = await product.findAllProductsByArtesanoId(id)
-        res.status(200).send({data})
-    }catch(e){
+        res.status(200).send({ data })
+    } catch (e) {
         console.error(e)
-        handleHttpError(res,"Ocurrio un error obteniendo el recuros", 500)
+        handleHttpError(res, "Ocurrio un error obteniendo el recuros", 500)
     }
 }
 
@@ -88,18 +88,18 @@ async function getProductsByArtesanoId(req,res){
  * @param res
  * @returns {Promise<void>}
  */
-async function getProductsByCategoryAbbreviation(req, res){
-    try{
+async function getProductsByCategoryAbbreviation (req, res) {
+    try {
         //obtenemos la abreviatura de la categoria que viene en el request
-        const {abreviatura} = req.params
+        const { abreviatura } = req.params
         //encuentro el id de la categoria a traves de la abreviatura
-        const idCategoria = await  categoria.findCategoryIdByAbreviatura(abreviatura)
+        const idCategoria = await categoria.findCategoryIdByAbreviatura(abreviatura)
         //Obtengo todos los productos de la categoria a traves del id de la cateogria
         const data = await product.findAllProductsByCategoryId(idCategoria)
-        res.status(200).send({data})
-    } catch(e){
+        res.status(200).send({ data })
+    } catch (e) {
         console.log(e)
-        handleHttpError(res,"Ocurrio un error obteniendo el recuros", 500)
+        handleHttpError(res, "Ocurrio un error obteniendo el recuros", 500)
     }
 
 }
@@ -147,15 +147,15 @@ function eliminar (req, res) {
 
 
 async function obtener (req, res) {
-    const {id} = req.params
+    const { id } = req.params
     console.log(id)
 
-    try{
+    try {
         const result = await product.findProductoAndArtesanoByProdId(id)
         console.log(result)
         res.status(200).send(result)
 
-    }catch(e){
+    } catch (e) {
         console.error(e)
         handleHttpError(res, "Ocurrio un error obteniendo el recurso", 500)
     }
@@ -173,19 +173,19 @@ async function obtener (req, res) {
             res.status(400).send(error)
         })
 }*/
- 
 
-function reportegeneral(req, res) {
-    let sql = ``; 
-        sql = 
+
+function reportegeneral (req, res) {
+    let sql = ``;
+    sql =
         `
         SELECT
             (SELECT COUNT(*) FROM producto) AS producto,
             (SELECT COUNT(*) FROM usuario) AS usuario,
             (SELECT COUNT(*) FROM artesano) AS artesano,
             (SELECT COUNT(*) FROM categoria) AS categoria;
-    `    
-    product.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+    `
+    product.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -194,9 +194,9 @@ function reportegeneral(req, res) {
         })
 }
 
-function listar(req, res) {
-    let sql = ``; 
-        sql = 
+function listar (req, res) {
+    let sql = ``;
+    sql =
         `
         SELECT 
         a.id,
@@ -210,8 +210,8 @@ function listar(req, res) {
     INNER JOIN usuario c ON c.id = b.usuario_id 
     order by a.id desc
     limit 50
-    `    
-    product.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+    `
+    product.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -221,21 +221,22 @@ function listar(req, res) {
 }
 
 
-function buscar(req, res) {
 
-    
-    const { 
+function buscar (req, res) {
+
+
+    const {
         nombres_es = '',
         nombre_completo = '',
         precio = null,
         cantidad = null,
     } = req.query;
-    
-    
 
-    
-    let sql = ``; 
-        sql = 
+
+
+
+    let sql = ``;
+    sql =
         `
         SELECT 
         a.id,
@@ -249,13 +250,13 @@ function buscar(req, res) {
     INNER JOIN usuario c ON c.id = b.usuario_id 
     WHERE 1=1 
     `;
-    
-   /* if (nombres_es !== '') {
-        sql += ` AND a.nombres_es LIKE '%${req.body.nombres_es}%'`;
-    }
-    if (nombre_completo !== '') {
-        sql += ` AND c.nombre_completo LIKE '%${req.body.nombres_es}%'`;
-    }*/
+
+    /* if (nombres_es !== '') {
+         sql += ` AND a.nombres_es LIKE '%${req.body.nombres_es}%'`;
+     }
+     if (nombre_completo !== '') {
+         sql += ` AND c.nombre_completo LIKE '%${req.body.nombres_es}%'`;
+     }*/
 
     if (nombres_es !== '') {
         sql += ` AND a.nombres_es LIKE '%${nombres_es}%'`;
@@ -265,22 +266,22 @@ function buscar(req, res) {
     }
 
     if (!isNaN(precio) && precio !== '') {
-    sql += ` AND a.precio <= '${req.query.precio}'`; 
+        sql += ` AND a.precio <= '${req.query.precio}'`;
     }
 
     if (!isNaN(cantidad) && cantidad !== '') {
-        sql += ` AND a.cantidad <= '${req.query.cantidad}'`;  
+        sql += ` AND a.cantidad <= '${req.query.cantidad}'`;
     }
 
 
- 
+
     sql += `
         ORDER BY a.id DESC
         LIMIT 50;
     `;
 
-    
-    product.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+
+    product.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -291,7 +292,7 @@ function buscar(req, res) {
 
 
 /*Guarda los datos generales de un predio*/
-async function save(req, res, next) {
+async function save (req, res, next) {
     const t = await product.sequelize.transaction();
     try {
         let object = await product.findOne({
@@ -322,7 +323,7 @@ async function save(req, res, next) {
 
 async function uploadFilproducto (req, res, next) {
     try {
-        let folder = 'files-app' + req.query.folder; 
+        let folder = 'files-app' + req.query.folder;
         let filenamesaved = req.filenamesaved;
         if (!filenamesaved) throw {
             error: "No se logro subir el archivo",
@@ -339,9 +340,9 @@ async function uploadFilproducto (req, res, next) {
         return next(err);
     }
 }
-async function productoFiltrados(req, res) {
+async function productoFiltrados (req, res) {
     try {
-        const {categoria, oferta, precio_min, precio_max} = req.params;
+        const { categoria, oferta, precio_min, precio_max } = req.params;
 
         let filters = {};
         if (categoria) {
@@ -370,14 +371,14 @@ async function productoFiltrados(req, res) {
 
         if (productos) {
             res.status(200).json(productos);
-        }else{
+        } else {
             res.status(500).json({ error: 'no se han encontrado productos' })
         }
-        
+
     } catch (error) {
-      res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
-    
+
 }
 
 

@@ -321,7 +321,7 @@ product.findProductoAndArtesanoByProdId = async function(id){
             include: [
                 {
                     model: artesano,
-                    attributes: ['foto1', 'correo', 'celular', 'lst_mediospago', 'lst_contactos'],
+                    attributes: ['foto1', 'correo', 'celular', 'lst_mediospago', 'lst_contactos', 'nombres', 'apellidos'],
                     as: 'datos_artesano'
                 }
             ]

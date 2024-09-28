@@ -381,7 +381,7 @@ function loadProductosDestacados (data) {
         html = html + `
        <div class="item wow fadeIn card " data-wow-duration="0.75s">
 						<div class="img-contenedor-destacados">
-                          <a href="producto?id=${item.id}" style="color:#000">
+                          <a href="producto.html?id=${item.id}" style="color:#000">
 							<img class="img-destacados"
 								src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" />
                                    </a>
