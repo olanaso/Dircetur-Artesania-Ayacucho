@@ -136,6 +136,8 @@ async function mostrarInformacion (producto) {
     $("#artesano-correo").text(`${producto.datos_artesano.correo}`);
     $("#artesano-informacion").text(`${producto.datos_artesano.nombres} ${producto.datos_artesano.apellidos} `);
     $("#artesano-informacion").attr("href",`artesano.html?id=${producto.artesano_id}`);
+    $("#artesano-img").attr("src",`${producto.datos_artesano.foto1}`);
+
     showMaterials(materiales);
     showProductSlider(imagenesSecundarias, producto.imagen_principal);
 }
