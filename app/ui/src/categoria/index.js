@@ -196,16 +196,16 @@ async function registrarCategoria () {
       const descripcion = document.getElementById('descripcion').value;
 
 
-      var principalImagePreview = document.getElementById('principalImagePreview');
+      // var principalImagePreview = document.getElementById('principalImagePreview');
 
-      // Obtener el valor del atributo src
-      var foto_referente = principalImagePreview.src;
+      // // Obtener el valor del atributo src
+      // var foto_referente = principalImagePreview.src;
 
       const formData = {
         abreviatura: abreviatura,
         denominacion: denominacion,
         descripcion: descripcion,
-        foto_referente: foto_referente
+        foto_referente: imagen_principal
       }
       const response = await guardarCategoria(formData);
       console.log(response);
@@ -303,12 +303,12 @@ function handleUploadResponse (response) {
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      $('#principalImagePreview').attr('src', getBaseUrl(baseUrl) + '/' + response.ruta).show();
+      $('#principalImagePreview').attr('src', '/' + response.ruta).show();
       $('#principalImageName').val(file.name);
     }
     reader.readAsDataURL(file);
 
-    imagen_principal = getBaseUrl(baseUrl) + '/' + response.ruta;
+    imagen_principal = '/' + response.ruta;
 
     //alert('registro de la imagen correctamente')
   } else {
@@ -322,11 +322,11 @@ function handleEditUploadResponse (response) {
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      $('#CategoriaImagePreviewEdit').attr('src', getBaseUrl(baseUrl) + '/' + response.ruta).show();
+      $('#CategoriaImagePreviewEdit').attr('src', '/' + response.ruta).show();
     }
     reader.readAsDataURL(file);
 
-    imagen_principal = getBaseUrl(baseUrl) + '/' + response.ruta;
+    imagen_principal = '/' + response.ruta;
 
     alert('Actualización de la imagen correctamente');
   } else {

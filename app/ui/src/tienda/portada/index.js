@@ -92,6 +92,7 @@ function loadSlider (data) {
 
 
 function loadCategorias (data) {
+    console.log(data)
 
     let html = ``
     for (let item of data) {
@@ -129,10 +130,10 @@ function loadCategorias (data) {
                 items: 3
             },
             800: {
-                items: 4
+                items: 3
             },
             1000: {
-                items: 5
+                items: 3
             }
         }
     })

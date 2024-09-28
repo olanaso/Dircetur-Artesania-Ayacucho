@@ -71,7 +71,7 @@ async function mostrarListaArtesanosPorCategoria () {
 
                 // Añadir funcionalidad para redirigir al hacer clic
                 artesanoElement.addEventListener('click', () => {
-                    window.location.href = `principal-artesano.html?id=${artesano.id}`;
+                    window.location.href = `artesano.html?id=${artesano.id}`;
                 });
 
                 // Cambiar la imagen al hacer hover

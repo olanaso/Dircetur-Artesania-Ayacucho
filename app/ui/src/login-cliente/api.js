@@ -1,5 +1,6 @@
 import {baseUrl, getDataFromLocalStorage, saveDataToLocalStorage} from "../utils/config";
 export async function loginCliente(usuario,clave){
+
     const settings = {
         method: "POST",
         headers: {
