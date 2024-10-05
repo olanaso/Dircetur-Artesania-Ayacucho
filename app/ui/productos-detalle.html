@@ -700,8 +700,8 @@
 															<div class="col">
 																<select class="form-control" id="estadoAgotado">
 																	<option value="0">Seleccionar</option>
-																	<option value="1">en stock</option>
-																	<option value="2">poco stock</option>
+																	<option value="1">En Stock</option>
+																	<option value="2">Poco stock</option>
 																	<option value="3">Agotado</option>
 
 																</select>
@@ -886,21 +886,22 @@
 										<div class="tab-pane fade" id="home4" role="tabpanel"
 											aria-labelledby="home-tab4">
 
-											<h6>Escoge una opción para subir el video:</h6>
+
 											<ul class="nav nav-tabs" id="myTab" role="tablist">
-												<li class="nav-item">
+												<!-- <li class="nav-item">
 													<a class="nav-link active" id="upload-tab" data-toggle="tab"
 														href="#upload" role="tab" aria-controls="upload"
 														aria-selected="true">Sube el video</a>
-												</li>
+												</li> -->
 												<li class="nav-item">
-													<a class="nav-link" id="link-tab" data-toggle="tab" href="#link"
-														role="tab" aria-controls="link" aria-selected="false">Sube el
+													<a class="nav-link active" id="link-tab" data-toggle="tab"
+														href="#link" role="tab" aria-controls="link"
+														aria-selected="false">Sube el
 														enlace del video</a>
 												</li>
 											</ul>
 											<div class="tab-content" id="myTabContent">
-												<div class="tab-pane fade show active" id="upload" role="tabpanel"
+												<!-- <div class="tab-pane fade show active" id="upload" role="tabpanel"
 													aria-labelledby="upload-tab">
 
 													<h6>Sube el video del producto</h6>
@@ -930,7 +931,7 @@
 																	</div>
 																	<div class="col-sm-9">
 																		<div class="d-flex align-items-center">
-																			<!--  <input type="file"  class="form-control-file mr-2" id="uploadVideo"> -->
+																	
 																			<input type="file" id="uploadVideo"
 																				name="uploadVideo" accept="video/*">
 																			<span id="fileSize" class="mr-2"></span>
@@ -978,6 +979,68 @@
 															</tr>
 														</thead>
 														<tbody id="videoList">
+
+														</tbody>
+													</table>
+												</div> -->
+
+												<div class="tab-pane fade show active" id="link" role="tabpanel"
+													aria-labelledby="link-tab">
+
+													<form id="linkForm">
+
+														<div class="card" style="min-height: 70px;">
+															<div class="card-body">
+
+																<div class="row mt-4">
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Nombre
+																			del video:
+																		</h6>
+																	</div>
+																	<div class="col-sm-9">
+																		<input type="text" class="form-control"
+																			id="linkVideoName" maxlength="100"
+																			placeholder="Ingrese el nombre del video">
+																	</div>
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Enlace
+																			del video:
+																		</h6>
+																	</div>
+																	<div class="col-sm-9">
+																		<input type="text" class="form-control"
+																			id="videoLink" maxlength="150"
+																			placeholder="Ingrese video de youtube, ejem: https://www.youtube.com/embed/AHGB_FBZZx0">
+																	</div>
+																	<div class="col-md-12 text-right">
+																		<button type="button"
+																			class="btn btn-info btn-sm"
+																			id="addVideoLink">
+																			Añadir <i
+																				class="icon icon-circle-with-plus"></i>
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</form>
+													<hr>
+													<h6>Lista de videos</h6>
+													<table class="table table-bordered offer-table">
+														<thead>
+															<tr>
+																<th style="width: 5%;">N°</th>
+																<th style="width: 30%;">Nombre del video</th>
+																<th style="width: 45%;">Enlace del video</th>
+																<th style="width: 20%;">Acción</th>
+															</tr>
+														</thead>
+														<tbody id="videoList2">
 
 														</tbody>
 													</table>
@@ -1388,64 +1451,7 @@
 											</form>
 
 										</div>
-										<div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab">
-											<h6>Sube el enlace del video</h6>
-											<form id="linkForm">
 
-												<div class="card" style="min-height: 70px;">
-													<div class="card-body">
-
-														<div class="row mt-4">
-															<div class="col-sm-2">
-																<h6 class="sub-heading"
-																	style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
-																	<span class="text-primary">*</span> Nombre del
-																	video:
-																</h6>
-															</div>
-															<div class="col-sm-9">
-																<input type="text" class="form-control"
-																	id="linkVideoName" maxlength="100"
-																	placeholder="Ingrese el nombre del video">
-															</div>
-															<div class="col-sm-2">
-																<h6 class="sub-heading"
-																	style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
-																	<span class="text-primary">*</span> Enlace del
-																	video:
-																</h6>
-															</div>
-															<div class="col-sm-9">
-																<input type="text" class="form-control" id="videoLink"
-																	maxlength="150"
-																	placeholder="Ingrese el enlace del video">
-															</div>
-															<div class="col-md-12 text-right">
-																<button type="button" class="btn btn-info btn-sm"
-																	id="addVideoLink">
-																	Añadir <i class="icon icon-circle-with-plus"></i>
-																</button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</form>
-											<hr>
-											<h6>Lista de videos</h6>
-											<table class="table table-bordered offer-table">
-												<thead>
-													<tr>
-														<th style="width: 5%;">N°</th>
-														<th style="width: 30%;">Nombre del video</th>
-														<th style="width: 45%;">Enlace del video</th>
-														<th style="width: 20%;">Acción</th>
-													</tr>
-												</thead>
-												<tbody id="videoList2">
-
-												</tbody>
-											</table>
-										</div>
 									</div>
 
 								</div>

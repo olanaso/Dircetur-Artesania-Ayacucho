@@ -180,7 +180,7 @@ async function buscarUsuario () {
   /*********** */
   $('#btnguardarcambio').on('click', async function (e) {
 
-
+    debugger
 
     e.preventDefault();
     var isValid = true;
@@ -199,178 +199,178 @@ async function buscarUsuario () {
       document.getElementById('dni').focus(); // Pone el foco en el campo del D
 
       return;
-    } else if (validar == "0") {
-      showToast('validar usuario de la ficha - información personal.');
-      return;
-    } else {
+    }
+    // else if (validar == "0") {
+    //   showToast('validar usuario de la ficha - información personal.');
+    //   return;
+    // } else {
 
-      let dni = $('#dni').val()
-      let ruc = $('#ruc').val()
-      let nombres = $('#nombres').val()
-      let apellidos = $('#apellidos').val()
-      let correo = $('#correo').val()
-      let celular = $('#celular').val()
-      let lugar_nacimiento = $('#lugar_nacimiento').val()
-      let ubigeo = $('#distrito').val()
-      let lengua_materna = $('#lengua_materna').val()
+    let dni = $('#dni').val()
+    let ruc = $('#ruc').val()
+    let nombres = $('#nombres').val()
+    let apellidos = $('#apellidos').val()
+    let correo = $('#correo').val()
+    let celular = $('#celular').val()
+    let lugar_nacimiento = $('#lugar_nacimiento').val()
+    let ubigeo = $('#distrito').val()
+    let lengua_materna = $('#lengua_materna').val()
+
+    var foto1ImagePreview = document.getElementById('imagenFoto1');
+    var foto2ImagePreview = document.getElementById('imagenFoto2');
+
+    // Obtener el valor del atributo src
+    var foto1 = foto1ImagePreview.src;
+    var foto2 = foto2ImagePreview.src;
+
+    //****informacion del taller */
+    let listataller = [];
+
+    let taller = {
+      id: 1,
+      nombretaller: $('#nombretaller').val(),
+      horarioatencion: $('#horarioatencion').val(),
+      ructaller: $('#ructaller').val(),
+      direccionfisica: $('#direccionfisica').val(),
+      latitud: $('#latitud').val(),
+      longitud: $('#longitud').val()
+    };
+    listataller.push(taller);
 
 
-      var foto1ImagePreview = document.getElementById('imagenFoto1');
-      var foto2ImagePreview = document.getElementById('imagenFoto2');
+    let tallerJSON = JSON.stringify(listataller);
 
-      // Obtener el valor del atributo src
-      var foto1 = foto1ImagePreview.src;
-      var foto2 = foto2ImagePreview.src;
+    let lst_taller = tallerJSON;
 
-      //****informacion del taller */
-      let listataller = [];
+    //****informacion especialidad tecnica */
+    let listaespecialidad = [];
 
-      let taller = {
-        id: 1,
-        nombretaller: $('#nombretaller').val(),
-        horarioatencion: $('#horarioatencion').val(),
-        ructaller: $('#ructaller').val(),
-        direccionfisica: $('#direccionfisica').val(),
-        latitud: $('#latitud').val(),
-        longitud: $('#longitud').val()
+    let especialidad = {
+      id: 1,
+      descripcionhabilidades: $('#descripcionhabilidades').val(),
+      tipoartesania: $('#tipoartesania').val(),
+      ceramica: $('#ceramica').is(':checked') ? 1 : 0,
+      piedra: $('#piedra').is(':checked') ? 1 : 0,
+      talabarteria: $('#talabarteria').is(':checked') ? 1 : 0,
+      otro: $('#otro').is(':checked') ? 1 : 0,
+      desotro: $('#desotro').val()
+    };
+    listaespecialidad.push(especialidad);
+
+
+    let especialidadJSON = JSON.stringify(listaespecialidad);
+
+    let lst_especialidadtecnicas = especialidadJSON;
+
+
+
+    //****informacion del contacto */
+
+    let listacontacto = [];
+
+    $('#listaContacto tr').each(function () {
+      let fila = $(this);
+      let contacto = {
+        id: fila.find('td').eq(0).text(),
+        valor: fila.find('td.ocultar').text(),
+        tipo: fila.find('td').eq(2).text(),
+        Usuario: fila.find('td').eq(3).text(),
+        Enlace: fila.find('td').eq(4).text()
       };
-      listataller.push(taller);
+      listacontacto.push(contacto);
+    });
 
+    let contactoJSON = JSON.stringify(listacontacto);
 
-      let tallerJSON = JSON.stringify(listataller);
+    let lst_contactos = contactoJSON;
 
-      let lst_taller = tallerJSON;
+    //****informacion del medio de pago */
 
-      //****informacion especialidad tecnica */
-      let listaespecialidad = [];
+    let listamediospago = [];
 
-      let especialidad = {
-        id: 1,
-        descripcionhabilidades: $('#descripcionhabilidades').val(),
-        tipoartesania: $('#tipoartesania').val(),
-        ceramica: $('#ceramica').is(':checked') ? 1 : 0,
-        piedra: $('#piedra').is(':checked') ? 1 : 0,
-        talabarteria: $('#talabarteria').is(':checked') ? 1 : 0,
-        otro: $('#otro').is(':checked') ? 1 : 0,
-        desotro: $('#desotro').val()
+    $('#listaMediopago tr').each(function () {
+      let fila = $(this);
+      let mediospago = {
+        id: fila.find('td').eq(0).text(),
+        valor: fila.find('td.ocultar').eq(0).text(),
+        Pago: fila.find('td').eq(2).text(),
+        Banco: fila.find('td.ocultar').eq(1).text(),
+        Titular: fila.find('td').eq(4).text(),
+        Corriente: fila.find('td').eq(5).text(),
+        Interbancaria: fila.find('td').eq(6).text(),
+        Boleta: fila.find('td.ocultar').eq(2).text(),
+        Factura: fila.find('td.ocultar').eq(3).text(),
+        Recibo: fila.find('td.ocultar').eq(4).text(),
+        Local: fila.find('td.ocultar').eq(5).text(),
+        Departamental: fila.find('td.ocultar').eq(6).text(),
+        Internacional: fila.find('td.ocultar').eq(7).text()
       };
-      listaespecialidad.push(especialidad);
+      listamediospago.push(mediospago);
+    });
+
+    let mediospagoJSON = JSON.stringify(listamediospago);
+
+    let lst_mediospago = mediospagoJSON;
 
 
-      let especialidadJSON = JSON.stringify(listaespecialidad);
+    //****informacion del reconocimiento */
 
-      let lst_especialidadtecnicas = especialidadJSON;
+    let listareconocimientos = [];
 
+    $('#listaReconocimiento tr').each(function () {
+      let fila = $(this);
+      let reconocimientos = {
+        id: fila.find('td').eq(0).text(),
+        Título: fila.find('td').eq(1).text(),
+        Entidad: fila.find('td').eq(2).text(),
+        Descripcion: fila.find('td').eq(3).text()
+      };
+      listareconocimientos.push(reconocimientos);
+    });
 
+    let reconocimientosJSON = JSON.stringify(listareconocimientos);
 
-      //****informacion del contacto */
-
-      let listacontacto = [];
-
-      $('#listaContacto tr').each(function () {
-        let fila = $(this);
-        let contacto = {
-          id: fila.find('td').eq(0).text(),
-          valor: fila.find('td.ocultar').text(),
-          tipo: fila.find('td').eq(2).text(),
-          Usuario: fila.find('td').eq(3).text(),
-          Enlace: fila.find('td').eq(4).text()
-        };
-        listacontacto.push(contacto);
-      });
-
-      let contactoJSON = JSON.stringify(listacontacto);
-
-      let lst_contactos = contactoJSON;
-
-      //****informacion del medio de pago */
-
-      let listamediospago = [];
-
-      $('#listaMediopago tr').each(function () {
-        let fila = $(this);
-        let mediospago = {
-          id: fila.find('td').eq(0).text(),
-          valor: fila.find('td.ocultar').eq(0).text(),
-          Pago: fila.find('td').eq(2).text(),
-          Banco: fila.find('td.ocultar').eq(1).text(),
-          Titular: fila.find('td').eq(4).text(),
-          Corriente: fila.find('td').eq(5).text(),
-          Interbancaria: fila.find('td').eq(6).text(),
-          Boleta: fila.find('td.ocultar').eq(2).text(),
-          Factura: fila.find('td.ocultar').eq(3).text(),
-          Recibo: fila.find('td.ocultar').eq(4).text(),
-          Local: fila.find('td.ocultar').eq(5).text(),
-          Departamental: fila.find('td.ocultar').eq(6).text(),
-          Internacional: fila.find('td.ocultar').eq(7).text()
-        };
-        listamediospago.push(mediospago);
-      });
-
-      let mediospagoJSON = JSON.stringify(listamediospago);
-
-      let lst_mediospago = mediospagoJSON;
-
-
-      //****informacion del reconocimiento */
-
-      let listareconocimientos = [];
-
-      $('#listaReconocimiento tr').each(function () {
-        let fila = $(this);
-        let reconocimientos = {
-          id: fila.find('td').eq(0).text(),
-          Título: fila.find('td').eq(1).text(),
-          Entidad: fila.find('td').eq(2).text(),
-          Descripcion: fila.find('td').eq(3).text()
-        };
-        listareconocimientos.push(reconocimientos);
-      });
-
-      let reconocimientosJSON = JSON.stringify(listareconocimientos);
-
-      let lst_reconocimientos = reconocimientosJSON;
+    let lst_reconocimientos = reconocimientosJSON;
 
 
 
 
-      let usuario = $('#usuario').val();
-      let clave = $('#contrasena').val();
+    let usuario = "";//$('#usuario').val();
+    let clave = "";//$('#contrasena').val();
 
-      // Aquí puedes enviar videosJSON al servidor o hacer algo con él
-      //alert('Costos guardados en JSON:\n' + costosJSON);
-      /****fin */
-      let listavideos = [];
-      $('#videoList tr').each(function () {
-        let fila = $(this);
-        let imagen = {
-          id: fila.find('td').eq(0).text(),
-          nombre: fila.find('td').eq(1).text(),
-          src: fila.find('a').attr('href'),
-        };
-        listavideos.push(imagen);
-      });
+    // Aquí puedes enviar videosJSON al servidor o hacer algo con él
+    //alert('Costos guardados en JSON:\n' + costosJSON);
+    /****fin */
+    let listavideos = [];
+    $('#videoList tr').each(function () {
+      let fila = $(this);
+      let imagen = {
+        id: fila.find('td').eq(0).text(),
+        nombre: fila.find('td').eq(1).text(),
+        src: fila.find('a').attr('href'),
+      };
+      listavideos.push(imagen);
+    });
 
-      let videosJSON = JSON.stringify(listavideos);
-      let lst_videos = videosJSON;
+    let videosJSON = JSON.stringify(listavideos);
+    let lst_videos = videosJSON;
 
 
-      // Aquí puedes enviar videosenlaceJSON al servidor o hacer algo con él
-      //alert('Costos guardados en JSON:\n' + costosJSON);
-      /****fin */
-      let listavideosenlace = [];
-      $('#videoList2 tr').each(function () {
-        let fila = $(this);
-        let imagen = {
-          id: fila.find('td').eq(0).text(),
-          nombre: fila.find('td').eq(1).text(),
-          src: fila.find('a').attr('href'),
-        };
-        listavideosenlace.push(imagen);
-      });
+    // Aquí puedes enviar videosenlaceJSON al servidor o hacer algo con él
+    //alert('Costos guardados en JSON:\n' + costosJSON);
+    /****fin */
+    let listavideosenlace = [];
+    $('#videoList2 tr').each(function () {
+      let fila = $(this);
+      let imagen = {
+        id: fila.find('td').eq(0).text(),
+        nombre: fila.find('td').eq(1).text(),
+        src: fila.find('a').attr('href'),
+      };
+      listavideosenlace.push(imagen);
+    });
 
-      let videosenlaceJSON = JSON.stringify(listavideosenlace);
-      let lst_videoenlace = videosenlaceJSON;
+    let videosenlaceJSON = JSON.stringify(listavideosenlace);
+    let lst_videoenlace = videosenlaceJSON;
 
 
 
@@ -378,51 +378,57 @@ async function buscarUsuario () {
 
 
 
-      alertDialog.createAlertDialog(
-        'confirm',
-        'Confirmar Alerta',
-        '¿Estás seguro de que deseas guardar?',
-        'Cancelar',
-        'Continuar',
-        async () => {
-          try {
+    alertDialog.createAlertDialog(
+      'confirm',
+      'Confirmar Alerta',
+      '¿Estás seguro de que deseas guardar?',
+      'Cancelar',
+      'Continuar',
+      async () => {
+        try {
 
 
-            showLoading()
-            let resultlogin = await guardarUsuario({ usuarioid, usuario, nombre_completo: nombres + ' ' + apellidos, clave, rolid: 2, tipousuario: 2, estado: 1 });
-            if (resultlogin) {
+          showLoading()
+          let resultlogin = await guardarUsuario({ usuarioid, usuario, nombre_completo: nombres + ' ' + apellidos, clave, rolid: 2, tipousuario: 2, estado: 1 });
+          debugger
+          if (resultlogin) {
+            showToast('Se actualizo los datos correctamente')
+            usuarioid = resultlogin.data.id
+            let artesano = getDataFromLocalStorage('artesano')
+            let result = await guardarArtesano({
+              id: artesano.id, artesanoId: artesano.id, dni, ruc, nombres, apellidos, correo, celular, lugar_nacimiento, ubigeo
+              , lengua_materna, foto1, foto2, lst_taller, lst_especialidadtecnicas, lst_contactos, lst_mediospago, lst_reconocimientos
+              , usuario_id: usuarioid, lst_videoenlace, lst_videos
+            });
+            if (result) {
+
               showToast('Se actualizo los datos correctamente')
-              usuarioid = resultlogin.id
 
-              let result = await guardarArtesano({ artesanoId, dni, ruc, nombres, apellidos, correo, celular, lugar_nacimiento, ubigeo, lengua_materna, foto1, foto2, lst_taller, lst_especialidadtecnicas, lst_contactos, lst_mediospago, lst_reconocimientos, usuario_id: usuarioid, lst_videoenlace, lst_videos });
-              if (result) {
-                showToast('Se actualizo los datos correctamente')
-
-                if (artesanoId == 0) {
-                  const url = new URL(window.location.href);
-                  url.searchParams.set('id', result.id);
-                  window.history.pushState({}, '', url);
-                  artesanoId = result.id;
-                }
-
-
-                hideLoading()
-                $('#myModal').css('display', 'none');
-              } else {
-                showToast('Ocurrio un error.')
+              if (artesanoId == 0) {
+                const url = new URL(window.location.href);
+                url.searchParams.set('id', result.id);
+                window.history.pushState({}, '', url);
+                artesanoId = result.id;
               }
+
+
+              hideLoading()
+              $('#myModal').css('display', 'none');
             } else {
               showToast('Ocurrio un error.')
             }
-
-          } catch (error) {
-            console.error('Error al eliminar la foto de perfil:', error);
+          } else {
+            showToast('Ocurrio un error.')
           }
+
+        } catch (error) {
+          console.error('Error al eliminar la foto de perfil:', error);
         }
-      );
+      }
+    );
 
 
-    }
+    //}
   })
 
 
@@ -437,12 +443,12 @@ async function buscarUsuario () {
 // calcular precios 
 
 
-async function editarArtesano (id) {
+async function editarArtesano (usuario_id) {
 
-  editarartesano = await geteditarArtesano(id);
+  editarartesano = await geteditarArtesano(usuario_id);
 
-  usuarioid = editarartesano.usuario_id
-
+  usuarioid = editarartesano.usuario_id;
+  artesanoId = editarartesano.usuario_id;
 
   $('#dni').val(editarartesano.dni)
   $('#ruc').val(editarartesano.ruc)
@@ -817,15 +823,16 @@ $(document).ready(function () {
   ///editar formulario
   /**const urlParams = new URLSearchParams(window.location.search);
     artesanoId = urlParams.get('id');*/
-  let usuario = getDataFromLocalStorage('session').usuarios;
-  artesanoId = usuario.datos[0].id;
+  let usuario = getDataFromLocalStorage('usuario');
+
+
 
   var titulo = document.getElementById("tituloartesano");
 
 
-  if (artesanoId != 0) {
+  if (usuario.id != 0) {
     titulo.innerText = "Datos Artesano";
-    editarArtesano(artesanoId);
+    editarArtesano(usuario.id);
   } else {
     titulo.innerText = "Nuevo artesano";
   }
@@ -839,7 +846,7 @@ $(document).ready(function () {
   $('#addcontactoButton').on('click', function () {
 
 
-    let tiporedsocial = $('#tiporedsocial').val();
+    let tiporedsocial = $('#tiporedsocial option:selected').val();
 
 
 
@@ -861,13 +868,13 @@ $(document).ready(function () {
 
     const selectElement = document.getElementById('tiporedsocial');
     const opciones = selectElement.options;
-    let texto = "";
-    let valor = "";
-    for (let i = 0; i < opciones.length; i++) {
-      texto = opciones[i].text;
-      valor = opciones[i].value;
-      console.log(`Texto: ${texto}, Valor: ${valor}`);
-    }
+    let texto = $('#tiporedsocial option:selected').text();
+    let valor = $('#tiporedsocial option:selected').val();
+    // for (let i = 0; i < opciones.length; i++) {
+    //   texto = opciones[i].text;
+    //   valor = opciones[i].value;
+    //   console.log(`Texto: ${texto}, Valor: ${valor}`);
+    // }
 
     contadorContacto++;
 

@@ -145,7 +145,7 @@ function loadProductos (data) {
                 <div class="thumb-content">
                     <div class="car-banner nuevo-producto"></div>
                     <div class="thumb-inner photo-prod">
-                        <a href="producto.html?id=${item.id}">
+                        <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
                             <img style="height:250px; width:100%; object-fit: cover;" 
                                  src="${item?.imagen_principal || 'https://via.placeholder.com/400x200'}" 
                                  alt="Producto">
@@ -153,7 +153,7 @@ function loadProductos (data) {
                     </div>
                 </div>
                 <div class="down-content text-center">
-                    <a href="producto.html?id=${item.id}" style="color:#000;">
+                    <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000;">
                         <h5 title="${item?.nombres_es || ''}" class="card-title font-weight-bold product-description">
                             <span class="d-block d-md-none" style="font-size: 1rem;">${item?.nombres_es || ''}</span>
                             <span class="d-none d-md-block" style="font-size: 1.25rem;">${item?.nombres_es || ''}</span>
@@ -183,7 +183,7 @@ function loadProductos (data) {
                     <div class="d-flex mt-4 justify-content-center ">
                         <div class="hidden sm-block btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-light">
-                                <a href="producto.html?id=${item.id}">Ver más</a>
+                                <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">Ver más</a>
                             </button>
                             <button type="button" class="btn btn-light btn-comprar" producto_id="${item.id}">
                             <a href="carrito-de-compra.html?producto=${encodeURIComponent(JSON.stringify(artenia_anviar_carrito))}">

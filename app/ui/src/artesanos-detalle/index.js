@@ -42,9 +42,39 @@ function startApp () {
     //();
   }, 500);
   buscarUsuario();
+  setChangeOpcionesBilletera();
   //exportarExcel();
   //nuevo();
 
+}
+
+function setChangeOpcionesBilletera () {
+
+  document.getElementById('tipomediopago').addEventListener('change', handleSelectMediosPago);
+}
+
+
+function handleSelectMediosPago (event) {
+
+  const contenedor = document.getElementById('valoresBilletera');
+  const inputs = contenedor.querySelectorAll('.nro-yape-plin, .nombre-titular,  .nro-cta , .nro-cci');
+
+  // Ocultar todos los inputs dentro del contenedor `valoresBilletera` inicialmente
+  inputs.forEach(input => input.style.display = 'none');
+
+  // Obtener el valor seleccionado y los targets a mostrar
+  const selectedOption = event.target.options[event.target.selectedIndex];
+  const targets = selectedOption.getAttribute('data-target');
+
+  // Mostrar los inputs especificados en los targets dentro de `valoresBilletera`
+  if (targets) {
+    targets.split(' ').forEach(target => {
+      const elements = contenedor.querySelectorAll(`.${target}`);
+      elements.forEach(element => {
+        element.style.display = 'block';
+      });
+    });
+  }
 }
 
 /*async function checkadminsession () {
@@ -850,14 +880,9 @@ $(document).ready(function () {
 
   /****** Contacto */
 
-
   $('#addcontactoButton').on('click', function () {
 
-
-    let tiporedsocial = $('#tiporedsocial').val();
-
-
-
+    let tiporedsocial = $('#tiporedsocial option:selected').val();
     let usuarionumero = $('#usuarionumero').val();
     let enlacecontacto = $('#enlacecontacto').val();
 
@@ -874,15 +899,10 @@ $(document).ready(function () {
       return;
     }
 
-    const selectElement = document.getElementById('tiporedsocial');
-    const opciones = selectElement.options;
-    let texto = "";
-    let valor = "";
-    for (let i = 0; i < opciones.length; i++) {
-      texto = opciones[i].text;
-      valor = opciones[i].value;
-      console.log(`Texto: ${texto}, Valor: ${valor}`);
-    }
+    // Obtener el valor y el texto seleccionados correctamente
+    let selectElement = document.getElementById('tiporedsocial');
+    let texto = selectElement.options[selectElement.selectedIndex].text;
+    let valor = selectElement.options[selectElement.selectedIndex].value;
 
     contadorContacto++;
 
@@ -894,19 +914,20 @@ $(document).ready(function () {
             <td>${usuarionumero}</td> 
             <td>${enlacecontacto}</td> 
             <td>
-                <button type="button" data-toggle="tooltip"  title="Eliminar" class="btn btn-primary btn-sm btn-delete-Contacto">
-                <i class="icon icon-bin"></i>
+                <button type="button" data-toggle="tooltip" title="Eliminar" class="btn btn-primary btn-sm btn-delete-Contacto">
+                    <i class="icon icon-bin"></i>
                 </button> 
-
             </td>
         </tr>
     `;
     $('#listaContacto').append(nuevaFila);
 
+    // Reiniciar los campos del formulario
     $('#tiporedsocial').val(0);
     $('#usuarionumero').val('');
     $('#enlacecontacto').val('');
   });
+
 
   $(document).on('click', '.btn-delete-Contacto', function () {
 
@@ -970,10 +991,10 @@ $(document).ready(function () {
       showToast('Por favor de seleccionar tipo.');
       return;
     }
-    if (nombrebanco === "" || nombretitular === "" || cuentacorriente === "" || cuentainterbancaria === "") {
-      showToast('Por favor, todos los campos *.');
-      return;
-    }
+    // if (nombrebanco === "" || nombretitular === "" || cuentacorriente === "" || cuentainterbancaria === "") {
+    //   showToast('Por favor, todos los campos *.');
+    //   return;
+    // }
 
     /*const selectElement = document.getElementById('tipomediopago');
     const opciones = selectElement.options;

@@ -10,7 +10,7 @@ module.exports = {
     actualizar,
     eliminar,
     obtener,
-    listar, 
+    listar,
     save,
     buscar,
     uploadFilproducto
@@ -84,10 +84,10 @@ function obtener (req, res) {
         })
 }*/
 
- 
-function listar(req, res) {
-    let sql = ``; 
-        sql = 
+
+function listar (req, res) {
+    let sql = ``;
+    sql =
         `
     select  p.imagen_principal,
             p.nombres_es,
@@ -102,7 +102,7 @@ function listar(req, res) {
     inner join categoria c on p.categoria_id=c.id 
     where p.artesano_id= '${req.params.id}'
     `
-    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+    model.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -112,21 +112,21 @@ function listar(req, res) {
 }
 
 
-function buscar(req, res) {
+function buscar (req, res) {
 
-    
-    const { 
-        nombres_es = '', 
+
+    const {
+        nombres_es = '',
         precio = null,
         cantidad = null,
-        id=null
+        id = null
     } = req.query;
-    
-    
 
-    
-    let sql = ``; 
-        sql = 
+
+
+
+    let sql = ``;
+    sql =
         `
         SELECT 
         a.id,
@@ -140,35 +140,35 @@ function buscar(req, res) {
     INNER JOIN usuario c ON c.id = b.usuario_id 
     WHERE 1=1 and a.artesano_id = '${id}'
     `;
-    
-   /* if (nombres_es !== '') {
-        sql += ` AND a.nombres_es LIKE '%${req.body.nombres_es}%'`;
-    }
-    if (nombre_completo !== '') {
-        sql += ` AND c.nombre_completo LIKE '%${req.body.nombres_es}%'`;
-    }*/
+
+    /* if (nombres_es !== '') {
+         sql += ` AND a.nombres_es LIKE '%${req.body.nombres_es}%'`;
+     }
+     if (nombre_completo !== '') {
+         sql += ` AND c.nombre_completo LIKE '%${req.body.nombres_es}%'`;
+     }*/
 
     if (nombres_es !== '') {
         sql += ` AND a.nombres_es LIKE '%${nombres_es}%'`;
-    } 
+    }
 
     if (!isNaN(precio) && precio !== '') {
-    sql += ` AND a.precio <= '${req.query.precio}'`; 
+        sql += ` AND a.precio <= '${req.query.precio}'`;
     }
 
     if (!isNaN(cantidad) && cantidad !== '') {
-        sql += ` AND a.cantidad <= '${req.query.cantidad}'`;  
+        sql += ` AND a.cantidad <= '${req.query.cantidad}'`;
     }
 
 
- 
+
     sql += `
         ORDER BY a.id DESC
-        LIMIT 50;
+        LIMIT 100;
     `;
 
-    
-    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+    console.log(sql)
+    model.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -179,7 +179,7 @@ function buscar(req, res) {
 
 
 /*Guarda los datos generales de un predio*/
-async function save(req, res, next) {
+async function save (req, res, next) {
     const t = await model.sequelize.transaction();
     try {
         let object = await model.findOne({
@@ -210,7 +210,7 @@ async function save(req, res, next) {
 
 async function uploadFilproducto (req, res, next) {
     try {
-        let folder = 'files-app' + req.query.folder; 
+        let folder = 'files-app' + req.query.folder;
         let filenamesaved = req.filenamesaved;
         if (!filenamesaved) throw {
             error: "No se logro subir el archivo",

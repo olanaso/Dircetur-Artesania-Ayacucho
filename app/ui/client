@@ -3,15 +3,5 @@
 > concurrently --kill-others "npm:dev:client"
 
 [dev:client] npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
-[dev:client] 
-[dev:client] > Biblioideas@0.0.1 dev:client
-[dev:client] > vite
-[dev:client] 
-[dev:client] [33mbuild.terserOptions is specified but build.minify is not set to use Terser. Note Vite now defaults to use esbuild for minification. If you still prefer Terser, set build.minify to "terser".[39m
-[dev:client] 
-[dev:client]   [32m[1mVITE[22m v4.3.9[39m  [2mready in [0m[1m309[22m[2m[0m ms[22m
-[dev:client] 
-[dev:client]   [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
-[dev:client] [2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
-[dev:client] ^C^C�Desea terminar el trabajo por lotes (S/N)? npm run dev:client exited with code 1
+[dev:client] ^C�Desea terminar el trabajo por lotes (S/N)? npm run dev:client exited with code 1
 �Desea terminar el trabajo por lotes (S/N)? 

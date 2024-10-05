@@ -96,6 +96,11 @@
 									<form id="form" action="javascript:void(0)">
 										<div class="row gutters mb-4">
 											<div class="col">
+												<input type="text" class="form-control" placeholder="Ingrese DNI"
+													id="dni" maxlength="8"
+													oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+											</div>
+											<div class="col">
 												<input type="text" class="form-control"
 													placeholder="Nombre del artesano" id="nombre">
 											</div>

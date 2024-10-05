@@ -15,8 +15,6 @@ hideLoading();
   let partials = [
     { path: 'partials/shared/header.html', container: 'app-header' },
     { path: 'partials/shared/menu.html', container: 'app-side' },
-
-
   ];
   try {
     await loadPartials(partials);
@@ -73,8 +71,7 @@ let artesano_id = null;
 
 async function cargar () {
 
-  debugger
-  //alert(1)
+
   let datos = await listarArtesanosCombo()
   console.log(datos)
 
@@ -386,7 +383,7 @@ async function buscarUsuario () {
         let fila = $(this);
         let talla = {
           id: fila.find('td').eq(0).text(),
-          talla: parseInt(fila.find('td').eq(1).text(), 10)
+          talla: fila.find('td').eq(1).text()
         };
         listaTalla.push(talla);
       });
@@ -558,7 +555,6 @@ descuentoInput.addEventListener('input', function () {
   if (isNaN(precioOriginal)) {
 
     showToast('Completar el precio actual, registrar en la pestaña "datos generales - Precio del producto".');
-
     $('#porcentajeDescuento').val("");
     $('#precioOfertado').val("");
     return;
@@ -628,6 +624,7 @@ precioInput.addEventListener('input', function () {
 async function editarProducto (id) {
 
   editarproductos = await geteditarproducto(id);
+
   $('#idespanolNombre').val(editarproductos.nombres_es)
   $('#idinglesNombre').val(editarproductos.nombres_eng)
   $('#idespanolResumen').val(editarproductos.resumen_es)
@@ -652,6 +649,7 @@ async function editarProducto (id) {
 
   $('#cantidad').val(editarproductos.cantidad)
   $('#cantidadMinima').val(editarproductos.cantidad_minima)
+
   if (editarproductos.restar_stock === 1) {
     document.getElementById('restarStock').checked = true;
   } else {
@@ -662,7 +660,9 @@ async function editarProducto (id) {
   $('#lstcategoria').val(editarproductos.categoria_id)
   $('#fechaDisponible').val(editarproductos.fecha_disponible)
 
-
+  /*Agregando los datos de los artesanos*/
+  $('#dni').val(editarproductos.datos_artesano?.dni)
+  $('#nombrecompleto').val(editarproductos.datos_artesano.nombres + ' ' + editarproductos.datos_artesano.apellidos)
 
   document.getElementById('imagenPrincipal').src = editarproductos.imagen_principal
 
@@ -903,6 +903,7 @@ function habilitar () {
   home8Tab.classList.remove('disabled');
 }
 
+
 $(document).ready(function () {
 
 
@@ -912,6 +913,7 @@ $(document).ready(function () {
   productId = urlParams.get('id');
 
   var titulo = document.getElementById("tituloproducto");
+
   if (productId != 0) {
     editarProducto(productId);
     titulo.innerText = "Editar producto";
@@ -1959,7 +1961,7 @@ async function llenarcategoria () {
     lstcategorias.forEach(region => {
       let option = document.createElement('option');
       option.value = region.id;
-      option.textContent = region.abreviatura;
+      option.textContent = region.denominacion + ' - ' + region.abreviatura;
       selectCategoria.appendChild(option);
     });
   } catch (error) {

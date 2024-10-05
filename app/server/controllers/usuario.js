@@ -7,7 +7,7 @@ const {
 const model = require('../models/usuario');
 const modelprograma = require('../models/programas');
 const { listarProgramasbyIESTP } = require('../services/libros/libros');
-const { reporteLibros,reporteUsuarios,reporteaccesos } = require('../services/usuario/usuario');
+const { reporteLibros, reporteUsuarios, reporteaccesos } = require('../services/usuario/usuario');
 const iestps = require('../models/iestps');
 const programas = require('../models/programas');
 const rol = require('../models/rol');
@@ -15,9 +15,9 @@ const menu = require('../models/menu');
 const usuario = require('../models/usuario');
 const artesano = require('../models/artesano');
 const cliente = require('../models/cliente')
-const{tokenSign} = require('../utils/handleJwt')
+const { tokenSign } = require('../utils/handleJwt')
 const { handleHttpError } = require('../utils/handleError');
-const {matchedData} = require('express-validator')
+const { matchedData } = require('express-validator')
 module.exports = {
     guardar,
     actualizar,
@@ -27,8 +27,8 @@ module.exports = {
     save,
     obtenerDNI, loginpersonal,
     verificarToken,
-    recuperarcuenta, cambiarContrasenia,importarUsuarios
-    ,reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp ,
+    recuperarcuenta, cambiarContrasenia, importarUsuarios
+    , reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp,
     loginCliente, actualizarContraseniaCiente
 
 };
@@ -39,45 +39,46 @@ module.exports = {
  * @param res
  * @returns {Promise<void>}
  */
-async function actualizarContraseniaCiente(req,res){
-    const {id} = req.params
-    const{contraseniaNueva} = req.body
-    try{
+async function actualizarContraseniaCiente (req, res) {
+    const { id } = req.params
+    const { contraseniaNueva } = req.body
+    try {
         //cambio la clave por contrasenia nueva donde el id coincida
-        await usuario.update({clave: contraseniaNueva}, {where: {id}})
-        res.status(200).send({message: "Contraseña actualizada"})
-    }catch(e){
+        await usuario.update({ clave: contraseniaNueva }, { where: { id } })
+        res.status(200).send({ message: "Contraseña actualizada" })
+    } catch (e) {
         console.error(e)
-        handleHttpError(res,"Ocurrio un error actualizando la contraseña",500)
+        handleHttpError(res, "Ocurrio un error actualizando la contraseña", 500)
     }
 
 
 
 
 }
-async function loginCliente(req, res){
-    try{
-        const {clave} = req.body
+async function loginCliente (req, res) {
+    try {
+        const { clave } = req.body
         //encuentra el cliente que coincida con clave y contrasenia
-        const user = await  usuario.findOne({where:
-                {usuario:req.body.usuario, clave}
+        const user = await usuario.findOne({
+            where:
+                { usuario: req.body.usuario, clave }
         })
         //validaciones de rol y cliente existente
-        if(!user){
-            return res.status(400).send({error: "Usuario o contraseña incorrectos"})
+        if (!user) {
+            return res.status(400).send({ error: "Usuario o contraseña incorrectos" })
         }
-        if(user.rolid !== 3){
-            return res.status(400).send({error: "Solo puedes ingresar con una cuenta de cliente"})
+        if (user.rolid !== 3) {
+            return res.status(400).send({ error: "Solo puedes ingresar con una cuenta de cliente" })
         }
         const data = {
             token: jwt.sign({ client: user }, '2C44-4D44-WppQ38S', { expiresIn: '1d' }),
             id: user.id,
             idCliente: await cliente.findClienteIdByUsuarioId(user.id)
         }
-        return res.status(200).send({data})
-    }catch(e){
+        return res.status(200).send({ data })
+    } catch (e) {
         console.error(e)
-        handleHttpError(res,"Error al iniciar sesion",500)
+        handleHttpError(res, "Error al iniciar sesion", 500)
     }
 }
 function guardar (req, res) {
@@ -97,15 +98,15 @@ function guardar (req, res) {
 }
 async function actualizar (req, res) {
 
-    try{
+    try {
         const id = req.params.id
         const body = req.body
         // console.log("El request es:",req.body)
         // console.log(req.params.id)
-        const data = await usuario.update(body, {where: {id}})
+        const data = await usuario.update(body, { where: { id } })
         console.log("Data es", data)
-        return res.status(200).send({data})
-    }catch(e){
+        return res.status(200).send({ data })
+    } catch (e) {
         handleHttpError(res, "Error updating item", 500)
     }
 }
@@ -159,9 +160,9 @@ function obtenerDNI (req, res) {
         where: { dni: req.query.dni }
     })
         .then(resultset => {
-           if(resultset){
-            delete resultset.clave
-           }
+            if (resultset) {
+                delete resultset.clave
+            }
             res.status(200).json(resultset)
         })
         .catch(error => {
@@ -231,9 +232,11 @@ function listar (req, res) {
     }
 }*/
 /*Guarda los datos generales de un predio*/
-async function save(req, res, next) {
+async function save (req, res, next) {
     const t = await model.sequelize.transaction();
     try {
+        delete req.body.usuario;
+        delete req.body.clave;
         let object = await model.findOne({
             where: {
                 id: req.body.id ? req.body.id : 0
@@ -267,7 +270,7 @@ async function save(req, res, next) {
         // const token = tokenSign(object)
         // req.session.token = token
         // res.cookie('token', data.token, { maxAge: 24 * 60 * 60 * 1000 })
-        return res.status(200).send({data});
+        return res.status(200).send({ data });
     } catch (e) {
         await t.rollback();
         return next(e);
@@ -339,8 +342,8 @@ async function loginpersonal (req, res) {
         }
 
         else {
-           
-            usuarioDB.clave = "chismoso" 
+
+            usuarioDB.clave = "chismoso"
             usuarioDB.url = roles.url;
             req.session.user = usuarioDB.dataValues; // Puedes almacenar cualquier informaci贸n adicional del usuario aqu铆
             console.log('Impmiendo session ----------------------')
@@ -349,15 +352,21 @@ async function loginpersonal (req, res) {
             // Almacenar el token en una cookie para mantener la sesi贸n
             res.cookie('token', token, { maxAge: 24 * 60 * 60 * 1000 });
 
- 
+
         }
         console.log("El usuario", usuarioDB.correo)
         //Encuentro el id del cliente por el correo, este id es usado por el front, lo almacena en local storage
         //que despues es usado para x cosaas idk xd
+
+
         const idClient = await cliente.findIdByCorreo(usuarioDB.correo)
+        const rartesano = await artesano.findOne({
+            where: { usuario_id: usuarioDB.id }
+        });
         res.status(200).json({
             islogueado: true,
             usuario: usuarioDB,
+            artesano: rartesano,
             token: "Bearer " + token,
             idCliente: idClient
         });
@@ -395,43 +404,43 @@ async function verificarToken (req, res) {
         const iestp = await usuario.findOne({
             where: { usuario: usuarios.usuario }
         });
- 
-       /* let programa = []
-        if (usuario.rolid == 1) {
-            programa = await listarProgramasbyIESTP({ iestpid: usuario.iestpid })
-        }
-        if (usuario.rolid == 2) {
-            programa = await listarProgramasbyIESTP({ iestpid: usuario.iestpid })
-        }
-        if(usuario.rolid == 3) {
-            programa = await programas.findAll({
-                where: { id: usuario.programaid }
-            });
-        }
-            
-*/  
+
+        /* let programa = []
+         if (usuario.rolid == 1) {
+             programa = await listarProgramasbyIESTP({ iestpid: usuario.iestpid })
+         }
+         if (usuario.rolid == 2) {
+             programa = await listarProgramasbyIESTP({ iestpid: usuario.iestpid })
+         }
+         if(usuario.rolid == 3) {
+             programa = await programas.findAll({
+                 where: { id: usuario.programaid }
+             });
+         }
+             
+ */
         let datosartesano = [];
-        const idusu=usuarios.id;
+        const idusu = usuarios.id;
         console.log(idusu)
         if (idusu) {
 
             datosartesano = await artesano.findAll({
-                where: { 
-                usuario_id: idusu
-            } 
+                where: {
+                    usuario_id: idusu
+                }
             });
             usuarios.datos = datosartesano;
         } else {
             usuarios.datos = null; // o algún valor predeterminado
         }
- 
+
 
         const role = await rol.findOne({
             where: { id: usuarios.rolid }
         });
 
-         
- 
+
+
         /*usuario.iestp = iestp;
         usuario.programas = programa; */
         let menuspadre = await menu.findAll({
@@ -444,25 +453,25 @@ async function verificarToken (req, res) {
 
         let menushijo = [];
         menushijo = await menu.findAll({
-            where: { 
+            where: {
                 rolid: usuarios.rolid,
                 padreid: {
                     [Op.ne]: 0
-                } 
+                }
             },
             order: [['orden', 'ASC']]
         });
 
-        
+
         console.log(role)
         usuarios.rol = role;
         usuarios.menu = menuspadre;
         usuarios.menuhijo = menushijo;
-        
-         
+
+
         //console.log(datosartesano)
 
-        console.log("Los headers",req.headers)
+        console.log("Los headers", req.headers)
         return res.status(200).json({ isvalid: true, message: 'Token valido', usuarios });
     });
 }
@@ -543,7 +552,7 @@ async function enviarcorreo (usuario) {
 
 
 
-async function enviarcorreoingreso (usuario) { 
+async function enviarcorreoingreso (usuario) {
 
 
     console.log('---------------USUARIO---------------------')
@@ -569,7 +578,7 @@ async function enviarcorreoingreso (usuario) {
         var mailOptions = {
             from: 'noreply@biblioideas.com',
             to: usuario.correo,
-            subject: 'Bienvenido a BiblioIdeas '+ usuario.nombres,
+            subject: 'Bienvenido a BiblioIdeas ' + usuario.nombres,
             html: `
             <h1>Datos de la cuenta de usuario</h1>
             <p>Usuario: ${usuario.dni}</p>
@@ -611,7 +620,7 @@ async function importarUsuarios (req, res, next) {
 
         for (let i = 0; i < listusuarios.length; i++) {
             //validamos que no el dni tenga 8 digitos y exista en la base de datos por el DNI
-            let usuario=listusuarios[i];
+            let usuario = listusuarios[i];
             let listErrores = []
             if (String(usuario.dni).trim() == '') {
                 listErrores.push('DNI vacio')
@@ -621,7 +630,7 @@ async function importarUsuarios (req, res, next) {
             } else {
                 let object = await model.findOne({
                     where: {
-                        dni:usuario.dni 
+                        dni: usuario.dni
                     }
                 });
 
@@ -693,7 +702,7 @@ async function importarUsuarios (req, res, next) {
 
 async function reporteusuariosiestp (req, res) {
     try {
-        
+
 
         let result = await reporteUsuarios(req.query.iestpid)
 
@@ -707,7 +716,7 @@ async function reporteusuariosiestp (req, res) {
 
 async function reportelibrosiestp (req, res) {
     try {
-        
+
         let result = await reporteLibros(req.query.iestpid)
 
         return res.status(200).send(result);
@@ -720,9 +729,9 @@ async function reportelibrosiestp (req, res) {
 
 async function reporteaccesosiestp (req, res) {
     try {
-        
 
-        let result = await reporteaccesos(req.query.iestpid,req.query.fechini,req.query.fechfin )
+
+        let result = await reporteaccesos(req.query.iestpid, req.query.fechini, req.query.fechfin)
 
         return res.status(200).send(result);
 

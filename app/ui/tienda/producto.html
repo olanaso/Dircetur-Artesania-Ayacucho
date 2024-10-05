@@ -13,7 +13,7 @@
 	<meta name="author" content="Car Dealer Template">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Producto - Artesanias de Ayacucho</title>
+	<title>Proceso de compra - Artesanias de Ayacucho</title>
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
 
@@ -30,6 +30,13 @@
 	<link rel="stylesheet" href="assets_tienda/css/animated.css">
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 	<style>
+		.img-cover {
+			max-height: 100%;
+			max-width: 100%;
+			object-fit: cover;
+			/* Mantiene la proporción y rellena el contenedor */
+		}
+
 		.product-card {
 			border: 1px solid #ccc;
 			border-radius: 10px;
@@ -194,8 +201,8 @@
 					<div class="heading-content-bg wow fadeIn" data-wow-delay="0.75s" data-wow-duration="1s">
 						<div class="row">
 							<div class="heading-content col-md-12">
-								<p><a href="index.html">Inicio</a> / <em> Producto </em> </p>
-								<h2>Presentación de <em>Producto</em></h2>
+								<p><a href="index.html">Inicio</a> / <em> Artesania </em> </p>
+								<h2>Detalle de la <em>Artesania</em></h2>
 							</div>
 						</div>
 					</div>
@@ -211,25 +218,20 @@
 			<div class="recent-car-content">
 				<div class="row">
 					<div class="col-md-6">
-						<div class="slider-pro" id="single-car">
-							<div class="sp-slides">
-								<!-- Slide 1 -->
-								<div class="sp-slide">
-									<img class="sp-image" src="https://via.placeholder.com/250" alt="Main image" />
-								</div>
-								<!-- Slide 2 -->
-								<div class="sp-slide">
-									<img class="sp-image" src="https://via.placeholder.com/250" alt="Secondary image" />
-								</div>
+						<div id="single-car" class="slider-pro">
+							<div class="sp-slides " id="id-sp-slides">
+
+
+
 							</div>
-						
-							<!-- Thumbnail navigation -->
-							<div class="sp-thumbnails">
-								<img class="sp-thumbnail" src="https://via.placeholder.com/100" alt="Thumbnail 1" />
-								<img class="sp-thumbnail" src="https://via.placeholder.com/100" alt="Thumbnail 2" />
+
+							<div class="sp-thumbnails" id="id-sp-thumbnails">
+
+
+
+
 							</div>
 						</div>
-						
 					</div>
 					<div class="col-md-6">
 						<div class="car-details">
@@ -274,7 +276,8 @@
 							</div>
 							<div class="similar-info">
 								<div class="primary-button">
-									<a href="#" id="agregar-carrito">AGREGAR AL CARRITO <i class="fa fa-dollar"></i></a>
+									<a id="btnagregarcarrito" href="#">AGREGAR AL CARRITO <i
+											class="fa fa-dollar"></i></a>
 								</div>
 							</div>
 						</div>
@@ -333,9 +336,9 @@
 							<div class="sep-section-heading">
 								<h2>Información de <em>Contacto</em></h2>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati accusamus a iure
-								nulla,
-								sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio repellat.
+							<p>
+								<img id="artesano-img" src="" class="artesano-photo">
+								<a id="artesano-informacion_" href="">Ver el artesano</a>
 							</p>
 							<div class="contact-info">
 								<div class="row">
@@ -355,7 +358,7 @@
 		</div>
 	</section>
 
-	<!-- <section>
+	<section>
 		<div class="recent-car similar-car wow fadeIn" data-wow-duration="1s">
 			<div class="container">
 				<div class="recent-car-content">
@@ -531,7 +534,7 @@
 				</div>
 			</div>
 		</div>
-	</section> -->
+	</section>
 
 
 	<div id="footer">
@@ -558,7 +561,6 @@
 
 	<!-- Custom Js -->
 	<script src="assets_tienda/js/custom.js"></script>
-
 
 
 	<script type="module" src="../src/tienda/producto/index.js"></script>

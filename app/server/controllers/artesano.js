@@ -148,32 +148,92 @@ function obtenerDNI (req, res) {
 
 
 
+// function listar (req, res) {
+// let {dni,nombre,correo}=req.query
+
+//     let sql = ``;
+//     sql =
+//         `
+//         SELECT 
+//         a.id,
+//         CONCAT(a.nombres, ' - ', a.apellidos) AS completo,
+//         a.correo,
+//             a.dni,
+//         CASE 
+//             WHEN c.tipousuario = 1 THEN 'artesano'
+//             WHEN c.tipousuario = 2 THEN 'cliente'
+//             ELSE 'otro'
+//         END AS tipousuario
+//     FROM artesano a 
+//     INNER JOIN usuario c ON c.id = a.usuario_id
+//     ORDER BY a.id DESC
+//     LIMIT 50;
+//     `
+//     artesanoModel.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
+//         .then(resultset => {
+//             res.status(200).json(resultset)
+//         })
+//         .catch(error => {
+//             res.status(400).send(error)
+//         })
+// }
+
 function listar (req, res) {
-    let sql = ``;
-    sql =
-        `
+    let { dni, nombre, correo } = req.query;
+
+    let sql = `
         SELECT 
-        a.id,
-        CONCAT(a.nombres, ' - ', a.apellidos) AS completo,
-        a.correo,
-        CASE 
-            WHEN c.tipousuario = 1 THEN 'artesano'
-            WHEN c.tipousuario = 2 THEN 'cliente'
-            ELSE 'otro'
-        END AS tipousuario
-    FROM artesano a 
-    INNER JOIN usuario c ON c.id = a.usuario_id
-    ORDER BY a.id DESC
-    LIMIT 50;
-    `
-    artesanoModel.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
+            a.id,
+            CONCAT(a.nombres, ' - ', a.apellidos) AS completo,
+            a.correo,
+            a.dni,
+            CASE 
+                WHEN c.tipousuario = 1 THEN 'artesano'
+                WHEN c.tipousuario = 2 THEN 'cliente'
+                ELSE 'otro'
+            END AS tipousuario
+        FROM artesano a 
+        INNER JOIN usuario c ON c.id = a.usuario_id
+    `;
+
+    // Agregar condiciones WHERE dinámicas basadas en los valores de req.query
+    let conditions = [];
+    let params = {};
+
+    if (dni) {
+        conditions.push(`a.dni = :dni`);
+        params.dni = dni;
+    }
+    if (nombre) {
+        conditions.push(`a.nombres LIKE :nombre`);
+        params.nombre = `%${nombre}%`;
+    }
+    if (correo) {
+        conditions.push(`a.correo LIKE :correo`);
+        params.correo = `%${correo}%`;
+    }
+
+    // Si existen condiciones, agregarlas al SQL
+    if (conditions.length > 0) {
+        sql += ` WHERE ` + conditions.join(' AND ');
+    }
+
+    // Agregar la cláusula ORDER BY y LIMIT
+    sql += `
+        ORDER BY a.id DESC
+        LIMIT 50;
+    `;
+
+    // Ejecutar la consulta con los parámetros reemplazados
+    artesanoModel.sequelize.query(sql, { replacements: params, type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
-            res.status(200).json(resultset)
+            res.status(200).json(resultset);
         })
         .catch(error => {
-            res.status(400).send(error)
-        })
+            res.status(400).send(error);
+        });
 }
+
 
 
 
@@ -326,6 +386,7 @@ async function saveUsuarioArtesano (req, res, next) {
 
 
 async function save (req, res, next) {
+
     const t = await artesanoModel.sequelize.transaction();
     try {
         let object = await artesanoModel.findOne({

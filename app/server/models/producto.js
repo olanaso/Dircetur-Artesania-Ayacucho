@@ -1,9 +1,9 @@
 const db = require('../config/db');
-sequelize = db.sequelize; 
+sequelize = db.sequelize;
 Sequelize = db.Sequelize;
-const categoria = require ('./categoria')
+const categoria = require('./categoria')
 const artesano = require('./artesano')
-const {Op} = require('sequelize')
+const { Op } = require('sequelize')
 
 
 const product = sequelize.define('producto', {
@@ -12,8 +12,8 @@ const product = sequelize.define('producto', {
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
-        field: 'id'  
-    }, 
+        field: 'id'
+    },
     artesano_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
@@ -149,7 +149,7 @@ const product = sequelize.define('producto', {
         allowNull: true,
         field: 'fecha_disponible'
     },
- 
+
     imagen_principal: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -169,7 +169,7 @@ const product = sequelize.define('producto', {
         type: Sequelize.JSON,
         allowNull: true,
         field: 'lst_videoenlace'
-    }, 
+    },
     lst_colores: {
         type: Sequelize.JSON,
         allowNull: true,
@@ -251,7 +251,7 @@ const product = sequelize.define('producto', {
         field: 'updatedat'
     }
 }, {
-    tableName: 'producto', 
+    tableName: 'producto',
     timestamps: true
 });
 
@@ -260,11 +260,11 @@ const product = sequelize.define('producto', {
  * @param categoryId
  * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
  */
-product.findAllProductsByCategoryId = async function(categoryId){
+product.findAllProductsByCategoryId = async function (categoryId) {
     product.belongsTo(categoria, {
         foreignKey: 'categoria_id'
     })
-    return await product.findAll({where:{categoria_id : categoryId}})
+    return await product.findAll({ where: { categoria_id: categoryId } })
 }
 //cuando pongo las relaciones afuera de la funcion ,la funcion no se cae
 //producto pertenece a artesano, la foreign key es artesano_id dentro del mismo product
@@ -286,12 +286,13 @@ product.belongsTo(categoria, {
  * @param artesanoId : id del artesano
  * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
  */
-product.findAllProductsByArtesanoId = async function(artesanoId) {
-    return await product.findAll({where:{artesano_id : artesanoId},
+product.findAllProductsByArtesanoId = async function (artesanoId) {
+    return await product.findAll({
+        where: { artesano_id: artesanoId },
         include: [
             //Eligiendo que atributos de los alias quiero que vaya en el response
             {
-                model:artesano,
+                model: artesano,
                 as: 'datos_artesano',
                 attributes: ['nombres']
             },
@@ -304,24 +305,25 @@ product.findAllProductsByArtesanoId = async function(artesanoId) {
     })
 }
 
-product.findAllArtesanoIdByCategoriaId = async function(id)  {
-    const artesanos = await product.findAll({where: {categoria_id : id}})
+product.findAllArtesanoIdByCategoriaId = async function (id) {
+    const artesanos = await product.findAll({ where: { categoria_id: id } })
     return artesanos.map(artesano => artesano.artesano_id)
 }
 
-product.findProductoAndArtesanoByProdId = async function(id){
+product.findProductoAndArtesanoByProdId = async function (id) {
     const productoEncontrado = await product.findOne(
-        {where: {id},
-            attributes: ['nombres_es', 'artesano_id', 'lst_ofertas', 'resumen_es',
-            'descripcion_es', 'cualidades_es', 'palabra_clave_es', 'numero_piezas_es',
-            'alto', 'ancho', 'materiales_es', 'precio', 'tecnicas_es', 'cantidad',
-            'imagen_principal', 'lst_imagenes', 'lst_colores', 'lst_ofertas', 'lst_talla',
-            'lst_otros_costos', 'precio_local', 'precio_nacional', 'precio_extranjero',
-            'tiempo_elaboracion' ],
+        {
+            where: { id },
+            // attributes: ['nombres_es', 'artesano_id', 'lst_ofertas', 'resumen_es',
+            //     'descripcion_es', 'cualidades_es', 'palabra_clave_es', 'numero_piezas_es',
+            //     'alto', 'ancho', 'materiales_es', 'precio', 'tecnicas_es', 'cantidad',
+            //     'imagen_principal', 'lst_imagenes', 'lst_colores', 'lst_ofertas', 'lst_talla',
+            //     'lst_otros_costos', 'precio_local', 'precio_nacional', 'precio_extranjero', 'categoria_id', 'cantidad_minima',
+            //     'tiempo_elaboracion'],
             include: [
                 {
                     model: artesano,
-                    attributes: ['foto1', 'correo', 'celular', 'lst_mediospago', 'lst_contactos', 'nombres', 'apellidos'],
+                    attributes: ['foto1', 'correo', 'celular', 'lst_mediospago', 'lst_contactos', 'nombres', 'apellidos', 'dni', 'ruc'],
                     as: 'datos_artesano'
                 }
             ]
@@ -333,12 +335,12 @@ product.findProductoAndArtesanoByProdId = async function(id){
  * @param categorias = objeto
  * @returns {Promise<Model<TModelAttributes, TCreationAttributes>[]>}
  */
-product.findAllArtesanoIdAndCategoriaIdByCategorias = async function(categorias){
+product.findAllArtesanoIdAndCategoriaIdByCategorias = async function (categorias) {
     const artesanosPorCategoria = await product.findAll({
         attributes: ['categoria_id', 'artesano_id'],
         where: {
-            categoria_id : {
-                [Op.in] : categorias.map(cat => cat.id)
+            categoria_id: {
+                [Op.in]: categorias.map(cat => cat.id)
             }
         }
     })
