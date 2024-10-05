@@ -70,32 +70,76 @@ let artesano_id = null;
 
 
 async function cargar () {
+<<<<<<< HEAD
 
 
   let datos = await listarArtesanosCombo()
   console.log(datos)
+=======
+  const urlParams = new URLSearchParams(window.location.search);
+  productId = urlParams.get('id');
+  console.log('id del prod', productId)
+  debugger
+  //alert(1)
+>>>>>>> d49987a4118ccaeffb9291d5b2d4fe4df38b6fd4
 
-  $('#drp-artesano-dni').select2({
-    placeholder: 'Seleccione una opción',
-    allowClear: true,
-    data: datos.map(function (item) {
-      return {
-        id: item.dni,
-        text: item.completo,
-        artesano_id: item.id
-      };
-    })
-  });
+  if(productId === '0') {
+    let datos = await listarArtesanosCombo()
+    console.log(datos)
+    $('#drp-artesano-dni').select2({
+      placeholder: 'Seleccione una opción',
+      allowClear: true,
+      data: datos.map(function (item) {
+        return {
+          id: item.dni,
+          text: item.completo,
+          artesano_id: item.id
+        };
+      })
+    });
 
 
-  // Mostrar el valor seleccionado en el input
-  $('#drp-artesano-dni').on('select2:select', function (e) {
-    var data = e.params.data;
-    $('#dni').val(data.id);  // Asigna el texto seleccionado al input
-    $('#nombrecompleto').val(data.text.split(' - ')[1]);
-    console.log('id del artesano', data.artesano_id)
-    artesano_id = data.artesano_id
-  });
+    // Mostrar el valor seleccionado en el input
+    $('#drp-artesano-dni').on('select2:select', function (e) {
+      var data = e.params.data;
+      $('#dni').val(data.id);  // Asigna el texto seleccionado al input
+      $('#nombrecompleto').val(data.text.split(' - ')[1]);
+      console.log('id del artesano', data.artesano_id)
+      artesano_id = data.artesano_id
+    });
+  } else {
+    editarproductos = await geteditarproducto(productId);
+    let datos = await listarArtesanosCombo()
+
+    console.log('array de listar combo', datos)
+    console.log('id del artesanow', editarproductos.artesano_id)
+
+    $('#drp-artesano-dni').select2({
+      placeholder: 'Seleccione una opción',
+      allowClear: true,
+      data: datos.filter( (item) => item.id === editarproductos.artesano_id)
+          .map((item) => ({
+            id: item.id,
+                text: item.completo,
+                dni: item.dni
+          }))
+    });
+
+    console.log('producto from await', editarproductos)
+    $('#drp-artesano-dni').val(editarproductos.artesano_id).trigger('change');
+    $('#nombrecompleto').val(editarproductos.datos_artesano.nombres);
+    $('#dni').val(editarproductos.datos_artesano.dni);
+
+    $('#drp-artesano-dni').on('select2:select', function (e) {
+      var data = e.params.data;
+      $('#dni').val(data.dni);  // Asigna el texto seleccionado al input
+      console.log(artesano_id)
+      artesano_id = editarproductos.artesano_id
+    });
+    console.log('id del artesano', editarproductos.artesano_id)
+    artesano_id = editarproductos.artesano_id
+  }
+
 }
 
 

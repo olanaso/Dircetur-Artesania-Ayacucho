@@ -148,7 +148,7 @@ async function obtenerPedido(idPedido) {
 // }
 const DEFAULT_PAGE_LIMIT = 10; // Número predeterminado de resultados por página
 
-function listar(req, res) {
+function    listar(req, res) {
     const page = parseInt(req.query.page) || 1; // Página solicitada, por defecto la primera
     const limit = parseInt(req.query.limit) || DEFAULT_PAGE_LIMIT; // Límite de resultados por página
     const idartesano = parseInt(req.query.idartesano); // Límite de resultados por página
