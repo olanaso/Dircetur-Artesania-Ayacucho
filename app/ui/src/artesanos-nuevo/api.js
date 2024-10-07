@@ -99,7 +99,10 @@ export async function guardarArtesanoUsuario (artesano, usuario) {
     return data; // Ahora data contiene el ID del objeto creado y otros datos
 
   } catch (error) {
+    alert('Ocurrio un error en el registro, verifica si el usuario esta registrado')
     console.error("Error:", error);
+    location.reload();
+
   }
 }
 //comprobar en donde se usa y borrar

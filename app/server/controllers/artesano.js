@@ -7,6 +7,7 @@ const moment = require('moment');
 const categoria = require('../models/categoria')
 const product = require('../models/producto')
 const { handleHttpError } = require("../utils/handleError");
+const { emailRegistroArtesano } = require("../services/mails/mails");
 
 
 
@@ -346,6 +347,7 @@ async function saveUsuarioArtesano (req, res, next) {
             // usuario.id = artesano.id;
             usuario_result = await artesanos.create({ ...usuario }, { transaction: t });
 
+
         }
         console.log('El id!!', usuario.id)
         let artesano_result = null;
@@ -367,6 +369,13 @@ async function saveUsuarioArtesano (req, res, next) {
         } else {  //registro de nuevo usuario
             artesano.usuario_id = usuario_result.id;
             artesano_result = await artesanoModel.create({ ...artesano }, { transaction: t });
+            if (artesano_result) {
+
+                emailRegistroArtesano({
+                    correo: artesano_result.correo, nombreArtesano: artesano_result.nombres + ' ' + artesano_result.apellidos
+                    , usuarioArtesano: artesano_result.dni, contrasenaArtesano: usuario_result.clave, logoUrl: null
+                })
+            }
 
         }
 

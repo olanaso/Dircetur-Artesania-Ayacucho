@@ -731,7 +731,7 @@
 														<div class="modal-body">
 															<form id="mediopagoForm">
 
-																<div class="row mt-4">
+																<div id="valoresBilletera" class="row mt-4">
 																	<div class="col-1 col-md-3">
 																		<h6 class="sub-heading"
 																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
@@ -741,38 +741,58 @@
 																	</div>
 																	<div class="col-9 col-md-8">
 																		<select class="form-control" id="tipomediopago">
-																			<option value="0">Seleccionar</option>
-																			<option value="1">BCP</option>
-																			<option value="2">Banco de la Nación
-																			</option>
-																			<option value="3">BBVA</option>
-																			<option value="4">YAPE</option>
-																			<option value="5">PLIN</option>
+
+																			<option value="">Seleccionar</option>
+																			<option value="YAPE"
+																				data-target="nro-yape-plin nombre-titular">
+																				Billetera Digital - YAPE</option>
+																			<option value="PLIN"
+																				data-target="nro-yape-plin nombre-titular">
+																				Billetera Digital - PLIN</option>
+																			<option value="BCP"
+																				data-target="nro-cta nro-cci nombre-titular">
+																				Banco de Credito del Perú - BCP</option>
+																			<option value="Banco de la Nación"
+																				data-target="nro-cta nro-cci nombre-titular">
+																				Banco de la Nación</option>
+																			<option value="BBVA"
+																				data-target="nro-cta nro-cci nombre-titular">
+																				Banco - BBVA</option>
+																			<option value="Interbank"
+																				data-target="nro-cta nro-cci nombre-titular">
+																				Banco- Interbank</option>
+																			<option value="Scotiabank"
+																				data-target="nro-cta nro-cci nombre-titular">
+																				Banco - Scotiabank</option>
+
+
 																		</select>
+
 																	</div>
-																	<div class="col-1 col-md-3">
+																	<div class="col-1 col-md-3 nro-yape-plin"
+																		style="display: none">
 																		<h6 class="sub-heading"
 																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
-																			<span class="text-primary">*</span> Nombre
-																			del Banco:
+																			<span class="text-primary">*</span> Nro de
+																			Yape / Plin:
 																		</h6>
 																	</div>
-																	<div class="col-9 col-md-8">
+																	<div class="col-9 col-md-8 nro-yape-plin"
+																		style="display: none;">
 																		<input type="text" class="form-control"
 																			placeholder="Ingrese el nombre del banco"
 																			id="nombrebanco" maxlength="100"
-																			minlength="8"
-																			oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
+																			minlength="9">
 
 																	</div>
-																	<div class="col-1 col-md-3">
+																	<div class="col-1 col-md-3 nombre-titular">
 																		<h6 class="sub-heading"
 																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
 																			<span class="text-primary">*</span> Nombre
 																			Titular:
 																		</h6>
 																	</div>
-																	<div class="col-9 col-md-8">
+																	<div class="col-9 col-md-8 nombre-titular">
 																		<input type="text" class="form-control"
 																			placeholder="Ingrese el nombre titular"
 																			id="nombretitular" maxlength="100"
@@ -780,14 +800,14 @@
 																			oninput="this.value = this.value.replace(/[^A-Za-z0-9 ]/g, '');">
 
 																	</div>
-																	<div class="col-1 col-md-3">
+																	<div class="col-1 col-md-3 nro-cta">
 																		<h6 class="sub-heading"
 																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
 																			<span class="text-primary">*</span> Nro de
-																			Cuenta Corriente:
+																			Cuenta:
 																		</h6>
 																	</div>
-																	<div class="col-9 col-md-8">
+																	<div class="col-9 col-md-8  nro-cta">
 																		<input type="text" class="form-control"
 																			placeholder="Ingrese el nro de cuenta corriente"
 																			id="cuentacorriente" maxlength="100"
@@ -795,14 +815,14 @@
 																			oninput="this.value = this.value.replace(/[^0-9\-]/g, '');">
 
 																	</div>
-																	<div class="col-1 col-md-3">
+																	<div class="col-1 col-md-3  nro-cci">
 																		<h6 class="sub-heading"
 																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
 																			<span class="text-primary">*</span> Nro de
 																			Cuenta Interbancaria:
 																		</h6>
 																	</div>
-																	<div class="col-9 col-md-8">
+																	<div class="col-9 col-md-8 nro-cci">
 																		<input type="text" class="form-control"
 																			placeholder="Ingrese el nro de cuenta interbancaria"
 																			id="cuentainterbancaria" maxlength="100"
@@ -868,8 +888,7 @@
 																		</div>
 																	</div>
 																	<div class="col-9 col-md-2">
-																		<label
-																			for="envioNacional">Departamental:</label>
+																		<label for="envioNacional">Nacional:</label>
 																		<div class="custom-switch">
 																			<input type="checkbox"
 																				class="custom-control-input"
@@ -1039,24 +1058,24 @@
 										<div class="tab-pane fade" id="home7" role="tabpanel"
 											aria-labelledby="home-tab7">
 
-											<h6>Escoge una opción para subir el video:</h6>
+
 											<ul class="nav nav-tabs" id="myTab" role="tablist">
-												<li class="nav-item">
+												<!-- <li class="nav-item">
 													<a class="nav-link active" id="upload-tab" data-toggle="tab"
 														href="#upload" role="tab" aria-controls="upload"
 														aria-selected="true">Sube el video</a>
-												</li>
+												</li> -->
 												<li class="nav-item">
 													<a class="nav-link" id="link-tab" data-toggle="tab" href="#link"
 														role="tab" aria-controls="link" aria-selected="false">Sube el
-														enlace del video</a>
+														enlace del video Youtube</a>
 												</li>
 											</ul>
 											<div class="tab-content" id="myTabContent">
-												<div class="tab-pane fade show active" id="upload" role="tabpanel"
+												<div class="tab-pane fade " id="upload" role="tabpanel"
 													aria-labelledby="upload-tab">
 
-													<h6>Sube el video del presentación</h6>
+
 													<form id="videoForm">
 														<div class="card" style="min-height: 70px;">
 															<div class="card-body">
@@ -1115,6 +1134,8 @@
 																				class="icon icon-circle-with-plus"></i></button>
 																	</div>
 																</div>
+															</div>
+														</div>
 													</form>
 													<hr>
 													<h6>Lista de videos</h6>
@@ -1132,69 +1153,84 @@
 														</tbody>
 													</table>
 												</div>
+
+												<div class="tab-pane fade show active" id="link" role="tabpanel"
+													aria-labelledby="link-tab">
+													<h6>Sube el enlace del video</h6>
+													<form id="linkForm">
+
+														<div class="card" style="min-height: 70px;">
+															<div class="card-body">
+
+																<div class="row mt-4">
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Nombre
+																			del
+																			video:
+																		</h6>
+																	</div>
+																	<div class="col-sm-9">
+																		<input type="text" class="form-control"
+																			id="linkVideoName" maxlength="100"
+																			placeholder="Ingrese el nombre del video">
+																	</div>
+																	<div class="col-sm-2">
+																		<h6 class="sub-heading"
+																			style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
+																			<span class="text-primary">*</span> Enlace
+																			del
+																			video:
+																		</h6>
+																	</div>
+																	<div class="col-sm-9">
+																		<input type="text" class="form-control"
+																			id="videoLink" maxlength="150"
+																			placeholder="Ingrese el enlace del video">
+																	</div>
+																	<div class="col-md-12 text-right">
+																		<button type="button"
+																			class="btn btn-info btn-sm"
+																			id="addVideoLink">
+																			Añadir <i
+																				class="icon icon-circle-with-plus"></i>
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</form>
+													<hr>
+													<h6>Lista de videos</h6>
+													<table class="table table-bordered offer-table">
+														<thead>
+															<tr>
+																<th style="width: 5%;">N°</th>
+																<th style="width: 30%;">Nombre del video</th>
+																<th style="width: 45%;">Enlace del video</th>
+																<th style="width: 20%;">Acción</th>
+															</tr>
+														</thead>
+														<tbody id="videoList2">
+
+														</tbody>
+													</table>
+												</div>
+
 											</div>
 
 
 
 
 										</div>
-										<div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab">
-											<h6>Sube el enlace del video</h6>
-											<form id="linkForm">
 
-												<div class="card" style="min-height: 70px;">
-													<div class="card-body">
+										<!-- Tabs Parent Container -->
 
-														<div class="row mt-4">
-															<div class="col-sm-2">
-																<h6 class="sub-heading"
-																	style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
-																	<span class="text-primary">*</span> Nombre del
-																	video:
-																</h6>
-															</div>
-															<div class="col-sm-9">
-																<input type="text" class="form-control"
-																	id="linkVideoName" maxlength="100"
-																	placeholder="Ingrese el nombre del video">
-															</div>
-															<div class="col-sm-2">
-																<h6 class="sub-heading"
-																	style="padding: 10px;margin-top: 10px;font-size: 1.0rem;">
-																	<span class="text-primary">*</span> Enlace del
-																	video:
-																</h6>
-															</div>
-															<div class="col-sm-9">
-																<input type="text" class="form-control" id="videoLink"
-																	maxlength="150"
-																	placeholder="Ingrese el enlace del video">
-															</div>
-															<div class="col-md-12 text-right">
-																<button type="button" class="btn btn-info btn-sm"
-																	id="addVideoLink">
-																	Añadir <i class="icon icon-circle-with-plus"></i>
-																</button>
-															</div>
-														</div>
 
-											</form>
-											<hr>
-											<h6>Lista de videos</h6>
-											<table class="table table-bordered offer-table">
-												<thead>
-													<tr>
-														<th style="width: 5%;">N°</th>
-														<th style="width: 30%;">Nombre del video</th>
-														<th style="width: 45%;">Enlace del video</th>
-														<th style="width: 20%;">Acción</th>
-													</tr>
-												</thead>
-												<tbody id="videoList2">
 
-												</tbody>
-											</table>
-										</div>
+
+
 									</div>
 
 								</div>

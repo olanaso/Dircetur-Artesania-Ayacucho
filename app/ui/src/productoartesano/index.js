@@ -87,7 +87,7 @@ async function buscarUsuario () {
 
 async function buscarUsuario22 () {
 
-
+  let artesano = getDataFromLocalStorage('artesano')
   const Nombreproducto = document.getElementById('nombre-producto').value;
   const Preciosid = document.getElementById('precios-id').value;
   const Cantidadesid = document.getElementById('cantidades-id').value;
@@ -96,7 +96,7 @@ async function buscarUsuario22 () {
     nombres_es: Nombreproducto,
     precio: Preciosid,
     cantidad: Cantidadesid,
-    id: artesanoId
+    id: artesano.id
   };
 
   const data = await buscarProducto(filtro);

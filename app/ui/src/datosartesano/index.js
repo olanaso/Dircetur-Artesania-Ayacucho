@@ -44,7 +44,37 @@ function startApp () {
   buscarUsuario();
   //exportarExcel();
   //nuevo();
+  setChangeOpcionesBilletera();
+}
 
+
+function setChangeOpcionesBilletera () {
+
+  document.getElementById('tipomediopago').addEventListener('change', handleSelectMediosPago);
+}
+
+
+function handleSelectMediosPago (event) {
+
+  const contenedor = document.getElementById('valoresBilletera');
+  const inputs = contenedor.querySelectorAll('.nro-yape-plin, .nombre-titular,  .nro-cta , .nro-cci');
+
+  // Ocultar todos los inputs dentro del contenedor `valoresBilletera` inicialmente
+  inputs.forEach(input => input.style.display = 'none');
+
+  // Obtener el valor seleccionado y los targets a mostrar
+  const selectedOption = event.target.options[event.target.selectedIndex];
+  const targets = selectedOption.getAttribute('data-target');
+
+  // Mostrar los inputs especificados en los targets dentro de `valoresBilletera`
+  if (targets) {
+    targets.split(' ').forEach(target => {
+      const elements = contenedor.querySelectorAll(`.${target}`);
+      elements.forEach(element => {
+        element.style.display = 'block';
+      });
+    });
+  }
 }
 
 /*async function checkadminsession () {
@@ -445,7 +475,11 @@ async function buscarUsuario () {
 
 async function editarArtesano (usuario_id) {
 
-  editarartesano = await geteditarArtesano(usuario_id);
+  let artesano = getDataFromLocalStorage('artesano')
+
+  editarartesano = await geteditarArtesano(artesano.id);
+
+
 
   usuarioid = editarartesano.usuario_id;
   artesanoId = editarartesano.usuario_id;
@@ -960,10 +994,10 @@ $(document).ready(function () {
       showToast('Por favor de seleccionar tipo.');
       return;
     }
-    if (nombrebanco === "" || nombretitular === "" || cuentacorriente === "" || cuentainterbancaria === "") {
-      showToast('Por favor, todos los campos *.');
-      return;
-    }
+    // if (nombrebanco === "" || nombretitular === "" || cuentacorriente === "" || cuentainterbancaria === "") {
+    //   showToast('Por favor, todos los campos *.');
+    //   return;
+    // }
 
     /*const selectElement = document.getElementById('tipomediopago');
     const opciones = selectElement.options;

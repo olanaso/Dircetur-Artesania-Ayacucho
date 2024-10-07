@@ -1,4 +1,7 @@
-export function generarCorreoConfirmacionCompra (logoUrl, numeroPedido, montoTotal, productos, enlaceSeguimiento) {
+module.exports = {
+    generarCorreoRegistro
+};
+function generarCorreoConfirmacionCompra (logoUrl, numeroPedido, montoTotal, productos, enlaceSeguimiento) {
     // Genera la lista de productos en HTML
     const productosHtml = productos.map(producto =>
         `<li>${producto.nombre} (${producto.cantidad} unidad/es)</li>`
@@ -71,16 +74,55 @@ export function generarCorreoConfirmacionCompra (logoUrl, numeroPedido, montoTot
     return html;
 }
 
-// Ejemplo de uso:
-const logoUrl = 'https://www.example.com/logo.png';
-const numeroPedido = '123456';
-const montoTotal = '150.00';
-const productos = [
-    { nombre: 'Producto A', cantidad: 2 },
-    { nombre: 'Producto B', cantidad: 1 },
-    { nombre: 'Producto C', cantidad: 3 }
-];
-const enlaceSeguimiento = 'https://www.example.com/seguimiento';
 
-const correoHtml = generarCorreoConfirmacionCompra(logoUrl, numeroPedido, montoTotal, productos, enlaceSeguimiento);
-document.write(correoHtml);
+function generarCorreoRegistro ({ nombreArtesano, usuarioArtesano, contrasenaArtesano, logoUrl }) {
+    return `<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Exitoso</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+
+    <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        
+        <!-- Header -->
+        <div style="text-align: center; padding-bottom: 20px;">
+            <img src="${logoUrl}" alt="Logo de Artesanías de Ayacucho" style="max-width: 200px; margin-bottom: 20px;">
+            <h1 style="font-size: 24px; color: #d6008b; margin: 0;">Bienvenido a Artesanías de Ayacucho 🎉</h1>
+        </div>
+
+        <!-- Body -->
+        <p style="font-size: 16px; color: #333333; line-height: 1.6; margin: 20px 0;">
+            Estimado/a ${nombreArtesano}, nos complace informarte que has sido registrado exitosamente en nuestra plataforma. ¡Ahora puedes comenzar a compartir tus creaciones con el mundo y ser parte de nuestra comunidad de artesanos!
+        </p>
+
+        <p style="font-size: 16px; color: #333333; line-height: 1.6; margin: 20px 0;">
+            Tus credenciales de acceso son las siguientes:
+        </p>
+
+        <ul style="font-size: 16px; color: #333333; line-height: 1.6; margin: 20px 0; list-style-type: none; padding: 0;">
+            <li><strong>Usuario:</strong> ${usuarioArtesano}</li>
+            <li><strong>Contraseña:</strong> ${contrasenaArtesano}</li>
+        </ul>
+
+        <p style="font-size: 16px; color: #333333; line-height: 1.6; margin: 20px 0;">
+            Te invitamos a completar tu perfil para que los compradores conozcan más sobre ti y tus artesanías. ¡Cuéntanos tu historia y muestra tu talento!
+        </p>
+
+        <!-- Button -->
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="https://artesaniasdeayacucho.pe/" style="background-color: #d6008b; color: #ffffff; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-size: 16px;">Completar mi perfil</a>
+        </div>
+
+        <!-- Footer -->
+        <p style="font-size: 14px; color: #999999; text-align: center; margin-top: 40px;">
+            Este correo fue enviado desde Artesanías de Ayacucho. Si tienes alguna pregunta, no dudes en <a href="mailto:contacto@tu-dominio.com" style="color: #d6008b; text-decoration: none;">contactarnos</a>.
+        </p>
+
+    </div>
+
+</body>
+</html>`;
+}

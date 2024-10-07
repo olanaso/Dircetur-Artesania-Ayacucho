@@ -1946,7 +1946,7 @@ async function llenarcategoria () {
     lstcategorias.forEach(region => {
       let option = document.createElement('option');
       option.value = region.id;
-      option.textContent = region.abreviatura;
+      option.textContent = region.denominacion + ' - ' + region.abreviatura;
       selectCategoria.appendChild(option);
     });
   } catch (error) {
