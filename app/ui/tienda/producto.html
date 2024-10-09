@@ -165,12 +165,24 @@
 			color: red;
 			font-weight: bold;
 		}
+
+
+		.cuadro-color {
+			width: 20px;
+			height: 20px;
+			display: inline-block;
+			margin: 5px;
+		}
 	</style>
 
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<!-- Incluir Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
 
@@ -218,20 +230,60 @@
 			<div class="recent-car-content">
 				<div class="row">
 					<div class="col-md-6">
-						<div id="single-car" class="slider-pro">
-							<div class="sp-slides " id="id-sp-slides">
+
+						<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="imagenes-tab" data-toggle="tab" href="#imagenes"
+									role="tab" aria-controls="imagenes" aria-selected="true">Imágenes</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="videos-tab" data-toggle="tab" href="#videos" role="tab"
+									aria-controls="videos" aria-selected="false">Videos</a>
+							</li>
+						</ul>
+						<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" id="imagenes" role="tabpanel"
+								aria-labelledby="imagenes-tab">
+								<div id="single-car" class="slider-pro">
+									<div class="sp-slides " id="id-sp-slides">
 
 
 
+									</div>
+
+									<div class="sp-thumbnails" id="id-sp-thumbnails">
+
+
+
+
+									</div>
+								</div>
 							</div>
+							<div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
+								<div class="row mt-3">
+									<div class="col-md-12">
+										<div class="embed-responsive embed-responsive-16by9">
+											<iframe class="embed-responsive-item"
+												src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+												allowfullscreen></iframe>
+										</div>
+									</div>
 
-							<div class="sp-thumbnails" id="id-sp-thumbnails">
+									<div class="col-md-12">
+										<div class="embed-responsive embed-responsive-16by9">
+											<iframe class="embed-responsive-item"
+												src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+												allowfullscreen></iframe>
+										</div>
+									</div>
 
 
-
-
+								</div>
 							</div>
 						</div>
+
+
+
 					</div>
 					<div class="col-md-6">
 						<div class="car-details">
@@ -245,11 +297,22 @@
 							<div class="container">
 								<div class="row">
 									<ul class="car-info col-md-6">
-										<li><i class="flaticon flaticon-calendar"></i>
+										<li>
+											<i class="fas fa-ruler-vertical" style="color:white; font-size: 20px;"
+												title="Alto"></i>
 											<p id="producto-alto">2016/2017</p>
 										</li>
-										<li><i class="flaticon flaticon-speed"></i>
+										<li>
+											<i class="fas fa-ruler-horizontal" style="color:white; font-size: 20px;"
+												title="Ancho"></i>
+
 											<p id="producto-ancho">240p/h</p>
+										</li>
+										<li>
+											<i class="fas fa-weight" style="color:white; font-size: 20px;"
+												title="Peso"></i>
+											<p id="producto-cantidad">Automatic</p>
+											<p>Kg.</p>
 										</li>
 										<!--										<li><i class="flaticon flaticon-road"></i>-->
 										<!--											<p>20.000km - 40.000km</p>-->
@@ -259,12 +322,20 @@
 										<!--										</li>-->
 									</ul>
 									<ul class="car-info col-md-6">
-										<li><i class="flaticon flaticon-art"></i>
-											<p id="producto-color">White</p>
+										<li>
+											<i class="fas fa-palette" style="color:white; font-size: 20px;"
+												title="Colores"></i>
+
+											<p id="contenedor-colores">
+
+											</p>
 										</li>
-										<li><i class="flaticon flaticon-shift"></i>
+										<li>
+											<i class="fas fa-boxes" style="color:white; font-size: 20px;"
+												title="Cantidad"></i>
 											<p id="producto-cantidad">Automatic</p>
 										</li>
+
 										<!--										<li><i class="flaticon flaticon-car"></i>-->
 										<!--											<p>4/5</p>-->
 										<!--										</li>-->

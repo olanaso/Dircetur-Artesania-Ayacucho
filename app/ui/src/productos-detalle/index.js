@@ -70,20 +70,19 @@ let artesano_id = null;
 
 
 async function cargar () {
-<<<<<<< HEAD
+
 
 
   let datos = await listarArtesanosCombo()
   console.log(datos)
-=======
+
   const urlParams = new URLSearchParams(window.location.search);
   productId = urlParams.get('id');
   console.log('id del prod', productId)
   debugger
-  //alert(1)
->>>>>>> d49987a4118ccaeffb9291d5b2d4fe4df38b6fd4
 
-  if(productId === '0') {
+
+  if (productId === '0') {
     let datos = await listarArtesanosCombo()
     console.log(datos)
     $('#drp-artesano-dni').select2({
@@ -117,12 +116,12 @@ async function cargar () {
     $('#drp-artesano-dni').select2({
       placeholder: 'Seleccione una opción',
       allowClear: true,
-      data: datos.filter( (item) => item.id === editarproductos.artesano_id)
-          .map((item) => ({
-            id: item.id,
-                text: item.completo,
-                dni: item.dni
-          }))
+      data: datos.filter((item) => item.id === editarproductos.artesano_id)
+        .map((item) => ({
+          id: item.id,
+          text: item.completo,
+          dni: item.dni
+        }))
     });
 
     console.log('producto from await', editarproductos)

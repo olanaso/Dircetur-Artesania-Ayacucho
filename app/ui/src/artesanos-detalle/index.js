@@ -191,8 +191,6 @@ async function buscarUsuario () {
   /*********** */
   $('#btnguardarcambio').on('click', async function (e) {
 
-    debugger
-
     e.preventDefault();
     var isValid = true;
     // // Itera sobre todos los campos requeridos para verificar si están vacíos
@@ -245,6 +243,7 @@ async function buscarUsuario () {
         latitud: $('#latitud').val(),
         longitud: $('#longitud').val()
       };
+
       listataller.push(taller);
 
 
@@ -486,6 +485,7 @@ async function editarArtesano (id) {
   $('#distrito').val(editarartesano.ubigeo) */
 
   await llenarDpto();
+  debugger
 
   // Establecer el valor del select de región
   $('#region').val(editarartesano.ubigeo.substring(0, 2));
@@ -502,7 +502,8 @@ async function editarArtesano (id) {
   // Establecer el valor del select de distrito
   $('#distrito').val(editarartesano.ubigeo);
 
-  $('#lengua_materna').val(editarartesano.lengua_materna)
+  $('#lengua_materna').val(editarartesano.lengua_materna);
+
   document.getElementById('imagenFoto1').src = editarartesano.foto1
   document.getElementById('imagenFoto2').src = editarartesano.foto2
 

@@ -110,6 +110,22 @@ function showMaterials (materiales) {
     }
 }
 
+function showVideos (listaVideos) {
+    //materiales
+    if (materiales.length > 0) {
+        for (let material of materiales) {
+            $("#producto-materiales").append(`
+                <ul>
+                <li><i class="fa fa-check-square"></i><span>${material}</span></li>
+                </ul>
+            `)
+        }
+    }
+    else {
+        console.log('no hay materiales')
+    }
+}
+
 function showProductSlider (imagenesSecundarias, imagenPrincial) {
 
     let imagenes = [imagenPrincial, ...imagenesSecundarias]
@@ -118,10 +134,10 @@ function showProductSlider (imagenesSecundarias, imagenPrincial) {
     for (let imagen of imagenes) {
         sp_slides += `
         <div class="sp-slide ">
-									<img class="sp-image" src="${imagen}" alt="" />
+									<img class="sp-image" src="${imagen}" alt="" onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/200x220.png?text=En proceso de carga';"/>
 								</div>
         `
-        sp_thumbnails += `<img style="heigth:120;width:180px" class="sp-thumbnail" src="${imagen}" alt="" />`
+        sp_thumbnails += `<img style="heigth:120;width:180px" class="sp-thumbnail" src="${imagen}" alt="" onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/100x100.png?text=En proceso de carga';" />`
     }
 
     $('#id-sp-slides').html('');
@@ -147,19 +163,40 @@ function showProductSlider (imagenesSecundarias, imagenPrincial) {
     console.log('imagenesSecundarias', imagenesSecundarias)
 
 }
+
+
+// Función para generar el HTML de los cuadritos de color
+function generarHtmlColores (colores) {
+    if (colores.length == 0) {
+        return '<span>-</span>';
+    }
+    let html = '';
+    colores.forEach(item => {
+        html += `<div class="cuadro-color" style="background-color: ${item.color.trim()}"></div>`;
+    });
+    return html;
+}
 async function mostrarInformacion (producto) {
+    debugger
     const listColores = JSON.parse(JSON.parse(producto.lst_colores));
-    const colores = listColores.join(", ")
+    const lst_ofertas = JSON.parse(JSON.parse(producto.lst_ofertas));
+    const lst_otros_costos = JSON.parse(JSON.parse(producto.lst_otros_costos));
+    const lst_tallas = JSON.parse(JSON.parse(producto.lst_talla));
+    const lst_videoenlace = JSON.parse(JSON.parse(producto.lst_videoenlace));
+
+    const colores = generarHtmlColores(listColores)
     const materiales = transformarMaterialesResponseToArray(producto.materiales_es)
     const imagenesSecundarias = transformarImagenesSecResponseToArray(producto.lst_imagenes)
     console.log('imagenPrincipal', producto.imagen_principal)
 
     $("#producto-nombre").text(`${producto.nombres_es}`);
-    $("#producto-precio").text(`${producto.precio} S/`);
+    $("#producto-precio").text(`S/ ${producto.precio} `);
     $("#producto-descripcion").text(`${producto.descripcion_es}`);
-    $("#producto-alto").text(`${producto.alto} cm.`);
-    $("#producto-ancho").text(`${producto.ancho} cm.`);
-    $("#producto-color").text(`${colores}`);
+    $("#producto-alto").text(`${producto.alto} cm`);
+    $("#producto-ancho").text(`${producto.ancho} cm`);
+
+    $('#contenedor-colores').append(colores);
+    $("#producto-color").text(`${colores == "" ? 'No disponible' : colores}`);
     $("#producto-cantidad").text(`${producto.cantidad}`);
     $("#producto-cualidades").text(`${producto.cualidades_es}`);
     $("#artesano-celular").text(`${producto.datos_artesano.celular}`);
@@ -169,6 +206,7 @@ async function mostrarInformacion (producto) {
     $("#artesano-img").attr("src", `${producto.datos_artesano.foto1}`);
 
     showMaterials(materiales);
+    showVideos(lst_videoenlace);
     showProductSlider(imagenesSecundarias, producto.imagen_principal);
 }
 
