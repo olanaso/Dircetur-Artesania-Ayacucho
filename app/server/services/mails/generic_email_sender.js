@@ -43,21 +43,3 @@ async function enviarCorreo ({ destinatarios, asunto, html, adjuntos }) {
     });
 }
 
-// Ejemplo de uso:
-(async () => {
-    try {
-        const resultado = await enviarCorreo({
-            destinatarios: 'ericks.escalanteolano@gmail.com',
-            asunto: 'Recuperación de cuenta de artesanía',
-            html: `
-        <h1>Recuperación de cuenta de usuario</h1>
-        <p>Usuario: Juan Perez</p>
-        <p>Clave: 123456</p>
-      `,
-
-        });
-        console.log('Resultado:', resultado);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-})();

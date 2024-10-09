@@ -363,6 +363,8 @@ async function loginpersonal (req, res) {
         const rartesano = await artesano.findOne({
             where: { usuario_id: usuarioDB.id }
         });
+        usuarioDB.artesano=rartesano;
+
         res.status(200).json({
             islogueado: true,
             usuario: usuarioDB,

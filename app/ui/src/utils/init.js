@@ -73,6 +73,7 @@ export function llenarinformacionIESTPProg () {
 
     setTimeout(() => {
         let usuario=getDataFromLocalStorage('session').usuarios;
+        
         $('#user-name').text(usuario.nombre_completo)
         $('#mlbliestp').text(usuario.nombre_completo)
        // $('#mlbliestp').text(usuario.nombre_completo)
