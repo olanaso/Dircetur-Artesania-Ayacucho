@@ -17,3 +17,10 @@ dist/
 
 # Otros archivos de configuración
 .env
+
+# Los archivos Zip
+.zip
+
+
+# Los archivos tar
+.tar
