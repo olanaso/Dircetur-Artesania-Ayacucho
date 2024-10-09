@@ -5,7 +5,7 @@ const PARAMETROS = require("../helpers/parametros");
 const moment = require('moment');
 
 module.exports = {
-    guardar,
+    guardar, 
     actualizar,
     eliminar,
     obtener,
