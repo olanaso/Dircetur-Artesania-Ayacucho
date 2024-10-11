@@ -18,7 +18,6 @@ async function emailRegistroArtesano ({ correo, nombreArtesano, usuarioArtesano,
     }
 
 }
-
 async function emailPedidoArtesania ({ correos, cliente, pedido }) {
 
     try {

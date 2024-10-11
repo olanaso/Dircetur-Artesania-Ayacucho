@@ -75,6 +75,7 @@ function generarCorreoConfirmacionCompra (logoUrl, numeroPedido, montoTotal, pro
 }
 
 
+
 function generarCorreoRegistro ({ nombreArtesano, usuarioArtesano, contrasenaArtesano, logoUrl }) {
     return `<!DOCTYPE html>
 <html lang="es">
