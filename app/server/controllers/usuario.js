@@ -14,10 +14,11 @@ const rol = require('../models/rol');
 const menu = require('../models/menu');
 const usuario = require('../models/usuario');
 const artesano = require('../models/artesano');
-const cliente = require('../models/cliente')
-const { tokenSign } = require('../utils/handleJwt')
+const cliente = require('../models/cliente');
+const { tokenSign } = require('../utils/handleJwt');
 const { handleHttpError } = require('../utils/handleError');
-const { matchedData } = require('express-validator')
+const { matchedData } = require('express-validator');
+
 module.exports = {
     guardar,
     actualizar,
@@ -363,7 +364,7 @@ async function loginpersonal (req, res) {
         const rartesano = await artesano.findOne({
             where: { usuario_id: usuarioDB.id }
         });
-        usuarioDB.artesano=rartesano;
+        usuarioDB.artesano = rartesano;
 
         res.status(200).json({
             islogueado: true,

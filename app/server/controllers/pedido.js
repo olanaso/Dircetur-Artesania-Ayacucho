@@ -3,6 +3,7 @@ const { Op } = require('sequelize');
 const modelPedido = require('../models/pedido');
 const modelCliente = require('../models/cliente');
 const modelArtesano = require('../models/artesano');
+const { emailPedidoArtesania } = require("../services/mails/mails");
 
 modelPedido.belongsTo(modelCliente, { foreignKey: 'cliente_id' });
 modelPedido.belongsTo(modelArtesano, { foreignKey: 'artesano_id' });
@@ -19,6 +20,7 @@ module.exports = {
     reporte1,
     reporte2,
     enviarPedido,
+    registrarCompra,
     obtener: async (req, res) => {
         const idPedido = req.params.id;
 
@@ -33,11 +35,11 @@ module.exports = {
 };
 
 
-function reporte1(req, res) {
-  
-    
-    let sql = ``; 
-        sql = 
+function reporte1 (req, res) {
+
+
+    let sql = ``;
+    sql =
         `
         SELECT
             SUM(CASE WHEN estado = 'pagado' THEN 1 ELSE 0 END) AS pagado,
@@ -47,10 +49,10 @@ function reporte1(req, res) {
         FROM pedido
         WHERE 1=1 AND artesano_id = '${req.params.id}'
     `;
-     
-   
-    
-    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+
+
+
+    model.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -60,11 +62,11 @@ function reporte1(req, res) {
 }
 
 
-function reporte2(req, res) {
-  
-    
-    let sql = ``; 
-        sql = 
+function reporte2 (req, res) {
+
+
+    let sql = ``;
+    sql =
         `
         SELECT
             num_pedido,
@@ -73,10 +75,10 @@ function reporte2(req, res) {
         FROM pedido
         WHERE 1=1 AND artesano_id = '${req.params.id}'
     `;
-     
-   
-    
-    model.sequelize.query(sql, {type: sequelize.QueryTypes.SELECT})
+
+
+
+    model.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
         .then(resultset => {
             res.status(200).json(resultset)
         })
@@ -85,7 +87,7 @@ function reporte2(req, res) {
         })
 }
 
-function guardar(req, res) {
+function guardar (req, res) {
     model.create(req.body)
         .then(object => {
             res.status(200).json(object);
@@ -95,7 +97,7 @@ function guardar(req, res) {
         });
 }
 
-function actualizar(req, res) {
+function actualizar (req, res) {
     model.findOne({
         where: { num_pedido: req.params.id }
     })
@@ -107,7 +109,7 @@ function actualizar(req, res) {
         .catch(error => res.status(400).send(error));
 }
 
-function eliminar(req, res) {
+function eliminar (req, res) {
     model.findOne({
         where: { num_pedido: req.body.id }
     })
@@ -129,7 +131,7 @@ function eliminar(req, res) {
 //             res.status(400).send(error);
 //         });
 // }
-async function obtenerPedido(idPedido) {
+async function obtenerPedido (idPedido) {
     try {
         const pedidoResult = await modelPedido.findOne({
             where: { num_pedido: idPedido },
@@ -204,7 +206,7 @@ async function obtenerPedido(idPedido) {
 // }
 const DEFAULT_PAGE_LIMIT = 10; // Número predeterminado de resultados por página
 
-function listar(req, res) {
+function listar (req, res) {
     const page = parseInt(req.query.page) || 1; // Página solicitada, por defecto la primera
     const limit = parseInt(req.query.limit) || DEFAULT_PAGE_LIMIT; // Límite de resultados por página
 
@@ -230,24 +232,24 @@ function listar(req, res) {
         limit: limit,
         offset: offset
     })
-    .then(result => {
-        const { count, rows } = result;
-        const totalPages = Math.ceil(count / limit); // Calcular el número total de páginas
+        .then(result => {
+            const { count, rows } = result;
+            const totalPages = Math.ceil(count / limit); // Calcular el número total de páginas
 
-        res.status(200).json({
-            totalItems: count,
-            totalPages: totalPages,
-            currentPage: page,
-            pedidos: rows
+            res.status(200).json({
+                totalItems: count,
+                totalPages: totalPages,
+                currentPage: page,
+                pedidos: rows
+            });
+        })
+        .catch(error => {
+            console.error('Error al listar pedidos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
         });
-    })
-    .catch(error => {
-        console.error('Error al listar pedidos:', error);
-        res.status(500).json({ message: 'Error interno del servidor' });
-    });
 }
 
-async function save(req, res, next) {
+async function save (req, res, next) {
     const t = await model.sequelize.transaction();
     try {
         let object = await model.findOne({
@@ -275,7 +277,7 @@ async function save(req, res, next) {
 }
 
 
-async function filtrar(req, res) {
+async function filtrar (req, res) {
     try {
         let { page, limit, fecha_pedido, num_pedido, nombre_artesano, nombre_cliente, estado } = req.query;
 
@@ -381,22 +383,67 @@ async function uploadFileAtencion (req, res, next) {
     } catch (err) {
         return next(err);
     }
-} 
+}
 
 
-async function enviarPedido (req, res, next){
+async function enviarPedido (req, res, next) {
 
-    
+
     const t = await model.sequelize.transaction();
     try {
         //
-        
+
         const object = await modelPedido.create(req.body);
         //Valida que esta creado y envia correo
 
         return res.status(200).send(object);
     } catch (e) {
         t.rollback();
+        return next(e);
+    }
+}
+
+
+async function registrarCompra (req, res) {
+    const t = await sequelize.transaction(); // Inicia la transacción
+    try {
+        const { datosCliente, pedido } = req.body;
+
+        // Buscar el cliente por DNI
+        let cliente = await modelCliente.findOne({
+            where: { dni: datosCliente.dni },
+            transaction: t
+        });
+
+        // Si no existe el cliente, crearlo
+        if (!cliente) {
+            cliente = await modelCliente.create(
+                req.body.datosCliente, // Asegúrate de que req.body.cliente tenga los datos correctos del cliente
+                { transaction: t }
+            );
+        }
+
+        // Crear el pedido y asociar el idCliente
+        const nuevoPedido = await modelPedido.create(
+            {
+                ...pedido, // Datos del pedido desde req.body.pedido
+                idCliente: cliente.id // Usar el id del cliente recién creado o existente
+            },
+            { transaction: t }
+        );
+
+        if (nuevoPedido) {
+            emailPedidoArtesania({ correos, cliente, pedido })
+        }
+
+        // Confirma la transacción
+        await t.commit();
+
+        // Responder con el objeto creado
+        res.status(200).json(nuevoPedido);
+    } catch (error) {
+        // Si ocurre un error, revertir la transacción
+        await t.rollback();
         return next(e);
     }
 }

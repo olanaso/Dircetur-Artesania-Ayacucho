@@ -1,9 +1,9 @@
 
 //export const baseUrl = 'https://api-certificados.centrodegestion.org'; 
 // export const baseUrl = 'http://148.113.196.34:80/api';
-//export const baseUrl = 'http://localhost:3002/api';
+export const baseUrl = 'http://localhost:3002/api';
 //export const baseUrl = 'https://app.artesaniasdeayacucho.pe/api';
-export const baseUrl = 'https://fantastic-zebra-65wpjr4xvjh5xgv-3002.app.github.dev/api';
+//export const baseUrl = 'https://fantastic-zebra-65wpjr4xvjh5xgv-3002.app.github.dev/api';
 export const baseUrldni = 'https://dni.biblio-ideas.com/api';
 //} Function to save data in localStorage
 export function saveDataToLocalStorage (key, data) {
@@ -20,6 +20,13 @@ export function saveDataToLocalStorage (key, data) {
   }
 }
 
+
+export function getBasePathWithPort () {
+  const parsedUrl = new URL(baseUrl);
+  // Si no hay un puerto explícito, utiliza el puerto por defecto según el protocolo
+  const port = parsedUrl.port || (parsedUrl.protocol === 'https:' ? '443' : '80');
+  return `${parsedUrl.protocol}//${parsedUrl.hostname}:${port}`;
+}
 
 export function getBaseUrl (url) {
   const urlObj = new URL(url);

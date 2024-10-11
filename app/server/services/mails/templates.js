@@ -1,5 +1,5 @@
 module.exports = {
-    generarCorreoRegistro
+    generarCorreoRegistro, generarFacturaHTML
 };
 function generarCorreoConfirmacionCompra (logoUrl, numeroPedido, montoTotal, productos, enlaceSeguimiento) {
     // Genera la lista de productos en HTML
@@ -125,4 +125,215 @@ function generarCorreoRegistro ({ nombreArtesano, usuarioArtesano, contrasenaArt
 
 </body>
 </html>`;
+}
+
+
+function generarFacturaHTML (cliente, pedido) {
+    return `<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Factura de Venta - Artesanías de Ayacucho</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+            }
+            .invoice-container {
+                max-width: 800px;
+                margin: 20px auto;
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .invoice-header {
+                text-align: center;
+                padding-bottom: 20px;
+            }
+            .invoice-header img {
+                max-width: 150px;
+                margin-bottom: 10px;
+            }
+            .invoice-header h1 {
+                font-size: 28px;
+                color: #d6008b;
+                margin: 0;
+            }
+            .order-code {
+                text-align: center;
+                font-size: 20px;
+                color: #d6008b;
+                margin-top: 10px;
+                font-weight: bold;
+            }
+            .invoice-section {
+                margin: 20px 0;
+            }
+            .invoice-section h2 {
+                font-size: 18px;
+                color: #d6008b;
+                margin-bottom: 10px;
+            }
+            .invoice-details table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            .invoice-details th, .invoice-details td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #dddddd;
+            }
+            .invoice-details th {
+                background-color: #f0f0f0;
+            }
+            .invoice-footer {
+                text-align: center;
+                margin-top: 30px;
+                font-size: 14px;
+                color: #999999;
+            }
+            .btn-follow-up {
+                background-color: #25D366;
+                color: #ffffff;
+                padding: 10px 20px;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 16px;
+                display: inline-block;
+                margin-top: 20px;
+            }
+            .customer-details-table, .shipping-details-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+            .customer-details-table td, .shipping-details-table td {
+                padding: 10px;
+                border-bottom: 1px solid #dddddd;
+            }
+            .customer-details-table td:first-child, .shipping-details-table td:first-child {
+                font-weight: bold;
+                color: #333333;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="invoice-container">
+            <!-- Header -->
+            <div class="invoice-header">
+                <img src="https://artesaniasdeayacucho.pe/logo.png" alt="Logo de Artesanías de Ayacucho">
+                <h1>Factura de Venta</h1>
+                <div class="order-code">Código del Pedido: #${pedido.codigo}</div>
+            </div>
+
+            <!-- Customer Details -->
+            <div class="invoice-section">
+                <h2>Datos del Cliente:</h2>
+                <table class="customer-details-table">
+                    <tr>
+                        <td>Documento de Identidad (Person ID):</td>
+                        <td>${cliente.documento}</td>
+                    </tr>
+                    <tr>
+                        <td>Nombres:</td>
+                        <td>${cliente.nombres}</td>
+                    </tr>
+                    <tr>
+                        <td>Apellidos:</td>
+                        <td>${cliente.apellidos}</td>
+                    </tr>
+                    <tr>
+                        <td>Correo Electrónico:</td>
+                        <td>${cliente.correo}</td>
+                    </tr>
+                    <tr>
+                        <td>Código País:</td>
+                        <td>${cliente.codigoPais}</td>
+                    </tr>
+                    <tr>
+                        <td>Teléfono / Móvil:</td>
+                        <td>${cliente.telefono}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Shipping Details -->
+            <div class="invoice-section">
+                <h2>Datos del Envío:</h2>
+                <table class="shipping-details-table">
+                    <tr>
+                        <td>País:</td>
+                        <td>${pedido.envio.pais}</td>
+                    </tr>
+                    <tr>
+                        <td>Región:</td>
+                        <td>${pedido.envio.region}</td>
+                    </tr>
+                    <tr>
+                        <td>Ciudad:</td>
+                        <td>${pedido.envio.ciudad}</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección (para el envío):</td>
+                        <td>${pedido.envio.direccion}</td>
+                    </tr>
+                    <tr>
+                        <td>Mensaje al artesano:</td>
+                        <td>${pedido.envio.mensaje || ''}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Invoice Details -->
+            <div class="invoice-section invoice-details">
+                <h2>Detalles de la Compra:</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th style="text-align: right;">Cantidad</th>
+                            <th style="text-align: right;">Precio Unitario</th>
+                            <th style="text-align: right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${pedido.productos.map(producto => {
+        const totalProducto = producto.cantidad * producto.precioUnitario;
+        return `
+                                <tr>
+                                    <td>${producto.nombre}</td>
+                                    <td style="text-align: right;">${producto.cantidad}</td>
+                                    <td style="text-align: right;">S/ ${producto.precioUnitario.toFixed(2)}</td>
+                                    <td style="text-align: right;">S/ ${totalProducto.toFixed(2)}</td>
+                                </tr>
+                            `;
+    }).join('')}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" style="text-align: right;"><strong>Total a Pagar:</strong></td>
+                            <td style="text-align: right;"><strong>S/ ${pedido.productos.reduce((total, producto) => total + (producto.cantidad * producto.precioUnitario), 0).toFixed(2)}</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- Follow-up Button -->
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://wa.me/${cliente.telefono}" class="btn-follow-up">Contactar al Artesano por WhatsApp</a>
+            </div>
+
+            <!-- Footer -->
+            <p class="invoice-footer">
+                Este correo fue enviado desde Artesanías de Ayacucho. Si tienes alguna pregunta, no dudes en <a href="mailto:contacto@artesaniasdeayacucho.pe" style="color: #d6008b; text-decoration: none;">contactarnos</a>.
+            </p>
+        </div>
+
+    </body>
+    </html>`;
 }

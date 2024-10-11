@@ -1019,7 +1019,7 @@ $(document).ready(function () {
             <td>${texto}</td> 
             <td class="ocultar">${nombrebanco}</td> 
             <td>${nombretitular}</td> 
-            <td>${cuentacorriente}</td> 
+            <td>${cuentacorriente || nombrebanco}</td> 
             <td>${cuentainterbancaria}</td> 
             <td class="ocultar">${boleta}</td> 
             <td class="ocultar">${factura}</td> 
@@ -1200,7 +1200,7 @@ $(document).ready(function () {
   $('#editarMediopagoBtn').on('click', function () {
 
 
-
+    debugger
     let nuevoValor = $('#tipomediopago').val();
     let nuevoTexto = $('#tipomediopago option:selected').text();
 
@@ -1222,7 +1222,7 @@ $(document).ready(function () {
     filaActual.find('td:eq(2)').text(nuevoTexto);
     filaActual.find('td:eq(3)').text(nuevoNombreBanco);
     filaActual.find('td:eq(4)').text(nuevoNombreTitular);
-    filaActual.find('td:eq(5)').text(nuevaCuentaCorriente);
+    filaActual.find('td:eq(5)').text(nuevaCuentaCorriente || nuevoNombreBanco);
     filaActual.find('td:eq(6)').text(nuevaCuentaInterbancaria);
     filaActual.find('td:eq(7)').text(nuevaBoleta);
     filaActual.find('td:eq(8)').text(nuevaFactura);

@@ -3,7 +3,8 @@ import './styles.css';
 import { loadPartials } from "../../utils/viewpartials.js";
 import { obtenerArtesanoById, buscarDNI } from './api.js';
 import { custom } from '../utils/common.js';
-
+import { FileUploader } from '../../utils/uploadJorge.js';
+import { baseUrl, getBasePathWithPort } from '../../utils/config.js';
 
 (async function () {
     let partials = [
@@ -35,8 +36,119 @@ function startApp () {
     // cargarDataPortada();
     // rellenarFormulario();
     // realizarBusqueda();
+    //obtenerDatosArtesano();
     asignarEventosFormulario();
+    iniciarComponenteSubida();
+    eventDesactivarSubida();
+    eventEnviarCompra();
+
 }
+
+function eventEnviarCompra () {
+    $('#btnfinalizarcompra').on('click', function (e) {
+        e.preventDefault();
+        alert(1)
+    })
+}
+
+
+function validateFile () {
+    var fileInput = document.getElementById('fileInput');
+    var file = fileInput.files[0];
+
+    // Verificar si hay un archivo seleccionado
+    if (!file) {
+        alert('Por favor, selecciona un archivo.');
+        return;
+    }
+
+    // Verificar el tipo de archivo
+    var allowedTypes = ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'];
+    if (!allowedTypes.includes(file.type)) {
+        alert('Solo se permiten archivos PNG, JPG, JPEG o PDF.');
+        fileInput.value = ''; // Limpiar el input si el archivo no es válido
+        return;
+    }
+
+    // Verificar el tamaño del archivo (máximo 10 MB)
+    var maxSize = 10 * 1024 * 1024; // 10 MB en bytes
+    if (file.size > maxSize) {
+        alert('El archivo no debe exceder los 10 MB.');
+        fileInput.value = ''; // Limpiar el input si el archivo excede el tamaño
+        return;
+    }
+
+    // Si el archivo es válido
+    alert('El archivo es válido y cumple con los requisitos.');
+}
+window.validateFile = validateFile
+
+function eventDesactivarSubida () {
+    $('.custom-file-input').on('change', function (event) {
+        var inputFile = event.currentTarget;
+        $(inputFile).parent()
+            .find('.custom-file-label')
+            .html(inputFile.files[0].name);
+    });
+
+    // Función para habilitar/deshabilitar el bloque de subida de archivo
+    document.getElementById('directPaymentCheck').addEventListener('change', function () {
+
+        const fileUploadBlock = document.getElementById('fileUploadBlock');
+        const fileInput = document.getElementById('uploadPrincipalImage');
+        const viewBtn = document.getElementById('viewComprobanteBtn');
+
+        if (this.checked) {
+            fileUploadBlock.classList.add('disabled'); // Agrega la clase disabled
+            fileInput.disabled = true;
+            viewBtn.disabled = true;
+            fileInput.value = ""; // Limpia el archivo seleccionado
+            document.querySelector('.custom-file-label').innerHTML = "Elige el archivo";
+        } else {
+            fileUploadBlock.classList.remove('disabled'); // Remueve la clase disabled
+            fileInput.disabled = false;
+            viewBtn.disabled = false;
+        }
+    });
+}
+
+
+
+//carga de imagen de perfil de cliente
+function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
+
+    const fileInput = document.getElementById(fileInputId);
+    const inputName = fileInput.name;
+    const progressBar = document.getElementById(progressBarId);
+    const statusElement = document.getElementById(statusElementId);
+
+    if (fileInput && progressBar && statusElement) {
+        const uploader = new FileUploader(uploadUrl, progressBar, statusElement, callback, inputName, folder);
+        uploader.attachToFileInput(fileInput);
+    } else {
+        console.error('Initialization failed: One or more elements not found.');
+    }
+}
+
+function handleUploadResponseimgprincipal (response) {
+
+    $('#viewComprobanteBtn').attr('href', getBasePathWithPort() + '/' + response.path)
+    $('#viewComprobanteBtn').show();
+
+}
+
+
+function iniciarComponenteSubida () {
+    initializeFileUploader({
+        fileInputId: 'uploadPrincipalImage',
+        progressBarId: 'progressBar',
+        statusElementId: 'status',
+        uploadUrl: baseUrl + '/artesano/fileupload',
+        callback: handleUploadResponseimgprincipal,
+        folder: '/proceso-compra/'
+    });
+}
+
 
 function adEventBusqDNI () {
     $('#btn_buscar_dni').click(async function () {
@@ -61,6 +173,8 @@ function adEventBusqDNI () {
         }
     });
 }
+
+
 
 function formatearNumero (numero) {
     return numero.toLocaleString('es-US', {
@@ -112,8 +226,47 @@ async function setArtesano (artesano_id) {
 
     ARTESANO.lst_mediospago = JSON.parse(JSON.parse(ARTESANO.lst_mediospago))
     console.log(ARTESANO.lst_mediospago)
+    showCuentasArtesano(ARTESANO.lst_mediospago)
     $('#nombre_artesano').text(ARTESANO.nombres + ' ' + ARTESANO.apellidos)
 
+}
+
+function getIcon (pago) {
+    switch (pago) {
+        case 'BCP':
+            return '<i class="fas fa-university"></i>'; // Ícono para BCP
+        case 'YAPE':
+            return '<i class="fas fa-mobile-alt"></i>'; // Ícono para Yape
+        default:
+            return '<i class="fas fa-credit-card"></i>'; // Ícono genérico
+    }
+}
+
+function showCuentasArtesano (datos) {
+    debugger
+    const container = document.getElementById('datos-container');
+    datos.forEach(dato => {
+        const div = document.createElement('div');
+        div.classList.add('form-check');
+
+        // Crear la etiqueta principal con el tipo de pago
+        const label = document.createElement('label');
+        label.classList.add('form-check-label');
+        label.setAttribute('for', `step4${dato.Pago}`);
+        label.innerHTML = `  <span class="highlight-text">${dato.Pago}</span>`;
+
+        // Crear el pequeño texto con el número de cuenta y CCI
+        const small = document.createElement('small');
+        small.classList.add('form-text');
+        small.innerHTML = `Titular: <strong>${dato.Titular}</strong><br>Nº cuenta: <strong>${dato.Corriente}</strong><br>CCI: <strong>${dato.Interbancaria || 'N/A'}</strong>`;
+
+        // Añadir elementos al div
+        div.appendChild(label);
+        div.appendChild(small);
+
+        // Añadir el div al contenedor
+        container.appendChild(div);
+    });
 }
 
 
@@ -230,3 +383,7 @@ $('.prev').click(function () {
     currentStep--;
     showStep(currentStep);
 });
+
+
+
+

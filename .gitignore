@@ -24,3 +24,6 @@ dist/
 
 # Los archivos tar
 .tar
+
+# Archivos subidos por parte de los usuarios 
+app/server/public/files-app/

@@ -1,6 +1,7 @@
 import { baseUrl, baseUrldni } from "../../utils/config";
 
 
+
 export async function obtenerArtesanoById (idArtesano) {
     try {
         const response = await fetch(`${baseUrl}/artesano/${idArtesano}`, {
@@ -12,7 +13,6 @@ export async function obtenerArtesanoById (idArtesano) {
         console.error("Error:", error);
     }
 }
-
 
 
 export async function buscarDNI (dni) {
@@ -33,4 +33,29 @@ export async function buscarDNI (dni) {
         console.log('error', error);
     }
 
+}
+
+
+export async function registrarPedidoCompra (artesano, usuario) {
+
+    const settings = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json", // Cambiado a JSON
+        },
+        body: JSON.stringify({ artesano, usuario }), // Convertir objeto a JSON
+    };
+
+    try {
+
+        const response = await fetch(baseUrl + "/artesano/saveusuarioartesano/", settings);
+        const data = await response.json();
+        return data; // Ahora data contiene el ID del objeto creado y otros datos
+
+    } catch (error) {
+        alert('Ocurrio un error en el registro, verifica si el usuario esta registrado')
+        console.error("Error:", error);
+        location.reload();
+
+    }
 }

@@ -158,6 +158,56 @@
 			color: red;
 			font-weight: bold;
 		}
+
+		#payment-section .form-check {
+			background-color: #ffffff;
+			padding: 20px;
+			border-radius: 12px;
+			margin-bottom: 20px;
+			border: 1px solid #e9007f;
+			/* Color rosa */
+			box-shadow: 0 4px 8px rgba(233, 0, 127, 0.1);
+			transition: transform 0.2s ease, box-shadow 0.2s ease;
+		}
+
+		#payment-section .form-check:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 16px rgba(233, 0, 127, 0.2);
+		}
+
+		#payment-section .form-check-label {
+			font-weight: bold;
+			color: #343a40;
+
+			display: flex;
+			align-items: center;
+		}
+
+		#payment-section .form-check-label i {
+			margin-right: 15px;
+			font-size: 1.8rem;
+			color: #e9007f;
+			/* Color rosa */
+		}
+
+		#payment-section .form-text {
+			color: #6c757d;
+			font-size: 1rem;
+			margin-top: 10px;
+		}
+
+		#payment-section h2 {
+			margin-bottom: 30px;
+			color: #e9007f;
+			/* Color rosa */
+			font-weight: bold;
+			text-shadow: 1px 1px 2px rgba(233, 0, 127, 0.3);
+		}
+
+		#payment-section .highlight-text {
+			color: #e9007f;
+			/* Color rosa */
+		}
 	</style>
 
 	<!--[if lt IE 9]>
@@ -685,59 +735,58 @@
 							</div>
 							<!-- Métodos de pago -->
 							<div class="col-md-6">
-								<h4 class="step-subtitle">Realiza el pago por estos medios que posee el artesano:</h4>
-								<hr>
-								<!-- Transferencia -->
-								<div class="form-check">
 
-									<label class="form-check-label" for="step4Transferencia">
-										Transferencia (CTA del artesano)
-									</label>
-									<small class="form-text">Nº cuenta: 455454 545455, CCI:
-										546488455151588454545545</small>
-
+								<div id="payment-section" class="container mt-5">
+									<h5 class="text-center">Información de Cuentas de Pago</h4>
+										<div id="datos-container"></div>
 								</div>
 
-								<!-- Pagar con YAPE -->
-								<div class="form-check mt-3">
 
-									<label class="form-check-label" for="step4Yape">
-										Pagar con YAPE (Número del artesano)
-									</label>
-									<small class="form-text">Número: 999 999 999</small>
-									<small class="form-text">Subir captura de pantalla de pago en el siguiente
-										paso</small>
-								</div>
-
-								<!-- Pago efectivo -->
-								<div class="form-check mt-3">
-
-									<label class="form-check-label" for="step4Efectivo">
-										Pago efectivo
-									</label>
-									<small class="form-text text">Pago contra entrega previo acuerdo con el
-										artesano</small>
-								</div>
 							</div>
 							<div class="col-md-12 mt-5"></div>
 							<div class="col-md-12">
 								<div class="border p-3">
-									<!-- Subir comprobante -->
-									<div class="form-group">
-										<label for="step5Comprobante" class="btn btn-outline-secondary">
-											<input type="file" id="step5Comprobante" style="display: none;">
-											<i class="fa fa-upload"></i> Elige el archivo
+
+									<h5 class="card-title">Subir comprobante de pago para finalizar pedido</h5>
+
+									<!-- Checkbox para pago directo al artesano -->
+									<div class="form-check mb-3">
+										<input class="form-check-input" type="checkbox" id="directPaymentCheck">
+										<label class="form-check-label" for="directPaymentCheck">
+											Realizaré el pago directamente al artesano, y realizare mi pedido
 										</label>
-										<span id="step5NombreArchivo"></span>
-										<a href="#" class="btn btn-warning btn-sm ml-3" id="step5VerComprobante">
-											<i class="fa fa-paperclip"></i> Ver comprobante
-										</a>
+									</div>
+									<!-- Input de archivo -->
+
+
+
+									<!-- Bloque de input de archivo completo -->
+									<div id="fileUploadBlock">
+										<div class="custom-file mb-3">
+											<input type="file" class="custom-file-input" name="uploadPrincipalImage"
+												id="uploadPrincipalImage" aria-label="Sube tu archivo"
+												accept=".png, .jpg, .jpeg, .pdf" onchange="validateFile()">
+											<label class="custom-file-label" for="customFile">Elige el archivo</label>
+										</div>
+										<progress id="progressBar" value="100" max="100" style="width: 100%;"
+											style="display:none;"></progress>
+										<div id="status" style="display: none;"></div>
+										<!-- Botón para ver el comprobante -->
+										<button class="btn btn-warning btn-block mb-3" id="viewComprobanteBtn"
+											style="display: none;">Ver comprobante</button>
 									</div>
 
+
+
+
+
+
+									<hr>
+
+
+
 									<!-- Botón subir comprobante -->
-									<button type="button" class="btn btn-success btn-block" id="step5_subirComprobante">
-										Subir comprobante de pago para finalizar pedido
-									</button>
+
 								</div>
 							</div>
 							<div class="col-md-12 mt-5"></div>
@@ -765,7 +814,8 @@
 						<div class="row justify-content-between p-3">
 							<button type="button" class="btn btn-prev prev"><i class="fa fa-arrow-left"></i>
 								Anterior</button>
-							<button type="button" class="btn btn-next next"><i class="fa fa-check"></i>
+							<button id="btnfinalizarcompra" type="button" class="btn btn-next next"><i
+									class="fa fa-check"></i>
 								Finalizar</button>
 						</div>
 					</div>
