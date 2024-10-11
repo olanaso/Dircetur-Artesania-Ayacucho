@@ -36,19 +36,19 @@ export async function buscarDNI (dni) {
 }
 
 
-export async function registrarPedidoCompra (artesano, usuario) {
+export async function registrarPedidoCompra (correos, datosCliente, pedido) {
 
     const settings = {
         method: "POST",
         headers: {
             "Content-Type": "application/json", // Cambiado a JSON
         },
-        body: JSON.stringify({ artesano, usuario }), // Convertir objeto a JSON
+        body: JSON.stringify({ correos, datosCliente, pedido }), // Convertir objeto a JSON
     };
 
     try {
 
-        const response = await fetch(baseUrl + "/artesano/saveusuarioartesano/", settings);
+        const response = await fetch(baseUrl + "/pedido/registro/", settings);
         const data = await response.json();
         return data; // Ahora data contiene el ID del objeto creado y otros datos
 

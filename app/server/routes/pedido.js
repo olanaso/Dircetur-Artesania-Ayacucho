@@ -19,5 +19,6 @@ router.get('/reporte1/:id', controller.reporte1);
 router.get('/reporte2/:id', controller.reporte2);
 
 router.post('/pedido/fileupload', uploadarchivoDDP, controller.uploadFileAtencion);
+router.post('/pedido/registro', uploadarchivoDDP, controller.registrarCompra);
 
 module.exports = router;

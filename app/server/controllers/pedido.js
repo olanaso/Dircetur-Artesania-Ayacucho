@@ -407,7 +407,7 @@ async function enviarPedido (req, res, next) {
 async function registrarCompra (req, res) {
     const t = await sequelize.transaction(); // Inicia la transacción
     try {
-        const { datosCliente, pedido } = req.body;
+        const { correos, datosCliente, pedido } = req.body;
 
         // Buscar el cliente por DNI
         let cliente = await modelCliente.findOne({

@@ -1,7 +1,7 @@
 import './styles.css';
 
 import { loadPartials } from "../../utils/viewpartials.js";
-import { obtenerArtesanoById, buscarDNI } from './api.js';
+import { obtenerArtesanoById, buscarDNI, registrarPedidoCompra } from './api.js';
 import { custom } from '../utils/common.js';
 import { FileUploader } from '../../utils/uploadJorge.js';
 import { baseUrl, getBasePathWithPort } from '../../utils/config.js';
@@ -47,12 +47,46 @@ function startApp () {
 function eventEnviarCompra () {
     $('#btnfinalizarcompra').on('click', function (e) {
         e.preventDefault();
-        alert(1)
+
+        let correos = obtenerCorreoEnviar();
+        let datosCliente = obtenerdatosCliente();
+        let pedido = obtenerPedido();
+
+        registrarPedidoCompra(correos, datosCliente, pedido)
     })
 }
 
 
+
+function obtenerCorreoEnviar () {
+
+    let correos = [];
+    correos.push($('#correo').val());
+    correos.push(ARTESANO.correo)
+    return correos.join(',');
+
+}
+
+function obtenerdatosCliente () {
+
+    let correos = [];
+    correos.push($('#correo').val());
+    correos.push(ARTESANO.correo)
+    return correos.join(',');
+
+}
+
+function obtenerPedido () {
+
+    let correos = [];
+    correos.push($('#correo').val());
+    correos.push(ARTESANO.correo)
+    return correos.join(',');
+
+}
+
 function validateFile () {
+
     var fileInput = document.getElementById('fileInput');
     var file = fileInput.files[0];
 
@@ -81,9 +115,11 @@ function validateFile () {
     // Si el archivo es válido
     alert('El archivo es válido y cumple con los requisitos.');
 }
+
 window.validateFile = validateFile
 
 function eventDesactivarSubida () {
+
     $('.custom-file-input').on('change', function (event) {
         var inputFile = event.currentTarget;
         $(inputFile).parent()
@@ -222,7 +258,9 @@ var ARTESANO = null;
 async function setArtesano (artesano_id) {
 
     $('#link_artesano').attr('href', 'artesano.html?id=' + artesano_id)
-    let ARTESANO = await obtenerArtesanoById(artesano_id)
+    ARTESANO = await obtenerArtesanoById(artesano_id)
+
+    console.log(ARTESANO)
 
     ARTESANO.lst_mediospago = JSON.parse(JSON.parse(ARTESANO.lst_mediospago))
     console.log(ARTESANO.lst_mediospago)
