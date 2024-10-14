@@ -24,6 +24,7 @@ module.exports = sequelize.define('pedido', {
     fecha_pedido: {
         type: Sequelize.DATE,
         allowNull: true,
+        defaultValue: Sequelize.NOW,  // Default to the current date and time
         field: 'fecha_pedido'
     },
     list_productos: {

@@ -45,15 +45,33 @@ function startApp () {
 }
 
 function eventEnviarCompra () {
-    $('#btnfinalizarcompra').on('click', function (e) {
-        e.preventDefault();
+    $('#btnfinalizarcompra').on('click', async function (e) {
 
+        e.preventDefault();
         let correos = obtenerCorreoEnviar();
         let datosCliente = obtenerdatosCliente();
         let pedido = obtenerPedido();
+        try {
+            let resultado = await registrarPedidoCompra(correos, datosCliente, pedido)
+            if (resultado) {
+                eliminarCarritoCompras(ARTESANO.id)
+                location.href = "finalizacion-de-compra.html?pedido=" + resultado.num_pedido;
 
-        registrarPedidoCompra(correos, datosCliente, pedido)
+
+            }
+        } catch (error) {
+            alert('Ocurrio un error al registrar.')
+        }
+
     })
+}
+
+function eliminarCarritoCompras (artesano_id) {
+
+    const dataGuardada = localStorage.getItem('artesanias');
+    let artesanias = dataGuardada ? JSON.parse(dataGuardada) : [];
+    const artesaniasFiltradas = artesanias.filter(artesania => artesania.id_artesano != artesano_id); // Filtrar el producto a eliminarnue
+    localStorage.setItem('artesanias', artesaniasFiltradas);
 }
 
 
@@ -68,21 +86,68 @@ function obtenerCorreoEnviar () {
 }
 
 function obtenerdatosCliente () {
-
-    let correos = [];
-    correos.push($('#correo').val());
-    correos.push(ARTESANO.correo)
-    return correos.join(',');
-
+    let cliente = null
+    if (formData) {
+        cliente =
+        {
+            "id": 1,
+            "nombres": formData.nombres || $('#nombres').val(),
+            "apellidos": formData.apellidos || $('#apellidos').val(),
+            "correo": formData.correo || $('#correo').val(),
+            "telefono": $('#countryCode option:selected').val() + formData.telefono,
+            "direccion": formData.direccion_envio || $('#direccion_envio').val(),
+            "pais": formData.pais || $('#pais').val(),
+            "region": formData.region || $('#region').val(),
+            "ciudad": formData.ciudad || $('#ciudad').val(),
+            "tipo_documento": "DNI",
+            "numero_documento": formData.dni || $('#dni').val(),
+            "direccion_envio": formData.mensaje || $('#mensaje').val(),
+            "usuario_id": 2,
+            "estado": true
+        }
+    }
+    return cliente;
 }
 
 function obtenerPedido () {
+    let pedido = null
+    if (formData && ARTESANO) {
+        let artesanias_comprar = listarArtesanias(ARTESANO.id);
 
-    let correos = [];
-    correos.push($('#correo').val());
-    correos.push(ARTESANO.correo)
-    return correos.join(',');
+        let lst_productos = artesanias_comprar.map(row => ({
+            nombre: row.objeto.descripcion_es,
+            precio_unitario: row.objeto.precio,
+            cantidad: row.cantidad,
+            subtotal: row.cantidad * row.objeto.precio,
+            descripcion: row.objeto.cualidades_es
+        }))
 
+        pedido =
+        {
+            "artesano_id": ARTESANO.id,
+            "cliente_id": null,
+            "fecha_pedido": null,
+            "list_productos": lst_productos,
+            "imagen_pago": JSON.stringify({ "url": urlFileComprobante }),
+            "lst_reclamo": [],
+            "comprobante_solic": formData.pais,
+            "estado": 'pendiente',
+            "lst_atencion": []
+
+        }
+
+
+
+        pedido.productos = artesanias_comprar.map(row => ({
+            nombre: row.objeto.descripcion_es,
+            cantidad: row.cantidad,
+            precioUnitario: row.objeto.precio
+        }));
+    }
+
+
+
+    return pedido;
 }
 
 function validateFile () {
@@ -166,9 +231,11 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
     }
 }
 
+var urlFileComprobante = ""
 function handleUploadResponseimgprincipal (response) {
 
     $('#viewComprobanteBtn').attr('href', getBasePathWithPort() + '/' + response.path)
+    urlFileComprobante = getBasePathWithPort() + '/' + response.path
     $('#viewComprobanteBtn').show();
 
 }
@@ -258,6 +325,7 @@ var ARTESANO = null;
 async function setArtesano (artesano_id) {
 
     $('#link_artesano').attr('href', 'artesano.html?id=' + artesano_id)
+    debugger
     ARTESANO = await obtenerArtesanoById(artesano_id)
 
     console.log(ARTESANO)
@@ -281,7 +349,7 @@ function getIcon (pago) {
 }
 
 function showCuentasArtesano (datos) {
-    debugger
+
     const container = document.getElementById('datos-container');
     datos.forEach(dato => {
         const div = document.createElement('div');
@@ -392,16 +460,30 @@ function validateStep (step) {
     });
 
     // Validar el checkbox en el paso 4
-    if (step === 4) {
-        var checkbox = $('#step4Terminos');
-        if (!checkbox.is(':checked')) {
+    if (step === 3) {
+        var checkboxTerminos = $('#terminos');
+        var checkboxPrivacidad = $('#privacidad');
+        var isValid = true;
+
+        if (!checkboxTerminos.is(':checked')) {
             isValid = false;
-            checkbox.addClass('is-invalid');
-            showToast("Debe aceptar los términos y condiciones antes de continuar.");
+            checkboxTerminos.addClass('is-invalid');
+            alert("Debe aceptar los Términos y Condiciones antes de continuar.");
         } else {
-            checkbox.removeClass('is-invalid');
+            checkboxTerminos.removeClass('is-invalid');
         }
+
+        if (!checkboxPrivacidad.is(':checked')) {
+            isValid = false;
+            checkboxPrivacidad.addClass('is-invalid');
+            alert("Debe aceptar la Política de Privacidad antes de continuar.");
+        } else {
+            checkboxPrivacidad.removeClass('is-invalid');
+        }
+
+        return isValid;
     }
+
 
     return isValid;
 }

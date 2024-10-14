@@ -268,7 +268,6 @@ async function buscarUsuario () {
 
 
     let tallerJSON = JSON.stringify(listataller);
-
     let lst_taller = tallerJSON;
 
     //****informacion especialidad tecnica */
@@ -286,15 +285,10 @@ async function buscarUsuario () {
     };
     listaespecialidad.push(especialidad);
 
-
     let especialidadJSON = JSON.stringify(listaespecialidad);
-
     let lst_especialidadtecnicas = especialidadJSON;
 
-
-
     //****informacion del contacto */
-
     let listacontacto = [];
 
     $('#listaContacto tr').each(function () {

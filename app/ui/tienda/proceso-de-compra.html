@@ -629,20 +629,34 @@
 						<!-- Factura field -->
 						<div class="form-group">
 							<label for="tipocomprobante">Seleccione comprobante</label>
-							<select id="tipocomprobante" class="form-control" required>
+							<select id="tipocomprobante" class="form-control" required onchange="toggleRucField()">
 								<option value="" selected disabled>Seleccione una opción</option>
-								<option value="Si">Ninguno</option>
-								<option value="Si">Nota de venta</option>
-								<option value="No">Factura</option>
-								<option value="No">Boleta</option>
+								<option value="NINGUNO">NINGUNO</option>
+								<option value="FACTURA">FACTURA</option>
+								<option value="BOLETA">BOLETA</option>
+								<option value="RECIBO HONORARIO">RECIBO HONORARIO</option>
 							</select>
 						</div>
 
-						<div class="form-group">
-							<label for="ruc">En caso de <strong>Factura</strong>, indicar <strong>RUC</strong></label>
+						<div class="form-group" id="ruc-container" style="display: none;">
+							<label for="ruc">En caso de <strong>Factura / RH</strong>, indicar
+								<strong>RUC</strong></label>
 							<input type="number" class="form-control" id="ruc" placeholder="Ejem: 20303030061" value=""
-								pattern="\d\d\d\d\d\d\d\d\d\d\d">
+								pattern="\d\d\d\d\d\d\d\d\d\d\d" maxlength="11" minlength="11">
 						</div>
+
+						<script>
+							function toggleRucField () {
+								var comprobante = document.getElementById("tipocomprobante").value;
+								var rucContainer = document.getElementById("ruc-container");
+
+								if (comprobante === "FACTURA" || comprobante === "RECIBO HONORARIO") {
+									rucContainer.style.display = "block";
+								} else {
+									rucContainer.style.display = "none";
+								}
+							}
+						</script>
 
 
 						<h6 class="section-title">Datos del Envio</h6>

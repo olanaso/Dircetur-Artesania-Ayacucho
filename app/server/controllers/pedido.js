@@ -4,6 +4,7 @@ const modelPedido = require('../models/pedido');
 const modelCliente = require('../models/cliente');
 const modelArtesano = require('../models/artesano');
 const { emailPedidoArtesania } = require("../services/mails/mails");
+const moment = require('moment');
 
 modelPedido.belongsTo(modelCliente, { foreignKey: 'cliente_id' });
 modelPedido.belongsTo(modelArtesano, { foreignKey: 'artesano_id' });
@@ -387,12 +388,8 @@ async function uploadFileAtencion (req, res, next) {
 
 
 async function enviarPedido (req, res, next) {
-
-
     const t = await model.sequelize.transaction();
     try {
-        //
-
         const object = await modelPedido.create(req.body);
         //Valida que esta creado y envia correo
 
@@ -404,36 +401,54 @@ async function enviarPedido (req, res, next) {
 }
 
 
-async function registrarCompra (req, res) {
+async function registrarCompra (req, res, next) {
     const t = await sequelize.transaction(); // Inicia la transacción
     try {
         const { correos, datosCliente, pedido } = req.body;
 
+        let fechaPedido = pedido.fecha_pedido;
+
+        // Si la fecha es inválida, asignar una fecha por defecto (ejemplo: fecha actual)
+        if (!moment(fechaPedido, 'YYYY-MM-DD HH:mm:ss', true).isValid()) {
+            fechaPedido = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        }
+
         // Buscar el cliente por DNI
+        let nrodocumento = datosCliente.numero_documento
         let cliente = await modelCliente.findOne({
-            where: { dni: datosCliente.dni },
+            where: { numero_documento: nrodocumento },
             transaction: t
         });
 
         // Si no existe el cliente, crearlo
         if (!cliente) {
+            delete datosCliente.id
             cliente = await modelCliente.create(
-                req.body.datosCliente, // Asegúrate de que req.body.cliente tenga los datos correctos del cliente
+                datosCliente, // Asegúrate de que req.body.cliente tenga los datos correctos del cliente
                 { transaction: t }
             );
         }
+
+
+        pedido.list_atencion = [{
+            "id": "0001", "estado": "pendiente", "notificarCliente": true,
+            "enlaceSeguimiento": "", "comentario": "", "medioPrueba": "",
+            "fecha_atencion": fechaPedido
+        }]
 
         // Crear el pedido y asociar el idCliente
         const nuevoPedido = await modelPedido.create(
             {
                 ...pedido, // Datos del pedido desde req.body.pedido
-                idCliente: cliente.id // Usar el id del cliente recién creado o existente
+                cliente_id: cliente.id, // Usar el id del cliente recién creado o existente
+                fecha_pedido: fechaPedido // Usar la fecha validada o corregida
             },
             { transaction: t }
         );
 
         if (nuevoPedido) {
-            emailPedidoArtesania({ correos, cliente, pedido })
+            pedido.id = nuevoPedido.num_pedido;
+            emailPedidoArtesania({ correos, cliente: datosCliente, pedido });
         }
 
         // Confirma la transacción
@@ -444,6 +459,6 @@ async function registrarCompra (req, res) {
     } catch (error) {
         // Si ocurre un error, revertir la transacción
         await t.rollback();
-        return next(e);
+        return next(error);
     }
 }

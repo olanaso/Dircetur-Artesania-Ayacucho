@@ -15,6 +15,19 @@ export async function obtenerArtesanoById (idArtesano) {
 }
 
 
+export async function obtenerPedidoById (pedido_id) {
+    try {
+        const response = await fetch(`${baseUrl}/pedido/${pedido_id}`, {
+            method: "GET",
+        });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+
 export async function buscarDNI (dni) {
     try {
 
@@ -55,7 +68,7 @@ export async function registrarPedidoCompra (correos, datosCliente, pedido) {
     } catch (error) {
         alert('Ocurrio un error en el registro, verifica si el usuario esta registrado')
         console.error("Error:", error);
-        location.reload();
+        //  location.reload();
 
     }
 }

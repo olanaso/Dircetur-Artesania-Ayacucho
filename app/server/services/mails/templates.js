@@ -1,6 +1,18 @@
+//const fs = require('fs');
+//const path = require('path');
+
+
+
 module.exports = {
     generarCorreoRegistro, generarFacturaHTML
 };
+
+// Lee el archivo SVG como string
+//const logo = fs.readFileSync(path.resolve(__dirname, './assets/logo.svg'), 'utf-8');
+//const Logo = `data:image/svg+xml;base64,${Buffer.from(logo).toString('base64')}`
+const Logo = `https://artesaniasdeayacucho.pe/email/Logo.jpg`
+
+
 function generarCorreoConfirmacionCompra (logoUrl, numeroPedido, montoTotal, productos, enlaceSeguimiento) {
     // Genera la lista de productos en HTML
     const productosHtml = productos.map(producto =>
@@ -21,7 +33,7 @@ function generarCorreoConfirmacionCompra (logoUrl, numeroPedido, montoTotal, pro
         
         <!-- Header -->
         <div style="text-align: center; padding-bottom: 20px;">
-            <img src="${logoUrl}" alt="Logo de Artesanías de Ayacucho" style="max-width: 200px; margin-bottom: 20px;">
+            <img src="${Logo}" alt="Logo de Artesanías de Ayacucho" style="max-width: 200px; margin-bottom: 20px;">
             <h1 style="font-size: 24px; color: #d6008b; margin: 0;">¡Gracias por tu compra en Artesanías de Ayacucho! 🛍️✨</h1>
         </div>
 
@@ -90,7 +102,7 @@ function generarCorreoRegistro ({ nombreArtesano, usuarioArtesano, contrasenaArt
         
         <!-- Header -->
         <div style="text-align: center; padding-bottom: 20px;">
-            <img src="${logoUrl}" alt="Logo de Artesanías de Ayacucho" style="max-width: 200px; margin-bottom: 20px;">
+            <img src="${Logo}" alt="Logo de Artesanías de Ayacucho" style="max-width: 200px; margin-bottom: 20px;">
             <h1 style="font-size: 24px; color: #d6008b; margin: 0;">Bienvenido a Artesanías de Ayacucho 🎉</h1>
         </div>
 
@@ -222,14 +234,14 @@ function generarFacturaHTML (cliente, pedido) {
             }
         </style>
     </head>
-    <body>
+    <body style="background: #dedede">
 
-        <div class="invoice-container">
+        <div class="invoice-container"  style="background: #fff">
             <!-- Header -->
             <div class="invoice-header">
-                <img src="https://artesaniasdeayacucho.pe/logo.png" alt="Logo de Artesanías de Ayacucho">
-                <h1>Factura de Venta</h1>
-                <div class="order-code">Código del Pedido: #${pedido.codigo}</div>
+                <img src="${Logo}" alt="Logo de Artesanías de Ayacucho"/>
+                <h1>Pedido de venta de artesanía</h1>
+                <div class="order-code">Código del Pedido: #${pedido.id}</div>
             </div>
 
             <!-- Customer Details -->
@@ -238,7 +250,7 @@ function generarFacturaHTML (cliente, pedido) {
                 <table class="customer-details-table">
                     <tr>
                         <td>Documento de Identidad (Person ID):</td>
-                        <td>${cliente.documento}</td>
+                        <td>${cliente.numero_documento}</td>
                     </tr>
                     <tr>
                         <td>Nombres:</td>
@@ -252,10 +264,7 @@ function generarFacturaHTML (cliente, pedido) {
                         <td>Correo Electrónico:</td>
                         <td>${cliente.correo}</td>
                     </tr>
-                    <tr>
-                        <td>Código País:</td>
-                        <td>${cliente.codigoPais}</td>
-                    </tr>
+                  
                     <tr>
                         <td>Teléfono / Móvil:</td>
                         <td>${cliente.telefono}</td>
@@ -269,33 +278,33 @@ function generarFacturaHTML (cliente, pedido) {
                 <table class="shipping-details-table">
                     <tr>
                         <td>País:</td>
-                        <td>${pedido.envio.pais}</td>
+                        <td>${cliente.pais}</td>
                     </tr>
                     <tr>
                         <td>Región:</td>
-                        <td>${pedido.envio.region}</td>
+                        <td>${cliente.region}</td>
                     </tr>
                     <tr>
                         <td>Ciudad:</td>
-                        <td>${pedido.envio.ciudad}</td>
+                        <td>${cliente.ciudad}</td>
                     </tr>
                     <tr>
                         <td>Dirección (para el envío):</td>
-                        <td>${pedido.envio.direccion}</td>
+                        <td>${cliente.direccion}</td>
                     </tr>
                     <tr>
                         <td>Mensaje al artesano:</td>
-                        <td>${pedido.envio.mensaje || ''}</td>
+                        <td>${cliente.direccion_envio || ''}</td>
                     </tr>
                 </table>
             </div>
 
             <!-- Invoice Details -->
             <div class="invoice-section invoice-details">
-                <h2>Detalles de la Compra:</h2>
+                <h2>Detalles del Pedido:</h2>
                 <table>
                     <thead>
-                        <tr>
+                        <tr>    
                             <th>Producto</th>
                             <th style="text-align: right;">Cantidad</th>
                             <th style="text-align: right;">Precio Unitario</th>
@@ -326,7 +335,7 @@ function generarFacturaHTML (cliente, pedido) {
 
             <!-- Follow-up Button -->
             <div style="text-align: center; margin-top: 30px;">
-                <a href="https://wa.me/${cliente.telefono}" class="btn-follow-up">Contactar al Artesano por WhatsApp</a>
+                <a href="https://wa.me/${cliente.telefono}" class="btn-follow-up" style="color:#fff">Contactar al Artesano por WhatsApp</a>
             </div>
 
             <!-- Footer -->
