@@ -158,7 +158,7 @@ async function obtenerPedido (idPedido) {
                 },
                 {
                     model: modelArtesano,
-                    attributes: ['nombres', 'apellidos']
+                    attributes: ['nombres', 'apellidos', 'id', 'celular', 'telefonos']
                 }
             ]
         });

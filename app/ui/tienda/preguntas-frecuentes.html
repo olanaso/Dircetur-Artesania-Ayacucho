@@ -13,7 +13,7 @@
 	<meta name="author" content="Car Dealer Template">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Artesanias de Ayacucho - Preguntas Frecuentes</title>
+	<title>Nosotros- Artesanias de Ayacucho</title>
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
 
@@ -30,70 +30,144 @@
 	<link rel="stylesheet" href="assets_tienda/css/animated.css">
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 	<style>
-		.long-text {
-			width: 100%;
-			display: -webkit-box !important;
-			-webkit-box-orient: vertical;
-			-webkit-line-clamp: 2;
-			overflow: hidden;
+		.product-card {
+			border: 1px solid #ccc;
+			border-radius: 10px;
+			padding: 20px;
+			margin-bottom: 20px;
+			transition: box-shadow 0.3s ease;
 		}
 
-		.photo-prod {
+		.product-card:hover {
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+
+		.product-image {
+			width: 100px;
+			height: 100px;
+
 			display: flex;
-			justify-content: center;
 			align-items: center;
-			height: 250px;
-			/* Altura fija para el contenedor */
-			width: 100%;
-			/* Ancho ajustable según el contenedor padre */
-			overflow: hidden;
-			/* Oculta cualquier parte desbordante de la imagen */
+			justify-content: center;
+			font-size: 12px;
+			color: #777;
 		}
 
-		.photo-prod img {
-			max-height: 100%;
-			max-width: 100%;
+		.product-actions button {
+			width: 100%;
+			margin-bottom: 5px;
+		}
+
+		.btn-primary:hover {
+			background-color: #6200ea;
+			border-color: #6200ea;
+		}
+
+		.btn-info:hover {
+			background-color: #017acd;
+			border-color: #017acd;
+		}
+
+		.btn-danger:hover {
+			background-color: #b00020;
+			border-color: #b00020;
+		}
+
+		.artesano-info {
+			display: flex;
+			align-items: center;
+			margin-top: 10px;
+		}
+
+		.artesano-photo {
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
 			object-fit: cover;
-			/* Mantiene la proporción y rellena el contenedor */
+			margin-right: 10px;
 		}
 
-		.nuevo-producto a {
-			background-color: rgb(23, 186, 113) !important;
-			color: #fff !important;
+		a {
+			color: #2c3e50;
+			text-decoration: none;
+			font-weight: 600;
+			transition: color 0.3s ease;
 		}
 
-		.img-contenedor-destacados {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 150px;
-			/* Altura fija para el contenedor */
-			width: 100%;
-			/* Ancho ajustable según el contenedor padre */
-			overflow: hidden;
-			/* Oculta cualquier parte desbordante de la imagen */
+
+		@media (max-width: 576px) {
+			.product-card {
+				padding: 15px;
+			}
+
+			.product-image {
+				width: 80px;
+				height: 80px;
+			}
+
+			.input-group {
+				max-width: 100px;
+			}
+
+			.product-actions button {
+				font-size: 14px;
+				padding: 8px;
+			}
+
+			.product-actions a {
+				font-size: 14px;
+				padding: 8px;
+			}
+
+			.product-card h5 {
+				font-size: 16px;
+			}
+
+			.product-card p {
+				font-size: 14px;
+			}
 		}
 
-		.img-destacados {
-			float: center;
-			object-fit: cover;
-			max-height: 100%;
-			max-width: 100%;
-			height: 120px !important;
-			overflow: hidden;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 100% !important;
-			border-top-left-radius: calc(.25rem - 1px);
-			border-top-right-radius: calc(.25rem - 1px);
+		.section-title {
+			color: #f709f3;
 		}
 
-		.product-description {
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			display: block;
+		.summary-table th,
+		.summary-table td {
+			text-align: left;
+			padding: 10px;
+		}
+
+		.summary-table th {
+			background-color: #f1f1f1;
+		}
+
+		.summary-table td {
+			background-color: #f9f9f9;
+		}
+
+		/* Selecciona labels asociados a inputs o textarea que son requeridos */
+		/* Estilo general para los labels */
+		.form-group label {
+			margin-right: 5px;
+		}
+
+		/* Estilo del asterisco rojo */
+		.required-asterisk::after {
+			content: " *";
+			color: red;
+			font-weight: bold;
+		}
+
+		.markdown-content {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji" !important;
+			line-height: 1.6 !important;
+			color: #24292e !important;
+			background-color: #ffffff !important;
+			padding: 20px !important;
+			margin: 0 !important;
+			border-radius: 6px !important;
+			box-shadow: 0 1px 3px rgba(27, 31, 35, 0.1) !important;
 		}
 	</style>
 
@@ -102,11 +176,11 @@
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
 
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 </head>
 
 <body>
-
-
 	<div class="preloader">
 		<div class="preloader-bounce">
 			<span></span>
@@ -114,31 +188,17 @@
 			<span></span>
 		</div>
 	</div>
-
-	<div id="search">
-		<button type="button" class="close">×</button>
-		<form>
-			<input type="search" value="" placeholder="type keyword(s) here" />
-			<button type="submit" class="primary-button">Search <i class="fa fa-search"></i></button>
-		</form>
-	</div>
-
 	<header class="site-header wow fadeIn" data-wow-duration="1s" id="header">
-
 	</header>
-
-
 	<div class="page-heading wow fadeIn" data-wow-duration="0.5s">
 		<div class="container">
-
-
 			<div class="row">
 				<div class="col-md-12">
 					<div class="heading-content-bg wow fadeIn" data-wow-delay="0.75s" data-wow-duration="1s">
 						<div class="row">
 							<div class="heading-content col-md-12">
-								<p><a href="index.html">Inicio</a> / <em> Preguntas Frecuentes</em> </p>
-								<h2>Preguntas Frecuentes <em>Artesania</em></h2>
+								<p><a href="index.html">Inicio</a> / <em> Información </em> </p>
+								<h2>Preguntas <em>Frecuentes</em></h2>
 							</div>
 						</div>
 					</div>
@@ -146,61 +206,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="blog-page">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-                    <section class="faq-section container my-5 p-4 bg-light shadow-sm rounded">
-                        <h2 class="section-title text-center mb-5">Preguntas Frecuentes - Artesanías</h2>
-                    
-                        <div class="faq-item mb-4">
-                            <h5 class="fw-bold text-primary">¿Cuáles son los tiempos de entrega de los productos artesanales?</h5>
-                            <p class="text-secondary">
-                                Los productos artesanales suelen tardar entre 5 y 10 días hábiles en ser entregados, dependiendo de la ubicación y la disponibilidad del artesano. En casos de productos personalizados, el tiempo de entrega puede ser mayor. Te recomendamos verificar la estimación en el detalle del producto.
-                            </p>
-                        </div>
-                    
-                        <div class="faq-item mb-4">
-                            <h5 class="fw-bold text-primary">¿Puedo solicitar un producto personalizado o hecho a medida?</h5>
-                            <p class="text-secondary">
-                                Sí, ofrecemos la posibilidad de solicitar productos personalizados. Muchos de nuestros artesanos están disponibles para realizar piezas hechas a medida. Puedes comunicarte directamente con el artesano desde la página del producto para discutir los detalles de personalización.
-                            </p>
-                        </div>
-                    
-                        <div class="faq-item mb-4">
-                            <h5 class="fw-bold text-primary">¿Cómo puedo estar seguro de que los productos son auténticos?</h5>
-                            <p class="text-secondary">
-                                Trabajamos directamente con artesanos locales que utilizan técnicas tradicionales y materiales autóctonos. Cada producto en nuestra tienda viene acompañado de un certificado de autenticidad que garantiza su procedencia artesanal y la calidad de los materiales empleados.
-                            </p>
-                        </div>
-                    
-                        <div class="faq-item mb-4">
-                            <h5 class="fw-bold text-primary">¿Cuáles son los métodos de pago disponibles?</h5>
-                            <p class="text-secondary">
-                                Aceptamos una variedad de métodos de pago, incluyendo tarjetas de crédito y débito, transferencias bancarias, PayPal y pagos en efectivo contra entrega en algunas regiones. Todos los pagos son procesados de manera segura a través de nuestros socios de pago certificados.
-                            </p>
-                        </div>
-                    
-                        <div class="faq-item mb-4">
-                            <h5 class="fw-bold text-primary">¿Qué debo hacer si el producto llega dañado o en mal estado?</h5>
-                            <p class="text-secondary">
-                                Si tu producto llega dañado, por favor contacta a nuestro equipo de atención al cliente dentro de las 24 horas siguientes a la entrega. Envíanos una foto del producto y del empaque para que podamos evaluar el daño y proceder con el reemplazo o reembolso, según corresponda.
-                            </p>
-                        </div>
-                    
-                        <div class="faq-item mb-4">
-                            <h5 class="fw-bold text-primary">¿Cómo puedo contactar al artesano para más detalles sobre un producto?</h5>
-                            <p class="text-secondary">
-                                Cada página de producto cuenta con una opción para contactar al artesano directamente. Puedes hacer preguntas sobre materiales, técnicas empleadas o solicitar productos a medida. Los artesanos estarán encantados de asistirte.
-                            </p>
-                        </div>
-                    </section>
+	<div class="on-grids wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1s">
+
+		<div class="container" style="max-width: 1100px;" id="markdown-content">
 
 
-				</div>
-			</div>
+
+
+
+
 		</div>
 	</div>
+
 
 
 	<div id="footer">
@@ -228,7 +245,9 @@
 	<!-- Custom Js -->
 	<script src="assets_tienda/js/custom.js"></script>
 
-	<script type="module" src="../src/tienda/portada/index.js"></script>
+
+
+	<script type="module" src="../src/tienda/preguntas-frecuentes/index.js"></script>
 
 </body>
 

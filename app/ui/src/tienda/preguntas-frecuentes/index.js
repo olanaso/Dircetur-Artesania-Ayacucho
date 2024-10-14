@@ -1,7 +1,6 @@
 
 
 import { loadPartials } from "../../utils/viewpartials.js";
-import { getPortadaBusqueda, busquedaProductos } from './api.js';
 import { custom } from '../utils/common.js';
 
 import { marked } from 'marked';
@@ -35,7 +34,7 @@ function startApp () {
 }
 
 function callMarkdown () {
-    fetch("./info/nosotros.md") // Ruta correcta al archivo markdown
+    fetch("./info/preguntas-frecuentes.md") // Ruta correcta al archivo markdown
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al cargar el archivo Markdown.');
