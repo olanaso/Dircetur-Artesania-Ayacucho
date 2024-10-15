@@ -46,6 +46,10 @@ async function cargaInformacionPedido () {
 
     let data = await obtenerPedidoById(pedido_id)
     // console.log(datosPedido)
+    $('#artesano-vendido').text(data.artesano.nombres + ' ' + data.artesano.apellidos)
+    $('#artesano-vendido').attr("href", "artesano.html?id=" + data.artesano.id)
+
+
 
     // Insertar información básica del pedido
     document.getElementById("order-number").textContent = data.num_pedido;
@@ -90,8 +94,7 @@ async function cargaInformacionPedido () {
 
 
     // Opcional: Mostrar el botón para contactar al artesano
-    document.getElementById("contact-artist-btn").href = `mailto:${data.cliente.correo}?subject=Contacto sobre el pedido ${data.num_pedido}`;
-
+    $('#contact-artist-btn').attr("href", "https://wa.me/+51" + data.artesano.celular)
 
 }
 

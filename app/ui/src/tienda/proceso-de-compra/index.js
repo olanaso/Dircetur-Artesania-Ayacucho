@@ -71,7 +71,7 @@ function eliminarCarritoCompras (artesano_id) {
     const dataGuardada = localStorage.getItem('artesanias');
     let artesanias = dataGuardada ? JSON.parse(dataGuardada) : [];
     const artesaniasFiltradas = artesanias.filter(artesania => artesania.id_artesano != artesano_id); // Filtrar el producto a eliminarnue
-    localStorage.setItem('artesanias', artesaniasFiltradas);
+    localStorage.setItem('artesanias', JSON.stringify(artesaniasFiltradas));
 }
 
 

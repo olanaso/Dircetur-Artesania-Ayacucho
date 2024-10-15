@@ -68,7 +68,7 @@ export async function registrarPedidoCompra (correos, datosCliente, pedido) {
     } catch (error) {
         alert('Ocurrio un error en el registro, verifica si el usuario esta registrado')
         console.error("Error:", error);
-        //  location.reload();
+        location.reload();
 
     }
 }
