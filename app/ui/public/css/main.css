@@ -96,7 +96,7 @@ body.full-screen .app-main {
 }
 
 body.login-bg {
-  background: url("../img/login-bg.jpg") no-repeat;
+  background: url("../img/login-bg.webp") no-repeat;
   background-size: cover;
   background-position: center center;
 }

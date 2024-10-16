@@ -1,5 +1,6 @@
-import { baseUrl,getDataFromLocalStorage } from './config';
-import {saveDataToLocalStorage} from '../utils/config'
+import { baseUrl, getDataFromLocalStorage } from './config';
+import { saveDataToLocalStorage } from '../utils/config'
+import perfilVaron from './avatars/perfil_varon.svg';
 
 export async function validateToken (usuario, clave) {
     const settings = {
@@ -15,84 +16,98 @@ export async function validateToken (usuario, clave) {
     try {
         const response = await fetch(baseUrl + "/api/protegido", settings);
         const data = await response.json();
-        saveDataToLocalStorage('session',data)
+        saveDataToLocalStorage('session', data)
         return data
     } catch (error) {
         console.error("Error:", error);
     }
 }
 
-export function hideLoading(){
-    $(function() {
+export function hideLoading () {
+    $(function () {
         $(".loading-wrapper").fadeOut(2000);
     });
 }
 
-export function showLoading(){
-    $(function() {
+export function showLoading () {
+    $(function () {
         $(".loading-wrapper").show();
     });
 }
 
 
-export function obtenerIESTP(){
-    $(function() {
+export function obtenerIESTP () {
+    $(function () {
         $(".loading-wrapper").fadeOut(2000);
     });
 }
 
-export async function checkSession(){
+export async function checkSession () {
     const settings = {
         method: "POST",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded",
             'Authorization': 'Bearer ' + getDataFromLocalStorage('accessToken'),
             'Rol': getDataFromLocalStorage('rol')
         },
         body: new URLSearchParams({
-          token: getDataFromLocalStorage('accessToken')
+            token: getDataFromLocalStorage('accessToken')
         }),
-      };
-    
-      try {
-        const response = await fetch(baseUrl+"/protegido", settings);
+    };
+
+    try {
+        const response = await fetch(baseUrl + "/protegido", settings);
         const data = await response.json();
-        saveDataToLocalStorage('session',data)
-        if(!data.isvalid){
+        saveDataToLocalStorage('session', data)
+        if (!data.isvalid) {
             location.href = "sinacceso.html"
         }
         return data
-      } catch (error) {
+    } catch (error) {
         console.error("Error:", error);
-      }
+    }
 }
 
 
 export function llenarinformacionIESTPProg () {
- 
+
 
     setTimeout(() => {
-        let usuario=getDataFromLocalStorage('session').usuarios;
-        
+        let usuario = getDataFromLocalStorage('session').usuarios;
+
         $('#user-name').text(usuario.nombre_completo)
+        $('#user-name').attr('title', usuario.nombre_completo)
         $('#mlbliestp').text(usuario.nombre_completo)
-       // $('#mlbliestp').text(usuario.nombre_completo)
+        // $('#mlbliestp').text(usuario.nombre_completo)
         $('#mlblnombrerol').text(usuario.rol.denominacion)
         //$('#logoiestpheader').attr('src',usuario.rol.denominacion)
-        $('#m_programas').empty(); 
-    
-    
+        $('#m_programas').empty();
+
+        let datosArtesano = getDataFromLocalStorage('artesano')
+
+        if (datosArtesano) {
+            $('.avatar').attr('src', datosArtesano.foto1 || datosArtesano.foto2)
+                .css('height', '38px') // Añadir el estilo de altura
+                .on('error', function () {
+                    // Si hay un error al cargar la imagen, se puede mostrar una imagen de respaldo
+                    $(this).attr('src', perfilVaron);
+                });
+
+        }
+
+
+
         let nro = 0;
         let nroitem = 0;
         let htmlContent = '';
-    
+
         for (let prog of usuario.menu) {
             nroitem = 1;
-    
+
             htmlContent += `
                 <li>
             `;
-    
+
             if (prog.padreid == 0 && prog.hijoid == 0) {
                 htmlContent += ` 
                     <a href="${prog.enlace}" class="has-arrow1">
@@ -112,7 +127,7 @@ export function llenarinformacionIESTPProg () {
                     </a> 
                     <ul class="submenu" style="display: none;" aria-expanded="false">
                 `;
-    
+
                 for (let progitem of usuario.menuhijo) {
                     if (progitem.padreid == prog.id) {
                         htmlContent += `  
@@ -123,64 +138,64 @@ export function llenarinformacionIESTPProg () {
                         nroitem++;
                     }
                 }
-    
+
                 htmlContent += `   
                     </ul> 
                 `;
             }
-    
+
             htmlContent += `  
                 </li>
             `;
             nro++;
         }
-    
-        $('#unifyMenu').empty().append(htmlContent);
-    
-    
-    
-            // Event listener para el toggle del submenú
-            $(document).on('click', '.has-arrow', function(e) {
-                e.preventDefault();
-                const $submenu = $(this).next('.submenu');
-                const isExpanded = $(this).attr('aria-expanded') === 'true';
-    
-                // Cerrar todos los submenús
-                $('.submenu').slideUp('fast').attr('aria-expanded', 'false');
-                $('.has-arrow').removeClass('active').attr('aria-expanded', 'false');
-    
-                // Abrir el submenú clickeado si no está abierto
-                if (!isExpanded) {
-                    $(this).addClass('active').attr('aria-expanded', 'true');
-                    $submenu.slideDown('fast').attr('aria-expanded', 'true');
-                }
-            });
-    
-            // Event listener opcional para clic en elemento de submenú
-            $(document).on('click', '.submenu li a', function(e) {
-                // Remover clase activa de todos los elementos de submenú
-                $('.submenu li a').removeClass('active');
-    
-                // Agregar clase activa al elemento de submenú clickeado
-                $(this).addClass('active');
-            });
 
-            marcarSubMenuSeleccionado();
+        $('#unifyMenu').empty().append(htmlContent);
+
+
+
+        // Event listener para el toggle del submenú
+        $(document).on('click', '.has-arrow', function (e) {
+            e.preventDefault();
+            const $submenu = $(this).next('.submenu');
+            const isExpanded = $(this).attr('aria-expanded') === 'true';
+
+            // Cerrar todos los submenús
+            $('.submenu').slideUp('fast').attr('aria-expanded', 'false');
+            $('.has-arrow').removeClass('active').attr('aria-expanded', 'false');
+
+            // Abrir el submenú clickeado si no está abierto
+            if (!isExpanded) {
+                $(this).addClass('active').attr('aria-expanded', 'true');
+                $submenu.slideDown('fast').attr('aria-expanded', 'true');
+            }
+        });
+
+        // Event listener opcional para clic en elemento de submenú
+        $(document).on('click', '.submenu li a', function (e) {
+            // Remover clase activa de todos los elementos de submenú
+            $('.submenu li a').removeClass('active');
+
+            // Agregar clase activa al elemento de submenú clickeado
+            $(this).addClass('active');
+        });
+
+        marcarSubMenuSeleccionado();
     }, 500); // Simula un proceso que tarda 1 segundo
-        
-    
-    
- 
-    
-     
-  }
-  // Función para marcar el submenú y sus elementos como activos
-  export function marcarSubMenuSeleccionado() { 
+
+
+
+
+
+
+}
+// Función para marcar el submenú y sus elementos como activos
+export function marcarSubMenuSeleccionado () {
     const currentPath = window.location.pathname; // Obtener la ruta actual
     let currentPath2 = currentPath.replace("-detalle", "");
 
     // Iterar sobre los elementos del menú principal
-    $('#unifyMenu .has-arrow1').each(function() {
+    $('#unifyMenu .has-arrow1').each(function () {
         const $this = $(this);
         const href = $this.attr('href');
 
@@ -196,7 +211,7 @@ export function llenarinformacionIESTPProg () {
     });
 
     // Iterar sobre los elementos del submenú
-    $('#unifyMenu .submenu li a').each(function() {
+    $('#unifyMenu .submenu li a').each(function () {
         const $this = $(this);
         const $submenu = $this.closest('.submenu');
         const $parentMenuItem = $submenu.prev('.has-arrow');

@@ -33,6 +33,7 @@ async function loguear (usuario, clave) {
     $("#btnlogin").prop("disabled", true).text("Logueado...");
     let result = await login(usuario, clave)
     console.log(result)
+    debugger
     if (result.islogueado) {
         saveDataToLocalStorage('usuario', result.usuario);
         saveDataToLocalStorage('artesano', result.artesano);
