@@ -4,6 +4,8 @@ import { loadPartials } from "../../utils/viewpartials.js";
 import { getPortada } from './api';
 import { custom } from '../utils/common.js';
 
+import { ShoppingCart } from "../utils/pluginCarrito.js";
+
 // Toggle para abrir/cerrar el menú en dispositivos móviles
 
 
@@ -29,6 +31,16 @@ import { custom } from '../utils/common.js';
 
 function startApp () {
     cargarDataPortada()
+    //  cargarCarrito()
+}
+
+
+function cargarCarrito () {
+    const dataGuardada = localStorage.getItem('artesanias');
+    let products = dataGuardada ? JSON.parse(dataGuardada) : [];
+
+
+    const shoppingCart = new ShoppingCart(products);
 }
 
 

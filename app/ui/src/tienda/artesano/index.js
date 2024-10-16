@@ -31,13 +31,15 @@ function getQueryParameter (name) {
     return urlParams.get(name);
 }
 
-async function infoArtesanoById() {
+async function infoArtesanoById () {
     const artesano = await obtenerArtesanoById(getQueryParameter("id"));
     console.log(" >DATA artesano: ", artesano);
     mostrarInformacion(artesano);
 }
 
-async function mostrarInformacion(artesano){
+async function mostrarInformacion (artesano) {
+
+
     const listTaller = JSON.parse(JSON.parse(artesano.lst_taller));
     const lst_videoenlace = JSON.parse(JSON.parse(artesano.lst_videoenlace));
     const listEspecialidadesTecnicas = JSON.parse(
@@ -74,7 +76,7 @@ async function mostrarInformacion(artesano){
     $("#artesano-linea-artesanal").text(lineaArtesanal); // aui el tring de los 1
     $('#artesano-ubigeo').text(artesano.ubigeo);
     //mapa//
-    initMap(listTaller[0].latitud, listTaller[0].longitud, listTaller[0].direccionfisica);
+    initMap(listTaller[0].latitud, listTaller[0].longitud, listTaller[0].direccionfisica, artesano.foto1);
     //video//
     if (lst_videoenlace.length > 0) {
         const videoUrl = lst_videoenlace[0].src;
@@ -112,25 +114,47 @@ async function mostrarInformacion(artesano){
 				</div>
       `);
     }
+
+    loadProductosDestacados(artesano.productos)
 }
 
-function initMap (latitud, longitud, ubicacion) {
-    // Coordenadas de ejemplo (Lima, Perú)
+function initMap (latitud, longitud, ubicacion, fotoArtesano) {
+    // Crear el mapa centrado en las coordenadas proporcionadas
     var mymap = L.map("map").setView([latitud, longitud], 15);
 
     // Agregar capa de OpenStreetMap
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 18,
-        attribution:
-            'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(mymap);
 
-    // Agregar marcador personalizado
-    var marker = L.marker([latitud, longitud])
+    // Crear un icono personalizado con la foto del artesano
+    var artisanIcon = L.divIcon({
+        className: 'custom-icon', // Clase CSS personalizada
+        html: `<img src="${fotoArtesano}" class="rounded-image" onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/40x40.png?text=A';">`, // HTML para la imagen redondeada
+        iconSize: [50, 50], // Tamaño del icono
+        iconAnchor: [25, 50], // Punto de anclaje
+        popupAnchor: [0, -50] // Punto donde aparecerá el popup
+    });
+
+    // Crear el contenido del popup con el botón para abrir Google Maps
+    var popupContent = `
+        <div>
+            <p>${ubicacion}</p>
+            <button style="background: #ea0397;padding: 10px 20px; color:#fff" onclick="window.open('https://www.google.com/maps?q=${latitud},${longitud}', '_blank')">
+                Visitar en Google Maps
+            </button>
+        </div>
+    `;
+
+    // Agregar marcador personalizado con el popup
+    var marker = L.marker([latitud, longitud], { icon: artisanIcon })
         .addTo(mymap)
-        .bindPopup(ubicacion)
+        .bindPopup(popupContent)
         .openPopup();
 }
+
+
 
 function startApp () {
     infoArtesanoById();
@@ -139,6 +163,114 @@ function startApp () {
     // rellenarFormulario();
     // realizarBusqueda();
 }
+
+function formatearNumero (numero) {
+    return numero.toLocaleString('es-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+function loadProductosDestacados (data) {
+
+    debugger
+
+    let html = ` `
+    for (let item of data) {
+
+        let artenia_anviar_carrito = {
+            artesano_id: item.artesano_id,
+            id: item.id,
+            categoria_id: item.categoria_id,
+            artesano: item.datos_artesano.nombres + ' ' + item.datos_artesano.apellidos,
+            datos: {
+                imagen_principal: item.imagen_principal,
+                descripcion_es: item.nombres_es,
+                cualidades_es: item.descripcion_es,
+                precio: parseFloat(item.precio)
+            },
+        }
+
+        let artenia_deseados = {
+            id: item.id + '-' + item.artesano_id,
+            artesania: {
+                id: item.id,
+                nombre_es: item.nombres_es,
+                precio: parseFloat(item.precio),
+                imagen_principal: item.imagen_principal,
+                url_carrito: encodeURIComponent(JSON.stringify(artenia_anviar_carrito))
+            },
+            artesano: {
+                id: item.artesano_id,
+                nombres: item.datos_artesano.nombres + ' ' + item.datos_artesano.apellidos,
+                foto1: item.datos_artesano.foto1,
+            }
+        }
+
+
+        //alert(item.imagen)
+        html = html + `
+       <div class="item wow fadeIn card " data-wow-duration="0.75s">
+						<div class="img-contenedor-destacados">
+                          <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000">
+							<img class="img-destacados"
+								src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" />
+                                   </a>
+						</div>
+						
+						<div class="line-dec"></div>
+
+						<div class="card-body">
+							<!-- <div class="d-flex justify-content-between align-items-center mb-2">
+								<span class="badge badge-danger" style="color: #fff;">-15%</span>
+								<span class="text-muted"><s>S/. 1770.00</s></span>
+							</div> -->
+                            <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000">
+							<h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item.nombres_es || "-"}</h5>
+                            </a>
+							<p class="h4 text-danger font-weight-bold">S/.${formatearNumero(item?.precio) || ""}</p>
+							<p class="card-text text-muted">Categoría: ${item?.categoria_producto?.denominacion}</p>
+
+
+							<div class="author-rate">
+								<img src="${item?.datos_artesano.foto1 || "https://via.placeholder.com/40"}" alt="">
+								<h4><a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></h4>
+								<div class="line-dec2"></div>
+								
+                                <a href="carrito-de-compra.html?producto=${encodeURIComponent(JSON.stringify(artenia_anviar_carrito))}" title="Ir a carrito de compras">Comprar <i class="fa fa-shopping-cart"></i></a>
+							</div>
+						</div>
+					</div>
+
+
+        `
+    }
+    $('#owl-testimonials').append(html)
+
+
+    $('#owl-testimonials').owlCarousel({
+        pagination: true,
+        paginationNumbers: false,
+        autoplay: true,
+        loop: true,
+        margin: 10,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 3
+            }
+        }
+    })
+}
+
+
+
 
 
 

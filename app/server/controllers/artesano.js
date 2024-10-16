@@ -23,7 +23,7 @@ module.exports = {
     uploadFilartesano,
     saveUsuarioArtesano,
     getAllArtesanosByCategoria,
-    listarCombo
+    listarCombo, listarArtesanosMapa
 };
 
 /**
@@ -127,8 +127,12 @@ function obtener (req, res) {
     artesanoModel.findOne({
         where: { id: req.params.id }
     })
-        .then(resultset => {
-            res.status(200).json(resultset)
+        .then(async resultset => {
+
+            let productos = await product.findAllProductsByArtesanoId(resultset.id)
+            // resultset.productos = productos;
+            res.status(200).json({ ...resultset.dataValues, productos })
+
         })
         .catch(error => {
             res.status(400).send(error)
@@ -227,6 +231,26 @@ function listar (req, res) {
 
     // Ejecutar la consulta con los parámetros reemplazados
     artesanoModel.sequelize.query(sql, { replacements: params, type: sequelize.QueryTypes.SELECT })
+        .then(resultset => {
+            res.status(200).json(resultset);
+        })
+        .catch(error => {
+            res.status(400).send(error);
+        });
+}
+
+
+function listarArtesanosMapa (req, res) {
+    // Consulta SQL
+    let sql = `
+       SELECT id,nombres, apellidos, foto1, foto2, lst_taller, lst_especialidadtecnicas
+       FROM artesano
+    `;
+
+    // Ejecutar la consulta sin parámetros
+    artesanoModel.sequelize.query(sql, {
+        type: artesanoModel.sequelize.QueryTypes.SELECT
+    })
         .then(resultset => {
             res.status(200).json(resultset);
         })

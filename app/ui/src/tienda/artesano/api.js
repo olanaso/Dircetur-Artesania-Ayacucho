@@ -43,7 +43,7 @@ export async function busquedaProductos (obj) {
 
 }
 
-export async function obtenerArtesanoById(idArtesano) {
+export async function obtenerArtesanoById (idArtesano) {
     try {
         const response = await fetch(`${baseUrl}/artesano/${idArtesano}`, {
             method: "GET",
@@ -53,4 +53,25 @@ export async function obtenerArtesanoById(idArtesano) {
     } catch (error) {
         console.error("Error:", error);
     }
+}
+
+
+export async function getArtesanosMapa () {
+    try {
+
+        const myHeaders = new Headers();
+        const requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        const response = await fetch(baseUrl + "/artesanos/mapa", requestOptions);
+        const result = await response.json();
+
+        return result;
+    } catch (error) {
+        console.log('error', error);
+    }
+
 }

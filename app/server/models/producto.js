@@ -294,7 +294,7 @@ product.findAllProductsByArtesanoId = async function (artesanoId) {
             {
                 model: artesano,
                 as: 'datos_artesano',
-                attributes: ['nombres']
+                attributes: ['nombres', 'apellidos', 'foto1', 'id'],
             },
             {
                 model: categoria,
