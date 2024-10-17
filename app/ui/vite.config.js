@@ -64,7 +64,8 @@ export default {
         'tienda/productos-deseados': resolve(__dirname, 'tienda/productos-deseados.html'),
         'tienda/nosotros': resolve(__dirname, 'tienda/nosotros.html'),
         'tienda/preguntas-frecuentes': resolve(__dirname, 'tienda/preguntas-frecuentes.html'),
-        'tienda/finalizacion-de-compra': resolve(__dirname, 'tienda/finalizacion-de-compra.html')
+        'tienda/finalizacion-de-compra': resolve(__dirname, 'tienda/finalizacion-de-compra.html'),
+        'tienda/mapa-artesanos': resolve(__dirname, 'tienda/mapa-artesanos.html')
       }
     },
 

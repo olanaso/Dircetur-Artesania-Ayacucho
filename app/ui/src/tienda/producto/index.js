@@ -112,7 +112,7 @@ function showMaterials (materiales) {
 
 function showVideos (listaVideos) {
     //materiales
-    if (materiales.length > 0) {
+    if (listaVideos.length > 0) {
         for (let material of materiales) {
             $("#producto-materiales").append(`
                 <ul>
@@ -177,6 +177,7 @@ function generarHtmlColores (colores) {
     return html;
 }
 async function mostrarInformacion (producto) {
+
     debugger
     const listColores = JSON.parse(JSON.parse(producto.lst_colores));
     const lst_ofertas = JSON.parse(JSON.parse(producto.lst_ofertas));
@@ -206,8 +207,9 @@ async function mostrarInformacion (producto) {
     $("#artesano-img").attr("src", `${producto.datos_artesano.foto1}`);
 
     showMaterials(materiales);
-    showVideos(lst_videoenlace);
     showProductSlider(imagenesSecundarias, producto.imagen_principal);
+    showVideos(lst_videoenlace);
+
 }
 
 function createSlidersProd () {

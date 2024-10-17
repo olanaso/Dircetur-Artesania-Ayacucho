@@ -30,6 +30,7 @@ import { custom } from '../utils/common.js';
 
 async function startApp () {
     let artesanos = await getArtesanosMapa()
+    $('[data-toggle="tooltip"]').tooltip();
     initMap(artesanos)
 }
 
@@ -76,6 +77,8 @@ function initMap (artesanos) {
 
     // Iterar sobre la lista de artesanos y agregar un marcador para cada uno
     artesanos.forEach(artesano => {
+
+        console.log(artesano)
         // Parsear los campos lst_taller y lst_especialidadtecnicas
         var talleres = JSON.parse(JSON.parse(artesano.lst_taller));
         var taller = talleres[0]; // Asumimos que hay al menos un taller
@@ -99,6 +102,7 @@ function initMap (artesanos) {
             // Crear el contenido del popup con la información del taller y especialidades técnicas
             var popupContent = `
                 <div>
+                <img style="height:100px" src="${artesano.foto1}" class="" onerror="this.onerror=null; this.src='${defaultAvatar}'">
                     <p><strong>${artesano.nombres} ${artesano.apellidos}</strong></p>
                     <p><strong>Taller:</strong></p>
                     <ul>
@@ -111,12 +115,13 @@ function initMap (artesanos) {
                     <ul>
                         <li><strong>Tipo de Artesanía:</strong> ${especialidad.tipoartesania}</li>
                         <li><strong>Habilidades:</strong> ${especialidad.descripcionhabilidades}</li>
+                          <li><strong>Tipo de artesania:</strong> ${especialidad.desotro + ' - ' + especialidad.tipoartesania}</li>
                     </ul>
-                     <button class="btn btn-primary btn-sm" onclick="window.open('artesano.html?id='+${artesano.id}, '_blank')">
-                     Perfil
+                     <button style="background: #ea0397; border:solid 0px #fff" class="btn btn-primary btn-sm" onclick="window.open('artesano.html?id='+${artesano.id}, '_blank')">
+                    <i class="fas fa-user"></i> Perfil
                     </button>
-                    <button class="btn btn-primary btn-sm" onclick="window.open('https://www.google.com/maps?q=${taller.latitud},${taller.longitud}', '_blank')">
-                        Visitar en Google Maps
+                    <button style="background: #ea0397  border:solid 0px #fff" class="btn btn-primary btn-sm" onclick="window.open('https://www.google.com/maps?q=${taller.latitud},${taller.longitud}', '_blank')">
+                     <i class="fas fa-map-marker"></i> Ir a dirección
                     </button>
                 </div>
             `;
@@ -153,8 +158,8 @@ function initMap (artesanos) {
         var div = L.DomUtil.create('div', 'legend');
         div.innerHTML = `
             <h4>Total de Artesanos: ${artesanos.length}</h4>
-            <p>Con Ubicación: ${artesanosConUbicacion}</p>
-            <p>Sin Ubicación: ${artesanosSinUbicacion}</p>
+            <p>Con ubicación: ${artesanosConUbicacion}</p>
+            <p>Sin ubicación: ${artesanosSinUbicacion}</p>
         `;
         return div;
     };

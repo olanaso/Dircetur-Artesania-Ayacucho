@@ -233,7 +233,7 @@ function loadProductosDestacados (data) {
 
 
 							<div class="author-rate">
-								<img src="${item?.datos_artesano.foto1 || "https://via.placeholder.com/40"}" alt="">
+								
 								<h4><a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></h4>
 								<div class="line-dec2"></div>
 								
