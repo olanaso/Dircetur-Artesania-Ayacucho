@@ -31,7 +31,28 @@ import { ShoppingCart } from "../utils/pluginCarrito.js";
 
 function startApp () {
     cargarDataPortada()
-    //  cargarCarrito()
+    cargarCarrito()
+    buscarArtesania()
+}
+
+function buscarArtesania () {
+    function realizarBusqueda () {
+        let valor = $('#txt-busqueda').val();
+        location.href = "busqueda.html?nombre_producto=" + valor;
+    }
+
+    // Ejecutar búsqueda al hacer clic en el botón
+    $('#btn-buscar').on('click', function (e) {
+        realizarBusqueda();
+    });
+
+    // Ejecutar búsqueda al presionar Enter o Tab en el campo de texto
+    $('#txt-busqueda').on('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === 'Tab') {
+            e.preventDefault(); // Evitar la acción predeterminada para evitar un cambio de campo en el caso de Tab
+            realizarBusqueda();
+        }
+    });
 }
 
 

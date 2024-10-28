@@ -1,8 +1,8 @@
 import { loadPartials } from '../utils/viewpartials';
-import { saveUser ,changepassword} from './api';
+import { saveUser, changepassword, getDatausuario } from './api';
 import { hideLoading, showLoading, checkSession, llenarinformacionIESTPProg } from '../utils/init';
 import { showToast } from '../utils/toast';
-import { getDataFromLocalStorage,} from '../utils/config'
+import { getDataFromLocalStorage, } from '../utils/config'
 
 hideLoading();
 // Uso de la función
@@ -15,7 +15,7 @@ hideLoading();
   ];
   try {
     await loadPartials(partials);
-    import ('../utils/common')
+    import('../utils/common')
 
     // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
     console.log('Las vistas parciales se han cargado correctamente!');
@@ -36,16 +36,39 @@ function startApp () {
 
   guardarUsuario()
   cambiarClave()
-
+  mostrarOcultarPassword()
 }
+
+function mostrarOcultarPassword () {
+  // Alternar visibilidad de contraseña actual
+  $('#togglePasswordAnt').on('click', function () {
+    const input = $('#txt_clave_ant');
+    const type = input.attr('type') === 'password' ? 'text' : 'password';
+    input.attr('type', type);
+    // Cambia el icono (opcional)
+    $(this).text(type === 'password' ? '👁️' : '🚫');
+  });
+
+  // Alternar visibilidad de contraseña nueva
+  $('#togglePasswordNueva').on('click', function () {
+    const input = $('#txt_clave_nueva');
+    const type = input.attr('type') === 'password' ? 'text' : 'password';
+    input.attr('type', type);
+    // Cambia el icono (opcional)
+    $(this).text(type === 'password' ? '👁️' : '🚫');
+  });
+}
+
+
 async function cargarDatosusuario () {
-  let usuario = getDataFromLocalStorage('session').usuario;
-  console.log(usuario)
-  $('#txt-dni').val(usuario.dni)
-  $('#txt-nombres').val(usuario.nombres)
+  let usuariosession = getDataFromLocalStorage('session').usuarios;
+  //console.log(usuario)
+  let usuario = await getDatausuario(usuariosession.id);
+  $('#txt-dni').val(usuario.usuario)
+  $('#txt-nombres').val(usuario.nombre_completo)
   $('#txt-apellidos').val(usuario.apellidos)
   $('#txt-correo').val(usuario.correo)
-  $('#txt-telefonos').val(usuario.telefonos)
+  // $('#txt-telefonos').val(usuario.telefonos)
   let rol = "";
   if (usuario.rolid == 1) {
     rol = "ADMINISTRADOR"
@@ -58,29 +81,32 @@ async function cargarDatosusuario () {
   }
   $('#txt-rol').val(rol)
 
-  let programas = usuario.programas.map(item => item.denominacion).join(', ');
-  $('#txt-programa').val(programas)
+  // let programas = usuario.programas.map(item => item.denominacion).join(', ');
+  // $('#txt-programa').val(programas)
 
 }
 
 async function guardarUsuario () {
 
-  $('#btnguardardatosperfil').on('click',async function(e){
+  $('#btnguardardatosperfil').on('click', async function (e) {
+
     e.preventDefault();
+
+    let usuariosession = getDataFromLocalStorage('session').usuarios;
     $("#btnguardardatosperfil").prop("disabled", true).text("Guardando...");
     let dni = $('#txt-dni').val()
-    let nombres = $('#txt-nombres').val()
-    let apellidos = $('#txt-apellidos').val()
+    let nombre_completo = $('#txt-nombres').val()
+    // let apellidos = $('#txt-apellidos').val()
     let correo = $('#txt-correo').val()
-    let telefonos = $('#txt-telefonos').val()
-    let result=await saveUser({dni,nombres,apellidos,correo,telefonos});
-    if(result.id){
+    // let telefonos = $('#txt-telefonos').val()
+    let result = await saveUser({ id: usuariosession.id, dni, nombre_completo, correo });
+    if (result.id) {
       showToast('Se guardo los datos correctamente')
-    }else{
+    } else {
       showToast('Ocurrio un error.')
     }
     $("#btnguardardatosperfil").prop("disabled", false).text("Guardar");
-  
+
   })
 
 
@@ -89,23 +115,23 @@ async function guardarUsuario () {
 
 async function cambiarClave () {
 
-  $('#btncambiarClave').on('click',async function(e){
+  $('#btncambiarClave').on('click', async function (e) {
     e.preventDefault();
     $("#btncambiarClave").prop("disabled", true).text("Guardando...");
     let dni = $('#txt-dni').val()
     let clave_ant = $('#txt_clave_ant').val()
     let clave_nueva = $('#txt_clave_nueva').val()
-    
-    let result=await changepassword({dni,clave_ant,clave_nueva});
-    if(result.ischanged!=undefined){
-   
+
+    let result = await changepassword({ dni, clave_ant, clave_nueva });
+    if (result.ischanged != undefined) {
+
       showToast(result.msj)
-    }else{
+    } else {
       showToast('Se guardo los datos correctamente');
-      window.location.href="index.html"
+      window.location.href = "index.html"
     }
     $("#btncambiarClave").prop("disabled", false).text("Guardar");
-  
+
   })
 
 

@@ -24,6 +24,7 @@ module.exports = {
     guardar,
     actualizar,
     eliminar,
+    obtenerDatosPerfil,
     obtener,
     listar,
     save,
@@ -52,11 +53,8 @@ async function actualizarContraseniaCiente (req, res) {
         console.error(e)
         handleHttpError(res, "Ocurrio un error actualizando la contraseña", 500)
     }
-
-
-
-
 }
+
 async function loginCliente (req, res) {
     try {
         const { clave } = req.body
@@ -154,6 +152,26 @@ function obtener (req, res) {
             res.status(400).send(error)
         })
 }
+
+
+function obtenerDatosPerfil (req, res) {
+
+    model.findOne({
+        where: { id: req.params.id }
+    })
+        .then(resultset => {
+
+
+            let usuario = resultset.dataValues;
+            usuario.clave = '***CHISMOSON***'
+
+            res.status(200).json(usuario);
+        })
+        .catch(error => {
+            res.status(400).send(error)
+        })
+}
+
 
 
 function obtenerDNI (req, res) {
@@ -291,7 +309,7 @@ async function cambiarContrasenia (req, res, next) {
 
         let object = await model.findOne({
             where: {
-                dni: req.body.dni ? req.body.dni : 0
+                usuario: req.body.dni ? req.body.dni : 0
             }
         });
 
