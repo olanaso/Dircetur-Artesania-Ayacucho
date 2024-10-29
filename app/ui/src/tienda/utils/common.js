@@ -151,3 +151,16 @@ export function menu () {
     });
 
 }
+
+
+export function menuselec () {
+    const currentPath = window.location.pathname.split("/").pop(); // Obtener el nombre del archivo actual
+    const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+
+    navLinks.forEach(link => {
+        // Comparar href con la ruta actual y agregar la clase 'active' si coinciden
+        if (link.getAttribute("href") === currentPath) {
+            link.classList.add("active");
+        }
+    });
+}

@@ -29,6 +29,7 @@
 	<!-- Animated Css -->
 	<link rel="stylesheet" href="assets_tienda/css/animated.css">
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 	<style>
 		.long-text {
 			width: 100%;
@@ -99,6 +100,34 @@
 		.oferta a {
 			color: #fff !important;
 		}
+
+		.image-box {
+			width: 200px;
+			height: 100px;
+			background-color: #fff;
+			/* Fondo blanco */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			margin: 10px;
+		}
+
+		.image-box img {
+			max-width: 80%;
+			/* Ajusta el tamaño para que quepa dentro del cuadro */
+			max-height: 80%;
+		}
+
+		footer {
+			margin-top: 80px;
+			background-color: #111;
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			padding: 0px 15px 0px 15px
+		}
 	</style>
 
 	<!--[if lt IE 9]>
@@ -127,9 +156,9 @@
 		</form>
 	</div>
 
-	<header class="site-header wow fadeIn" data-wow-duration="1s" id="header">
+	<div class="site-header wow fadeIn" data-wow-duration="1s" id="header">
 
-	</header>
+	</div>
 
 	<div id="slidersList" class="Modern-Slider">
 		<!-- Slide 1 -->
@@ -272,6 +301,7 @@
 	<script src="assets_tienda/js/custom.js"></script>
 
 	<script type="module" src="../src/tienda/portada/index.js"></script>
+
 
 </body>
 

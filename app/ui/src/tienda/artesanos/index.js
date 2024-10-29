@@ -2,7 +2,7 @@
 
 import { loadPartials } from "../../utils/viewpartials.js";
 import { listarArtesanosPorCategoriaArtesania } from "./api.js";
-import { custom } from '../utils/common.js';
+import { custom, menuselec } from '../utils/common.js';
 
 import { marked } from 'marked';
 
@@ -18,6 +18,7 @@ import { marked } from 'marked';
         await loadPartials(partials);
 
         custom()
+        menuselec()
 
         console.log('Las vistas parciales se han cargado correctamente!');
 

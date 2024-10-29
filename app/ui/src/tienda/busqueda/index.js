@@ -2,7 +2,7 @@
 
 import { loadPartials } from "../../utils/viewpartials.js";
 import { getPortadaBusqueda, busquedaProductos } from './api';
-import { custom } from '../utils/common.js';
+import { custom, menuselec } from '../utils/common.js';
 
 
 (async function () {
@@ -14,6 +14,7 @@ import { custom } from '../utils/common.js';
 
         await loadPartials(partials);
         custom()
+        menuselec()
         // import('../utils/common');
         console.log('Las vistas parciales se han cargado correctamente!');
 

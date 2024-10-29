@@ -28,6 +28,7 @@
 	<link rel="stylesheet" href="assets_tienda/css/flaticon.css">
 	<!-- Animated Css -->
 	<link rel="stylesheet" href="assets_tienda/css/animated.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 	<style>
 		.img-cover {
@@ -173,6 +174,68 @@
 			display: inline-block;
 			margin: 5px;
 		}
+
+		.img-contenedor-destacados {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 150px;
+			/* Altura fija para el contenedor */
+			width: 100%;
+			/* Ancho ajustable según el contenedor padre */
+			overflow: hidden;
+			/* Oculta cualquier parte desbordante de la imagen */
+		}
+
+		.img-destacados {
+			float: center;
+			object-fit: cover;
+			max-height: 100%;
+			max-width: 100%;
+			height: 120px !important;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100% !important;
+			border-top-left-radius: calc(.25rem - 1px);
+			border-top-right-radius: calc(.25rem - 1px);
+		}
+
+		.product-description {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			display: block;
+		}
+
+		.image-box {
+			width: 200px;
+			height: 100px;
+			background-color: #fff;
+			/* Fondo blanco */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			margin: 10px;
+		}
+
+		.image-box img {
+			max-width: 80%;
+			/* Ajusta el tamaño para que quepa dentro del cuadro */
+			max-height: 80%;
+		}
+
+		footer {
+			margin-top: 80px;
+			background-color: #111;
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			padding: 0px 15px 0px 15px
+		}
 	</style>
 
 	<!--[if lt IE 9]>
@@ -263,7 +326,7 @@
 								<div class="row mt-3">
 									<div class="col-md-12">
 										<div class="embed-responsive embed-responsive-16by9">
-											<video class="embed-responsive-item" controls>
+											<video id="videoproducto" class="embed-responsive-item" controls>
 												<source src="ruta_del_video/video.mp4" type="video/mp4">
 												Tu navegador no soporta la etiqueta de video.
 											</video>
@@ -299,7 +362,7 @@
 										<li>
 											<i class="fas fa-weight" style="color:white; font-size: 20px;"
 												title="Peso"></i>
-											<p id="producto-cantidad">-</p>
+											<p id="producto-peso">-</p>
 											<p>Kg.</p>
 										</li>
 
@@ -319,6 +382,12 @@
 											<p id="producto-cantidad">Automatic</p>
 										</li>
 
+										<li>
+											<i class="fa fa-sort-numeric-desc" style="color:white; font-size: 20px;"
+												title="Cantidad"></i>
+											<p id="producto-tallas">Talla: </p>
+										</li>
+
 										<!--										<li><i class="flaticon flaticon-car"></i>-->
 										<!--											<p>4/5</p>-->
 										<!--										</li>-->
@@ -331,7 +400,7 @@
 							<div class="similar-info">
 								<div class="primary-button">
 									<a id="btnagregarcarrito" href="#">AGREGAR AL CARRITO <i
-											class="fa fa-dollar"></i></a>
+											class="fa fa-cart-plus"></i></a>
 								</div>
 							</div>
 						</div>
@@ -350,14 +419,7 @@
 							<div class="sep-section-heading">
 								<h2><em>DESCRIPCIÓN</em></h2>
 							</div>
-							<p id="producto-cualidades">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Obcaecati accusamus a iure
-								nulla,
-								sed non ex nobis eius esse distinctio imps sunt quia sint quis quisquam odio
-								repellat.<br><br> <em>Eos non odit, corporis adipisci reprehenderit commodi sequi
-									molestias
-									blanditiis tenetur harum natus!</em><br><br>Illum quae, corrupti a ducimus voluptate
-								velit praesentium dolorum earum unde nostrum.</p>
+							<p id="producto-cualidades"></p>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -392,7 +454,7 @@
 							</div>
 							<p>
 								<img id="artesano-img" src="" class="artesano-photo">
-								<a id="artesano-informacion_" href="">Ver el artesano</a>
+								<a id="artesano-informacion" href="">Ver el artesano</a>
 							</p>
 							<div class="contact-info">
 								<div class="row">
@@ -408,6 +470,65 @@
 						</div>
 					</div>
 				</div>
+				<hr>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="item wow fadeInUp" data-wow-duration="0.5s">
+							<div class="sep-section-heading">
+								<h2><em>TECNICAS EMPLEADAS</em></h2>
+							</div>
+							<p id="producto-tecnicas"></p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="item wow fadeInUp" data-wow-duration="0.5s">
+							<div class="sep-section-heading">
+								<h2><em>CUALIDADES</em></h2>
+							</div>
+							<p id="producto-cualidades_es">ualidades</p>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="item wow fadeInUp" data-wow-duration="0.5s">
+							<div class="sep-section-heading">
+								<h2><em>PIEZAS</em></h2>
+							</div>
+							<p id="producto-numero_piezas_es"></p>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="item wow fadeInUp" data-wow-duration="0.5s">
+							<div class="sep-section-heading">
+								<h2><em>PREVENTA</em></h2>
+							</div>
+							<p id="producto-preventas"></p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="item wow fadeInUp" data-wow-duration="0.5s">
+							<div class="sep-section-heading">
+								<h2><em>TIEMPO DE ELABORACION</em></h2>
+							</div>
+							<p id="producto-tiempo_elaboracion">ualidades</p>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="item wow fadeInUp" data-wow-duration="0.5s">
+							<div class="sep-section-heading">
+								<h2><em>TIEMPO DE ENVIO</em></h2>
+							</div>
+							<p id="producto-tiempo_envio"></p>
+						</div>
+					</div>
+				</div>
+
+
 			</div>
 		</div>
 	</section>
@@ -420,171 +541,25 @@
 						<div class="col-md-12">
 							<div class="section-heading">
 								<div class="icon">
-									<i class="fa fa-car"></i>
+									<i class="fa fa-diamond"></i>
 								</div>
 								<div class="text-content">
 									<h2>Productos Similares</h2>
 									<span>Te van a encantar</span>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div id="owl-similar" class="owl-carousel owl-theme">
-						<div class="item car-item">
-							<div class="thumb-content">
-								<div class="car-banner">
-									<a href="single_car.html">For Rent</a>
-								</div>
-								<a href="single_car.html"><img src="assets/images/car_item_1.jpg" alt=""></a>
-							</div>
-							<div class="down-content">
-								<a href="single_car.html">
-									<h4>Perfect Sport Car</h4>
-								</a>
-								<span>$36.000</span>
-							</div>
-						</div>
-						<div class="item car-item">
-							<div class="thumb-content">
-								<div class="car-banner">
-									<a href="single_car.html">For Sale</a>
-								</div>
-								<a href="single_car.html"><img src="assets/images/car_item_2.jpg" alt=""></a>
-							</div>
-							<div class="down-content">
-								<a href="single_car.html">
-									<h4>Perfect Sport Car</h4>
-								</a>
-								<span>$49.000</span>
-							</div>
-						</div>
-						<div class="item car-item">
-							<div class="thumb-content">
-								<div class="car-banner">
-									<a href="single_car.html">For Rent</a>
-								</div>
-								<a href="single_car.html"><img src="assets/images/car_item_3.jpg" alt=""></a>
-							</div>
-							<div class="down-content">
-								<a href="single_car.html">
-									<h4>Perfect Sport Car</h4>
-								</a>
-								<span>$42.000</span>
-							</div>
-						</div>
-						<div class="item car-item">
-							<div class="thumb-content">
-								<div class="car-banner">
-									<a href="single_car.html">For Rent</a>
-								</div>
-								<a href="single_car.html"><img src="assets/images/car_item_4.jpg" alt=""></a>
-							</div>
-							<div class="down-content">
-								<a href="single_car.html">
-									<h4>Perfect Sport Car</h4>
-								</a>
-								<span>$54.000</span>
-							</div>
-						</div>
-						<div class="item car-item">
-							<div class="thumb-content">
-								<div class="car-banner">
-									<a href="single_car.html">For Rent</a>
-								</div>
-								<a href="single_car.html"><img src="assets/images/car_item_5.jpg" alt=""></a>
-							</div>
-							<div class="down-content">
-								<a href="single_car.html">
-									<h4>Perfect Sport Car</h4>
-								</a>
-								<span>$42.000</span>
-							</div>
-						</div>
-						<div class="item car-item">
-							<div class="thumb-content">
-								<div class="car-banner">
-									<a href="single_car.html">For Rent</a>
-								</div>
-								<a href="single_car.html"><img src="assets/images/car_item_6.jpg" alt=""></a>
-							</div>
-							<div class="down-content">
-								<a href="single_car.html">
-									<h4>Perfect Sport Car</h4>
-								</a>
-								<span>$54.000</span>
-							</div>
-						</div>
-						<div class="item car-item">
-							<div class="thumb-content">
-								<div class="car-banner">
-									<a href="single_car.html">For Rent</a>
-								</div>
-								<a href="single_car.html"><img src="assets/images/car_item_1.jpg" alt=""></a>
-							</div>
-							<div class="down-content">
-								<a href="single_car.html">
-									<h4>Perfect Sport Car</h4>
-								</a>
-								<span>$42.000</span>
-							</div>
-						</div>
-						<div class="item car-item">
-							<div class="thumb-content">
-								<div class="car-banner">
-									<a href="single_car.html">For Rent</a>
-								</div>
-								<a href="single_car.html"><img src="assets/images/car_item_2.jpg" alt=""></a>
-							</div>
-							<div class="down-content">
-								<a href="single_car.html">
-									<h4>Perfect Sport Car</h4>
-								</a>
-								<span>$54.000</span>
-							</div>
-						</div>
-						<div class="item car-item">
-							<div class="thumb-content">
-								<div class="car-banner">
-									<a href="single_car.html">For Sale</a>
-								</div>
-								<a href="single_car.html"><img src="assets/images/car_item_3.jpg" alt=""></a>
-							</div>
-							<div class="down-content">
-								<a href="single_car.html">
-									<h4>Perfect Sport Car</h4>
-								</a>
-								<span>$23.000</span>
-							</div>
-						</div>
-						<div class="item car-item">
-							<div class="thumb-content">
-								<div class="car-banner">
-									<a href="single_car.html">For Rent</a>
-								</div>
-								<a href="single_car.html"><img src="assets/images/car_item_4.jpg" alt=""></a>
-							</div>
-							<div class="down-content">
-								<a href="single_car.html">
-									<h4>Perfect Sport Car</h4>
-								</a>
-								<span>$68.000</span>
-							</div>
-						</div>
-						<div class="item car-item">
-							<div class="thumb-content">
-								<div class="car-banner">
-									<a href="single_car.html">For Rent</a>
-								</div>
-								<a href="single_car.html"><img src="assets/images/car_item_5.jpg" alt=""></a>
-							</div>
-							<div class="down-content">
-								<a href="single_car.html">
-									<h4>Perfect Sport Car</h4>
-								</a>
-								<span>$36.000</span>
+
+							<div id="owl-testimonials" class="owl-carousel owl-theme">
+
+
+
+
+
+
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>

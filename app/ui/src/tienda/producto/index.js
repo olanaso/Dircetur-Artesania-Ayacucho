@@ -54,7 +54,7 @@ function obtenerUrlProducto () {
         const artesaniaenviada = JSON.parse(data);
 
         // Mostrar el objeto en el DOM
-        debugger
+        //    debugger
         console.log(artesaniaenviada)
         infoProductoById(artesaniaenviada.artesania.id)
 
@@ -176,14 +176,32 @@ function generarHtmlColores (colores) {
     });
     return html;
 }
+//Gestionar las tallas
+function convertirTallasEnString (lista) {
+    // Filtrar elementos con talla no nula ni vacía y extraer solo las tallas
+    const tallas = lista
+        .filter(item => item.talla !== null && item.talla !== '')
+        .map(item => item.talla);
+
+    // Si no hay tallas válidas, devolver "ninguno"
+    if (tallas.length === 0) {
+        return "Ninguno";
+    }
+
+    // Unir las tallas en un solo string separado por comas
+    return tallas.join(", ");
+}
+
+
 async function mostrarInformacion (producto) {
 
-    debugger
+    // debugger
     const listColores = JSON.parse(JSON.parse(producto.lst_colores));
     const lst_ofertas = JSON.parse(JSON.parse(producto.lst_ofertas));
     const lst_otros_costos = JSON.parse(JSON.parse(producto.lst_otros_costos));
     const lst_tallas = JSON.parse(JSON.parse(producto.lst_talla));
     const lst_videoenlace = JSON.parse(JSON.parse(producto.lst_videoenlace));
+    const lst_videos = JSON.parse(JSON.parse(producto.lst_videos));
 
     const colores = generarHtmlColores(listColores)
     const materiales = transformarMaterialesResponseToArray(producto.materiales_es)
@@ -193,12 +211,14 @@ async function mostrarInformacion (producto) {
     $("#producto-nombre").text(`${producto.nombres_es}`);
     $("#producto-precio").text(`S/ ${producto.precio} `);
     $("#producto-descripcion").text(`${producto.descripcion_es}`);
-    $("#producto-alto").text(`${producto.alto} cm`);
-    $("#producto-ancho").text(`${producto.ancho} cm`);
+    $("#producto-alto").text(`Alto: ${producto.alto} cm`);
+    $("#producto-ancho").text(`Ancho:${producto.ancho} cm`);
+    $("#producto-tallas").text(`Tallas: ${convertirTallasEnString(lst_tallas)} `);
 
     $('#contenedor-colores').append(colores);
     $("#producto-color").text(`${colores == "" ? 'No disponible' : colores}`);
-    $("#producto-cantidad").text(`${producto.cantidad}`);
+    $("#producto-peso").text(`Peso: ${producto.peso}`);
+    $("#producto-cantidad").text(`Cant. disponible: ${producto.cantidad}`);
     $("#producto-cualidades").text(`${producto.cualidades_es}`);
     $("#artesano-celular").text(`${producto.datos_artesano.celular}`);
     $("#artesano-correo").text(`${producto.datos_artesano.correo}`);
@@ -206,9 +226,22 @@ async function mostrarInformacion (producto) {
     $("#artesano-informacion").attr("href", `artesano.html?id=${producto.artesano_id}`);
     $("#artesano-img").attr("src", `${producto.datos_artesano.foto1}`);
 
+    $("#producto-tecnicas").text(`${producto.tecnicas_es}`);
+    $("#producto-cualidades_es").text(`${producto.cualidades_es}`);
+    $("#producto-numero_piezas_es").text(`${producto.numero_piezas_es}`);
+
+    $("#producto-preventas").text(`${producto.preventas == 0 || '0' ? 'Sujeta a Stock' : 'En preventa'}`);
+    $("#producto-tiempo_elaboracion").text(`${producto.tiempo_elaboracion == 0 || '0' ? 'Acuerdo con el artesano' : producto.tiempo_elaboracion + ' Días'}`);
+    $("#producto-tiempo_envio").text(`${producto.tiempo_envio == 0 || '0' ? 'Acuerdo con el artesano' : producto.tiempo_envio + ' Días'}`);
+
+
+    loadProductosDestacados(producto.productosRelacionados)
+
     showMaterials(materiales);
     showProductSlider(imagenesSecundarias, producto.imagen_principal);
-    showVideos(lst_videoenlace);
+    //showVideos(lst_videoenlace);
+
+    $('#videoproducto').attr('src', lst_videos[0].src)
 
 }
 
@@ -505,6 +538,106 @@ function cargarComboAertesanos (list) {
 
     // Reemplazar el contenido de #categorias con el nuevo HTML
     $('#id_artesano').html(html);
+}
+
+
+
+function loadProductosDestacados (data) {
+
+    debugger
+
+    let html = ` `
+    for (let item of data) {
+
+        let artenia_anviar_carrito = {
+            artesano_id: item.artesano_id,
+            id: item.id,
+            categoria_id: item.categoria_id,
+            artesano: item.datos_artesano.nombres + ' ' + item.datos_artesano.apellidos,
+            datos: {
+                imagen_principal: item.imagen_principal,
+                descripcion_es: item.nombres_es,
+                cualidades_es: item.descripcion_es,
+                precio: parseFloat(item.precio)
+            },
+        }
+
+        let artenia_deseados = {
+            id: item.id + '-' + item.artesano_id,
+            artesania: {
+                id: item.id,
+                nombre_es: item.nombres_es,
+                precio: parseFloat(item.precio),
+                imagen_principal: item.imagen_principal,
+                url_carrito: encodeURIComponent(JSON.stringify(artenia_anviar_carrito))
+            },
+            artesano: {
+                id: item.artesano_id,
+                nombres: item.datos_artesano.nombres + ' ' + item.datos_artesano.apellidos,
+                foto1: item.datos_artesano.foto1,
+            }
+        }
+
+
+        //alert(item.imagen)
+        html = html + `
+       <div class="item wow fadeIn card " data-wow-duration="0.75s">
+						<div class="img-contenedor-destacados">
+                          <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000">
+							<img class="img-destacados"
+								src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" />
+                                   </a>
+						</div>
+						
+						<div class="line-dec"></div>
+
+						<div class="card-body">
+							<!-- <div class="d-flex justify-content-between align-items-center mb-2">
+								<span class="badge badge-danger" style="color: #fff;">-15%</span>
+								<span class="text-muted"><s>S/. 1770.00</s></span>
+							</div> -->
+                            <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000">
+							<h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item.nombres_es || "-"}</h5>
+                            </a>
+							<p class="h4 text-danger font-weight-bold">S/.${formatearNumero(item?.precio) || ""}</p>
+							<p class="card-text text-muted">Categoría: ${item?.categoria_producto?.denominacion}</p>
+
+
+							<div class="author-rate">
+								
+								<h4><a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></h4>
+								<div class="line-dec2"></div>
+								
+                                <a href="carrito-de-compra.html?producto=${encodeURIComponent(JSON.stringify(artenia_anviar_carrito))}" title="Ir a carrito de compras">Comprar <i class="fa fa-shopping-cart"></i></a>
+							</div>
+						</div>
+					</div>
+
+
+        `
+    }
+    $('#owl-testimonials').append(html)
+
+
+    $('#owl-testimonials').owlCarousel({
+        pagination: true,
+        paginationNumbers: false,
+        autoplay: true,
+        loop: true,
+        margin: 10,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 3
+            }
+        }
+    })
 }
 
 

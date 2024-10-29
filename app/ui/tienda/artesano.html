@@ -28,6 +28,7 @@
 	<link rel="stylesheet" href="assets_tienda/css/flaticon.css">
 	<!-- Animated Css -->
 	<link rel="stylesheet" href="assets_tienda/css/animated.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 	<style>
@@ -153,6 +154,68 @@
 			box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 			/* Agrega una sombra para darle más estilo */
 		}
+
+		.img-contenedor-destacados {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 150px;
+			/* Altura fija para el contenedor */
+			width: 100%;
+			/* Ancho ajustable según el contenedor padre */
+			overflow: hidden;
+			/* Oculta cualquier parte desbordante de la imagen */
+		}
+
+		.img-destacados {
+			float: center;
+			object-fit: cover;
+			max-height: 100%;
+			max-width: 100%;
+			height: 120px !important;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100% !important;
+			border-top-left-radius: calc(.25rem - 1px);
+			border-top-right-radius: calc(.25rem - 1px);
+		}
+
+		.product-description {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			display: block;
+		}
+
+		.image-box {
+			width: 200px;
+			height: 100px;
+			background-color: #fff;
+			/* Fondo blanco */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			margin: 10px;
+		}
+
+		.image-box img {
+			max-width: 80%;
+			/* Ajusta el tamaño para que quepa dentro del cuadro */
+			max-height: 80%;
+		}
+
+		footer {
+			margin-top: 80px;
+			background-color: #111;
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			padding: 0px 15px 0px 15px
+		}
 	</style>
 
 	<!--[if lt IE 9]>
@@ -219,7 +282,7 @@
 							<p class="mb-2" style="font-size: 1.2rem;">
 								<span class="text-warning">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 							</p>
-							<p style="color: #777; font-size: 1rem; margin-bottom: 5px;">Asoc. Artesanos</p>
+
 							<p style="font-size: 1rem;">
 								<i id="artesano-telefono" class="fa fa-phone" style="color: #666;"></i>
 							</p>

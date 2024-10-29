@@ -328,7 +328,39 @@ product.findProductoAndArtesanoByProdId = async function (id) {
                 }
             ]
         })
-    return productoEncontrado
+
+
+    //Agregar productos adicionales
+
+    if (!productoEncontrado) return null;
+
+    // Convertir a JSON para evitar referencias circulares
+    const productoPlano = productoEncontrado.toJSON();
+
+    // Obtener el id de la categoría del producto original
+    const categoriaId = productoPlano.categoria_id;
+
+    // Encontrar 5 productos aleatorios de la misma categoría
+    const productosRelacionados = await product.findAll({
+        where: { categoria_id: categoriaId },
+        order: Sequelize.literal('RAND()'),  // Seleccionar aleatoriamente
+        limit: 5,
+        include: [
+            {
+                model: artesano,
+                attributes: [
+                    'foto1', 'correo', 'celular', 'lst_mediospago',
+                    'lst_contactos', 'nombres', 'apellidos',
+                    'dni', 'ruc'
+                ],
+                as: 'datos_artesano'
+            }
+        ]
+    });
+    // Convertir productos relacionados a un formato plano
+    productoPlano.productosRelacionados = productosRelacionados.map(producto => producto.toJSON());
+
+    return productoPlano;
 }
 /**
  * Funcion  para encontrar todos los id de artesanos y categorias por el id de la categoria

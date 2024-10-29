@@ -65,7 +65,10 @@ export default {
         'tienda/nosotros': resolve(__dirname, 'tienda/nosotros.html'),
         'tienda/preguntas-frecuentes': resolve(__dirname, 'tienda/preguntas-frecuentes.html'),
         'tienda/finalizacion-de-compra': resolve(__dirname, 'tienda/finalizacion-de-compra.html'),
-        'tienda/mapa-artesanos': resolve(__dirname, 'tienda/mapa-artesanos.html')
+        'tienda/mapa-artesanos': resolve(__dirname, 'tienda/mapa-artesanos.html'),
+        'tienda/politica-proteccion-datos': resolve(__dirname, 'tienda/politica-proteccion-datos.html'),
+        'tienda/politicas-privacidad': resolve(__dirname, 'tienda/politicas-privacidad.html'),
+        'tienda/terminos-condiciones': resolve(__dirname, 'tienda/terminos-condiciones.html')
       }
     },
 

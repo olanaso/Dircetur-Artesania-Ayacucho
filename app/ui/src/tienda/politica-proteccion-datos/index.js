@@ -35,7 +35,7 @@ function startApp () {
 }
 
 function callMarkdown () {
-    fetch("./info/preguntas-frecuentes.md") // Ruta correcta al archivo markdown
+    fetch("./info/politica-proteccion-datos.md") // Ruta correcta al archivo markdown
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al cargar el archivo Markdown.');
