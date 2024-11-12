@@ -21,7 +21,7 @@ async function busquedaProductoController (req, res) {
     let param = req.query;
     let resultado = await busquedaProducto(param.page, param.limit, param.oferta, param.precio_min, param.precio_max
         , param.abrev_categoria, param.nombre_categoria, param.id_categoria, param.id_artesano, param.nombre_artesano
-        , param.nombre_producto, param.orden_precio, param.recientes)
+        , param.nombre_producto, param.order)
 
     return res.status(200).send(resultado);
 

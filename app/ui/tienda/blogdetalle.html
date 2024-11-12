@@ -13,7 +13,7 @@
 	<meta name="author" content="Car Dealer Template">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Blog - Artesanias de Ayacucho</title>
+	<title>Detalle - Artesanias de Ayacucho</title>
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
 
@@ -198,6 +198,23 @@
 			background-size: cover;
 			padding: 0px 15px 0px 15px
 		}
+
+		/* Estilo para hacer que el iframe ocupe el 100% del contenedor */
+		#listanoticias {
+			width: 100%;
+			height: 1800px;
+			/* Ocupa toda la altura de la ventana */
+			border: none;
+			overflow: hidden;
+			/* Esconde el scroll */
+		}
+
+		/* Si necesitas que el contenedor tenga una altura específica */
+		.blog-grid-post .row {
+			height: auto;
+			/* Ajusta esta altura según lo que necesites */
+			overflow: hidden;
+		}
 	</style>
 
 	<!--[if lt IE 9]>
@@ -235,22 +252,22 @@
 			</div>
 		</div>
 	</div>
-	<div class="on-grids wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1s">
-		<div class="blog-page">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="blog-grid-post">
-							<div class="row" id="listanoticias">
 
-							</div>
-						</div>
-					</div>
+
+	<div class="container">
+
+		<div class="col-md-12">
+			<div class="blog-grid-post">
+				<div class="row">
+					<iframe id="listanoticias" src="" frameborder="0"></iframe>
 				</div>
 			</div>
 		</div>
 
 	</div>
+
+
+
 
 
 
@@ -271,7 +288,9 @@
 	<script src="assets_tienda/js/wow.animation.js"></script>
 	<!-- Custom Js -->
 	<script src="assets_tienda/js/custom.js"></script>
-	<script type="module" src="../src/tienda/blog/index.js"></script>
+
+	<script type="module" src="../src/tienda/blog/blogdetalle.js"></script>
+
 
 </body>
 

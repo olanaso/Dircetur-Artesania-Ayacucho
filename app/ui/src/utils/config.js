@@ -1,19 +1,22 @@
 
 //export const baseUrl = 'https://api-certificados.centrodegestion.org'; 
 // export const baseUrl = 'http://148.113.196.34:80/api';
-//export const baseUrl = 'http://localhost:3002/api';
-export const baseUrl = 'https://app.artesaniasdeayacucho.pe/api';
+export const baseUrl = 'http://localhost:3002/api';
+//export const baseUrl = 'https://app.artesaniasdeayacucho.pe/api';
 //export const baseUrl = 'https://fantastic-zebra-65wpjr4xvjh5xgv-3002.app.github.dev/api';
 export const baseUrldni = 'https://dni.biblio-ideas.com/api';
+/*Seccion de la llamda al wordpress*/
+export const URL_GLOBAL = 'https://blog.artesaniasdeayacucho.pe/';
+export const categoryNews = 4;
+export const sizeNews = 10;
+
 //} Function to save data in localStorage
 export function saveDataToLocalStorage (key, data) {
   try {
     // Convert the data to a JSON string
     const dataJSON = JSON.stringify(data);
-
     // Save the data in localStorage with the given key
     localStorage.setItem(key, dataJSON);
-
     console.log(`Data with key "${key}" saved to localStorage.`);
   } catch (error) {
     console.error('Error while saving data to localStorage:', error);

@@ -506,8 +506,9 @@ async function recuperarcuenta (req, res) {
         if (!usuarioDB) {
             return res.status(400).json({ isRecuperado: false, message: "El correo ingresado no se ecuentra registrado" });
         }
-
-
+        /*
+            Generar clave
+        */
         let result = await enviarcorreo(usuarioDB.dataValues)
 
         return res.status(200).send(result);

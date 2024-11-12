@@ -29,6 +29,13 @@ function startApp () {
     cargarDataPortada();
     rellenarFormulario();
     realizarBusqueda();
+    changeRelevancia()
+}
+
+function changeRelevancia () {
+    $('#drpordenamientosbusqueda').on('change', function (e) {
+        ordenamientosBusqueda()
+    })
 }
 
 function generarURL () {
@@ -406,5 +413,27 @@ function cargarComboAertesanos (list) {
     $('#id_artesano').html(html);
 }
 
+function ordenamientosBusqueda () {
+    let valorordenamiento = $('#drpordenamientosbusqueda option:selected').val()
+    // alert(valorordenamiento)
 
+
+    const formulario = $('#miFormulario');
+    const formData = new FormData(formulario[0]);
+    const params = new URLSearchParams();
+
+    formData.forEach((value, key) => {
+        if (value) {  // Solo agregar a la URL si el valor no está vacío
+            params.append(key, value);
+        }
+    });
+    params.append('order', valorordenamiento);
+    // Redirige a la misma página con los nuevos parámetros en la URL
+    window.location.href = '?' + params.toString();
+
+    // Previene el submit tradicional
+    return false;
+
+
+}
 

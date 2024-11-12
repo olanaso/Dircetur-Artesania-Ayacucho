@@ -68,7 +68,9 @@ export default {
         'tienda/mapa-artesanos': resolve(__dirname, 'tienda/mapa-artesanos.html'),
         'tienda/politica-proteccion-datos': resolve(__dirname, 'tienda/politica-proteccion-datos.html'),
         'tienda/politicas-privacidad': resolve(__dirname, 'tienda/politicas-privacidad.html'),
-        'tienda/terminos-condiciones': resolve(__dirname, 'tienda/terminos-condiciones.html')
+        'tienda/terminos-condiciones': resolve(__dirname, 'tienda/terminos-condiciones.html'),
+        'tienda/blog': resolve(__dirname, 'tienda/blog.html'),
+        'tienda/blogdetalle': resolve(__dirname, 'tienda/blogdetalle.html'),
       }
     },
 

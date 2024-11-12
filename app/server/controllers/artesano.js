@@ -193,8 +193,8 @@ function listar (req, res) {
             a.correo,
             a.dni,
             CASE 
-                WHEN c.tipousuario = 1 THEN 'artesano'
-                WHEN c.tipousuario = 2 THEN 'cliente'
+                WHEN c.tipousuario = 1 THEN 'Artesano'
+                WHEN c.tipousuario = 2 THEN 'Artesano'
                 ELSE 'otro'
             END AS tipousuario
         FROM artesano a 
@@ -210,8 +210,13 @@ function listar (req, res) {
         params.dni = dni;
     }
     if (nombre) {
-        conditions.push(`a.nombres LIKE :nombre`);
-        params.nombre = `%${nombre}%`;
+
+        const nombreTerms = nombre.trim().split(/\s+/);
+        const nombreConditions = nombreTerms.map((term, index) => {
+            params[`nombre${index}`] = `%${term}%`;
+            return `(a.nombres LIKE :nombre${index} OR a.apellidos LIKE :nombre${index})`;
+        });
+        conditions.push(`(${nombreConditions.join(' AND ')})`);
     }
     if (correo) {
         conditions.push(`a.correo LIKE :correo`);
