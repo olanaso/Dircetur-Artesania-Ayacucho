@@ -331,22 +331,30 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
 
 
 
-        let orderby = ` order by a.id`
+        let orderby = ` `
         let opcionesordenamiento = []
-        if (order && order= 'menor-precio') {
-            opcionesordenamiento.push(`a.precio`)
-        }
-        if (recientes) {
-            opcionesordenamiento.push(`a.createdat`)
+
+
+        /**/
+
+        if (order) {
+
+            if (order === 'menor-precio') {
+                orderby = ` order by  a.precio ASC`;
+            } else if (order === 'mayor-precio') {
+                orderby = ` order by  a.precio desc`;
+            } else if (order === 'novedades') {
+                orderby = ` order by a.createdat desc`;
+
+            }
+            else if (order === 'relevancia') {
+                orderby = ` `;
+            }
         }
 
-        if (orden_precio == 'true' || recientes == 'true') {
-            orderby += `${opcionesordenamiento.join(",")} ASC`
-        }
 
-        if (orden_precio == 'false' || recientes == 'false') {
-            orderby += ` ${opcionesordenamiento.join(",")} DESC`
-        }
+
+
 
         let limitOffset = ` LIMIT ${limit} OFFSET ${offset}`
 

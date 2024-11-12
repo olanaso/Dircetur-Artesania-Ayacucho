@@ -32,17 +32,18 @@
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 
 	<!-- Google translate -->
-	<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	<script type="text/javascript"
+		src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 	<style>
-		div > iframe.skiptranslate {
+		div>iframe.skiptranslate {
 			display: none !important;
 		}
 
 		body {
 			top: 0px !important;
 		}
-		
+
 		.long-text {
 			width: 100%;
 			display: -webkit-box !important;
@@ -340,12 +341,12 @@
 					<div class="col-md-8">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h5 id="lblTotales"> </h5>
-							<select id="drpordenamientosbusqueda" class="form-control w-auto">
+							<select name="order" id="drpordenamientosbusqueda" class="form-control w-auto">
 								<option value="relevancia">Relevancia</option>
 								<option value="menor-precio">Menor precio</option>
 								<option value="mayor-precio">Mayor Precio</option>
 								<option value="novedades">Novedades</option>
-								<option value="mas-valorado">Más valorado</option>
+
 							</select>
 						</div>
 						<div id="listaProductosNovedades" class="row">
