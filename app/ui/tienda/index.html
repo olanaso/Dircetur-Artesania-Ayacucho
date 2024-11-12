@@ -30,7 +30,18 @@
 	<link rel="stylesheet" href="assets_tienda/css/animated.css">
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<!-- Google translate -->
+	<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 	<style>
+		div > iframe.skiptranslate {
+			display: none !important;
+		}
+
+		body {
+			top: 0px !important;
+		}
+		
 		.long-text {
 			width: 100%;
 			display: -webkit-box !important;
@@ -119,6 +130,7 @@
 			/* Ajusta el tamaño para que quepa dentro del cuadro */
 			max-height: 80%;
 		}
+
 
 		footer {
 			margin-top: 80px;
@@ -301,8 +313,6 @@
 	<script src="assets_tienda/js/custom.js"></script>
 
 	<script type="module" src="../src/tienda/portada/index.js"></script>
-
-
 </body>
 
 <!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:21:58 GMT -->
