@@ -8,11 +8,9 @@ import {
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { CompraDetalleModalComponent } from '../../components/compra-detalle-modal/compra-detalle-modal.component';
 import { PedidosService } from '../../services/pedidos.service';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PedidosResponse } from '../../interfaces/pedidos-response.interface';
 import { Atencion } from '../../interfaces/lista-atencion.interface';
-import { RecaptchaModule, RecaptchaV3Module, ReCaptchaV3Service } from 'ng-recaptcha';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-seguimiento-pedido',
@@ -23,11 +21,10 @@ import { environment } from '../../../environments/environment';
 })
 export class SeguimientoPedidoComponent {
   private pedidosService = inject(PedidosService);
-  private reCaptchaV3Service = inject(ReCaptchaV3Service);
 
   private dialog = inject(Dialog);
 
-  public codigoPedidoInput = new FormControl('');
+  public codigoPedidoInput = new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]);
 
   public pedido = signal<PedidosResponse | null>(null);
   public totalPagado = signal<number>(0);
@@ -44,6 +41,11 @@ export class SeguimientoPedidoComponent {
   }
 
   buscarPedido() {
+    if (this.codigoPedidoInput.invalid) {
+      this.codigoPedidoInput.markAsTouched();
+      return;
+    }
+
     const valor = this.codigoPedidoInput.value;
 
     if (!valor) {
@@ -65,7 +67,6 @@ export class SeguimientoPedidoComponent {
         this.estaBuscandoPedido.set(false);
       },
       error: (error) => {
-        console.error(error);
         this.estaBuscandoPedido.set(false);
         this.pedidoNoEncontrado.set(true);
       },
@@ -84,25 +85,14 @@ export class SeguimientoPedidoComponent {
     return JSON.parse(pedido.list_atencion);
   }
 
-  ejecutarRecaptcha() {
-    console.log('Ejecutando reCaptcha');
-
-    this.reCaptchaV3Service.execute('').subscribe({
-      next: (token) => {
-        console.log('Token: ', token);
-
-        this.buscarPedido();
-      },
-      error: (error) => {
-        console.error('Error: ', error);
-      },
-    });
-  }
-
-  ejecutarRecaptchaVisible( token: any ) {
-    console.log('Token: ', token);
-
-    this.buscarPedido();
-
+  obtenerColorEstado(estado: string): string {
+    const colores = {
+      pagado: 'bg-emerald-100 text-emerald-800',
+      enviado: 'bg-violet-100 text-violet-800',
+      finalizado: 'bg-blue-100 text-blue-800',
+    };
+    return (
+      colores[estado as keyof typeof colores] || 'bg-gray-100 text-gray-800'
+    );
   }
 }

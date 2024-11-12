@@ -1,7 +1,9 @@
+import { googleTranslateElementInit } from "./translate";
 
 export function custom () {
+    googleTranslateElementInit();
 
-
+    
     $('.preloader').fadeOut();
     $('.animated-row').each(function () {
         var $this = $(this);

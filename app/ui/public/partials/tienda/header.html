@@ -1,3 +1,4 @@
+
 <div id="main-header" class="main-header">
 
 
@@ -133,19 +134,22 @@
                 </defs>
             </svg>
         </a>
+
         <!-- Barra de búsqueda -->
-<div class="search-bar mx-auto d-none d-lg-block">
-    <input type="text" id="searchInput" placeholder="Búscar productos..."
-        onkeydown="if (event.key === 'Enter') { window.location.href = 'busqueda.html?nombre_producto=' + encodeURIComponent(this.value); }">
-    <button
-        onclick="window.location.href = 'busqueda.html?nombre_producto=' + encodeURIComponent(document.getElementById('searchInput').value);">
-        <i class="fas fa-search"></i>
-    </button>
-</div>
+        <div class="search-bar mx-auto d-none d-lg-block">
+            <input type="text" id="searchInput" placeholder="Búscar productos..."
+                onkeydown="if (event.key === 'Enter') { window.location.href = 'busqueda.html?nombre_producto=' + encodeURIComponent(this.value); }">
+            <button
+                onclick="window.location.href = 'busqueda.html?nombre_producto=' + encodeURIComponent(document.getElementById('searchInput').value);">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -166,10 +170,14 @@
                 <li class="nav-item">
                     <a title="Carrito de compras" class="nav-link" href="carrito-de-compra.html"><i class="fas fa-shopping-cart"></i> </a> <!-- Carrito -->
                 </li>
+                <li class="nav-item" style="width: 170px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.3s; margin-right: 20px;">
+                    <div id="google_translate_element"></div>
+                </li>
             </ul>
         </div>
         <a class="btn btn-outline-artesania " href="/seguimiento/" style="font-weight: bold;"><i class="fa fa-search"></i>
-            Seguimiento compra</a>
+            Seguimiento compra
+        </a>
     </nav>
 
     <!-- <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
