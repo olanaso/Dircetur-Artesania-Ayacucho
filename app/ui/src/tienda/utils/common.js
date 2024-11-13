@@ -2,7 +2,7 @@ import { googleTranslateElementInit } from "./translate";
 import { baseUrl, getDataFromLocalStorage } from '../../utils/config';
 
 export function custom () {
-    googleTranslateElementInit();
+
 
 
     $('.preloader').fadeOut();
@@ -58,6 +58,11 @@ export function custom () {
 
 
     menu()
+
+    setTimeout(function (e) {
+        googleTranslateElementInit();
+    }, 5000)
+
 }
 
 
@@ -288,4 +293,12 @@ export async function generarTypeHead () {
     } catch (error) {
         console.error('Error generando el typeahead:', error);
     }
+}
+
+
+export function formatearNumero (numero) {
+    return numero.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
 }

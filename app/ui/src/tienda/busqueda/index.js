@@ -417,22 +417,32 @@ function ordenamientosBusqueda () {
     let valorordenamiento = $('#drpordenamientosbusqueda option:selected').val()
     // alert(valorordenamiento)
 
+    // Obtener los parámetros actuales de la URL
+    const currentParams = new URLSearchParams(window.location.search);
 
-    const formulario = $('#miFormulario');
-    const formData = new FormData(formulario[0]);
-    const params = new URLSearchParams();
+    // Agregar o actualizar el parámetro 'order' con el valor seleccionado
+    currentParams.set('order', valorordenamiento);
 
-    formData.forEach((value, key) => {
-        if (value) {  // Solo agregar a la URL si el valor no está vacío
-            params.append(key, value);
-        }
-    });
-    params.append('order', valorordenamiento);
-    // Redirige a la misma página con los nuevos parámetros en la URL
-    window.location.href = '?' + params.toString();
+    // Redirige a la misma página con los parámetros actualizados en la URL
+    window.location.href = '?' + currentParams.toString();
 
     // Previene el submit tradicional
     return false;
+    /* const formulario = $('#miFormulario');
+     const formData = new FormData(formulario[0]);
+     const params = new URLSearchParams();
+ 
+     formData.forEach((value, key) => {
+         if (value) {  // Solo agregar a la URL si el valor no está vacío
+             params.append(key, value);
+         }
+     });
+     params.append('order', valorordenamiento);
+     // Redirige a la misma página con los nuevos parámetros en la URL
+     window.location.href = '?' + params.toString();
+ 
+     // Previene el submit tradicional
+     return false;*/
 
 
 }
