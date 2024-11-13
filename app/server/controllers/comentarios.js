@@ -95,7 +95,7 @@ function listar(req, res) {
 function listar (req, res) {
 
   if (!req.query.productoid) {
-    return res.status(400).send({ error: 'The productoid parameter is required' });
+    return res.status(400).send({ error: 'The productoid parameter   is required' });
   }
 
 
