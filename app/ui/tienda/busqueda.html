@@ -13,7 +13,7 @@
 	<meta name="author" content="Car Dealer Template">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Búsqueda - Artesanias de Ayacucho</title>
+	<title>Búsqueda - Artesanías de Ayacucho</title>
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
 
@@ -32,17 +32,18 @@
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 
 	<!-- Google translate -->
-	<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	<script type="text/javascript"
+		src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 	<style>
-		div > iframe.skiptranslate {
+		div>iframe.skiptranslate {
 			display: none !important;
 		}
 
 		body {
 			top: 0px !important;
 		}
-		
+
 		.long-text {
 			width: 100%;
 			display: -webkit-box !important;
@@ -246,7 +247,7 @@
 						<div class="row">
 							<div class="heading-content col-md-12">
 								<p><a href="index.html">Inicio</a> / <em> Búsqueda </em> </p>
-								<h2>Búsqueda de <em>Artesanias</em></h2>
+								<h2>Búsqueda de <em>Artesanías</em></h2>
 							</div>
 						</div>
 					</div>
@@ -269,7 +270,7 @@
 													<i class="fa fa-search"></i>
 												</div>
 												<div class="text-content">
-													<h2>Búsqueda de artesanias</h2>
+													<h2>Búsqueda de artesanías</h2>
 													<span>Selecciona las opciones de filtro</span>
 													<a style="color: yellow;" href="busqueda.html"><i
 															class="fa fa-search"></i> Nueva busqueda</a>
@@ -338,12 +339,16 @@
 						</div>
 					</div>
 					<div class="col-md-8">
-						<!-- <div class="d-flex justify-content-between align-items-center mb-3">
+						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h5 id="lblTotales"> </h5>
-							<select class="form-control w-auto">
-								<option>Relevancia</option>
+							<select name="order" id="drpordenamientosbusqueda" class="form-control w-auto">
+								<option value="relevancia">Relevancia</option>
+								<option value="menor-precio">Menor precio</option>
+								<option value="mayor-precio">Mayor Precio</option>
+								<option value="novedades">Novedades</option>
+
 							</select>
-						</div> -->
+						</div>
 						<div id="listaProductosNovedades" class="row">
 
 

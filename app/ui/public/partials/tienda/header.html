@@ -168,8 +168,31 @@
                     <a class="nav-link" href="preguntas-frecuentes.html">Preguntas frecuentes</a>
                 </li>
                 <li class="nav-item">
-                    <a title="Carrito de compras" class="nav-link" href="carrito-de-compra.html"><i class="fas fa-shopping-cart"></i> </a> <!-- Carrito -->
+                    <a class="nav-link" href="blog.html">Blog</a>
                 </li>
+                <li class="nav-item">
+                   
+                    <div class="cart-icon">
+                        <a  href="carrito-de-compra.html" type="button" class="btn btn-success btn-circle " title="Carrito de compras">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        <span class="badge">5</span> <!-- Aquí se muestra la cantidad de productos -->
+                    </div>
+
+                    <div class="cart-icon">
+                        <a href="productos-deseados.html" type="button" class="btn btn-success btn-circle"  title="Ir a mis favoritos">
+                            <i class="fas fa-heart"></i>
+                        </a>
+                        <span class="badge">5</span> <!-- Aquí se muestra la cantidad de productos -->
+                    </div>
+                    <div class="cart-icon">
+                        <a href="login-cliente.html" type="button" class="btn btn-success btn-circle" title="Iniciar sessión">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    
+                    </div>
+                </li>
+               
                 <li class="nav-item" style="width: 170px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.3s; margin-right: 20px;">
                     <div id="google_translate_element"></div>
                 </li>
@@ -179,6 +202,42 @@
             Seguimiento compra
         </a>
     </nav>
+    <style>
+        .cart-icon {
+            position: relative;
+            display: inline-block;
+        }
+        .btn-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0;
+    font-size: 20px;
+    background-color:#ea0397;
+    border: 1px solid #ea0397;
+  }
+  .btn-circle:hover {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0;
+    font-size: 20px;
+    background-color:#0e0e0e;
+    border: 1px solid #0b0b0b;
+  }
+    
+        .cart-icon .badge {
+            position: absolute;
+            top: -15px;
+            right: -10px;
+            padding: 5px 5px;
+            border-radius: 50%;
+            background-color: #141414;
+            color: rgb(255, 255, 255);
+        }
+    </style>
 
     <!-- <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
         <h5 class="my-0 mr-md-auto font-weight-normal">

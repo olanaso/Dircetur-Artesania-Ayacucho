@@ -200,12 +200,12 @@ function generarInterfaz () {
 					</a>
 				</div>
 				<div class="col-md-6">
-					<a href="detalle-producto.html" title="Ver detalle del producto">
+					<a href="busqueda.html?nombre_producto=${artesania.nombre_es}" title="Ver detalle del producto">
 						<h4>${artesania.nombre_es}</h4>
 					</a>
 					<div class="artesano-info">
 						<img src="${artesano.foto1 || 'https://via.placeholder.com/150'}" alt="Foto del artesano" class="artesano-photo">
-						<a href="#"><span style="color:#757575">${artesano.nombres}</span></a>
+						<a href="artesano.html?id=${artesano.id}"><span style="color:#757575">${artesano.nombres}</span></a>
 					</div>
 
 

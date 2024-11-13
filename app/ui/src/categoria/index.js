@@ -19,6 +19,7 @@ hideLoading();
 
   ];
   try {
+
     await loadPartials(partials);
     import('../utils/common')
 
@@ -34,19 +35,19 @@ hideLoading();
 })();
 
 function startApp () {
-  //checkadminsession(); 
+  checkadminsession();
   setTimeout(function () {
     llenarinformacionIESTPProg();
     //marcarSubMenuSeleccionado();
   }, 500);
 
 }
-/*async function checkadminsession () {
+async function checkadminsession () {
   let result = await checkSession()
   if (result.usuario.rolid != 1) {
     location.href = "sinacceso.html"
   }
-}*/
+}
 
 
 

@@ -2,7 +2,7 @@
 
 import { loadPartials } from "../../utils/viewpartials.js";
 import { getPortada } from './api';
-import { custom, menuselec } from '../utils/common.js';
+import { custom, menuselec, generarTypeHead } from '../utils/common.js';
 
 import { ShoppingCart } from "../utils/pluginCarrito.js";
 
@@ -19,6 +19,7 @@ import { ShoppingCart } from "../utils/pluginCarrito.js";
         await loadPartials(partials);
         custom()
         menuselec()
+        generarTypeHead()
         // import('../utils/common');
 
         console.log('Las vistas parciales se han cargado correctamente!');
@@ -509,5 +510,4 @@ function loadProductosDestacados (data) {
         }
     })
 }
-
 

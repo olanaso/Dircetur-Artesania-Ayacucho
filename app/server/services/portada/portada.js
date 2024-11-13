@@ -275,7 +275,7 @@ WHERE a.id=${id}
 }
 
 async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_min = 0, precio_max = 9999999, abrev_categoria, nombre_categoria, id_categoria, id_artesano
-    , nombre_artesano, nombre_producto, orden_precio, recientes) {
+    , nombre_artesano, nombre_producto, order) {
 
     try {
         let sql = '';
@@ -309,7 +309,7 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
             where += ` AND upper(concat(b.nombres, b.apellidos)) like '%${nombre_artesano.toUpperCase()}%' `
         }
         if (nombre_producto) {
-            where += ` AND upper(concat(a.resumen_es, a.nombres_eng)) like '%${nombre_producto.toUpperCase()}%' `
+            where += ` AND upper(concat(a.resumen_es,a.nombres_es, a.nombres_eng)) like '%${nombre_producto.toUpperCase()}%' `
         }
 
 
@@ -328,22 +328,33 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
         let offset = (pagina - 1) * limit;
         //Calculo de limit offset
 
-        let orderby = ` order by a.id`
+
+
+
+        let orderby = ` `
         let opcionesordenamiento = []
-        if (orden_precio) {
-            opcionesordenamiento.push(`a.precio`)
-        }
-        if (recientes) {
-            opcionesordenamiento.push(`a.createdat`)
+
+
+        /**/
+
+        if (order) {
+
+            if (order === 'menor-precio') {
+                orderby = ` order by  a.precio ASC`;
+            } else if (order === 'mayor-precio') {
+                orderby = ` order by  a.precio desc`;
+            } else if (order === 'novedades') {
+                orderby = ` order by a.createdat desc`;
+
+            }
+            else if (order === 'relevancia') {
+                orderby = ` `;
+            }
         }
 
-        if (orden_precio == 'true' || recientes == 'true') {
-            orderby += `${opcionesordenamiento.join(",")} ASC`
-        }
 
-        if (orden_precio == 'false' || recientes == 'false') {
-            orderby += ` ${opcionesordenamiento.join(",")} DESC`
-        }
+
+
 
         let limitOffset = ` LIMIT ${limit} OFFSET ${offset}`
 
