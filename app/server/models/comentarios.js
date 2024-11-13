@@ -10,15 +10,15 @@ module.exports = sequelize.define('comentarios', {
         autoIncrement: true,
         field: 'id'
     },
-    libroid: {
+    productoid: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'libroid'
+        field: 'productoid'
     },
-    usuarioid: {
+    clienteid: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'usuarioid'
+        field: 'clienteid'
     },
     nropagina: {
         type: Sequelize.INTEGER,

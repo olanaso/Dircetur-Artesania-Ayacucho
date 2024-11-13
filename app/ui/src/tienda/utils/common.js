@@ -61,7 +61,7 @@ export function custom () {
 
     setTimeout(function (e) {
         googleTranslateElementInit();
-    }, 5000)
+    }, 2000)
 
 }
 

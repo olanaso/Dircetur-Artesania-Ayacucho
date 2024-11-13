@@ -1,20 +1,30 @@
 const sequelize = require('sequelize');
 const model = require('../models/comentarios');
+const usuario = require('../models/usuario');
+const cliente = require('../models/cliente');
+const iestp = require('../models/iestps')
+const programa = require('../models/programas')
 const {
   Op
 } = require('sequelize');
+
+
+
+model.belongsTo(cliente, {
+  foreignKey: 'clienteid', // La clave foránea debe ser clienteid para hacer referencia al modelo clientes
+  targetKey: 'id'          // El campo id de clientes se relaciona con clienteid de comentarios
+});
+
 module.exports = {
   guardar,
   actualizar,
   eliminar,
   obtener,
   listar,
-  listarAvanced,
-  listarPaginado,
   save
 };
 
-function guardar(req, res) {
+function guardar (req, res) {
 
   model.create(req.body)
     .then(object => {
@@ -25,13 +35,13 @@ function guardar(req, res) {
     })
 }
 
-function actualizar(req, res) {
+function actualizar (req, res) {
   model.findOne({
-      where: {
-        id: req.params.id
-      }
+    where: {
+      id: req.params.id
+    }
 
-    })
+  })
     .then(object => {
       object.update(req.body)
         .then(object => res.status(200).json(object))
@@ -40,7 +50,7 @@ function actualizar(req, res) {
     .catch(error => res.status(400).send(error));
 }
 
-function eliminar(req, res) {
+function eliminar (req, res) {
 
   model
     .findOne({
@@ -55,13 +65,13 @@ function eliminar(req, res) {
     .catch(error => res.status(400).send(error));
 }
 
-function obtener(req, res) {
+function obtener (req, res) {
 
   model.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
+    where: {
+      id: req.params.id
+    }
+  })
     .then(resultset => {
       res.status(200).json(resultset)
     })
@@ -69,10 +79,10 @@ function obtener(req, res) {
       res.status(400).send(error)
     })
 }
-
+/*
 function listar(req, res) {
     model.findAll({
-         where: { },
+         where: {libroid: req.query.libroid},
         })
         .then(resultset => {
             res.status(200).json(resultset)
@@ -81,8 +91,38 @@ function listar(req, res) {
             res.status(400).send(error)
         })
 }
+*/
+function listar (req, res) {
 
-async function save(req, res, next) {
+  if (!req.query.productoid) {
+    return res.status(400).send({ error: 'The productoid parameter is required' });
+  }
+
+
+  model.findAll({
+    where: { productoid: req.query.productoid },
+    attributes: {
+      exclude: ['productoid']
+    },
+    include: [
+      {
+        model: cliente,
+        attributes: ['nombres', 'apellidos'],
+
+      },
+
+
+
+    ]
+  })
+    .then(resultset => {
+      res.status(200).json(resultset)
+    })
+    .catch(error => {
+      res.status(400).send(error)
+    })
+}
+async function save (req, res, next) {
   const t = await model.sequelize.transaction();
   try {
 
@@ -93,7 +133,8 @@ async function save(req, res, next) {
     });
 
     if (object != null) {
-      let obj = { ...object.dataValues,
+      let obj = {
+        ...object.dataValues,
         ...req.body
       }
       for (const prop in obj) {
@@ -104,7 +145,8 @@ async function save(req, res, next) {
         t
       });
     } else {
-      object = await model.create({ ...req.body
+      object = await model.create({
+        ...req.body
       }, {
         t
       });

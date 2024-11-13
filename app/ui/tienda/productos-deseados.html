@@ -32,17 +32,18 @@
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 
 	<!-- Google translate -->
-	<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	<script type="text/javascript"
+		src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 	<style>
-		div > iframe.skiptranslate {
+		div>iframe.skiptranslate {
 			display: none !important;
 		}
 
 		body {
 			top: 0px !important;
 		}
-		
+
 		.product-card {
 			border: 1px solid #ccc;
 			border-radius: 10px;
@@ -139,6 +140,60 @@
 			.product-card p {
 				font-size: 14px;
 			}
+		}
+
+		.image-box {
+			width: 200px;
+			height: 100px;
+			background-color: #fff;
+			/* Fondo blanco */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			margin: 10px;
+		}
+
+		.image-box img {
+			max-width: 80%;
+			/* Ajusta el tamaño para que quepa dentro del cuadro */
+			max-height: 80%;
+		}
+
+		footer {
+			margin-top: 80px;
+			background-color: #111;
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			padding: 0px 15px 0px 15px
+		}
+
+		.tt-menu {
+			background-color: #fff;
+			border: 1px solid #ff0000;
+			max-width: 300px;
+		}
+
+		.tt-suggestion {
+			padding: 10px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+		}
+
+		.tt-suggestion:hover {
+			background-color: #ffe5e5;
+		}
+
+		.tt-suggestion img {
+			max-width: 40px;
+			margin-right: 10px;
+		}
+
+		.tt-suggestion .book-title {
+			color: #ff0000;
 		}
 	</style>
 
