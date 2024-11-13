@@ -1,16 +1,13 @@
 // File: app/ui/src/lista-artesanos/api.js
 import { baseUrl } from "../../utils/config";
 
-export async function loginCliente(usuario, clave) {
+export async function loginCliente(email, clave) {
   const settings = {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: new URLSearchParams({
-      usuario: usuario,
-      clave: clave,
-    }),
+    body: new URLSearchParams({ email, clave}),
   };
 
   try {

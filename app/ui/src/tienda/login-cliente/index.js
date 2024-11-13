@@ -39,19 +39,15 @@ function startApp () {
 
         loader.style.display = "block";
 
-
         // Obtener los valores de los campos de entrada
         const email = emailInput.value;
         const password = passwordInput.value;
 
-        console.log('Email:', email);
-        console.log('Password:', password);
-
         const resp = await loginCliente(email, password)
 
-        console.log(resp)
+        // console.log(resp);
 
-        if (resp.status === 200) {
+        if (resp.data) {
             loader.style.display = "none";
             localStorage.setItem('token', resp.token);
             localStorage.setItem('usuario', resp.usuario);
@@ -59,11 +55,8 @@ function startApp () {
             window.location.href = '/tienda/index.html';
         } else {
             loader.style.display = "none";
-            alert('Usuario o contraseña incorrecta');
+            alert(resp.error);
         }
 
     });
-
-    console.log('Iniciando la aplicación...');
-
 }

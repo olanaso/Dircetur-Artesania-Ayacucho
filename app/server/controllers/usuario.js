@@ -59,30 +59,46 @@ async function actualizarContraseniaCiente (req, res) {
 
 async function loginCliente (req, res) {
     try {
-        const { clave } = req.body
-        //encuentra el cliente que coincida con clave y contrasenia
+        const { email, clave } = req.body;
+
+        //encuentra el cliente que coincida con el usuario
         const user = await usuario.findOne({
             where:
-                { usuario: req.body.usuario, clave }
+                { correo: email }
         })
+
+        console.log({ user });
+
         //validaciones de rol y cliente existente
         if (!user) {
-            return res.status(400).send({ error: "Usuario o contraseña incorrectos" })
+            return res.status(400).send({ error: "El correo o contraseña incorrectos" })
         }
+
+        const claveCorrecta = bcrypt.compareSync(clave, user.clave);
+        console.log({ claveCorrecta });
+
+        if (!claveCorrecta) {
+            return res.status(400).send({ error: "El correo o contraseña incorrectos" })
+        }
+
         if (user.rolid !== 3) {
             return res.status(400).send({ error: "Solo puedes ingresar con una cuenta de cliente" })
         }
+        
         const data = {
             token: jwt.sign({ client: user }, '2C44-4D44-WppQ38S', { expiresIn: '1d' }),
             id: user.id,
             idCliente: await cliente.findClienteIdByUsuarioId(user.id)
         }
+
         return res.status(200).send({ data })
+
     } catch (e) {
         console.error(e)
         handleHttpError(res, "Error al iniciar sesion", 500)
     }
 }
+
 function guardar (req, res) {
 
     console.log('El request es:', req.body);
@@ -344,8 +360,6 @@ async function cambiarContrasenia (req, res, next) {
 
 
 async function loginpersonal (req, res) {
-    console.log({ login: req.body })
-
     try {
 
         let usuarioDB = await model.findOne({
@@ -360,14 +374,11 @@ async function loginpersonal (req, res) {
             where: { id: usuarioDB.rolid }
         });
 
-        console.log(roles)
 
         if (!usuarioDB) {
             return res.status(400).json({ ok: false, message: "El usuario no existe" });
         }
 
-        console.log(usuarioDB.dataValues)
-        console.log(req.body.clave)
         // let claveCorrecta = usuarioDB.dataValues.clave == req.body.clave;
         let claveCorrecta = bcrypt.compareSync(req.body.clave, usuarioDB.dataValues.clave);
 
