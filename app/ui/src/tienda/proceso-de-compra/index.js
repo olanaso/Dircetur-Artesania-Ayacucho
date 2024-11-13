@@ -325,7 +325,6 @@ var ARTESANO = null;
 async function setArtesano (artesano_id) {
 
     $('#link_artesano').attr('href', 'artesano.html?id=' + artesano_id)
-    debugger
     ARTESANO = await obtenerArtesanoById(artesano_id)
 
     console.log(ARTESANO)

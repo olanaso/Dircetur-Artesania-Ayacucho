@@ -1,18 +1,23 @@
 // File: app/ui/src/lista-artesanos/api.js
-import { baseUrl } from '../../utils/config';
+import { baseUrl } from "../../utils/config";
 
-export async function listarArtesanosPorCategoriaArtesania () {
-    try {
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        const response = await fetch(`${baseUrl}/v1/artesanos/categorias`, requestOptions);
-        const result = await response.json()
-        return result; // Return the data property from the response
-    } catch (error) {
-        console.error('Error:', error);
-    }
+export async function loginCliente(usuario, clave) {
+  const settings = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      usuario: usuario,
+      clave: clave,
+    }),
+  };
+
+  try {
+    const response = await fetch(baseUrl + "/v1/login-clientes", settings);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
