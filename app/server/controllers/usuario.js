@@ -19,6 +19,8 @@ const { tokenSign } = require('../utils/handleJwt');
 const { handleHttpError } = require('../utils/handleError');
 const { matchedData } = require('express-validator');
 const { emailRecuperarContraseña } = require("../services/mails/mails");
+const bcrypt = require('bcryptjs');
+const { generatePassword } = require('../utils/generatePassword');
 
 module.exports = {
     guardar,
@@ -83,7 +85,7 @@ async function loginCliente (req, res) {
 }
 function guardar (req, res) {
 
-
+    console.log('El request es:', req.body);
     //req.body.ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     //req.body.equipo=req.header('user-agent');
 
@@ -253,6 +255,7 @@ function listar (req, res) {
 }*/
 /*Guarda los datos generales de un predio*/
 async function save (req, res, next) {
+    console.log('usuario_save', req.body);
     const t = await model.sequelize.transaction();
     try {
         delete req.body.usuario;
@@ -303,19 +306,30 @@ async function save (req, res, next) {
 
 
 async function cambiarContrasenia (req, res, next) {
+    const { dni, clave_nueva, clave_ant } = req.body;
+    console.log({body: req.body});
 
     const t = await model.sequelize.transaction();
     try {
 
         let object = await model.findOne({
             where: {
-                usuario: req.body.dni ? req.body.dni : 0
+                usuario: dni ? dni : 0
             }
         });
+        console.log({clave: object.clave});
 
-        if (object.clave == req.body.clave_ant) {
-            object.clave = req.body.clave_nueva;
+        const esClaveAnteriorCorrecta = bcrypt.compareSync(clave_ant, object.clave);
+        console.log(object);
+
+        console.log({esClaveAnteriorCorrecta});
+
+        if (esClaveAnteriorCorrecta) {
+            console.log({claveNueva: clave_nueva});
+            object.clave = bcrypt.hashSync(clave_nueva, 10);
+            // console.log({claveNueva: object.clave});
             await object.save({ t });
+
         } else {
             object = { ischanged: false, msj: "La contraseña anterior no es correcta" }
         }
@@ -330,9 +344,9 @@ async function cambiarContrasenia (req, res, next) {
 
 
 async function loginpersonal (req, res) {
+    console.log({ login: req.body })
 
     try {
-        console.log(req.body)
 
         let usuarioDB = await model.findOne({
             where: {
@@ -354,7 +368,9 @@ async function loginpersonal (req, res) {
 
         console.log(usuarioDB.dataValues)
         console.log(req.body.clave)
-        let claveCorrecta = usuarioDB.dataValues.clave == req.body.clave;
+        // let claveCorrecta = usuarioDB.dataValues.clave == req.body.clave;
+        let claveCorrecta = bcrypt.compareSync(req.body.clave, usuarioDB.dataValues.clave);
+
         let token = null;
 
         if (!claveCorrecta) {
@@ -501,28 +517,62 @@ async function verificarToken (req, res) {
 
 async function recuperarcuenta (req, res) {
     try {
-        let usuarioDB = await model.findOne({ where: { correo: req.body.correo } });
+        // Validar que se proporcione un correo
+        const { correo } = req.body;
+        if (!correo) {
+            return res.status(400).json({ 
+                isRecuperado: false, 
+                message: "El correo es requerido" 
+            });
+        }
+
+        // Buscar usuario
+        const usuarioDB = await model.findOne({ 
+            where: { correo: correo.toLowerCase().trim() } 
+        });
 
         if (!usuarioDB) {
-            return res.status(400).json({ isRecuperado: false, message: "El correo ingresado no se ecuentra registrado" });
+            return res.status(400).json({ 
+                isRecuperado: false, 
+                message: "El correo ingresado no se encuentra registrado" 
+            });
         }
-        /*
-            Generar clave
-        */
-        let result = await enviarcorreo(usuarioDB.dataValues)
 
-        return res.status(200).send(result);
+        // Generar nueva contraseña
+        const nuevaClave = generatePassword();
+
+         // Hashear la nueva contraseña
+        const salt = await bcrypt.genSalt(10);
+        const claveHasheada = await bcrypt.hash(nuevaClave, salt);
+        
+        // Actualizar la contraseña en la base de datos
+        await usuarioDB.update({ 
+            clave: claveHasheada,
+        });
+
+        console.log({ nuevaClave });
+        console.log({ usuarioDB });
+
+        const resultadoCorreo = await enviarcorreo(usuarioDB.dataValues, nuevaClave);
+        console.log({ resultadoCorreo });
+
+        // Verificar si el correo se envió correctamente
+        if (!resultadoCorreo.isRecuperado) {
+            throw new Error('Error al enviar el correo');
+        }
+
+        return res.status(200).send(resultadoCorreo);
 
     } catch (err) {
         return res.status(500).json({ ok: false, err });
     }
 }
 
-async function enviarcorreo (usuario) {
+async function enviarcorreo (usuario, nuevaClave) {
     try {
         emailRecuperarContraseña({
             correos: usuario.correo, nombreUsuario: usuario.nombre_completo
-            , usuarioArtesano: usuario.usuario, contrasenaArtesano: usuario.clave
+            , usuarioArtesano: usuario.usuario, contrasenaArtesano: nuevaClave
         })
 
         return { isRecuperado: true }

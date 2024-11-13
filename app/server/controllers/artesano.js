@@ -8,7 +8,7 @@ const categoria = require('../models/categoria')
 const product = require('../models/producto')
 const { handleHttpError } = require("../utils/handleError");
 const { emailRegistroArtesano } = require("../services/mails/mails");
-
+const bcrypt = require('bcryptjs');
 
 
 module.exports = {
@@ -352,7 +352,6 @@ async function saveUsuarioArtesano (req, res, next) {
     const t = await artesanoModel.sequelize.transaction();
     try {
         const { usuario, artesano } = req.body;
-        console.log('usuario', usuario)
 
         //Guardar usuario 
         let modelArtesano = artesano;
@@ -374,6 +373,8 @@ async function saveUsuarioArtesano (req, res, next) {
 
         } else {  //registro de nuevo usuario
             // usuario.id = artesano.id;
+            const salt = bcrypt.genSaltSync();
+            usuario.clave = bcrypt.hashSync(usuario.clave, salt);
             usuario_result = await artesanos.create({ ...usuario }, { transaction: t });
 
 
@@ -426,6 +427,7 @@ async function saveUsuarioArtesano (req, res, next) {
 async function save (req, res, next) {
 
     const t = await artesanoModel.sequelize.transaction();
+
     try {
         let object = await artesanoModel.findOne({
             where: {
