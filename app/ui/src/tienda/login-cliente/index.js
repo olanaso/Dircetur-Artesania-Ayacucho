@@ -31,25 +31,10 @@ import { marked } from 'marked';
 function startApp () {
 
 
-    callMarkdown()
+
 }
 
 function callMarkdown () {
-    fetch("./info/politicas-privacidad.md") // Ruta correcta al archivo markdown
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al cargar el archivo Markdown.');
-            }
-            return response.text();
-        })
-        .then(text => {
-            // Convertir el markdown a HTML usando la librería marked
-            const htmlContent = marked(text);
-            // Mostrar el contenido en el contenedor con id 'markdown-content'
-            document.getElementById("markdown-content").innerHTML = htmlContent;
-        })
-        .catch(error => {
-            console.error('Error al cargar el archivo markdown:', error);
-        });
+
 
 }

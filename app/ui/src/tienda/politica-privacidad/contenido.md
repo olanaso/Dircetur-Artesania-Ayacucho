@@ -12,5 +12,5 @@ Este es un ejemplo de cómo mostrar un archivo Markdown en una página web con *
 
 ```html
 <div class="container">
-    <h1>Este es un ejemplo de código HTML</h1>
+    <h1>Este es un ejemplo de código HTML  </h1>
 </div>
