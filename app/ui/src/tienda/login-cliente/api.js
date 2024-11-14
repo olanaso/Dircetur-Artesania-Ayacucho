@@ -18,3 +18,39 @@ export async function loginCliente(email, clave) {
     console.error("Error:", error);
   }
 }
+
+export const registerCliente = async (data) => {
+  const settings = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+
+  try {
+    const response = await fetch(baseUrl + "/cliente", settings);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+export const recuperarCuenta = async (email) => {
+  const settings = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  };
+
+  try {
+    const response = await fetch(baseUrl + "/recuperarcuenta", settings);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}

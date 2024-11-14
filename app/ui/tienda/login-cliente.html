@@ -199,14 +199,14 @@
       }
 
       /* Formulaio de inicio de sesión */
-      #loginForm {
+      .client-form {
         background-color: #f8f9fa;
         padding: 20px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
 
-      #loginForm h3 {
+      .client-form h3 {
         color: #343a40;
         margin-bottom: 20px;
       }
@@ -238,9 +238,31 @@
 				gap: 12px;
       }
 
+			.button-group {
+				display: flex;
+				justify-content: space-between;
+			}
+
       .btn-primary:hover {
         background-color: #c906c5;
         border-color: #c906c5;
+      }
+
+      .btn-line {
+        color: #c906c5;
+				cursor: pointer;
+        font-size: 16px;
+				font-weight: 500;
+        padding: 10px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .btn-line:hover {
+        color: #a808a6;
+				text-decoration: underline;
       }
 
       footer {
@@ -283,7 +305,10 @@
               <div class="row">
                 <div class="heading-content col-md-12">
                   <p><a href="index.html">Inicio</a> / <em> Acceso </em></p>
-                  <h2>Inicio de <em>sessión</em></h2>
+
+									<div id="principalTitle">
+										<h2>Inicio de <em>sessión</em></h2>
+									</div>
                 </div>
               </div>
             </div>
@@ -308,9 +333,9 @@
             animation-duration: 1s;
           "
         >
-          <form id="loginForm" onsubmit="return validateForm()">
+          <form id="loginForm" class="client-form">
             <h3 style="text-align: center; color: #f709f3">
-              Formulario de inicio de sesión
+              Inicio de sesión
             </h3>
 
             <!-- Email field -->
@@ -344,6 +369,11 @@
               <div id="passwordError" style="color: red; font-size: 14px"></div>
             </div>
 
+						<div class="button-group">
+								<span type="button" class="btn-line crear-cuenta">Crear cuenta</span>
+								<span type="button" class="btn-line recuperar-contra">Recuperar contraseña</span>
+						</div>
+
             <!-- Submit button -->
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block">
@@ -359,40 +389,130 @@
             </div>
           </form>
 
-          <script>
-            function validateForm() {
-              const email = document.getElementById("correo").value;
-              const password = document.getElementById("password").value;
-              const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-              let isValid = true;
+					<form id="registerForm" class="client-form" style="display: none;">
+            <h3 style="text-align: center; color: #f709f3">
+              Registro
+            </h3>
 
-              const emailError = document.getElementById("emailError");
-              const passwordError = document.getElementById("passwordError");
+            <!-- Email field -->
+            <div class="form-group">
+              <label for="correo">Correo</label>
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                id="correoRegistro"
+                placeholder="Ingrese su correo"
+                required
+              />
+              <!-- Email error message -->
+              <div id="emailErrorRegistro" style="color: red; font-size: 14px"></div>
+            </div>
 
-              if (!emailPattern.test(email)) {
-                emailError.textContent =
-                  "Por favor, ingrese un correo electrónico válido.";
-                isValid = false;
-              } else {
-                emailError.textContent = "";
-              }
+						<div class="button-group">
+								<span type="button" class="btn-line iniciar-sesion">Iniciar sesión</span>
+								<span type="button" class="btn-line recuperar-contra">Recuperar contraseña</span>
+						</div>
 
-              if (password.length < 6) {
-                passwordError.textContent =
-                  "La contraseña debe tener al menos 6 caracteres.";
-                isValid = false;
-              } else {
-                passwordError.textContent = "";
-              }
+            <!-- Submit button -->
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">
+                Registrarse
+								<!-- Loader -->
+								<div id="loaderRegistro" style="display: none; text-align: center">
+									<i
+										class="fas fa-spinner fa-spin"
+										style="font-size: 24px;"
+									></i>
+								</div>
+              </button>
+            </div>
+          </form>
 
-              return isValid;
-            }
-          </script>
+          <form id="recoveryForm" class="client-form" style="display: none;">
+            <h3 style="text-align: center; color: #f709f3">
+              Recuperación de contraseña
+            </h3>
+
+            <!-- Email field -->
+            <div class="form-group">
+              <label for="correo">Correo</label>
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                id="correoRecuperar"
+                placeholder="Ingrese su correo"
+                required
+              />
+              <!-- Email error message -->
+              <div id="emailErrorRecuperar" style="color: red; font-size: 14px"></div>
+            </div>
+
+						<div class="button-group">
+							<span type="button" class="btn-line crear-cuenta">Crear cuenta</span>
+							<span type="button" class="btn-line iniciar-sesion">Iniciar sesión</span>
+						</div>
+
+            <!-- Submit button -->
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">
+                Recuperar contraseña
+								<!-- Loader -->
+								<div id="loaderRecuperar" style="display: none; text-align: center">
+									<i
+										class="fas fa-spinner fa-spin"
+										style="font-size: 24px;"
+									></i>
+								</div>
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
 
     <div id="footer"></div>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				const loginButtons = document.querySelectorAll(".iniciar-sesion");
+				const registerButtons = document.querySelectorAll(".crear-cuenta");
+				const recoveryButtons = document.querySelectorAll(".recuperar-contra");
+
+				const principalTitle = document.getElementById("principalTitle");
+
+				loginButtons.forEach((button) => {
+					button.addEventListener("click", function () {
+						principalTitle.innerHTML = "<h2>Inicio de <em>sessión</em></h2>";
+
+						document.getElementById("loginForm").style.display = "block";
+						document.getElementById("registerForm").style.display = "none";
+						document.getElementById("recoveryForm").style.display = "none";
+					});
+				});
+
+				registerButtons.forEach((button) => {
+					button.addEventListener("click", function () {
+						principalTitle.innerHTML = "<h2>Registro de <em>cliente</em></h2>";
+
+						document.getElementById("loginForm").style.display = "none";
+						document.getElementById("registerForm").style.display = "block";
+						document.getElementById("recoveryForm").style.display = "none";
+					});
+				});
+
+				recoveryButtons.forEach((button) => {
+					button.addEventListener("click", function () {
+						principalTitle.innerHTML = "<h2>Recuperación de <em>contraseña</em></h2>";
+
+						document.getElementById("loginForm").style.display = "none";
+						document.getElementById("registerForm").style.display = "none";
+						document.getElementById("recoveryForm").style.display = "block";
+					});
+				});
+			});
+		</script>
 
     <script src="assets_tienda/js/jquery-1.11.0.min.js"></script>
 
