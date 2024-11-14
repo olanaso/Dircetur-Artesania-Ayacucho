@@ -544,7 +544,7 @@ function cargarComboAertesanos (list) {
 
 function loadProductosDestacados (data) {
 
-    debugger
+    // debugger
 
     let html = ` `
     for (let item of data) {
