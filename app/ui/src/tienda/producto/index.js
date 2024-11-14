@@ -1,7 +1,7 @@
 
 
 import { loadPartials } from "../../utils/viewpartials.js";
-import { getPortadaBusqueda, busquedaProductos } from './api';
+import { getPortadaBusqueda, busquedaProductos, listarComentarios } from './api';
 import { custom } from '../utils/common.js';
 import { obtenerProducto } from "../producto/api.js";
 
@@ -33,8 +33,63 @@ function startApp () {
     // rellenarFormulario();
     // realizarBusqueda();
     obtenerUrlProducto()
+}
 
 
+const obtenerComentarios = async (id) => {
+    const commentsList = document.querySelector('.comments-list');
+
+    try {
+        commentsList.innerHTML = '';
+
+        const comentarios = await listarComentarios(id);
+        
+        if (!comentarios || comentarios.length === 0) {
+            commentsList.innerHTML = '<div style="text-align: center; padding: 20px; color: #666; font-size: 16px; font-style: italic; border: 1px dashed #ccc; border-radius: 8px; margin: 10px 0;">No hay comentarios disponibles para este producto.</div>';
+            return;
+        }
+
+        const comentariosOrdenados = comentarios.sort((a, b) => 
+            new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        
+        const fragment = document.createDocumentFragment();
+
+        comentariosOrdenados.forEach(comentario => {
+            const newCommentElement = document.createElement('div');
+            newCommentElement.classList.add('comment', 'fadeInUp');
+
+            const fecha = new Date(comentario.createdAt);
+            const fechaFormateada = fecha.toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            const iniciales = (comentario.cliente.nombres.charAt(0) + comentario.cliente.apellidos.charAt(0)).toUpperCase();
+
+            newCommentElement.innerHTML = `
+                <div class="comment-avatar">
+                    <div class='avatar-initial'>${iniciales}</div>
+                </div>
+                <div class="comment-content">
+                    <div class="comment-header">
+                        <h3 class='comment-author'>${comentario.cliente.nombres} ${comentario.cliente.apellidos}</h3>
+                        <span class='comment-date'>${fechaFormateada}</span>
+                    </div>
+                    <p class='comment-text'>${comentario.comentario}</p>
+                </div>
+            `;
+
+            fragment.appendChild(newCommentElement);
+        });
+
+        commentsList.appendChild(fragment);
+
+    } catch (error) {
+        console.error('Error al cargar comentarios:', error);
+        commentsList.innerHTML = '<div class="error-message">Ocurrió un error al cargar los comentarios.</div>';
+    }
 }
 
 
@@ -47,7 +102,7 @@ function obtenerUrlProducto () {
     // Obtener el valor del parámetro 'data'
     const data = urlParams.get('producto');
 
-    console.log(data)
+    console.log({data})
 
     // Decodificar y convertir el objeto JSON nuevamente
     if (data) {
@@ -57,6 +112,7 @@ function obtenerUrlProducto () {
         //    debugger
         console.log(artesaniaenviada)
         infoProductoById(artesaniaenviada.artesania.id)
+        obtenerComentarios(artesaniaenviada.artesania.id)
 
         $('#btnagregarcarrito').attr('href', `carrito-de-compra.html?producto=${artesaniaenviada.artesania.url_carrito}`)
         //guardarArtesania(artesaniaenviada.artesania.id);

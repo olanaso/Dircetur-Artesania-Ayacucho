@@ -51,3 +51,13 @@ export async function obtenerProducto(idprod) {
         console.error('Error:', error);
     }
 }
+
+export async function listarComentarios(idprod) {
+    try {
+        const response = await fetch(`${baseUrl}/listaComentarios?productoid=${idprod}`, { method: 'GET' });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
