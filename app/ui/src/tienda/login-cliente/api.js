@@ -13,6 +13,7 @@ export async function loginCliente(email, clave) {
   try {
     const response = await fetch(baseUrl + "/v1/login-clientes", settings);
     const data = await response.json();
+    console.log({dataApiRespLogin: data});
     return data;
   } catch (error) {
     console.error("Error:", error);
@@ -29,8 +30,10 @@ export const registerCliente = async (data) => {
   };
 
   try {
-    const response = await fetch(baseUrl + "/cliente", settings);
+    const response = await fetch(baseUrl + "/cliente/tienda/save", settings);
+
     const data = await response.json();
+    console.log({dataApiResp: data});
     return data;
   } catch (error) {
     console.error("Error:", error);
@@ -43,7 +46,7 @@ export const recuperarCuenta = async (email) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email }),
+    body: JSON.stringify({ correo: email }),
   };
 
   try {

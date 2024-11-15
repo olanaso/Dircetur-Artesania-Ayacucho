@@ -285,6 +285,10 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
         transition: background-color 0.3s ease;
       }
 
@@ -732,6 +736,12 @@
             ></textarea>
             <button type="submit" class="comment-submit">
               Enviar Comentario
+              <div
+                  id="loaderComentario"
+                  style="display: none; text-align: center"
+                >
+                  <i class="fas fa-spinner fa-spin" style="font-size: 24px"></i>
+                </div>
             </button>
           </form>
 

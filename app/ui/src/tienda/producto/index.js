@@ -66,7 +66,10 @@ const obtenerComentarios = async (id) => {
                 day: 'numeric'
             });
 
-            const iniciales = (comentario.cliente.nombres.charAt(0) + comentario.cliente.apellidos.charAt(0)).toUpperCase();
+            const nombres = comentario.cliente.nombres || '';
+            const apellidos = comentario.cliente.apellidos || '';
+
+            const iniciales = (nombres.charAt(0) + apellidos.charAt(0)).toUpperCase();
 
             newCommentElement.innerHTML = `
                 <div class="comment-avatar">
@@ -74,7 +77,7 @@ const obtenerComentarios = async (id) => {
                 </div>
                 <div class="comment-content">
                     <div class="comment-header">
-                        <h3 class='comment-author'>${comentario.cliente.nombres} ${comentario.cliente.apellidos}</h3>
+                        <h3 class='comment-author'>${nombres} ${apellidos}</h3>
                         <span class='comment-date'>${fechaFormateada}</span>
                     </div>
                     <p class='comment-text'>${comentario.comentario}</p>
@@ -98,9 +101,12 @@ const agregarComentario = async (artesaniaId) => {
     const newCommentTextarea = document.getElementById('new-comment');
     const commentsList = document.querySelector('.comments-list');
 
+    const loaderComentario = document.getElementById('loaderComentario');
 
     commentForm.addEventListener('submit', async (event) => {
         event.preventDefault();
+
+        loaderComentario.style.display = 'block';
 
         const idCliente = localStorage.getItem('idCliente')
 
@@ -147,7 +153,10 @@ const agregarComentario = async (artesaniaId) => {
                 day: 'numeric'
             });
 
-            const iniciales = (data.cliente.nombres.charAt(0) + data.cliente.apellidos.charAt(0)).toUpperCase();
+            const nombres = data.cliente.nombres || '';
+            const apellidos = data.cliente.apellidos || '';
+
+            const iniciales = (nombres.charAt(0) + apellidos.charAt(0)).toUpperCase();
 
             const newCommentElement = document.createElement('div');
             newCommentElement.classList.add('comment', 'fadeInUp');
@@ -158,7 +167,7 @@ const agregarComentario = async (artesaniaId) => {
                 </div>
                 <div class="comment-content">
                     <div class="comment-header">
-                        <h3 class='comment-author'>${data.cliente.nombres} ${data.cliente.apellidos}</h3>
+                        <h3 class='comment-author'>${nombres} ${apellidos}</h3>
                         <span class='comment-date'>${fechaFormateada}</span>
                     </div>
                     <p class='comment-text'>${data.comentario}</p>
@@ -170,6 +179,8 @@ const agregarComentario = async (artesaniaId) => {
         } catch (error) {
             console.error('Error al enviar comentario:', error);
             alert('Ocurrió un error al enviar el comentario.');
+        } finally {
+            loaderComentario.style.display = 'none';
         }
     });
     

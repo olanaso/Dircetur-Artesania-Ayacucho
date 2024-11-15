@@ -57,54 +57,89 @@ const login = () => {
 
         const resp = await loginCliente(email, password)
 
-        console.log({respLogin: resp});
-
-        if (resp) {
+        if (resp.error) {
+            loader.style.display = "none";
+            console.log('Error login:', resp.error);
+            alert(resp.error);
+        } else {
             loader.style.display = "none";
             localStorage.setItem('token', resp.token);
             localStorage.setItem('id', resp.id);
             localStorage.setItem('idCliente', resp.idCliente);
             window.location.href = '/tienda/index.html';
-        } else {
-            loader.style.display = "none";
-            console.log('Error login:', resp.error);
-            alert(resp.error);
         }
-
     });
 }
 
 const register = () => {
-    const emailInput = document.getElementById('correoRegistro');
-    const loaderRegistro = document.querySelector('#loaderRegistro');
-    const emailError = document.getElementById('emailErrorRegistro');
+    const loaderRegistro = document.getElementById('loaderRegistro');
 
-    const registerForm = document.getElementById('registerForm');
+    document.getElementById('registerForm').addEventListener('submit', async (event) => {
+        event.preventDefault(); // Evitar el envío tradicional del formulario
 
-    registerForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const isValid = validateRegisterForm();
-
-        if (!isValid) {
-            return;
-        }
-
+        // Mostrar el loader
         loaderRegistro.style.display = 'block';
 
-        const email = emailInput.value;
+        // Obtener los valores del formulario
+        const dni = document.getElementById('dni').value;
+        const nombres = document.getElementById('nombres').value;
+        const apellidos = document.getElementById('apellidos').value;
+        const correo = document.getElementById('correoRegistro').value;
+        const telefono = document.getElementById('countryCode').value + document.getElementById('telefono').value;
+        const pais = document.getElementById('pais').value;
+        const region = document.getElementById('region').value;
+        const ciudad = document.getElementById('ciudad').value;
+        const direccion_envio = document.getElementById('direccion_envio').value;
 
-        const data = await registerCliente({ email });
+        // Construir el objeto de datos en el formato solicitado
+        const datos = {
+            datosusuario: {
+                usuario: dni,
+                nombre: nombres,
+                apellidos: apellidos,
+                nombre_completo: `${nombres} ${apellidos}`,
+                correo: correo,
+                createdat: new Date().toISOString(), // Usar la fecha actual
+                updatedat: new Date().toISOString(),
+            },
+                datoscliente: {
+                nombre: nombres,
+                apellidos: apellidos,
+                correo: correo,
+                telefono: telefono,
+                direccion: direccion_envio,
+                pais: pais,
+                region: region,
+                ciudad: ciudad,
+                tipo_documento: 'DNI',
+                numero_documento: dni,
+                direccion_envio: direccion_envio,
+                foto_perfil: '' // Este campo está vacío según el formato dado
+            }
+        };
 
-        loaderRegistro.style.display = 'none';
+        console.log({datos});
 
-        if (data.success) {
-            // Redirigir o realizar alguna acción adicional
-            window.location.href = '/tienda/index.html';
-        } else {
-            emailError.textContent = data.message || 'Error en el registro';
+
+        try {
+            const data = await registerCliente(datos);
+
+            if (data.error) {
+                throw new Error(data.error || 'Error en el registro');
+            }
+
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            alert('Registro exitoso, inicie sesión para continuar.');
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert(error.message);
+        } finally {
+            loaderRegistro.style.display = 'none';
         }
     });
+
 }
 
 const recovery = () => {
@@ -132,7 +167,9 @@ const recovery = () => {
         const result = await recuperarCuenta(email);
         loaderRecuperar.style.display = "none";
 
-        if (response.ok) {
+        if (result.isRecuperado) {
+            document.getElementById('recoveryForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
             alert("Se ha enviado un correo para recuperar su contraseña.");
         } else {
             emailError.textContent = result.message || "Error al recuperar la contraseña.";

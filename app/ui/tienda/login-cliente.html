@@ -199,6 +199,16 @@
       }
 
       /* Formulaio de inicio de sesión */
+      .form-container {
+        display: block;
+        padding: 30px;
+        margin: auto auto;
+        border: #c5c5c5 1px solid;
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+        margin-top: 40px;
+      }
+
       .client-form {
         background-color: #f8f9fa;
         padding: 20px;
@@ -232,16 +242,16 @@
         border-color: #f709f3;
         font-size: 16px;
         padding: 10px 20px;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				gap: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
       }
 
-			.button-group {
-				display: flex;
-				justify-content: space-between;
-			}
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+      }
 
       .btn-primary:hover {
         background-color: #c906c5;
@@ -250,9 +260,9 @@
 
       .btn-line {
         color: #c906c5;
-				cursor: pointer;
+        cursor: pointer;
         font-size: 16px;
-				font-weight: 500;
+        font-weight: 500;
         padding: 10px 0px;
         display: flex;
         justify-content: center;
@@ -262,7 +272,7 @@
 
       .btn-line:hover {
         color: #a808a6;
-				text-decoration: underline;
+        text-decoration: underline;
       }
 
       footer {
@@ -306,9 +316,9 @@
                 <div class="heading-content col-md-12">
                   <p><a href="index.html">Inicio</a> / <em> Acceso </em></p>
 
-									<div id="principalTitle">
-										<h2>Inicio de <em>sessión</em></h2>
-									</div>
+                  <div id="principalTitle">
+                    <h2>Inicio de <em>sessión</em></h2>
+                  </div>
                 </div>
               </div>
             </div>
@@ -333,10 +343,8 @@
             animation-duration: 1s;
           "
         >
-          <form id="loginForm" class="client-form">
-            <h3 style="text-align: center; color: #f709f3">
-              Inicio de sesión
-            </h3>
+          <form id="loginForm" class="client-form form-container">
+            <h3 style="text-align: center; color: #f709f3">Inicio de sesión</h3>
 
             <!-- Email field -->
             <div class="form-group">
@@ -369,67 +377,459 @@
               <div id="passwordError" style="color: red; font-size: 14px"></div>
             </div>
 
-						<div class="button-group">
-								<span type="button" class="btn-line crear-cuenta">Crear cuenta</span>
-								<span type="button" class="btn-line recuperar-contra">Recuperar contraseña</span>
-						</div>
+            <div class="button-group">
+              <span type="button" class="btn-line crear-cuenta"
+                >Crear cuenta</span
+              >
+              <span type="button" class="btn-line recuperar-contra"
+                >Recuperar contraseña</span
+              >
+            </div>
 
             <!-- Submit button -->
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block">
                 Iniciar sesión
-								<!-- Loader -->
-								<div id="loader" style="display: none; text-align: center">
-									<i
-										class="fas fa-spinner fa-spin"
-										style="font-size: 24px;"
-									></i>
-								</div>
+                <!-- Loader -->
+                <div id="loader" style="display: none; text-align: center">
+                  <i class="fas fa-spinner fa-spin" style="font-size: 24px"></i>
+                </div>
               </button>
             </div>
           </form>
 
-					<form id="registerForm" class="client-form" style="display: none;">
+          <form
+            id="registerForm"
+            class="client-form form-container"
+            style="display: none"
+          >
             <h3 style="text-align: center; color: #f709f3">
-              Registro
+              Completar información de registro
             </h3>
+            <p class="card-text">Solicitamos que complete todo el formulario</p>
+
+            <!-- Bloque 1: Datos del Cliente -->
+            <h6 class="section-title">Datos del Cliente</h6>
+            <hr />
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="dni">Documento de Identidad (Person ID)</label> 
+                <input
+                  type="text"
+                  class="form-control"
+                  id="dni"
+                  placeholder="Ingrese su DNI 8 digitos numericos"
+                  minlength="8"
+                  maxlength="8"
+                  required
+                  pattern="\d\d\d\d\d\d\d\d"
+                  title="Ingrese formato de Identidad"
+                />
+              </div>
+              <div class="form-group col-md-1 align-self-end">
+                <button
+                  id="btn_buscar_dni"
+                  type="button"
+                  class="btn btn-secondary btn-block"
+                >
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="nombres">Nombres</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombres"
+                  placeholder="Nombres"
+                  value=""
+                  required
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="apellidos">Apellidos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="apellidos"
+                  placeholder="Apellidos"
+                  value=""
+                  required
+                />
+              </div>
+            </div>
 
             <!-- Email field -->
             <div class="form-group">
               <label for="correo">Correo</label>
               <input
                 type="email"
-                name="email"
                 class="form-control"
                 id="correoRegistro"
-                placeholder="Ingrese su correo"
+                placeholder="Ingrese correo"
+                value=""
                 required
               />
-              <!-- Email error message -->
-              <div id="emailErrorRegistro" style="color: red; font-size: 14px"></div>
             </div>
 
-						<div class="button-group">
-								<span type="button" class="btn-line iniciar-sesion">Iniciar sesión</span>
-								<span type="button" class="btn-line recuperar-contra">Recuperar contraseña</span>
-						</div>
+            <!-- Name and Surname fields -->
+
+            <!-- Phone field -->
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="countryCode">Código País</label>
+                <select id="countryCode" class="form-control" required>
+                  <option value="+51">+51 (Perú)</option>
+                  <option value="+93">+93 (Afganistán)</option>
+                  <option value="+355">+355 (Albania)</option>
+                  <option value="+213">+213 (Argelia)</option>
+                  <option value="+1-684">+1-684 (Samoa Americana)</option>
+                  <option value="+376">+376 (Andorra)</option>
+                  <option value="+244">+244 (Angola)</option>
+                  <option value="+1-264">+1-264 (Anguila)</option>
+                  <option value="+672">+672 (Antártida)</option>
+                  <option value="+1-268">+1-268 (Antigua y Barbuda)</option>
+                  <option value="+54">+54 (Argentina)</option>
+                  <option value="+374">+374 (Armenia)</option>
+                  <option value="+297">+297 (Aruba)</option>
+                  <option value="+61">+61 (Australia)</option>
+                  <option value="+43">+43 (Austria)</option>
+                  <option value="+994">+994 (Azerbaiyán)</option>
+                  <option value="+1-242">+1-242 (Bahamas)</option>
+                  <option value="+973">+973 (Baréin)</option>
+                  <option value="+880">+880 (Bangladés)</option>
+                  <option value="+1-246">+1-246 (Barbados)</option>
+                  <option value="+375">+375 (Bielorrusia)</option>
+                  <option value="+32">+32 (Bélgica)</option>
+                  <option value="+501">+501 (Belice)</option>
+                  <option value="+229">+229 (Benín)</option>
+                  <option value="+1-441">+1-441 (Bermudas)</option>
+                  <option value="+975">+975 (Bután)</option>
+                  <option value="+591">+591 (Bolivia)</option>
+                  <option value="+387">+387 (Bosnia y Herzegovina)</option>
+                  <option value="+267">+267 (Botsuana)</option>
+                  <option value="+55">+55 (Brasil)</option>
+                  <option value="+246">
+                    +246 (Territorio Británico del Océano Índico)
+                  </option>
+                  <option value="+1-284">
+                    +1-284 (Islas Vírgenes Británicas)
+                  </option>
+                  <option value="+673">+673 (Brunéi)</option>
+                  <option value="+359">+359 (Bulgaria)</option>
+                  <option value="+226">+226 (Burkina Faso)</option>
+                  <option value="+257">+257 (Burundi)</option>
+                  <option value="+855">+855 (Camboya)</option>
+                  <option value="+237">+237 (Camerún)</option>
+                  <option value="+1">+1 (Canadá)</option>
+                  <option value="+238">+238 (Cabo Verde)</option>
+                  <option value="+1-345">+1-345 (Islas Caimán)</option>
+                  <option value="+236">+236 (República Centroafricana)</option>
+                  <option value="+235">+235 (Chad)</option>
+                  <option value="+56">+56 (Chile)</option>
+                  <option value="+86">+86 (China)</option>
+                  <option value="+61">+61 (Isla de Navidad)</option>
+                  <option value="+61">+61 (Islas Cocos)</option>
+                  <option value="+57">+57 (Colombia)</option>
+                  <option value="+269">+269 (Comoras)</option>
+                  <option value="+682">+682 (Islas Cook)</option>
+                  <option value="+506">+506 (Costa Rica)</option>
+                  <option value="+385">+385 (Croacia)</option>
+                  <option value="+53">+53 (Cuba)</option>
+                  <option value="+599">+599 (Curazao)</option>
+                  <option value="+357">+357 (Chipre)</option>
+                  <option value="+420">+420 (República Checa)</option>
+                  <option value="+243">
+                    +243 (República Democrática del Congo)
+                  </option>
+                  <option value="+45">+45 (Dinamarca)</option>
+                  <option value="+253">+253 (Yibuti)</option>
+                  <option value="+1-767">+1-767 (Dominica)</option>
+                  <option value="+1-809">+1-809 (República Dominicana)</option>
+                  <option value="+593">+593 (Ecuador)</option>
+                  <option value="+20">+20 (Egipto)</option>
+                  <option value="+503">+503 (El Salvador)</option>
+                  <option value="+240">+240 (Guinea Ecuatorial)</option>
+                  <option value="+291">+291 (Eritrea)</option>
+                  <option value="+372">+372 (Estonia)</option>
+                  <option value="+251">+251 (Etiopía)</option>
+                  <option value="+500">+500 (Islas Malvinas)</option>
+                  <option value="+298">+298 (Islas Feroe)</option>
+                  <option value="+679">+679 (Fiyi)</option>
+                  <option value="+358">+358 (Finlandia)</option>
+                  <option value="+33">+33 (Francia)</option>
+                  <option value="+594">+594 (Guayana Francesa)</option>
+                  <option value="+689">+689 (Polinesia Francesa)</option>
+                  <option value="+241">+241 (Gabón)</option>
+                  <option value="+220">+220 (Gambia)</option>
+                  <option value="+995">+995 (Georgia)</option>
+                  <option value="+49">+49 (Alemania)</option>
+                  <option value="+233">+233 (Ghana)</option>
+                  <option value="+350">+350 (Gibraltar)</option>
+                  <option value="+30">+30 (Grecia)</option>
+                  <option value="+299">+299 (Groenlandia)</option>
+                  <option value="+1-473">+1-473 (Granada)</option>
+                  <option value="+590">+590 (Guadalupe)</option>
+                  <option value="+1-671">+1-671 (Guam)</option>
+                  <option value="+502">+502 (Guatemala)</option>
+                  <option value="+44-1481">+44-1481 (Guernsey)</option>
+                  <option value="+224">+224 (Guinea)</option>
+                  <option value="+245">+245 (Guinea-Bisáu)</option>
+                  <option value="+592">+592 (Guyana)</option>
+                  <option value="+509">+509 (Haití)</option>
+                  <option value="+504">+504 (Honduras)</option>
+                  <option value="+852">+852 (Hong Kong)</option>
+                  <option value="+36">+36 (Hungría)</option>
+                  <option value="+354">+354 (Islandia)</option>
+                  <option value="+91">+91 (India)</option>
+                  <option value="+62">+62 (Indonesia)</option>
+                  <option value="+98">+98 (Irán)</option>
+                  <option value="+964">+964 (Irak)</option>
+                  <option value="+353">+353 (Irlanda)</option>
+                  <option value="+44-1624">+44-1624 (Isla de Man)</option>
+                  <option value="+972">+972 (Israel)</option>
+                  <option value="+39">+39 (Italia)</option>
+                  <option value="+225">+225 (Costa de Marfil)</option>
+                  <option value="+1-876">+1-876 (Jamaica)</option>
+                  <option value="+81">+81 (Japón)</option>
+                  <option value="+44">+44 (Reino Unido)</option>
+                  <option value="+962">+962 (Jordania)</option>
+                  <option value="+7">+7 (Kazajistán)</option>
+                  <option value="+254">+254 (Kenia)</option>
+                  <option value="+686">+686 (Kiribati)</option>
+                  <option value="+383">+383 (Kosovo)</option>
+                  <option value="+965">+965 (Kuwait)</option>
+                  <option value="+996">+996 (Kirguistán)</option>
+                  <option value="+856">+856 (Laos)</option>
+                  <option value="+371">+371 (Letonia)</option>
+                  <option value="+961">+961 (Líbano)</option>
+                  <option value="+266">+266 (Lesoto)</option>
+                  <option value="+231">+231 (Liberia)</option>
+                  <option value="+218">+218 (Libia)</option>
+                  <option value="+423">+423 (Liechtenstein)</option>
+                  <option value="+370">+370 (Lituania)</option>
+                  <option value="+352">+352 (Luxemburgo)</option>
+                  <option value="+853">+853 (Macao)</option>
+                  <option value="+389">+389 (Macedonia)</option>
+                  <option value="+261">+261 (Madagascar)</option>
+                  <option value="+265">+265 (Malaui)</option>
+                  <option value="+60">+60 (Malasia)</option>
+                  <option value="+960">+960 (Maldivas)</option>
+                  <option value="+223">+223 (Malí)</option>
+                  <option value="+356">+356 (Malta)</option>
+                  <option value="+692">+692 (Islas Marshall)</option>
+                  <option value="+596">+596 (Martinica)</option>
+                  <option value="+222">+222 (Mauritania)</option>
+                  <option value="+230">+230 (Mauricio)</option>
+                  <option value="+262">+262 (Mayotte)</option>
+                  <option value="+52">+52 (México)</option>
+                  <option value="+691">+691 (Micronesia)</option>
+                  <option value="+373">+373 (Moldavia)</option>
+                  <option value="+377">+377 (Mónaco)</option>
+                  <option value="+976">+976 (Mongolia)</option>
+                  <option value="+382">+382 (Montenegro)</option>
+                  <option value="+1-664">+1-664 (Montserrat)</option>
+                  <option value="+212">+212 (Marruecos)</option>
+                  <option value="+258">+258 (Mozambique)</option>
+                  <option value="+95">+95 (Birmania)</option>
+                  <option value="+264">+264 (Namibia)</option>
+                  <option value="+674">+674 (Nauru)</option>
+                  <option value="+977">+977 (Nepal)</option>
+                  <option value="+31">+31 (Países Bajos)</option>
+                  <option value="+599">+599 (Caribe Neerlandés)</option>
+                  <option value="+687">+687 (Nueva Caledonia)</option>
+                  <option value="+64">+64 (Nueva Zelanda)</option>
+                  <option value="+505">+505 (Nicaragua)</option>
+                  <option value="+227">+227 (Níger)</option>
+                  <option value="+234">+234 (Nigeria)</option>
+                  <option value="+683">+683 (Niue)</option>
+                  <option value="+672">+672 (Isla Norfolk)</option>
+                  <option value="+850">+850 (Corea del Norte)</option>
+                  <option value="+47">+47 (Noruega)</option>
+                  <option value="+968">+968 (Omán)</option>
+                  <option value="+92">+92 (Pakistán)</option>
+                  <option value="+680">+680 (Palaos)</option>
+                  <option value="+970">+970 (Palestina)</option>
+                  <option value="+507">+507 (Panamá)</option>
+                  <option value="+675">+675 (Papúa Nueva Guinea)</option>
+                  <option value="+595">+595 (Paraguay)</option>
+
+                  <option value="+63">+63 (Filipinas)</option>
+                  <option value="+48">+48 (Polonia)</option>
+                  <option value="+351">+351 (Portugal)</option>
+                  <option value="+1-787">+1-787 (Puerto Rico)</option>
+                  <option value="+974">+974 (Catar)</option>
+                  <option value="+242">+242 (República del Congo)</option>
+                  <option value="+262">+262 (Reunión)</option>
+                  <option value="+40">+40 (Rumanía)</option>
+                  <option value="+7">+7 (Rusia)</option>
+                  <option value="+250">+250 (Ruanda)</option>
+                  <option value="+590">+590 (San Bartolomé)</option>
+                  <option value="+290">+290 (Santa Elena)</option>
+                  <option value="+1-869">
+                    +1-869 (San Cristóbal y Nieves)
+                  </option>
+                  <option value="+1-758">+1-758 (Santa Lucía)</option>
+                  <option value="+590">+590 (San Martín)</option>
+                  <option value="+508">+508 (San Pedro y Miquelón)</option>
+                  <option value="+1-784">
+                    +1-784 (San Vicente y las Granadinas)
+                  </option>
+                  <option value="+685">+685 (Samoa)</option>
+                  <option value="+378">+378 (San Marino)</option>
+                  <option value="+239">+239 (Santo Tomé y Príncipe)</option>
+                  <option value="+966">+966 (Arabia Saudita)</option>
+                  <option value="+221">+221 (Senegal)</option>
+                  <option value="+381">+381 (Serbia)</option>
+                  <option value="+248">+248 (Seychelles)</option>
+                  <option value="+232">+232 (Sierra Leona)</option>
+                  <option value="+65">+65 (Singapur)</option>
+                  <option value="+421">+421 (Eslovaquia)</option>
+                  <option value="+386">+386 (Eslovenia)</option>
+                  <option value="+677">+677 (Islas Salomón)</option>
+                  <option value="+252">+252 (Somalia)</option>
+                  <option value="+27">+27 (Sudáfrica)</option>
+                  <option value="+82">+82 (Corea del Sur)</option>
+                  <option value="+211">+211 (Sudán del Sur)</option>
+                  <option value="+34">+34 (España)</option>
+                  <option value="+94">+94 (Sri Lanka)</option>
+                  <option value="+249">+249 (Sudán)</option>
+                  <option value="+597">+597 (Surinam)</option>
+                  <option value="+47">+47 (Svalbard y Jan Mayen)</option>
+                  <option value="+268">+268 (Suazilandia)</option>
+                  <option value="+46">+46 (Suecia)</option>
+                  <option value="+41">+41 (Suiza)</option>
+                  <option value="+963">+963 (Siria)</option>
+                  <option value="+886">+886 (Taiwán)</option>
+                  <option value="+992">+992 (Tayikistán)</option>
+                  <option value="+255">+255 (Tanzania)</option>
+                  <option value="+66">+66 (Tailandia)</option>
+                  <option value="+670">+670 (Timor Oriental)</option>
+                  <option value="+228">+228 (Togo)</option>
+                  <option value="+690">+690 (Tokelau)</option>
+                  <option value="+676">+676 (Tonga)</option>
+                  <option value="+1-868">+1-868 (Trinidad y Tobago)</option>
+                  <option value="+216">+216 (Túnez)</option>
+                  <option value="+90">+90 (Turquía)</option>
+                  <option value="+993">+993 (Turkmenistán)</option>
+                  <option value="+1-649">+1-649 (Islas Turcas y Caicos)</option>
+                  <option value="+688">+688 (Tuvalu)</option>
+                  <option value="+256">+256 (Uganda)</option>
+                  <option value="+380">+380 (Ucrania)</option>
+                  <option value="+971">+971 (Emiratos Árabes Unidos)</option>
+                  <option value="+44">+44 (Reino Unido)</option>
+                  <option value="+1">+1 (Estados Unidos)</option>
+                  <option value="+598">+598 (Uruguay)</option>
+                  <option value="+998">+998 (Uzbekistán)</option>
+                  <option value="+678">+678 (Vanuatu)</option>
+                  <option value="+379">+379 (Ciudad del Vaticano)</option>
+                  <option value="+58">+58 (Venezuela)</option>
+                  <option value="+84">+84 (Vietnam)</option>
+                  <option value="+681">+681 (Wallis y Futuna)</option>
+                  <option value="+967">+967 (Yemen)</option>
+                  <option value="+260">+260 (Zambia)</option>
+                  <option value="+263">+263 (Zimbabue)</option>
+                </select>
+              </div>
+              <div class="form-group col-md-9">
+                <label for="telefono">Teléfono / Móvil</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="telefono"
+                  placeholder="Ingrese nro telefonico"
+                  pattern="\d\d\d\d\d\d\d\d\d"
+                  required
+                />
+              </div>
+            </div>
+
+            <h6 class="section-title">Datos del Envio</h6>
+            <hr />
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="pais">País</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pais"
+                  placeholder="Pais"
+                  value=""
+                  required=""
+                />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="region">Region</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="region"
+                  placeholder="Departamento o región"
+                  value=""
+                  required=""
+                />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="ciudad">Ciudad</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="ciudad"
+                  placeholder="Ciudad"
+                  value=""
+                  required=""
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="direccion_envio"
+                ><span class="error">*</span>Dirección (para el envio)
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="direccion_envio"
+                placeholder="Ingrese la direccion a donde se le enviara"
+                value=""
+                required
+              />
+            </div>
+
+            <div class="button-group">
+              <span type="button" class="btn-line iniciar-sesion"
+                >Iniciar sesión</span
+              >
+              <span type="button" class="btn-line recuperar-contra"
+                >Recuperar contraseña</span
+              >
+            </div>
 
             <!-- Submit button -->
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block">
                 Registrarse
-								<!-- Loader -->
-								<div id="loaderRegistro" style="display: none; text-align: center">
-									<i
-										class="fas fa-spinner fa-spin"
-										style="font-size: 24px;"
-									></i>
-								</div>
+                <!-- Loader -->
+                <div
+                  id="loaderRegistro"
+                  style="display: none; text-align: center"
+                >
+                  <i class="fas fa-spinner fa-spin" style="font-size: 24px"></i>
+                </div>
               </button>
             </div>
           </form>
 
-          <form id="recoveryForm" class="client-form" style="display: none;">
+          <form
+            id="recoveryForm"
+            class="client-form form-container"
+            style="display: none"
+          >
             <h3 style="text-align: center; color: #f709f3">
               Recuperación de contraseña
             </h3>
@@ -446,25 +846,32 @@
                 required
               />
               <!-- Email error message -->
-              <div id="emailErrorRecuperar" style="color: red; font-size: 14px"></div>
+              <div
+                id="emailErrorRecuperar"
+                style="color: red; font-size: 14px"
+              ></div>
             </div>
 
-						<div class="button-group">
-							<span type="button" class="btn-line crear-cuenta">Crear cuenta</span>
-							<span type="button" class="btn-line iniciar-sesion">Iniciar sesión</span>
-						</div>
+            <div class="button-group">
+              <span type="button" class="btn-line crear-cuenta"
+                >Crear cuenta</span
+              >
+              <span type="button" class="btn-line iniciar-sesion"
+                >Iniciar sesión</span
+              >
+            </div>
 
             <!-- Submit button -->
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block">
                 Recuperar contraseña
-								<!-- Loader -->
-								<div id="loaderRecuperar" style="display: none; text-align: center">
-									<i
-										class="fas fa-spinner fa-spin"
-										style="font-size: 24px;"
-									></i>
-								</div>
+                <!-- Loader -->
+                <div
+                  id="loaderRecuperar"
+                  style="display: none; text-align: center"
+                >
+                  <i class="fas fa-spinner fa-spin" style="font-size: 24px"></i>
+                </div>
               </button>
             </div>
           </form>
@@ -474,45 +881,46 @@
 
     <div id="footer"></div>
 
-		<script>
-			document.addEventListener("DOMContentLoaded", function () {
-				const loginButtons = document.querySelectorAll(".iniciar-sesion");
-				const registerButtons = document.querySelectorAll(".crear-cuenta");
-				const recoveryButtons = document.querySelectorAll(".recuperar-contra");
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const forms = {
+          login: {
+            id: "loginForm",
+            title: "<h2>Inicio de <em>sessión</em></h2>",
+            buttonClass: "iniciar-sesion",
+          },
+          register: {
+            id: "registerForm",
+            title: "<h2>Registro de <em>cliente</em></h2>",
+            buttonClass: "crear-cuenta",
+          },
+          recovery: {
+            id: "recoveryForm",
+            title: "<h2>Recuperación de <em>contraseña</em></h2>",
+            buttonClass: "recuperar-contra",
+          },
+        };
 
-				const principalTitle = document.getElementById("principalTitle");
+        const principalTitle = document.getElementById("principalTitle");
 
-				loginButtons.forEach((button) => {
-					button.addEventListener("click", function () {
-						principalTitle.innerHTML = "<h2>Inicio de <em>sessión</em></h2>";
+        function showForm(formType) {
+          principalTitle.innerHTML = forms[formType].title;
 
-						document.getElementById("loginForm").style.display = "block";
-						document.getElementById("registerForm").style.display = "none";
-						document.getElementById("recoveryForm").style.display = "none";
-					});
-				});
+          Object.keys(forms).forEach((key) => {
+            document.getElementById(forms[key].id).style.display =
+              key === formType ? "block" : "none";
+          });
+        }
 
-				registerButtons.forEach((button) => {
-					button.addEventListener("click", function () {
-						principalTitle.innerHTML = "<h2>Registro de <em>cliente</em></h2>";
-
-						document.getElementById("loginForm").style.display = "none";
-						document.getElementById("registerForm").style.display = "block";
-						document.getElementById("recoveryForm").style.display = "none";
-					});
-				});
-
-				recoveryButtons.forEach((button) => {
-					button.addEventListener("click", function () {
-						principalTitle.innerHTML = "<h2>Recuperación de <em>contraseña</em></h2>";
-
-						document.getElementById("loginForm").style.display = "none";
-						document.getElementById("registerForm").style.display = "none";
-						document.getElementById("recoveryForm").style.display = "block";
-					});
-				});
-			});
-		</script>
+        Object.keys(forms).forEach((formType) => {
+          document
+            .querySelectorAll(`.${forms[formType].buttonClass}`)
+            .forEach((button) => {
+              button.addEventListener("click", () => showForm(formType));
+            });
+        });
+      });
+    </script>
 
     <script src="assets_tienda/js/jquery-1.11.0.min.js"></script>
 

@@ -78,7 +78,7 @@ async function loginCliente (req, res) {
             return res.status(400).send({ error: "El correo o contraseña incorrectos" })
         }
 
-        if (user.rolid !== 3) {
+        if (user.rolid !== 3 && user.tipousuario !== 3) {
             return res.status(400).send({ error: "Solo puedes ingresar con una cuenta de cliente" })
         }
 
