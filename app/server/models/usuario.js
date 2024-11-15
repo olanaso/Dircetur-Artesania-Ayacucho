@@ -14,7 +14,7 @@ const usuario = sequelize.define('usuario', {
         type: Sequelize.TEXT,
         allowNull: true,
         field: 'usuario'
-    }, 
+    },
     correo: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -24,12 +24,22 @@ const usuario = sequelize.define('usuario', {
         type: Sequelize.STRING,
         allowNull: true,
         field: 'url'
-    }, 
+    },
+    nombre: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+        field: 'nombre_completo'
+    },
+    apellido: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+        field: 'nombre_completo'
+    },
     nombre_completo: {
         type: Sequelize.TEXT,
         allowNull: true,
         field: 'nombre_completo'
-    }, 
+    },
     clave: {
         type: Sequelize.TEXT,
         allowNull: true,
@@ -49,7 +59,7 @@ const usuario = sequelize.define('usuario', {
         type: Sequelize.INTEGER,
         allowNull: true,
         field: 'estado'
-    }, 
+    },
     createdAt: {
         type: Sequelize.DATE,
         allowNull: true,
@@ -71,8 +81,8 @@ const usuario = sequelize.define('usuario', {
  * @param id
  * @returns {Promise<Usuario | null>}
  */
-usuario.findUsuarioById = function(id){
-    return usuario.findOne({where:{id}})
+usuario.findUsuarioById = function (id) {
+    return usuario.findOne({ where: { id } })
 }
 
 

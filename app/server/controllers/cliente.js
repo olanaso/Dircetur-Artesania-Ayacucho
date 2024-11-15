@@ -3,6 +3,9 @@ const model = require('../models/cliente');
 const { Op } = require('sequelize');
 const { handleHttpError } = require('../utils/handleError')
 const usuario = require('../models/usuario')
+const mails = require('../services/mails/mails')
+const { generatePassword, encriptartexto, comprateTextEncripted } = require('../utils/generatePassword');
+
 
 module.exports = {
     guardar,
@@ -12,7 +15,8 @@ module.exports = {
     listar,
     save,
     filtrar,
-    uploadFilimg
+    uploadFilimg,
+    saveClienteTienda
 };
 
 function guardar (req, res) {
@@ -162,6 +166,96 @@ async function save (req, res, next) {
         handleHttpError(res, "Error creando cliente", 500)
     }
 }
+
+async function saveClienteTienda (req, res, next) {
+
+    let cliente = model;
+    const t = await model.sequelize.transaction() //transaccion
+    try {
+        //registrar un usuario cliente
+        const { datosusuario, datoscliente } = req.body;
+
+        let usuariovalue = datosusuario.usuario;
+        let correovalue = datosusuario.correo;
+
+        let usuario_buscado = null
+        usuario_buscado = await usuario.findOne({
+            where: { usuario: usuariovalue },
+            transaction: t
+        });
+
+        // Si no existe el cliente, crearlo
+        if (usuario_buscado) {
+            throw new Error(`El cliente con usuario: ${usuariovalue} ya existe en el sistema, recupere su clave`)
+
+        }
+
+        usuario_buscado = await usuario.findOne({
+            where: { correo: correovalue },
+            transaction: t
+        });
+
+        // Si no existe el cliente, crearlo
+        if (usuario_buscado) {
+            throw new Error(`El cliente con correo: ${correovalue} ya existe en el sistema, recupere su clave`)
+            // new throw ({ messaje: `El cliente con correo: ${correovalue} ya existe en el sistema, recupere su clave` })
+        }
+
+
+        let numero_documento_value = datoscliente.numero_documento;
+        let correo_cliente_value = datoscliente.correo;
+
+        let cliente_buscado = null
+        cliente_buscado = await cliente.findOne({
+            where: { correo: correo_cliente_value },
+            transaction: t
+        });
+
+        // Si no existe el cliente, crearlo
+        if (cliente_buscado) {
+            throw new Error(`El cliente con correo: ${correovalue} ya existe en el sistema, recupere su clave`)
+        }
+
+
+        cliente_buscado = await cliente.findOne({
+            where: { numero_documento: numero_documento_value },
+            transaction: t
+        });
+
+        // Si no existe el cliente, crearlo
+        if (cliente_buscado) {
+            throw new Error(`El cliente con dni: ${numero_documento_value} ya existe en el sistema, recupere su clave`)
+        }
+        datosusuario.clave = encriptartexto(datoscliente.numero_documento)
+        let ROL_CLIENTE = 3; //segun la tabla de roles
+        datosusuario.tipousuario = ROL_CLIENTE;
+        datosusuario.rol = ROL_CLIENTE;
+        datosusuario.estado = true;
+
+        let usuariocreado = null;
+        usuariocreado = await usuario.create(
+            datosusuario, // Asegúrate de que req.body.cliente tenga los datos correctos del cliente
+            { transaction: t }
+        );
+        datoscliente.usuario_id = usuariocreado.dataValues.id;
+        let clientecreado = null;
+        clientecreado = await cliente.create(
+            datoscliente, // Asegúrate de que req.body.cliente tenga los datos correctos del cliente
+            { transaction: t }
+        );
+
+        mails.emailRegistrarCliente(datoscliente.correo, datosusuario.nombre_completo, datosusuario.usuario, datoscliente.numero_documento);
+
+        res.status(200).send({ message: "Cliente creado correctamente" })
+
+        return await t.commit()
+    } catch (e) {
+        await t.rollback()
+        console.error(e.message)
+        handleHttpError(res, "Error:" + e.message, 500)
+    }
+}
+
 
 async function filtrar (req, res) {
     try {

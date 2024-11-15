@@ -4,7 +4,7 @@
 
 
 module.exports = {
-    generarCorreoRegistro, generarFacturaHTML, generarCorreoRecuperacion
+    generarCorreoRegistro, generarFacturaHTML, generarCorreoRecuperacion, generarCorreoRegistroCliente
 };
 
 // Lee el archivo SVG como string
@@ -374,6 +374,57 @@ function generarCorreoRecuperacion ({ nombreUsuario, usuarioArtesano, contrasena
         <ul style="font-size: 16px; color: #333333; line-height: 1.6; margin: 20px 0; list-style-type: none; padding: 0;">
             <li><strong>Usuario:</strong> ${usuarioArtesano}</li>
             <li><strong>Contraseña:</strong> ${contrasenaArtesano}</li>
+        </ul>
+
+        <p style="font-size: 16px; color: #333333; line-height: 1.6; margin: 20px 0;">
+            Por favor, te recomendamos que cambies tu contraseña al iniciar sesión para mantener tu cuenta segura.
+        </p>
+
+        <!-- Button -->
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="https://artesaniasdeayacucho.pe/" style="background-color: #d6008b; color: #ffffff; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-size: 16px;">Iniciar sesión</a>
+        </div>
+
+        <!-- Footer -->
+        <p style="font-size: 14px; color: #999999; text-align: center; margin-top: 40px;">
+            Este correo fue enviado desde Artesanías de Ayacucho. Si tienes alguna pregunta, no dudes en <a href="mailto:contacto@tu-dominio.com" style="color: #d6008b; text-decoration: none;">contactarnos</a>.
+        </p>
+
+    </div>
+
+</body>
+</html>
+`
+}
+
+
+
+function generarCorreoRegistroCliente ({ nombreCliente, usuarioCliente, contrasenaCliente }) {
+    return `<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperación de Cuenta</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+
+    <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+
+        <!-- Header -->
+        <div style="text-align: center; padding-bottom: 20px;">
+            <img src="${Logo}" alt="Logo de Artesanías de Ayacucho" style="max-width: 200px; margin-bottom: 20px;">
+            <h1 style="font-size: 24px; color: #d6008b; margin: 0;">Recuperación de Cuenta</h1>
+        </div>
+
+        <!-- Body -->
+        <p style="font-size: 16px; color: #333333; line-height: 1.6; margin: 20px 0;">
+            Estimado/a cliente: <strong>${nombreCliente}</strong>, tu registro a sido exitoso. A continuación, te proporcionamos tus nuevas credenciales de acceso.
+        </p>
+
+        <ul style="font-size: 16px; color: #333333; line-height: 1.6; margin: 20px 0; list-style-type: none; padding: 0;">
+            <li><strong>Usuario:</strong> ${usuarioCliente}</li>
+            <li><strong>Contraseña:</strong> ${contrasenaCliente}</li>
         </ul>
 
         <p style="font-size: 16px; color: #333333; line-height: 1.6; margin: 20px 0;">

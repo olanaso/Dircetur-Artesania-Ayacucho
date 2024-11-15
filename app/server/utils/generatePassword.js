@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+
 const generatePassword = ({
   length = 12,
   includeUpperCase = true,
@@ -29,7 +31,7 @@ const generatePassword = ({
   }
 
   let password = '';
-  
+
   // Asegurar que al menos un carácter de cada tipo seleccionado esté presente
   if (includeUpperCase) {
     password += upperCaseChars.charAt(Math.floor(Math.random() * upperCaseChars.length));
@@ -54,4 +56,15 @@ const generatePassword = ({
   return password.split('').sort(() => Math.random() - 0.5).join('');
 }
 
-module.exports = { generatePassword };
+function encriptartexto (texto) {
+  let textoEncripted = bcrypt.hashSync(texto, 10);
+  return textoEncripted
+}
+
+function comprateTextEncripted (textoPlano, textoEcriptado) {
+  return bcrypt.compareSync(textoPlano, textoEcriptado);
+}
+
+
+
+module.exports = { generatePassword, encriptartexto, comprateTextEncripted };

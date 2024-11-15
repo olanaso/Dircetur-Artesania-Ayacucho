@@ -1,7 +1,7 @@
-const { generarCorreoRegistro, generarFacturaHTML, generarCorreoRecuperacion } = require('./templates');
+const { generarCorreoRegistro, generarFacturaHTML, generarCorreoRecuperacion, generarCorreoRegistroCliente } = require('./templates');
 const { enviarCorreo } = require('./generic_email_sender');
 module.exports = {
-    emailRegistroArtesano, emailPedidoArtesania, emailRecuperarContraseña
+    emailRegistroArtesano, emailPedidoArtesania, emailRecuperarContraseña, emailRegistrarCliente
 };
 async function emailRegistroArtesano ({ correo, nombreArtesano, usuarioArtesano, contrasenaArtesano, logoUrl }) {
 
@@ -50,4 +50,23 @@ async function emailRecuperarContraseña ({ correos, nombreUsuario, usuarioArtes
     }
 
 }
+
+
+async function emailRegistrarCliente (correos, nombreCliente, usuarioCliente, contrasenaCliente) {
+
+    try {
+        const resultado = await enviarCorreo({
+            destinatarios: correos,
+            asunto: 'Registro exitoso de cliente - www.artesaniasdeayacucho.pe',
+            html: generarCorreoRegistroCliente({ nombreCliente, usuarioCliente, contrasenaCliente }),
+
+        });
+        console.log('Resultado:', resultado);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
+}
+
+
 

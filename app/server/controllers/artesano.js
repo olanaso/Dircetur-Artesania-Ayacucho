@@ -8,7 +8,8 @@ const categoria = require('../models/categoria')
 const product = require('../models/producto')
 const { handleHttpError } = require("../utils/handleError");
 const { emailRegistroArtesano } = require("../services/mails/mails");
-const bcrypt = require('bcryptjs');
+
+const { generatePassword, encriptartexto, comprateTextEncripted } = require('../utils/generatePassword');
 
 
 module.exports = {
@@ -373,8 +374,8 @@ async function saveUsuarioArtesano (req, res, next) {
 
         } else {  //registro de nuevo usuario
             // usuario.id = artesano.id;
-            const salt = bcrypt.genSaltSync();
-            usuario.clave = bcrypt.hashSync(usuario.clave, salt);
+
+            usuario.clave = encriptartexto(usuario.clave)
             usuario_result = await artesanos.create({ ...usuario }, { transaction: t });
 
 

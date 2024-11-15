@@ -19,8 +19,8 @@ const { tokenSign } = require('../utils/handleJwt');
 const { handleHttpError } = require('../utils/handleError');
 const { matchedData } = require('express-validator');
 const { emailRecuperarContraseña } = require("../services/mails/mails");
-const bcrypt = require('bcryptjs');
-const { generatePassword } = require('../utils/generatePassword');
+
+const { generatePassword, encriptartexto, comprateTextEncripted } = require('../utils/generatePassword');
 
 module.exports = {
     guardar,
@@ -72,7 +72,7 @@ async function loginCliente (req, res) {
             return res.status(400).send({ error: "El correo o contraseña incorrectos" })
         }
 
-        const claveCorrecta = bcrypt.compareSync(clave, user.clave);
+        const claveCorrecta = comprateTextEncripted(clave, user.clave);
 
         if (!claveCorrecta) {
             return res.status(400).send({ error: "El correo o contraseña incorrectos" })
@@ -81,14 +81,14 @@ async function loginCliente (req, res) {
         if (user.rolid !== 3) {
             return res.status(400).send({ error: "Solo puedes ingresar con una cuenta de cliente" })
         }
-        
+
         const data = {
             token: jwt.sign({ client: user }, '2C44-4D44-WppQ38S', { expiresIn: '1d' }),
             id: user.id,
             idCliente: await cliente.findClienteIdByUsuarioId(user.id)
         }
 
-        return res.status(200).send( data )
+        return res.status(200).send(data)
 
     } catch (e) {
         console.error(e)
@@ -320,7 +320,7 @@ async function save (req, res, next) {
 
 async function cambiarContrasenia (req, res, next) {
     const { dni, clave_nueva, clave_ant } = req.body;
-    console.log({body: req.body});
+    console.log({ body: req.body });
 
     const t = await model.sequelize.transaction();
     try {
@@ -330,17 +330,17 @@ async function cambiarContrasenia (req, res, next) {
                 usuario: dni ? dni : 0
             }
         });
-        console.log({clave: object.clave});
+        console.log({ clave: object.clave });
 
-        const esClaveAnteriorCorrecta = bcrypt.compareSync(clave_ant, object.clave);
+        const esClaveAnteriorCorrecta = comprateTextEncripted(clave_ant, object.clave);
         console.log(object);
 
-        console.log({esClaveAnteriorCorrecta});
+        console.log({ esClaveAnteriorCorrecta });
 
         if (esClaveAnteriorCorrecta) {
-            console.log({claveNueva: clave_nueva});
-            object.clave = bcrypt.hashSync(clave_nueva, 10);
-            // console.log({claveNueva: object.clave});
+            console.log({ claveNueva: clave_nueva });
+            object.clave = encriptartexto(clave_nueva);
+
             await object.save({ t });
 
         } else {
@@ -377,7 +377,7 @@ async function loginpersonal (req, res) {
         }
 
         // let claveCorrecta = usuarioDB.dataValues.clave == req.body.clave;
-        let claveCorrecta = bcrypt.compareSync(req.body.clave, usuarioDB.dataValues.clave);
+        let claveCorrecta = comprateTextEncripted(req.body.clave, usuarioDB.dataValues.clave);
 
         let token = null;
 
@@ -528,33 +528,33 @@ async function recuperarcuenta (req, res) {
         // Validar que se proporcione un correo
         const { correo } = req.body;
         if (!correo) {
-            return res.status(400).json({ 
-                isRecuperado: false, 
-                message: "El correo es requerido" 
+            return res.status(400).json({
+                isRecuperado: false,
+                message: "El correo es requerido"
             });
         }
 
         // Buscar usuario
-        const usuarioDB = await model.findOne({ 
-            where: { correo: correo.toLowerCase().trim() } 
+        const usuarioDB = await model.findOne({
+            where: { correo: correo.toLowerCase().trim() }
         });
 
         if (!usuarioDB) {
-            return res.status(400).json({ 
-                isRecuperado: false, 
-                message: "El correo ingresado no se encuentra registrado" 
+            return res.status(400).json({
+                isRecuperado: false,
+                message: "El correo ingresado no se encuentra registrado"
             });
         }
 
         // Generar nueva contraseña
         const nuevaClave = generatePassword();
 
-         // Hashear la nueva contraseña
-        const salt = await bcrypt.genSalt(10);
-        const claveHasheada = await bcrypt.hash(nuevaClave, salt);
-        
+        // Hashear la nueva contraseña
+
+        const claveHasheada = encriptartexto(nuevaClave);
+
         // Actualizar la contraseña en la base de datos
-        await usuarioDB.update({ 
+        await usuarioDB.update({
             clave: claveHasheada,
         });
 
