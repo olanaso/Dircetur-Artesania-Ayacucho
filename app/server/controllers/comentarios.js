@@ -24,15 +24,54 @@ module.exports = {
   save
 };
 
-function guardar (req, res) {
+async function guardar(req, res) {
+  try {
+    const { clienteid, productoid, nropagina, comentario } = req.body;
 
-  model.create(req.body)
-    .then(object => {
-      res.status(200).json(object);
-    })
-    .catch(error => {
-      res.status(400).send(error)
-    })
+    if (!clienteid || !productoid || !comentario) {
+      return res.status(400).json({ 
+        error: 'clienteid, productoid, y comentario son campos requeridos' 
+      });
+    }
+
+    if (!Number.isInteger(clienteid) || !Number.isInteger(productoid)) {
+      return res.status(400).json({ 
+        error: 'clienteid and productoid deben ser números enteros'
+      });
+    }
+
+    if (comentario.length < 3 || comentario.length > 1000) {
+      return res.status(400).json({
+        error: 'comentario debe tener entre 3 y 1000 caracteres'
+      });
+    }
+
+    const object = await model.create({
+      ...req.body,
+      nropagina: nropagina || 1,
+      createdAt: new Date()
+    });
+
+    const comentarioBD = await model.findOne({
+      where: {
+        id: object.id
+      },
+      include: [
+        {
+          model: cliente,
+          attributes: ['nombres', 'apellidos'],
+        }
+      ]
+    });
+
+    return res.status(200).json(comentarioBD);
+
+  } catch (error) {
+    console.error('Error creardo el comentario:', error);
+    return res.status(400).json({
+      error: error.message || 'Error creardo el comentario'
+    });
+  }
 }
 
 function actualizar (req, res) {

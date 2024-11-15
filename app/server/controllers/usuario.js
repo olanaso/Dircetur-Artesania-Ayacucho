@@ -67,15 +67,12 @@ async function loginCliente (req, res) {
                 { correo: email }
         })
 
-        console.log({ user });
-
         //validaciones de rol y cliente existente
         if (!user) {
             return res.status(400).send({ error: "El correo o contraseña incorrectos" })
         }
 
         const claveCorrecta = bcrypt.compareSync(clave, user.clave);
-        console.log({ claveCorrecta });
 
         if (!claveCorrecta) {
             return res.status(400).send({ error: "El correo o contraseña incorrectos" })
@@ -91,7 +88,7 @@ async function loginCliente (req, res) {
             idCliente: await cliente.findClienteIdByUsuarioId(user.id)
         }
 
-        return res.status(200).send({ data })
+        return res.status(200).send( data )
 
     } catch (e) {
         console.error(e)

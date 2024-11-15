@@ -61,3 +61,25 @@ export async function listarComentarios(idprod) {
         console.error('Error:', error);
     }
 }
+
+export async function nuevoComentario(objComentario) {
+    try {
+        const response = await fetch(`${baseUrl}/nuevoComentario`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(objComentario),
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al enviar el comentario.');
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+        return null;
+    }
+}

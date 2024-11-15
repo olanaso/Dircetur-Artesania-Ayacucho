@@ -24,7 +24,7 @@ SELECT * FROM slider
      `;
 
         const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
-        console.log(list)
+        // console.log(list)
         if (!list) {
             throw {
                 error: new Error("No existen datos"),
@@ -48,7 +48,7 @@ async function listarCategorias () {
      `;
 
         const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
-        console.log(list)
+        // console.log(list)
         if (!list) {
             throw {
                 error: new Error("No existen datos"),
@@ -106,7 +106,7 @@ WHERE JSON_VALID(a.lst_ofertas) AND TRIM(a.lst_ofertas) != '"[]"';
 
                 const ofertasLimpias = item.lst_ofertas.trim();
                 console.log('----------------')
-                console.log(ofertasLimpias)
+                // console.log(ofertasLimpias)
                 // const ofertasSinComillas = ofertasLimpias.startsWith('"') && ofertasLimpias.endsWith('"')
                 //     ? ofertasLimpias.slice(1, -1)
                 //     : ofertasLimpias;
@@ -114,7 +114,7 @@ WHERE JSON_VALID(a.lst_ofertas) AND TRIM(a.lst_ofertas) != '"[]"';
                 // Deserializar dos veces para corregir el problema de caracteres escapados
                 const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1, -1)));
                 console.log('----------------')
-                console.log(ofertasArray)
+                // console.log(ofertasArray)
                 // Parsear el string limpio
                 //const ofertasArray = JSON.parse(ofertasSinComillas);
                 // Filtrar solo las ofertas vigentes
@@ -161,7 +161,7 @@ LIMIT 9
      `;
 
         const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
-        console.log(list)
+        // console.log(list)
         if (!list) {
             throw {
                 error: new Error("No existen datos"),
@@ -194,7 +194,7 @@ LIMIT 9
      `;
 
         const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
-        console.log(list)
+        // console.log(list)
         if (!list) {
             throw {
                 error: new Error("No existen datos"),
@@ -226,7 +226,7 @@ WHERE a.id=${id}
      `;
 
         const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
-        console.log(list)
+        // console.log(list)
         if (!list) {
             throw {
                 error: new Error("No existen datos"),
@@ -259,7 +259,7 @@ WHERE a.id=${id}
      `;
 
         const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
-        console.log(list)
+        // console.log(list)
         if (!list) {
             throw {
                 error: new Error("No existen datos"),
@@ -372,7 +372,7 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
 
 
         const resultados = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
-        console.log(resultados)
+        // console.log(resultados)
         if (!resultados) {
             throw {
                 error: new Error("No existen datos"),
@@ -405,7 +405,7 @@ WHERE id=${id}
 
         const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
         console.log('-----------')
-        console.log(list)
+        // console.log(list)
         if (!list || list.length == 0) {
             throw {
                 error: new Error("No existen datos"),
@@ -415,7 +415,7 @@ WHERE id=${id}
         }
 
         let [artesano] = list;
-        console.log(artesano)
+        // console.log(artesano)
 
         sql = `SELECT a.*,
                 CONCAT(b.nombres, ' ', b.apellidos) AS artesano,   b.foto1, b.id artesano_id
@@ -428,7 +428,7 @@ WHERE id=${id}
 
 
         const productos = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
-        console.log(list)
+        // console.log(list)
         if (!list) {
             throw {
                 error: new Error("No existen datos"),
@@ -463,7 +463,7 @@ async function PortadaBusquedaListCategorias (cateria_id = 0, preciomin = 0, pre
      `;
 
         const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
-        console.log(list)
+        // console.log(list)
         if (!list) {
             throw {
                 error: new Error("No existen datos"),
@@ -487,7 +487,7 @@ ORDER BY concat(nombres, ' ', apellidos)
      `;
 
         const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
-        console.log(list)
+        // console.log(list)
         if (!list) {
             throw {
                 error: new Error("No existen datos"),

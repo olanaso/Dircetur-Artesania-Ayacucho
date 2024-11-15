@@ -1,7 +1,7 @@
 
 
 import { loadPartials } from "../../utils/viewpartials.js";
-import { getPortadaBusqueda, busquedaProductos, listarComentarios } from './api';
+import { getPortadaBusqueda, busquedaProductos, listarComentarios, nuevoComentario } from './api';
 import { custom } from '../utils/common.js';
 import { obtenerProducto } from "../producto/api.js";
 
@@ -45,7 +45,7 @@ const obtenerComentarios = async (id) => {
         const comentarios = await listarComentarios(id);
         
         if (!comentarios || comentarios.length === 0) {
-            commentsList.innerHTML = '<div style="text-align: center; padding: 20px; color: #666; font-size: 16px; font-style: italic; border: 1px dashed #ccc; border-radius: 8px; margin: 10px 0;">No hay comentarios disponibles para este producto.</div>';
+            commentsList.innerHTML = '<div id="noComentarios" style="text-align: center; padding: 20px; color: #666; font-size: 16px; font-style: italic; border: 1px dashed #ccc; border-radius: 8px; margin: 10px 0;">No hay comentarios disponibles para este producto.</div>';
             return;
         }
 
@@ -92,6 +92,88 @@ const obtenerComentarios = async (id) => {
     }
 }
 
+const agregarComentario = async (artesaniaId) => {
+
+    const commentForm = document.getElementById('comment-form');
+    const newCommentTextarea = document.getElementById('new-comment');
+    const commentsList = document.querySelector('.comments-list');
+
+
+    commentForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const idCliente = localStorage.getItem('idCliente')
+
+        if (!idCliente || idCliente === 'null' || idCliente === 'undefined') {
+            alert('Debes iniciar sesión para poder comentar.');
+            return;
+        }
+
+        const comentario = newCommentTextarea.value.trim();
+
+        if (comentario.length === 0) {
+            alert('Por favor, escribe un comentario antes de enviarlo.');
+            return;
+        }
+
+        try {
+            const objComentario = {
+                clienteid: Number(idCliente),
+                productoid: artesaniaId,
+                nropagina: 1,
+                comentario,
+            };
+
+            const data = await nuevoComentario(objComentario);
+
+            if (data === null || data === undefined) {
+                alert('Ocurrió un error al enviar el comentario.');
+                return;
+            }
+
+            // Quita el mensaje de "No hay comentarios"
+            const noComentarios = document.getElementById('noComentarios');
+            if (noComentarios) {
+                noComentarios.remove();
+            }
+
+            newCommentTextarea.value = '';
+            
+            // agregar el nuevo comentario a la lista
+            const fecha = new Date(data.createdAt);
+            const fechaFormateada = fecha.toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            const iniciales = (data.cliente.nombres.charAt(0) + data.cliente.apellidos.charAt(0)).toUpperCase();
+
+            const newCommentElement = document.createElement('div');
+            newCommentElement.classList.add('comment', 'fadeInUp');
+
+            newCommentElement.innerHTML = `
+                <div class="comment-avatar">
+                    <div class='avatar-initial'>${iniciales}</div>
+                </div>
+                <div class="comment-content">
+                    <div class="comment-header">
+                        <h3 class='comment-author'>${data.cliente.nombres} ${data.cliente.apellidos}</h3>
+                        <span class='comment-date'>${fechaFormateada}</span>
+                    </div>
+                    <p class='comment-text'>${data.comentario}</p>
+                </div>
+            `;
+
+            commentsList.prepend(newCommentElement);
+
+        } catch (error) {
+            console.error('Error al enviar comentario:', error);
+            alert('Ocurrió un error al enviar el comentario.');
+        }
+    });
+    
+}
 
 function obtenerUrlProducto () {
     const queryString = window.location.search;
@@ -113,6 +195,7 @@ function obtenerUrlProducto () {
         console.log(artesaniaenviada)
         infoProductoById(artesaniaenviada.artesania.id)
         obtenerComentarios(artesaniaenviada.artesania.id)
+        agregarComentario(artesaniaenviada.artesania.id)
 
         $('#btnagregarcarrito').attr('href', `carrito-de-compra.html?producto=${artesaniaenviada.artesania.url_carrito}`)
         //guardarArtesania(artesaniaenviada.artesania.id);

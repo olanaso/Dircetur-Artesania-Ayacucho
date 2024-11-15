@@ -57,16 +57,17 @@ const login = () => {
 
         const resp = await loginCliente(email, password)
 
-        // console.log(resp);
+        console.log({respLogin: resp});
 
-        if (resp.data) {
+        if (resp) {
             loader.style.display = "none";
             localStorage.setItem('token', resp.token);
-            localStorage.setItem('usuario', resp.usuario);
-            localStorage.setItem('rol', resp.rol);
+            localStorage.setItem('id', resp.id);
+            localStorage.setItem('idCliente', resp.idCliente);
             window.location.href = '/tienda/index.html';
         } else {
             loader.style.display = "none";
+            console.log('Error login:', resp.error);
             alert(resp.error);
         }
 
