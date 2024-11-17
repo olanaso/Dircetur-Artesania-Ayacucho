@@ -175,6 +175,9 @@ async function saveClienteTienda (req, res, next) {
         //registrar un usuario cliente
         const { datosusuario, datoscliente } = req.body;
 
+
+        mails.emailRegistrarCliente(datoscliente.correo, datosusuario.nombre_completo, datosusuario.usuario, datoscliente.numero_documento);
+
         let usuariovalue = datosusuario.usuario;
         let correovalue = datosusuario.correo;
 
@@ -204,6 +207,8 @@ async function saveClienteTienda (req, res, next) {
 
         let numero_documento_value = datoscliente.numero_documento;
         let correo_cliente_value = datoscliente.correo;
+
+
 
         let cliente_buscado = null
         cliente_buscado = await cliente.findOne({
@@ -244,7 +249,7 @@ async function saveClienteTienda (req, res, next) {
             { transaction: t }
         );
 
-        mails.emailRegistrarCliente(datoscliente.correo, datosusuario.nombre_completo, datosusuario.usuario, datoscliente.numero_documento);
+
 
         res.status(200).send({ message: "Cliente creado correctamente" })
 

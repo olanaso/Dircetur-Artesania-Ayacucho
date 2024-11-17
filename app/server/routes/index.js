@@ -26,6 +26,7 @@ const pedidodetalle = require('./pedidodetalle');
 const productosFavoritos = require('./productos-favoritos')
 const portada = require('./portada')
 const comentarios = require('./comentarios');
+const valoracion = require('./valoracion');
 
 module.exports = (app) => {
     app.use('/api', mantenimiento);
@@ -55,4 +56,5 @@ module.exports = (app) => {
     app.use('/api', productosFavoritos);
     app.use('/api', portada);
     app.use('/api', comentarios);
+    app.use('/api', valoracion);
 };

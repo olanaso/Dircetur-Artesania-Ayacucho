@@ -4,85 +4,12 @@ const {
   Op
 } = require('sequelize');
 module.exports = {
-  guardar,
-  actualizar,
-  eliminar,
-  obtener,
-  listar,
-  listarAvanced,
-  listarPaginado,
-  save
+  save,
+  puntuacionPromedio
 };
 
-function guardar(req, res) {
 
-  model.create(req.body)
-    .then(object => {
-      res.status(200).json(object);
-    })
-    .catch(error => {
-      res.status(400).send(error)
-    })
-}
-
-function actualizar(req, res) {
-  model.findOne({
-      where: {
-        id: req.params.id
-      }
-
-    })
-    .then(object => {
-      object.update(req.body)
-        .then(object => res.status(200).json(object))
-        .catch(error => res.status(400).send(error))
-    })
-    .catch(error => res.status(400).send(error));
-}
-
-function eliminar(req, res) {
-
-  model
-    .findOne({
-      where: {
-        id: req.body.id
-      }
-    })
-    .then(object => {
-      object.destroy();
-      res.status(200).json(object);
-    })
-    .catch(error => res.status(400).send(error));
-}
-
-function obtener(req, res) {
-
-  model.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
-    .then(resultset => {
-      res.status(200).json(resultset)
-    })
-    .catch(error => {
-      res.status(400).send(error)
-    })
-}
-
-function listar(req, res) {
-    model.findAll({
-         where: { },
-        })
-        .then(resultset => {
-            res.status(200).json(resultset)
-        })
-        .catch(error => {
-            res.status(400).send(error)
-        })
-}
-
-async function save(req, res, next) {
+async function save (req, res, next) {
   const t = await model.sequelize.transaction();
   try {
 
@@ -93,7 +20,8 @@ async function save(req, res, next) {
     });
 
     if (object != null) {
-      let obj = { ...object.dataValues,
+      let obj = {
+        ...object.dataValues,
         ...req.body
       }
       for (const prop in obj) {
@@ -104,7 +32,8 @@ async function save(req, res, next) {
         t
       });
     } else {
-      object = await model.create({ ...req.body
+      object = await model.create({
+        ...req.body
       }, {
         t
       });
@@ -115,4 +44,27 @@ async function save(req, res, next) {
     t.rollback();
     return next(e);
   }
+}
+
+async function puntuacionPromedio (req, res) {
+
+
+  try {
+    const promedio = await model.findAll({
+      attributes: [
+        [model.sequelize.fn('AVG', Sequelize.col('valor')), 'promedio'],
+      ],
+      where: {
+        productoid: req.query.productoid, // Filtro por el ID del producto si es necesario
+      },
+    });
+
+    const resultado = promedio[0].get('promedio');
+    console.log(`El promedio de puntuaciones es: ${resultado}`);
+    return res.status(200).send({ puntuacion: Math.round(resultado) });
+  } catch (error) {
+    console.error('Error al calcular el promedio:', error);
+  }
+
+
 }

@@ -13,7 +13,7 @@ module.exports = sequelize.define('valoracion', {
     libroid: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        field: 'libroid'
+        field: 'productoid'
     },
     valor: {
         type: Sequelize.INTEGER,

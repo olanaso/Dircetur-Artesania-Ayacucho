@@ -24,6 +24,7 @@ const productosFavoritos = require('./productosFavoritos')
 const pedidodetalle = require('./pedidodetalle');
 const portada = require('./portada');
 const comentarios = require('./comentarios');
+const valoracion = require('./valoracion');
 
 module.exports = {
     mantenimiento,
@@ -53,4 +54,5 @@ module.exports = {
     productosFavoritos,
     portada,
     comentarios,
+    valoracion,
 };
