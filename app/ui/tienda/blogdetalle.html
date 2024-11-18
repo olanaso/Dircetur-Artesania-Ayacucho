@@ -215,6 +215,32 @@
 			/* Ajusta esta altura según lo que necesites */
 			overflow: hidden;
 		}
+
+		.tt-menu {
+			background-color: #fff;
+			border: 1px solid #ff0000;
+			max-width: 300px;
+		}
+
+		.tt-suggestion {
+			padding: 10px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+		}
+
+		.tt-suggestion:hover {
+			background-color: #ffe5e5;
+		}
+
+		.tt-suggestion img {
+			max-width: 40px;
+			margin-right: 10px;
+		}
+
+		.tt-suggestion .book-title {
+			color: #ff0000;
+		}
 	</style>
 
 	<!--[if lt IE 9]>
@@ -289,6 +315,7 @@
 	<!-- Custom Js -->
 	<script src="assets_tienda/js/custom.js"></script>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
 	<script type="module" src="../src/tienda/blog/blogdetalle.js"></script>
 
 

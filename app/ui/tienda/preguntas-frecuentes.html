@@ -32,18 +32,18 @@
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 
 	<!-- Google translate -->
-	<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	<script type="text/javascript"
+		src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 	<style>
-
-		div > iframe.skiptranslate {
+		div>iframe.skiptranslate {
 			display: none !important;
 		}
 
 		body {
 			top: 0px !important;
 		}
-		
+
 		.product-card {
 			border: 1px solid #ccc;
 			border-radius: 10px;
@@ -211,6 +211,32 @@
 			background-size: cover;
 			padding: 0px 15px 0px 15px
 		}
+
+		.tt-menu {
+			background-color: #fff;
+			border: 1px solid #ff0000;
+			max-width: 300px;
+		}
+
+		.tt-suggestion {
+			padding: 10px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+		}
+
+		.tt-suggestion:hover {
+			background-color: #ffe5e5;
+		}
+
+		.tt-suggestion img {
+			max-width: 40px;
+			margin-right: 10px;
+		}
+
+		.tt-suggestion .book-title {
+			color: #ff0000;
+		}
 	</style>
 
 	<!--[if lt IE 9]>
@@ -288,7 +314,7 @@
 	<script src="assets_tienda/js/custom.js"></script>
 
 
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
 	<script type="module" src="../src/tienda/preguntas-frecuentes/index.js"></script>
 
 </body>
