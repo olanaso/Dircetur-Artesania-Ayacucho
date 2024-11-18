@@ -69,9 +69,10 @@ export function custom () {
 
 
 export function badgesdata () {
-    let artesanias = getDataFromLocalStorage('artesanias')
+    let artesanias = getDataFromLocalStorage('artesanias') || []
     $('#badge_cant_prod_carrito').text(artesanias.length)
-    let artesaniasdeseadas = getDataFromLocalStorage('artesaniasdeseadas')
+
+    let artesaniasdeseadas = getDataFromLocalStorage('artesaniasdeseadas') || []
     $('#badge_cant_prod_deseado').text(artesaniasdeseadas.length)
 
 }
