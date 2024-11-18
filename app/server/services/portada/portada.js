@@ -308,8 +308,18 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
         if (nombre_artesano) {
             where += ` AND upper(concat(b.nombres, b.apellidos)) like '%${nombre_artesano.toUpperCase()}%' `
         }
+        // if (nombre_producto) {
+        //     where += ` AND upper(concat(a.resumen_es,a.nombres_es, a.nombres_eng)) like '%${nombre_producto.toUpperCase()}%' `
+        // }
+        let params = {};
         if (nombre_producto) {
-            where += ` AND upper(concat(a.resumen_es,a.nombres_es, a.nombres_eng)) like '%${nombre_producto.toUpperCase()}%' `
+
+            const nombreTerms = nombre_producto.trim().split(/\s+/);
+            const nombreConditions = nombreTerms.map((term, index) => {
+                params[`nombre${index}`] = `%${term}%`;
+                return `( a.nombres_es LIKE  :nombre${index}  OR a.nombres_eng LIKE  :nombre${index}  OR a.resumen_es LIKE  :nombre${index}  OR a.resumen_eng LIKE  :nombre${index} )`;
+            });
+            where += ` AND (${nombreConditions.join(' AND ')}) `
         }
 
 
@@ -322,7 +332,7 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
          WHERE 1 = 1
      `+ where;
 
-        const [tam_consulta] = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
+        const [tam_consulta] = await models.sequelize.query(sql, { replacements: params, type: sequelize.QueryTypes.SELECT });
         let cantidad = tam_consulta.cantidad
 
         let offset = (pagina - 1) * limit;
@@ -371,7 +381,7 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
 
 
 
-        const resultados = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
+        const resultados = await models.sequelize.query(sql, { replacements: params, type: sequelize.QueryTypes.SELECT });
         // console.log(resultados)
         if (!resultados) {
             throw {

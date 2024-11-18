@@ -298,18 +298,20 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
   }
 }
 
+
+
 function handleUploadResponse (response) {
 
   let file = $('#myfile').prop('files')[0];
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      $('#principalImagePreview').attr('src', '/' + response.ruta).show();
+      $('#principalImagePreview').attr('src', getBaseUrl(baseUrl) + '/' + response.ruta).show();
       $('#principalImageName').val(file.name);
     }
     reader.readAsDataURL(file);
 
-    imagen_principal = '/' + response.ruta;
+    imagen_principal = getBaseUrl(baseUrl) + '/' + response.ruta;
 
     //alert('registro de la imagen correctamente')
   } else {
@@ -323,17 +325,56 @@ function handleEditUploadResponse (response) {
   if (file) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      $('#CategoriaImagePreviewEdit').attr('src', '/' + response.ruta).show();
+      $('#CategoriaImagePreviewEdit').attr('src', getBaseUrl(baseUrl) + '/' + response.ruta).show();
     }
     reader.readAsDataURL(file);
 
-    imagen_principal = '/' + response.ruta;
+    imagen_principal = getBaseUrl(baseUrl) + '/' + response.ruta;
 
     alert('Actualización de la imagen correctamente');
   } else {
     alert("Por favor, seleccione un archivo para visualizar.");
   }
 }
+
+
+// function handleUploadResponse (response) {
+//   debugger
+
+//   let file = $('#myfile').prop('files')[0];
+//   if (file) {
+//     let reader = new FileReader();
+//     reader.onload = function (e) {
+//       $('#principalImagePreview').attr('src', '/' + response.ruta).show();
+//       $('#principalImageName').val(file.name);
+//     }
+//     reader.readAsDataURL(file);
+
+//     imagen_principal = '/' + response.ruta;
+
+//     //alert('registro de la imagen correctamente')
+//   } else {
+//     alert("Por favor, seleccione un archivo para visualizar.");
+//   }
+
+// }
+
+// function handleEditUploadResponse (response) {
+//   let file = $('#myfile-editar').prop('files')[0];
+//   if (file) {
+//     let reader = new FileReader();
+//     reader.onload = function (e) {
+//       $('#CategoriaImagePreviewEdit').attr('src', '/' + response.ruta).show();
+//     }
+//     reader.readAsDataURL(file);
+
+//     imagen_principal = '/' + response.ruta;
+
+//     alert('Actualización de la imagen correctamente');
+//   } else {
+//     alert("Por favor, seleccione un archivo para visualizar.");
+//   }
+// }
 
 
 

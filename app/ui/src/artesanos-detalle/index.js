@@ -1682,6 +1682,7 @@ $(document).ready(function () {
 
 });
 
+
 /******foto 1 */
 document.addEventListener('DOMContentLoaded', () => {
   initializeFileUploader({

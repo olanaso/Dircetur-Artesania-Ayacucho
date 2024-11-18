@@ -59,6 +59,7 @@ export function custom () {
 
     menu()
     badgesdata()
+    generarTypeHead_ante();
 
     setTimeout(function (e) {
         googleTranslateElementInit();
@@ -188,7 +189,7 @@ export function menuselec () {
 export async function generarTypeHead_ante () {
     try {
         // Obtener el tipo de libro por defecto
-        let textobusqueda = document.getElementById('searchInput').value;
+        // let textobusqueda = ;
 
         document.getElementById('searchInput').style.width = '300px';
         // Configurar Bloodhound para la búsqueda
@@ -196,7 +197,7 @@ export async function generarTypeHead_ante () {
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('titulo'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
-                url: `${baseUrl}/buscar-producto?limit=9&nombre_producto=${textobusqueda}`, // URL del API que busca los libros
+                url: `${baseUrl}/buscar-producto?limit=9&nombre_producto=%QUERY`, // URL del API que busca los libros
                 wildcard: '%QUERY',
                 transform: function (response) {
                     // Adaptar la respuesta del servidor al formato que necesita Bloodhound
@@ -215,7 +216,7 @@ export async function generarTypeHead_ante () {
             {
                 hint: true,
                 highlight: true,
-                minLength: 2
+                minLength: 4
             },
             {
                 name: 'autores',
