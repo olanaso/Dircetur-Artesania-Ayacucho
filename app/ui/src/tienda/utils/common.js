@@ -58,10 +58,20 @@ export function custom () {
 
 
     menu()
+    badgesdata()
 
     setTimeout(function (e) {
         googleTranslateElementInit();
     }, 2000)
+
+}
+
+
+export function badgesdata () {
+    let artesanias = getDataFromLocalStorage('artesanias')
+    $('#badge_cant_prod_carrito').text(artesanias.length)
+    let artesaniasdeseadas = getDataFromLocalStorage('artesaniasdeseadas')
+    $('#badge_cant_prod_deseado').text(artesaniasdeseadas.length)
 
 }
 
@@ -232,63 +242,6 @@ export async function generarTypeHead_ante () {
             console.log('Libro seleccionado:', suggestion);
             window.location.href = "busqueda.html?nombre_producto=" + suggestion.title
             //location.href = 
-        });
-    } catch (error) {
-        console.error('Error generando el typeahead:', error);
-    }
-}
-
-
-export async function generarTypeHead () {
-    try {
-        // Inicializar el typeahead vacío
-        $('#searchInput').typeahead(
-            {
-                hint: true,
-                highlight: true,
-                minLength: 2
-            },
-            {
-                name: 'autores',
-                display: 'title',
-                source: function (query, syncResults, asyncResults) {
-                    // Llamada al servicio con el texto de búsqueda
-                    fetch(`${baseUrl}/buscar-producto?limit=9&nombre_producto=${encodeURIComponent(query)}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            // Adaptar la respuesta del servidor al formato que necesita el typeahead
-                            const results = data.datos.map(book => ({
-                                id: book.id,
-                                title: book.nombres_es.trim(),
-                                autores: book.artesano,
-                                cover_image: book.imagen_principal,
-                                categoria: book.categoria
-                            }));
-                            asyncResults(results); // Pasar los resultados al typeahead
-                        })
-                        .catch(error => console.error('Error en la búsqueda:', error));
-                },
-                templates: {
-                    suggestion: function (data) {
-                        return `
-                            <div class="tt-suggestion d-flex align-items-center">
-                                <img src="${data.cover_image}" alt="${data.title}" style="max-width: 40px; margin-right: 10px;">
-                                <div>
-                                    <div class="book-title">${data.title}</div>
-                                    <small class="text-muted">${data.autores}</small>
-                                    <p class="text-muted">${data.categoria}</p>
-                                </div>
-                            </div>
-                        `;
-                    }
-                }
-            }
-        );
-
-        // Evento para capturar la selección del usuario
-        $('#searchInput').bind('typeahead:select', function (ev, suggestion) {
-            console.log('Libro seleccionado:', suggestion);
-            window.location.href = `busqueda.html?nombre_producto=${encodeURIComponent(suggestion.title)}`;
         });
     } catch (error) {
         console.error('Error generando el typeahead:', error);

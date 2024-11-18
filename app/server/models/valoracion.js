@@ -10,10 +10,15 @@ module.exports = sequelize.define('valoracion', {
         autoIncrement: true,
         field: 'id'
     },
-    libroid: {
+    productoid: {
         type: Sequelize.INTEGER,
         allowNull: true,
         field: 'productoid'
+    },
+    artesanoid: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        field: 'artesanoid'
     },
     valor: {
         type: Sequelize.INTEGER,

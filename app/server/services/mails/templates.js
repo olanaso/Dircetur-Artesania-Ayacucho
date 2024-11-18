@@ -405,7 +405,7 @@ function generarCorreoRegistroCliente ({ nombreCliente, usuarioCliente, contrase
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperación de Cuenta</title>
+    <title>Registro de Cuenta</title>
 </head>
 <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
 
@@ -414,7 +414,7 @@ function generarCorreoRegistroCliente ({ nombreCliente, usuarioCliente, contrase
         <!-- Header -->
         <div style="text-align: center; padding-bottom: 20px;">
             <img src="${Logo}" alt="Logo de Artesanías de Ayacucho" style="max-width: 200px; margin-bottom: 20px;">
-            <h1 style="font-size: 24px; color: #d6008b; margin: 0;">Recuperación de Cuenta</h1>
+            <h1 style="font-size: 24px; color: #d6008b; margin: 0;">Registro de cuenta</h1>
         </div>
 
         <!-- Body -->

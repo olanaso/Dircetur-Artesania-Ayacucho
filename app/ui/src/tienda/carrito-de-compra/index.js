@@ -2,7 +2,7 @@
 
 import { loadPartials } from "../../utils/viewpartials.js";
 import { getPortadaBusqueda, busquedaProductos } from './api.js';
-import { custom } from '../utils/common.js';
+import { custom, badgesdata } from '../utils/common.js';
 
 
 (async function () {
@@ -183,7 +183,7 @@ function generarInterfaz () {
                             <div class="d-flex align-items-center mt-3" title="Artesano">
 									
 										<span class="text-dark"> 
-                                        <a style="color:#fff !important" href="../principal-artesano.html?id=50">
+                                        <a style="color:#fff !important" href="artesano.html?id=${artesano_id}">
                                <h3>Artesano ${contador}: ${artesano}</h3>
                                         </a></span>
 
@@ -311,6 +311,7 @@ function eliminarArtesania (id) {
     }
     localStorage.setItem('artesanias', JSON.stringify(nuevasArtesanias)); // Guardar la nueva lista
     generarInterfaz(); // Volver a renderizar la interfaz
+    badgesdata()
 }
 
 window.eliminarArtesania = eliminarArtesania

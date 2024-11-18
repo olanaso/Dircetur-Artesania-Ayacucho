@@ -176,7 +176,6 @@ async function saveClienteTienda (req, res, next) {
         const { datosusuario, datoscliente } = req.body;
 
 
-        mails.emailRegistrarCliente(datoscliente.correo, datosusuario.nombre_completo, datosusuario.usuario, datoscliente.numero_documento);
 
         let usuariovalue = datosusuario.usuario;
         let correovalue = datosusuario.correo;
@@ -249,6 +248,7 @@ async function saveClienteTienda (req, res, next) {
             { transaction: t }
         );
 
+        mails.emailRegistrarCliente(datoscliente.correo, datosusuario.nombre_completo, datosusuario.usuario, datoscliente.numero_documento);
 
 
         res.status(200).send({ message: "Cliente creado correctamente" })
