@@ -37,7 +37,9 @@ function startApp () {
 
 const setearPuntuacion = async (productoid) => {
 
-    const puntuacion = await obtenerPuntuacion(productoid);
+    let puntuacion = await obtenerPuntuacion(productoid);
+    puntuacion = puntuacion > 5 ? 5 : puntuacion;
+    puntuacion = puntuacion < 0 ? 0 : puntuacion;
 
     const estrella = document.querySelector(`input[name="rate"][value="${puntuacion}"]`);
 

@@ -90,7 +90,7 @@ export const  obtenerPuntuacion = async (productoid) => {
         return;
     }
 
-    const apiUrl = `http://localhost:3002/api/puntuacioPromedio?productoid=${productoid}`;  // Construimos la URL de la API
+    const apiUrl = `${baseUrl}/puntuacioPromedio?productoid=${productoid}`;  // Construimos la URL de la API
 
     try {
         const response = await fetch(apiUrl);  // Hacemos la solicitud a la API
@@ -108,7 +108,7 @@ export const  obtenerPuntuacion = async (productoid) => {
 
 export const enviarPuntuacion = async (data) => {
     try {
-        const response = await fetch('http://localhost:3002/api/valoracion', {
+        const response = await fetch(`${baseUrl}/valoracion`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
