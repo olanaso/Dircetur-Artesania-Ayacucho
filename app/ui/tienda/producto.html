@@ -343,6 +343,46 @@
       line-height: 1.4;
     }
 
+    .rating-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* From Uiverse.io by andrew-demchenk0 */
+    .rating:not(:checked)>input {
+      position: absolute;
+      appearance: none;
+    }
+
+    .rating:not(:checked)>label {
+      float: right;
+      cursor: pointer;
+      font-size: 30px;
+      color: #666;
+    }
+
+    .rating:not(:checked)>label:before {
+      content: "★";
+    }
+
+    .rating>input:checked+label:hover,
+    .rating>input:checked+label:hover~label,
+    .rating>input:checked~label:hover,
+    .rating>input:checked~label:hover~label,
+    .rating>label:hover~input:checked~label {
+      color: #e58e09;
+    }
+
+    .rating:not(:checked)>label:hover,
+    .rating:not(:checked)>label:hover~label {
+      color: #ff9e0b;
+    }
+
+    .rating>input:checked~label {
+      color: #ffa723;
+    }
+
     footer {
       margin-top: 80px;
       background-color: #111;
@@ -433,6 +473,25 @@
               <h4 id="producto-nombre">-</h4>
               <span id="producto-precio">-</span>
               <p id="producto-descripcion">-</p>
+
+              <h5 class="fw-bold">Valorar este producto</h5>
+
+              <div class="rating-container">
+                <div class="rating">
+                  <input value="5" name="rate" id="star5" type="radio" />
+                  <label title="5" for="star5"></label>
+                  <input value="4" name="rate" id="star4" type="radio" />
+                  <label title="4" for="star4"></label>
+                  <input value="3" name="rate" id="star3" type="radio" />
+                  <label title="3" for="star3"></label>
+                  <input value="2" name="rate" id="star2" type="radio" />
+                  <label title="2" for="star2"></label>
+                  <input value="1" name="rate" id="star1" type="radio" />
+                  <label title="1" for="star1"></label>
+                </div>
+              </div>
+
+
               <div class="container">
                 <div class="row">
                   <ul class="car-info col-md-6">
@@ -608,7 +667,6 @@
     </div>
   </section>
 
-
   <section>
     <div class="recent-car similar-car wow fadeIn" data-wow-duration="1s">
       <div class="container">
@@ -640,7 +698,8 @@
 
         <form id="comment-form" class="comment-form">
           <textarea id="new-comment" placeholder="Escribe tu comentario aquí..." class="comment-textarea" required
-            minlength="3" maxlength="100"></textarea>
+            minlength="3"></textarea>
+
           <button type="submit" class="comment-submit">
             Enviar Comentario
             <div id="loaderComentario" style="display: none; text-align: center">
@@ -649,9 +708,7 @@
           </button>
         </form>
 
-        <div class="comments-list">
-
-        </div>
+        <div class="comments-list"></div>
       </div>
     </div>
   </section>
