@@ -1,7 +1,7 @@
 
 
 import { loadPartials } from "../../utils/viewpartials.js";
-import { getPortadaBusqueda, busquedaProductos, listarComentarios, nuevoComentario } from './api';
+import { getPortadaBusqueda, busquedaProductos, listarComentarios, nuevoComentario, obtenerPuntuacion, enviarPuntuacion } from './api';
 import { custom } from '../utils/common.js';
 import { obtenerProducto } from "../producto/api.js";
 
@@ -35,6 +35,49 @@ function startApp () {
     obtenerUrlProducto()
 }
 
+const setearPuntuacion = async (productoid) => {
+
+    const puntuacion = await obtenerPuntuacion(productoid);
+
+    const estrella = document.querySelector(`input[name="rate"][value="${puntuacion}"]`);
+
+    if (estrella) {
+        estrella.checked = true;
+    }
+}
+
+const enviarCalificacion = async (productoId) => {
+    document.querySelectorAll('input[name="rate"]').forEach(star => {
+        star.addEventListener('change', async () => {
+            const valor = star.value;
+            
+            const data = {
+                libroid: productoId,
+                valor: parseInt(valor)
+            };
+            
+            const resp = await enviarPuntuacion(data);
+
+            const ratingContainer = document.querySelector('.rating-container');
+            const mensajeElement = document.createElement('p');
+            mensajeElement.style.color = resp ? '#4caf50' : '#f44336';
+            mensajeElement.style.fontWeight = 'bold';
+
+            if (resp) {
+                mensajeElement.textContent = '¡Gracias por tu calificación!';
+                setearPuntuacion(productoId);
+            } else {
+                mensajeElement.textContent = 'Ocurrió un error al enviar tu calificación.';
+            }
+
+            ratingContainer.appendChild(mensajeElement);
+
+            setTimeout(() => {
+                mensajeElement.remove();
+            }, 3000);
+        });
+    });
+}
 
 const obtenerComentarios = async (id) => {
     const commentsList = document.querySelector('.comments-list');
@@ -203,10 +246,15 @@ function obtenerUrlProducto () {
 
         // Mostrar el objeto en el DOM
         //    debugger
+
+        const artesaniaId = artesaniaenviada.artesania.id;
         console.log(artesaniaenviada)
-        infoProductoById(artesaniaenviada.artesania.id)
-        obtenerComentarios(artesaniaenviada.artesania.id)
-        agregarComentario(artesaniaenviada.artesania.id)
+
+        infoProductoById(artesaniaId)
+        obtenerComentarios(artesaniaId)
+        agregarComentario(artesaniaId)
+        setearPuntuacion(artesaniaId)
+        enviarCalificacion(artesaniaId)
 
         $('#btnagregarcarrito').attr('href', `carrito-de-compra.html?producto=${artesaniaenviada.artesania.url_carrito}`)
         //guardarArtesania(artesaniaenviada.artesania.id);
