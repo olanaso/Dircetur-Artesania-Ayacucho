@@ -43,11 +43,11 @@ function reporte1 (req, res) {
     sql =
         `
         SELECT
-            SUM(CASE WHEN estado = 'pagado' THEN 1 ELSE 0 END) AS pagado,
-            SUM(CASE WHEN estado = 'envio' THEN 1 ELSE 0 END) AS envio,
-            SUM(CASE WHEN estado = 'pendiente' THEN 1 ELSE 0 END) AS pendiente,
-            SUM(CASE WHEN estado = 'proceso' THEN 1 ELSE 0 END) AS proceso
-        FROM pedido
+    COALESCE(SUM(CASE WHEN estado = 'pagado' THEN 1 ELSE 0 END), 0) AS pagado,
+    COALESCE(SUM(CASE WHEN estado = 'envio' THEN 1 ELSE 0 END), 0) AS envio,
+    COALESCE(SUM(CASE WHEN estado = 'pendiente' THEN 1 ELSE 0 END), 0) AS pendiente,
+    COALESCE(SUM(CASE WHEN estado = 'proceso' THEN 1 ELSE 0 END), 0) AS proceso
+FROM pedido
         WHERE 1=1 AND artesano_id = '${req.params.id}'
     `;
 

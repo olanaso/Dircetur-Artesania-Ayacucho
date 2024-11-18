@@ -42,12 +42,13 @@ export function obtenerIESTP () {
     });
 }
 
-
 export async function checkSession () {
     const settings = {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
+            'Authorization': 'Bearer ' + getDataFromLocalStorage('accessToken'),
+            'Rol': getDataFromLocalStorage('rol')
         },
         body: new URLSearchParams({
             token: getDataFromLocalStorage('accessToken')
@@ -57,7 +58,6 @@ export async function checkSession () {
     try {
         const response = await fetch(baseUrl + "/protegido", settings);
         const data = await response.json();
-        console.log("El data es", data)
         saveDataToLocalStorage('session', data)
         if (!data.isvalid) {
             location.href = "sinacceso.html"
@@ -68,25 +68,6 @@ export async function checkSession () {
     }
 }
 
-export async function checkUserSession () {
-    let result = await checkSession();
-
-    // Obtener el enlace actual de la página (asumo que está almacenado en alguna variable)
-    const currentUrl = window.location.pathname;  // Puedes ajustar esto según cómo obtengas la URL actual
-
-    // Verificar si el usuario tiene acceso al enlace actual
-    const tieneAcceso = result.usuario.menu.some(item => {
-        return item.enlace === currentUrl && item.rolesacceso.includes(result.usuario.rolid.toString());
-    });
-
-    // Verificar acceso especial para la página /admin-ciclos.html para el rol de super admin
-    const esSuperAdmin = result.usuario.rolid === 1000;
-    const accesoEspecial = currentUrl === '/admin-ciclos.html' && esSuperAdmin;
-
-    if (!tieneAcceso && !accesoEspecial) {
-        location.href = "sinacceso.html";
-    }
-}
 
 export function llenarinformacionIESTPProg () {
 
