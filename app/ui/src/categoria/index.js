@@ -6,7 +6,7 @@ import { showToast } from '../utils/toast';
 import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
 
 import { loadPartials } from '../utils/viewpartials';
-import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
+import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado, checkUserSession } from '../utils/init';
 
 
 hideLoading();
@@ -35,7 +35,7 @@ hideLoading();
 })();
 
 function startApp () {
-  checkadminsession();
+  checkUserSession();
   setTimeout(function () {
     llenarinformacionIESTPProg();
     //marcarSubMenuSeleccionado();

@@ -210,7 +210,6 @@ async function buscarUsuario () {
   /*********** */
   $('#btnguardarcambio').on('click', async function (e) {
 
-    debugger
 
     e.preventDefault();
     var isValid = true;
@@ -242,7 +241,7 @@ async function buscarUsuario () {
     let correo = $('#correo').val()
     let celular = $('#celular').val()
     let lugar_nacimiento = $('#lugar_nacimiento').val()
-    let ubigeo = $('#distrito').val()
+    let ubigeo = $('#distrito option:selected').val()
     let lengua_materna = $('#lengua_materna').val()
 
     var foto1ImagePreview = document.getElementById('imagenFoto1');
