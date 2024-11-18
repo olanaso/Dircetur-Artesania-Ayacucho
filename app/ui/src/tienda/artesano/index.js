@@ -1,7 +1,7 @@
 import './styles.css';
 
 import { loadPartials } from "../../utils/viewpartials.js";
-import { getPortadaBusqueda, busquedaProductos, obtenerArtesanoById } from './api.js';
+import { getPortadaBusqueda, busquedaProductos, obtenerArtesanoById, obtenerPuntuacion, enviarPuntuacion } from './api.js';
 import { custom } from '../utils/common.js';
 
 
@@ -162,6 +162,9 @@ function startApp () {
     // cargarDataPortada();
     // rellenarFormulario();
     // realizarBusqueda();
+
+    setearCalificacion();
+    enviarCalificacion();
 }
 
 function formatearNumero (numero) {
@@ -172,8 +175,6 @@ function formatearNumero (numero) {
 }
 
 function loadProductosDestacados (data) {
-
-    debugger
 
     let html = ` `
     for (let item of data) {
@@ -269,7 +270,55 @@ function loadProductosDestacados (data) {
     })
 }
 
+const setearCalificacion = async () => {
+    const artesanoId = getQueryParameter("id");
 
+    let puntuacion = await obtenerPuntuacion(artesanoId);
+
+    puntuacion = puntuacion > 5 ? 5 : puntuacion;
+    puntuacion = puntuacion < 0 ? 0 : puntuacion;
+
+    const estrella = document.querySelector(`input[name="rate"][value="${puntuacion}"]`);
+
+    if (estrella) {
+        estrella.checked = true;
+    }
+}
+
+const enviarCalificacion = async () => {
+    const artesanoId = await getQueryParameter("id");
+
+    document.querySelectorAll('input[name="rate"]').forEach(star => {
+        star.addEventListener('change', async () => {
+            const valor = star.value;
+            
+            const data = {
+                artesanoid: artesanoId,
+                valor: parseInt(valor)
+            };
+            
+            const resp = await enviarPuntuacion(data);
+
+            const ratingContainer = document.querySelector('.rating-container');
+            const mensajeElement = document.createElement('p');
+            mensajeElement.style.color = resp ? '#4caf50' : '#f44336';
+            mensajeElement.style.fontWeight = 'bold';
+
+            if (resp && resp.valor) {
+                mensajeElement.textContent = '¡Gracias por tu calificación!';
+                setearCalificacion(artesanoId);
+            } else {
+                mensajeElement.textContent = 'Ocurrió un error al enviar tu calificación.';
+            }
+
+            ratingContainer.appendChild(mensajeElement);
+
+            setTimeout(() => {
+                mensajeElement.remove();
+            }, 3000);
+        });
+    });
+}
 
 
 
