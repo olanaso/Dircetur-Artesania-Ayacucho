@@ -1,56 +1,63 @@
 /* jshint indent: 1 */
 const db = require('../config/db');
 sequelize = db.sequelize;
-Sequelize = db.Sequelize;
+DataTypes = db.Sequelize;
 
-module.exports = sequelize.define('libros', {
+module.exports = sequelize.define('accesos', {
     id: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        primaryKey: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
         autoIncrement: true,
-        field: 'id'
+        primaryKey: true,
     },
-    iestp: {
-        type: Sequelize.STRING,
+    cliente: {
+        type: DataTypes.TEXT,
         allowNull: true,
-        field: 'iestp'
     },
-    carrera: {
-        type: Sequelize.STRING,
+    productoid: {
+        type: DataTypes.INTEGER,
         allowNull: true,
-        field: 'carrera'
     },
-     fecha_registro: {
-        type: Sequelize.DATEONLY, 
+    producto: {
+        type: DataTypes.TEXT,
         allowNull: true,
-        field: 'fecha_registro'
-    },
-    libro: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        field: 'libro'
-    },
-    autor: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        field: 'autor'
-    },
-    usuario: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        field: 'usuario'
-    },
-    modalidad: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        field: 'modalidad'
     },
     ip: {
-        type: Sequelize.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
-        field: 'ip'
-    }
+    },
+    horario: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+    },
+    horaacceso: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    },
+    fecha_cliente: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
+    dispositivo: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+    },
+    url: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+    },
+    createdAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: DataTypes.NOW,
+        field: 'createdat',
+    },
+    updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: DataTypes.NOW,
+        field: 'updatedat',
+    },
 
 }, {
     tableName: 'accesos',
