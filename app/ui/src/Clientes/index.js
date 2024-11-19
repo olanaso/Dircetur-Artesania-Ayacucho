@@ -5,7 +5,7 @@ const alertDialog = new AlertDialog();
 
 
 import { loadPartials } from '../utils/viewpartials';
-import { hideLoading, llenarinformacionIESTPProg } from '../utils/init';
+import { hideLoading, llenarinformacionIESTPProg, checkSession } from '../utils/init';
 
 
 hideLoading();
@@ -34,6 +34,7 @@ hideLoading();
 
 function startApp () {
   //checkadminsession(); 
+  checkSession();
   setTimeout(function () {
     llenarinformacionIESTPProg();
     //marcarSubMenuSeleccionado();

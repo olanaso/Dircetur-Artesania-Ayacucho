@@ -4,7 +4,7 @@ import { FileUploader } from '../utils/uploadJorge.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 import { guardarUsuario, geteditarArtesano, geteditarLogin, deleteUserCapacitacion, guardarArtesano, llenardepartamento, llenarprovincia, llenardistrito, nuevoUserCapacitacion, buscarDNI } from './api';
-import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
+import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado, checkSession } from '../utils/init';
 
 import { showToast } from '../utils/toast';
 import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
@@ -37,6 +37,7 @@ hideLoading();
 
 function startApp () {
   // checkadminsession(); 
+  checkSession();
   setTimeout(function () {
     llenarinformacionIESTPProg();
     //marcarSubMenuSeleccionado();

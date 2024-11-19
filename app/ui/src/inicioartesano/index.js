@@ -33,7 +33,7 @@ hideLoading();
 })();
 
 function startApp () {
-
+  debugger
   validarSession();
   setTimeout(function () {
     llenarinformacionIESTPProg();
@@ -48,6 +48,7 @@ var editreporte2 = null;
 var editreporte3 = null;
 var editreporte4 = null;
 let usuario = null;
+
 async function validarSession () {
 
   let result = await checkSession()

@@ -3,7 +3,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 import { buscarProducto, deleteProducto } from './api';
-import { showLoading, hideLoading, llenarinformacionIESTPProg } from '../utils/init';
+import { showLoading, hideLoading, llenarinformacionIESTPProg, checkSession } from '../utils/init';
 import { getDataFromLocalStorage } from '../utils/config';
 import { showToast } from '../utils/toast';
 import '../productos/style.css';
@@ -26,7 +26,9 @@ hideLoading();
   }
 })();
 
-function startApp() {
+function startApp () {
+
+  checkSession();
   setTimeout(function () {
     llenarinformacionIESTPProg();
   }, 500);
@@ -38,7 +40,7 @@ var idactualizar = null;
 let currentPage = 1; // Reset to the first page
 let rowsPerPage = 10;
 
-async function buscarUsuario22() {
+async function buscarUsuario22 () {
   const Nombreproducto = document.getElementById('nombre-producto').value;
   const Nombreartesano = document.getElementById('nombre-artesano').value;
   const Preciosid = document.getElementById('precios-id').value;
@@ -85,7 +87,7 @@ $(document).on('click', '.btn_Eliminar', async function (e) {
   );
 });
 
-async function iniciarcarga() {
+async function iniciarcarga () {
   const Nombreproducto = document.getElementById('nombre-producto').value;
   const Nombreartesano = document.getElementById('nombre-artesano').value;
   const Preciosid = document.getElementById('precios-id').value;
@@ -102,7 +104,7 @@ async function iniciarcarga() {
   displayPagination(data, rowsPerPage);
 }
 
-async function displayTable(data, rowsPerPage, page) {
+async function displayTable (data, rowsPerPage, page) {
   const start = (page - 1) * rowsPerPage;
   const end = Math.min(start + rowsPerPage, data.length);
   const paginatedData = data.slice(start, end);
@@ -133,7 +135,7 @@ async function displayTable(data, rowsPerPage, page) {
   updateInfo(start + 1, end, data.length);
 }
 
-function displayPagination(data, rowsPerPage) {
+function displayPagination (data, rowsPerPage) {
   const pagination = document.querySelector('.pagination');
   pagination.innerHTML = '';
 
@@ -188,7 +190,7 @@ function displayPagination(data, rowsPerPage) {
   updatePaginationButtons();
 }
 
-function createPageButton(page, data) {
+function createPageButton (page, data) {
   const button = document.createElement('li');
   button.classList.add('paginate_button', 'page-item');
   button.innerHTML = `<a href="#" class="page-link">${page}</a>`;
@@ -202,14 +204,14 @@ function createPageButton(page, data) {
   return button;
 }
 
-function createEllipsis() {
+function createEllipsis () {
   const ellipsis = document.createElement('li');
   ellipsis.classList.add('paginate_button', 'page-item', 'disabled');
   ellipsis.innerHTML = `<a href="#" class="page-link">…</a>`;
   return ellipsis;
 }
 
-function updatePaginationButtons() {
+function updatePaginationButtons () {
   const paginationButtons = document.querySelectorAll('.pagination .page-item');
   paginationButtons.forEach(button => button.classList.remove('active'));
 
@@ -220,7 +222,7 @@ function updatePaginationButtons() {
   });
 }
 
-function updateInfo(start, end, total) {
+function updateInfo (start, end, total) {
   const info = document.getElementById('basicExample_info');
   info.textContent = `Mostrando del ${start} a ${end} de ${total} resultados`;
 }

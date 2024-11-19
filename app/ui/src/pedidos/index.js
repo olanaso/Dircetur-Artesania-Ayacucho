@@ -1,39 +1,40 @@
 import { listarPedidos, filtrarPedidos } from './api';
 import { showToast } from '../utils/toast';
-import { loadPartials } from '../utils/viewpartials';   
-import {  hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init'; 
+import { loadPartials } from '../utils/viewpartials';
+import { hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado, checkSession } from '../utils/init';
 
- 
+
 hideLoading();
 // Uso de la función
 (async function () {
-  let partials = [
-    { path: 'partials/shared/header.html', container: 'app-header' },
-    { path: 'partials/shared/menu.html', container: 'app-side' },
+    let partials = [
+        { path: 'partials/shared/header.html', container: 'app-header' },
+        { path: 'partials/shared/menu.html', container: 'app-side' },
 
 
-  ]; 
-  try {
-    await loadPartials(partials);
-    import ('../utils/common')
+    ];
+    try {
+        await loadPartials(partials);
+        import('../utils/common')
 
-   
-    // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
-    console.log('Las vistas parciales se han cargado correctamente!');
-    // Por ejemplo, podrías iniciar tu aplicación aquí.
 
-    startApp();
-  } catch (e) {
-    console.error(e);
-  }
+        // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
+        console.log('Las vistas parciales se han cargado correctamente!');
+        // Por ejemplo, podrías iniciar tu aplicación aquí.
+
+        startApp();
+    } catch (e) {
+        console.error(e);
+    }
 })();
 
 function startApp () {
-  //checkadminsession(); 
-  setTimeout(function() {
-    llenarinformacionIESTPProg();
-   // marcarSubMenuSeleccionado();
-}, 500); 
+    //checkadminsession();
+    checkSession();
+    setTimeout(function () {
+        llenarinformacionIESTPProg();
+        // marcarSubMenuSeleccionado();
+    }, 500);
 
 }
 /*async function checkadminsession () {
@@ -42,7 +43,7 @@ function startApp () {
     location.href = "sinacceso.html"
   }
 }*/
- 
+
 
 
 
@@ -64,9 +65,9 @@ const btnFiltrar = document.getElementById('filtrar-pedido');
 const tablaPedidos = document.getElementById('tablaPedidos');
 const tablaPedidoBody = tablaPedidos.getElementsByTagName('tbody')[0];
 
- 
 
-async function cargarPedidos() {
+
+async function cargarPedidos () {
     try {
         let pedidos;
         // Determinar si se está filtrando o no
@@ -89,7 +90,7 @@ async function cargarPedidos() {
     }
 }
 
-function actualizarControlesPaginacion(totalPages, totalItems) {
+function actualizarControlesPaginacion (totalPages, totalItems) {
     // Calculamos el rango mostrado actualmente
     const fromItem = (currentPage - 1) * DEFAULT_PAGE_LIMIT + 1;
     let toItem = currentPage * DEFAULT_PAGE_LIMIT;
@@ -230,7 +231,7 @@ function actualizarControlesPaginacion(totalPages, totalItems) {
     paginationControls.appendChild(nextBtn);
 }
 
-async function cambiarPagina(page) {
+async function cambiarPagina (page) {
     if (page !== currentPage) {
         currentPage = page;
         await cargarPedidos();
@@ -241,46 +242,46 @@ btnFiltrar.addEventListener('click', async (event) => {
     await filtrarPedidosAction();
 });
 
-async function filtrarPedidosAction() {
-    
-        // Obtener valores de los campos de filtro
-        const numPedido = document.getElementById('num-pedido').value;
-        const artesano = document.getElementById('nombre-artesano').value;
-        const cliente = document.getElementById('nombre-cliente').value;
-        const fecha = document.getElementById('fecha-pedido').value;
-        const estado = document.getElementById('estado').value;
+async function filtrarPedidosAction () {
 
-        // Construir el objeto de filtro
-        currentFilter = {
-            num_pedido: numPedido,
-            nombre_artesano: artesano,
-            nombre_cliente: cliente,
-            fecha_pedido: fecha,
-            estado: estado
+    // Obtener valores de los campos de filtro
+    const numPedido = document.getElementById('num-pedido').value;
+    const artesano = document.getElementById('nombre-artesano').value;
+    const cliente = document.getElementById('nombre-cliente').value;
+    const fecha = document.getElementById('fecha-pedido').value;
+    const estado = document.getElementById('estado').value;
+
+    // Construir el objeto de filtro
+    currentFilter = {
+        num_pedido: numPedido,
+        nombre_artesano: artesano,
+        nombre_cliente: cliente,
+        fecha_pedido: fecha,
+        estado: estado
+    };
+
+    // Reiniciar currentPage al filtrar
+    currentPage = 1;
+
+    try {
+        // Filtrar pedidos con los parámetros actuales
+        const filtro = {
+            ...currentFilter,
+            page: currentPage,
+            limit: DEFAULT_PAGE_LIMIT
         };
+        const pedidosFiltrados = await filtrarPedidos(filtro);
 
-        // Reiniciar currentPage al filtrar
-        currentPage = 1;
-
-        try {
-            // Filtrar pedidos con los parámetros actuales
-            const filtro = {
-                ...currentFilter,
-                page: currentPage,
-                limit: DEFAULT_PAGE_LIMIT
-            };
-            const pedidosFiltrados = await filtrarPedidos(filtro);
-
-            // Cargar los resultados filtrados en la tabla y actualizar la paginación
-            cargarTabla(pedidosFiltrados.pedidos);
-            totalPages = Math.ceil(pedidosFiltrados.totalItems / DEFAULT_PAGE_LIMIT);
-            actualizarControlesPaginacion(totalPages, pedidosFiltrados.totalItems);
-        } catch (error) {
-            console.error('Error al filtrar pedidos:', error);
-        }
+        // Cargar los resultados filtrados en la tabla y actualizar la paginación
+        cargarTabla(pedidosFiltrados.pedidos);
+        totalPages = Math.ceil(pedidosFiltrados.totalItems / DEFAULT_PAGE_LIMIT);
+        actualizarControlesPaginacion(totalPages, pedidosFiltrados.totalItems);
+    } catch (error) {
+        console.error('Error al filtrar pedidos:', error);
+    }
 }
 
-function cargarTabla(pedidos) {
+function cargarTabla (pedidos) {
     tablaPedidoBody.innerHTML = '';
 
     pedidos.forEach(pedido => {
@@ -333,7 +334,7 @@ function cargarTabla(pedidos) {
 
 
 
-function formatearFecha(fecha) {
+function formatearFecha (fecha) {
     const date = new Date(fecha);
     const anio = date.getUTCFullYear();
     const mes = ('0' + (date.getUTCMonth() + 1)).slice(-2);

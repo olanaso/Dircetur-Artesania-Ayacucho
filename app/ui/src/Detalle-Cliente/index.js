@@ -3,12 +3,12 @@ import { enviarCorreo } from './api.js';
 import { loadData, handleCountryChange, handleStateChange } from '../utils/ubicaciones';
 import { FileUploader } from '../utils/uploadVictor.js';
 import { AlertDialog } from "../utils/alert";
-import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
+import { baseUrl, getBaseUrl } from '../utils/config.js';
 const alertDialog = new AlertDialog();
 
 
 import { loadPartials } from '../utils/viewpartials';
-import { hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
+import { hideLoading, llenarinformacionIESTPProg, checkSession } from '../utils/init';
 
 
 hideLoading();
@@ -37,6 +37,7 @@ hideLoading();
 
 function startApp () {
     //checkadminsession(); 
+    checkSession();
     setTimeout(function () {
         llenarinformacionIESTPProg();
         // marcarSubMenuSeleccionado();

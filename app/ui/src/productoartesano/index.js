@@ -3,7 +3,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 import { buscarProducto, deleteProducto } from './api';
-import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
+import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado, checkSession } from '../utils/init';
 import { getDataFromLocalStorage, } from '../utils/config'
 import { showToast } from '../utils/toast';
 import '../productoartesano/style.css'
@@ -37,6 +37,7 @@ hideLoading();
 
 function startApp () {
   //checkadminsession(); 
+  checkSession();
   setTimeout(function () {
     llenarinformacionIESTPProg();
     buscarUsuario22();

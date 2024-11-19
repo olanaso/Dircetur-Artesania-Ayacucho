@@ -4,7 +4,7 @@ import { FileUploader } from '../utils/uploadJorge.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 import { geteditarArtesano, geteditarLogin, llenardepartamento, llenarprovincia, llenardistrito, guardarArtesano, buscarDNI, guardarArtesanoUsuario } from './api';
-import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
+import { showLoading, hideLoading, llenarinformacionIESTPProg, checkSession } from '../utils/init';
 import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
 import { showToast } from '../utils/toast';
 import '../artesanos-detalle/style.css'
@@ -37,6 +37,7 @@ hideLoading();
 
 function startApp () {
   //checkadminsession(); 
+  checkSession();
   setTimeout(function () {
     llenarinformacionIESTPProg();
     //();

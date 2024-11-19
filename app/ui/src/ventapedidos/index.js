@@ -1,45 +1,46 @@
 import { listarPedidos, filtrarPedidos } from './api';
 
-import { loadPartials } from '../utils/viewpartials'; 
+import { loadPartials } from '../utils/viewpartials';
 import { AlertDialog } from "../utils/alert";
-const alertDialog = new AlertDialog(); 
-import {  hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';
-import { getDataFromLocalStorage, } from '../utils/config' 
+const alertDialog = new AlertDialog();
+import { hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado, checkSession } from '../utils/init';
+import { getDataFromLocalStorage, } from '../utils/config'
 
 
 
 
- 
+
 hideLoading();
 // Uso de la función
 (async function () {
-  let partials = [
-    { path: 'partials/shared/header.html', container: 'app-header' },
-    { path: 'partials/shared/menu.html', container: 'app-side' },
+    let partials = [
+        { path: 'partials/shared/header.html', container: 'app-header' },
+        { path: 'partials/shared/menu.html', container: 'app-side' },
 
 
-  ]; 
-  try {
-    await loadPartials(partials);
-    import ('../utils/common')
+    ];
+    try {
+        await loadPartials(partials);
+        import('../utils/common')
 
-   
-    // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
-    console.log('Las vistas parciales se han cargado correctamente!');
-    // Por ejemplo, podrías iniciar tu aplicación aquí.
 
-    startApp();
-  } catch (e) {
-    console.error(e);
-  }
+        // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
+        console.log('Las vistas parciales se han cargado correctamente!');
+        // Por ejemplo, podrías iniciar tu aplicación aquí.
+
+        startApp();
+    } catch (e) {
+        console.error(e);
+    }
 })();
 
 function startApp () {
-  //checkadminsession(); 
-  setTimeout(function() {
-    llenarinformacionIESTPProg();
-   // marcarSubMenuSeleccionado();
-}, 500); 
+    //checkadminsession();
+    checkSession();
+    setTimeout(function () {
+        llenarinformacionIESTPProg();
+        // marcarSubMenuSeleccionado();
+    }, 500);
 
 }
 /*async function checkadminsession () {
@@ -55,9 +56,9 @@ function startApp () {
 
 
 
-var artesanoId=0;
-let usuario=getDataFromLocalStorage('session').usuarios;
-  artesanoId = usuario.datos[0].id;
+var artesanoId = 0;
+let usuario = getDataFromLocalStorage('session').usuarios;
+artesanoId = usuario.datos[0].id;
 
 const DEFAULT_PAGE_LIMIT = 10;
 let currentPage = 1;
@@ -71,13 +72,13 @@ const tablaPedidoBody = tablaPedidos.getElementsByTagName('tbody')[0];
 
 
 
-async function cargarPedidos() {
+async function cargarPedidos () {
     try {
         let pedidos;
 
         // Determinar si se está filtrando o no
         if (Object.keys(currentFilter).length === 0) {
-            pedidos = await listarPedidos(currentPage, DEFAULT_PAGE_LIMIT,artesanoId);
+            pedidos = await listarPedidos(currentPage, DEFAULT_PAGE_LIMIT, artesanoId);
         } else {
             const filtro = {
                 ...currentFilter,
@@ -95,7 +96,7 @@ async function cargarPedidos() {
     }
 }
 
-function actualizarControlesPaginacion(totalPages, totalItems) {
+function actualizarControlesPaginacion (totalPages, totalItems) {
     // Calculamos el rango mostrado actualmente
     const fromItem = (currentPage - 1) * DEFAULT_PAGE_LIMIT + 1;
     let toItem = currentPage * DEFAULT_PAGE_LIMIT;
@@ -236,14 +237,14 @@ function actualizarControlesPaginacion(totalPages, totalItems) {
     paginationControls.appendChild(nextBtn);
 }
 
-async function cambiarPagina(page) {
+async function cambiarPagina (page) {
     if (page !== currentPage) {
         currentPage = page;
         await cargarPedidos();
     }
 }
 
-async function filtrarPedidosAction() {
+async function filtrarPedidosAction () {
     btnFiltrar.addEventListener('click', async (event) => {
         event.preventDefault();
 
@@ -285,7 +286,7 @@ async function filtrarPedidosAction() {
     });
 }
 
-function cargarTabla(pedidos) {
+function cargarTabla (pedidos) {
     tablaPedidoBody.innerHTML = '';
 
     pedidos.forEach(pedido => {
@@ -330,7 +331,7 @@ function cargarTabla(pedidos) {
     });
 }
 
-function formatearFecha(fecha) {
+function formatearFecha (fecha) {
     const date = new Date(fecha);
     const anio = date.getUTCFullYear();
     const mes = ('0' + (date.getUTCMonth() + 1)).slice(-2);

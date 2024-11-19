@@ -3,7 +3,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 import { buscarArtesano, deleteArtesano } from './api';
-import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
+import { showLoading, hideLoading, llenarinformacionIESTPProg, checkSession } from '../utils/init';
 import { getDataFromLocalStorage } from '../utils/config';
 import { showToast } from '../utils/toast';
 import '../artesanos/style.css';
@@ -28,6 +28,7 @@ hideLoading();
 })();
 
 function startApp () {
+  checkSession();
   setTimeout(function () {
     llenarinformacionIESTPProg();
   }, 500);

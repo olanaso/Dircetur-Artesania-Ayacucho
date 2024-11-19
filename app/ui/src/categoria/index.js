@@ -6,7 +6,8 @@ import { showToast } from '../utils/toast';
 import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
 
 import { loadPartials } from '../utils/viewpartials';
-import { showLoading, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado, checkUserSession } from '../utils/init';
+import { showLoading, checkSession, hideLoading, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init';
+
 
 
 hideLoading();
@@ -35,26 +36,13 @@ hideLoading();
 })();
 
 function startApp () {
-  checkUserSession();
+  checkSession();
   setTimeout(function () {
     llenarinformacionIESTPProg();
     //marcarSubMenuSeleccionado();
   }, 500);
 
 }
-async function checkadminsession () {
-  let result = await checkSession()
-  if (result.usuario.rolid != 1) {
-    location.href = "sinacceso.html"
-  }
-}
-
-
-
-
-
-
-
 
 let imagen_principal = "";
 async function cargarCategoria () {

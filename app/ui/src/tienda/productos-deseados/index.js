@@ -160,7 +160,7 @@ function guardarArtesania ({ id, artesania, artesano }) {
 
 // Función para eliminar un producto por ID con confirmación
 function eliminarArtesania (id) {
-    const confirmacion = confirm('¿Estás seguro de que deseas eliminar este producto del carrito?');
+    const confirmacion = confirm('¿ Estás seguro de que deseas eliminar el producto deseado ?');
     if (!confirmacion) {
         return; // Si el usuario cancela, no se elimina el producto
     }

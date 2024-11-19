@@ -1,47 +1,48 @@
-import {reporteGeneral} from './api'
+import { reporteGeneral } from './api'
 
 
-import { loadPartials } from '../utils/viewpartials';  
-import { createXLS } from '../utils/exportexcel';   
-import {  hideLoading, llenarinformacionIESTPProg,marcarSubMenuSeleccionado } from '../utils/init';  
+import { loadPartials } from '../utils/viewpartials';
+import { createXLS } from '../utils/exportexcel';
+import { hideLoading, llenarinformacionIESTPProg, checkSession } from '../utils/init';
 import { showToast } from '../utils/toast';
 
- 
+
 hideLoading();
 // Uso de la función
 (async function () {
-  let partials = [
-    { path: 'partials/shared/header.html', container: 'app-header' },
-    { path: 'partials/shared/menu.html', container: 'app-side' },
+    let partials = [
+        { path: 'partials/shared/header.html', container: 'app-header' },
+        { path: 'partials/shared/menu.html', container: 'app-side' },
 
 
-  ]; 
-  try {
-    await loadPartials(partials);
-    import ('../utils/common')
+    ];
+    try {
+        await loadPartials(partials);
+        import('../utils/common')
 
-   
-    // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
-    console.log('Las vistas parciales se han cargado correctamente!');
-    // Por ejemplo, podrías iniciar tu aplicación aquí.
 
-    startApp();
-  } catch (e) {
-    console.error(e);
-  }
+        // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
+        console.log('Las vistas parciales se han cargado correctamente!');
+        // Por ejemplo, podrías iniciar tu aplicación aquí.
+
+        startApp();
+    } catch (e) {
+        console.error(e);
+    }
 })();
 
-function startApp () {  
-  setTimeout(function() {
-    llenarinformacionIESTPProg(); 
-}, 500); 
+function startApp () {
+    checkSession();
+    setTimeout(function () {
+        llenarinformacionIESTPProg();
+    }, 500);
 
 }
- 
+
 
 
 /* (en caso de querer personalizar campos de reportes en general)*/
-document.getElementById('reportType').addEventListener('change', function() {
+document.getElementById('reportType').addEventListener('change', function () {
     /*const reportType = this.value;
     const checkboxContainer = document.getElementById('checkboxContainer');
     checkboxContainer.innerHTML = ''; // Clear previous checkboxes
@@ -97,7 +98,7 @@ document.getElementById('reportType').addEventListener('change', function() {
         checkboxContainer.appendChild(checkboxDiv);
     }*/
 });
- 
+
 
 /*document.getElementById('btn-reporte').addEventListener('click', async function(event) {
     event.preventDefault()
@@ -115,9 +116,9 @@ document.getElementById('reportType').addEventListener('change', function() {
 });*/
 
 
- 
 
-document.getElementById('btn-exportarexcel').addEventListener('click', async function(event) {
+
+document.getElementById('btn-exportarexcel').addEventListener('click', async function (event) {
     event.preventDefault()
 
 
@@ -126,49 +127,49 @@ document.getElementById('btn-exportarexcel').addEventListener('click', async fun
     if (selectedReportType == 0) {
         showToast('Escoge el tipo de reporte');
         return;
-    } 
+    }
 
-   
-     /*const selectedAttributes = Array.from(document.querySelectorAll('#checkboxContainer input:checked')).map(input => input.value);
 
-    if (selectedReportType && selectedAttributes.length > 0) {
-        const response = await reporteGeneral(selectedReportType);
-        createXLS(response,"reporte1.xls", "select artesano_id  as id from  ") 
-    } 
+    /*const selectedAttributes = Array.from(document.querySelectorAll('#checkboxContainer input:checked')).map(input => input.value);
 
-    /*if (selectedReportType) {
-        const response = await reporteGeneral(selectedReportType);
-        console.log("response: ", response)
-        //createXLS(response,"reporte2.xls", "select * from ") 
-        
-    } */ 
+   if (selectedReportType && selectedAttributes.length > 0) {
+       const response = await reporteGeneral(selectedReportType);
+       createXLS(response,"reporte1.xls", "select artesano_id  as id from  ") 
+   } 
+
+   /*if (selectedReportType) {
+       const response = await reporteGeneral(selectedReportType);
+       console.log("response: ", response)
+       //createXLS(response,"reporte2.xls", "select * from ") 
+       
+   } */
     switch (selectedReportType) {
         case 'productos':
             const response1 = await reporteGeneral(selectedReportType);
-            createXLS(response1,"productos.xls", "select artesano_id as id, nombres_es as nombre, resumen_es as resumen, descripcion_es as descripcion, cualidades_es as cualidades,  palabra_clave_es as palabraclave, numero_piezas_es as numero_piezas, alto, ancho, materiales_es as materiales, precio, peso, tecnicas_es as tecnicas,  cantidad, cantidad_minima, restar_stock, tipo_estado, fecha_disponible, igv, precios_envio, precio_local, precio_nacional, precio_extranjero, tiempo_elaboracion, tiempo_envio, preventas from ") 
-            
+            createXLS(response1, "productos.xls", "select artesano_id as id, nombres_es as nombre, resumen_es as resumen, descripcion_es as descripcion, cualidades_es as cualidades,  palabra_clave_es as palabraclave, numero_piezas_es as numero_piezas, alto, ancho, materiales_es as materiales, precio, peso, tecnicas_es as tecnicas,  cantidad, cantidad_minima, restar_stock, tipo_estado, fecha_disponible, igv, precios_envio, precio_local, precio_nacional, precio_extranjero, tiempo_elaboracion, tiempo_envio, preventas from ")
+
             showToast('Generando reporte');
             break;
         case 'artesanos':
             const response2 = await reporteGeneral(selectedReportType);
-            createXLS(response2,"artesanos.xls", "select dni, ruc, nombres, apellidos, correo, celular, telefonos, ubigeo, lugar_nacimiento, lengua_materna,  estado from ") 
-            
+            createXLS(response2, "artesanos.xls", "select dni, ruc, nombres, apellidos, correo, celular, telefonos, ubigeo, lugar_nacimiento, lengua_materna,  estado from ")
+
             showToast('Generando reporte');
             break;
-        case 'clientes': 
+        case 'clientes':
             const response3 = await reporteGeneral(selectedReportType);
-            createXLS(response3,"clientes.xls", "select nombres, apellidos, correo, telefono, direccion, pais, region, ciudad, tipo_documento, numero_documento, direccion_envio, estado from ") 
-            
+            createXLS(response3, "clientes.xls", "select nombres, apellidos, correo, telefono, direccion, pais, region, ciudad, tipo_documento, numero_documento, direccion_envio, estado from ")
+
             showToast('Generando reporte');
             break;
         default:
             break;
     }
-   
+
 
 });
- 
-function generateTable(data, attributes) {
+
+function generateTable (data, attributes) {
     const tableContainer = document.getElementById('tablaReportes');
     tableContainer.innerHTML = ''; // Clear previous table
 
@@ -199,4 +200,3 @@ function generateTable(data, attributes) {
 
     tableContainer.appendChild(table);
 }
-    
