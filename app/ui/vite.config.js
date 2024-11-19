@@ -54,6 +54,7 @@ export default {
         'ventas-detalle': resolve(__dirname, 'ventas-detalle.html'),
         'ventas': resolve(__dirname, 'ventas.html'),
         'productos_por_categoria': resolve(__dirname, 'productos_por_categoria.html'),
+
         'tienda/index': resolve(__dirname, 'tienda/index.html'),
         'tienda/busqueda': resolve(__dirname, 'tienda/busqueda.html'),
         'tienda/artesano': resolve(__dirname, 'tienda/artesano.html'),
@@ -71,6 +72,7 @@ export default {
         'tienda/terminos-condiciones': resolve(__dirname, 'tienda/terminos-condiciones.html'),
         'tienda/blog': resolve(__dirname, 'tienda/blog.html'),
         'tienda/blogdetalle': resolve(__dirname, 'tienda/blogdetalle.html'),
+        'tienda/login-cliente': resolve(__dirname, 'tienda/login-cliente.html'),
       }
     },
 
