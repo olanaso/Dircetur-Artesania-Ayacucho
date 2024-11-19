@@ -269,7 +269,7 @@ async function visualizarreporte (id) {
   // Iterar sobre cada propiedad del objeto data
   for (let key in listd1Array) {
     // Convertir cada string en un array usando JSON.parse
-    let pair = JSON.parse(listd1Array[key]);
+    let pair = JSON.parse(listd1Array[key] || '[]');
     // Agregar el array convertido a d1
     d2.push(pair);
   }

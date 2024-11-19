@@ -146,19 +146,19 @@ document.getElementById('btn-exportarexcel').addEventListener('click', async fun
     switch (selectedReportType) {
         case 'productos':
             const response1 = await reporteGeneral(selectedReportType);
-            createXLS(response1, "productos.xls", "select artesano_id as id, nombres_es as nombre, resumen_es as resumen, descripcion_es as descripcion, cualidades_es as cualidades,  palabra_clave_es as palabraclave, numero_piezas_es as numero_piezas, alto, ancho, materiales_es as materiales, precio, peso, tecnicas_es as tecnicas,  cantidad, cantidad_minima, restar_stock, tipo_estado, fecha_disponible, igv, precios_envio, precio_local, precio_nacional, precio_extranjero, tiempo_elaboracion, tiempo_envio, preventas from ")
+            createXLS(response1, "productos", "select artesano_id as id, nombres_es as nombre, resumen_es as resumen, descripcion_es as descripcion, cualidades_es as cualidades,  palabra_clave_es as palabraclave, numero_piezas_es as numero_piezas, alto, ancho, materiales_es as materiales, precio, peso, tecnicas_es as tecnicas,  cantidad, cantidad_minima, restar_stock, tipo_estado, fecha_disponible, igv, precios_envio, precio_local, precio_nacional, precio_extranjero, tiempo_elaboracion, tiempo_envio, preventas from ")
 
             showToast('Generando reporte');
             break;
         case 'artesanos':
             const response2 = await reporteGeneral(selectedReportType);
-            createXLS(response2, "artesanos.xls", "select dni, ruc, nombres, apellidos, correo, celular, telefonos, ubigeo, lugar_nacimiento, lengua_materna,  estado from ")
+            createXLS(response2, "artesanos", "select dni, ruc, nombres, apellidos, correo, celular, telefonos, ubigeo, lugar_nacimiento, lengua_materna,  estado from ")
 
             showToast('Generando reporte');
             break;
         case 'clientes':
             const response3 = await reporteGeneral(selectedReportType);
-            createXLS(response3, "clientes.xls", "select nombres, apellidos, correo, telefono, direccion, pais, region, ciudad, tipo_documento, numero_documento, direccion_envio, estado from ")
+            createXLS(response3, "clientes", "select nombres, apellidos, correo, telefono, direccion, pais, region, ciudad, tipo_documento, numero_documento, direccion_envio, estado from ")
 
             showToast('Generando reporte');
             break;

@@ -249,7 +249,7 @@ $(function () {
 		},
 		colors: ['#e5e8f2', '#ff5661', '#007ae1'],
 	};
-	var plot = $.plot($("#combineChartCompare"),
-		data
-		, options);
+	// var plot = $.plot($("#combineChartCompare"),
+	// 	data
+	// 	, options);
 });
