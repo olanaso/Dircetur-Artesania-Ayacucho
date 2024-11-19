@@ -156,6 +156,7 @@ const agregarComentario = async (artesaniaId) => {
         const idCliente = localStorage.getItem('idCliente')
 
         if (!idCliente || idCliente === 'null' || idCliente === 'undefined') {
+            loaderComentario.style.display = 'none';
             alert('Debes iniciar sesión para poder comentar.');
             return;
         }
@@ -163,6 +164,7 @@ const agregarComentario = async (artesaniaId) => {
         const comentario = newCommentTextarea.value.trim();
 
         if (comentario.length === 0) {
+            loaderComentario.style.display = 'none';
             alert('Por favor, escribe un comentario antes de enviarlo.');
             return;
         }
@@ -178,6 +180,7 @@ const agregarComentario = async (artesaniaId) => {
             const data = await nuevoComentario(objComentario);
 
             if (data === null || data === undefined) {
+                loaderComentario.style.display = 'none';
                 alert('Ocurrió un error al enviar el comentario.');
                 return;
             }
