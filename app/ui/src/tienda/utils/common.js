@@ -59,6 +59,7 @@ export function custom () {
 
     menu()
     badgesdata()
+    checkSession()
     generarTypeHead_ante();
 
     setTimeout(function (e) {
@@ -77,7 +78,42 @@ export function badgesdata () {
 
 }
 
+export function checkSession () {
+    const avatarContainer = document.getElementById('avatarContainer');
+    const session = getDataFromLocalStorage('idCliente');
 
+    if (session) {
+        fetch(`${baseUrl}/cliente/${session}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    const avatarImage = new Image();
+                    avatarImage.src = data.foto_perfil;
+                    
+                    const initial = data.nombres.charAt(0).toUpperCase() + data.apellidos.charAt(0).toUpperCase();
+
+                    avatarImage.onerror = function() {
+                        avatarContainer.innerHTML = `
+                            <div class="avatar">
+                                <div class='avatar-initial'>${initial}</div>
+                            </div>
+                        `;
+                    };
+
+                    avatarImage.onload = function() {
+                        avatarContainer.innerHTML = `
+                            <div class="avatar">
+                                <img src="${data.foto_perfil}" alt="Profile Picture" class="avatar-image">
+                            </div>
+                        `;
+                    };
+
+                    avatarContainer.appendChild(avatarImage);
+                }
+            })
+            .catch(error => console.error('Error fetching user data:', error));
+    }
+}
 
 
 export function menu () {
