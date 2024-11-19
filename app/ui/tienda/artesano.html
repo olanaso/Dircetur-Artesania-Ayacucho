@@ -3,623 +3,541 @@
 <html class="ie ie9" lang="en-US">
 <![endif]-->
 <html lang="en-US">
-  <!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:20:49 GMT -->
+<!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:20:49 GMT -->
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="HTML,CSS,XML,JavaScript" />
-    <meta name="author" content="Car Dealer Template" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="HTML,CSS,XML,JavaScript" />
+  <meta name="author" content="Car Dealer Template" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Artesano - Artesanias de Ayacucho</title>
+  <title>Artesano - Artesanias de Ayacucho</title>
 
-    <link
-      href="http://fonts.googleapis.com/css?family=Roboto:400,300,500,700"
-      rel="stylesheet"
-      type="text/css"
-    />
+  <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="assets_tienda/css/bootstrap.css" />
-    <link rel="stylesheet" href="assets_tienda/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="assets_tienda/css/main.css" />
-    <!-- Slider Pro Css -->
-    <link rel="stylesheet" href="assets_tienda/css/sliderPro.css" />
-    <!-- Owl Carousel Css -->
-    <link rel="stylesheet" href="assets_tienda/css/owl-carousel.css" />
-    <!-- Flat Icons Css -->
-    <link rel="stylesheet" href="assets_tienda/css/flaticon.css" />
-    <!-- Animated Css -->
-    <link rel="stylesheet" href="assets_tienda/css/animated.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    />
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
+  <link rel="stylesheet" href="assets_tienda/css/bootstrap.css" />
+  <link rel="stylesheet" href="assets_tienda/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="assets_tienda/css/main.css" />
+  <!-- Slider Pro Css -->
+  <link rel="stylesheet" href="assets_tienda/css/sliderPro.css" />
+  <!-- Owl Carousel Css -->
+  <link rel="stylesheet" href="assets_tienda/css/owl-carousel.css" />
+  <!-- Flat Icons Css -->
+  <link rel="stylesheet" href="assets_tienda/css/flaticon.css" />
+  <!-- Animated Css -->
+  <link rel="stylesheet" href="assets_tienda/css/animated.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
 
-    <!-- Google translate -->
-    <script
-      type="text/javascript"
-      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    ></script>
+  <!-- Google translate -->
+  <script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <style>
-      div > iframe.skiptranslate {
-        display: none !important;
-      }
+  <style>
+    div>iframe.skiptranslate {
+      display: none !important;
+    }
 
-      body {
-        top: 0px !important;
-      }
+    body {
+      top: 0px !important;
+    }
 
+    .product-card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-image {
+      width: 100px;
+      height: 100px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #777;
+    }
+
+    .product-actions button {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+
+    .btn-primary:hover {
+      background-color: #6200ea;
+      border-color: #6200ea;
+    }
+
+    .btn-info:hover {
+      background-color: #017acd;
+      border-color: #017acd;
+    }
+
+    .btn-danger:hover {
+      background-color: #b00020;
+      border-color: #b00020;
+    }
+
+    .artesano-info {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .artesano-photo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+
+    a {
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    #map {
+      margin-top: 20px;
+      height: 400px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-section iframe {
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 576px) {
       .product-card {
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 20px;
-        transition: box-shadow 0.3s ease;
-      }
-
-      .product-card:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 15px;
       }
 
       .product-image {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
+      }
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        color: #777;
+      .input-group {
+        max-width: 100px;
       }
 
       .product-actions button {
-        width: 100%;
-        margin-bottom: 5px;
+        font-size: 14px;
+        padding: 8px;
       }
 
-      .btn-primary:hover {
-        background-color: #6200ea;
-        border-color: #6200ea;
+      .product-actions a {
+        font-size: 14px;
+        padding: 8px;
       }
 
-      .btn-info:hover {
-        background-color: #017acd;
-        border-color: #017acd;
+      .product-card h5 {
+        font-size: 16px;
       }
 
-      .btn-danger:hover {
-        background-color: #b00020;
-        border-color: #b00020;
+      .product-card p {
+        font-size: 14px;
       }
+    }
 
-      .artesano-info {
-        display: flex;
-        align-items: center;
-        margin-top: 10px;
-      }
+    .custom-icon .rounded-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      /* Esto hace que la imagen sea redondeada */
+      object-fit: cover;
+      /* Asegura que la imagen se ajuste dentro del contenedor */
+      border: 2px solid #fff;
+      /* Añade un borde blanco alrededor si lo deseas */
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+      /* Agrega una sombra para darle más estilo */
+    }
 
-      .artesano-photo {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-right: 10px;
-      }
+    .img-contenedor-destacados {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      /* Altura fija para el contenedor */
+      width: 100%;
+      /* Ancho ajustable según el contenedor padre */
+      overflow: hidden;
+      /* Oculta cualquier parte desbordante de la imagen */
+    }
 
-      a {
-        color: #2c3e50;
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.3s ease;
-      }
+    .img-destacados {
+      float: center;
+      object-fit: cover;
+      max-height: 100%;
+      max-width: 100%;
+      height: 120px !important;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100% !important;
+      border-top-left-radius: calc(0.25rem - 1px);
+      border-top-right-radius: calc(0.25rem - 1px);
+    }
 
-      #map {
-        margin-top: 20px;
-        height: 400px;
-        border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      }
+    .product-description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: block;
+    }
 
-      .video-section iframe {
-        border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      }
+    .image-box {
+      width: 200px;
+      height: 100px;
+      background-color: #fff;
+      /* Fondo blanco */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin: 10px;
+    }
 
-      @media (max-width: 576px) {
-        .product-card {
-          padding: 15px;
-        }
+    .image-box img {
+      max-width: 80%;
+      /* Ajusta el tamaño para que quepa dentro del cuadro */
+      max-height: 80%;
+    }
 
-        .product-image {
-          width: 80px;
-          height: 80px;
-        }
+    .rating-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .input-group {
-          max-width: 100px;
-        }
+    .rating:not(:checked)>input {
+      position: absolute;
+      appearance: none;
+    }
 
-        .product-actions button {
-          font-size: 14px;
-          padding: 8px;
-        }
+    .rating:not(:checked)>label {
+      float: right;
+      cursor: pointer;
+      font-size: 30px;
+      color: #666;
+    }
 
-        .product-actions a {
-          font-size: 14px;
-          padding: 8px;
-        }
+    .rating:not(:checked)>label:before {
+      content: "★";
+    }
 
-        .product-card h5 {
-          font-size: 16px;
-        }
+    .rating>input:checked+label:hover,
+    .rating>input:checked+label:hover~label,
+    .rating>input:checked~label:hover,
+    .rating>input:checked~label:hover~label,
+    .rating>label:hover~input:checked~label {
+      color: #e58e09;
+    }
 
-        .product-card p {
-          font-size: 14px;
-        }
-      }
+    .rating:not(:checked)>label:hover,
+    .rating:not(:checked)>label:hover~label {
+      color: #ff9e0b;
+    }
 
-      .custom-icon .rounded-image {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        /* Esto hace que la imagen sea redondeada */
-        object-fit: cover;
-        /* Asegura que la imagen se ajuste dentro del contenedor */
-        border: 2px solid #fff;
-        /* Añade un borde blanco alrededor si lo deseas */
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-        /* Agrega una sombra para darle más estilo */
-      }
+    .rating>input:checked~label {
+      color: #ffa723;
+    }
 
-      .img-contenedor-destacados {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 150px;
-        /* Altura fija para el contenedor */
-        width: 100%;
-        /* Ancho ajustable según el contenedor padre */
-        overflow: hidden;
-        /* Oculta cualquier parte desbordante de la imagen */
-      }
+    footer {
+      margin-top: 80px;
+      background-color: #111;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 0px 15px 0px 15px;
+    }
+  </style>
 
-      .img-destacados {
-        float: center;
-        object-fit: cover;
-        max-height: 100%;
-        max-width: 100%;
-        height: 120px !important;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100% !important;
-        border-top-left-radius: calc(0.25rem - 1px);
-        border-top-right-radius: calc(0.25rem - 1px);
-      }
-
-      .product-description {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        display: block;
-      }
-
-      .image-box {
-        width: 200px;
-        height: 100px;
-        background-color: #fff;
-        /* Fondo blanco */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        margin: 10px;
-      }
-
-      .image-box img {
-        max-width: 80%;
-        /* Ajusta el tamaño para que quepa dentro del cuadro */
-        max-height: 80%;
-      }
-
-      .rating-container {
-        display: flex;
-				flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .rating:not(:checked) > input {
-        position: absolute;
-        appearance: none;
-      }
-
-      .rating:not(:checked) > label {
-        float: right;
-        cursor: pointer;
-        font-size: 30px;
-        color: #666;
-      }
-
-      .rating:not(:checked) > label:before {
-        content: "★";
-      }
-
-      .rating > input:checked + label:hover,
-      .rating > input:checked + label:hover ~ label,
-      .rating > input:checked ~ label:hover,
-      .rating > input:checked ~ label:hover ~ label,
-      .rating > label:hover ~ input:checked ~ label {
-        color: #e58e09;
-      }
-
-      .rating:not(:checked) > label:hover,
-      .rating:not(:checked) > label:hover ~ label {
-        color: #ff9e0b;
-      }
-
-      .rating > input:checked ~ label {
-        color: #ffa723;
-      }
-      footer {
-        margin-top: 80px;
-        background-color: #111;
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        padding: 0px 15px 0px 15px;
-      }
-    </style>
-
-    <!--[if lt IE 9]>
+  <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body>
-    <div class="preloader">
-      <div class="preloader-bounce">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+<body>
+  <div class="preloader">
+    <div class="preloader-bounce">
+      <img src="/img/logotienda.svg" />
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
+  </div>
 
-    <header
-      class="site-header wow fadeIn"
-      data-wow-duration="1s"
-      id="header"
-    ></header>
+  <header class="site-header wow fadeIn" data-wow-duration="1s" id="header"></header>
 
-    <div class="page-heading wow fadeIn" data-wow-duration="0.5s">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div
-              class="heading-content-bg wow fadeIn"
-              data-wow-delay="0.75s"
-              data-wow-duration="1s"
-            >
-              <div class="row">
-                <div class="heading-content col-md-12">
-                  <p><a href="index.html">Inicio</a> / <em> Artesano </em></p>
-                  <h2>conoce al <em>Artesano</em></h2>
-                </div>
+  <div class="page-heading wow fadeIn" data-wow-duration="0.5s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="heading-content-bg wow fadeIn" data-wow-delay="0.75s" data-wow-duration="1s">
+            <div class="row">
+              <div class="heading-content col-md-12">
+                <p><a href="index.html">Inicio</a> / <em> Artesano </em></p>
+                <h2>conoce al <em>Artesano</em></h2>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div
-      class="on-grids wow fadeIn"
-      data-wow-delay="0.5s"
-      data-wow-duration="1s"
-    >
-      <div class="container">
-        <div class="row">
-          <!-- Video Section -->
+  <div class="on-grids wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1s">
+    <div class="container">
+      <div class="row">
+        <!-- Video Section -->
 
-          <!-- Artisan Details Section -->
+        <!-- Artisan Details Section -->
 
-          <div class="col-md-4">
-            <div class="card" style="border-radius: 15px; border: none">
-              <div class="card-body text-center">
-                <img
-                  id="artesano-foto"
-                  src="https://via.placeholder.com/150"
-                  class="rounded-circle mb-3 card-img-top"
-                  alt="Foto del artesano"
-                  style="border: 5px solid #f1f1f1"
-                />
+        <div class="col-md-4">
+          <div class="card" style="border-radius: 15px; border: none">
+            <div class="card-body text-center">
+              <img id="artesano-foto" src="https://via.placeholder.com/150" class="rounded-circle mb-3 card-img-top"
+                alt="Foto del artesano" style="border: 5px solid #f1f1f1" />
 
-                <h3
-                  id="artesano-nombre"
-                  class="card-title"
-                  style="font-weight: bold"
-                >
-                  ALBERTO
-                </h3>
+              <h3 id="artesano-nombre" class="card-title" style="font-weight: bold">
+                ALBERTO
+              </h3>
 
-                <div class="rating-container">
-                  <div class="rating">
-                    <input value="5" name="rate" id="star5" type="radio" />
-                    <label title="5" for="star5"></label>
-                    <input value="4" name="rate" id="star4" type="radio" />
-                    <label title="4" for="star4"></label>
-                    <input value="3" name="rate" id="star3" type="radio" />
-                    <label title="3" for="star3"></label>
-                    <input value="2" name="rate" id="star2" type="radio" />
-                    <label title="2" for="star2"></label>
-                    <input value="1" name="rate" id="star1" type="radio" />
-                    <label title="1" for="star1"></label>
-                  </div>
-                </div>
-
-                <p style="font-size: 1rem">
-                  <i
-                    id="artesano-telefono"
-                    class="fa fa-phone"
-                    style="color: #666"
-                  ></i>
-                </p>
-                <div class="d-flex justify-content-center mt-3">
-                  <a
-                    id="artesano-whatsapp"
-                    target="_blank"
-                    href="https://wa.me/51966030046"
-                    class="btn btn-outline-success mx-2"
-                    style="
-                      border-radius: 50%;
-                      padding: 10px;
-                      width: 45px;
-                      height: 45px;
-                    "
-                  >
-                    <i class="fa fa-whatsapp"></i>
-                  </a>
-                  <a
-                    id="artesano-telefono-enlace"
-                    href="tel:+51966030046"
-                    class="btn btn-outline-info mx-2"
-                    style="
-                      border-radius: 50%;
-                      padding: 10px;
-                      width: 45px;
-                      height: 45px;
-                    "
-                  >
-                    <i class="fa fa-phone"></i>
-                  </a>
-                  <a
-                    href="https://facebook.com"
-                    class="btn btn-outline-primary mx-2"
-                    style="
-                      border-radius: 50%;
-                      padding: 10px;
-                      width: 45px;
-                      height: 45px;
-                    "
-                  >
-                    <i class="fa fa-facebook"></i>
-                  </a>
-                  <a
-                    id="artesano-youtube"
-                    target="_blank"
-                    href="https://youtube.com"
-                    class="btn btn-outline-danger mx-2"
-                    style="
-                      border-radius: 50%;
-                      padding: 10px;
-                      width: 45px;
-                      height: 45px;
-                    "
-                  >
-                    <i class="fa fa-youtube"></i>
-                  </a>
+              <div class="rating-container">
+                <div class="rating">
+                  <input value="5" name="rate" id="star5" type="radio" />
+                  <label title="5" for="star5"></label>
+                  <input value="4" name="rate" id="star4" type="radio" />
+                  <label title="4" for="star4"></label>
+                  <input value="3" name="rate" id="star3" type="radio" />
+                  <label title="3" for="star3"></label>
+                  <input value="2" name="rate" id="star2" type="radio" />
+                  <label title="2" for="star2"></label>
+                  <input value="1" name="rate" id="star1" type="radio" />
+                  <label title="1" for="star1"></label>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div class="col-md-8 video-section">
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe
-                class="embed-responsive-item"
-                id="artesano-video"
-                src="https://www.youtube.com/embed/jSXAIFoPp6g?autoplay=1"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </div>
-        </div>
-
-        <div class="row mt-4">
-          <!-- Artisan Information -->
-          <div class="col-md-4">
-            <div class="card">
-              <div
-                class="card-header font-weight-bold text-primary"
-                style="background-color: #ea0397; color: #fff !important"
-              >
-                SOBRE EL ARTESANO
-              </div>
-              <div class="card-body">
-                <p>
-                  <strong>Nombre completo:</strong> <br />
-                  <span id="artesano-nombre-completo"
-                    >ALBERTO FLORES CONTRERAS</span
-                  >
-                </p>
-                <p>
-                  <strong>Correo:</strong> <br />
-                  <span id="artesano-correo">maki.arte46@gmail.com</span>
-                </p>
-                <p>
-                  <strong>Lugar de procedencia:</strong> <br /><span
-                    id="artesano-lugar-procedencia"
-                    >Ayacucho-Huamanga</span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Workshop Information -->
-          <div class="col-md-4">
-            <div class="card">
-              <div
-                class="card-header font-weight-bold text-primary"
-                style="background-color: #d6a135; color: #fff !important"
-              >
-                INFORMACIÓN DEL TALLER
-              </div>
-              <div class="card-body">
-                <p>
-                  <strong>Nombre del taller:</strong> <br /><span
-                    id="taller-nombre"
-                    >Taller Maki Arte SRL
-                  </span>
-                </p>
-                <p>
-                  <strong>RUC del taller:</strong> <br /><span id="taller-ruc"
-                    >20608956779</span
-                  >
-                </p>
-                <p>
-                  <strong>Dirección física:</strong> <br /><span
-                    id="taller-direccion"
-                    >Plaza principal N° 304 Distro de Quinua</span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Specialty Information -->
-          <div class="col-md-4">
-            <div class="card">
-              <div
-                class="card-header font-weight-bold text-primary"
-                style="background-color: #0a9cf7; color: #fff !important"
-              >
-                ESPECIALIDAD Y TÉCNICAS
-              </div>
-              <div class="card-body">
-                <p>
-                  <strong>Habilidades de un artesano:</strong> <br /><span
-                    id="artesano-habilidades"
-                  >
-                    Modelado a mano, molde prensado, utilitario con torno
-                    eléctrico</span
-                  >
-                </p>
-                <p>
-                  <strong>Tipos de artesanía que produce:</strong> <br /><span
-                    id="artesano-tipo-artesania"
-                  >
-                    Piezas artísticas decorativas</span
-                  >
-                </p>
-                <p>
-                  <strong>Línea artesanal:</strong> <br /><span
-                    id="artesano-linea-artesanal"
-                    >Cerámica</span
-                  >
-                </p>
+              <p style="font-size: 1rem">
+                <i id="artesano-telefono" class="fa fa-phone" style="color: #666"></i>
+              </p>
+              <div class="d-flex justify-content-center mt-3">
+                <a id="artesano-whatsapp" target="_blank" href="https://wa.me/51966030046"
+                  class="btn btn-outline-success mx-2" style="
+                      border-radius: 50%;
+                      padding: 10px;
+                      width: 45px;
+                      height: 45px;
+                    ">
+                  <i class="fa fa-whatsapp"></i>
+                </a>
+                <a id="artesano-telefono-enlace" href="tel:+51966030046" class="btn btn-outline-info mx-2" style="
+                      border-radius: 50%;
+                      padding: 10px;
+                      width: 45px;
+                      height: 45px;
+                    ">
+                  <i class="fa fa-phone"></i>
+                </a>
+                <a href="https://facebook.com" class="btn btn-outline-primary mx-2" style="
+                      border-radius: 50%;
+                      padding: 10px;
+                      width: 45px;
+                      height: 45px;
+                    ">
+                  <i class="fa fa-facebook"></i>
+                </a>
+                <a id="artesano-youtube" target="_blank" href="https://youtube.com" class="btn btn-outline-danger mx-2"
+                  style="
+                      border-radius: 50%;
+                      padding: 10px;
+                      width: 45px;
+                      height: 45px;
+                    ">
+                  <i class="fa fa-youtube"></i>
+                </a>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Mapa de Ubicación -->
-        <div class="row mt-4">
-          <div class="col-12">
-            <h5 class="section-title">UBICACIÓN ARTESANO</h5>
-            <hr />
+        <div class="col-md-8 video-section">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" id="artesano-video"
+              src="https://www.youtube.com/embed/jSXAIFoPp6g?autoplay=1" allowfullscreen></iframe>
           </div>
-          <div class="col-12 d-flex justify-content-between">
-            <div class="col-md-4 d-flex align-items-center">
-              <i class="fa fa-map-marker fa"></i>
-              <strong>&nbsp; Ubigeo:</strong>&nbsp;
-              <span id="artesano-ubigeo">LIMA</span>
-            </div>
-            <!--					<div class="col-md-4 d-flex align-items-center">-->
-            <!--						<i class="fa fa-map-marker fa-3"></i>-->
-            <!--						<strong>&nbsp; Provincia:</strong>&nbsp; <span id="artesano-provincia">LIMA</span>-->
-            <!--					</div>-->
-            <!--					<div class="col-md-4 d-flex align-items-center">-->
-            <!--						<i class="fa fa-map-marker fa-3"></i>-->
-            <!--						<strong>&nbsp; Distrito:</strong>&nbsp; <span id="artesano-distrito">LIMA</span>-->
-            <!--					</div>-->
-          </div>
-
-          <div class="col-12">
-            <div id="map"></div>
-          </div>
-        </div>
-
-        <!-- Sección de Reconocimientos -->
-        <div class="row mt-5" id="reconocimientos">
-          <div class="col-12">
-            <h5 class="section-title">RECONOCIMIENTOS DEL ARTESANO</h5>
-            <hr />
-          </div>
-          <!-- Primer reconocimiento -->
-
-          <!-- Segundo reconocimiento -->
-
-          <!-- Tercer reconocimiento -->
-        </div>
-
-        <!-- Sección de Reconocimientos -->
-        <div class="row mt-5" id="productos">
-          <div class="col-12">
-            <h5 class="section-title">PRODUCTOS DEL ARTESANO</h5>
-            <hr />
-          </div>
-          <div id="owl-testimonials" class="owl-carousel owl-theme"></div>
         </div>
       </div>
+
+      <div class="row mt-4">
+        <!-- Artisan Information -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header font-weight-bold text-primary"
+              style="background-color: #ea0397; color: #fff !important">
+              SOBRE EL ARTESANO
+            </div>
+            <div class="card-body">
+              <p>
+                <strong>Nombre completo:</strong> <br />
+                <span id="artesano-nombre-completo">ALBERTO FLORES CONTRERAS</span>
+              </p>
+              <p>
+                <strong>Correo:</strong> <br />
+                <span id="artesano-correo">maki.arte46@gmail.com</span>
+              </p>
+              <p>
+                <strong>Lugar de procedencia:</strong> <br /><span
+                  id="artesano-lugar-procedencia">Ayacucho-Huamanga</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Workshop Information -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header font-weight-bold text-primary"
+              style="background-color: #d6a135; color: #fff !important">
+              INFORMACIÓN DEL TALLER
+            </div>
+            <div class="card-body">
+              <p>
+                <strong>Nombre del taller:</strong> <br /><span id="taller-nombre">Taller Maki Arte SRL
+                </span>
+              </p>
+              <p>
+                <strong>RUC del taller:</strong> <br /><span id="taller-ruc">20608956779</span>
+              </p>
+              <p>
+                <strong>Dirección física:</strong> <br /><span id="taller-direccion">Plaza principal N° 304 Distro de
+                  Quinua</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Specialty Information -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header font-weight-bold text-primary"
+              style="background-color: #0a9cf7; color: #fff !important">
+              ESPECIALIDAD Y TÉCNICAS
+            </div>
+            <div class="card-body">
+              <p>
+                <strong>Habilidades de un artesano:</strong> <br /><span id="artesano-habilidades">
+                  Modelado a mano, molde prensado, utilitario con torno
+                  eléctrico</span>
+              </p>
+              <p>
+                <strong>Tipos de artesanía que produce:</strong> <br /><span id="artesano-tipo-artesania">
+                  Piezas artísticas decorativas</span>
+              </p>
+              <p>
+                <strong>Línea artesanal:</strong> <br /><span id="artesano-linea-artesanal">Cerámica</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mapa de Ubicación -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <h5 class="section-title">UBICACIÓN ARTESANO</h5>
+          <hr />
+        </div>
+        <div class="col-12 d-flex justify-content-between">
+          <div class="col-md-4 d-flex align-items-center">
+            <i class="fa fa-map-marker fa"></i>
+            <strong>&nbsp; Ubigeo:</strong>&nbsp;
+            <span id="artesano-ubigeo">LIMA</span>
+          </div>
+          <!--					<div class="col-md-4 d-flex align-items-center">-->
+          <!--						<i class="fa fa-map-marker fa-3"></i>-->
+          <!--						<strong>&nbsp; Provincia:</strong>&nbsp; <span id="artesano-provincia">LIMA</span>-->
+          <!--					</div>-->
+          <!--					<div class="col-md-4 d-flex align-items-center">-->
+          <!--						<i class="fa fa-map-marker fa-3"></i>-->
+          <!--						<strong>&nbsp; Distrito:</strong>&nbsp; <span id="artesano-distrito">LIMA</span>-->
+          <!--					</div>-->
+        </div>
+
+        <div class="col-12">
+          <div id="map"></div>
+        </div>
+      </div>
+
+      <!-- Sección de Reconocimientos -->
+      <div class="row mt-5" id="reconocimientos">
+        <div class="col-12">
+          <h5 class="section-title">RECONOCIMIENTOS DEL ARTESANO</h5>
+          <hr />
+        </div>
+        <!-- Primer reconocimiento -->
+
+        <!-- Segundo reconocimiento -->
+
+        <!-- Tercer reconocimiento -->
+      </div>
+
+      <!-- Sección de Reconocimientos -->
+      <div class="row mt-5" id="productos">
+        <div class="col-12">
+          <h5 class="section-title">PRODUCTOS DEL ARTESANO</h5>
+          <hr />
+        </div>
+        <div id="owl-testimonials" class="owl-carousel owl-theme"></div>
+      </div>
     </div>
+  </div>
 
-    <div id="footer"></div>
+  <div id="footer"></div>
 
-    <script src="assets_tienda/js/jquery-1.11.0.min.js"></script>
+  <script src="assets_tienda/js/jquery-1.11.0.min.js"></script>
 
-    <!-- Slider Pro Js -->
-    <script src="assets_tienda/js/sliderpro.min.js"></script>
+  <!-- Slider Pro Js -->
+  <script src="assets_tienda/js/sliderpro.min.js"></script>
 
-    <!-- Slick Slider Js -->
-    <script src="assets_tienda/js/slick.js"></script>
+  <!-- Slick Slider Js -->
+  <script src="assets_tienda/js/slick.js"></script>
 
-    <!-- Owl Carousel Js -->
-    <script src="assets_tienda/js/owl.carousel.min.js"></script>
+  <!-- Owl Carousel Js -->
+  <script src="assets_tienda/js/owl.carousel.min.js"></script>
 
-    <!-- Boostrap Js -->
-    <script src="assets_tienda/js/bootstrap.min.js"></script>
+  <!-- Boostrap Js -->
+  <script src="assets_tienda/js/bootstrap.min.js"></script>
 
-    <!-- Boostrap Js -->
-    <script src="assets_tienda/js/wow.animation.js"></script>
+  <!-- Boostrap Js -->
+  <script src="assets_tienda/js/wow.animation.js"></script>
 
-    <!-- Custom Js -->
-    <script src="assets_tienda/js/custom.js"></script>
+  <!-- Custom Js -->
+  <script src="assets_tienda/js/custom.js"></script>
 
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
-    <script type="module" src="../src/tienda/artesano/index.js"></script>
-  </body>
+  <script type="module" src="../src/tienda/artesano/index.js"></script>
+</body>
 
-  <!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:21:58 GMT -->
+<!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:21:58 GMT -->
+
 </html>
