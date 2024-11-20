@@ -1,20 +1,82 @@
-.thumb-content {
-    width: 150px;
-    /* Ancho deseado para la miniatura */
+
+header {
+    background-color: #1f2937;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.thumb-inner {
-    aspect-ratio: 1 / 1;
-    /* Relación de aspecto cuadrada */
-    width: 100%;
-    /* Ocupará todo el ancho del contenedor */
+header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+main {
+    padding: 30px;
+}
+
+.person-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+/* Card Styles */
+.person-card {
+    background: #fff;
+    border-radius: 12px;
     overflow: hidden;
-    /* Para ocultar cualquier exceso de la imagen */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.thumb-inner img {
+.person-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.person-card img {
     width: 100%;
-    height: 100%;
+    height: 200px;
     object-fit: cover;
-    /* Ajuste de la imagen para cubrir todo el espacio sin distorsión */
+    border-bottom: 2px solid #007BFF;
+}
+
+.person-card h2 {
+    font-size: 1.2rem;
+    margin: 15px 0;
+    color: #1f2937;
+    font-weight: 500;
+}
+
+.person-card button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.person-card button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
 }
