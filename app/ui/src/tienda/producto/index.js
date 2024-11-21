@@ -52,12 +52,12 @@ const enviarCalificacion = async (productoId) => {
     document.querySelectorAll('input[name="rate"]').forEach(star => {
         star.addEventListener('change', async () => {
             const valor = star.value;
-            
+
             const data = {
                 libroid: productoId,
                 valor: parseInt(valor)
             };
-            
+
             const resp = await enviarPuntuacion(data);
 
             const ratingContainer = document.querySelector('.rating-container');
@@ -88,16 +88,18 @@ const obtenerComentarios = async (id) => {
         commentsList.innerHTML = '';
 
         const comentarios = await listarComentarios(id);
-        
+
+        debugger
+
         if (!comentarios || comentarios.length === 0) {
             commentsList.innerHTML = '<div id="noComentarios" style="text-align: center; padding: 20px; color: #666; font-size: 16px; font-style: italic; border: 1px dashed #ccc; border-radius: 8px; margin: 10px 0;">No hay comentarios disponibles para este producto.</div>';
             return;
         }
 
-        const comentariosOrdenados = comentarios.sort((a, b) => 
+        const comentariosOrdenados = comentarios.sort((a, b) =>
             new Date(b.createdAt) - new Date(a.createdAt)
         );
-        
+
         const fragment = document.createDocumentFragment();
 
         comentariosOrdenados.forEach(comentario => {
@@ -176,6 +178,7 @@ const agregarComentario = async (artesaniaId) => {
             };
 
             const data = await nuevoComentario(objComentario);
+            debugger
 
             if (data === null || data === undefined) {
                 alert('Ocurrió un error al enviar el comentario.');
@@ -189,7 +192,7 @@ const agregarComentario = async (artesaniaId) => {
             }
 
             newCommentTextarea.value = '';
-            
+
             // agregar el nuevo comentario a la lista
             const fecha = new Date(data.createdAt);
             const fechaFormateada = fecha.toLocaleDateString('es-ES', {
@@ -228,7 +231,7 @@ const agregarComentario = async (artesaniaId) => {
             loaderComentario.style.display = 'none';
         }
     });
-    
+
 }
 
 function obtenerUrlProducto () {
@@ -240,7 +243,7 @@ function obtenerUrlProducto () {
     // Obtener el valor del parámetro 'data'
     const data = urlParams.get('producto');
 
-    console.log({data})
+    console.log({ data })
 
     // Decodificar y convertir el objeto JSON nuevamente
     if (data) {

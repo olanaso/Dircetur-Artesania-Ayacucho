@@ -187,6 +187,8 @@ function getClassByDescriptionLength (description) {
 function loadProductosOferta (data) {
 
     let html = ` `
+    let activo = data.length == 0
+    activo ? $('#section-artesanias-oferta').css('display', 'none') : null;
     for (let item of data) {
         //alert(item.imagen)
 
