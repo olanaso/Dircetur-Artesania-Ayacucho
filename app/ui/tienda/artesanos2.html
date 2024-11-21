@@ -130,7 +130,7 @@
 
 		.search-container {
 			display: flex;
-			justify-content: center;
+			justify-content: space-between;
 			align-items: center;
 			margin-top: 20px;
 		}
@@ -176,6 +176,41 @@
 			outline: none;
 		}
 
+		.filter-container {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			max-width: 300px;
+			/* Ajusta el ancho según lo necesites */
+			border: 1px solid #ccc;
+			border-radius: 25px;
+			overflow: hidden;
+			background-color: white;
+		}
+
+		.filter-select {
+			flex: 1;
+			border: none;
+			padding: 10px 15px;
+			font-size: 16px;
+			border-radius: 25px;
+			appearance: none;
+			background-color: transparent;
+			cursor: pointer;
+			outline: none;
+			background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEyIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgM0wwIDRsNCA0IDQtNEgwTDQgNkwwIDN6IiBmaWxsPSIjY2NjIi8+PC9zdmc+');
+			background-repeat: no-repeat;
+			background-position: right 10px center;
+			background-size: 12px 8px;
+		}
+
+		.filter-select:focus {
+			outline: none;
+		}
+
+		.filter-select option {
+			padding: 10px;
+		}
 
 
 		.artesanos-container {
@@ -290,6 +325,14 @@
 			<input id="searchInputArtesano" type="text" class="search-input" placeholder="Buscar artesanos" required>
 			<button id="searchButtonArtesano" type="button" class="search-button">Buscar</button>
 		</div>
+
+		<div class="filter-container">
+			<select id="filterSelect" class="filter-select">
+				<option value="" disabled selected>Filtrar por categoría</option>
+				<option value="TODOS">TODOS</option>
+			</select>
+		</div>
+
 	</div>
 
 	<section class="artesanos-container">

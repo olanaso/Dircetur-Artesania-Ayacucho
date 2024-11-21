@@ -8,22 +8,38 @@ export async function listarArtesanos () {
                 'Content-Type': 'application/json'
             }
         }
-        const response = await fetch(`${baseUrl}/v1/artesanos/categorias`, requestOptions);
+        const response = await fetch(`${baseUrl}/artesanosweb`, requestOptions);
 
         if (!response.ok) {
-            throw new Error('Error:', response.statusText);
+            return [];
         }
 
         const data = await response.json()
 
-        const artesanos = data.flatMap(categoria =>
-            categoria.artesanos.map(artesano => ({
-                ...artesano,
-            }))
-        );
-
-        return artesanos;
+        return data;
     } catch (error) {
-        console.error('Error:', error);
+        return [];
+    }
+}
+
+export async function listarFiltros () {
+    try {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        const response = await fetch(`${baseUrl}/filtroartesanosweb`, requestOptions);
+
+        if (!response.ok) {
+            return [];
+        }
+
+        const data = await response.json()
+
+        return data;
+    } catch (error) {
+        return [];
     }
 }
