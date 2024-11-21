@@ -24,7 +24,7 @@ module.exports = {
     uploadFilartesano,
     saveUsuarioArtesano,
     getAllArtesanosByCategoria,
-    listarCombo, listarArtesanosMapa, listarArtesanosWeb
+    listarCombo, listarArtesanosMapa, listarArtesanosWeb, listarFiltroArtesanosWeb
 };
 
 /**
@@ -270,19 +270,19 @@ function listarArtesanosMapa (req, res) {
 function listarArtesanosWeb (req, res) {
     // Consulta SQL
     let sql = `
-       SELECT a.id,a.nombres,a.apellidos,a.celular,a.foto1,a.foto2,a.correo
-,COALESCE(b.categorias, '-') categoria_artesano  FROM artesano a
+SELECT a.id,a.nombres,a.apellidos,a.celular,a.foto1,a.foto2,a.correo
+,COALESCE(b.categorias, 'OTRO') categoria_artesano  FROM artesano a
 LEFT JOIN (
 SELECT
     a.artesano_id,
-  COALESCE(GROUP_CONCAT(DISTINCT b.denominacion SEPARATOR ', '), '-') AS categorias
+  GROUP_CONCAT(DISTINCT b.denominacion SEPARATOR ', ') AS categorias
 FROM
     producto a
 INNER JOIN categoria b ON a.categoria_id = b.id
 GROUP BY
     a.artesano_id) b ON a.id=b.artesano_id
 ORDER BY
- a.nombres,a.apellidos ASC;
+ categoria_artesano ASC;
     `;
 
     // Ejecutar la consulta sin parámetros
@@ -297,6 +297,38 @@ ORDER BY
         });
 }
 
+
+
+function listarFiltroArtesanosWeb (req, res) {
+    // Consulta SQL
+    let sql = `
+SELECT distinct COALESCE(b.id,9999) id
+,COALESCE(b.categorias, 'OTRO') categoria_artesano  FROM artesano a
+LEFT JOIN (
+SELECT
+    a.artesano_id,
+  b.denominacion AS categorias,
+  b.id
+FROM
+    producto a
+INNER JOIN categoria b ON a.categoria_id = b.id
+GROUP BY
+    a.artesano_id) b ON a.id=b.artesano_id
+ORDER BY
+ id ;
+    `;
+
+    // Ejecutar la consulta sin parámetros
+    artesanoModel.sequelize.query(sql, {
+        type: artesanoModel.sequelize.QueryTypes.SELECT
+    })
+        .then(resultset => {
+            res.status(200).json(resultset);
+        })
+        .catch(error => {
+            res.status(400).send(error);
+        });
+}
 
 
 

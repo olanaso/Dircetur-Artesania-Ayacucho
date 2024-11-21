@@ -16,6 +16,7 @@ router.get('/artesano-dni/:dni', controller.obtenerDNI);
 router.post('/artesano/fileupload', uploadarchivoArtesano, controller.uploadFilartesano);
 router.get('/v1/artesanos/categorias', controller.getAllArtesanosByCategoria)
 router.get('/artesanosweb', controller.listarArtesanosWeb)
+router.get('/filtroartesanosweb', controller.listarFiltroArtesanosWeb)
 router.get('/artesanos/mapa', controller.listarArtesanosMapa)
 
 module.exports = router;
