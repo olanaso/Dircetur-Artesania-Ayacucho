@@ -24,7 +24,7 @@ module.exports = {
     uploadFilartesano,
     saveUsuarioArtesano,
     getAllArtesanosByCategoria,
-    listarCombo, listarArtesanosMapa
+    listarCombo, listarArtesanosMapa, listarArtesanosWeb
 };
 
 /**
@@ -264,6 +264,39 @@ function listarArtesanosMapa (req, res) {
             res.status(400).send(error);
         });
 }
+
+
+
+function listarArtesanosWeb (req, res) {
+    // Consulta SQL
+    let sql = `
+       SELECT a.id,a.nombres,a.apellidos,a.celular,a.foto1,a.foto2,a.correo
+,COALESCE(b.categorias, '-') categoria_artesano  FROM artesano a
+LEFT JOIN (
+SELECT
+    a.artesano_id,
+  COALESCE(GROUP_CONCAT(DISTINCT b.denominacion SEPARATOR ', '), '-') AS categorias
+FROM
+    producto a
+INNER JOIN categoria b ON a.categoria_id = b.id
+GROUP BY
+    a.artesano_id) b ON a.id=b.artesano_id
+ORDER BY
+ a.nombres,a.apellidos ASC;
+    `;
+
+    // Ejecutar la consulta sin parámetros
+    artesanoModel.sequelize.query(sql, {
+        type: artesanoModel.sequelize.QueryTypes.SELECT
+    })
+        .then(resultset => {
+            res.status(200).json(resultset);
+        })
+        .catch(error => {
+            res.status(400).send(error);
+        });
+}
+
 
 
 
