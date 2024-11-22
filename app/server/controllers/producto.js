@@ -6,6 +6,7 @@ const PARAMETROS = require("../helpers/parametros");
 const moment = require('moment');
 const { DECIMAL } = require('sequelize');
 const { handleHttpError } = require("../utils/handleError");
+const { convertirMoneda } = require('../utils/convertirMoneda');
 
 module.exports = {
     guardar,
@@ -152,7 +153,11 @@ async function obtener (req, res) {
 
     try {
         const result = await product.findProductoAndArtesanoByProdId(id)
-        console.log(result)
+
+        const convertido = await convertirMoneda('PEN', 'USD', result.precio || 0);
+
+        result.precio_usd = convertido || 0;
+
         res.status(200).send(result)
 
     } catch (e) {
