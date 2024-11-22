@@ -22,13 +22,15 @@ import { custom, menuselec } from "../utils/common.js";
     }
 })();
 
-function startApp() {
+function startApp () {
     mostrarArtesanos();
 }
+let listadoCategorias = null;
 
-async function mostrarArtesanos() {
+async function mostrarArtesanos () {
     try {
         const categorias = await listarFiltros();
+        listadoCategorias = categorias;
         llenarFiltros(categorias);
 
         const artesanos = await listarArtesanos();
@@ -41,7 +43,7 @@ async function mostrarArtesanos() {
         searchInput.addEventListener("input", () => {
             buscarArtesanos(artesanos, searchInput);
         });
-        
+
         searchButton.addEventListener("click", () => {
             buscarArtesanos(artesanos, searchInput);
         });
@@ -73,64 +75,59 @@ const gridArtesanos = async (artesanos) => {
             artesanoList.appendChild(noData);
             return;
         }
-
+        $('#person-list').html('');
         artesanos.forEach((artesano) => {
-            const card = document.createElement("div");
-            const img = document.createElement("img");
-            const name = document.createElement("h2");
-            const categoria = document.createElement("p");
-            const button = document.createElement("button");
-
-            let nombreCompleto = titleCase(`${artesano.nombres} ${artesano.apellidos}`);
-            nombreCompleto = sliceText(nombreCompleto, 23);
-
-            card.className = "person-card";
-            
-            const fotoPlaceholder = "https://objetivoligar.com/wp-content/uploads/2017/03/blank-profile-picture-973460_1280-580x580.jpg";
-            const foto1 = artesano.foto1
-                            ? artesano.foto1.includes("https") ? artesano.foto1 : fotoPlaceholder
-                            : fotoPlaceholder;
-            
-            const foto2 = artesano.foto2
-                            ? artesano.foto2.includes("https") ? artesano.foto2 : fotoPlaceholder
-                            : fotoPlaceholder;
-                            
-            img.src = foto1;
-
-            img.alt = nombreCompleto;
-
-            img.onmouseover = () => {
-                img.src = foto2;
-            };
-
-            img.onmouseout = () => {
-                img.src = foto1;
-            };
-
-            name.textContent = nombreCompleto;
-            categoria.innerText = artesano.categoria_artesano;
-            categoria.style.fontWeight = "bold";
-            categoria.style.marginBottom = "0";
-            categoria.style.marginLeft = "10px";
-            categoria.style.color = "green";
-            categoria.style.textAlign = "left";
-
-            button.textContent = "Ver Perfil";
-            button.onclick = () => {
-                window.location.href = `artesano.html?id=${artesano.id}`;
-            };
-
-            card.appendChild(img);
-            card.appendChild(name);
-            card.appendChild(categoria);
-            card.appendChild(button);
-
-            artesanoList.appendChild(card);
+            let htmlcardArtesano = crearteCardArtesano(artesano);
+            $('#person-list').append(htmlcardArtesano);
+            //artesanoList.appendChild(htmlcardArtesano);
         });
     } catch (e) {
         console.error(e);
     }
 };
+
+
+function generateBadges (text) {
+    const categoryColors = {
+        "CERÁMICA": "#3498db", // Azul
+        "TEXTILERÍA": "#e74c3c", // Rojo
+        "PIEDRA TALLADA": "#2ecc71" // Verde
+    };
+
+    const categories = text.split(',').map(item => item.trim());
+    let badgesHTML = '';
+
+    categories.forEach(category => {
+        const color = categoryColors[category.toUpperCase()] || "#95a5a6"; // Color gris por defecto
+        badgesHTML += `
+                    <span style="
+                        display: inline-block;
+                        padding: 0.4em 0.8em;
+                        margin: 0.2em;
+                        font-size: 0.9em;
+                        font-weight: bold;
+                        color: white;
+                        background-color: ${color};
+                        border-radius: 12px;
+                    ">
+                        ${category}
+                    </span>
+                `;
+    });
+
+    return badgesHTML;
+}
+function crearteCardArtesano (artesano) {
+    return `
+   <div class="person-card">
+        <img src="${artesano.foto1}" alt="${artesano.nombres} ${artesano.apellidos}" style="cursor: pointer;" onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/200x220.png?text=No disponible';">
+        <h2>${artesano.nombres} ${artesano.apellidos}</h2>
+        <p style="font-weight: bold; margin-bottom: 0px; margin-left: 10px; color: white;  text-align: left;">
+        ${generateBadges(artesano.categoria_artesano)}
+        </p>
+    </div>
+    `
+}
 
 const llenarFiltros = async (categorias) => {
     const selectElement = document.getElementById('filterSelect');
@@ -150,7 +147,7 @@ const buscarArtesanos = async (artesanos, searchInput) => {
     const filteredArtesanos = artesanos.filter((artesano) =>
         artesano.nombres.toLowerCase().includes(searchTerm)
     );
-    
+
     gridArtesanos(filteredArtesanos);
 };
 
@@ -160,7 +157,7 @@ const filtrarPorCategoria = async (artesanos, categoria) => {
         return;
     }
 
-    const filteredArtesanos = artesanos.filter((artesano) => 
+    const filteredArtesanos = artesanos.filter((artesano) =>
         artesano.categoria_artesano.toLowerCase().includes(categoria.toLowerCase())
     );
 
