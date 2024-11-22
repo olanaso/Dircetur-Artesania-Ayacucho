@@ -415,7 +415,7 @@ async function mostrarInformacion (producto) {
     console.log('imagenPrincipal', producto.imagen_principal)
 
     $("#producto-nombre").text(`${producto.nombres_es}`);
-    $("#producto-precio").text(`S/ ${producto.precio} `);
+    $("#producto-precio").text(`S/ ${producto.precio}  | $ ${producto.precio_usd}`);
     $("#producto-descripcion").text(`${producto.descripcion_es}`);
     $("#producto-alto").text(`Alto: ${producto.alto} cm`);
     $("#producto-ancho").text(`Ancho:${producto.ancho} cm`);
