@@ -14,6 +14,7 @@ import { ShoppingCart } from "../utils/pluginCarrito.js";
         { path: '../partials/tienda/header.html', container: 'header' },
         { path: '../partials/tienda/footer.html', container: 'footer' },
     ];
+    
     try {
 
         await loadPartials(partials);
@@ -134,7 +135,7 @@ function loadCategorias (data) {
         html = html + `
         <div class="item car-item">
             <div class="thumb-content">
-            <a href="busqueda.html?id_categoria=${item?.id}"><img style="widht:187px;height:141px" src="${item?.foto_referente || "https://via.placeholder.com/187x141"}" alt=""></a>
+            <a href="busqueda.html?id_categoria=${item?.id}"><img style="widht:187px;height:141px;object-fit:cover;" src="${item?.foto_referente || "https://via.placeholder.com/187x141"}" alt=""></a>
             </div>
             <div class="down-content">
             <a href="busqueda.html?id_categoria=${item?.id}">
