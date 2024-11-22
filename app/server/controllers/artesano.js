@@ -417,39 +417,50 @@ function buscar (req, res) {
 async function saveUsuarioArtesano (req, res, next) {
     const t = await artesanoModel.sequelize.transaction();
     try {
-        const { usuario, artesano } = req.body;
+        const { usuario: _usuario, artesano } = req.body;
 
         //Guardar usuario 
         let modelArtesano = artesano;
 
+        //buscando usuario
         let objectUsuario = await artesanos.findOne({
             where: {
-                id: usuario.id ? usuario.id : 0
+                [Op.or]: [
+                    { usuario: _usuario.usuario ? _usuario.usuario : 0 },
+                    { id: _usuario.id ? _usuario.id : 0 } // Otra condición para el OR
+                ]
             }
         });
+
         let usuario_result = objectUsuario;
 
         if (objectUsuario != null) { //proceso de actualizacion
-            let obj = { ...objectUsuario.dataValues, ...usuario };
+            let obj = { ...objectUsuario.dataValues, ..._usuario };
             for (const prop in obj) {
                 objectUsuario[prop] = obj[prop];
             }
             objectUsuario.usuaregistra_id = req.userId;
+            objectUsuario.rolid = 2; //artesano
             await objectUsuario.save({ transaction: t });
 
         } else {  //registro de nuevo usuario
             // usuario.id = artesano.id;
 
-            usuario.clave = encriptartexto(usuario.clave)
-            usuario_result = await artesanos.create({ ...usuario }, { transaction: t });
+            _usuario.clave = encriptartexto(_usuario.clave)
+            _usuario.rolid = 2; //artesano
+            usuario_result = await artesanos.create(_usuario, { transaction: t });
 
 
         }
-        console.log('El id!!', usuario.id)
+        console.log('El id!!', usuario_result.id)
         let artesano_result = null;
 
-        let objectArtesano = await artesanoModel.findArtesanoByUserId(usuario.id)
-
+        //let objectArtesano = await artesanoModel.findArtesanoByUserId(artesano.dni)
+        let objectArtesano = await artesanoModel.findOne({
+            where: {
+                dni: artesano.dni
+            }
+        });
 
         console.log('model artesano', modelArtesano)
         //Guardado de artesano
@@ -461,6 +472,10 @@ async function saveUsuarioArtesano (req, res, next) {
             }
             objectArtesano.usuario_id = usuario_result.id;
             await objectArtesano.save({ transaction: t });
+            /*  emailRegistroArtesano({
+                  correo: objectArtesano.correo, nombreArtesano: objectArtesano.nombres + ' ' + objectArtesano.apellidos
+                  , usuarioArtesano: objectArtesano.dni, contrasenaArtesano: objectArtesano.clave || 'recupere desde el login', logoUrl: null
+              })*/
 
         } else {  //registro de nuevo usuario
             artesano.usuario_id = usuario_result.id;
