@@ -58,6 +58,7 @@ async function mostrarArtesanos () {
 }
 
 const gridArtesanos = async (artesanos) => {
+
     const artesanoList = document.getElementById("person-list");
     artesanoList.innerHTML = ""; // Clear previous results
 
@@ -119,12 +120,14 @@ function generateBadges (text) {
 }
 function crearteCardArtesano (artesano) {
     return `
-   <div class="person-card">
+   <div class="person-card" style="with:200px; word-wrap: break-word; overflow-wrap: break-word;">
+   <a href="artesano.html?id=${artesano.id}">
         <img src="${artesano.foto1}" alt="${artesano.nombres} ${artesano.apellidos}" style="cursor: pointer;" onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/200x220.png?text=No disponible';">
         <h2>${artesano.nombres} ${artesano.apellidos}</h2>
         <p style="font-weight: bold; margin-bottom: 0px; margin-left: 10px; color: white;  text-align: left;">
         ${generateBadges(artesano.categoria_artesano)}
         </p>
+        </a>
     </div>
     `
 }
