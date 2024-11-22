@@ -35,6 +35,7 @@ hideLoading();
 })();
 
 function startApp () {
+  
   // checkadminsession(); 
   setTimeout(function () {
     llenarinformacionIESTPProg();
@@ -44,6 +45,7 @@ function startApp () {
   buscarUsuario();
   //exportarExcel();
   //nuevo(); 
+  llenarcategoria()
 
 }
 
@@ -1927,8 +1929,8 @@ document.getElementById('precioEnvio').addEventListener('change', function () {
   $('#envioExtranjero').val('');
 });
 
-const selectCategoria = document.getElementById('lstcategoria');
 async function llenarcategoria () {
+  const selectCategoria = document.getElementById('lstcategoria');
 
   try {
     // Obtener los datos asincrónicamente
