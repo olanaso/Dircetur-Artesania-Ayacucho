@@ -32,6 +32,23 @@ function startApp () {
     changeRelevancia()
 }
 
+
+function validarSession() {
+    const favoritosLinks = document.querySelectorAll('a[href^="productos-deseados.html?producto="]');
+
+    favoritosLinks.forEach(favoritosLink => {
+        favoritosLink.addEventListener('click', function(event) {
+            const idCliente = localStorage.getItem('idCliente');
+            
+            if (!idCliente) {
+                event.preventDefault();
+                alert('Para agregar productos a tus favoritos, primero debes iniciar sesión.');
+            }
+        });
+    });
+}
+
+
 function changeRelevancia () {
     $('#drpordenamientosbusqueda').on('change', function (e) {
         ordenamientosBusqueda()
@@ -285,7 +302,8 @@ function loadProductos (data) {
     }
     $('#listaProductosNovedades').append(html)
 
-
+    setTimeout(() => validarSession(), 500)
+    
 }
 
 function generatePaginationHTML (totalPages) {
@@ -443,7 +461,4 @@ function ordenamientosBusqueda () {
  
      // Previene el submit tradicional
      return false;*/
-
-
 }
-
