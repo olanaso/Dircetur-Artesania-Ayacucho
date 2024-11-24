@@ -62,7 +62,7 @@ const enviarCalificacion = async (productoId) => {
             const valor = star.value;
 
             const data = {
-                libroid: productoId,
+                productoid: productoId,
                 valor: parseInt(valor)
             };
 
