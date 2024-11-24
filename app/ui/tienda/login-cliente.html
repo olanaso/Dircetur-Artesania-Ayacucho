@@ -746,6 +746,12 @@
   <div id="footer"></div>
 
   <script>
+    const idCliente = localStorage.getItem("idCliente");
+
+    if (idCliente) {
+      window.location.href = "/tienda/";
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
       const forms = {
         login: {
