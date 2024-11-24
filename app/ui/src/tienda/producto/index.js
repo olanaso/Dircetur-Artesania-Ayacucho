@@ -51,6 +51,14 @@ const setearPuntuacion = async (productoid) => {
 const enviarCalificacion = async (productoId) => {
     document.querySelectorAll('input[name="rate"]').forEach(star => {
         star.addEventListener('change', async () => {
+            const idCliente = localStorage.getItem('idCliente');
+
+            if (!idCliente) {
+                setearPuntuacion(productoId);
+                alert('Debes iniciar sesión para poder calificar el producto.');
+                return;
+            }
+
             const valor = star.value;
 
             const data = {
@@ -88,8 +96,6 @@ const obtenerComentarios = async (id) => {
         commentsList.innerHTML = '';
 
         const comentarios = await listarComentarios(id);
-
-        debugger
 
         if (!comentarios || comentarios.length === 0) {
             commentsList.innerHTML = '<div id="noComentarios" style="text-align: center; padding: 20px; color: #666; font-size: 16px; font-style: italic; border: 1px dashed #ccc; border-radius: 8px; margin: 10px 0;">No hay comentarios disponibles para este producto.</div>';
@@ -180,7 +186,6 @@ const agregarComentario = async (artesaniaId) => {
             };
 
             const data = await nuevoComentario(objComentario);
-            debugger
 
             if (data === null || data === undefined) {
                 loaderComentario.style.display = 'none';
@@ -253,8 +258,6 @@ function obtenerUrlProducto () {
         const artesaniaenviada = JSON.parse(data);
 
         // Mostrar el objeto en el DOM
-        //    debugger
-
         const artesaniaId = artesaniaenviada.artesania.id;
         console.log(artesaniaenviada)
 
@@ -401,7 +404,6 @@ function convertirTallasEnString (lista) {
 
 async function mostrarInformacion (producto) {
 
-    // debugger
     const listColores = JSON.parse(JSON.parse(producto.lst_colores));
     const lst_ofertas = JSON.parse(JSON.parse(producto.lst_ofertas));
     const lst_otros_costos = JSON.parse(JSON.parse(producto.lst_otros_costos));
@@ -447,7 +449,11 @@ async function mostrarInformacion (producto) {
     showProductSlider(imagenesSecundarias, producto.imagen_principal);
     //showVideos(lst_videoenlace);
 
-    $('#videoproducto').attr('src', lst_videos[0].src)
+    // const lstVideos = lst_videos.length > 0 ? lst_videos : lst_videoenlace;
+    // console.log({ lst_videos, lst_videoenlace });
+    const scrVideo = lst_videos.length > 0 ? lst_videos[0].src : '';
+
+    $('#videoproducto').attr('src', scrVideo)
 
 }
 
@@ -750,16 +756,16 @@ function cargarComboAertesanos (list) {
 
 function loadProductosDestacados (data) {
 
-    // debugger
-
     let html = ` `
     for (let item of data) {
+        const artesanoNombres = item.datos_artesano ? item.datos_artesano.nombres : '';
+        const artesanoApellidos = item.datos_artesano ? item.datos_artesano.apellidos : '';
 
         let artenia_anviar_carrito = {
             artesano_id: item.artesano_id,
             id: item.id,
             categoria_id: item.categoria_id,
-            artesano: item.datos_artesano.nombres + ' ' + item.datos_artesano.apellidos,
+            artesano: artesanoNombres + ' ' + artesanoApellidos,
             datos: {
                 imagen_principal: item.imagen_principal,
                 descripcion_es: item.nombres_es,
@@ -779,8 +785,8 @@ function loadProductosDestacados (data) {
             },
             artesano: {
                 id: item.artesano_id,
-                nombres: item.datos_artesano.nombres + ' ' + item.datos_artesano.apellidos,
-                foto1: item.datos_artesano.foto1,
+                nombres: artesanoNombres + ' ' + artesanoApellidos,
+                foto1: item.datos_artesano ? item.datos_artesano.foto1 : ''
             }
         }
 

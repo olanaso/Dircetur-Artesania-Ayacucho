@@ -26,18 +26,18 @@ import { custom } from '../utils/common.js';
     }
 })();
 
-function getQueryParameter (name) {
+function getQueryParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
 
-async function infoArtesanoById () {
+async function infoArtesanoById() {
     const artesano = await obtenerArtesanoById(getQueryParameter("id"));
     console.log(" >DATA artesano: ", artesano);
     mostrarInformacion(artesano);
 }
 
-async function mostrarInformacion (artesano) {
+async function mostrarInformacion(artesano) {
 
 
     const listTaller = JSON.parse(JSON.parse(artesano.lst_taller));
@@ -118,7 +118,7 @@ async function mostrarInformacion (artesano) {
     loadProductosDestacados(artesano.productos)
 }
 
-function initMap (latitud, longitud, ubicacion, fotoArtesano) {
+function initMap(latitud, longitud, ubicacion, fotoArtesano) {
     // Crear el mapa centrado en las coordenadas proporcionadas
     var mymap = L.map("map").setView([latitud, longitud], 15);
 
@@ -156,7 +156,7 @@ function initMap (latitud, longitud, ubicacion, fotoArtesano) {
 
 
 
-function startApp () {
+function startApp() {
     infoArtesanoById();
     // showStep(currentStep);     // crearListaInicial();
     // cargarDataPortada();
@@ -167,14 +167,14 @@ function startApp () {
     enviarCalificacion();
 }
 
-function formatearNumero (numero) {
+function formatearNumero(numero) {
     return numero.toLocaleString('es-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     });
 }
 
-function loadProductosDestacados (data) {
+function loadProductosDestacados(data) {
 
     let html = ` `
     for (let item of data) {
@@ -286,17 +286,26 @@ const setearCalificacion = async () => {
 }
 
 const enviarCalificacion = async () => {
-    const artesanoId = await getQueryParameter("id");
+
+    const artesanoId = getQueryParameter("id");
 
     document.querySelectorAll('input[name="rate"]').forEach(star => {
         star.addEventListener('change', async () => {
+            const idCliente = localStorage.getItem('idCliente');
+
+            if (!idCliente) {
+                setearCalificacion();
+                alert('Debes iniciar sesión para calificar a un artesano.');
+                return;
+            }
+
             const valor = star.value;
-            
+
             const data = {
                 artesanoid: artesanoId,
                 valor: parseInt(valor)
             };
-            
+
             const resp = await enviarPuntuacion(data);
 
             const ratingContainer = document.querySelector('.rating-container');
