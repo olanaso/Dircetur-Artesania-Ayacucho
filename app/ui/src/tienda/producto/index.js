@@ -119,8 +119,8 @@ const obtenerComentarios = async (id) => {
                 day: 'numeric'
             });
 
-            const nombres = comentario.cliente.nombres || '';
-            const apellidos = comentario.cliente.apellidos || '';
+            const nombres = comentario.cliente ? comentario.cliente.nombres ?? 'User' : 'User';
+            const apellidos = comentario.cliente ? comentario.cliente.apellidos ?? 'User' : 'User';
 
             const iniciales = (nombres.charAt(0) + apellidos.charAt(0)).toUpperCase();
 
@@ -417,7 +417,7 @@ async function mostrarInformacion (producto) {
     console.log('imagenPrincipal', producto.imagen_principal)
 
     $("#producto-nombre").text(`${producto.nombres_es}`);
-    $("#producto-precio").text(`S/ ${producto.precio}  | $ ${(producto.precio_usd).toFixed(2)}`);
+    $("#producto-precio").text(`S/ ${producto.precio}  | $ ${producto.precio_usd}`);
     $("#producto-descripcion").text(`${producto.descripcion_es}`);
     $("#producto-alto").text(`Alto: ${producto.alto} cm`);
     $("#producto-ancho").text(`Ancho:${producto.ancho} cm`);

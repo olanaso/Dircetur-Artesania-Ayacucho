@@ -130,7 +130,7 @@ const register = () => {
 
             document.getElementById('registerForm').style.display = 'none';
             document.getElementById('loginForm').style.display = 'block';
-            alert('Registro exitoso, inicie sesión para continuar.');
+            alert('Registro exitoso, su contraseña es su DNI. Para cambiarla, por favor, ve a la recuperacion de contraseña.');
 
         } catch (error) {
             console.error('Error:', error);
