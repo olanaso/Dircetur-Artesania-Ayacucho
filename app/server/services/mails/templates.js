@@ -335,7 +335,7 @@ function generarFacturaHTML (cliente, pedido) {
 
             <!-- Follow-up Button -->
             <div style="text-align: center; margin-top: 30px;">
-                <a href="https://wa.me/${cliente.telefono}" class="btn-follow-up" style="color:#fff">Contactar al Artesano por WhatsApp</a>
+                <a href="https://wa.me/+51${pedido.artesano_celular}" class="btn-follow-up" style="color:#fff">Contactar al Artesano por WhatsApp</a>
             </div>
 
             <!-- Footer -->

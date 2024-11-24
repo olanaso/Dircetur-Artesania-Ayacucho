@@ -125,6 +125,7 @@ function obtenerPedido () {
         pedido =
         {
             "artesano_id": ARTESANO.id,
+            "artesano_celular": ARTESANO.celular,
             "cliente_id": null,
             "fecha_pedido": null,
             "list_productos": lst_productos,
