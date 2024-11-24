@@ -266,6 +266,7 @@ product.findAllProductsByCategoryId = async function (categoryId) {
     })
     return await product.findAll({ where: { categoria_id: categoryId } })
 }
+
 //cuando pongo las relaciones afuera de la funcion ,la funcion no se cae
 //producto pertenece a artesano, la foreign key es artesano_id dentro del mismo product
 product.belongsTo(artesano, {
@@ -325,10 +326,9 @@ product.findProductoAndArtesanoByProdId = async function (id) {
                     model: artesano,
                     attributes: ['foto1', 'correo', 'celular', 'lst_mediospago', 'lst_contactos', 'nombres', 'apellidos', 'dni', 'ruc'],
                     as: 'datos_artesano'
-                }
+                },
             ]
         })
-
 
     //Agregar productos adicionales
 
@@ -354,14 +354,21 @@ product.findProductoAndArtesanoByProdId = async function (id) {
                     'dni', 'ruc'
                 ],
                 as: 'datos_artesano'
+            },
+            {
+                model: categoria,
+                attributes: ['denominacion'],
+                as: 'categoria_producto'
             }
         ]
     });
+    
     // Convertir productos relacionados a un formato plano
     productoPlano.productosRelacionados = productosRelacionados.map(producto => producto.toJSON());
 
     return productoPlano;
 }
+
 /**
  * Funcion  para encontrar todos los id de artesanos y categorias por el id de la categoria
  * @param categorias = objeto
@@ -383,6 +390,7 @@ product.findAllArtesanoIdAndCategoriaIdByCategorias = async function (categorias
 
     return uniqueArtesanosPorCategoria;
 }
+
 module.exports = product
 
 

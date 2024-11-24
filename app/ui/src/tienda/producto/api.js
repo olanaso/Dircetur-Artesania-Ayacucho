@@ -118,7 +118,6 @@ export const enviarPuntuacion = async (data) => {
     
         if (response.ok) {
             const jsonResponse = await response.json();
-            console.log('Calificación enviada correctamente:', jsonResponse);
             return jsonResponse;
         } else {
             console.error('Error en la solicitud:', response.statusText);
