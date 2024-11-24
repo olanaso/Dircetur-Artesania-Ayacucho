@@ -29,12 +29,19 @@ let listadoCategorias = null;
 
 async function mostrarArtesanos () {
     try {
+
+        const countResult = document.getElementById("countResult");
+        const totalResult = document.getElementById("totalResult");
+
         const categorias = await listarFiltros();
         listadoCategorias = categorias;
         llenarFiltros(categorias);
 
         const artesanos = await listarArtesanos();
         gridArtesanos(artesanos);
+
+        countResult.textContent = artesanos.length;
+        totalResult.textContent = artesanos.length;
 
         const searchInput = document.getElementById("searchInputArtesano");
         const searchButton = document.getElementById("searchButtonArtesano");
@@ -58,6 +65,9 @@ async function mostrarArtesanos () {
 }
 
 const gridArtesanos = async (artesanos) => {
+    const countResult = document.getElementById("countResult");
+
+    countResult.textContent = artesanos.length;
 
     const artesanoList = document.getElementById("person-list");
     artesanoList.innerHTML = ""; // Clear previous results

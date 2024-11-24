@@ -267,6 +267,14 @@
 		.person-card button:hover {
 			background-color: #c01c9d;
 		}
+
+		.count-result {
+			text-align: center;
+			margin-top: 20px;
+			font-size: 18px;
+			color: #333;
+			font-weight: bold;
+		}
 	</style>
 
 	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -333,10 +341,11 @@
 				<option value="TODOS">TODOS</option>
 			</select>
 		</div>
-
 	</div>
 
 	<section class="artesanos-container">
+		<p class="count-result">Mostrando <span id="countResult">0</span> de <span id="totalResult">0</span> resultados</p>
+
 		<div id="person-list" class="person-list"></div>
 	</section>
 

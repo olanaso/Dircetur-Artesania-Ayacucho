@@ -89,8 +89,17 @@ export function checkSession () {
                 if (data) {
                     const avatarImage = new Image();
                     avatarImage.src = data.foto_perfil;
+
+                    data.nombres = data.nombres || 'Usuario';
+                    data.apellidos = data.apellidos || 'Anónimo';
                     
                     const initial = data.nombres.charAt(0).toUpperCase() + data.apellidos.charAt(0).toUpperCase();
+
+                    const logoutButton = document.createElement('button');
+                    logoutButton.id = 'logoutButton';
+                    logoutButton.className = 'btn-logout';
+                    logoutButton.style.display = 'none';
+                    logoutButton.textContent = 'Cerrar sesión';
 
                     avatarImage.onerror = function() {
                         avatarContainer.innerHTML = `
@@ -98,6 +107,7 @@ export function checkSession () {
                                 <div class='avatar-initial'>${initial}</div>
                             </div>
                         `;
+                        avatarContainer.appendChild(logoutButton);
                     };
 
                     avatarImage.onload = function() {
@@ -106,15 +116,43 @@ export function checkSession () {
                                 <img src="${data.foto_perfil}" alt="Profile Picture" class="avatar-image">
                             </div>
                         `;
+                        avatarContainer.appendChild(logoutButton);
                     };
 
-                    avatarContainer.appendChild(avatarImage);
+                    showHideLogoutButton(avatarContainer, logoutButton);
                 }
             })
             .catch(error => console.error('Error fetching user data:', error));
     }
 }
 
+export function showHideLogoutButton (avatarContainer, logoutButton) {
+    avatarContainer.addEventListener('mouseover', () => {
+        logoutButton.style.display = 'block';
+    });
+
+    avatarContainer.addEventListener('mouseout', () => {
+        logoutButton.style.display = 'none';
+    });
+
+    logoutButton.addEventListener('mouseover', () => {
+        logoutButton.style.display = 'block';
+    });
+
+    logoutButton.addEventListener('mouseout', () => {
+        logoutButton.style.display = 'none';
+    });
+
+    logoutButton.addEventListener('click', () => {
+        logout();
+    });
+}
+
+
+function logout() {
+    localStorage.removeItem('idCliente');
+    window.location.href = '/tienda/index.html';
+}
 
 export function menu () {
     // Menu Function for DropDown
