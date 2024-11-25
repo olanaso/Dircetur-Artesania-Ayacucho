@@ -313,9 +313,12 @@ function cargarTabla (pedidos) {
                 estadoClass = '';
         }
 
+        const nombres = pedido.cliente ? pedido.cliente.nombres : '';
+        const apellidos = pedido.cliente ? pedido.cliente.apellidos : '';
+
         row.innerHTML = `
             <td>${pedido.num_pedido}</td>
-            <td>${pedido.cliente.nombres} ${pedido.cliente.apellidos}</td> 
+            <td>${nombres} ${apellidos}</td> 
             <td>${formatearFecha(pedido.fecha_pedido)}</td>
             <td>${formatearFecha(pedido.updatedAt)}</td>
             <td><span class="${estadoClass}">${pedido.estado}</span></td>
