@@ -103,7 +103,7 @@ const register = () => {
                 updatedat: new Date().toISOString(),
             },
                 datoscliente: {
-                nombre: nombres,
+                nombres: nombres,
                 apellidos: apellidos,
                 correo: correo,
                 telefono: telefono,
@@ -117,9 +117,6 @@ const register = () => {
                 foto_perfil: '' // Este campo está vacío según el formato dado
             }
         };
-
-        console.log({datos});
-
 
         try {
             const data = await registerCliente(datos);
