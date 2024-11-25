@@ -294,6 +294,7 @@ const enviarCalificacion = async () => {
             const idCliente = localStorage.getItem('idCliente');
 
             if (!idCliente) {
+                star.checked = false;
                 setearCalificacion();
                 alert('Debes iniciar sesión para calificar a un artesano.');
                 return;

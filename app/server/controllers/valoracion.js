@@ -53,14 +53,16 @@ async function puntuacionPromedio (req, res) {
   try {
     const promedio = await model.findAll({
       attributes: [
-        [model.sequelize.fn('AVG', Sequelize.col('valor')), 'promedio'],
+        [model.sequelize.fn('AVG', sequelize.col('valor')), 'promedio'],
       ],
       where: {
         productoid: req.query.productoid, // Filtro por el ID del producto si es necesario
       },
     });
 
-    const resultado = promedio[0].get('promedio');
+    console.log({ promedio: promedio[0] });
+
+    const resultado = promedio[0].get('promedio') || 0;
     console.log(`El promedio de puntuaciones es: ${resultado}`);
     return res.status(200).send({ puntuacion: Math.round(resultado) });
   } catch (error) {
@@ -76,14 +78,14 @@ async function puntuacionPromedioArtesano (req, res) {
   try {
     const promedio = await model.findAll({
       attributes: [
-        [model.sequelize.fn('AVG', Sequelize.col('valor')), 'promedio'],
+        [model.sequelize.fn('AVG', sequelize.col('valor')), 'promedio'],
       ],
       where: {
         artesanoid: req.query.artesanoid, // Filtro por el ID del producto si es necesario
       },
     });
 
-    const resultado = promedio[0].get('promedio');
+    const resultado = promedio[0].get('promedio') || 0;
     console.log(`El promedio de puntuaciones es: ${resultado}`);
     return res.status(200).send({ puntuacion: Math.round(resultado) });
   } catch (error) {
