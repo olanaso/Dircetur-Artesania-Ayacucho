@@ -9,7 +9,7 @@ hideLoading();
 (async function () {
   let partials = [
     { path: 'partials/shared/header.html', container: 'app-header' },
-    { path: 'partials/shared/menuperfil.html', container: 'app-side' },
+    { path: 'partials/shared/menu.html', container: 'app-side' },
 
 
   ];
@@ -74,10 +74,10 @@ async function cargarDatosusuario () {
     rol = "ADMINISTRADOR"
   }
   if (usuario.rolid == 2) {
-    rol = "DOCENTE"
+    rol = "ARTESANO"
   }
   if (usuario.rolid == 3) {
-    rol = "ESTUDIANTE"
+    rol = "CLIENTE"
   }
   $('#txt-rol').val(rol)
 

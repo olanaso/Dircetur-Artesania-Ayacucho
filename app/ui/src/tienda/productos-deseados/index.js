@@ -184,7 +184,6 @@ function generarInterfaz () {
 
     // Iterar sobre cada artesano y sus productos
     for (let item of artesanias) {
-        debugger
         let { id, artesania, artesano } = item;
         const grupoHTML = `
         

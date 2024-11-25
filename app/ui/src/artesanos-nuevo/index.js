@@ -177,8 +177,6 @@ async function buscarUsuario () {
   /*********** */
   $('#btnguardarcambio').on('click', async function (e) {
 
-    debugger
-
     e.preventDefault();
     var isValid = true;
     // // Itera sobre todos los campos requeridos para verificar si están vacíos

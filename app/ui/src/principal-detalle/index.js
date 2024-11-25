@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function cargar () {
 
-    debugger
     let datos = await listarArtesanosCombo()
 
     $('#drp-artesano-dni').select2({

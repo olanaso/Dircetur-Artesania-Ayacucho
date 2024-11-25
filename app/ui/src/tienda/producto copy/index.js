@@ -31,7 +31,6 @@ function startApp () {
     // cargarDataPortada();
     // rellenarFormulario();
     // realizarBusqueda();
-    debugger
     createMenuMobil()
 
 }

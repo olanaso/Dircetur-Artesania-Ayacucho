@@ -394,7 +394,6 @@ async function buscarUsuario () {
 
 
             showLoading()
-            debugger
             let ousuario = { id: usuarioid, usuarioid, usuario, nombre_completo: nombres + ' ' + apellidos, clave, rolid: 2, tipousuario: 2, estado: 1, usuario }
             let artesano = { artesanoId, dni, ruc, nombres, apellidos, correo, celular, lugar_nacimiento, ubigeo, lengua_materna, foto1, foto2, lst_taller, lst_especialidadtecnicas, lst_contactos, lst_mediospago, lst_reconocimientos, usuario_id: usuarioid, lst_videoenlace, lst_videos }
 
@@ -486,7 +485,6 @@ async function editarArtesano (id) {
   $('#distrito').val(editarartesano.ubigeo) */
 
   await llenarDpto();
-  debugger
 
   // Establecer el valor del select de región
   $('#region').val(editarartesano.ubigeo.substring(0, 2));
@@ -1201,7 +1199,6 @@ $(document).ready(function () {
   $('#editarMediopagoBtn').on('click', function () {
 
 
-    debugger
     let nuevoValor = $('#tipomediopago').val();
     let nuevoTexto = $('#tipomediopago option:selected').text();
 

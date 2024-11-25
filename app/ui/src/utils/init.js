@@ -43,7 +43,6 @@ export function obtenerIESTP () {
 }
 
 export async function checkSession () {
-    debugger
     const settings = {
         method: "POST",
         headers: {

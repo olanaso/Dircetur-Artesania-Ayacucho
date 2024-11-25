@@ -29,7 +29,6 @@ hideLoading();
 })();
 
 function startApp () {
-	debugger
 	validarSession();
 	setTimeout(function () {
 		llenarinformacionIESTPProg();

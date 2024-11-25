@@ -79,8 +79,6 @@ async function cargar () {
   const urlParams = new URLSearchParams(window.location.search);
   productId = urlParams.get('id');
   console.log('id del prod', productId)
-  debugger
-
 
   if (productId === '0') {
     let datos = await listarArtesanosCombo()

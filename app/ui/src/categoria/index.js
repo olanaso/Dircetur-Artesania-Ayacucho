@@ -327,7 +327,6 @@ function handleEditUploadResponse (response) {
 
 
 // function handleUploadResponse (response) {
-//   debugger
 
 //   let file = $('#myfile').prop('files')[0];
 //   if (file) {

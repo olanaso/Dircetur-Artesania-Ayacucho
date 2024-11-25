@@ -258,7 +258,6 @@ export async function buscarArtesano (filtro) {
 
 async function cargar () {
 
-  debugger
   let datos = await listarArtesanosCombo()
 
   $('#drp-artesano-dni').select2({

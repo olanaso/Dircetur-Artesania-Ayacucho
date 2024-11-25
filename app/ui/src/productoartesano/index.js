@@ -92,7 +92,7 @@ async function buscarUsuario22 () {
   const Nombreproducto = document.getElementById('nombre-producto').value;
   const Preciosid = document.getElementById('precios-id').value;
   const Cantidadesid = document.getElementById('cantidades-id').value;
-  debugger
+  
   const filtro = {
     nombres_es: Nombreproducto,
     precio: Preciosid,

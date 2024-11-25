@@ -414,7 +414,7 @@ async function buscarUsuario () {
 
           showLoading()
           let resultlogin = await guardarUsuario({ usuarioid, usuario, nombre_completo: nombres + ' ' + apellidos, clave, rolid: 2, tipousuario: 2, estado: 1 });
-          debugger
+          
           if (resultlogin) {
             showToast('Se actualizo los datos correctamente')
             usuarioid = resultlogin.data.id
