@@ -1929,7 +1929,7 @@ function handleUploadResponselistavideo (response) {
 function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, uploadUrl, folder, callback }) {
 
   const fileInput = document.getElementById(fileInputId);
-  const inputName = fileInput.name;
+  const inputName = fileInput ? fileInput.name : '';
   const progressBar = document.getElementById(progressBarId);
   const statusElement = document.getElementById(statusElementId);
 

@@ -90,23 +90,24 @@ async function cargarCampos (idPedido) {
     cargarTablaProductos(pedido);
     cargarTablaHistoriaPedido(pedido);
     cargarTablaHistoriaReclamos(pedido);
+
     // Tab Información
     ordenTitle.innerHTML = `Orden # ${pedido.num_pedido}`;
     numPedido.value = pedido.num_pedido;
     fechaPedido.value = formatearFecha(pedido.fecha_pedido);
     comprobateSolicitado.value = pedido.comprobante_solic;
-    nombreArtesano.value = pedido.artesano['nombres'] + ' ' + pedido.artesano['apellidos'];
-    nombreCliente.value = pedido.cliente['nombres'] + ' ' + pedido.cliente['apellidos'];
-    tipoDocumentoCliente.innerHTML = pedido.cliente['tipo_documento'];
-    numeroDocumentoCliente.value = pedido.cliente['numero_documento'];
-    correoCliente.value = pedido.cliente['correo'];
-    telefonoCliente.value = pedido.cliente['telefono'];
-    paisRecepcion.value = pedido.cliente['pais'];
-    regionRecepcion.value = pedido.cliente['region'];
-    ciudadRecepcion.value = pedido.cliente['ciudad'];
-    direccionRecepcion.value = pedido.cliente['direccion'];
-    wspCliente.setAttribute('href', `https://wa.me/${pedido.cliente['telefono']}`);
-    wspClienteReclamos.setAttribute('href', `https://wa.me/${pedido.cliente['telefono']}`);
+    nombreArtesano.value = pedido.artesano ? pedido.artesano['nombres'] + ' ' + pedido.artesano['apellidos'] : 'NA';
+    nombreCliente.value = pedido.cliente ? pedido.cliente['nombres'] + ' ' + pedido.cliente['apellidos'] : 'NA';
+    tipoDocumentoCliente.innerHTML = pedido.cliente ? pedido.cliente['tipo_documento'] : 'NA';
+    numeroDocumentoCliente.value = pedido.cliente ? pedido.cliente['numero_documento'] : 'NA';
+    correoCliente.value = pedido.cliente ? pedido.cliente['correo'] : 'NA';
+    telefonoCliente.value = pedido.cliente ? pedido.cliente['telefono'] : 'NA';
+    paisRecepcion.value = pedido.cliente ? pedido.cliente['pais'] : 'NA';
+    regionRecepcion.value = pedido.cliente ? pedido.cliente['region'] : 'NA';
+    ciudadRecepcion.value = pedido.cliente ? pedido.cliente['ciudad'] : 'NA';
+    direccionRecepcion.value = pedido.cliente ? pedido.cliente['direccion'] : 'NA';
+    wspCliente.setAttribute('href', pedido.cliente ? `https://wa.me/${pedido.cliente['telefono']}` : '#');
+    wspClienteReclamos.setAttribute('href', pedido.cliente ? `https://wa.me/${pedido.cliente['telefono']}` : '#');
 
     $('#imagen-Compra').attr('src', pedido.imagen_pago);
 }
