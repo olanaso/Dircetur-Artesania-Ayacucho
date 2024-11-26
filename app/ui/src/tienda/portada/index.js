@@ -1,7 +1,7 @@
 
 
 import { loadPartials } from "../../utils/viewpartials.js";
-import { getPortada } from './api';
+import { getPortada, postIndicadores } from './api';
 import { custom, menuselec } from '../utils/common.js';
 
 import { ShoppingCart } from "../utils/pluginCarrito.js";
@@ -53,14 +53,11 @@ const enviarIndicadores = async () => {
     const data = {
         cliente: nombreCompleto,
         clienteid: cliente?.id || null,
-        // productoid: null,
-        // producto: null,
-        // palabrasclave: null,
         fecha_cliente: new Date().toISOString(),
         url: window.location.href,
     }
 
-    console.log(data);
+    await postIndicadores(data);
 }
 
 function buscarArtesania () {

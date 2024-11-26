@@ -1,7 +1,7 @@
 
 
 import { loadPartials } from "../../utils/viewpartials.js";
-import { getPortadaBusqueda, busquedaProductos, listarComentarios, nuevoComentario, obtenerPuntuacion, enviarPuntuacion } from './api';
+import { getPortadaBusqueda, busquedaProductos, listarComentarios, nuevoComentario, obtenerPuntuacion, enviarPuntuacion, postIndicadores } from './api';
 import { custom } from '../utils/common.js';
 import { obtenerProducto } from "../producto/api.js";
 
@@ -261,12 +261,11 @@ const enviarIndicadores = async (artesania) => {
         clienteid: cliente?.id || null,
         productoid: artesania.id,
         producto: artesania.nombre_es,
-        // palabrasclave: null,
         fecha_cliente: new Date().toISOString(),
         url: window.location.href,
     }
 
-    console.log({indicadores});
+    await postIndicadores(indicadores);
 }
 
 function obtenerUrlProducto () {
