@@ -1,5 +1,7 @@
 import { googleTranslateElementInit } from "./translate";
 import { baseUrl, getDataFromLocalStorage } from '../../utils/config';
+import { postIndicadores } from './api-general';
+
 
 export function custom () {
 
@@ -321,7 +323,10 @@ export async function generarTypeHead_ante () {
         // Evento para capturar la selección del usuario
         $('#searchInput').bind('typeahead:select', function (ev, suggestion) {
             console.log('Libro seleccionado:', suggestion);
+            enviarIndicadores(suggestion.title);
             window.location.href = "busqueda.html?nombre_producto=" + suggestion.title
+
+
             //location.href = 
         });
     } catch (error) {
@@ -329,6 +334,31 @@ export async function generarTypeHead_ante () {
     }
 }
 
+
+
+const enviarIndicadores = async (palabrasclave) => {
+    const cliente = JSON.parse(localStorage.getItem('cliente') || '{}');
+
+    let nombreCompleto = null;
+
+    if (cliente?.nombres && cliente?.apellidos) {
+        nombreCompleto = cliente?.nombres + ' ' + cliente?.apellidos;
+    } else if (cliente?.nombres) {
+        nombreCompleto = cliente?.nombres;
+    } else if (cliente?.apellidos) {
+        nombreCompleto = cliente?.apellidos;
+    }
+
+    const indicadores = {
+        cliente: nombreCompleto,
+        clienteid: cliente?.id || null,
+        palabrasclave: palabrasclave,
+        fecha_cliente: new Date().toISOString(),
+        url: window.location.href,
+    }
+
+    await postIndicadores(indicadores);
+}
 
 export function formatearNumero (numero) {
     return numero.toLocaleString('en-US', {
