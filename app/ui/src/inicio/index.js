@@ -258,29 +258,7 @@ async function generarEstadisticas () {
 	const jsonData = await obtenerEstadisticas();
 
 	// Total Visitas Chart
-	const ctxTotalVisitas = document.getElementById('totalVisitasChart').getContext('2d');
-	new Chart(ctxTotalVisitas, {
-		type: 'doughnut',
-		data: {
-			labels: ['Total Visitas'],
-			datasets: [{
-				data: [jsonData.totalVisitas[0].total_visitas],
-				backgroundColor: ['rgba(54, 162, 235, 0.6)']
-			}]
-		},
-		options: {
-			responsive: true,
-			plugins: {
-				legend: {
-					position: 'top'
-				},
-				title: {
-					display: true,
-					text: '# Visitas a la web'
-				}
-			}
-		}
-	});
+	$('#total-visitas').text(jsonData.totalVisitas[0].total_visitas)
 
 	// Usuarios Nuevos Chart
 	const ctxUsuariosNuevos = document.getElementById('usuariosNuevosChart').getContext('2d');
