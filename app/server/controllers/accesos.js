@@ -3,9 +3,11 @@ const model = require('../models/accesos');
 const { Op } = require('sequelize');
 
 module.exports = {
+
   guardar,
   listarfull,
-  listarInterval
+  listarInterval,
+  obtenerEstadisticas
 
 };
 
@@ -133,3 +135,100 @@ function listarInterval (req, res) {
       res.status(400).send(error)
     })
 }
+
+
+
+async function obtenerEstadisticas (req, res) {
+  try {
+    const sequelize = model.sequelize;
+
+    // Definición de las consultas
+    const consultas = {
+      totalVisitas: `
+        SELECT COUNT(*) AS total_visitas
+        FROM accesos;
+      `,
+      usuariosNuevos: `
+        SELECT 
+          b.denominacion, 
+          COUNT(*) AS usuarios_nuevos,
+          DATE(a.createdat) AS fecha
+        FROM usuario a
+        INNER JOIN rol b ON a.rolid = b.id
+        WHERE a.createdat >= CURDATE() - INTERVAL 30 DAY
+        GROUP BY DATE(a.createdat);
+      `,
+      accesosPorHora: `
+        SELECT 
+          horaacceso,
+          COUNT(*) AS total_accesos
+        FROM accesos
+        GROUP BY horaacceso
+        ORDER BY total_accesos DESC
+        LIMIT 5;
+      `,
+      palabrasClaveFrecuencia: `
+        SELECT 
+          palabrasclave,
+          COUNT(*) AS frecuencia
+        FROM accesos
+        WHERE palabrasclave IS NOT NULL
+        GROUP BY palabrasclave
+        ORDER BY frecuencia DESC
+        LIMIT 10;
+      `,
+      demandasPorCategoria: `
+        SELECT 
+          c.denominacion,
+          COUNT(a.productoid) AS total_demandas
+        FROM accesos a
+        INNER JOIN producto p ON a.productoid = p.id
+        INNER JOIN categoria c ON c.id = p.categoria_id
+        GROUP BY c.denominacion, a.productoid
+        ORDER BY c.denominacion, a.productoid DESC
+        LIMIT 5;
+      `,
+      solicitudesPorArtesano: `
+        SELECT 
+          CONCAT(ar.nombres, ' ', ar.apellidos) AS artesano,
+          COUNT(a.productoid) AS total_solicitudes
+        FROM accesos a
+        INNER JOIN producto p ON a.productoid = p.id
+        INNER JOIN artesano ar ON ar.id = p.artesano_id
+        GROUP BY ar.nombres, ar.apellidos
+        ORDER BY total_solicitudes DESC
+        LIMIT 5;
+      `,
+      calificacionesPromedio: `
+        SELECT 
+          p.nombres_es AS producto,
+          AVG(c.valor) AS promedio_calificacion,
+          COUNT(c.valor) AS total_calificaciones
+        FROM valoracion c
+        INNER JOIN producto p ON c.productoid = p.id
+        GROUP BY c.productoid
+        ORDER BY promedio_calificacion DESC
+        LIMIT 10;
+      `
+    };
+
+    // Ejecutar las consultas en paralelo
+    const resultados = await Promise.all(
+      Object.entries(consultas).map(async ([key, query]) => {
+        const result = await sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
+        return { [key]: result };
+      })
+    );
+
+    // Consolidar los resultados en un único JSON
+    const respuesta = resultados.reduce((acc, curr) => ({ ...acc, ...curr }), {});
+
+    // Enviar la respuesta
+    res.status(200).json(respuesta);
+  } catch (error) {
+    console.error("Error al obtener estadísticas:", error);
+    res.status(500).send({ error: "Error al obtener estadísticas" });
+  }
+}
+
+

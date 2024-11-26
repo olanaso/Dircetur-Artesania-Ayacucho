@@ -102,42 +102,8 @@
 								<h5 id="id_entregado"></h5>
 								<p> Total usuarios</p>
 							</a>
-							
-							<a href="#" class="block-140">
-								<div class="icon primary">
-									<i class="icon-eye"></i> <!-- Changed icon -->
-								</div>
 
-								<h5 id="id_visitas">55</h5>
-								<p>Número de visitas al portal</p>
-							</a>
 
-							<a href="#" class="block-140">
-								<div class="icon primary">
-									<i class="icon-clock"></i> <!-- Changed icon -->
-								</div>
-
-								<h5 id="id_horas">Noche</h5>
-								<p>Horas de mayor acceso de usuarios</p>
-							</a>
-							
-							<a href="#" class="block-140">
-								<div class="icon primary">
-									<i class="icon-star"></i> <!-- Changed icon -->
-								</div>
-
-								<h5 id="id_artistas">CESAR ABEL	GUTIERREZ CANO</h5>
-								<p>Artista cuyos productos son los más solicitado</p>
-							</a>
-							
-							<a href="#" class="block-140">
-								<div class="icon primary">
-									<i class="icon-thumbs-up"></i> <!-- Changed icon -->
-								</div>
-
-								<h5 id="id_calificacion_experiencia">4 / 10</h5>
-								<p>Calificación de experiencia de compra</p>
-							</a>
 
 						</div>
 
@@ -160,40 +126,15 @@
 								<p>Total Categorías</p>
 							</a>
 
-							<a href="#" class="block-140">
-								<div class="icon primary">
-									<i class="icon-user-plus"></i> <!-- Changed icon -->
-								</div>
 
-								<h5 id="id_usuarios_nuevos">15</h5>
-								<p>Usuarios nuevos registrado en la ultima semana</p>
-							</a>
-
-							<a href="#" class="block-140">
-								<div class="icon primary">
-									<i class="icon-list"></i> <!-- Changed icon -->
-								</div>
-
-								<h5 id="id_categorias">CERAMICA</h5>
-								<p>Categorías de productos de más demanda</p>
-							</a>
-							
-							<a href="#" class="block-140">
-								<div class="icon primary">
-									<i class="icon-star-half"></i> <!-- Changed icon -->
-								</div>
-
-								<h5 id="_experiencia">4 estrellas</h5>
-								<p>Calificación de productos</p>
-							</a>
 
 						</div>
 
 						<div class="col-xl-4 col-lg-2 col-md-3 col-sm-12 col">
 							<div class="card" style="margin-top: 0; margin-bottom: 0;">
-								<div class="card-header">Palabras  claves  más  empleadas  en  los procesos de búsqueda</div>
+								<div class="card-header">Palabras claves más empleadas en los procesos de búsqueda</div>
 								<div class="card-body">
-									<ul class="stats"  id="lista-pedidos"> 
+									<ul class="stats" id="lista-pedidos">
 										<li>cerámica</li>
 										<li>ceramica</li>
 										<li>Hojalateria</li>
@@ -203,6 +144,46 @@
 										<li>ayacucho</li>
 										<li>huamanga</li>
 									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<h1>Otras Estadísticas</h1>
+					<div class="container mt-5">
+						<div class="row">
+							<div class="col-md-4 mb-4">
+								<div class="card">
+									<div class="card-body">
+										<canvas id="totalVisitasChart"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 mb-4">
+								<div class="card">
+									<div class="card-body">
+										<canvas id="usuariosNuevosChart"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 mb-4">
+								<div class="card">
+									<div class="card-body">
+										<canvas id="accesosPorHoraChart"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 mb-4">
+								<div class="card">
+									<div class="card-body">
+										<canvas id="demandasPorCategoriaChart"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 mb-4">
+								<div class="card">
+									<div class="card-body">
+										<canvas id="solicitudesPorArtesanoChart"></canvas>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -237,7 +218,7 @@
 	<script src="/js/alasql.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 
-	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 	<script src="vendor/flot/jquery.flot.min.js"></script>
 	<script src="vendor/flot/jquery.flot.time.min.js"></script>

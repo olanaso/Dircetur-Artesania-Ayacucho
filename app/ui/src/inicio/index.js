@@ -1,7 +1,7 @@
 import { loadPartials } from '../utils/viewpartials';
 import { hideLoading, checkSession, llenarinformacionIESTPProg, marcarSubMenuSeleccionado } from '../utils/init'
 import { } from '../utils/config'
-import { getreportegeneral } from './api'
+import { getreportegeneral, obtenerEstadisticas } from './api'
 
 
 hideLoading();
@@ -35,7 +35,7 @@ function startApp () {
 		// marcarSubMenuSeleccionado();
 	}, 500);
 
-
+	generarEstadisticas();
 }
 var editreporte = null;
 let usuario = null;
@@ -252,3 +252,143 @@ $(function () {
 	// 	data
 	// 	, options);
 });
+
+
+async function generarEstadisticas () {
+	const jsonData = await obtenerEstadisticas();
+
+	// Total Visitas Chart
+	const ctxTotalVisitas = document.getElementById('totalVisitasChart').getContext('2d');
+	new Chart(ctxTotalVisitas, {
+		type: 'doughnut',
+		data: {
+			labels: ['Total Visitas'],
+			datasets: [{
+				data: [jsonData.totalVisitas[0].total_visitas],
+				backgroundColor: ['rgba(54, 162, 235, 0.6)']
+			}]
+		},
+		options: {
+			responsive: true,
+			plugins: {
+				legend: {
+					position: 'top'
+				},
+				title: {
+					display: true,
+					text: '# Visitas a la web'
+				}
+			}
+		}
+	});
+
+	// Usuarios Nuevos Chart
+	const ctxUsuariosNuevos = document.getElementById('usuariosNuevosChart').getContext('2d');
+	new Chart(ctxUsuariosNuevos, {
+		type: 'bar',
+		data: {
+			labels: jsonData.usuariosNuevos.map(item => item.denominacion),
+			datasets: [{
+				label: 'Usuarios Nuevos',
+				data: jsonData.usuariosNuevos.map(item => item.usuarios_nuevos),
+				backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, 0.6)']
+			}]
+		},
+		options: {
+			responsive: true,
+			plugins: {
+				legend: {
+					position: 'top'
+				},
+				title: {
+					display: true,
+					text: 'Ultimos usuarios agregados en el último mes'
+				}
+			}
+		}
+	});
+
+	// Accesos por Hora Chart
+	const ctxAccesosPorHora = document.getElementById('accesosPorHoraChart').getContext('2d');
+	new Chart(ctxAccesosPorHora, {
+		type: 'line',
+		data: {
+			labels: jsonData.accesosPorHora.map(item => item.horaacceso + 'h'),
+			datasets: [{
+				label: 'Total Accesos',
+				data: jsonData.accesosPorHora.map(item => item.total_accesos),
+				fill: false,
+				borderColor: 'rgba(255, 99, 132, 0.6)',
+				tension: 0.1
+			}]
+		},
+		options: {
+			responsive: true,
+			plugins: {
+				legend: {
+					position: 'top'
+				},
+				title: {
+					display: true,
+					text: 'Horarios más visitados'
+				}
+			}
+		}
+	});
+
+	// Demandas por Categoria Chart
+	const demandasPorCategoriaData = jsonData.demandasPorCategoria.reduce((acc, curr) => {
+		acc[curr.denominacion] = (acc[curr.denominacion] || 0) + curr.total_demandas;
+		return acc;
+	}, {});
+
+	const ctxDemandasPorCategoria = document.getElementById('demandasPorCategoriaChart').getContext('2d');
+	new Chart(ctxDemandasPorCategoria, {
+		type: 'pie',
+		data: {
+			labels: Object.keys(demandasPorCategoriaData),
+			datasets: [{
+				data: Object.values(demandasPorCategoriaData),
+				backgroundColor: ['rgba(255, 206, 86, 0.6)', 'rgba(75, 192, 192, 0.6)']
+			}]
+		},
+		options: {
+			responsive: true,
+			plugins: {
+				legend: {
+					position: 'top'
+				},
+				title: {
+					display: true,
+					text: 'Categorías más demandadas'
+				}
+			}
+		}
+	});
+
+	// Solicitudes por Artesano Chart
+	const ctxSolicitudesPorArtesano = document.getElementById('solicitudesPorArtesanoChart').getContext('2d');
+	new Chart(ctxSolicitudesPorArtesano, {
+		type: 'bar',
+		data: {
+			labels: jsonData.solicitudesPorArtesano.map(item => item.artesano),
+			datasets: [{
+				label: 'Total Solicitudes',
+				data: jsonData.solicitudesPorArtesano.map(item => item.total_solicitudes),
+				backgroundColor: ['rgba(153, 102, 255, 0.6)']
+			}]
+		},
+		options: {
+			responsive: true,
+			plugins: {
+				legend: {
+					position: 'top'
+				},
+				title: {
+					display: true,
+					text: 'Solicitudes por Artesano'
+				}
+			}
+		}
+	});
+}
