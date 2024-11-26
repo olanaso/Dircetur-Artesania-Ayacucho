@@ -8,7 +8,6 @@ import { ShoppingCart } from "../utils/pluginCarrito.js";
 
 // Toggle para abrir/cerrar el menú en dispositivos móviles
 
-
 (async function () {
     let partials = [
         { path: '../partials/tienda/header.html', container: 'header' },
@@ -31,11 +30,37 @@ import { ShoppingCart } from "../utils/pluginCarrito.js";
     }
 })();
 
-
 function startApp () {
     cargarDataPortada()
     cargarCarrito()
     buscarArtesania()
+    enviarIndicadores()
+}
+
+const enviarIndicadores = async () => {
+    const cliente = JSON.parse(localStorage.getItem('cliente') || '{}');
+
+    let nombreCompleto = null;
+
+    if (cliente?.nombres && cliente?.apellidos) {
+        nombreCompleto = cliente?.nombres + ' ' + cliente?.apellidos;
+    } else if (cliente?.nombres) {
+        nombreCompleto = cliente?.nombres;
+    } else if (cliente?.apellidos) {
+        nombreCompleto = cliente?.apellidos;
+    }
+
+    const data = {
+        cliente: nombreCompleto,
+        clienteid: cliente?.id || null,
+        // productoid: null,
+        // producto: null,
+        // palabrasclave: null,
+        fecha_cliente: new Date().toISOString(),
+        url: window.location.href,
+    }
+
+    console.log(data);
 }
 
 function buscarArtesania () {
@@ -58,7 +83,6 @@ function buscarArtesania () {
     });
 }
 
-
 function cargarCarrito () {
     const dataGuardada = localStorage.getItem('artesanias');
     let products = dataGuardada ? JSON.parse(dataGuardada) : [];
@@ -66,8 +90,6 @@ function cargarCarrito () {
 
     const shoppingCart = new ShoppingCart(products);
 }
-
-
 
 async function cargarDataPortada () {
 
@@ -78,8 +100,6 @@ async function cargarDataPortada () {
     loadProductosDestacados(resultado.productosDestacados)
     loadProductosRecientes(resultado.productosRecientes)
 }
-
-
 
 function loadSlider (data) {
 
@@ -126,9 +146,7 @@ function loadSlider (data) {
     });
 }
 
-
 function loadCategorias (data) {
-    console.log(data)
 
     let html = ``
     for (let item of data) {
@@ -174,6 +192,7 @@ function loadCategorias (data) {
         }
     })
 }
+
 function formatearNumero (numero) {
     return numero.toLocaleString('es-US', {
         minimumFractionDigits: 2,
@@ -298,9 +317,6 @@ function loadProductosOferta (data) {
 
 }
 
-
-
-
 function loadProductosRecientes (data) {
 
     let html = ` `
@@ -409,7 +425,6 @@ function loadProductosRecientes (data) {
 
 
 }
-
 
 function loadProductosDestacados (data) {
 

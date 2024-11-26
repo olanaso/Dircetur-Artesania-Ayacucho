@@ -87,6 +87,8 @@ export function checkSession () {
             .then(response => response.json())
             .then(data => {
                 if (data) {
+                    localStorage.setItem('cliente', JSON.stringify(data));
+
                     const avatarImage = new Image();
                     avatarImage.src = data.foto_perfil;
 
@@ -151,6 +153,9 @@ export function showHideLogoutButton (avatarContainer, logoutButton) {
 
 function logout () {
     localStorage.removeItem('idCliente');
+    localStorage.removeItem('cliente');
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
     window.location.href = '/tienda/index.html';
 }
 

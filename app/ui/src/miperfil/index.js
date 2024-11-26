@@ -94,17 +94,22 @@ async function guardarUsuario () {
 
     let usuariosession = getDataFromLocalStorage('session').usuarios;
     $("#btnguardardatosperfil").prop("disabled", true).text("Guardando...");
+
     let dni = $('#txt-dni').val()
     let nombre_completo = $('#txt-nombres').val()
+
     // let apellidos = $('#txt-apellidos').val()
     let correo = $('#txt-correo').val()
+
     // let telefonos = $('#txt-telefonos').val()
     let result = await saveUser({ id: usuariosession.id, dni, nombre_completo, correo });
-    if (result.id) {
+    
+    if (result.data.message === 'Cuenta creada con exito') {
       showToast('Se guardo los datos correctamente')
     } else {
       showToast('Ocurrio un error.')
     }
+
     $("#btnguardardatosperfil").prop("disabled", false).text("Guardar");
 
   })
