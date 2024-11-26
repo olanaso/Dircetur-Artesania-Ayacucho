@@ -361,9 +361,10 @@ async function buscarUsuario () {
       $('#listaTalla tr').each(function () {
         let fila = $(this);
         let talla = {
-          id: fila.find('td').eq(0).text(),
-          talla: parseInt(fila.find('td').eq(1).text(), 10)
+          id: parseInt(fila.find('td').eq(0).text(), 10),
+          talla: fila.find('td').eq(1).text()
         };
+        
         listaTalla.push(talla);
       });
 
