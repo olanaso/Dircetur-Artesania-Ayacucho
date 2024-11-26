@@ -8,7 +8,6 @@ import { ShoppingCart } from "../utils/pluginCarrito.js";
 
 // Toggle para abrir/cerrar el menú en dispositivos móviles
 
-
 (async function () {
     let partials = [
         { path: '../partials/tienda/header.html', container: 'header' },
@@ -30,7 +29,6 @@ import { ShoppingCart } from "../utils/pluginCarrito.js";
         console.error(e);
     }
 })();
-
 
 function startApp () {
     cargarDataPortada()
@@ -58,7 +56,6 @@ function buscarArtesania () {
     });
 }
 
-
 function cargarCarrito () {
     const dataGuardada = localStorage.getItem('artesanias');
     let products = dataGuardada ? JSON.parse(dataGuardada) : [];
@@ -66,8 +63,6 @@ function cargarCarrito () {
 
     const shoppingCart = new ShoppingCart(products);
 }
-
-
 
 async function cargarDataPortada () {
 
@@ -78,8 +73,6 @@ async function cargarDataPortada () {
     loadProductosDestacados(resultado.productosDestacados)
     loadProductosRecientes(resultado.productosRecientes)
 }
-
-
 
 function loadSlider (data) {
 
@@ -125,7 +118,6 @@ function loadSlider (data) {
         nextArrow: '<button class="NextArrow"></button>',
     });
 }
-
 
 function loadCategorias (data) {
     console.log(data)
@@ -174,6 +166,7 @@ function loadCategorias (data) {
         }
     })
 }
+
 function formatearNumero (numero) {
     return numero.toLocaleString('es-US', {
         minimumFractionDigits: 2,
@@ -298,9 +291,6 @@ function loadProductosOferta (data) {
 
 }
 
-
-
-
 function loadProductosRecientes (data) {
 
     let html = ` `
@@ -409,7 +399,6 @@ function loadProductosRecientes (data) {
 
 
 }
-
 
 function loadProductosDestacados (data) {
 
