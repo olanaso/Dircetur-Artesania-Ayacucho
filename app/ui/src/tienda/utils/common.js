@@ -92,7 +92,7 @@ export function checkSession () {
 
                     data.nombres = data.nombres || 'Usuario';
                     data.apellidos = data.apellidos || 'Anónimo';
-                    
+
                     const initial = data.nombres.charAt(0).toUpperCase() + data.apellidos.charAt(0).toUpperCase();
 
                     const logoutButton = document.createElement('button');
@@ -101,18 +101,18 @@ export function checkSession () {
                     logoutButton.style.display = 'none';
                     logoutButton.textContent = 'Cerrar sesión';
 
-                    avatarImage.onerror = function() {
+                    avatarImage.onerror = function () {
                         avatarContainer.innerHTML = `
                             <div class="avatar">
-                                <div class='avatar-initial'>${initial}</div>
+                                <div class='avatar-initial' title="Bienvenido: ${data.nombres + ' ' + data.apellidos}">${initial}</div>
                             </div>
                         `;
                         avatarContainer.appendChild(logoutButton);
                     };
 
-                    avatarImage.onload = function() {
+                    avatarImage.onload = function () {
                         avatarContainer.innerHTML = `
-                            <div class="avatar">
+                            <div class="avatar"  title="Bienvenido: ${data.nombres + ' ' + data.apellidos}">
                                 <img src="${data.foto_perfil}" alt="Profile Picture" class="avatar-image">
                             </div>
                         `;
@@ -149,7 +149,7 @@ export function showHideLogoutButton (avatarContainer, logoutButton) {
 }
 
 
-function logout() {
+function logout () {
     localStorage.removeItem('idCliente');
     window.location.href = '/tienda/index.html';
 }

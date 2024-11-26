@@ -78,9 +78,9 @@ async function loginCliente (req, res) {
             return res.status(400).send({ error: "El correo o contraseña incorrectos" })
         }
 
-        if (user.rolid !== 3 && user.tipousuario !== 3) {
-            return res.status(400).send({ error: "Solo puedes ingresar con una cuenta de cliente" })
-        }
+        // if (user.rolid !== 3 && user.tipousuario !== 3) {
+        //     return res.status(400).send({ error: "Solo puedes ingresar con una cuenta de cliente" })
+        // }
 
         const data = {
             token: jwt.sign({ client: user }, '2C44-4D44-WppQ38S', { expiresIn: '1d' }),

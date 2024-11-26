@@ -1,65 +1,90 @@
 /* jshint indent: 1 */
 const db = require('../config/db');
-sequelize = db.sequelize;
-DataTypes = db.Sequelize;
+const sequelize = db.sequelize;
+const Sequelize = db.Sequelize;
+const { Op } = require('sequelize');
 
-module.exports = sequelize.define('accesos', {
+const accesos = sequelize.define('accesos', {
     id: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
+        field: 'id'
     },
     cliente: {
-        type: DataTypes.TEXT,
+        type: Sequelize.TEXT,
         allowNull: true,
+        field: 'cliente'
+    },
+    clienteid: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        field: 'clienteid'
     },
     productoid: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: true,
+        field: 'productoid'
     },
     producto: {
-        type: DataTypes.TEXT,
+        type: Sequelize.TEXT,
         allowNull: true,
+        field: 'producto'
     },
     ip: {
-        type: DataTypes.TEXT,
+        type: Sequelize.TEXT,
         allowNull: true,
+        field: 'ip'
     },
     horario: {
-        type: DataTypes.TEXT,
+        type: Sequelize.TEXT,
         allowNull: true,
+        field: 'horario'
+    },
+    palabrasclave: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+        field: 'palabrasclave'
     },
     horaacceso: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: true,
+        field: 'horaacceso'
     },
     fecha_cliente: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: true,
+        field: 'fecha_cliente'
     },
     dispositivo: {
-        type: DataTypes.TEXT,
+        type: Sequelize.TEXT,
         allowNull: true,
+        field: 'dispositivo'
     },
     url: {
-        type: DataTypes.TEXT,
+        type: Sequelize.TEXT,
         allowNull: true,
+        field: 'url'
     },
-    createdAt: {
-        type: DataTypes.DATE,
+    createdat: {
+        type: Sequelize.DATE,
         allowNull: true,
-        defaultValue: DataTypes.NOW,
-        field: 'createdat',
+        defaultValue: Sequelize.NOW,
+        field: 'createdat'
     },
-    updatedAt: {
-        type: DataTypes.DATE,
+    updatedat: {
+        type: Sequelize.DATE,
         allowNull: true,
-        defaultValue: DataTypes.NOW,
-        field: 'updatedat',
-    },
-
+        defaultValue: Sequelize.NOW,
+        field: 'updatedat'
+    }
 }, {
     tableName: 'accesos',
-    timestamps: false,
+    timestamps: true,
+    createdAt: 'createdat',
+    updatedAt: 'updatedat'
 });
+
+
+module.exports = accesos;
