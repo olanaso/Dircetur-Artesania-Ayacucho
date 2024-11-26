@@ -364,9 +364,27 @@ async function generarEstadisticas () {
 				},
 				title: {
 					display: true,
-					text: 'Solicitudes por Artesano'
+					text: 'Artesanos más demandados'
 				}
 			}
 		}
 	});
+
+	generarTablaPalabrasClave(jsonData.palabrasClaveFrecuencia);
+
 }
+
+
+// Función para generar la tabla de Palabras Clave y Frecuencia
+function generarTablaPalabrasClave (data) {
+	let tableHTML = '<table class="table table-bordered">';
+	tableHTML += '<thead class="thead-dark"><tr><th>Palabras Clave</th><th>Frecuencia</th></tr></thead>';
+	tableHTML += '<tbody>';
+	data.forEach(item => {
+		tableHTML += `<tr><td>${item.palabrasclave}</td><td>${item.frecuencia}</td></tr>`;
+	});
+	tableHTML += '</tbody></table>';
+	document.getElementById('tablaPalabrasClave').innerHTML = tableHTML;
+}
+
+// Generar la tabla con los datos de palabrasClaveFrecuencia
