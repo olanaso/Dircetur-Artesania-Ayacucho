@@ -243,6 +243,32 @@ const agregarComentario = async (artesaniaId) => {
 
 }
 
+const enviarIndicadores = async (artesania) => {
+    const cliente = JSON.parse(localStorage.getItem('cliente') || '{}');
+
+    let nombreCompleto = null;
+
+    if (cliente?.nombres && cliente?.apellidos) {
+        nombreCompleto = cliente?.nombres + ' ' + cliente?.apellidos;
+    } else if (cliente?.nombres) {
+        nombreCompleto = cliente?.nombres;
+    } else if (cliente?.apellidos) {
+        nombreCompleto = cliente?.apellidos;
+    }
+
+    const indicadores = {
+        cliente: nombreCompleto,
+        clienteid: cliente?.id || null,
+        productoid: artesania.id,
+        producto: artesania.nombre_es,
+        // palabrasclave: null,
+        fecha_cliente: new Date().toISOString(),
+        url: window.location.href,
+    }
+
+    console.log({indicadores});
+}
+
 function obtenerUrlProducto () {
     const queryString = window.location.search;
 
@@ -252,16 +278,16 @@ function obtenerUrlProducto () {
     // Obtener el valor del parámetro 'data'
     const data = urlParams.get('producto');
 
-    console.log({ data })
 
     // Decodificar y convertir el objeto JSON nuevamente
     if (data) {
         const artesaniaenviada = JSON.parse(data);
+        console.log({artesaniaenviada});
 
         // Mostrar el objeto en el DOM
         const artesaniaId = artesaniaenviada.artesania.id;
-        console.log(artesaniaenviada)
 
+        enviarIndicadores(artesaniaenviada.artesania);
         infoProductoById(artesaniaId)
         obtenerComentarios(artesaniaId)
         agregarComentario(artesaniaId)

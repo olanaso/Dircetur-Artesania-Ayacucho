@@ -34,6 +34,33 @@ function startApp () {
     cargarDataPortada()
     cargarCarrito()
     buscarArtesania()
+    enviarIndicadores()
+}
+
+const enviarIndicadores = async () => {
+    const cliente = JSON.parse(localStorage.getItem('cliente') || '{}');
+
+    let nombreCompleto = null;
+
+    if (cliente?.nombres && cliente?.apellidos) {
+        nombreCompleto = cliente?.nombres + ' ' + cliente?.apellidos;
+    } else if (cliente?.nombres) {
+        nombreCompleto = cliente?.nombres;
+    } else if (cliente?.apellidos) {
+        nombreCompleto = cliente?.apellidos;
+    }
+
+    const data = {
+        cliente: nombreCompleto,
+        clienteid: cliente?.id || null,
+        // productoid: null,
+        // producto: null,
+        // palabrasclave: null,
+        fecha_cliente: new Date().toISOString(),
+        url: window.location.href,
+    }
+
+    console.log(data);
 }
 
 function buscarArtesania () {
@@ -120,7 +147,6 @@ function loadSlider (data) {
 }
 
 function loadCategorias (data) {
-    console.log(data)
 
     let html = ``
     for (let item of data) {
