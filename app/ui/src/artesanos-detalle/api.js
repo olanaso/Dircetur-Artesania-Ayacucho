@@ -300,3 +300,22 @@ export async function nuevoUserCapacitacion (usuario) {
     console.error("Error:", error);
   }
 }
+
+
+export const resetearContraseniaArtesano = async (id) => {
+  const settings = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const response = await fetch(baseUrl + `/resetear-contrasenia-artesano/${id}`, settings);
+    const data = await response.json();
+    console.log({dataReset: data});
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}

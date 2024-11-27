@@ -32,6 +32,7 @@ module.exports = {
     save,
     obtenerDNI, loginpersonal,
     verificarToken,
+    resetearContraseniaArtesano,
     recuperarcuenta, cambiarContrasenia, importarUsuarios
     , reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp,
     loginCliente, actualizarContraseniaCiente
@@ -352,6 +353,38 @@ async function cambiarContrasenia (req, res, next) {
     } catch (e) {
         t.rollback();
         return next(e);
+    }
+}
+
+
+async function resetearContraseniaArtesano (req, res) {
+    const { id } = req.params
+    const resp = { ischanged: false, msj: "Ocurrió un error al resetear la contraseña" }
+
+    const t = await usuario.sequelize.transaction();
+    try {
+
+        let artesanoData = await artesano.findOne({
+            where: {
+                id: id
+            }
+        });
+
+
+        if (artesanoData) {
+            const artesanoDni = encriptartexto(artesanoData.dni);
+            await usuario.update({ clave: artesanoDni }, { where: { id: artesanoData.usuario_id } })
+        }
+
+        resp.ischanged = true;
+        resp.msj = "Contraseña reseteada con éxito"
+        
+        t.commit().then();
+        return res.status(200).send(resp);
+    } catch (e) {
+        t.rollback();
+        console.log(e);
+        return res.status(500).send(resp);
     }
 }
 
