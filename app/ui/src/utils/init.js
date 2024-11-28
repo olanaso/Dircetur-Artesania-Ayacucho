@@ -68,13 +68,21 @@ export async function checkSession () {
     }
 }
 
+const waitForSession = () => {
+    return new Promise((resolve) => {
+        const interval = setInterval(() => {
+            const session = localStorage.getItem('session');
+            if (session) {
+                clearInterval(interval);
+                const usuario = JSON.parse(session).usuarios;
+                resolve(usuario);
+            }
+        }, 100);
+    });
+}
 
 export function llenarinformacionIESTPProg () {
-
-
-    setTimeout(() => {
-        let usuario = getDataFromLocalStorage('session').usuarios;
-
+    waitForSession().then((usuario) => {
         $('#user-name').text(usuario.nombre_completo)
         $('#user-name').attr('title', usuario.nombre_completo)
         $('#mlbliestp').text(usuario.nombre_completo)
@@ -92,10 +100,7 @@ export function llenarinformacionIESTPProg () {
                     // Si hay un error al cargar la imagen, se puede mostrar una imagen de respaldo
                     $(this).attr('src', perfilVaron);
                 });
-
         }
-
-
 
         let nro = 0;
         let nroitem = 0;
@@ -152,8 +157,6 @@ export function llenarinformacionIESTPProg () {
 
         $('#unifyMenu').empty().append(htmlContent);
 
-
-
         // Event listener para el toggle del submenú
         $(document).on('click', '.has-arrow', function (e) {
             e.preventDefault();
@@ -181,14 +184,9 @@ export function llenarinformacionIESTPProg () {
         });
 
         marcarSubMenuSeleccionado();
-    }, 500); // Simula un proceso que tarda 1 segundo
-
-
-
-
-
-
+    });
 }
+
 // Función para marcar el submenú y sus elementos como activos
 export function marcarSubMenuSeleccionado () {
     const currentPath = window.location.pathname; // Obtener la ruta actual

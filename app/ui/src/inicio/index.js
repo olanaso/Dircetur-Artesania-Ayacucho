@@ -30,10 +30,8 @@ hideLoading();
 
 function startApp () {
 	validarSession();
-	setTimeout(function () {
-		llenarinformacionIESTPProg();
-		// marcarSubMenuSeleccionado();
-	}, 500);
+	llenarinformacionIESTPProg();
+	// marcarSubMenuSeleccionado();
 
 	generarEstadisticas();
 }
