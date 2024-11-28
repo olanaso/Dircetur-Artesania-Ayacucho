@@ -359,6 +359,7 @@ async function cambiarContrasenia (req, res, next) {
 
 async function resetearContraseniaArtesano (req, res) {
     const { id } = req.params
+    const { claveNueva } = req.body;
     const resp = { ischanged: false, msj: "Ocurrió un error al resetear la contraseña" }
 
     const t = await usuario.sequelize.transaction();
@@ -370,10 +371,9 @@ async function resetearContraseniaArtesano (req, res) {
             }
         });
 
-
         if (artesanoData) {
-            const artesanoDni = encriptartexto(artesanoData.dni);
-            await usuario.update({ clave: artesanoDni }, { where: { id: artesanoData.usuario_id } })
+            const nuevaContrasenia = encriptartexto(claveNueva);
+            await usuario.update({ clave: nuevaContrasenia }, { where: { id: artesanoData.usuario_id } })
         }
 
         resp.ischanged = true;

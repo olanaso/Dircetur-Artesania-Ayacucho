@@ -442,8 +442,12 @@ async function buscarUsuario () {
 
 // calcular precios 
 async function editarArtesano (id) {
+  const inputReseteoContrasenia = document.getElementById('inputReseteoContrasenia');
 
   editarartesano = await geteditarArtesano(id);
+  const artesanoDni = editarartesano ? editarartesano.dni : '';
+
+  inputReseteoContrasenia.value = artesanoDni;
 
   usuarioid = editarartesano.usuario_id
 
@@ -1790,20 +1794,37 @@ const resetearContrasenia = async () => {
   const btnCambiarClave = document.getElementById('btnCambiarClave');
   const loaderClave = document.getElementById('loaderClave');
   const claveRestablecida = document.getElementById('claveRestablecida');
+  const inputReseteoContrasenia = document.getElementById('inputReseteoContrasenia');
+
+  // Alternar visibilidad de contraseña nueva
+  $('#togglePasswordNueva').on('click', function () {
+    const input = $('#inputReseteoContrasenia');
+    const type = input.attr('type') === 'password' ? 'text' : 'password';
+    input.attr('type', type);
+    // Cambia el icono (opcional)
+    $(this).text(type === 'password' ? '👁️' : '🚫');
+  });
 
   btnCambiarClave.addEventListener('click', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const artesanoId = urlParams.get('id');
+
+    const claveNueva = inputReseteoContrasenia.value.trim();
 
     if (!artesanoId) {
       showToast('No se encontró el ID del artesano', 'error');
       return;
     }
 
+    if (!claveNueva) {
+      showToast('Por favor, ingrese una contraseña nueva', 'error');
+      return;
+    }
+
     loaderClave.style.display = 'block';
 
     try {
-      const resp = await resetearContraseniaArtesano(artesanoId);
+      const resp = await resetearContraseniaArtesano(artesanoId, claveNueva);
 
       if (resp.ischanged) {
         claveRestablecida.style.display = 'block';
