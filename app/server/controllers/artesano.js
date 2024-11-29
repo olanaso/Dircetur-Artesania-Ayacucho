@@ -484,7 +484,7 @@ async function saveUsuarioArtesano (req, res, next) {
 
                 emailRegistroArtesano({
                     correo: artesano_result.correo, nombreArtesano: artesano_result.nombres + ' ' + artesano_result.apellidos
-                    , usuarioArtesano: artesano_result.dni, contrasenaArtesano: usuario_result.clave, logoUrl: null
+                    , usuarioArtesano: artesano_result.dni, contrasenaArtesano: artesano_result.dni, logoUrl: null
                 })
             }
 
