@@ -3,7 +3,7 @@ import { validarHTML5 } from '../utils/validateForm';
 import { FileUploader } from '../utils/uploadJorge.js';
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
-import { geteditarArtesano, geteditarLogin, llenardepartamento, llenarprovincia, llenardistrito, guardarArtesano, buscarDNI, guardarArtesanoUsuario } from './api';
+import { geteditarArtesano, geteditarLogin, llenardepartamento, llenarprovincia, llenardistrito, guardarArtesano, buscarDNI, guardarArtesanoUsuario, resetearContraseniaArtesano,  } from './api';
 import { showLoading, hideLoading, llenarinformacionIESTPProg, checkSession } from '../utils/init';
 import { baseUrl, baseUrldni, getDataFromLocalStorage, getBaseUrl } from '../utils/config.js';
 import { showToast } from '../utils/toast';
@@ -46,7 +46,7 @@ function startApp () {
   setChangeOpcionesBilletera();
   //exportarExcel();
   //nuevo();
-
+  resetearContrasenia();
 }
 
 function setChangeOpcionesBilletera () {
@@ -78,22 +78,8 @@ function handleSelectMediosPago (event) {
   }
 }
 
-/*async function checkadminsession () {
-  let result = await checkSession()
-  if (result.usuario.rolid != 1) {
-    location.href = "sinacceso.html"
-  }
-}*/
-
-
-
-
-
-
-
 var artesanoId = 0;
 var usuarioid = 0;
-
 
 let contadorContacto = 0;
 let contadorMedioPago = 0;
@@ -108,9 +94,6 @@ let videoCounter = 0;
 let videoCounter2 = 0;
 
 async function buscarUsuario () {
-
-
-
   $('#btnvalidar').on('click', async function (e) {
 
     event.preventDefault(); // Prevenir el envío predeterminado del formulario
@@ -457,15 +440,14 @@ async function buscarUsuario () {
 }
 
 
-
-
-
 // calcular precios 
-
-
 async function editarArtesano (id) {
+  const inputReseteoContrasenia = document.getElementById('inputReseteoContrasenia');
 
   editarartesano = await geteditarArtesano(id);
+  const artesanoDni = editarartesano ? editarartesano.dni : '';
+
+  inputReseteoContrasenia.value = artesanoDni;
 
   usuarioid = editarartesano.usuario_id
 
@@ -721,7 +703,6 @@ async function editarArtesano (id) {
 
 }
 
-
 const selectRegion = document.getElementById('region');
 const selectProvincian = document.getElementById('provincia');
 const selectDistrito = document.getElementById('distrito');
@@ -797,7 +778,6 @@ async function llenarProv (iddepartamento) {
   }
 }
 
-
 async function llenarDist (idprovincia) {
 
   try {
@@ -826,8 +806,6 @@ async function llenarDist (idprovincia) {
   }
 }
 
-
-
 function disabilitar () {
   $('#home-tab2, #home-tab3, #home-tab4, #home-tab5, #home-tab6').addClass('disabled');
 }
@@ -848,7 +826,6 @@ function habilitar () {
 
 
 $(document).ready(function () {
-
 
   llenarDpto();
 
@@ -1703,6 +1680,7 @@ document.addEventListener('DOMContentLoaded', () => {
     folder: '/producto/video/',
   });
 });
+
 function handleUploadResponselistavideo (response) {
 
   $('#videoPreview').attr('src', getBaseUrl(baseUrl) + "/" + response.path).show();
@@ -1741,7 +1719,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
 function handleUploadResponseimgprincipal2 (response) {
 
   let file = $('#uploadPrincipal2Image').prop('files')[0];
@@ -1776,8 +1753,6 @@ function initializeFileUploader ({ fileInputId, progressBarId, statusElementId, 
 }
 
 
-
-
 // Obtener referencias a los elementos del DOM
 const dniElement = document.getElementById('dni');
 const nombresElement = document.getElementById('nombres');
@@ -1806,11 +1781,66 @@ dniElement.addEventListener('input', async function () {
   // Aquí puedes usar artesanosDNI como lo necesites 
 });
 
-
-
 document.getElementById('otro').addEventListener('change', function () {
   var checkbox = this;
   var input = document.getElementById('desotro');
   input.disabled = !checkbox.checked;
   $('#desotro').val('');
 });
+
+
+
+const resetearContrasenia = async () => {
+  const btnCambiarClave = document.getElementById('btnCambiarClave');
+  const loaderClave = document.getElementById('loaderClave');
+  const claveRestablecida = document.getElementById('claveRestablecida');
+  const inputReseteoContrasenia = document.getElementById('inputReseteoContrasenia');
+
+  // Alternar visibilidad de contraseña nueva
+  $('#togglePasswordNueva').on('click', function () {
+    const input = $('#inputReseteoContrasenia');
+    const type = input.attr('type') === 'password' ? 'text' : 'password';
+    input.attr('type', type);
+    // Cambia el icono (opcional)
+    $(this).text(type === 'password' ? '👁️' : '🚫');
+  });
+
+  btnCambiarClave.addEventListener('click', async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const artesanoId = urlParams.get('id');
+
+    const claveNueva = inputReseteoContrasenia.value.trim();
+
+    if (!artesanoId) {
+      showToast('No se encontró el ID del artesano', 'error');
+      return;
+    }
+
+    if (!claveNueva) {
+      showToast('Por favor, ingrese una contraseña nueva', 'error');
+      return;
+    }
+
+    loaderClave.style.display = 'block';
+
+    try {
+      const resp = await resetearContraseniaArtesano(artesanoId, claveNueva);
+
+      if (resp.ischanged) {
+        claveRestablecida.style.display = 'block';
+
+      } else {
+        showToast(resp.msj, 'error');
+      }
+    } catch (error) {
+      showToast('Ocurrió un error inesperado', 'error');
+
+    } finally {
+      loaderClave.style.display = 'none';
+
+      setTimeout(() => {
+        claveRestablecida.style.display = 'none';
+      }, 2000);
+    }
+  })
+}

@@ -129,6 +129,13 @@
 												role="tab" aria-controls="home7" aria-selected="false">Video
 												Presentación</a>
 										</li>
+
+										<li class="nav-item">
+											<a class="nav-link" id="home-tab8" data-toggle="tab" href="#home8"
+												role="tab" aria-controls="hom87" aria-selected="false">
+												Resetear Contraseña
+											</a>
+										</li>
 									</ul>
 
 									<div class="tab-content" id="myTabContent">
@@ -1224,6 +1231,41 @@
 
 										</div>
 
+										<div class="tab-pane fade" id="home8" role="tabpanel" aria-labelledby="home-tab8">
+											<div class="row mt-3">
+												<div class="col-12 col-md-2 font-weight-bold">
+													<p> Contraseña nueva </p>
+												</div>
+												<div class="col-12 col-md-4">
+													<input id="inputReseteoContrasenia" class="form-control form-control-sm"
+														type="password">
+													<span id="togglePasswordNueva" class="position-absolute"
+														style="right: 30px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+														👁️
+													</span>
+												</div>
+											</div>
+											
+											<div class="row mt-3">
+												<div class="col-12">
+													<p id="claveRestablecida" style="display: none; color: green;">
+														<strong>Contraseña restablecida!! </strong>
+													</p>
+												</div>
+											</div>
+
+											<div class="row mt-3">
+												<div class="col-12 col-md-2">
+													<button id="btnCambiarClave" type="button" class="btn btn-primary">
+														Resetear contraseña
+														<!-- loader -->
+														<div class="spinner-border text-light spinner-border-sm" role="status" id="loaderClave" style="display: none;">
+															<span class="sr-only">Loading...</span>
+														</div>
+													</button>
+												</div>
+											</div>
+										</div>
 									</div>
 
 								</div>

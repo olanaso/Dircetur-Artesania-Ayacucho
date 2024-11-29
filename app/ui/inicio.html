@@ -20,7 +20,6 @@
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
 	<link rel="stylesheet" href="/css/main.css" />
-
 </head>
 
 <body>
@@ -81,96 +80,112 @@
 				<div class="main-content">
 
 					<!-- Row start -->
-					<div class="row gutters">
-
-
+					<div class="row">
 						<div class="col-xl-4 col-lg-2 col-md-3 col-sm-6 col">
 							<a href="#" class="block-140">
 								<div class="icon primary">
-									<i class="icon-box"></i> <!-- Changed icon -->
+									<i class="icon-box"></i>
 								</div>
 
-								<h5 id="id_total"></h5>
-								<p> Total Productos</p>
+								<h5 id="id_total" class="font-weight-bolder"></h5>
+								<p style="font-size: medium; font-weight: 600;"> Total Productos</p>
 							</a>
 
 							<a href="#" class="block-140">
 								<div class="icon primary">
-									<i class="icon-users"></i> <!-- Changed icon -->
+									<i class="icon-users"></i>
 								</div>
 
-								<h5 id="id_entregado"></h5>
-								<p> Total usuarios</p>
+								<h5 id="id_entregado" class="font-weight-bolder"></h5>
+								<p style="font-size: medium; font-weight: 600;"> Total usuarios</p>
 							</a>
-
-
-
 						</div>
 
 						<div class="col-xl-4 col-lg-2 col-md-3 col-sm-12 col">
 							<a href="#" class="block-140">
 								<div class="icon primary">
-									<i class="icon-user-tie"></i> <!-- Changed icon -->
+									<i class="icon-user-tie"></i>
 								</div>
 
-								<h5 id="id_pendiente"></h5>
-								<p>Total Artesanos</p>
+								<h5 id="id_pendiente" class="font-weight-bolder"></h5>
+								<p style="font-size: medium; font-weight: 600;">Total Artesanos</p>
 							</a>
 
 							<a href="#" class="block-140">
 								<div class="icon primary">
-									<i class="icon-tags"></i> <!-- Changed icon -->
+									<i class="icon-tags"></i>
 								</div>
 
-								<h5 id="id_proceso"></h5>
-								<p>Total Categorías</p>
+								<h5 id="id_proceso" class="font-weight-bolder"></h5>
+								<p style="font-size: medium; font-weight: 600;">Total Categorías</p>
 							</a>
-
-
-
 						</div>
 
 						<div class="col-xl-4 col-lg-2 col-md-3 col-sm-12 col">
-							<div class="card" style="margin-top: 0; margin-bottom: 0;">
+							<div class="" style="margin-top: 0; margin-bottom: 0;">
 
-								<div id="tablaPalabrasClave"></div>
+								<div id="tablaPalabrasClave" style="background: white;"></div>
 							</div>
 						</div>
 					</div>
-					<h2>Otras Estadísticas</h2>
-					<div class="container mt-5">
-						<div class="row">
-							<div class="col-md-4 mb-4">
-								<div class="card">
-									<div class="card-body text-center">
-										<h5 class="card-title">Total de Visitas a web</h5>
-										<h1 id="total-visitas">-</h1>
+
+					<h2 style="color: #333; font-size: 28px; margin: 30px 0; padding-bottom: 10px; border-bottom: 2px solid #E80000; text-align: center; font-weight: 600;">Otras Estadísticas</h2>
+
+					<div class="container-fluid mt-4">
+						<div class="row gutters">
+							<!-- Total Visits Card -->
+							<div class="col-xl-4 col-lg-4 col-md-6 mb-4">
+								<div class="card shadow-sm border-0 h-100">
+									<div class="card-body text-center p-4">
+										<div class="mb-3">
+											<i class="icon-eye text-primary" style="font-size: 2.5rem;"></i>
+										</div>
+
+										<h5 class="card-title mb-3 font-weight-bolder text-center">Total de Visitas</h5>
+										<h2 id="total-visitas" class="display-4 font-weight-bold">-</h2>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4 mb-4">
-								<div class="card">
+
+							<!-- Chart Cards -->
+							<div class="col-xl-4 col-lg-4 col-md-6 mb-4">
+								<div class="card shadow-sm border-0 h-100">
+									<div class="card-header bg-transparent border-0">
+										<h6 class="mb-0 font-weight-bolder text-center">Usuarios Nuevos</h6>
+									</div>
 									<div class="card-body">
 										<canvas id="usuariosNuevosChart"></canvas>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4 mb-4">
-								<div class="card">
+
+							<div class="col-xl-4 col-lg-4 col-md-6 mb-4">
+								<div class="card shadow-sm border-0 h-100">
+									<div class="card-header bg-transparent border-0">
+										<h6 class="mb-0 font-weight-bolder text-center">Accesos por Hora</h6>
+									</div>
 									<div class="card-body">
 										<canvas id="accesosPorHoraChart"></canvas>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4 mb-4">
-								<div class="card">
+
+							<div class="col-xl-6 col-lg-6 col-md-6 mb-4">
+								<div class="card shadow-sm border-0 h-100">
+									<div class="card-header bg-transparent border-0">
+										<h6 class="mb-0 font-weight-bolder text-center">Demanda por Categoría</h6>
+									</div>
 									<div class="card-body">
-										<canvas id="demandasPorCategoriaChart"></canvas>
+										<canvas id="demandasPorCategoriaChart"  height="400" style="justify-content: center; width: 100%;"></canvas>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4 mb-4">
-								<div class="card">
+
+							<div class="col-xl-6 col-lg-6 col-md-12 mb-4">
+								<div class="card shadow-sm border-0 h-100">
+									<div class="card-header bg-transparent border-0">
+										<h6 class="mb-0 font-weight-bolder text-center">Solicitudes por Artesano</h6>
+									</div>
 									<div class="card-body">
 										<canvas id="solicitudesPorArtesanoChart"></canvas>
 									</div>
@@ -178,7 +193,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- Row end -->
 					<!-- Row end -->
 				</div>
 				<!-- END: .main-content -->

@@ -14,6 +14,7 @@ router.get('/usuario_dni', controller.obtenerDNI);
 router.get('/usuarios', controller.listar);
 router.post('/usuario_save', controller.save);
 router.post('/cambiar_contrasenia', controller.cambiarContrasenia);
+router.put('/resetear-contrasenia-artesano/:id', controller.resetearContraseniaArtesano);
 router.put('/v1/contrasenia-clientes/:id', validatorUpdatePasswordCliente, controller.actualizarContraseniaCiente)
 router.get('/loginpersonal', controller.loginpersonal);
 router.post('/login', controller.loginpersonal);

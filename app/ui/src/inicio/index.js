@@ -30,10 +30,8 @@ hideLoading();
 
 function startApp () {
 	validarSession();
-	setTimeout(function () {
-		llenarinformacionIESTPProg();
-		// marcarSubMenuSeleccionado();
-	}, 500);
+	llenarinformacionIESTPProg();
+	// marcarSubMenuSeleccionado();
 
 	generarEstadisticas();
 }
@@ -276,11 +274,35 @@ async function generarEstadisticas () {
 			responsive: true,
 			plugins: {
 				legend: {
-					position: 'top'
+					position: 'top',
+					labels: {
+						font: {
+							size: 16 
+						}
+					}
 				},
 				title: {
 					display: true,
-					text: 'Ultimos usuarios agregados en el último mes'
+					text: 'Ultimos usuarios agregados en el último mes',
+					font: {
+						size: 16
+					}
+				}
+			},
+			scales: {
+				x: {
+					ticks: {
+						font: {
+							size: 14 
+						}
+					}
+				},
+				y: {
+					ticks: {
+						font: {
+							size: 14
+						}
+					}
 				}
 			}
 		}
@@ -304,11 +326,35 @@ async function generarEstadisticas () {
 			responsive: true,
 			plugins: {
 				legend: {
-					position: 'top'
+					position: 'top',
+					labels: {
+						font: {
+							size: 16 
+						}
+					}
 				},
 				title: {
 					display: true,
-					text: 'Horarios más visitados'
+					text: 'Horarios más visitados',
+					font: {
+						size: 16
+					}
+				}
+			},
+			scales: {
+				x: {
+					ticks: {
+						font: {
+							size: 14 
+						}
+					}
+				},
+				y: {
+					ticks: {
+						font: {
+							size: 14
+						}
+					}
 				}
 			}
 		}
@@ -331,16 +377,25 @@ async function generarEstadisticas () {
 			}]
 		},
 		options: {
-			responsive: true,
+			responsive: false,
 			plugins: {
 				legend: {
-					position: 'top'
+					position: 'top',
+					labels: {
+						font: {
+							size: 16 
+						}
+					}
 				},
 				title: {
 					display: true,
-					text: 'Categorías más demandadas'
-				}
-			}
+					text: 'Categorías más demandadas',
+					font: {
+						size: 16
+					}
+				},
+				
+			},
 		}
 	});
 
@@ -360,11 +415,35 @@ async function generarEstadisticas () {
 			responsive: true,
 			plugins: {
 				legend: {
-					position: 'top'
+					position: 'top',
+					labels: {
+						font: {
+							size: 16 
+						}
+					}
 				},
 				title: {
 					display: true,
-					text: 'Artesanos más demandados'
+					text: 'Artesanos más demandados',
+					font: {
+						size: 16
+					}
+				}
+			},
+			scales: {
+				x: {
+					ticks: {
+						font: {
+							size: 14 
+						}
+					}
+				},
+				y: {
+					ticks: {
+						font: {
+							size: 14
+						}
+					}
 				}
 			}
 		}

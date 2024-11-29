@@ -300,3 +300,23 @@ export async function nuevoUserCapacitacion (usuario) {
     console.error("Error:", error);
   }
 }
+
+
+export const resetearContraseniaArtesano = async (artesanoId, claveNueva) => {
+  const settings = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ claveNueva }),
+  };
+
+  try {
+    const response = await fetch(baseUrl + `/resetear-contrasenia-artesano/${artesanoId}`, settings);
+    const data = await response.json();
+    console.log({dataReset: data});
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
