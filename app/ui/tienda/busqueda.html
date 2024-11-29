@@ -235,6 +235,94 @@
 		.tt-suggestion .book-title {
 			color: #ff0000;
 		}
+
+		.card__busqueda {
+			border-radius: 10px;
+			overflow: hidden;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			background-color: #fff;
+			margin-bottom: 15px;
+		}
+
+		.card__busqueda:hover {
+			transform: scale(1.05);
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+		}
+
+		.card__busqueda-img-top {
+			width: 100%;
+			/* Imagen responsive */
+			height: auto;
+			/* Mantiene la proporción */
+			object-fit: cover;
+			/* Recorta la imagen si es necesario */
+			border-bottom: 2px solid #ff007f;
+		}
+
+		/* Estilo del contenido */
+		.card__busqueda-title {
+			font-size: 1.1rem !important;
+			font-weight: bold;
+			word-wrap: break-word;
+			hyphens: auto;
+			line-height: normal;
+		}
+
+		.card__busqueda-price {
+			font-size: 1.2rem !important;
+			font-weight: bold;
+			color: #ff007f;
+		}
+
+		.card__busqueda-category {
+			font-size: 0.9rem !important;
+			color: #6c757d;
+		}
+
+		.card__busqueda-artisan {
+			font-size: 0.6rem !important;
+			font-weight: 600;
+			line-height: normal;
+		}
+
+		.card__busqueda-location {
+			font-size: 0.7rem !important;
+			color: #6c757d;
+		}
+
+		/* Botones */
+		.card__busqueda-buttons a,
+		.card__busqueda-buttons button {
+			font-size: 0.9rem !important;
+			border-radius: 20px;
+		}
+
+		.btn-primary {
+			background-color: #ff007f;
+			border-color: #ff007f;
+		}
+
+		.btn-primary:hover {
+			background-color: #e60073;
+			border-color: #e60073;
+		}
+
+		.btn-outline-dark:hover {
+			background-color: #f8f9fa;
+		}
+
+		.btn-outline-danger:hover {
+			background-color: rgba(255, 0, 127, 0.1);
+		}
+
+		/* Imagen redonda del artesano */
+		.card__busqueda-artisan-img {
+			width: 40px;
+			height: 40px;
+			object-fit: cover;
+			border: 2px solid #ff007f;
+			border-radius: 50%;
+		}
 	</style>
 
 	<!--[if lt IE 9]>
