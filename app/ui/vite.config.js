@@ -54,6 +54,7 @@ export default {
         'ventas-detalle': resolve(__dirname, 'ventas-detalle.html'),
         'ventas': resolve(__dirname, 'ventas.html'),
         'productos_por_categoria': resolve(__dirname, 'productos_por_categoria.html'),
+        'tipo-cambio': resolve(__dirname, 'tipo-cambio.html'),
 
         'tienda/index': resolve(__dirname, 'tienda/index.html'),
         'tienda/busqueda': resolve(__dirname, 'tienda/busqueda.html'),
