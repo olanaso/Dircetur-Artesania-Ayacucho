@@ -281,7 +281,7 @@ function obtenerUrlProducto () {
     // Decodificar y convertir el objeto JSON nuevamente
     if (data) {
         const artesaniaenviada = JSON.parse(data);
-        console.log({artesaniaenviada});
+        console.log({ artesaniaenviada });
 
         // Mostrar el objeto en el DOM
         const artesaniaId = artesaniaenviada.artesania.id;
@@ -443,7 +443,7 @@ async function mostrarInformacion (producto) {
     console.log('imagenPrincipal', producto.imagen_principal)
 
     $("#producto-nombre").text(`${producto.nombres_es}`);
-    $("#producto-precio").text(`S/ ${producto.precio} | $ ${producto.precio_usd}`);
+    $("#producto-precio").text(` ${formatearNumero(producto.precio)} PEN | $ ${formatearNumero(producto.precio_usd)} USD`);
     $("#producto-descripcion").text(`${producto.descripcion_es}`);
     $("#producto-alto").text(`Alto: ${producto.alto} cm`);
     $("#producto-ancho").text(`Ancho:${producto.ancho} cm`);
@@ -563,12 +563,19 @@ async function realizarBusqueda () {
 }
 
 function formatearNumero (numero) {
-    return numero.toLocaleString('es-US', {
+    // Convierte el valor a un número si es una cadena
+    let numeroConvertido = parseFloat(numero);
+
+    // Verifica que la conversión fue exitosa
+    if (isNaN(numeroConvertido)) {
+        return numero;
+    }
+
+    return numeroConvertido.toLocaleString('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     });
 }
-
 
 function loadProductos (data) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -602,7 +609,7 @@ function loadProductos (data) {
                             <h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item?.nombres_es || ""}</h5>
                         </a>
 
-                        <p class="h4 text-danger font-weight-bold">S/.${formatearNumero(item?.precio) || ""} </p>
+                        <p class="h4 text-danger font-weight-bold">${formatearNumero(item?.precio) || ""} PEN </p>
                         <p class="card-text text-muted">Categoría: ${item?.categoria}</p>
                         <div class="d-flex align-items-center mt-3" title="Artesano">
                             <img class="rounded-circle mr-2"
@@ -832,7 +839,7 @@ function loadProductosDestacados (data) {
                     <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000">
                     <h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item.nombres_es || "-"}</h5>
                     </a>
-                    <p class="h4 text-danger font-weight-bold">S/.${formatearNumero(item?.precio) || ""}</p>
+                    <p class="h4 text-danger font-weight-bold">${formatearNumero(item?.precio) || ""} PEN</p>
                     <p class="card-text text-muted">Categoría: ${item?.categoria_producto?.denominacion}</p>
 
 

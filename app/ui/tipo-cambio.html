@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tipo de Cambio USD a Soles</title>
+	<!-- Enlace a Bootstrap 4 -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+	<div class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card text-center shadow-sm">
+					<div class="card-header bg-primary text-white">
+						<h5 class="mb-0">Tipo de Cambio</h5>
+					</div>
+					<div class="card-body">
+						<h6 class="card-title">Dólar Americano (USD) a Soles Peruanos (PEN)</h6>
+						<p class="card-text">
+							1 USD =
+							<span id="exchangeRate" class="font-weight-bold text-primary">Cargando...</span> PEN
+						</p>
+						<button class="btn btn-outline-primary btn-sm" onclick="fetchExchangeRate()">Actualizar</button>
+					</div>
+					<div class="card-footer text-muted">
+						Datos actualizados en tiempo real
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// URL de la API
+		const apiUrl = 'https://v6.exchangerate-api.com/v6/ad3f75eb3ea982e01dcfcffa/latest/USD';
+
+		// Función para obtener y mostrar el tipo de cambio
+		async function fetchExchangeRate () {
+			try {
+				const response = await fetch(apiUrl);
+				if (!response.ok) {
+					throw new Error(`HTTP error! Status: ${response.status}`);
+				}
+				const data = await response.json();
+
+				// Obtener el tipo de cambio a PEN
+				const exchangeRatePEN = data.conversion_rates.PEN;
+
+				// Mostrar el tipo de cambio en el span
+				document.getElementById('exchangeRate').textContent = exchangeRatePEN.toFixed(4); // Redondear a 4 decimales
+			} catch (error) {
+				console.error('Error al obtener el tipo de cambio:', error);
+				document.getElementById('exchangeRate').textContent = 'Error al cargar';
+			}
+		}
+
+		// Llamar a la función al cargar la página
+		fetchExchangeRate();
+	</script>
+
+	<!-- Enlace a Bootstrap JS y dependencias -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

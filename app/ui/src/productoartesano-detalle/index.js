@@ -35,7 +35,7 @@ hideLoading();
 })();
 
 function startApp () {
-  
+
   // checkadminsession(); 
   setTimeout(function () {
     llenarinformacionIESTPProg();
@@ -46,6 +46,7 @@ function startApp () {
   //exportarExcel();
   //nuevo(); 
   llenarcategoria()
+  initReady()
 
 }
 
@@ -75,8 +76,11 @@ let contadorOfertas = 0;
 let contadorCostos = 0;
 
 
-let usuario = getDataFromLocalStorage('session').usuarios;
-var artesano_id = usuario.datos[0].id;
+var usuario = getDataFromLocalStorage('session').usuarios;
+
+var artesano_ = getDataFromLocalStorage('artesano');
+
+var artesano_id = artesano_.id;
 
 
 async function buscarUsuario () {
@@ -148,62 +152,6 @@ async function buscarUsuario () {
 
   })
 
-
-  async function buscarUsuario2 () {
-
-    certificados = await buscarProducto($('#searchBox').val());
-    // Obtener la referencia del elemento HTML donde se insertará la tabla
-    let tabla = document.getElementById('tablaCertificados');
-    // Limpiar la tabla antes de insertar nuevos datos
-    tabla.innerHTML = '';
-    // Crear una fila para los encabezados de la tabla
-    let encabezados = '<tr><th>N°</th><th>Nombres Completos</th><th>Curso</th><th>Fecha Emisión</th><th>Código</th> <th colspan="3" style="text-align: center;">Certificado</th></tr>';
-    // Agregar los encabezados a la tabla
-    tabla.innerHTML += encabezados;
-    // Recorrer la lista de certificados y pintar los datos en la tabla
-    // Inicializar el contador
-    let correlativo = 1;
-
-    for (let prog of certificados) {
-      // Crear una fila para cada certificado
-
-      let fila = '<tr>';
-      // Agregar las celdas con los datos del certificado
-      fila += `<td>${correlativo}</td>`;
-      fila += `<td>${prog.nombres}</td>`;
-      fila += `<td>${prog.curso}</td>`;
-      fila += `<td>${prog.fecha_fin}</td>`;
-      fila += `<td>${prog.cod_curso}</td>`;
-      fila += `<td><a href="javascript:void(0);"   class="open-modal" data-toggle="tooltip" title="Editar" data-id="${prog.id}" style="color: blue; text-decoration: underline;"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px;">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-            </svg></a></td>`;
-
-      fila += `<td><a href="javascript:void(0);" class="btn_Eliminar" data-toggle="tooltip" title="Eliminar" data-id="${prog.id}" style="color: blue; text-decoration: underline;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px;">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-            <line x1="9" y1="9" x2="15" y2="15"/>
-            <line x1="15" y1="9" x2="9" y2="15"/>
-          </svg></a></td>`;
-
-
-
-      fila += `<td><a href="${prog.certificado}" target="_blank" data-toggle="tooltip" title="Ver certificado" style="color: blue; text-decoration: underline;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px;">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg></a></td>`;
-
-
-      fila += '</tr>';
-      // Agregar la fila a la tabla
-      tabla.innerHTML += fila;
-      // Incrementar el correlativo
-      correlativo++;
-    }
-    $('[data-toggle="tooltip"]').tooltip();
-
-
-  }
 
 
   function isInteger (value) {
@@ -364,7 +312,7 @@ async function buscarUsuario () {
           id: parseInt(fila.find('td').eq(0).text(), 10),
           talla: fila.find('td').eq(1).text()
         };
-        
+
         listaTalla.push(talla);
       });
 
@@ -514,17 +462,6 @@ async function buscarUsuario () {
 
 
 
-function createXLS (data, reportfilename) {
-  var resultgeojson = alasql(`SELECT *
-  FROM ? `, [data])
-  var opts = [{
-    sheetid: 'Reporte',
-    headers: true
-  }];
-  var res = alasql(`SELECT INTO XLSX("${reportfilename}.xlsx",?) FROM ?`, [opts, [resultgeojson]]);
-}
-
-
 
 // calcular precios 
 
@@ -615,6 +552,7 @@ precioInput.addEventListener('input', function () {
 async function editarProducto (id) {
 
   editarproductos = await geteditarproducto(id);
+
   $('#idespanolNombre').val(editarproductos.nombres_es)
   $('#idinglesNombre').val(editarproductos.nombres_eng)
   $('#idespanolResumen').val(editarproductos.resumen_es)
@@ -646,7 +584,7 @@ async function editarProducto (id) {
   }
 
   $('#estadoAgotado').val(editarproductos.tipo_estado)
-  $('#lstcategoria').val(editarproductos.categoria_id)
+  $('#lstcategoria').val(editarproductos.categoria_id + '')
   $('#fechaDisponible').val(editarproductos.fecha_disponible)
 
 
@@ -890,9 +828,9 @@ function habilitar () {
   home8Tab.classList.remove('disabled');
 }
 
-$(document).ready(function () {
+function initReady () {
 
-  llenarcategoria();
+  //llenarcategoria();
 
   ///editar formulario
   const urlParams = new URLSearchParams(window.location.search);
@@ -1779,7 +1717,7 @@ $(document).ready(function () {
 
 
 
-});
+};
 
 
 document.addEventListener('DOMContentLoaded', () => {

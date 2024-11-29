@@ -13,7 +13,7 @@ import { ShoppingCart } from "../utils/pluginCarrito.js";
         { path: '../partials/tienda/header.html', container: 'header' },
         { path: '../partials/tienda/footer.html', container: 'footer' },
     ];
-    
+
     try {
 
         await loadPartials(partials);
@@ -191,7 +191,15 @@ function loadCategorias (data) {
 }
 
 function formatearNumero (numero) {
-    return numero.toLocaleString('es-US', {
+    // Convierte el valor a un número si es una cadena
+    let numeroConvertido = parseFloat(numero);
+
+    // Verifica que la conversión fue exitosa
+    if (isNaN(numeroConvertido)) {
+        return numero;
+    }
+
+    return numeroConvertido.toLocaleString('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     });
@@ -257,13 +265,13 @@ function loadProductosOferta (data) {
 
 									<div class="d-flex justify-content-between align-items-center mb-2">
 										<span class="text-muted"></span>
-										<span class="text-muted"><s>S/.  ${formatearNumero(item?.precio) || ""}</s></span>
+										<span class="text-muted"><s>  ${formatearNumero(item?.precio) || ""} PEN</s></span>
 									</div>
 									  <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000">
 									
 									<h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item?.nombres_es || ""}</h5>
 </a>
-									<p class="h4 text-danger font-weight-bold">S/.${formatearNumero(item?.lst_ofertas[0]?.precioOfertado) || ""} </p>
+									<p class="h4 text-danger font-weight-bold">${formatearNumero(item?.lst_ofertas[0]?.precioOfertado) || ""} PEN </p>
 									<p class="card-text text-muted">Categoría: ${item?.categoria}</p>
 									<div class="d-flex align-items-center mt-3" title="Artesano">
 									<a href="artesano.html?id=${item?.artesano_id}">
@@ -367,7 +375,7 @@ function loadProductosRecientes (data) {
 									<h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item?.nombres_es || ""}</h5>
 </a>
 
-									<p class="h4 text-danger font-weight-bold">S/.${formatearNumero(item?.precio) || ""} </p>
+									<p class="h4 text-danger font-weight-bold"> ${formatearNumero(item?.precio) || ""} PEN </p>
 									<p class="card-text text-muted">Categoría: ${item?.categoria}</p>
 									<div class="d-flex align-items-center mt-3" title="Artesano">
 										<img class="rounded-circle mr-2"
@@ -478,14 +486,11 @@ function loadProductosDestacados (data) {
 						<div class="line-dec"></div>
 
 						<div class="card-body">
-							<!-- <div class="d-flex justify-content-between align-items-center mb-2">
-								<span class="badge badge-danger" style="color: #fff;">-15%</span>
-								<span class="text-muted"><s>S/. 1770.00</s></span>
-							</div> -->
+						
                             <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000">
 							<h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item.nombres_es || "-"}</h5>
                             </a>
-							<p class="h4 text-danger font-weight-bold">S/.${formatearNumero(item?.precio) || ""}</p>
+							<p class="h4 text-danger font-weight-bold">${formatearNumero(item?.precio) || ""} PEN</p>
 							<p class="card-text text-muted">Categoría: ${item?.categoria}</p>
 
 
