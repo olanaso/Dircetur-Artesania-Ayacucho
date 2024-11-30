@@ -189,7 +189,7 @@ function generarInterfaz () {
         
        <div class="row product-card">
 				<div class="col-md-3">
-					<a href="detalle-producto.html" title="Ver detalle del producto">
+					<a href="busqueda.html?nombre_producto=${artesania.nombre_es}&id_artesano=${artesano.id}" title="Ver detalle del producto">
 
                     <div class="product-image">
                     <img style="height:150px; width:100%; object-fit: cover; border:none; "  src="${artesania.imagen_principal || 'https://via.placeholder.com/150'}" alt="Imagen del producto">
@@ -199,7 +199,7 @@ function generarInterfaz () {
 					</a>
 				</div>
 				<div class="col-md-6">
-					<a href="busqueda.html?nombre_producto=${artesania.nombre_es}" title="Ver detalle del producto">
+					<a href="busqueda.html?nombre_producto=${artesania.nombre_es}&id_artesano=${artesano.id}" title="Ver detalle del producto">
 						<h4>${artesania.nombre_es}</h4>
 					</a>
 					<div class="artesano-info">

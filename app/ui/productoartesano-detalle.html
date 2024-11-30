@@ -143,7 +143,7 @@
 														<h6 class="sub-heading" style="padding: 10px;margin-top: 10px;font-size: 1.0rem;"><span class="text-primary">*</span> DNI:</h6>
 													</div>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" placeholder="Ingrese el DNI" id="dni" maxlength="8" minlength="8" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+														<input type="text" class="form-control" placeholder="Ingrese el DNI" id="dni" maxlength="8" minlength="8" required  >
 														
 													</div>
 													<div class="col-10 col-md-3">
@@ -542,10 +542,9 @@
 													</div>
 													<div class="col-9 col-md-10">
 
-														<input type="text" class="form-control"
+														<input type="number" class="form-control"
 															placeholder="Ingrese el peso del producto"
-															id="pesokilogramos" maxlength="8" required
-															oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+															id="pesokilogramos" maxlength="8" required>
 													</div>
 												</div>
 												<hr>
@@ -610,8 +609,7 @@
 															<div class="col">
 																<input type="text" class="form-control"
 																	placeholder="Ingrese la cantidad" id="cantidad"
-																	maxlength="11" minlength="11"
-																	oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+																	maxlength="11" minlength="11">
 
 															</div>
 														</div>
@@ -627,8 +625,7 @@
 															<div class="col">
 																<input type="text" class="form-control"
 																	placeholder="Ingrese la cantidad mínima"
-																	id="cantidadMinima" maxlength="11" minlength="11"
-																	oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+																	id="cantidadMinima" maxlength="11" minlength="11">
 
 															</div>
 														</div>
@@ -1132,8 +1129,7 @@
 															<div class="col-9 col-md-4">
 																<input type="text" class="form-control"
 																	placeholder="Ingrese el porcentaje de descuento"
-																	id="porcentajeDescuento" maxlength="3"
-																	oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+																	id="porcentajeDescuento" maxlength="3">
 															</div>
 															<div class="col-sm-2">
 																<h6 class="sub-heading"
@@ -1232,8 +1228,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
 															placeholder="Ingrese el precio" id="precioCosto"
-															maxlength="8"
-															oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+															maxlength="8">
 
 													</div>
 												</div>
@@ -1319,8 +1314,7 @@
 																<label for="envioLocal">Local:</label>
 																<input type="text" class="form-control"
 																	placeholder="Precio de envío local" id="envioLocal"
-																	maxlength="8" disabled
-																	oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+																	maxlength="8" disabled>
 															</div>
 														</div>
 													</div>
@@ -1335,8 +1329,7 @@
 																<label for="envioNacional">Nacional:</label>
 																<input type="text" class="form-control"
 																	placeholder="Precio de envío nacional"
-																	id="envioNacional" maxlength="8" disabled
-																	oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+																	id="envioNacional" maxlength="8" disabled>
 															</div>
 														</div>
 													</div>
@@ -1352,8 +1345,7 @@
 
 																<input type="text" class="form-control"
 																	placeholder="Precio de envío extranjero"
-																	id="envioExtranjero" maxlength="8" disabled
-																	oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+																	id="envioExtranjero" maxlength="8" disabled>
 															</div>
 														</div>
 													</div>
@@ -1371,8 +1363,7 @@
 															<div class="col">
 																<input type="text" class="form-control"
 																	placeholder="Ingrese los tiempos de elaboración"
-																	id="tiemposElaboracion" maxlength="4"
-																	oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+																	id="tiemposElaboracion" maxlength="4">
 															</div>
 														</div>
 													</div>
@@ -1390,8 +1381,7 @@
 															<div class="col">
 																<input type="text" class="form-control"
 																	placeholder="Ingrese los tiempos de envío"
-																	id="tiemposEnvio" maxlength="4"
-																	oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+																	id="tiemposEnvio" maxlength="4">
 															</div>
 														</div>
 													</div>
