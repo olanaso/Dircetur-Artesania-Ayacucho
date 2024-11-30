@@ -366,13 +366,16 @@ function showProductSlider (imagenesSecundarias, imagenPrincial) {
     let imagenes = [imagenPrincial, ...imagenesSecundarias]
     let sp_slides = ``
     let sp_thumbnails = ``
+
     for (let imagen of imagenes) {
         sp_slides += `
         <div class="sp-slide ">
+        <a href="${imagen}" data-fancybox="gallery">
 									<img class="sp-image" src="${imagen}" alt="" onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/200x220.png?text=En proceso de carga';"/>
+                                </a>
 								</div>
         `
-        sp_thumbnails += `<img style="heigth:120;width:180px" class="sp-thumbnail" src="${imagen}" alt="" onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/100x100.png?text=En proceso de carga';" />`
+        sp_thumbnails += `  <a href="${imagen}" data-fancybox="gallery"> <img style="heigth:120;width:180px" class="sp-thumbnail" src="${imagen}" alt="" onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/100x100.png?text=En proceso de carga';" /> </a>`
     }
 
     $('#id-sp-slides').html('');
