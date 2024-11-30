@@ -6,56 +6,61 @@ const Producto = require('../models/producto');
 
 
 
-function generateReport  (req, res) {
-    //const { attributes } = req.body;
-    //const attributes = req.query.attributes ? req.query.attributes.split(',') : null;
+function generateReport (req, res) {
     const reportType = req.query.reportType;
-    // if (!reportType || !attributes || !Array.isArray(attributes)) {
-    //     return res.status(400).json({ error: 'Invalid request data' });
-    // }
+
     if (!reportType) {
         return res.status(400).json({ error: 'Invalid request data' });
     }
 
     try {
-        let data;
+        let sql = '';
+
         switch (reportType) {
             case 'clientes':
-                Cliente.findAll()
-                    .then(resultset => {
-                        res.status(200).json(resultset)
-                    })
-                    .catch(error => {
-                        res.status(400).send(error)
-                    })
-                    //where: {},
-                    //attributes: attributes
-                //});
+                sql = `
+                    SELECT *
+                    FROM cliente;`;
                 break;
+
             case 'artesanos':
-                Artesano.findAll()
-                    .then(resultset => {
-                        res.status(200).json(resultset)
-                    })
-                    .catch(error => {
-                        res.status(400).send(error)
-                    })
-                    
+                sql = `
+                    SELECT *
+                    FROM artesano;`;
                 break;
+
             case 'productos':
-                data = Producto.findAll()
-                    .then(resultset => {
-                        res.status(200).json(resultset)
-                    })
-                    .catch(error => {
-                        res.status(400).send(error)
-                    })
+                sql = `
+                    SELECT 
+                        p.*,
+                        c.denominacion AS Categoria,
+                        c.descripcion AS DescripcionCategoria,
+                        a.nombres AS NombresArtesano,
+                        a.apellidos AS ApellidosArtesano,
+                        a.correo AS CorreoArtesano,
+                        a.celular AS CelularArtesano
+                    FROM producto p
+                    JOIN categoria c ON p.categoria_id = c.id
+                    JOIN artesano a ON p.artesano_id = a.id;
+                `;
                 break;
+
             default:
                 return res.status(400).json({ error: 'Invalid report type' });
         }
 
-        //return res.status(200).json(data);
+        Cliente.sequelize.query(sql, {
+            type: Cliente.sequelize.QueryTypes.SELECT
+        })
+            .then(resultset => {
+                res.status(200).json(resultset);
+            })
+            .catch(error => {
+                res.status(400).send(error);
+            });
+        //const [results, metadata] = await Cliente.sequelize.query(sql, { type: Cliente.sequelize.QueryTypes.SELECT });
+
+        //return res.status(200).json(results);
     } catch (error) {
         console.error('Error generating report:', error);
         return res.status(500).json({ error: 'Internal server error' });
