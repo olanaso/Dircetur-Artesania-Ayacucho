@@ -95,6 +95,7 @@ async function cargarDataPortada () {
     loadCategorias(resultado.categorias)
     loadProductosOferta(resultado.productosOferta)
     loadProductosDestacados(resultado.productosDestacados)
+    loadArtesanosDestacados(resultado.artesanos)
     loadProductosRecientes(resultado.productosRecientes)
 }
 
@@ -507,40 +508,48 @@ function loadProductosDestacados (data) {
 
         //alert(item.imagen)
         html = html + `
-       <div class="item wow fadeIn card " data-wow-duration="0.75s">
-						<div class="img-contenedor-destacados">
-                          <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000">
-							<img class="img-destacados"
-								src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" />
-                                   </a>
-						</div>
-						<ul class="star-rating">
-							<li><i class="fa fa-star"></i></li>
-							<li><i class="fa fa-star"></i></li>
-							<li><i class="fa fa-star"></i></li>
-							<li><i class="fa fa-star"></i></li>
-							<li><i class="fa fa-star"></i></li>
-						</ul>
-						<div class="line-dec"></div>
 
-						<div class="card-body">
-						
-                            <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000">
-							<h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item.nombres_es || "-"}</h5>
-                            </a>
-							<p class="h4 text-danger font-weight-bold">${formatearNumero(item?.precio) || ""} PEN</p>
-							<p class="card-text text-muted">Categoría: ${item?.categoria}</p>
+         <div class="card">
+    <div class="card-image">
+      <span class="new-label">Nuevo</span>
+      <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
+      <img style="height:300px; width:100%; object-fit: cover;  transform: scale(0.8);  transform-origin: center;  " src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" alt="Producto Artesanal" />
+      </a>
+    </div>
+    <div class="card-content"
+    style="margin-left:15px; margin-buttom:15px; padding:0px"
+    >
+     <a  href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}"> <h2 class="product-title">${item?.nombres_es || ""}</h2></a>
+      <p class="product-price">${formatearNumero(item?.precio) || ""} PEN</p>
+      <p class="product-category">${item?.categoria}</p>
+    </div>
+    
+      <div class="artisan-info" >
+        <img
+          src="${item?.foto1 || "https://via.placeholder.com/50"}"
+          alt="Foto del artesano"
+          class="artisan-photo"
+          style="height:50px; width:50px; border-radius:0px; margin-left:15px"
+        />
+        <div>
+       <a href="artesano.html?id=${item?.artesano_id}" style="margin-left:15px; margin-buttom:15px">  
+          <p class="artisan-name">${item?.artesano || ""}</p></a>
+          <p class="artisan-role">Artesano</p>
+        </div>
+      </div>
+      <div class="card-actions" style="margin-left:15px; margin-bottom: 10px;">
+        <a class="btn favorite" title="Añadir a favoritos" href="productos-deseados.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
+          <i class="fas fa-heart"></i>
+        </a>
+        <a class="btn cart" title="Añadir al carrito" href="carrito-de-compra.html?producto=${encodeURIComponent(JSON.stringify(artenia_anviar_carrito))}">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+      </div>
+   
+  </div>
 
 
-							<div class="author-rate">
-								<img src="${item?.foto1 || "https://via.placeholder.com/40"}" alt="">
-								<h4><a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></h4>
-								<div class="line-dec2"></div>
-								
-                                <a href="carrito-de-compra.html?producto=${encodeURIComponent(JSON.stringify(artenia_anviar_carrito))}" title="Ir a carrito de compras">Comprar <i class="fa fa-shopping-cart"></i></a>
-							</div>
-						</div>
-					</div>
+      
 
 
         `
@@ -564,6 +573,76 @@ function loadProductosDestacados (data) {
             },
             1000: {
                 items: 3
+            }
+        }
+    })
+}
+
+
+
+function loadArtesanosDestacados (data) {
+
+    let html = ` `
+    for (let item of data) {
+
+
+
+
+        //alert(item.imagen)
+        html = html + `
+ 
+         <div class="card"  style="height:380px;">
+    <div class="card-image">
+      <span class="new-label" style="background:#22a7f2;">destacado</span>
+      <a href="artesano.html?id=${item.id}">
+      <img style="height:300px; width:100%; object-fit: cover;  transform: scale(1);  transform-origin: center;  " 
+      src="${item?.foto1 || "https://via.placeholder.com/400x200"}" alt="Artesano" />
+      </a>
+    </div>
+    <div class="card-content"
+    style="margin-left:15px; margin-buttom:15px; padding:0px"
+    >
+     <a  href="artesano.html?id=${item.id}"> <h2 class="product-title">${item?.nombres} ${item?.apellidos}</h2></a>
+     
+      <p class="product-category">${item?.categoria_artesano}</p>
+    </div>
+    
+     
+      
+        </div>
+      </div>
+    
+   
+  </div>
+
+
+      
+
+
+        `
+    }
+    $('#owl-testimonials_artesanos').append(html)
+
+
+    $('#owl-testimonials_artesanos').owlCarousel({
+        pagination: true,
+        paginationNumbers: false,
+        autoplay: true,
+        loop: true,
+        margin: 10,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 3
+            },
+            1600: {
+                items: 4
             }
         }
     })

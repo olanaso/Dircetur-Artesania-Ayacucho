@@ -8,6 +8,7 @@ module.exports = {
     listadoProductosOferta,
     listadoProductosDestacados,
     listadoProductosRecientes,
+    listadoArtesanos,
     /*Servicios portada*/
     detalleProducto,
     busquedaProducto,
@@ -190,6 +191,43 @@ async function listadoProductosRecientes () {
   INNER JOIN categoria c ON a.categoria_id=c.id
 ORDER BY id DESC
 LIMIT 9
+
+     `;
+
+        const list = await models.sequelize.query(sql, { type: models.sequelize.QueryTypes.SELECT });
+        // console.log(list)
+        if (!list) {
+            throw {
+                error: new Error("No existen datos"),
+                message: "No existen Datos",
+                status: 401
+            };
+        }
+        return list;
+    }
+    catch (err) {
+        throw err;
+    }
+}
+
+
+async function listadoArtesanos () {
+    try {
+
+        let sql = `
+ SELECT a.id, a.nombres, a.apellidos, a.celular, a.foto1, a.foto2, a.correo,
+       COALESCE(b.categorias, 'OTRO') AS categoria_artesano
+FROM artesano a
+LEFT JOIN (
+    SELECT
+        a.artesano_id,
+        GROUP_CONCAT(DISTINCT b.denominacion SEPARATOR ', ') AS categorias
+    FROM producto a
+    INNER JOIN categoria b ON a.categoria_id = b.id
+    GROUP BY a.artesano_id
+) b ON a.id = b.artesano_id
+ORDER BY RAND()
+LIMIT 12;
 
      `;
 
