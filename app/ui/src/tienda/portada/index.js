@@ -430,7 +430,7 @@ function loadProductosRecientes (data) {
         html = html + `
   <div class="card">
     <div class="card-image">
-      <span class="new-label">Nuevo</span>
+      <span class="new-label" style="background:yellow;color:#000">Nuevo</span>
       <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
       <img style="height:300px; width:100%; object-fit: cover;  transform: scale(0.8);  transform-origin: center;  " src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" alt="Producto Artesanal" />
       </a>
@@ -511,7 +511,7 @@ function loadProductosDestacados (data) {
 
          <div class="card">
     <div class="card-image">
-      <span class="new-label">Nuevo</span>
+      <span class="new-label" style="background:orange;">Destacado</span>
       <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
       <img style="height:300px; width:100%; object-fit: cover;  transform: scale(0.8);  transform-origin: center;  " src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" alt="Producto Artesanal" />
       </a>
