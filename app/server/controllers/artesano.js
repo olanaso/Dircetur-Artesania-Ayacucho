@@ -108,18 +108,34 @@ function actualizar (req, res) {
         .catch(error => res.status(400).send(error));
 }
 
-function eliminar (req, res) {
+async function eliminar (req, res) {
+    const t = await artesanoModel.sequelize.transaction();
 
-    artesanoModel
-        .findOne({
-            where: { id: req.body.id }
-        })
-        .then(object => {
-            object.destroy();
-            res.status(200).json(object);
+    try {
+        const { id } = req.body;
+
+        const artesanoDb = await artesanoModel.findOne({
+            where: { id }
+        });
+
+        if (!artesanoDb) {
+            return res.status(404).send({ message: "Artesano no encontrado" });
         }
-        )
-        .catch(error => res.status(400).send(error));
+
+        await artesanos.destroy({
+            where: {
+                id: artesanoDb.usuario_id
+            },
+            transaction: t
+        })
+
+        await artesanoDb.destroy({ transaction: t });
+        await t.commit();
+        res.status(200).json(artesanoDb);
+    } catch (error) {
+        await t.rollback();
+        res.status(400).send(error);
+    }
 }
 
 
@@ -416,6 +432,7 @@ function buscar (req, res) {
 
 async function saveUsuarioArtesano (req, res, next) {
     const t = await artesanoModel.sequelize.transaction();
+
     try {
         const { usuario: _usuario, artesano } = req.body;
 
@@ -425,10 +442,7 @@ async function saveUsuarioArtesano (req, res, next) {
         //buscando usuario
         let objectUsuario = await artesanos.findOne({
             where: {
-                [Op.or]: [
-                    { usuario: _usuario.usuario ? _usuario.usuario : 0 },
-                    { id: _usuario.id ? _usuario.id : 0 } // Otra condición para el OR
-                ]
+                id: modelArtesano.usuario_id
             }
         });
 
@@ -436,35 +450,43 @@ async function saveUsuarioArtesano (req, res, next) {
 
         if (objectUsuario != null) { //proceso de actualizacion
             let obj = { ...objectUsuario.dataValues, ..._usuario };
+
             for (const prop in obj) {
                 objectUsuario[prop] = obj[prop];
             }
+
             objectUsuario.usuaregistra_id = req.userId;
             objectUsuario.rolid = 2; //artesano
+
+            if (artesano.correo) {
+                objectUsuario.correo = modelArtesano.correo.toLowerCase();
+            }
+
             await objectUsuario.save({ transaction: t });
 
         } else {  //registro de nuevo usuario
             // usuario.id = artesano.id;
+            if(_usuario.usuario === "" || _usuario.usuario === null || _usuario.usuario === undefined) { 
+                _usuario.usuario = modelArtesano.nombres.trim().toLowerCase().replace(/\s/g, '')
+            }
 
-            _usuario.clave = encriptartexto(_usuario.clave)
+            _usuario.clave = encriptartexto(_usuario.clave ? _usuario.clave : _usuario.usuario);
             _usuario.rolid = 2; //artesano
+            _usuario.correo = modelArtesano.correo.toLowerCase();
+
             usuario_result = await artesanos.create(_usuario, { transaction: t });
-
-
         }
-        console.log('El id!!', usuario_result.id)
+
         let artesano_result = null;
 
         //let objectArtesano = await artesanoModel.findArtesanoByUserId(artesano.dni)
         let objectArtesano = await artesanoModel.findOne({
             where: {
-                dni: artesano.dni
+                usuario_id: artesano.usuario_id
             }
         });
 
-        console.log('model artesano', modelArtesano)
         //Guardado de artesano
-
         if (objectArtesano != null) { //proceso de actualizacion
             let obj = { ...objectArtesano.dataValues, ...artesano };
             for (const prop in obj) {
@@ -483,17 +505,16 @@ async function saveUsuarioArtesano (req, res, next) {
             if (artesano_result) {
 
                 emailRegistroArtesano({
-                    correo: artesano_result.correo, nombreArtesano: artesano_result.nombres + ' ' + artesano_result.apellidos
-                    , usuarioArtesano: artesano_result.dni, contrasenaArtesano: artesano_result.dni, logoUrl: null
+                    correo: artesano_result.correo,
+                    nombreArtesano: artesano_result.nombres + ' ' + artesano_result.apellidos,
+                    usuarioArtesano: artesano_result.dni ? artesano_result.dni : artesano_result.nombres.trim().toLowerCase().replace(/\s/g, ''),
+                    contrasenaArtesano: artesano_result.dni ? artesano_result.dni : artesano_result.nombres.trim().toLowerCase().replace(/\s/g, ''),
+                    logoUrl: null
                 })
             }
-
         }
 
-
-
         //Gudardao de usuario
-
         await t.commit();
         // Envía el ID del objeto creado junto con el objeto
         return res.status(200).send({ id: artesano.artesanoId, artesano_result, usuario_result });
