@@ -93,53 +93,56 @@ WHERE JSON_VALID(a.lst_ofertas) AND TRIM(a.lst_ofertas) != '"[]"';
             };
         }
 
-        // Función para obtener la fecha actual en formato 'YYYY-MM-DD'
-        const obtenerFechaActual = () => {
-            const hoy = new Date();
-            return hoy.toISOString().split('T')[0];
-        };
-
-        const fechaActual = obtenerFechaActual();
-
-        const ofertasVigentes = data
-            .map(item => {
-
-                const ofertasLimpias = item.lst_ofertas.trim();
-                console.log('----------------')
-                // console.log(ofertasLimpias)
-                // const ofertasSinComillas = ofertasLimpias.startsWith('"') && ofertasLimpias.endsWith('"')
-                //     ? ofertasLimpias.slice(1, -1)
-                //     : ofertasLimpias;
-
-                // Deserializar dos veces para corregir el problema de caracteres escapados
-                const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1, -1)));
-                console.log('----------------')
-                // console.log(ofertasArray)
-                // Parsear el string limpio
-                //const ofertasArray = JSON.parse(ofertasSinComillas);
-                // Filtrar solo las ofertas vigentes
-                const ofertasFiltradas = ofertasArray.filter(oferta =>
-                    fechaActual >= oferta.fechaInicio && fechaActual <= oferta.fechaFin
-                );
-
-                // Si hay ofertas vigentes, devolver el objeto con las ofertas filtradas
-                if (ofertasFiltradas.length > 0) {
-                    return {
-                        ...item,
-                        lst_ofertas: ofertasFiltradas // Reemplazamos lst_ofertas con solo las ofertas vigentes
-                    };
-                }
-
-                return null; // Si no hay ofertas vigentes, devolvemos null
-            })
-            .filter(item => item !== null); // Filtrar los elementos que no tienen ofertas vigentes
 
 
-        return ofertasVigentes;
+
+
+        return obtenerOfertasVigentes(data);
     }
     catch (err) {
         throw err;
     }
+}
+
+function obtenerOfertasVigentes(listaDeOfertas) {
+    // Función para obtener la fecha actual en formato 'YYYY-MM-DD'
+    const obtenerFechaActual = () => {
+        const hoy = new Date();
+        return hoy.toISOString().split('T')[0];
+    };
+    const fechaActual = obtenerFechaActual();
+    return listaDeOfertas.map(item => {
+
+            const ofertasLimpias = item.lst_ofertas.trim();
+            console.log('----------------')
+            // console.log(ofertasLimpias)
+            // const ofertasSinComillas = ofertasLimpias.startsWith('"') && ofertasLimpias.endsWith('"')
+            //     ? ofertasLimpias.slice(1, -1)
+            //     : ofertasLimpias;
+
+            // Deserializar dos veces para corregir el problema de caracteres escapados
+            const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1, -1)));
+            console.log('----------------')
+            // console.log(ofertasArray)
+            // Parsear el string limpio
+            //const ofertasArray = JSON.parse(ofertasSinComillas);
+            // Filtrar solo las ofertas vigentes
+            const ofertasFiltradas = ofertasArray.filter(oferta =>
+                fechaActual >= oferta.fechaInicio && fechaActual <= oferta.fechaFin
+            );
+
+            // Si hay ofertas vigentes, devolver el objeto con las ofertas filtradas
+            if (ofertasFiltradas.length > 0) {
+                return {
+                    ...item,
+                    lst_ofertas: ofertasFiltradas // Reemplazamos lst_ofertas con solo las ofertas vigentes
+                };
+            }
+
+            return null; // Si no hay ofertas vigentes, devolvemos null
+        })
+        .filter(item => item !== null); // Filtrar los elementos que no tienen ofertas vigentes
+
 }
 
 
