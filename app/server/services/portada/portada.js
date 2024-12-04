@@ -93,10 +93,6 @@ WHERE JSON_VALID(a.lst_ofertas) AND TRIM(a.lst_ofertas) != '"[]"';
             };
         }
 
-
-
-
-
         return obtenerOfertasVigentes(data);
     }
     catch (err) {
@@ -104,14 +100,14 @@ WHERE JSON_VALID(a.lst_ofertas) AND TRIM(a.lst_ofertas) != '"[]"';
     }
 }
 
-function obtenerOfertasVigentes(listaDeOfertas) {
+function obtenerOfertasVigentes(listaDeProductos) {
     // Función para obtener la fecha actual en formato 'YYYY-MM-DD'
     const obtenerFechaActual = () => {
         const hoy = new Date();
         return hoy.toISOString().split('T')[0];
     };
     const fechaActual = obtenerFechaActual();
-    return listaDeOfertas.map(item => {
+    return listaDeProductos.map(item => {
 
             const ofertasLimpias = item.lst_ofertas.trim();
             console.log('----------------')
@@ -142,7 +138,45 @@ function obtenerOfertasVigentes(listaDeOfertas) {
             return null; // Si no hay ofertas vigentes, devolvemos null
         })
         .filter(item => item !== null); // Filtrar los elementos que no tienen ofertas vigentes
+}
 
+function obtenerFechaActual () {
+    const hoy = new Date();
+    return hoy.toISOString().split('T')[0];
+}
+
+function limpiezaDeOfertasDelProducto(listaDeProductos) {
+    // Función para obtener la fecha actual en formato 'YYYY-MM-DD'
+    const fechaActual = obtenerFechaActual();
+    return listaDeProductos.map(item => {
+
+        const ofertasLimpias = item.lst_ofertas.trim();
+        console.log('----------------')
+        // console.log(ofertasLimpias)
+        // const ofertasSinComillas = ofertasLimpias.startsWith('"') && ofertasLimpias.endsWith('"')
+        //     ? ofertasLimpias.slice(1, -1)
+        //     : ofertasLimpias;
+
+        // Deserializar dos veces para corregir el problema de caracteres escapados
+        const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1, -1)));
+        console.log('----------------')
+        // console.log(ofertasArray)
+        // Parsear el string limpio
+        //const ofertasArray = JSON.parse(ofertasSinComillas);
+        // Filtrar solo las ofertas vigentes
+        const ofertasFiltradas = ofertasArray.filter(oferta =>
+            fechaActual >= oferta.fechaInicio && fechaActual <= oferta.fechaFin
+        );
+
+        // Si hay ofertas vigentes, devolver el objeto con las ofertas filtradas
+
+            return finalItem =  {
+                ...item,
+                lst_ofertas: ofertasFiltradas // Reemplazamos lst_ofertas con solo las ofertas vigentes
+        }
+
+    })
+        .filter(item => item !== null); // Filtrar los elementos que no tienen ofertas vigentes
 }
 
 
@@ -172,7 +206,8 @@ LIMIT 9
                 status: 401
             };
         }
-        return list;
+        console.log("despues del clean", limpiezaDeOfertasDelProducto(list))
+        return limpiezaDeOfertasDelProducto(list);
     }
     catch (err) {
         throw err;
