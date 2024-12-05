@@ -373,8 +373,8 @@ function loadProductosRecientes (data) {
 
     <div class="card-content">
      <a  href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}"> <h2 class="product-title">${item?.nombres_es || ""}</h2></a>
-      <p class="product-price">${formatearNumero(item?.precio) || ""} PEN</p>
-       <p class="product-price-after-discount">${formatearNumero(item?.lst_ofertas[0]?.precioOfertado) || ""} PEN</p>
+      <p class="product-price-after-discount">${formatearNumero(item?.precio) || ""} PEN</p>
+       <p class="product-price">${formatearNumero(item?.lst_ofertas[0]?.precioOfertado) || ""} PEN</p>
       <p class="product-category">${item?.categoria}</p>
     </div>
     <div class="card-footer">
