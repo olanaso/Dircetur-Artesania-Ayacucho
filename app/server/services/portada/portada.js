@@ -419,7 +419,8 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
 
 
 
-        const resultados = await models.sequelize.query(sql, { replacements: params, type: sequelize.QueryTypes.SELECT });
+        let resultados = await models.sequelize.query(sql, { replacements: params, type: sequelize.QueryTypes.SELECT });
+        resultados = limpiezaDeOfertasDelProducto(resultados)
         // console.log(resultados)
         if (!resultados) {
             throw {
