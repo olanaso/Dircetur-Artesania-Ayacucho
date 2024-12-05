@@ -167,15 +167,13 @@ async function save (req, res, next) {
     }
 }
 
-async function saveClienteTienda (req, res, next) {
-
+async function  saveClienteTienda (req, res, next) {
     let cliente = model;
+
     const t = await model.sequelize.transaction() //transaccion
     try {
         //registrar un usuario cliente
         const { datosusuario, datoscliente } = req.body;
-
-
 
         let usuariovalue = datosusuario.usuario;
         let correovalue = datosusuario.correo;
@@ -186,10 +184,9 @@ async function saveClienteTienda (req, res, next) {
             transaction: t
         });
 
-        // Si no existe el cliente, crearlo
+        // Si no existe el cliente
         if (usuario_buscado) {
             throw new Error(`El cliente con usuario: ${usuariovalue} ya existe en el sistema, recupere su clave`)
-
         }
 
         usuario_buscado = await usuario.findOne({
@@ -197,17 +194,14 @@ async function saveClienteTienda (req, res, next) {
             transaction: t
         });
 
-        // Si no existe el cliente, crearlo
+        // Si no existe el cliente
         if (usuario_buscado) {
             throw new Error(`El cliente con correo: ${correovalue} ya existe en el sistema, recupere su clave`)
             // new throw ({ messaje: `El cliente con correo: ${correovalue} ya existe en el sistema, recupere su clave` })
         }
 
-
         let numero_documento_value = datoscliente.numero_documento;
         let correo_cliente_value = datoscliente.correo;
-
-
 
         let cliente_buscado = null
         cliente_buscado = await cliente.findOne({
@@ -215,7 +209,7 @@ async function saveClienteTienda (req, res, next) {
             transaction: t
         });
 
-        // Si no existe el cliente, crearlo
+        // Si no existe el cliente
         if (cliente_buscado) {
             throw new Error(`El cliente con correo: ${correovalue} ya existe en el sistema, recupere su clave`)
         }
@@ -226,14 +220,16 @@ async function saveClienteTienda (req, res, next) {
             transaction: t
         });
 
-        // Si no existe el cliente, crearlo
+        // Si no existe el cliente
         if (cliente_buscado) {
             throw new Error(`El cliente con dni: ${numero_documento_value} ya existe en el sistema, recupere su clave`)
         }
+
+        const ROL_CLIENTE = 3; //segun la tabla de roles
+
         datosusuario.clave = encriptartexto(datoscliente.numero_documento)
-        let ROL_CLIENTE = 3; //segun la tabla de roles
         datosusuario.tipousuario = ROL_CLIENTE;
-        datosusuario.rol = ROL_CLIENTE;
+        datosusuario.rolid = ROL_CLIENTE;
         datosusuario.estado = true;
 
         let usuariocreado = null;
@@ -241,14 +237,22 @@ async function saveClienteTienda (req, res, next) {
             datosusuario, // Asegúrate de que req.body.cliente tenga los datos correctos del cliente
             { transaction: t }
         );
-        datoscliente.usuario_id = usuariocreado.dataValues.id;
+
+        datoscliente.usuario_id = usuariocreado.id;
+        datoscliente.estado = 1;
+
         let clientecreado = null;
         clientecreado = await cliente.create(
             datoscliente, // Asegúrate de que req.body.cliente tenga los datos correctos del cliente
             { transaction: t }
         );
 
-        mails.emailRegistrarCliente(datoscliente.correo, datosusuario.nombre_completo, datosusuario.usuario, datoscliente.numero_documento);
+        mails.emailRegistrarCliente(
+            datoscliente.correo,
+            datosusuario.nombre_completo,
+            datosusuario.usuario,
+            datoscliente.numero_documento
+        );
 
 
         res.status(200).send({ message: "Cliente creado correctamente" })
@@ -297,6 +301,7 @@ async function filtrar (req, res) {
             limit: limit,
             offset: offset
         });
+        console.log( 'result', result.rows );
         const totalPages = Math.ceil(result.count / limit); // Calcular el número total de páginas
 
         res.json({

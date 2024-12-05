@@ -1,6 +1,5 @@
 import { baseUrl, getDataFromLocalStorage } from '../utils/config';
 
-
 export async function listarClientes (page, limit) {
     try {
         const response = await fetch(`${baseUrl}/cliente?page=${page}&limit=${limit}`);
@@ -63,7 +62,6 @@ export async function actualizarCliente (id, data) {
     }
 }
 
-
 export async function guardarcliente (data) {
     try {
         const requestOptions = {
@@ -89,5 +87,29 @@ export async function obtenerCliente (id) {
         return result;
     } catch (error) {
         console.error('Error:', error);
+    }
+}
+
+export const resetearContraseniaCliente = async (clienteId, claveNueva) => {
+    const settings = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ claveNueva }),
+    };
+
+    try {
+        const response = await fetch(baseUrl + `/resetear-contrasenia-cliente/${clienteId}`, settings);
+
+        if (!response.ok) {
+            throw new Error(`Error al resetear la contraseña del cliente: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log({dataReset: data});
+        return data;
+    } catch (error) {
+        console.error("Error:", error);
     }
 }

@@ -150,7 +150,7 @@
 													<div class="col">
 														<input type="text" class="form-control"
 															placeholder="Ingrese el telefono" id="telefonoC"
-															name="telefono" maxlength="9" minlength="9" required>
+															name="telefono" maxlength="12" minlength="9" required>
 
 													</div>
 												</div>
@@ -298,36 +298,39 @@
 									<form action="" class="col-md-8">
 										<div class="form-group row gutters">
 											<span class="text-primary"></span><label for="inputEmail3"
-												class="col-sm-3 col-form-label">Usuario</label>
+												class="col-sm-3 col-form-label">Correo</label>
 											<div class="col">
-												<input type="text" class="form-control" id="usuarioC" placeholder=""
-													maxlength="20" name="usuarioC" readonly>
+												<input type="text" class="form-control" id="clienteCorreo" placeholder=""
+													maxlength="20" name="clienteCorreo" readonly>
 											</div>
 										</div>
+
 										<div class="form-group row gutters">
-											<span class="text-primary">*</span><label for="inputPassword3"
-												class="col-sm-3 col-form-label">Contraseña</label>
+											<span class="text-primary">*</span>
+											<label for="inputPassword3" class="col-sm-3 col-form-label">Nueva Contraseña</label>
+
 											<div class="col">
-												<input type="password" class="form-control" id="contraseñaC"
-													placeholder="" maxlength="20" name="contraseñaC" required>
+												<input type="password" class="form-control" id="clientePassword"
+													placeholder="" name="clientePassword" required>
+												
+												<span id="togglePasswordNueva" class="position-absolute"
+													style="right: 30px; top: 40%; transform: translateY(-50%); cursor: pointer;">
+													👁️
+												</span>
+
+												<span style="color:gray;">La contraseña tomará por defecto el DNI del cliente, <b>puede cambiar a otro</b></span>
 											</div>
 										</div>
-										<div class="form-group row gutters">
-											<span class="text-primary">*</span><label for="inputPassword3"
-												class="col-sm-3 col-form-label">Repita Contraseña</label>
-											<div class="col">
-												<input type="password" class="form-control" id="rContraseñaC"
-													placeholder="" maxlength="20" name="rContraseñaC" required>
-											</div>
-										</div>
+
 										<div class="d-flex justify-content-end">
 											<div class="">
-												<button type="submit" class="btn btn-primary"
+												<button type="button" class="btn btn-primary"
 													id="actualizar-cuenta">Reestablecer</button>
 											</div>
 										</div>
 									</form>
 								</div>
+
 								<!-- ModalverReclamo -->
 								<div class="modal fade" id="modalverReclamo" tabindex="-1" role="dialog"
 									aria-hidden="true">

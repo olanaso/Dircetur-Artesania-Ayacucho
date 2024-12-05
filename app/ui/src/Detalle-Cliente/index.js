@@ -1,15 +1,14 @@
-import { actualizarCliente, obtenerCliente } from '../Clientes/api';
+import { actualizarCliente, obtenerCliente, resetearContraseniaCliente } from '../Clientes/api';
 import { enviarCorreo } from './api.js';
 import { loadData, handleCountryChange, handleStateChange } from '../utils/ubicaciones';
 import { FileUploader } from '../utils/uploadVictor.js';
 import { AlertDialog } from "../utils/alert";
 import { baseUrl, getBaseUrl } from '../utils/config.js';
-const alertDialog = new AlertDialog();
-
 
 import { loadPartials } from '../utils/viewpartials';
 import { hideLoading, llenarinformacionIESTPProg, checkSession } from '../utils/init';
 
+const alertDialog = new AlertDialog();
 
 hideLoading();
 // Uso de la función
@@ -17,13 +16,11 @@ hideLoading();
     let partials = [
         { path: 'partials/shared/header.html', container: 'app-header' },
         { path: 'partials/shared/menu.html', container: 'app-side' },
-
-
     ];
+
     try {
         await loadPartials(partials);
         import('../utils/common')
-
 
         // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
         console.log('Las vistas parciales se han cargado correctamente!');
@@ -51,9 +48,8 @@ function startApp () {
   }
 }*/
 
-
-
 let imagen_principal = null;
+
 //tab informacion
 const nombreC = document.getElementById('nombreC');
 const apellidosC = document.getElementById('apellidosC');
@@ -66,11 +62,10 @@ const ciudadC = document.getElementById('ciudad');
 const tipodocC = document.getElementById('tipo_documento');
 const numerodocC = document.getElementById('inputDocumentoTipo');
 const dirEnvioC = document.getElementById('dirEnvio');
-//tab cuenta
-const usuarioC = document.getElementById('usuarioC');
-const contraseñaC = document.getElementById('contraseñaC');
-const rcontraseñaC = document.getElementById('rContraseñaC');
 
+//tab cuenta
+const clienteCorreo = document.getElementById('clienteCorreo');
+const clientePassword = document.getElementById('clientePassword');
 
 //tab estado cuenta
 const estado = document.getElementById('estado')
@@ -83,6 +78,7 @@ function getQueryParameter (name) {
 async function llenarCampos (idCliente) {
 
     const cliente = await obtenerCliente(idCliente);
+
     console.log("cliente: ", cliente)
     //tab información
     nombreC.value = cliente.nombres;
@@ -93,6 +89,9 @@ async function llenarCampos (idCliente) {
     tipodocC.value = cliente.tipo_documento;
     numerodocC.value = cliente.numero_documento;
     dirEnvioC.value = cliente.direccion_envio
+    clienteCorreo.value = cliente.correo;
+    clientePassword.value = cliente.numero_documento;
+
     console.log("longitud pais: ", paisC.options.length)
 
     cargarYSeleccionarUbicaciones(cliente)
@@ -151,6 +150,7 @@ function llenar_tablaReclamos (lista) {
     }
 
 }
+
 async function cargarYSeleccionarUbicaciones (cliente) {
     // Cargar datos iniciales (paises)
     await loadData();
@@ -195,6 +195,7 @@ function waitForOptions (selectElement) {
         checkOptions();
     });
 }
+
 $(document).on('click', '#actualizar-informacion', async function (e) {
     e.preventDefault();
     try {
@@ -227,15 +228,10 @@ $(document).on('click', '#actualizar-informacion', async function (e) {
                 }
             }
         );
-
-
-
     } catch (error) {
         console.error('Error al actualizar el cliente:', error);
     }
 });
-
-
 
 $(document).on('click', '.btn-editarF', async function (e) {
     $('#ClienteImagePreview').attr('src', $('#imagenPrincipal').attr('src')).show()
@@ -278,13 +274,65 @@ $(document).on('click', '.btn-eliminarF', async function (e) {
 })
 
 $(document).on('click', '#actualizar-cuenta', async function (e) {
-    // Actualizar los datos de la categoría en tu estructura de datos
+    e.preventDefault();
+
+    try {
+
+        const newPasswordValue = clientePassword.value;
+        const idCliente = getQueryParameter('id');
+
+        if (newPasswordValue.length < 6) {
+            alertDialog.createAlertDialog(
+                'alert',
+                'Alerta',
+                'La contraseña debe tener al menos 8 caracteres.',
+                'Entendido'
+            );
+            return;
+        }
+
+        if (idCliente === null || idCliente === '') {
+            alertDialog.createAlertDialog(
+                'alert',
+                'Alerta',
+                'No se ha encontrado el cliente.',
+                'Entendido'
+            );
+            return;
+        }
+
+        alertDialog.createAlertDialog(
+            'confirm',
+            'Confirmar',
+            '¿Estás seguro que quieres actualizar?',
+            'Cancelar',
+            'Continuar',
+            async () => {
+                try {
+                    console.log('====================000');
+                    const result = await resetearContraseniaCliente(idCliente, newPasswordValue);
+                    console.log(result);
+                    alertDialog.createAlertDialog(
+                        'success',
+                        'Éxito',
+                        'La contraseña se ha actualizado correctamente.',
+                        'Entendido'
+                    );
+                } catch (error) {
+                    alertDialog.createAlertDialog(
+                        'error',
+                        'Error',
+                        'Ocurrió un error al actualizar la contraseña.',
+                        'Entendido'
+                    );
+                }
+            }
+        );
+    } catch (error) {
+        console.error('Error al actualizar el cliente:', error);
+    }
 
 });
-
-
-
-
 
 
 //ver reclamo
@@ -310,7 +358,6 @@ async function mostrarDataModal (clienteID) {
         }
     });
 }
-
 
 //correos
 async function enviarCorreoCliente (correoCliente, mensaje) {
@@ -397,7 +444,6 @@ async function enviarCorreoCliente (correoCliente, mensaje) {
     }
 }
 
-
 $(document).on('click', '#notificaEstado', async function (e) {
     e.preventDefault();
     const msg = document.getElementById('mensajeEstado');
@@ -452,7 +498,6 @@ function handleUploadResponse (response) {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', (event) => {
     event.preventDefault();
     loadData().then(() => {
@@ -481,4 +526,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 
+});
+
+$('#togglePasswordNueva').on('click', function () {
+    const input = $('#clientePassword');
+    const type = input.attr('type') === 'password' ? 'text' : 'password';
+    input.attr('type', type);
+    $(this).text(type === 'password' ? '👁️' : '🚫');
 });

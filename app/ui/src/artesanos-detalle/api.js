@@ -20,8 +20,6 @@ export async function getprogramasbyIESTP (iestpid) {
 
 }
 
-
-
 export async function buscarDNI (dni) {
   try {
 
@@ -42,9 +40,6 @@ export async function buscarDNI (dni) {
 
 }
 
-
-
-
 export async function buscarArtesano (filtro) {
 
   try {
@@ -56,7 +51,6 @@ export async function buscarArtesano (filtro) {
     console.error("Error al buscar las Artesano:", error);
   }
 }
-
 
 export async function guardarArtesano (artesano) {
   if (artesano.artesanoId != 0) {
@@ -80,8 +74,6 @@ export async function guardarArtesano (artesano) {
   }
 }
 
-
-
 export async function guardarArtesanoUsuario (artesano, usuario) {
 
   const settings = {
@@ -101,30 +93,7 @@ export async function guardarArtesanoUsuario (artesano, usuario) {
   } catch (error) {
     console.error("Error:", error);
   }
-}
-//comprobar en donde se usa y borrar
-// export async function guardarUsuario(usuario) {
-//   if (usuario.usuarioid != 0) {
-//     usuario.id = usuario.usuarioid;
-//   }
-//
-//   const settings = {
-//       method: "POST",
-//       headers: {
-//           "Content-Type": "application/json", // Cambiado a JSON
-//       },
-//       body: JSON.stringify(usuario), // Convertir objeto a JSON
-//   };
-//
-//   try {
-//       const response = await fetch(baseUrl + "/usuario_save/", settings);
-//       const data = await response.json();
-//       return data; // Ahora data contiene el ID del objeto creado y otros datos
-//   } catch (error) {
-//       console.error("Error:", error);
-//   }
-// }
-
+} 
 
 export async function geteditarArtesano (id) {
   try {
@@ -206,8 +175,6 @@ export async function llenardistrito (idprovincia) {
 
 }
 
-
-
 export async function geteditarLogin (id) {
   try {
 
@@ -227,15 +194,6 @@ export async function geteditarLogin (id) {
   }
 
 }
-
-
-
-
-
-
-
-
-
 
 export async function getusuariocapacitacion (dni) {
   try {
@@ -275,10 +233,6 @@ export async function deleteUserCapacitacion (usuario) {
   }
 }
 
-
-
-
-
 export async function nuevoUserCapacitacion (usuario) {
   if (usuario.programaid == 0) {
     usuario.programaid = null;
@@ -300,7 +254,6 @@ export async function nuevoUserCapacitacion (usuario) {
     console.error("Error:", error);
   }
 }
-
 
 export const resetearContraseniaArtesano = async (artesanoId, claveNueva) => {
   const settings = {

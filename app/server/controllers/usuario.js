@@ -33,18 +33,13 @@ module.exports = {
     obtenerDNI, loginpersonal,
     verificarToken,
     resetearContraseniaArtesano,
+    resetearContraseniaCliente,
     recuperarcuenta, cambiarContrasenia, importarUsuarios
     , reportelibrosiestp, reporteaccesosiestp, reporteusuariosiestp,
     loginCliente, actualizarContraseniaCiente
 
 };
 
-/**
- * Metodo que actualiza la contrasenia cliente
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
 async function actualizarContraseniaCiente (req, res) {
     const { id } = req.params
     const { contraseniaNueva } = req.body
@@ -112,8 +107,8 @@ function guardar (req, res) {
         })
 
 }
-async function actualizar (req, res) {
 
+async function actualizar (req, res) {
     try {
         const id = req.params.id
         const body = req.body
@@ -128,7 +123,6 @@ async function actualizar (req, res) {
 }
 
 function eliminar (req, res) {
-
     model
         .findOne({
             where: { dni: req.body.dni }
@@ -169,7 +163,6 @@ function obtener (req, res) {
         })
 }
 
-
 function obtenerDatosPerfil (req, res) {
 
     model.findOne({
@@ -187,8 +180,6 @@ function obtenerDatosPerfil (req, res) {
             res.status(400).send(error)
         })
 }
-
-
 
 function obtenerDNI (req, res) {
 
@@ -224,7 +215,6 @@ function obtenerDNI (req, res) {
 
 
 function listar (req, res) {
-
     model.findAll()
         .then(resultset => {
             res.status(200).json(resultset)
@@ -267,6 +257,7 @@ function listar (req, res) {
         return next(e);
     }
 }*/
+
 /*Guarda los datos generales de un predio*/
 async function save (req, res, next) {
     console.log('usuario_save', req.body);
@@ -314,11 +305,6 @@ async function save (req, res, next) {
     }
 }
 
-
-
-
-
-
 async function cambiarContrasenia (req, res, next) {
     const { dni, clave_nueva, clave_ant } = req.body;
     console.log({ body: req.body });
@@ -356,7 +342,6 @@ async function cambiarContrasenia (req, res, next) {
     }
 }
 
-
 async function resetearContraseniaArtesano (req, res) {
     const { id } = req.params
     const { claveNueva } = req.body;
@@ -388,6 +373,36 @@ async function resetearContraseniaArtesano (req, res) {
     }
 }
 
+async function resetearContraseniaCliente (req, res) {
+    const { id } = req.params
+    const { claveNueva } = req.body;
+    const resp = { ischanged: false, msj: "Ocurrió un error al resetear la contraseña" }
+
+    const t = await usuario.sequelize.transaction();
+
+    try {
+        let clienteDb = await cliente.findOne({
+            where: {
+                id: id
+            }
+        });
+
+        if (clienteDb) {
+            const nuevaContrasenia = encriptartexto(claveNueva);
+            await usuario.update({ clave: nuevaContrasenia }, { where: { id: clienteDb.usuario_id } })
+        }
+
+        resp.ischanged = true;
+        resp.msj = "Contraseña del cliente reseteada con éxito"
+        
+        t.commit().then();
+        return res.status(200).send(resp);
+    } catch (e) {
+        t.rollback();
+        console.log(e);
+        return res.status(500).send(resp);
+    }
+}
 
 async function loginpersonal (req, res) {
     try {
@@ -457,7 +472,6 @@ async function loginpersonal (req, res) {
 }
 
 //para verificar la cuenta del token
-
 async function verificarToken (req, res) {
     // Verificar si el token está presente en la cookie
     const token = req.body.token;
