@@ -206,7 +206,7 @@ LIMIT 9
                 status: 401
             };
         }
-        console.log("despues del clean", limpiezaDeOfertasDelProducto(list))
+
         return limpiezaDeOfertasDelProducto(list);
     }
     catch (err) {
@@ -240,7 +240,7 @@ LIMIT 9
                 status: 401
             };
         }
-        return list;
+        return limpiezaDeOfertasDelProducto(list);
     }
     catch (err) {
         throw err;
