@@ -171,7 +171,49 @@ function loadProductos (data) {
             }
         }
         //alert(item.imagen)
-        html = html + `
+        if(item.lst_ofertas.length>0){
+            html = html + `
+
+                  <div class="col-md-4" style=" margin-bottom: 1rem;">
+                <div class="card__busqueda shadow-lg" style=" height: 100%;">
+                 <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
+                    <img class="card__busqueda-img-top" style="height:200px; width:100%; object-fit: cover;  transform: scale(0.85);  transform-origin: center;  "   src="${item?.imagen_principal || 'https://via.placeholder.com/300x250'}" alt="Casaca artesanal">
+                    <span class="discount-label">Oferta</span>
+                    </a>
+                    <div class="card-body text-center" style="margin-top: 0px ">
+                        <h5 class="card__busqueda-title">${item?.nombres_es || ''}</h5>
+                        <p class="card__busqueda-price-after-discount">${formatearNumero(item?.precio) || ''} PEN</p>
+                        <p class="card__busqueda-price">${formatearNumero(item?.lst_ofertas[0]?.precioOfertado) || ''} PEN</p>
+                        <p class="card__busqueda-category"> ${item?.categoria || ''}</p>
+                       
+                        <div class="d-flex align-items-center justify-content-center my-3">
+                         <a  href="artesano.html?id=${item?.artesano_id || ''}"> 
+                            <img  src="${item?.foto1 || 'https://via.placeholder.com/40'}" alt="Artesano" class="card__busqueda-artisan-img"></a>
+                            <div class="ml-3 text-left">
+                               <a  href="artesano.html?id=${item?.artesano_id || ''}"> <p class="card__busqueda-artisan mb-0">
+                              ${item?.artesano || ''}
+                               </p></a>
+                                <p class="card__busqueda-location mb-0">Artesano</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between card__busqueda-buttons" >
+                            <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" class="btn btn-primary btn-sm">Ver más</a>
+                            <a title="Agregar carrito de compras" class="btn btn-outline-dark btn-sm" href="carrito-de-compra.html?producto=${encodeURIComponent(JSON.stringify(artenia_anviar_carrito))}">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                            <a  title="Agregar mis favoritos" class="btn btn-outline-danger btn-sm" href="productos-deseados.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
+                                <i class="fas fa-heart"></i>
+                            </a>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            
+     
+        `
+        } else {
+            html = html + `
 
                   <div class="col-md-4" style=" margin-bottom: 1rem;">
                 <div class="card__busqueda shadow-lg" style=" height: 100%;">
@@ -209,6 +251,8 @@ function loadProductos (data) {
             
      
         `
+
+        }
 
     }
     $('#listaProductosNovedades').append(html)
