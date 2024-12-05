@@ -1,11 +1,11 @@
 import { googleTranslateElementInit } from "./translate";
-import { baseUrl, getDataFromLocalStorage } from '../../utils/config';
+import { baseUrl, getDataFromLocalStorage, urlSeguimientoPedido } from '../../utils/config';
 import { postIndicadores } from './api-general';
+import { AlertDialog } from "../../utils/alert";
 
+const alertDialog = new AlertDialog();
 
 export function custom () {
-
-
 
     $('.preloader').fadeOut();
     $('.animated-row').each(function () {
@@ -24,8 +24,6 @@ export function custom () {
             });
         });
     });
-
-
 
 
     $('a[href="#search"]').on('click', function (event) {
@@ -59,9 +57,10 @@ export function custom () {
     });
 
 
-    menu()
-    badgesdata()
-    checkSession()
+    menu();
+    badgesdata();
+    checkSession();
+    goToSeguimientoPedido();
     generarTypeHead_ante();
 
     setTimeout(function (e) {
@@ -149,6 +148,26 @@ export function showHideLogoutButton (avatarContainer, logoutButton) {
 
     logoutButton.addEventListener('click', () => {
         logout();
+    });
+}
+
+export const goToSeguimientoPedido = () => {
+    const seguimientoPedido = document.getElementById('seguimientoPedido');
+
+    seguimientoPedido.addEventListener('click', () => {
+        const session = getDataFromLocalStorage('idCliente');
+        const token = localStorage.getItem('token');
+
+        if (session && token) {
+            window.open(`${urlSeguimientoPedido}?token=${token}&idCliente=${session}`, '_blank');
+        } else {
+            alertDialog.createAlertDialog(
+                'info',
+                'Alerta',
+                'Para acceder al seguimiento de sus pedidos, por favor inicie sesión.',
+                'Aceptar'
+            );
+        }
     });
 }
 

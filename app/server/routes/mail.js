@@ -19,7 +19,7 @@ router.post('/web/sendemail',async (req,res)=>{
 
 });
 
- var mailOptions = {
+var mailOptions = {
         from:req.body.from,
         to: req.body.to,
         subject: req.body.subject,
