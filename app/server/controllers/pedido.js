@@ -291,12 +291,7 @@ async function pedidosPorCliente (req, res) {
             where: { cliente_id: idCliente },
         })
         
-        console.log({ count, rows });
-
-        return res.status(200).json({
-            totalItems: count,
-            pedidos: rows
-        });
+        return res.status(200).json(rows);
 
     } catch (error) {
         console.error('Error al listar pedidos por cliente:', error);
