@@ -6,9 +6,50 @@
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- Google translate -->
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
   </head>
 
   <body>
+    <div id="google_translate_element"></div>
+
     <app-root></app-root>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        googleTranslateElementInit();
+
+        const anchor = document.querySelector(
+          "#google_translate_element .VIpgJd-ZVi9od-xl07Ob-lTBxed"
+        );
+
+        console.log(anchor);
+
+        if (anchor) {
+          anchor.addEventListener("click", function (event) {
+            event.preventDefault();
+          });
+
+          anchor.href = "";
+        }
+      });
+
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "es",
+            includedLanguages: "es,en,fr,de,it,pt,ja,ko,zh-CN",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false,
+            getTrack: false,
+          },
+          "google_translate_element"
+        );
+      }
+    </script>
   </body>
 </html>

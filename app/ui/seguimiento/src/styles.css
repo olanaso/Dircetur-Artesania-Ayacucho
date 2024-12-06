@@ -1,5 +1,61 @@
-@import '@angular/cdk/overlay-prebuilt.css';
+@import "@angular/cdk/overlay-prebuilt.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+div > iframe.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+#google_translate_element {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 100%;
+  max-width: 200px;
+  z-index: 1000;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+#google_translate_element .skiptranslate.goog-te-gadget {
+  display: flex;
+  align-items: center;
+}
+
+#google_translate_element .goog-te-gadget-simple {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+#google_translate_element .goog-te-gadget-icon {
+  margin-right: 5px;
+}
+
+#google_translate_element .VIpgJd-ZVi9od-xl07Ob-lTBxed {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+}
+
+#google_translate_element .VIpgJd-ZVi9od-xl07Ob-lTBxed span {
+  margin-right: 5px;
+}
+
+#google_translate_element .VIpgJd-ZVi9od-xl07Ob-lTBxed img {
+  display: none;
+}
+
+#google_translate_element .VIpgJd-ZVi9od-xl07Ob-lTBxed span[aria-hidden="true"] {
+  color: rgb(118, 118, 118);
+}

@@ -52,7 +52,7 @@
             </label>
             <input
               type="text"
-              [value]="pedido().artesano.nombres + ' ' + pedido().artesano.apellidos"
+              [value]="nombreArtesanoCompleto()"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded p-1.5 w-full"
               disabled
             />
@@ -64,7 +64,7 @@
             </label>
             <input
               type="email"
-              [value]="pedido().artesano.telefonos"
+              [value]="pedido().artesano?.telefonos"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded p-1.5 w-full"
               disabled
             />
@@ -76,7 +76,7 @@
             </label>
             <input
               type="tel"
-              [value]="pedido().artesano.celular"
+              [value]="pedido().artesano?.celular"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded p-1.5 w-full"
               disabled
             />
@@ -92,7 +92,7 @@
             </label>
             <input
               type="text"
-              [value]="pedido().cliente.nombres + ' ' + pedido().cliente.apellidos"
+              [value]="nombreClienteCompleto()"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded p-1.5 w-full"
               disabled
             />

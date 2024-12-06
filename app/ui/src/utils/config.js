@@ -5,8 +5,8 @@
 export const baseUrl = 'http://localhost:3002/api';
 //export const baseUrl = 'https://app.artesaniasdeayacucho.pe/api';
 
-// export const urlSeguimientoPedido = 'https://seguimiento.artesaniasdeayacucho.pe/';
 export const urlSeguimientoPedido = 'http://localhost:4200/';
+// export const urlSeguimientoPedido = 'https://seguimiento.artesaniasdeayacucho.pe/';
 
 //export const baseUrl = 'https://fantastic-zebra-65wpjr4xvjh5xgv-3002.app.github.dev/api';
 export const baseUrldni = 'https://dni.biblio-ideas.com/api';

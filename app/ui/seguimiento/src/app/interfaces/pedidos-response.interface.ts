@@ -12,7 +12,7 @@ export interface PedidosResponse {
   createdAt:              null;
   updatedAt:              Date;
   cliente:                Cliente;
-  artesano:               Artesano;
+  artesano?:              Artesano;
 }
 
 export interface Artesano {

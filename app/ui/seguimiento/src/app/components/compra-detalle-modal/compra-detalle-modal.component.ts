@@ -36,6 +36,18 @@ export class CompraDetalleModalComponent {
     }, 0)
   );
 
+  public nombreArtesanoCompleto = computed(() => {
+    const nombreCompleto = this.data.artesano ? `${this.data.artesano.nombres} ${this.data.artesano.apellidos}` : '';
+    return nombreCompleto;
+  });
+
+  public nombreClienteCompleto = computed(() => {
+    return this.data.cliente ? `${this.data.cliente.nombres} ${this.data.cliente.apellidos}` : '';
+  });
+
+  constructor() {
+    console.log({pedido: this.pedido()});
+  }
   public close() {
     this.dialogRef.close();
   }

@@ -3,41 +3,52 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  OnInit,
   signal,
 } from '@angular/core';
-import { Dialog, DialogModule } from '@angular/cdk/dialog';
-import { CompraDetalleModalComponent } from '../../components/compra-detalle-modal/compra-detalle-modal.component';
 import { PedidosService } from '../../services/pedidos.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PedidosResponse } from '../../interfaces/pedidos-response.interface';
-import { Atencion } from '../../interfaces/lista-atencion.interface';
+import { environment } from '../../../environments/environment';
+import { PedidoItemComponent } from '../../components/pedido-item/pedido-item.component';
 
 @Component({
   selector: 'app-seguimiento-pedido',
   standalone: true,
-  imports: [CommonModule, DialogModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, PedidoItemComponent],
   templateUrl: './seguimiento-pedido.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SeguimientoPedidoComponent {
+export class SeguimientoPedidoComponent implements OnInit {
+  private webUrl = environment.webUrl;
+
   private pedidosService = inject(PedidosService);
 
-  private dialog = inject(Dialog);
+  public codigoPedidoInput = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^\d+$/),
+  ]);
 
-  public codigoPedidoInput = new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]);
-
-  public pedido = signal<PedidosResponse | null>(null);
-  public totalPagado = signal<number>(0);
-  public listaAtencion = signal<Atencion[]>([]);
+  public pedidos = signal<PedidosResponse[]>([]);
 
   public estaBuscandoPedido = signal<boolean>(false);
   public pedidoNoEncontrado = signal<boolean>(false);
+  public errorTokenExpirado = signal<boolean>(false);
 
-  abrirComprobanteModal(pedido: PedidosResponse) {
-    this.dialog.open(CompraDetalleModalComponent, {
-      data: pedido,
-      width: '1000px',
-    });
+  ngOnInit() {
+    this.obtenerQueryParams();
+  }
+
+  obtenerQueryParams() {
+    const queryParams = new URLSearchParams(window.location.search);
+    const token = queryParams.get('token');
+    const idCliente = queryParams.get('idCliente');
+
+    if (token && idCliente) {
+      this.obtenerPedidosCliente(token, idCliente);
+    } else {
+      window.location.href = this.webUrl;
+    }
   }
 
   buscarPedido() {
@@ -54,16 +65,11 @@ export class SeguimientoPedidoComponent {
 
     this.pedidoNoEncontrado.set(false);
     this.estaBuscandoPedido.set(true);
-    this.pedido.set(null);
+    this.pedidos.set([]);
 
     this.pedidosService.obtenerPedido(valor).subscribe({
       next: (pedido) => {
-        this.pedido.set(pedido);
-        this.totalPagado.set(this.obtenerTotalPedido(pedido));
-
-        const listaAtencion = this.obtenerListaAtencion(pedido);
-        this.listaAtencion.set(listaAtencion);
-
+        this.pedidos.set([pedido]);
         this.estaBuscandoPedido.set(false);
       },
       error: (error) => {
@@ -73,26 +79,16 @@ export class SeguimientoPedidoComponent {
     });
   }
 
-  obtenerTotalPedido(pedido: PedidosResponse) {
-    const productos = JSON.parse(pedido.list_productos);
-
-    return productos.reduce((total: number, producto: any) => {
-      return total + producto.subtotal;
-    }, 0);
-  }
-
-  obtenerListaAtencion(pedido: PedidosResponse) {
-    return JSON.parse(pedido.list_atencion);
-  }
-
-  obtenerColorEstado(estado: string): string {
-    const colores = {
-      pagado: 'bg-emerald-100 text-emerald-800',
-      enviado: 'bg-violet-100 text-violet-800',
-      finalizado: 'bg-blue-100 text-blue-800',
-    };
-    return (
-      colores[estado as keyof typeof colores] || 'bg-gray-100 text-gray-800'
-    );
+  obtenerPedidosCliente(token: string, idCliente: string) {
+    this.pedidosService
+      .obtenerPedidosPorCliente(idCliente, token)
+      .subscribe({
+        next: (pedidos) => {
+          this.pedidos.set(pedidos);
+        },
+        error: (error) => {
+          this.errorTokenExpirado.set(true);
+        }
+      });
   }
 }
