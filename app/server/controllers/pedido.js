@@ -5,6 +5,7 @@ const modelCliente = require('../models/cliente');
 const modelArtesano = require('../models/artesano');
 const { emailPedidoArtesania } = require("../services/mails/mails");
 const moment = require('moment');
+const jwt = require('jsonwebtoken')
 
 modelPedido.belongsTo(modelCliente, { foreignKey: 'cliente_id' });
 modelPedido.belongsTo(modelArtesano, { foreignKey: 'artesano_id' });
@@ -15,6 +16,7 @@ module.exports = {
     actualizar,
     eliminar,
     listar,
+    pedidosPorCliente,
     save,
     filtrar,
     uploadFileAtencion,
@@ -248,6 +250,58 @@ function listar (req, res) {
             console.error('Error al listar pedidos:', error);
             res.status(500).json({ message: 'Error interno del servidor' });
         });
+}
+
+async function pedidosPorCliente (req, res) {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const idCliente = req.query.idCliente;
+
+        if (!token) {
+            return res.status(401).json({ message: 'No autorizado' });
+        }
+
+        const { client } = jwt.verify(token, '2C44-4D44-WppQ38S');
+
+        if (!client) {
+            return res.status(401).json({ message: 'No autorizado' });
+        }
+
+        if (!idCliente) {
+            return res.status(401).json({ message: 'No autorizado' });
+        }
+
+        const { count, rows } = await modelPedido.findAndCountAll({
+            attributes: {
+                exclude: ['cliente_id', 'artesano_id']
+            },
+            include: [
+                {
+                    model: modelCliente,
+                    attributes: [
+                        'nombres',
+                        'apellidos'
+                    ]
+                },
+                {
+                    model: modelArtesano,
+                    attributes: ['nombres', 'apellidos']
+                }
+            ],
+            where: { cliente_id: idCliente },
+        })
+        
+        console.log({ count, rows });
+
+        return res.status(200).json({
+            totalItems: count,
+            pedidos: rows
+        });
+
+    } catch (error) {
+        console.error('Error al listar pedidos por cliente:', error);
+        return res.status(500).json({ message: 'Error interno del servidor' });
+    }
 }
 
 async function save (req, res, next) {

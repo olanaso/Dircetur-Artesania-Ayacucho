@@ -11,6 +11,7 @@ router.get('/pedido/:id', controller.obtener);
 router.get('/pedido', controller.listar);
 router.post('/pedido/save/', controller.save);
 router.get('/pedidos', controller.filtrar);
+router.get('/pedidos-cliente', controller.pedidosPorCliente);
 
 router.post('/enviar-pedido-cliente', controller.enviarPedido);
 

@@ -27,8 +27,4 @@ router.get('/reporteusuariosiestp', controller.reporteusuariosiestp);
 router.get('/reportelibrosiestp', controller.reportelibrosiestp);
 router.get('/reporteaccesosiestp', controller.reporteaccesosiestp);
 
-//router.get('/login',  controller.login);
-authenticateToken,
-
-
-    module.exports = router;
+module.exports = router;
