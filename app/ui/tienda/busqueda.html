@@ -241,8 +241,23 @@
 			overflow: hidden;
 			transition: transform 0.3s ease, box-shadow 0.3s ease;
 			background-color: #fff;
-
 		}
+
+		.discount-label {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			background-color: #ea0397;
+			color: #ffffff;
+			font-size: 0.8rem;
+			font-weight: bold;
+			padding: 5px 10px;
+			border-radius: 8px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			text-transform: uppercase;
+			z-index: 10;
+		}
+
 
 		.card__busqueda:hover {
 			transform: scale(1.05);
@@ -272,6 +287,12 @@
 			font-size: 1.2rem !important;
 			font-weight: bold;
 			color: #ff007f;
+		}
+
+		.card__busqueda-price-after-discount {
+			font-size: 1rem;
+			color: #6c757d;
+			text-decoration: line-through;
 		}
 
 		.card__busqueda-category {

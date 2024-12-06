@@ -94,53 +94,90 @@ WHERE JSON_VALID(a.lst_ofertas) AND TRIM(a.lst_ofertas) != '"[]"';
             };
         }
 
-        // Función para obtener la fecha actual en formato 'YYYY-MM-DD'
-        const obtenerFechaActual = () => {
-            const hoy = new Date();
-            return hoy.toISOString().split('T')[0];
-        };
-
-        const fechaActual = obtenerFechaActual();
-
-        const ofertasVigentes = data
-            .map(item => {
-
-                const ofertasLimpias = item.lst_ofertas.trim();
-                console.log('----------------')
-                // console.log(ofertasLimpias)
-                // const ofertasSinComillas = ofertasLimpias.startsWith('"') && ofertasLimpias.endsWith('"')
-                //     ? ofertasLimpias.slice(1, -1)
-                //     : ofertasLimpias;
-
-                // Deserializar dos veces para corregir el problema de caracteres escapados
-                const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1, -1)));
-                console.log('----------------')
-                // console.log(ofertasArray)
-                // Parsear el string limpio
-                //const ofertasArray = JSON.parse(ofertasSinComillas);
-                // Filtrar solo las ofertas vigentes
-                const ofertasFiltradas = ofertasArray.filter(oferta =>
-                    fechaActual >= oferta.fechaInicio && fechaActual <= oferta.fechaFin
-                );
-
-                // Si hay ofertas vigentes, devolver el objeto con las ofertas filtradas
-                if (ofertasFiltradas.length > 0) {
-                    return {
-                        ...item,
-                        lst_ofertas: ofertasFiltradas // Reemplazamos lst_ofertas con solo las ofertas vigentes
-                    };
-                }
-
-                return null; // Si no hay ofertas vigentes, devolvemos null
-            })
-            .filter(item => item !== null); // Filtrar los elementos que no tienen ofertas vigentes
-
-
-        return ofertasVigentes;
+        return obtenerOfertasVigentes(data);
     }
     catch (err) {
         throw err;
     }
+}
+
+function obtenerOfertasVigentes(listaDeProductos) {
+    // Función para obtener la fecha actual en formato 'YYYY-MM-DD'
+    const obtenerFechaActual = () => {
+        const hoy = new Date();
+        return hoy.toISOString().split('T')[0];
+    };
+    const fechaActual = obtenerFechaActual();
+    return listaDeProductos.map(item => {
+
+            const ofertasLimpias = item.lst_ofertas.trim();
+            console.log('----------------')
+            // console.log(ofertasLimpias)
+            // const ofertasSinComillas = ofertasLimpias.startsWith('"') && ofertasLimpias.endsWith('"')
+            //     ? ofertasLimpias.slice(1, -1)
+            //     : ofertasLimpias;
+
+            // Deserializar dos veces para corregir el problema de caracteres escapados
+            const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1, -1)));
+            console.log('----------------')
+            // console.log(ofertasArray)
+            // Parsear el string limpio
+            //const ofertasArray = JSON.parse(ofertasSinComillas);
+            // Filtrar solo las ofertas vigentes
+            const ofertasFiltradas = ofertasArray.filter(oferta =>
+                fechaActual >= oferta.fechaInicio && fechaActual <= oferta.fechaFin
+            );
+
+            // Si hay ofertas vigentes, devolver el objeto con las ofertas filtradas
+            if (ofertasFiltradas.length > 0) {
+                return {
+                    ...item,
+                    lst_ofertas: ofertasFiltradas // Reemplazamos lst_ofertas con solo las ofertas vigentes
+                };
+            }
+
+            return null; // Si no hay ofertas vigentes, devolvemos null
+        })
+        .filter(item => item !== null); // Filtrar los elementos que no tienen ofertas vigentes
+}
+
+function obtenerFechaActual () {
+    const hoy = new Date();
+    return hoy.toISOString().split('T')[0];
+}
+
+function limpiezaDeOfertasDelProducto(listaDeProductos) {
+    // Función para obtener la fecha actual en formato 'YYYY-MM-DD'
+    const fechaActual = obtenerFechaActual();
+    return listaDeProductos.map(item => {
+
+        const ofertasLimpias = item.lst_ofertas.trim();
+        console.log('----------------')
+        // console.log(ofertasLimpias)
+        // const ofertasSinComillas = ofertasLimpias.startsWith('"') && ofertasLimpias.endsWith('"')
+        //     ? ofertasLimpias.slice(1, -1)
+        //     : ofertasLimpias;
+
+        // Deserializar dos veces para corregir el problema de caracteres escapados
+        const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1, -1)));
+        console.log('----------------')
+        // console.log(ofertasArray)
+        // Parsear el string limpio
+        //const ofertasArray = JSON.parse(ofertasSinComillas);
+        // Filtrar solo las ofertas vigentes
+        const ofertasFiltradas = ofertasArray.filter(oferta =>
+            fechaActual >= oferta.fechaInicio && fechaActual <= oferta.fechaFin
+        );
+
+        // Si hay ofertas vigentes, devolver el objeto con las ofertas filtradas
+
+            return finalItem =  {
+                ...item,
+                lst_ofertas: ofertasFiltradas // Reemplazamos lst_ofertas con solo las ofertas vigentes
+        }
+
+    })
+        .filter(item => item !== null); // Filtrar los elementos que no tienen ofertas vigentes
 }
 
 
@@ -170,7 +207,8 @@ LIMIT 9
                 status: 401
             };
         }
-        return list;
+
+        return limpiezaDeOfertasDelProducto(list);
     }
     catch (err) {
         throw err;
@@ -203,7 +241,7 @@ LIMIT 9
                 status: 401
             };
         }
-        return list;
+        return limpiezaDeOfertasDelProducto(list);
     }
     catch (err) {
         throw err;
@@ -419,7 +457,8 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
 
 
 
-        const resultados = await models.sequelize.query(sql, { replacements: params, type: sequelize.QueryTypes.SELECT });
+        let resultados = await models.sequelize.query(sql, { replacements: params, type: sequelize.QueryTypes.SELECT });
+        resultados = limpiezaDeOfertasDelProducto(resultados)
         // console.log(resultados)
         if (!resultados) {
             throw {

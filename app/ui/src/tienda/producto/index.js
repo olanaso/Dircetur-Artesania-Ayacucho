@@ -434,7 +434,7 @@ function convertirTallasEnString (lista) {
 async function mostrarInformacion (producto) {
 
     const listColores = JSON.parse(JSON.parse(producto.lst_colores));
-    const lst_ofertas = JSON.parse(JSON.parse(producto.lst_ofertas));
+    const lst_ofertas = producto.lst_ofertas;
     const lst_otros_costos = JSON.parse(JSON.parse(producto.lst_otros_costos));
     const lst_tallas = JSON.parse(JSON.parse(producto.lst_talla));
     const lst_videoenlace = JSON.parse(JSON.parse(producto.lst_videoenlace));
@@ -446,7 +446,13 @@ async function mostrarInformacion (producto) {
     console.log('imagenPrincipal', producto.imagen_principal)
 
     $("#producto-nombre").text(`${producto.nombres_es}`);
-    $("#producto-precio").text(` ${formatearNumero(producto.precio)} PEN | $ ${formatearNumero(producto.precio_usd)} USD`);
+    if(producto.lst_ofertas.length > 0){
+        $("#producto-precio-antiguo").text(` ${formatearNumero(producto.precio)} PEN |  `);
+        $("#oferta").text(` - ${formatearNumero(producto.lst_ofertas[0].porcentajeDescuento)}%`);
+        $("#producto-precio-despues-de-oferta").text(` ${formatearNumero(producto.lst_ofertas[0].precioOfertado)} PEN`);
+    } else {
+        $("#producto-precio").text(` ${formatearNumero(producto.precio)} PEN | $ ${formatearNumero(producto.precio_usd)} USD`);
+    }
     $("#producto-descripcion").text(`${producto.descripcion_es}`);
     $("#producto-alto").text(`Alto: ${producto.alto} cm`);
     $("#producto-ancho").text(`Ancho:${producto.ancho} cm`);

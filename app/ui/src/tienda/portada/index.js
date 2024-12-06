@@ -247,6 +247,7 @@ function loadProductosOferta (data) {
                 foto1: item.foto1,
             }
         }
+        console.log("ofertas", item)
         html = html + `
        	<div class="col-md-4 col-sm-12">
 							<div class="car-item wow fadeIn" data-wow-duration="0.75s">
@@ -358,6 +359,91 @@ function loadProductosRecientes (data) {
                 foto1: item.foto1,
             }
         }
+//If para mostrar card con oferta
+        if(item.lst_ofertas.length > 0){
+
+                html = html + `
+  <div class="card">
+    <div class="card-image">
+      <span class="new-label">Oferta</span>
+      <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
+      <img style="height:300px; width:100%; object-fit: cover;  transform: scale(0.8);  transform-origin: center;  " src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" alt="Producto Artesanal" />
+      </a>
+      <span class="discount-label"> -${item?.lst_ofertas[0]?.porcentajeDescuento}% </span>
+    </div>
+
+    <div class="card-content">
+     <a  href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}"> <h2 class="product-title">${item?.nombres_es || ""}</h2></a>
+      <p class="product-price-after-discount">${formatearNumero(item?.precio) || ""} PEN</p>
+       <p class="product-price">${formatearNumero(item?.lst_ofertas[0]?.precioOfertado) || ""} PEN</p>
+      <p class="product-category">${item?.categoria}</p>
+    </div>
+    <div class="card-footer">
+      <div class="artisan-info">
+        <img
+          src="${item?.foto1 || "https://via.placeholder.com/50"}"
+          alt="Foto del artesano"
+          class="artisan-photo"
+        />
+        <div>
+       <a href="artesano.html?id=${item?.artesano_id}">
+          <p class="artisan-name">${item?.artesano || ""}</p></a>
+          <p class="artisan-role">Artesano</p>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="btn favorite" title="Añadir a favoritos" href="productos-deseados.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
+          <i class="fas fa-heart"></i>
+        </a>
+        <a class="btn cart" title="Añadir al carrito" href="carrito-de-compra.html?producto=${encodeURIComponent(JSON.stringify(artenia_anviar_carrito))}">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+`
+
+        }
+        else {
+            console.log("no aplica oferta");
+
+            html = html + `
+  <div class="card">
+    <div class="card-image">
+      <span class="new-label">Nuevo</span>
+      <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
+      <img style="height:300px; width:100%; object-fit: cover;  transform: scale(0.8);  transform-origin: center;  " src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" alt="Producto Artesanal" />
+      </a>
+    </div>
+    <div class="card-content">
+     <a  href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}"> <h2 class="product-title">${item?.nombres_es || ""}</h2></a>
+      <p class="product-price">${formatearNumero(item?.precio) || ""} PEN</p>
+      <p class="product-category">${item?.categoria}</p>
+    </div>
+    <div class="card-footer">
+      <div class="artisan-info">
+        <img
+          src="${item?.foto1 || "https://via.placeholder.com/50"}"
+          alt="Foto del artesano"
+          class="artisan-photo"
+        />
+        <div>
+       <a href="artesano.html?id=${item?.artesano_id}">
+          <p class="artisan-name">${item?.artesano || ""}</p></a>
+          <p class="artisan-role">Artesano</p>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="btn favorite" title="Añadir a favoritos" href="productos-deseados.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
+          <i class="fas fa-heart"></i>
+        </a>
+        <a class="btn cart" title="Añadir al carrito" href="carrito-de-compra.html?producto=${encodeURIComponent(JSON.stringify(artenia_anviar_carrito))}">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+`}
 
         //         html = html + `
         //        	<div class="col-md-4 col-sm-6">
@@ -504,6 +590,7 @@ function loadProductosDestacados (data) {
                 foto1: item.foto1,
             }
         }
+
 
 
         //alert(item.imagen)

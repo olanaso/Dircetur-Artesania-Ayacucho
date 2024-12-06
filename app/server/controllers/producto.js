@@ -146,7 +146,27 @@ function eliminar (req, res) {
         .catch(error => res.status(400).send(error));
 }
 
+function obtenerFechaActual () {
+    const hoy = new Date();
+    return hoy.toISOString().split('T')[0];
+}
 
+function limpiarCadenaOfertas (input) {
+    return input.replace(/\\/g, '');
+}
+
+function transformarOfertaDeJsonAObjeto(producto) {
+    const fechaActual = obtenerFechaActual();
+
+    const ofertasLimpias = producto.lst_ofertas.trim();
+    const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1,-1)));
+
+    const ofertasValidas = ofertasArray.filter(oferta =>
+        fechaActual >= oferta.fechaInicio && fechaActual<= oferta.fechaFin);
+
+    producto.lst_ofertas = ofertasValidas;
+    return producto;
+}
 async function obtener (req, res) {
     const { id } = req.params
     console.log(id)
@@ -158,7 +178,9 @@ async function obtener (req, res) {
 
         result.precio_usd = convertido || 0;
 
-        res.status(200).send(result)
+        const resultadoFinal = transformarOfertaDeJsonAObjeto(result);
+
+        res.status(200).send(resultadoFinal)
 
     } catch (e) {
         console.error(e)
