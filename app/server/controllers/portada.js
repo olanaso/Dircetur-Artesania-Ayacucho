@@ -9,9 +9,9 @@ async function ListarDatosPortada (req, res) {
 
     let sliders = await listarSlider()
     let categorias = await listarCategorias()
-    let productosOferta = await listadoProductosOferta()
-    let productosDestacados = await listadoProductosDestacados()
     let productosRecientes = await listadoProductosRecientes()
+    let productosDestacados = await listadoProductosDestacados()
+    let productosOferta = await listadoProductosOferta()
     let artesanos = await listadoArtesanos();
     return res.status(200).send({ sliders, categorias, productosOferta, productosDestacados, productosRecientes, artesanos });
 

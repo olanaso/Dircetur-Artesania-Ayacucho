@@ -3,6 +3,8 @@
 import { loadPartials } from "../../utils/viewpartials.js";
 import { custom, menuselec } from '../utils/common.js';
 import { loginCliente, recuperarCuenta, registerCliente } from "./api.js";
+import { AlertDialog } from "../../utils/alert";
+const alertDialog = new AlertDialog();
 
 (async function () {
     let partials = [
@@ -102,7 +104,7 @@ const register = () => {
                 createdat: new Date().toISOString(), // Usar la fecha actual
                 updatedat: new Date().toISOString(),
             },
-                datoscliente: {
+            datoscliente: {
                 nombres: nombres,
                 apellidos: apellidos,
                 correo: correo,
@@ -148,7 +150,7 @@ const recovery = () => {
 
     recoveryForm.addEventListener("submit", async function (event) {
         event.preventDefault();
-        
+
 
         const isValid = validateRecoveryForm();
 
@@ -167,7 +169,16 @@ const recovery = () => {
         if (result.isRecuperado) {
             document.getElementById('recoveryForm').style.display = 'none';
             document.getElementById('loginForm').style.display = 'block';
-            alert("Se ha enviado un correo para recuperar su contraseña.");
+
+            alertDialog.createAlertDialog(
+                'success',
+                'Mensaje',
+                'Las credenciales han sido enviadas a su correo.',
+                'Aceptar',
+                'Cerrar',
+                () => { }
+            );
+
         } else {
             emailError.textContent = result.message || "Error al recuperar la contraseña.";
         }
@@ -176,7 +187,7 @@ const recovery = () => {
 }
 
 
-function validateLoginForm() {
+function validateLoginForm () {
     console.log("Validating login form");
     const email = document.getElementById("correo").value;
     const password = document.getElementById("password").value;
@@ -205,7 +216,7 @@ function validateLoginForm() {
     return isValid;
 }
 
-function validateRegisterForm() {
+function validateRegisterForm () {
     console.log("Validating register form");
     const email = document.getElementById("correoRegistro").value;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -224,7 +235,7 @@ function validateRegisterForm() {
     return isValid;
 }
 
-function validateRecoveryForm() {
+function validateRecoveryForm () {
     console.log("Validating recovery form");
     const email = document.getElementById("correoRecuperar").value;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

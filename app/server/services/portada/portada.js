@@ -101,7 +101,7 @@ WHERE JSON_VALID(a.lst_ofertas) AND TRIM(a.lst_ofertas) != '"[]"';
     }
 }
 
-function obtenerOfertasVigentes(listaDeProductos) {
+function obtenerOfertasVigentes (listaDeProductos) {
     // Función para obtener la fecha actual en formato 'YYYY-MM-DD'
     const obtenerFechaActual = () => {
         const hoy = new Date();
@@ -110,34 +110,34 @@ function obtenerOfertasVigentes(listaDeProductos) {
     const fechaActual = obtenerFechaActual();
     return listaDeProductos.map(item => {
 
-            const ofertasLimpias = item.lst_ofertas.trim();
-            console.log('----------------')
-            // console.log(ofertasLimpias)
-            // const ofertasSinComillas = ofertasLimpias.startsWith('"') && ofertasLimpias.endsWith('"')
-            //     ? ofertasLimpias.slice(1, -1)
-            //     : ofertasLimpias;
+        const ofertasLimpias = item.lst_ofertas.trim();
+        console.log('----------------')
+        // console.log(ofertasLimpias)
+        // const ofertasSinComillas = ofertasLimpias.startsWith('"') && ofertasLimpias.endsWith('"')
+        //     ? ofertasLimpias.slice(1, -1)
+        //     : ofertasLimpias;
 
-            // Deserializar dos veces para corregir el problema de caracteres escapados
-            const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1, -1)));
-            console.log('----------------')
-            // console.log(ofertasArray)
-            // Parsear el string limpio
-            //const ofertasArray = JSON.parse(ofertasSinComillas);
-            // Filtrar solo las ofertas vigentes
-            const ofertasFiltradas = ofertasArray.filter(oferta =>
-                fechaActual >= oferta.fechaInicio && fechaActual <= oferta.fechaFin
-            );
+        // Deserializar dos veces para corregir el problema de caracteres escapados
+        const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1, -1)));
+        console.log('----------------')
+        // console.log(ofertasArray)
+        // Parsear el string limpio
+        //const ofertasArray = JSON.parse(ofertasSinComillas);
+        // Filtrar solo las ofertas vigentes
+        const ofertasFiltradas = ofertasArray.filter(oferta =>
+            fechaActual >= oferta.fechaInicio && fechaActual <= oferta.fechaFin
+        );
 
-            // Si hay ofertas vigentes, devolver el objeto con las ofertas filtradas
-            if (ofertasFiltradas.length > 0) {
-                return {
-                    ...item,
-                    lst_ofertas: ofertasFiltradas // Reemplazamos lst_ofertas con solo las ofertas vigentes
-                };
-            }
+        // Si hay ofertas vigentes, devolver el objeto con las ofertas filtradas
+        if (ofertasFiltradas.length > 0) {
+            return {
+                ...item,
+                lst_ofertas: ofertasFiltradas // Reemplazamos lst_ofertas con solo las ofertas vigentes
+            };
+        }
 
-            return null; // Si no hay ofertas vigentes, devolvemos null
-        })
+        return null; // Si no hay ofertas vigentes, devolvemos null
+    })
         .filter(item => item !== null); // Filtrar los elementos que no tienen ofertas vigentes
 }
 
@@ -146,7 +146,7 @@ function obtenerFechaActual () {
     return hoy.toISOString().split('T')[0];
 }
 
-function limpiezaDeOfertasDelProducto(listaDeProductos) {
+function limpiezaDeOfertasDelProducto (listaDeProductos) {
     // Función para obtener la fecha actual en formato 'YYYY-MM-DD'
     const fechaActual = obtenerFechaActual();
     return listaDeProductos.map(item => {
@@ -171,9 +171,9 @@ function limpiezaDeOfertasDelProducto(listaDeProductos) {
 
         // Si hay ofertas vigentes, devolver el objeto con las ofertas filtradas
 
-            return finalItem =  {
-                ...item,
-                lst_ofertas: ofertasFiltradas // Reemplazamos lst_ofertas con solo las ofertas vigentes
+        return finalItem = {
+            ...item,
+            lst_ofertas: ofertasFiltradas // Reemplazamos lst_ofertas con solo las ofertas vigentes
         }
 
     })
@@ -227,7 +227,7 @@ async function listadoProductosRecientes () {
   FROM producto a
  INNER JOIN artesano b ON a.artesano_id=b.id
   INNER JOIN categoria c ON a.categoria_id=c.id
-ORDER BY id DESC
+ ORDER BY RAND()
 LIMIT 9
 
      `;

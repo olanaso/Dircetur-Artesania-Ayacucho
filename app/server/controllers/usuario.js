@@ -363,7 +363,7 @@ async function resetearContraseniaArtesano (req, res) {
 
         resp.ischanged = true;
         resp.msj = "Contraseña reseteada con éxito"
-        
+
         t.commit().then();
         return res.status(200).send(resp);
     } catch (e) {
@@ -394,7 +394,7 @@ async function resetearContraseniaCliente (req, res) {
 
         resp.ischanged = true;
         resp.msj = "Contraseña del cliente reseteada con éxito"
-        
+
         t.commit().then();
         return res.status(200).send(resp);
     } catch (e) {
@@ -608,7 +608,7 @@ async function recuperarcuenta (req, res) {
         console.log({ nuevaClave });
         console.log({ usuarioDB });
 
-        const resultadoCorreo = await enviarcorreo(usuarioDB.dataValues, nuevaClave);
+        const resultadoCorreo = await enviarcorreo({ ...usuarioDB.dataValues, correo: correo }, nuevaClave);
         console.log({ resultadoCorreo });
 
         // Verificar si el correo se envió correctamente

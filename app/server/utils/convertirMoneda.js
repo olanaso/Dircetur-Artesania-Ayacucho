@@ -7,11 +7,11 @@ const convertirMoneda = async (from, to, amount) => {
     try {
         // Construir la URL de la API
         // const url = `https://api.exchangerate.host/${endpoint}?access_key=${access_key}&from=${from}&to=${to}&amount=${amount}`;
-        const url = `https://v6.exchangerate-api.com/v6/${access_key}/latest/${from}`;
-        
+        // const url = `https://v6.exchangerate-api.com/v6/${access_key}/latest/${from}`;
+        const url = 'https://api.kambista.com/v1/exchange/calculates?originCurrency=USD&destinationCurrency=PEN&amount=1500&active=S'
         // Hacer la petición GET usando fetch
         const response = await fetch(url);
-        
+
         // Comprobar si la respuesta es exitosa
         if (!response.ok) {
             throw new Error(`Error en la solicitud: ${response.status}`);
@@ -21,16 +21,16 @@ const convertirMoneda = async (from, to, amount) => {
         const data = await response.json();
 
         // Verificar si la API devolvió un error
-        if (data.result === "error") {
+        if (!data) {
             throw new Error(data["error-type"]);
         }
 
-        const conversionRate = data.conversion_rates[to];
+        const conversionRate = 1 / (data.tc.ask || 3.8);
 
         // Obtener el resultado de la conversión
         const conversionResult = (amount * conversionRate).toFixed(2);
         console.log(`Resultado de la conversión: ${amount} ${from} = ${conversionResult} ${to}`);
-        
+
         return conversionResult;
     } catch (error) {
         console.error('Error al realizar la conversión:', error.message);

@@ -14,9 +14,7 @@ import { obtenerProducto } from "../producto/api.js";
     try {
 
         await loadPartials(partials);
-
         custom()
-
         console.log('Las vistas parciales se han cargado correctamente!');
 
         startApp();
@@ -311,7 +309,6 @@ function getQueryParameter (name) {
 async function infoProductoById (id) {
 
     const producto = await obtenerProducto(id);
-    console.log(" >DATA producto: ", producto);
     mostrarInformacion(producto);
 }
 
@@ -446,7 +443,7 @@ async function mostrarInformacion (producto) {
     console.log('imagenPrincipal', producto.imagen_principal)
 
     $("#producto-nombre").text(`${producto.nombres_es}`);
-    if(producto.lst_ofertas.length > 0){
+    if (producto.lst_ofertas.length > 0) {
         $("#producto-precio-antiguo").text(` ${formatearNumero(producto.precio)} PEN |  `);
         $("#oferta").text(` - ${formatearNumero(producto.lst_ofertas[0].porcentajeDescuento)}%`);
         $("#producto-precio-despues-de-oferta").text(` ${formatearNumero(producto.lst_ofertas[0].precioOfertado)} PEN`);

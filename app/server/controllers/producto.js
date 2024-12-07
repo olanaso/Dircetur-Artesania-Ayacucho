@@ -155,14 +155,14 @@ function limpiarCadenaOfertas (input) {
     return input.replace(/\\/g, '');
 }
 
-function transformarOfertaDeJsonAObjeto(producto) {
+function transformarOfertaDeJsonAObjeto (producto) {
     const fechaActual = obtenerFechaActual();
 
     const ofertasLimpias = producto.lst_ofertas.trim();
-    const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1,-1)));
+    const ofertasArray = JSON.parse(limpiarCadenaOfertas(ofertasLimpias.slice(1, -1)));
 
     const ofertasValidas = ofertasArray.filter(oferta =>
-        fechaActual >= oferta.fechaInicio && fechaActual<= oferta.fechaFin);
+        fechaActual >= oferta.fechaInicio && fechaActual <= oferta.fechaFin);
 
     producto.lst_ofertas = ofertasValidas;
     return producto;
