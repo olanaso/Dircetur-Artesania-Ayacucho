@@ -138,40 +138,44 @@ function loadProductos (data) {
     let html = ` `
     console.log * (data.datos)
     for (let item of data.datos) {
+        const elProductoTieneOferta = item.lst_ofertas.length > 0;
 
-
-        let artenia_anviar_carrito = {
-            artesano_id: item.artesano_id,
-            id: item.id,
-            categoria_id: item.categoria_id,
-            artesano: item.artesano,
-            datos: {
-                imagen_principal: item.imagen_principal,
-                precio: item.imagen_principal,
-                descripcion_es: item.nombres_es,
-                cualidades_es: item.descripcion_es,
-                precio: parseFloat(item.precio)
-            },
-        }
-
-        let artenia_deseados = {
-
-            id: item.id + '-' + item.artesano_id,
-            artesania: {
+        if(elProductoTieneOferta){
+            let artenia_anviar_carrito = {
+                artesano_id: item.artesano_id,
                 id: item.id,
-                nombre_es: item.nombres_es,
-                precio: parseFloat(item.precio),
-                imagen_principal: item.imagen_principal,
-                url_carrito: encodeURIComponent(JSON.stringify(artenia_anviar_carrito))
-            },
-            artesano: {
-                id: item.artesano_id,
-                nombres: item.artesano,
-                foto1: item.foto1,
+                categoria_id: item.categoria_id,
+                artesano: item.artesano,
+                datos: {
+                    imagen_principal: item.imagen_principal,
+                    precio: item.imagen_principal,
+                    descripcion_es: item.nombres_es,
+                    cualidades_es: item.descripcion_es,
+                    precio: parseFloat(item.precio),
+                },
+                datoOferta: {
+                    precioOfertado: item.lst_ofertas[0].precioOfertado
+                 }
             }
-        }
-        //alert(item.imagen)
-        if(item.lst_ofertas.length>0){
+
+            let artenia_deseados = {
+
+                id: item.id + '-' + item.artesano_id,
+                artesania: {
+                    id: item.id,
+                    nombre_es: item.nombres_es,
+                    precio: parseFloat(item.precio),
+                    imagen_principal: item.imagen_principal,
+                    url_carrito: encodeURIComponent(JSON.stringify(artenia_anviar_carrito)),
+
+                },
+                artesano: {
+                    id: item.artesano_id,
+                    nombres: item.artesano,
+                    foto1: item.foto1,
+                }
+            }
+
             html = html + `
 
                   <div class="col-md-4" style=" margin-bottom: 1rem;">
@@ -212,7 +216,41 @@ function loadProductos (data) {
             
      
         `
-        } else {
+        }
+        else {
+
+            let artenia_anviar_carrito = {
+                artesano_id: item.artesano_id,
+                id: item.id,
+                categoria_id: item.categoria_id,
+                artesano: item.artesano,
+                datos: {
+                    imagen_principal: item.imagen_principal,
+                    precio: item.imagen_principal,
+                    descripcion_es: item.nombres_es,
+                    cualidades_es: item.descripcion_es,
+                    precio: parseFloat(item.precio),
+                },
+            }
+
+            let artenia_deseados = {
+
+                id: item.id + '-' + item.artesano_id,
+                artesania: {
+                    id: item.id,
+                    nombre_es: item.nombres_es,
+                    precio: parseFloat(item.precio),
+                    imagen_principal: item.imagen_principal,
+                    url_carrito: encodeURIComponent(JSON.stringify(artenia_anviar_carrito)),
+
+                },
+                artesano: {
+                    id: item.artesano_id,
+                    nombres: item.artesano,
+                    foto1: item.foto1,
+                }
+            }
+
             html = html + `
 
                   <div class="col-md-4" style=" margin-bottom: 1rem;">
@@ -253,6 +291,8 @@ function loadProductos (data) {
         `
 
         }
+
+
 
     }
     $('#listaProductosNovedades').append(html)

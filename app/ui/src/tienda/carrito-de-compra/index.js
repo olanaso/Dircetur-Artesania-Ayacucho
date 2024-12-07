@@ -52,6 +52,7 @@ function obtenerUrlProducto () {
 
     // Decodificar y convertir el objeto JSON nuevamente
     if (data) {
+        console.log("The data is", data);
         const artesaniaenviada = JSON.parse(decodeURIComponent(data));
 
         // Mostrar el objeto en el DOM

@@ -281,7 +281,7 @@ function obtenerUrlProducto () {
     // Decodificar y convertir el objeto JSON nuevamente
     if (data) {
         const artesaniaenviada = JSON.parse(data);
-        console.log({ artesaniaenviada });
+        console.log("artesania a enviar", { artesaniaenviada });
 
         // Mostrar el objeto en el DOM
         const artesaniaId = artesaniaenviada.artesania.id;
