@@ -187,15 +187,15 @@ async function listadoProductosDestacados () {
     try {
 
         let sql = `
-       SELECT a.*,
+         SELECT distinct a.*,
 
     CONCAT(b.nombres, ' ', b.apellidos) AS artesano,  b.foto1, b.id artesano_id
      ,d.denominacion categoria,d.id categoria_id
   FROM producto a
  INNER JOIN artesano b ON a.artesano_id=b.id
-INNER JOIN productos_favoritos c ON a.id=c.id_producto
+INNER JOIN valoracion c ON a.id=c.productoid
  INNER JOIN categoria d ON a.categoria_id=d.id
-LIMIT 9
+LIMIT 9;
 
      `;
 
