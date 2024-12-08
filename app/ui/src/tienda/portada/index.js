@@ -278,7 +278,7 @@ function loadProductosOferta (data) {
           <p class="artisan-name">${item?.artesano || ""}</p></a>
           <p class="artisan-role">Artesano</p>
         </div>
-      </div>
+    </div>
       <div class="card-actions">
         <a class="btn-buttons favorite" title="Añadir a favoritos" href="productos-deseados.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
           <i class="fas fa-heart"></i>
@@ -338,7 +338,7 @@ function loadProductosRecientes (data) {
     html = html + `
   <div class="card">
     <div class="card-image">
-      <span class="new-label" style="background:yellow;color:#000">Nuevo</span>
+      <span class="new-label" style="background:#A9E8F5;color:#000">Nuevo</span>
       <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
       <img style="height:300px; width:100%; object-fit: cover;  transform: scale(0.8);  transform-origin: center;  " src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" alt="Producto Artesanal" />
       </a>

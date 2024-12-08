@@ -132,6 +132,7 @@ function obtenerOfertasVigentes (listaDeProductos) {
         if (ofertasFiltradas.length > 0) {
             return {
                 ...item,
+                oferta: true,
                 lst_ofertas: ofertasFiltradas // Reemplazamos lst_ofertas con solo las ofertas vigentes
             };
         }
@@ -381,8 +382,15 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
             where += ` AND b.id = ${id_artesano} `
         }
 
+
+
         if (nombre_artesano) {
             where += ` AND upper(concat(b.nombres, b.apellidos)) like '%${nombre_artesano.toUpperCase()}%' `
+        }
+
+
+        if (order === 'ofertas') {
+            where += ` AND JSON_VALID(a.lst_ofertas) AND TRIM(a.lst_ofertas) != '"[]"' `
         }
         // if (nombre_producto) {
         //     where += ` AND upper(concat(a.resumen_es,a.nombres_es, a.nombres_eng)) like '%${nombre_producto.toUpperCase()}%' `
@@ -407,6 +415,8 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
                 INNER JOIN categoria c ON a.categoria_id=c.id
          WHERE 1 = 1
      `+ where;
+
+        console.log(sql)
 
         const [tam_consulta] = await models.sequelize.query(sql, { replacements: params, type: sequelize.QueryTypes.SELECT });
         let cantidad = tam_consulta.cantidad
@@ -455,10 +465,15 @@ async function busquedaProducto (pagina = 1, limit = 9, oferta = false, precio_m
          WHERE 1 = 1
      ` + where + orderby + limitOffset;
 
-
+        console.log(sql)
 
         let resultados = await models.sequelize.query(sql, { replacements: params, type: sequelize.QueryTypes.SELECT });
-        resultados = limpiezaDeOfertasDelProducto(resultados)
+
+        if (order === 'ofertas') {
+            resultados = obtenerOfertasVigentes(resultados);
+
+        }
+        // resultados = limpiezaDeOfertasDelProducto(resultados)
         // console.log(resultados)
         if (!resultados) {
             throw {

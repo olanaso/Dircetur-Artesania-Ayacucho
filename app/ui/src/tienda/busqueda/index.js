@@ -150,7 +150,8 @@ function loadProductos (data) {
                 precio: item.imagen_principal,
                 descripcion_es: item.nombres_es,
                 cualidades_es: item.descripcion_es,
-                precio: parseFloat(item.precio)
+                precio: parseFloat(item.precio),
+                oferta: item.lst_ofertas
             },
         }
 
@@ -171,17 +172,18 @@ function loadProductos (data) {
             }
         }
         //alert(item.imagen)
-        if(item.lst_ofertas.length>0){
+        if (item.oferta) {
             html = html + `
 
                   <div class="col-md-4" style=" margin-bottom: 1rem;">
                 <div class="card__busqueda shadow-lg" style=" height: 100%;">
                  <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
-                    <img class="card__busqueda-img-top" style="height:200px; width:100%; object-fit: cover;  transform: scale(0.85);  transform-origin: center;  "   src="${item?.imagen_principal || 'https://via.placeholder.com/300x250'}" alt="Casaca artesanal">
+                    <img onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/200x220.png?text=En proceso de carga';" class="card__busqueda-img-top" style="height:200px; width:100%; object-fit: cover;  transform: scale(0.85);  transform-origin: center;  "   src="${item?.imagen_principal || 'https://via.placeholder.com/300x250'}" alt="Casaca artesanal">
                     <span class="discount-label">Oferta</span>
                     </a>
                     <div class="card-body text-center" style="margin-top: 0px ">
-                        <h5 class="card__busqueda-title">${item?.nombres_es || ''}</h5>
+                      <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">   <h5 class="card__busqueda-title">${item?.nombres_es || ''}</h5>
+                       </a>
                         <p class="card__busqueda-price-after-discount">${formatearNumero(item?.precio) || ''} PEN</p>
                         <p class="card__busqueda-price">${formatearNumero(item?.lst_ofertas[0]?.precioOfertado) || ''} PEN</p>
                         <p class="card__busqueda-category"> ${item?.categoria || ''}</p>
@@ -218,10 +220,13 @@ function loadProductos (data) {
                   <div class="col-md-4" style=" margin-bottom: 1rem;">
                 <div class="card__busqueda shadow-lg" style=" height: 100%;">
                  <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">
-                    <img class="card__busqueda-img-top" style="height:200px; width:100%; object-fit: cover;  transform: scale(0.85);  transform-origin: center;  "   src="${item?.imagen_principal || 'https://via.placeholder.com/300x250'}" alt="Casaca artesanal">
+                    <img onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/200x220.png?text=En proceso de carga';" class="card__busqueda-img-top" style="height:200px; width:100%; object-fit: cover;  transform: scale(0.85);  transform-origin: center;  "   src="${item?.imagen_principal || 'https://via.placeholder.com/300x250'}" alt="Casaca artesanal">
                     </a>
                     <div class="card-body text-center" style="margin-top: 0px ">
-                        <h5 class="card__busqueda-title">${item?.nombres_es || ''}</h5>
+                      <a style="color:#000 !important" href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}">   
+                      <h5 class="card__busqueda-title">${item?.nombres_es || ''}</h5>
+                       </a>
+                      
                         <p class="card__busqueda-price">${formatearNumero(item?.precio) || ''} PEN</p>
                         <p class="card__busqueda-category"> ${item?.categoria || ''}</p>
                        

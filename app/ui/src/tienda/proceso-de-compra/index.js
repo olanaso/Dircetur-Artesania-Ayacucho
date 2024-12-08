@@ -114,6 +114,7 @@ function obtenerPedido () {
     if (formData && ARTESANO) {
         let artesanias_comprar = listarArtesanias(ARTESANO.id);
 
+
         let lst_productos = artesanias_comprar.map(row => ({
             nombre: row.objeto.descripcion_es,
             precio_unitario: row.objeto.precio,
@@ -306,6 +307,38 @@ function handleChange (event) {
 
 // Asignar el evento de cambio a todos los inputs, textareas y selects
 
+function isOfferActive (product) {
+
+    if (!product.objeto.oferta || product.objeto.oferta.length === 0) {
+        return product; // No hay ofertas
+    }
+
+    const currentDate = new Date();
+    let bestOffer = null;
+
+    for (const oferta of product.objeto.oferta) {
+        const startDate = new Date(oferta.fechaInicio);
+        startDate.setHours(0, 0, 0, 0); // Ajustar inicio a las 00:00
+        const endDate = new Date(oferta.fechaFin);
+        endDate.setHours(23, 59, 59, 999); // Ajustar fin a las 23:59:59
+
+        if (currentDate >= startDate && currentDate <= endDate) {
+            if (!bestOffer || endDate - startDate > new Date(bestOffer.fechaFin) - new Date(bestOffer.fechaInicio)) {
+                bestOffer = oferta; // Seleccionar la oferta con la duración más larga
+            }
+        }
+    }
+
+    if (bestOffer) {
+        product.objeto.precio = bestOffer.precioOfertado; // Actualizar el precio al precio ofertado
+        product.objeto.ofertado = true;
+        product.objeto.porcentajeDescuento = bestOffer.porcentajeDescuento;
+        return product; // La oferta más duradera está activa
+    }
+
+    return product; // Ninguna oferta está activa
+}
+
 
 function obtenerProductos () {
 
@@ -318,7 +351,10 @@ function obtenerProductos () {
     setArtesano(artesano_id)
     // alert(artesano_id)
     let artsanias_comprar = listarArtesanias(artesano_id);
+
+
     console.log(artsanias_comprar)
+
     listarProductosComprar(artsanias_comprar)
 }
 
@@ -432,6 +468,11 @@ function listarArtesanias (artesano_id) {
         alert('No se encontro ningun producto del artesano.')
         location.href = "/tienda/"
     }
+
+    for (let i = 0; i < artesaniasFiltradas.length; i++) {
+        artesaniasFiltradas[i] = isOfferActive(artesaniasFiltradas[i]); // Actualizar cada artesanía con la oferta más relevante
+    }
+
     return artesaniasFiltradas
 }
 

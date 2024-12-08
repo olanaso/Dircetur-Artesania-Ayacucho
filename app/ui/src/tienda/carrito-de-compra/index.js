@@ -122,8 +122,38 @@ function formatearNumero (numero) {
     });
 }
 
+//validar ofertas
+function isOfferActive (product) {
 
+    if (!product.objeto.oferta || product.objeto.oferta.length === 0) {
+        return product; // No hay ofertas
+    }
 
+    const currentDate = new Date();
+    let bestOffer = null;
+
+    for (const oferta of product.objeto.oferta) {
+        const startDate = new Date(oferta.fechaInicio);
+        startDate.setHours(0, 0, 0, 0); // Ajustar inicio a las 00:00
+        const endDate = new Date(oferta.fechaFin);
+        endDate.setHours(23, 59, 59, 999); // Ajustar fin a las 23:59:59
+
+        if (currentDate >= startDate && currentDate <= endDate) {
+            if (!bestOffer || endDate - startDate > new Date(bestOffer.fechaFin) - new Date(bestOffer.fechaInicio)) {
+                bestOffer = oferta; // Seleccionar la oferta con la duración más larga
+            }
+        }
+    }
+
+    if (bestOffer) {
+        product.objeto.precio = bestOffer.precioOfertado; // Actualizar el precio al precio ofertado
+        product.objeto.ofertado = true;
+        product.objeto.porcentajeDescuento = bestOffer.porcentajeDescuento;
+        return product; // La oferta más duradera está activa
+    }
+
+    return product; // Ninguna oferta está activa
+}
 
 /*Para manejar el carrito de compras*/
 
@@ -163,6 +193,11 @@ function generarDatosDummy () {
 function generarInterfaz () {
     const artesanias = listarArtesanias(); // Obtener las artesanías desde localStorage
 
+
+    for (let i = 0; i < artesanias.length; i++) {
+        artesanias[i] = isOfferActive(artesanias[i]); // Actualizar cada artesanía con la oferta más relevante
+    }
+
     const artesanosAgrupados = agruparPorArtesano(artesanias); // Agrupar productos por artesano
     console.log(artesanosAgrupados)
     const contenedor = document.getElementById('contenedor-carrito'); // Contenedor donde se va a mostrar la interfaz
@@ -200,8 +235,13 @@ function generarInterfaz () {
             return `
                                     <div class="row mb-3">
                                         <div class="col-md-2">
+                                         <div class="position-relative">
+                                         ${producto.objeto.ofertado ? '<span class="badge badge-danger position-absolute" style="top: -10px; left: -10px; z-index: 1;">Oferta</span>' : ''}
+                                          
+
                                             <img src="${producto.objeto.imagen_principal || 'https://via.placeholder.com/150'}" class="img-fluid" alt="imagen producto">
                                         </div>
+                                          </div>
                                         <div class="col-md-8">
                                             <h5>${producto.objeto.descripcion_es}</h5>
                                             <p><b>Descripción:</b> ${producto.objeto.cualidades_es}</p>

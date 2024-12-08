@@ -444,11 +444,14 @@ async function mostrarInformacion (producto) {
 
     $("#producto-nombre").text(`${producto.nombres_es}`);
     if (producto.lst_ofertas.length > 0) {
-        $("#producto-precio-antiguo").text(` ${formatearNumero(producto.precio)} PEN |  `);
-        $("#oferta").text(` - ${formatearNumero(producto.lst_ofertas[0].porcentajeDescuento)}%`);
-        $("#producto-precio-despues-de-oferta").text(` ${formatearNumero(producto.lst_ofertas[0].precioOfertado)} PEN`);
+        $('#oferta').show();
+        $("#producto-precio-antiguo").text(` ${formatearNumero(producto.precio)} PEN ($ ${formatearNumero(producto.precio_usd)} USD ) `);
+        $("#oferta").text(`${formatearNumero(producto.lst_ofertas[0].porcentajeDescuento)}%  DSCTO `);
+        $("#producto-precio-despues-de-oferta").text(` ${formatearNumero(producto.lst_ofertas[0].precioOfertado)} PEN ($ ${formatearNumero((producto.precio_usd / producto.precio) * producto.lst_ofertas[0].precioOfertado)} USD )`);
     } else {
-        $("#producto-precio").text(` ${formatearNumero(producto.precio)} PEN | $ ${formatearNumero(producto.precio_usd)} USD`);
+        $('#oferta').hide();
+        $("#producto-precio").text(` ${formatearNumero(producto.precio)} PEN ( $ ${formatearNumero(producto.precio_usd)} USD )`);
+
     }
     $("#producto-descripcion").text(`${producto.descripcion_es}`);
     $("#producto-alto").text(`Alto: ${producto.alto} cm`);

@@ -77,14 +77,14 @@
       color: #777;
     }
 
-    .producto-precio-antiguo{
+    .producto-precio-antiguo {
       text-decoration: line-through;
       color: grey;
     }
 
 
 
-    .datos-antiguos-container{
+    .datos-antiguos-container {
       display: flex;
     }
 
@@ -513,18 +513,24 @@
           </div>
           <div class="col-md-6">
             <div class="car-details">
-              <h4 id="producto-nombre">-</h4>
+              <div class="d-flex justify-content-between align-items-center">
+                <h4 id="producto-nombre">-</h4>
+                <span class="badge badge-danger" style="color: white; display: none;" id="oferta">- DCTO</span>
+              </div>
+              <p id="producto-descripcion">-</p>
               <div class="roducto-preciosp">
                 <span class="product-precio" id="producto-precio"></span>
                 <div class="oferta">
                   <div class="datos-antiguos-container">
-                    <span class="producto-precio-antiguo"  id="producto-precio-antiguo"></span>
-                    <span class="oferta"  id="oferta"></span>
+                    <span class="producto-precio-antiguo" id="producto-precio-antiguo"
+                      style="color: #6c757d !important; font-weight: normal; font-size: 0.9em;"></span>
+
                   </div>
-                  <span class="product-precio-despues-de-oferta"  id="producto-precio-despues-de-oferta"></span>
+                  <span class="product-precio-despues-de-oferta" id="producto-precio-despues-de-oferta"
+                    style=" font-size: 1.7em;"></span>
                 </div>
               </div>
-              <p id="producto-descripcion">-</p>
+
 
               <h5 class="fw-bold">Valorar este producto</h5>
 
@@ -648,10 +654,11 @@
               <div class="contact-info">
                 <div class="row">
                   <div class="phone col-md-12 col-sm-6 col-xs-6">
-                    <i class="fa fa-phone"></i><span id="artesano-celular">+1 123 489-5748</span>
+                    <i class="fa fa-phone" style="color: #fff;"></i><span id="artesano-celular">+1 123 489-5748</span>
                   </div>
                   <div class="mail col-md-12 col-sm-6 col-xs-6">
-                    <i class="fa fa-envelope"></i><span id="artesano-correo">youremail@gmail.com</span>
+                    <i class="fa fa-envelope" style="color: #fff;"></i><span
+                      id="artesano-correo">youremail@gmail.com</span>
                   </div>
                 </div>
               </div>
