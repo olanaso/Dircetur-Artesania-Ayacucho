@@ -273,8 +273,7 @@ function adEventBusqDNI () {
             // Aquí puedes mostrar un mensaje de error al usuario si es necesario
         } finally {
             // Rehabilitar el botón y restaurar el texto
-            $btn.prop('disabled', false).html(`<i
-										class= "fa fa-search" ></i > `);
+            $btn.prop('disabled', false).html(`<i class= "fa fa-search" ></i > `);
         }
     });
 }

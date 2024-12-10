@@ -280,15 +280,25 @@ async function pedidosPorCliente (req, res) {
                     model: modelCliente,
                     attributes: [
                         'nombres',
-                        'apellidos'
+                        'apellidos',
+                        'numero_documento',
+                        'correo',
+                        'telefono',
+                        'tipo_documento',
+                        'numero_documento',
+                        'direccion',
+                        'pais',
+                        'region',
+                        'ciudad'
                     ]
                 },
                 {
                     model: modelArtesano,
-                    attributes: ['nombres', 'apellidos']
+                    attributes: ['nombres', 'apellidos', 'correo', 'id', 'celular', 'telefonos']
                 }
             ],
             where: { cliente_id: idCliente },
+            order: [['fecha_pedido', 'DESC']]
         })
         
         return res.status(200).json(rows);
