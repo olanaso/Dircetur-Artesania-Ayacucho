@@ -63,7 +63,7 @@ async function mostrarInformacion(artesano) {
     $("#artesano-nombre").text(`${artesano.nombres}`);
     $("#artesano-telefono").text(`+51 ${artesano.celular}`);
     $("#artesano-whatsapp").attr("href", `https://wa.me/51${artesano.celular}`);
-    $("#artesano-youtube").attr("href", lst_videoenlace[0].src);
+    $("#artesano-youtube").attr("href", lst_videoenlace[0]?.src || "#");
     $("#artesano-telefono-enlace").attr("href", `tel:+51${artesano.celular}`)
     $("#artesano-nombre-completo").text(`${artesano.nombres} ${artesano.apellidos}`);
     $("#artesano-correo").text(`${artesano.correo}`);
@@ -71,8 +71,8 @@ async function mostrarInformacion(artesano) {
     $("#taller-nombre").text(listTaller[0].nombretaller);
     $("#taller-ruc").text(listTaller[0].ructaller);
     $("#taller-direccion").text(listTaller[0].direccionfisica);
-    $("#artesano-habilidades").text(listEspecialidadesTecnicas[0].descripcionhabilidades);
-    $("#artesano-tipo-artesania").text(listEspecialidadesTecnicas[0].tipoartesania);
+    $("#artesano-habilidades").text(listEspecialidadesTecnicas[0]?.descripcionhabilidades || "No se encontraron habilidades");
+    $("#artesano-tipo-artesania").text(listEspecialidadesTecnicas[0]?.tipoartesania || "No se encontraron tipos de artesania");
     $("#artesano-linea-artesanal").text(lineaArtesanal); // aui el tring de los 1
     $('#artesano-ubigeo').text(artesano.ubigeo);
     //mapa//
