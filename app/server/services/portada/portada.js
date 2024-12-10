@@ -187,15 +187,26 @@ async function listadoProductosDestacados () {
     try {
 
         let sql = `
-       SELECT a.*,
-
-    CONCAT(b.nombres, ' ', b.apellidos) AS artesano,  b.foto1, b.id artesano_id
-     ,d.denominacion categoria,d.id categoria_id
-  FROM producto a
- INNER JOIN artesano b ON a.artesano_id=b.id
-INNER JOIN productos_favoritos c ON a.id=c.id_producto
- INNER JOIN categoria d ON a.categoria_id=d.id
-LIMIT 9
+       SELECT
+    p.*,
+    CONCAT(a.nombres, ' ', a.apellidos) AS artesano,
+    a.foto1,
+    a.id AS artesano_id,
+    c.denominacion AS categoria,
+    c.id AS categoria_id,
+    v.valor,
+    (SELECT AVG(valor) FROM valoracion) AS promedio_valor
+FROM
+    producto p
+INNER JOIN
+    artesano a ON p.artesano_id = a.id
+INNER JOIN
+    valoracion v ON p.id = v.productoid
+INNER JOIN
+    categoria c ON p.categoria_id = c.id
+ORDER BY
+    v.valor DESC
+LIMIT 9;
 
      `;
 
