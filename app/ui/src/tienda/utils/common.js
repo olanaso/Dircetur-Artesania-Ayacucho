@@ -63,9 +63,7 @@ export function custom () {
     goToSeguimientoPedido();
     generarTypeHead_ante();
 
-    setTimeout(function (e) {
-        googleTranslateElementInit();
-    }, 2000)
+    googleTranslateElementInit();
 
 }
 
