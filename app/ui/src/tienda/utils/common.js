@@ -161,7 +161,7 @@ export const goToSeguimientoPedido = () => {
         } else {
             alertDialog.createAlertDialog(
                 'info',
-                'Alerta',
+                'Aviso',
                 'Para acceder al seguimiento de sus pedidos, por favor inicie sesión.',
                 'Aceptar'
             );
