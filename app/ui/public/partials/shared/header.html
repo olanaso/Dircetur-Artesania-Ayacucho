@@ -1,23 +1,17 @@
 <header class="app-header">
     <div class="container-fluid">
-        <div class="row align-items-center">
-            <!-- Botón de menú hamburguesa para móviles -->
-            <div class="col-6 d-block d-md-none">
-                <a href="#" class="mini-nav-btn" id="mobile-menu-toggler">
-                    <i class="icon-menu"></i> <!-- Ícono de hamburguesa -->
-                </a>
-            </div>
-            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-3 col-4">
+        <div class="row align-items-center justify-content-between">
+            <div class="">
                 <a class="mini-nav-btn" id="app-side-mini-toggler">
                     <i class="icon-menu5"></i>
                 </a>
-                <a href="#" data-toggle="onoffcanvas" class="onoffcanvas-toggler" aria-expanded="true">
+                <a data-toggle="onoffcanvas" class="onoffcanvas-toggler" aria-expanded="true">
                     <i class="icon-chevron-thin-left"></i>
                 </a>
             </div>
 
             <!-- Logo centrado en dispositivos móviles -->
-            <div class="col-md-2 col-6 text-center">
+            <div class="text-center">
                 <a href="inicio.html" class="logo">
                     <?xml version="1.0" encoding="UTF-8"?>
                     <svg height="40px" id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 73">
@@ -215,8 +209,8 @@
                 </a>
             </div>
 
-            <!-- Opciones de usuario y acciones para pantallas grandes -->
-            <div class="col-md-5 d-none d-md-flex justify-content-end">
+            <!-- Opciones de usuario -->
+            <div class="">
                 <ul class="header-actions">
                     <li class="dropdown">
                         <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
@@ -242,14 +236,6 @@
                     </li>
                 </ul>
             </div>
-        </div>
-
-        <!-- Menú desplegable para móviles -->
-        <div id="mobile-menu" class="mobile-menu d-md-none">
-            <ul>
-                <li><a href="/miperfil.html">Perfil</a></li>
-                <li><a href="/index.html">Salir</a></li>
-            </ul>
         </div>
     </div>
 </header>

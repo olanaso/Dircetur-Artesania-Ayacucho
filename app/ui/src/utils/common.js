@@ -8,82 +8,80 @@
 
 /* eslint-disable no-undef */
 $(function () {
-	if ($(window).width() < 992) {
-		$('#app-side').onoffcanvas('hide');
-	} else {
-		$('#app-side').onoffcanvas('show');
-	}
+    // Responsive sidebar handling
+    const initializeSidebar = () => {
+        if ($(window).width() < 992) {
+            $('#app-side').onoffcanvas('hide');
+        } else {
+            $('#app-side').onoffcanvas('show');
+        }
+    }
 
-	$('.side-nav .unifyMenu').unifyMenu({ toggle: true });
+    initializeSidebar();
+    $(window).on('resize', initializeSidebar);
 
-	$('#app-side-hoverable-toggler').on('click', function () {
-		$('.app-side').toggleClass('is-hoverable');
-		$(undefined).children('i.fa').toggleClass('fa-angle-right fa-angle-left');
-	});
+    // Initialize side navigation menu
+    $('.side-nav .unifyMenu').unifyMenu({ toggle: true });
 
-	$('#app-side-mini-toggler').on('click', function () {
-		$('.app-side').toggleClass('is-mini');
-		$("#app-side-mini-toggler i").toggleClass('icon-menu5 icon-sort');
-	});
+    // Hoverable toggler handler
+    $('#app-side-hoverable-toggler').on('click', function () {
+        $('.app-side').toggleClass('is-hoverable');
+        $(this).children('i.fa').toggleClass('fa-angle-right fa-angle-left');
+    });
 
-	$('#onoffcanvas-nav').on('click', function () {
-		$('.app-side').toggleClass('left-toggle');
-		$('.app-main').toggleClass('left-toggle');
-		$("#onoffcanvas-nav i").toggleClass('icon-menu5 icon-sort');
-	});
+    // Mini toggler handler
+    $('#app-side-mini-toggler').on('click', function () {
+        $('.app-side').toggleClass('is-mini');
+        $(this).find('i').toggleClass('icon-menu5 icon-sort');
+    });
 
-	$('.onoffcanvas-toggler').on('click', function () {
-		$('.onoffcanvas-toggler').trigger('click')
-		//$('#app-side').addClass('is-mini')
-		//$(".onoffcanvas-toggler i").toggleClass('icon-chevron-thin-left icon-chevron-thin-right');
-	});
-});
+    // Onoffcanvas nav handler
+    $('#onoffcanvas-nav').on('click', function () {
+        $('.app-side').toggleClass('left-toggle');
+        $('.app-main').toggleClass('left-toggle');
+        $(this).find('i').toggleClass('icon-menu5 icon-sort');
+    });
 
+    // Canvas toggler handler with error handling
+    $('.onoffcanvas-toggler').on('click', function (e) {
+        try {
+            e.preventDefault();
+            $('#app-side').onoffcanvas('toggle');
+        } catch (error) {
+            console.error('Error toggling canvas:', error);
+        }
+    });
 
-// $(function() {
-// 	$('#unifyMenu')
-// 	.unifyMenu()
-// 	.on('shown.unifyMenu', function(event) {
-// 			$('body, html').animate({
-// 					scrollTop: $(event.target).parent('li').position().top
-// 			}, 600);
-// 	});
-// });
+    // Bootstrap components initialization
+    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="popover"]').popover();
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    });
 
-// Bootstrap Tooltip
-$(function () {
-	$('[data-toggle="tooltip"]').tooltip()
-})
+    // Today's date update
+    const updateDate = () => {
+        try {
+            if (typeof moment === 'undefined') {
+                throw new Error('Moment.js is not loaded');
+            }
+            const momentNow = moment();
+            $('#today-date').html(
+                `${momentNow.format('MMMM . DD')} ${momentNow.format('. dddd').substring(0, 5).toUpperCase()}`
+            );
+        } catch (error) {
+            console.error('Error updating date:', error);
+        }
+    };
+    setInterval(updateDate, 1000);
 
+    // Task list toggle
+    $('.task-list').on('click', 'li.list', function () {
+        $(this).toggleClass('completed');
+    });
 
-// Bootstrap Popover
-$(function () {
-	$('[data-toggle="popover"]').popover()
-})
-$('.popover-dismiss').popover({
-	trigger: 'focus'
-})
-
-
-// Todays Date
-$(function () {
-	var interval = setInterval(function () {
-		var momentNow = moment();
-		$('#today-date').html(momentNow.format('MMMM . DD') + ' '
-			+ momentNow.format('. dddd').substring(0, 5).toUpperCase());
-	}, 100);
-});
-
-
-// Task list
-$('.task-list').on('click', 'li.list', function () {
-	$(this).toggleClass('completed');
-});
-
-
-// Loading
-$(function () {
-	$(".loading-wrapper").fadeOut(2000);
+    // Loading screen
+    $(".loading-wrapper").fadeOut(2000);
 });
 
 
