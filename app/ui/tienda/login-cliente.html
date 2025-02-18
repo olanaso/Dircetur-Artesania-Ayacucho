@@ -532,6 +532,7 @@
               Completar información de registro
             </h3>
             <p class="card-text">Solicitamos que complete todo el formulario</p>
+            <p>(*) Obligatorio</p>
 
             <!-- Bloque 1: Datos del Cliente -->
             <h6 class="section-title">Datos del Cliente</h6>
@@ -539,50 +540,46 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="dni">Documento de Identidad (Person ID)</label>
+                <label for="tipoDocumento">Tipo de Documento *</label>
+                <select class="form-control" id="tipoDocumento" required>
+                  <option value="">Seleccione tipo de documento</option>
+                  <option value="DNI">DNI</option>
+                  <option value="CE">Carnet de Extranjería</option>
+                  <option value="PAS">Pasaporte</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="dni">Número de Documento de Identidad *</label>
                 <input
-                  type="text"
+                  type="number"
                   class="form-control"
                   id="dni"
-                  placeholder="Ingrese su DNI 8 digitos numericos"
-                  minlength="8"
-                  maxlength="8"
+                  placeholder="Ingrese número de documento"
                   required
-                  pattern="\d\d\d\d\d\d\d\d"
                   title="Ingrese formato de Identidad"
                 />
-              </div>
-              <div class="form-group col-md-1 align-self-end">
-                <button
-                  id="btn_buscar_dni"
-                  type="button"
-                  class="btn btn-secondary btn-block"
-                >
-                  <i class="fa fa-search"></i>
-                </button>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="nombres">Nombres</label>
+                <label for="nombres">Nombres *</label>
                 <input
                   type="text"
                   class="form-control"
                   id="nombres"
                   placeholder="Nombres"
-                  value=""
                   required
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="apellidos">Apellidos</label>
+                <label for="apellidos">Apellidos *</label>
                 <input
                   type="text"
                   class="form-control"
                   id="apellidos"
                   placeholder="Apellidos"
-                  value=""
                   required
                 />
               </div>
@@ -590,13 +587,12 @@
 
             <!-- Email field -->
             <div class="form-group">
-              <label for="correo">Correo</label>
+              <label for="correo">Correo *</label>
               <input
                 type="email"
                 class="form-control"
                 id="correoRegistro"
                 placeholder="Ingrese correo"
-                value=""
                 required
               />
             </div>
@@ -607,7 +603,7 @@
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="countryCode">Código País</label>
-                <select id="countryCode" class="form-control" required>
+                <select id="countryCode" class="form-control">
                   <option value="+51">+51 (Perú)</option>
                   <option value="+93">+93 (Afganistán)</option>
                   <option value="+355">+355 (Albania)</option>
@@ -868,7 +864,6 @@
                   id="telefono"
                   placeholder="Ingrese nro telefonico"
                   pattern="\d\d\d\d\d\d\d\d\d"
-                  required
                 />
               </div>
             </div>
@@ -884,10 +879,9 @@
                   class="form-control"
                   id="pais"
                   placeholder="Pais"
-                  value=""
-                  required=""
                 />
               </div>
+
               <div class="form-group col-md-4">
                 <label for="region">Region</label>
                 <input
@@ -895,10 +889,9 @@
                   class="form-control"
                   id="region"
                   placeholder="Departamento o región"
-                  value=""
-                  required=""
                 />
               </div>
+
               <div class="form-group col-md-4">
                 <label for="ciudad">Ciudad</label>
                 <input
@@ -906,23 +899,17 @@
                   class="form-control"
                   id="ciudad"
                   placeholder="Ciudad"
-                  value=""
-                  required=""
                 />
               </div>
             </div>
 
             <div class="form-group">
-              <label for="direccion_envio"
-                ><span class="error">*</span>Dirección (para el envio)
-              </label>
+              <label for="direccion_envio">Dirección (para el envio) </label>
               <input
                 type="text"
                 class="form-control"
                 id="direccion_envio"
                 placeholder="Ingrese la direccion a donde se le enviara"
-                value=""
-                required
               />
             </div>
 
