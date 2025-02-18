@@ -1,118 +1,209 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
 
-<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<meta name="description" content="Lead Admin Panel" />
-	<meta name="keywords"
-		content="Login, Lead Login, Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, TemplateMonster" />
-	<meta name="author" content="Bootstrap Gallery" />
-	<link rel="shortcut icon" href="img/fav.png" />
-	<title>Artesanias Ayacucho - Login</title>
+    <meta
+      name="description"
+      content="Compra artesanías tradicionales y auténticas de Ayacucho. Encuentra piezas únicas hechas a mano con calidad, tradición y diseño exclusivo. Apoya el comercio justo y celebra el arte peruano."
+    />
+    <meta
+      name="keywords"
+      content="artesanías Ayacucho, artesanía peruana, productos tradicionales, textilería, cerámica, piedra tallada, comercio justo, cultura peruana"
+    />
+    <meta
+      name="author"
+      content="Dirección Regional de Comercio Exterior y Turismo - Ayacucho"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://artesaniasdeayacucho.pe/" />
+    <meta
+      property="og:title"
+      content="Artesanías de Ayacucho - Productos Auténticos de Textilería, Cerámica y Piedra Tallada"
+    />
+    <meta
+      property="og:description"
+      content="Compra artesanías tradicionales y auténticas de Ayacucho. Piezas hechas a mano que combinan calidad, tradición y diseño exclusivo."
+    />
+    <meta
+      property="og:image"
+      content="/tienda/assets_tienda/images/logo-artesanias.png"
+    />
+    <meta property="og:url" content="https://artesaniasdeayacucho.pe/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta name="geo.region" content="PE-AYA" />
+    <meta name="geo.placename" content="Ayacucho, Perú" />
+    <meta name="geo.position" content="-13.1588;-74.2236" />
+    <meta name="ICBM" content="-13.1588, -74.2236" />
 
-	<!-- Common CSS -->
-	<link rel="stylesheet" href="/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
+    <!-- New Twitter SEO meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@ArtesaniasAya" />
+    <meta
+      name="twitter:title"
+      content="Artesanías de Ayacucho - Productos Auténticos"
+    />
+    <meta
+      name="twitter:description"
+      content="Compra artesanías tradicionales y auténticas de Ayacucho. Piezas únicas y exclusivas que celebran el arte peruano."
+    />
+    <meta
+      name="twitter:image"
+      content="/tienda/assets_tienda/images/logo-artesanias.png"
+    />
 
-	<!-- Mian and Login css -->
-	<link rel="stylesheet" href="/css/main.css" />
+    <!-- New JSON-LD Structured Data for Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Artesanías de Ayacucho",
+        "url": "https://artesaniasdeayacucho.pe/",
+        "logo": "https://artesaniasdeayacucho.pe/images/logo.png",
+        "sameAs": [
+          "https://www.facebook.com/ArtesaniasAyacucho",
+          "https://www.instagram.com/ArtesaniasAyacucho"
+        ],
+        "description": "Descubre y compra artesanías tradicionales de Ayacucho. Apoyamos el comercio justo, conectando a artesanos con consumidores."
+      }
+    </script>
 
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="img/fav.png" />
 
-</head>
+    <title>Artesanias Ayacucho - Login</title>
 
-<body class="login-bg">
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/fonts/icomoon/icomoon.css" />
 
-	<div class="loading-wrapper">
-		<div class="loading">
-			<div class="img"></div>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-	</div>
+    <!-- Mian and Login css -->
+    <link rel="stylesheet" href="/css/main.css" />
 
-	<div class="container">
-		<div class="contenedor-logo-iestp">
-			<img id="logoiestp" src="" alt="">
-		</div>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </head>
 
-		<div class="login-screen row align-items-center">
+  <body class="login-bg">
+    <div class="loading-wrapper">
+      <div class="loading">
+        <div class="img"></div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
 
+    <div class="container">
+      <div class="contenedor-logo-iestp">
+        <img id="logoiestp" src="" alt="" />
+      </div>
 
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-				<form id="form" action="javascript:void(0)">
-					<div class="login-container">
-						<div class="row no-gutters">
-							<div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
-								<div class="login-box">
-									<a href="#" class="login-logo">
-										<img src="img/logoPrincipal.svg" alt="Lead Admin Dashboard" />
-									</a>
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text" id="basic-addon1">
-												<i class="icon-account_circle"></i>
-											</span>
-										</div>
-										<input required id="txtusuario" type="text" class="form-control"
-											oninvalid="this.setCustomValidity('Por favor, ingresa el DNI o correo electronico')"
-											oninput="this.setCustomValidity('')" placeholder="Usuario o Email"
-											aria-label="username" aria-describedby="username">
-									</div>
-									<br>
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text" id="basic-addon1">
-												<i class="icon-verified_user"></i>
-											</span>
-										</div>
-										<input required id="txtclave" type="password" class="form-control"
-											oninvalid="this.setCustomValidity('Por favor, ingresa la clave de acceso')"
-											oninput="this.setCustomValidity('')" title="Ingrese la clave de acceso"
-											placeholder="Contraseña" aria-label="Password" aria-describedby="password">
-									</div>
-									<div class="actions clearfix">
-										<a href="recuperar-cuenta.html">¿Olvidaste tu contraseña?</a>
-										<button id="btnlogin" type="submit" class="btn btn-primary">Login</button>
-									</div>
+      <div class="login-screen row align-items-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <form id="form" action="javascript:void(0)">
+            <div class="login-container">
+              <div class="row no-gutters">
+                <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
+                  <div class="login-box">
+                    <a href="#" class="login-logo">
+                      <img
+                        src="img/logoPrincipal.svg"
+                        alt="Lead Admin Dashboard"
+                      />
+                    </a>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="icon-account_circle"></i>
+                        </span>
+                      </div>
+                      <input
+                        required
+                        id="txtusuario"
+                        type="text"
+                        class="form-control"
+                        oninvalid="this.setCustomValidity('Por favor, ingresa el DNI o correo electronico')"
+                        oninput="this.setCustomValidity('')"
+                        placeholder="Usuario o Email"
+                        aria-label="username"
+                        aria-describedby="username"
+                      />
+                    </div>
+                    <br />
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="icon-verified_user"></i>
+                        </span>
+                      </div>
+                      <input
+                        required
+                        id="txtclave"
+                        type="password"
+                        class="form-control"
+                        oninvalid="this.setCustomValidity('Por favor, ingresa la clave de acceso')"
+                        oninput="this.setCustomValidity('')"
+                        title="Ingrese la clave de acceso"
+                        placeholder="Contraseña"
+                        aria-label="Password"
+                        aria-describedby="password"
+                      />
+                    </div>
+                    <div class="actions clearfix">
+                      <a href="recuperar-cuenta.html"
+                        >¿Olvidaste tu contraseña?</a
+                      >
+                      <button
+                        id="btnlogin"
+                        type="submit"
+                        class="btn btn-primary"
+                      >
+                        Login
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    id="error_msj"
+                    class="col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                    style="display: none"
+                  >
+                    <div class="alert custom alert-danger">
+                      <i class="icon-warning2"></i>Usuario o clave incorrecto
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
+                  <div class="contenedorimgenlogin">
+                    <img
+                      id="imgbanner"
+                      src="/img/login-slider.jpg"
+                      alt="Descripción de la imagen"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer class="main-footer no-bdr fixed-btm">
+      <div class="container">Copyright Artesanias Ayacucho 2024.</div>
+    </footer>
+  </body>
 
-								</div>
-								<div id="error_msj" class="col-xl-12 col-lg-12 col-md-12 col-sm-12"
-									style="display: none;">
-									<div class="alert custom alert-danger">
-										<i class="icon-warning2"></i>Usuario o clave incorrecto
-									</div>
-								</div>
-							</div>
-							<div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
-								<div class="contenedorimgenlogin">
-									<img id="imgbanner" src="/img/login-slider.jpg" alt="Descripción de la imagen">
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<footer class="main-footer no-bdr fixed-btm">
-		<div class="container">
-			Copyright Artesanias Ayacucho 2024.
-		</div>
-	</footer>
-</body>
-
-<script type="module" src="src/login/index.js"></script>
-<!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
-
+  <script type="module" src="src/login/index.js"></script>
+  <!-- Mirrored from kodingwife.com/demos/lead-admin-dashboard/design-2/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2023 14:32:32 GMT -->
 </html>

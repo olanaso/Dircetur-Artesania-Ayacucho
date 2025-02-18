@@ -1,372 +1,416 @@
 <!DOCTYPE html>
-<!--[if IE 9]>
-<html class="ie ie9" lang="en-US">
-<![endif]-->
-<html lang="en-US">
-
-<!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:20:49 GMT -->
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="description" content="">
-	<meta name="keywords" content="HTML,CSS,XML,JavaScript">
-	<meta name="author" content="Car Dealer Template">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>Nosotros - Artesanias de Ayacucho</title>
-
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
-
-	<link rel="stylesheet" href="/assets_tienda/css/bootstrap.css">
-	<link rel="stylesheet" href="/assets_tienda/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/assets_tienda/css/main.css">
-	<!-- Slider Pro Css -->
-	<link rel="stylesheet" href="/assets_tienda/css/sliderPro.css">
-	<!-- Owl Carousel Css -->
-	<link rel="stylesheet" href="/assets_tienda/css/owl-carousel.css">
-	<!-- Flat Icons Css -->
-	<link rel="stylesheet" href="/assets_tienda/css/flaticon.css">
-	<!-- Animated Css -->
-	<link rel="stylesheet" href="/assets_tienda/css/animated.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
-
-	<!-- Google translate -->
-	<script type="text/javascript"
-		src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-	<style>
-		div>iframe.skiptranslate {
-			display: none !important;
-		}
-
-		body {
-			top: 0px !important;
-		}
-
-		.product-card {
-			border: 1px solid #ccc;
-			border-radius: 10px;
-			padding: 20px;
-			margin-bottom: 20px;
-			transition: box-shadow 0.3s ease;
-		}
-
-		.product-card:hover {
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-		}
-
-		.product-image {
-			width: 100px;
-			height: 100px;
-
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			font-size: 12px;
-			color: #777;
-		}
-
-		.product-actions button {
-			width: 100%;
-			margin-bottom: 5px;
-		}
-
-		.btn-primary:hover {
-			background-color: #6200ea;
-			border-color: #6200ea;
-		}
-
-		.btn-info:hover {
-			background-color: #017acd;
-			border-color: #017acd;
-		}
-
-		.btn-danger:hover {
-			background-color: #b00020;
-			border-color: #b00020;
-		}
-
-		.artesano-info {
-			display: flex;
-			align-items: center;
-			margin-top: 10px;
-		}
-
-		.artesano-photo {
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
-			object-fit: cover;
-			margin-right: 10px;
-		}
-
-		a {
-			color: #2c3e50;
-			text-decoration: none;
-			font-weight: 600;
-			transition: color 0.3s ease;
-		}
-
-
-		@media (max-width: 576px) {
-			.product-card {
-				padding: 15px;
-			}
-
-			.product-image {
-				width: 80px;
-				height: 80px;
-			}
-
-			.input-group {
-				max-width: 100px;
-			}
-
-			.product-actions button {
-				font-size: 14px;
-				padding: 8px;
-			}
-
-			.product-actions a {
-				font-size: 14px;
-				padding: 8px;
-			}
-
-			.product-card h5 {
-				font-size: 16px;
-			}
-
-			.product-card p {
-				font-size: 14px;
-			}
-		}
-
-		.section-title {
-			color: #f709f3;
-		}
-
-		.summary-table th,
-		.summary-table td {
-			text-align: left;
-			padding: 10px;
-		}
-
-		.summary-table th {
-			background-color: #f1f1f1;
-		}
-
-		.summary-table td {
-			background-color: #f9f9f9;
-		}
-
-		/* Selecciona labels asociados a inputs o textarea que son requeridos */
-		/* Estilo general para los labels */
-		.form-group label {
-			margin-right: 5px;
-		}
-
-		/* Estilo del asterisco rojo */
-		.required-asterisk::after {
-			content: " *";
-			color: red;
-			font-weight: bold;
-		}
-
-		.image-box {
-			width: 200px;
-			height: 100px;
-			background-color: #fff;
-			/* Fondo blanco */
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			border: 1px solid #ddd;
-			border-radius: 8px;
-			margin: 10px;
-		}
-
-		.image-box img {
-			max-width: 80%;
-			/* Ajusta el tamaño para que quepa dentro del cuadro */
-			max-height: 80%;
-		}
-
-		footer {
-			margin-top: 80px;
-			background-color: #111;
-			background-position: center center;
-			background-repeat: no-repeat;
-			background-size: cover;
-			padding: 0px 15px 0px 15px
-		}
-
-		.tt-menu {
-			background-color: #fff;
-			border: 1px solid #ff0000;
-			max-width: 300px;
-		}
-
-		.tt-suggestion {
-			padding: 10px;
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-		}
-
-		.tt-suggestion:hover {
-			background-color: #ffe5e5;
-		}
-
-		.tt-suggestion img {
-			max-width: 40px;
-			margin-right: 10px;
-		}
-
-		.tt-suggestion .book-title {
-			color: #ff0000;
-		}
-	</style>
-
-	<style>
-		.markdown ol,
-		menu,
-		ul {
-			list-style: none;
-			margin-left: 14px;
-			padding: 0
-		}
-
-		.markdown p,
-		.markdown ul {
-			font-size: .875rem;
-			line-height: 1.25rem;
-			margin-bottom: .75rem
-		}
-
-		.markdown li {
-			list-style-type: disc
-		}
-
-		.markdown h1,
-		.markdown h2 {
-			font-weight: 700;
-			margin-bottom: .75rem;
-			margin-top: 1rem
-		}
-
-		.markdown a {
-			--tw-text-opacity: 1;
-			color: rgb(16 185 129/var(--tw-text-opacity))
-		}
-
-		.markdown a:hover {
-			--tw-text-opacity: 1;
-			color: rgb(5 150 105/var(--tw-text-opacity));
-			cursor: pointer;
-			text-decoration-line: underline
-		}
-
-		@media (max-width: 640px) {
-			.markdown h1 {
-				font-size: 1.75rem
-			}
-
-			.markdown h2 {
-				font-size: 1.5rem
-			}
-
-			.markdown h3 {
-				font-size: 1.25rem
-			}
-
-			.markdown h4 {
-				font-size: 1rem
-			}
-		}
-	</style>
-
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-	<![endif]-->
-
-	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-</head>
-
-<body>
-	<div class="preloader">
-		<div class="preloader-bounce">
-			<img src="/img/logotienda.svg" />
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-	</div>
-	<header class="site-header wow fadeIn" data-wow-duration="1s" id="header">
-	</header>
-	<div class="page-heading wow fadeIn" data-wow-duration="0.5s">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="heading-content-bg wow fadeIn" data-wow-delay="0.75s" data-wow-duration="1s">
-						<div class="row">
-							<div class="heading-content col-md-12">
-								<p><a href="index.html">Inicio</a> / <em> Información </em> </p>
-								<h2>Sobre <em>Nosotros</em></h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="on-grids wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1s">
-
-		<div class="container markdown" style="max-width: 1100px;" id="markdown-content">
-
-
-
-
-
-
-		</div>
-	</div>
-
-
-
-	<div id="footer">
-
-	</div>
-
-
-	<script src="assets_tienda/js/jquery-1.11.0.min.js"></script>
-
-	<!-- Slider Pro Js -->
-	<script src="assets_tienda/js/sliderpro.min.js"></script>
-
-	<!-- Slick Slider Js -->
-	<script src="assets_tienda/js/slick.js"></script>
-
-	<!-- Owl Carousel Js -->
-	<script src="assets_tienda/js/owl.carousel.min.js"></script>
-
-	<!-- Boostrap Js -->
-	<script src="assets_tienda/js/bootstrap.min.js"></script>
-
-	<!-- Boostrap Js -->
-	<script src="assets_tienda/js/wow.animation.js"></script>
-
-	<!-- Custom Js -->
-	<script src="assets_tienda/js/custom.js"></script>
-
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
-	<script type="module" src="../src/tienda/nosotros/index.js"></script>
-
-</body>
-
-<!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:21:58 GMT -->
 
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Conoce la historia y misión de Artesanías de Ayacucho. Descubre nuestro compromiso con la tradición, el talento local y el comercio justo."
+    />
+    <meta
+      name="keywords"
+      content="nosotros, historia, artesanías, Ayacucho, comercio justo, tradición, talento local"
+    />
+    <link
+      rel="canonical"
+      href="https://artesaniasdeayacucho.pe/tienda/nosotros.html"
+    />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Nosotros - Artesanías de Ayacucho" />
+    <meta
+      property="og:description"
+      content="Conoce la historia y misión de Artesanías de Ayacucho. Celebramos la tradición y el talento local en cada pieza."
+    />
+    <meta
+      property="og:url"
+      content="https://artesaniasdeayacucho.pe/tienda/nosotros.html"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://artesaniasdeayacucho.pe/img/logo-artesanias.png"
+    />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nosotros - Artesanías de Ayacucho" />
+    <meta
+      name="twitter:description"
+      content="Conoce la historia y misión de Artesanías de Ayacucho. Descubre nuestro compromiso con la tradición y el comercio justo."
+    />
+    <meta
+      name="twitter:image"
+      content="https://artesaniasdeayacucho.pe/img/logo-artesanias.png"
+    />
+
+    <meta
+      name="author"
+      content="Dirección Regional de Comercio Exterior y Turismo - Ayacucho"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Nosotros - Artesanias de Ayacucho</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link rel="stylesheet" href="/assets_tienda/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets_tienda/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/assets_tienda/css/main.css" />
+    <!-- Slider Pro Css -->
+    <link rel="stylesheet" href="/assets_tienda/css/sliderPro.css" />
+    <!-- Owl Carousel Css -->
+    <link rel="stylesheet" href="/assets_tienda/css/owl-carousel.css" />
+    <!-- Flat Icons Css -->
+    <link rel="stylesheet" href="/assets_tienda/css/flaticon.css" />
+    <!-- Animated Css -->
+    <link rel="stylesheet" href="/assets_tienda/css/animated.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
+
+    <!-- Google translate -->
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+
+    <style>
+      div > iframe.skiptranslate {
+        display: none !important;
+      }
+
+      body {
+        top: 0px !important;
+      }
+
+      .product-card {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: box-shadow 0.3s ease;
+      }
+
+      .product-card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .product-image {
+        width: 100px;
+        height: 100px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: #777;
+      }
+
+      .product-actions button {
+        width: 100%;
+        margin-bottom: 5px;
+      }
+
+      .btn-primary:hover {
+        background-color: #6200ea;
+        border-color: #6200ea;
+      }
+
+      .btn-info:hover {
+        background-color: #017acd;
+        border-color: #017acd;
+      }
+
+      .btn-danger:hover {
+        background-color: #b00020;
+        border-color: #b00020;
+      }
+
+      .artesano-info {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      .artesano-photo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+      }
+
+      a {
+        color: #2c3e50;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      @media (max-width: 576px) {
+        .product-card {
+          padding: 15px;
+        }
+
+        .product-image {
+          width: 80px;
+          height: 80px;
+        }
+
+        .input-group {
+          max-width: 100px;
+        }
+
+        .product-actions button {
+          font-size: 14px;
+          padding: 8px;
+        }
+
+        .product-actions a {
+          font-size: 14px;
+          padding: 8px;
+        }
+
+        .product-card h5 {
+          font-size: 16px;
+        }
+
+        .product-card p {
+          font-size: 14px;
+        }
+      }
+
+      .section-title {
+        color: #f709f3;
+      }
+
+      .summary-table th,
+      .summary-table td {
+        text-align: left;
+        padding: 10px;
+      }
+
+      .summary-table th {
+        background-color: #f1f1f1;
+      }
+
+      .summary-table td {
+        background-color: #f9f9f9;
+      }
+
+      /* Selecciona labels asociados a inputs o textarea que son requeridos */
+      /* Estilo general para los labels */
+      .form-group label {
+        margin-right: 5px;
+      }
+
+      /* Estilo del asterisco rojo */
+      .required-asterisk::after {
+        content: " *";
+        color: red;
+        font-weight: bold;
+      }
+
+      .image-box {
+        width: 200px;
+        height: 100px;
+        background-color: #fff;
+        /* Fondo blanco */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin: 10px;
+      }
+
+      .image-box img {
+        max-width: 80%;
+        /* Ajusta el tamaño para que quepa dentro del cuadro */
+        max-height: 80%;
+      }
+
+      footer {
+        margin-top: 80px;
+        background-color: #111;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 0px 15px 0px 15px;
+      }
+
+      .tt-menu {
+        background-color: #fff;
+        border: 1px solid #ff0000;
+        max-width: 300px;
+      }
+
+      .tt-suggestion {
+        padding: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+
+      .tt-suggestion:hover {
+        background-color: #ffe5e5;
+      }
+
+      .tt-suggestion img {
+        max-width: 40px;
+        margin-right: 10px;
+      }
+
+      .tt-suggestion .book-title {
+        color: #ff0000;
+      }
+    </style>
+
+    <style>
+      .markdown ol,
+      menu,
+      ul {
+        list-style: none;
+        margin-left: 14px;
+        padding: 0;
+      }
+
+      .markdown p,
+      .markdown ul {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .markdown li {
+        list-style-type: disc;
+      }
+
+      .markdown h1,
+      .markdown h2 {
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .markdown a {
+        --tw-text-opacity: 1;
+        color: rgb(16 185 129 / var(--tw-text-opacity));
+      }
+
+      .markdown a:hover {
+        --tw-text-opacity: 1;
+        color: rgb(5 150 105 / var(--tw-text-opacity));
+        cursor: pointer;
+        text-decoration-line: underline;
+      }
+
+      @media (max-width: 640px) {
+        .markdown h1 {
+          font-size: 1.75rem;
+        }
+
+        .markdown h2 {
+          font-size: 1.5rem;
+        }
+
+        .markdown h3 {
+          font-size: 1.25rem;
+        }
+
+        .markdown h4 {
+          font-size: 1rem;
+        }
+      }
+    </style>
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+
+  <body>
+    <div class="preloader">
+      <div class="preloader-bounce">
+        <img src="/img/logotienda.svg" />
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <header
+      class="site-header wow fadeIn"
+      data-wow-duration="1s"
+      id="header"
+    ></header>
+    <div class="page-heading wow fadeIn" data-wow-duration="0.5s">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div
+              class="heading-content-bg wow fadeIn"
+              data-wow-delay="0.75s"
+              data-wow-duration="1s"
+            >
+              <div class="row">
+                <div class="heading-content col-md-12">
+                  <p>
+                    <a href="index.html">Inicio</a> / <em> Información </em>
+                  </p>
+                  <h2>Sobre <em>Nosotros</em></h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="on-grids wow fadeIn"
+      data-wow-delay="0.5s"
+      data-wow-duration="1s"
+    >
+      <div
+        class="container markdown"
+        style="max-width: 1100px"
+        id="markdown-content"
+      ></div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="assets_tienda/js/jquery-1.11.0.min.js"></script>
+
+    <!-- Slider Pro Js -->
+    <script src="assets_tienda/js/sliderpro.min.js"></script>
+
+    <!-- Slick Slider Js -->
+    <script src="assets_tienda/js/slick.js"></script>
+
+    <!-- Owl Carousel Js -->
+    <script src="assets_tienda/js/owl.carousel.min.js"></script>
+
+    <!-- Boostrap Js -->
+    <script src="assets_tienda/js/bootstrap.min.js"></script>
+
+    <!-- Boostrap Js -->
+    <script src="assets_tienda/js/wow.animation.js"></script>
+
+    <!-- Custom Js -->
+    <script src="assets_tienda/js/custom.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
+    <script type="module" src="../src/tienda/nosotros/index.js"></script>
+  </body>
+
+  <!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:21:58 GMT -->
 </html>

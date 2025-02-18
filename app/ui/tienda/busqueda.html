@@ -1,496 +1,540 @@
 <!DOCTYPE html>
-<!--[if IE 9]>
-<html class="ie ie9" lang="en-US">
-<![endif]-->
-<html lang="en-US">
-
-<!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:20:49 GMT -->
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="description" content="">
-	<meta name="keywords" content="HTML,CSS,XML,JavaScript">
-	<meta name="author" content="Car Dealer Template">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>Búsqueda - Artesanías de Ayacucho</title>
-
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
-
-	<link rel="stylesheet" href="/assets_tienda/css/bootstrap.css">
-	<link rel="stylesheet" href="/assets_tienda/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/assets_tienda/css/main.css">
-	<!-- Slider Pro Css -->
-	<link rel="stylesheet" href="/assets_tienda/css/sliderPro.css">
-	<!-- Owl Carousel Css -->
-	<link rel="stylesheet" href="/assets_tienda/css/owl-carousel.css">
-	<!-- Flat Icons Css -->
-	<link rel="stylesheet" href="/assets_tienda/css/flaticon.css">
-	<!-- Animated Css -->
-	<link rel="stylesheet" href="/assets_tienda/css/animated.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-	<!-- Google translate -->
-	<script type="text/javascript"
-		src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-	<style>
-		div>iframe.skiptranslate {
-			display: none !important;
-		}
-
-		body {
-			top: 0px !important;
-		}
-
-		.long-text {
-			width: 100%;
-			display: -webkit-box !important;
-			-webkit-box-orient: vertical;
-			-webkit-line-clamp: 2;
-			overflow: hidden;
-		}
-
-		.photo-prod {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 250px;
-			/* Altura fija para el contenedor */
-			width: 100%;
-			/* Ancho ajustable según el contenedor padre */
-			overflow: hidden;
-			/* Oculta cualquier parte desbordante de la imagen */
-		}
-
-		.photo-prod img {
-			max-height: 100%;
-			max-width: 100%;
-			object-fit: cover;
-			/* Mantiene la proporción y rellena el contenedor */
-		}
-
-		.nuevo-producto a {
-			background-color: rgb(23, 186, 113) !important;
-			color: #fff !important;
-		}
-
-		.img-contenedor-destacados {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 150px;
-			/* Altura fija para el contenedor */
-			width: 100%;
-			/* Ancho ajustable según el contenedor padre */
-			overflow: hidden;
-			/* Oculta cualquier parte desbordante de la imagen */
-		}
-
-		.img-destacados {
-			float: center;
-			object-fit: cover;
-			max-height: 100%;
-			max-width: 100%;
-			height: 120px !important;
-			overflow: hidden;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 100% !important;
-			border-top-left-radius: calc(.25rem - 1px);
-			border-top-right-radius: calc(.25rem - 1px);
-		}
-
-		.product-description {
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			display: block;
-		}
-
-		.secondary-button button {
-			display: inline-block;
-			background: #ffffff;
-			padding: 10px 20px;
-			text-align: center;
-			letter-spacing: 0.5px;
-			font-size: 14px;
-			font-weight: 600;
-			margin: 1px solid #ffffff;
-			border-radius: 5px;
-			text-transform: uppercase;
-			color: #1e1e1e;
-			-webkit-transition: all 0.3s;
-			-o-transition: all 0.3s;
-			transition: all 0.3s;
-			width: 100%;
-		}
-
-		.input-busqueda::placeholder {
-			color: #e6e6e6;
-			/* Color del placeholder */
-
-		}
-
-		.pagination-content ul li a {
-			color: #fff !important;
-
-		}
-
-		.product-card img {
-			object-fit: cover;
-			height: 200px;
-		}
-
-		/*Ocultar */
-
-		/* Ocultar el elemento por defecto */
-		.hidden {
-			display: none;
-		}
-
-		/* Mostrar el elemento en pantallas pequeñas y superiores (≥ 640px) */
-		@media (min-width: 640px) {
-			.sm-block {
-				display: inline;
-			}
-		}
-
-		/* Mostrar el elemento en pantallas medianas y superiores (≥ 768px) */
-		@media (min-width: 768px) {
-			.md-block {
-				display: inline;
-			}
-
-			.md-hidden {
-				display: none;
-			}
-		}
-
-		/* Mostrar el elemento en pantallas grandes y superiores (≥ 1024px) */
-		@media (min-width: 1024px) {
-			.lg-block {
-				display: inline;
-			}
-		}
-
-		/* Mostrar el elemento en pantallas extra grandes y superiores (≥ 1280px) */
-		@media (min-width: 1280px) {
-			.xl-block {
-				display: block;
-			}
-		}
-
-		.image-box {
-			width: 200px;
-			height: 100px;
-			background-color: #fff;
-			/* Fondo blanco */
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			border: 1px solid #ddd;
-			border-radius: 8px;
-			margin: 10px;
-		}
-
-		.image-box img {
-			max-width: 80%;
-			/* Ajusta el tamaño para que quepa dentro del cuadro */
-			max-height: 80%;
-		}
-
-		footer {
-			margin-top: 80px;
-			background-color: #111;
-			background-position: center center;
-			background-repeat: no-repeat;
-			background-size: cover;
-			padding: 0px 15px 0px 15px
-		}
-
-		.tt-menu {
-			background-color: #fff;
-			border: 1px solid #ff0000;
-			max-width: 300px;
-		}
-
-		.tt-suggestion {
-			padding: 10px;
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-		}
-
-		.tt-suggestion:hover {
-			background-color: #ffe5e5;
-		}
-
-		.tt-suggestion img {
-			max-width: 40px;
-			margin-right: 10px;
-		}
-
-		.tt-suggestion .book-title {
-			color: #ff0000;
-		}
-
-		.card__busqueda {
-			border-radius: 10px;
-			overflow: hidden;
-			transition: transform 0.3s ease, box-shadow 0.3s ease;
-			background-color: #fff;
-		}
-
-		.discount-label {
-			position: absolute;
-			top: 10px;
-			left: 10px;
-			background-color: #ea0397;
-			color: #ffffff;
-			font-size: 0.8rem;
-			font-weight: bold;
-			padding: 5px 10px;
-			border-radius: 8px;
-			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-			text-transform: uppercase;
-			z-index: 10;
-		}
-
-
-		.card__busqueda:hover {
-			transform: scale(1.05);
-			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-		}
-
-		.card__busqueda-img-top {
-			width: 100%;
-			/* Imagen responsive */
-			height: auto;
-			/* Mantiene la proporción */
-			object-fit: cover;
-			/* Recorta la imagen si es necesario */
-			border-bottom: 2px solid #ff007f;
-		}
-
-		/* Estilo del contenido */
-		.card__busqueda-title {
-			font-size: 1.1rem !important;
-			font-weight: bold;
-			word-wrap: break-word;
-			hyphens: auto;
-			line-height: normal;
-		}
-
-		.card__busqueda-price {
-			font-size: 1.2rem !important;
-			font-weight: bold;
-			color: #ff007f;
-		}
-
-		.card__busqueda-price-after-discount {
-			font-size: 1rem;
-			color: #6c757d;
-			text-decoration: line-through;
-		}
-
-		.card__busqueda-category {
-			font-size: 0.9rem !important;
-			color: #6c757d;
-		}
-
-		.card__busqueda-artisan {
-			font-size: 0.6rem !important;
-			font-weight: 600;
-			line-height: normal;
-		}
-
-		.card__busqueda-location {
-			font-size: 0.7rem !important;
-			color: #6c757d;
-		}
-
-		/* Botones */
-		.card__busqueda-buttons a,
-		.card__busqueda-buttons button {
-			font-size: 0.9rem !important;
-			border-radius: 20px;
-		}
-
-		.btn-primary {
-			background-color: #ff007f;
-			border-color: #ff007f;
-		}
-
-		.btn-primary:hover {
-			background-color: #e60073;
-			border-color: #e60073;
-		}
-
-		.btn-outline-dark:hover {
-			background-color: #f8f9fa;
-		}
-
-		.btn-outline-danger:hover {
-			background-color: rgba(255, 0, 127, 0.1);
-		}
-
-		/* Imagen redonda del artesano */
-		.card__busqueda-artisan-img {
-			width: 40px;
-			height: 40px;
-			object-fit: cover;
-			border: 2px solid #ff007f;
-			border-radius: 50%;
-		}
-	</style>
-
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-	<![endif]-->
-
-</head>
-
-<body>
-
-
-	<div class="preloader">
-		<div class="preloader-bounce">
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-	</div>
-
-
-
-	<header class="site-header wow fadeIn" data-wow-duration="1s" id="header">
-
-	</header>
-
-
-	<div class="page-heading wow fadeIn" data-wow-duration="0.5s">
-		<div class="container">
-
-
-			<div class="row">
-				<div class="col-md-12">
-					<div class="heading-content-bg wow fadeIn" data-wow-delay="0.75s" data-wow-duration="1s">
-						<div class="row">
-							<div class="heading-content col-md-12">
-								<p><a href="index.html">Inicio</a> / <em> Búsqueda </em> </p>
-								<h2>Búsqueda de <em>Artesanías</em></h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="on-grids wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1s">
-		<div class="container">
-			<div class="recent-car-content">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="sidebar-widgets">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="sidebar-widget">
-										<div class="search-content">
-											<div class="search-heading">
-												<div class="icon">
-													<i class="fa fa-search"></i>
-												</div>
-												<div class="text-content">
-													<h2>Búsqueda de artesanías</h2>
-													<span>Selecciona las opciones de filtro</span>
-													<a style="color: yellow;" href="busqueda.html"><i
-															class="fa fa-search"></i> Nueva busqueda</a>
-												</div>
-											</div>
-											<div class="search-form">
-												<form id="miFormulario">
-													<div class="row">
-
-														<div class="col-md-12">
-															<input class="input-busqueda" name="nombre_producto"
-																type="text" onfocus="this.value=''"
-																placeholder="Nombre, descripción ...">
-														</div>
-
-														<div class="col-md-12">
-															<div class="input-select">
-																<select id="id_categoria" name="id_categoria"
-																	class="input-busqueda" name="nombre_producto">
-																	<option value="-1">Categoria</option>
-
-																</select>
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="input-select">
-																<input id="precio_min" name="precio_min" type="number"
-																	class="input-busqueda" placeholder="Precio Min.">
-
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="input-select">
-																<input id="precio_max" name="precio_max" type="number"
-																	class="input-busqueda" placeholder="Precio Max.">
-															</div>
-														</div>
-
-														<div class="col-md-12">
-															<div class="input-select">
-																<select id="id_artesano" name="id_artesano">
-																	<option value="-1">Artesano</option>
-
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-12">
-															<div class="secondary-button">
-																<button id="filterButton" type="submit">
-																	Buscar <i class="fa fa-search"></i>
-																</button>
-
-
-															</div>
-														</div>
-
-													</div>
-
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-8">
-						<div class="d-flex justify-content-between align-items-center mb-3">
-							<h5 id="lblTotales"> </h5>
-							<select name="order" id="drpordenamientosbusqueda" class="form-control w-auto">
-								<option value="relevancia">Relevancia</option>
-								<option value="menor-precio">Menor precio</option>
-								<option value="mayor-precio">Mayor Precio</option>
-								<option value="novedades">Novedades</option>
-								<option value="ofertas">Ofertas</option>
-
-							</select>
-						</div>
-						<div id="listaProductosNovedades" class="row">
-
-
-						</div>
-						<div class="row">
-							<div class="col-md-12" id="paginationContainer">
-								<!-- <div class="page-numbers">
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Explora y encuentra artesanías auténticas de Ayacucho. Usa nuestros filtros para descubrir piezas hechas a mano con tradición, calidad y un diseño único."
+    />
+    <meta
+      name="keywords"
+      content="artesanías, Ayacucho, artesanía peruana, hechos a mano, tradición, calidad, piezas únicas"
+    />
+    <meta name="author" content="Car Dealer Template" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Búsqueda de Artesanías Auténticas - Encuentra tu Obra de Arte"
+    />
+    <meta
+      name="twitter:description"
+      content="Explora nuestra colección de artesanías de Ayacucho. Encuentra piezas únicas y auténticas mediante filtros avanzados."
+    />
+    <meta
+      name="twitter:image"
+      content="https://artesaniasdeayacucho.pe/img/logo-artesanias.png"
+    />
+
+    <title>Búsqueda de Artesanías Auténticas - Encuentra tu Obra de Arte</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://artesaniasdeayacucho.pe/tienda/busqueda.html",
+        "name": "Búsqueda - Artesanías de Ayacucho",
+        "description": "Explora y encuentra artesanías auténticas de Ayacucho. Filtra por categoría, precio y artesano para hallar piezas únicas y auténticas."
+      }
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link rel="stylesheet" href="/assets_tienda/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets_tienda/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/assets_tienda/css/main.css" />
+    <!-- Slider Pro Css -->
+    <link rel="stylesheet" href="/assets_tienda/css/sliderPro.css" />
+    <!-- Owl Carousel Css -->
+    <link rel="stylesheet" href="/assets_tienda/css/owl-carousel.css" />
+    <!-- Flat Icons Css -->
+    <link rel="stylesheet" href="/assets_tienda/css/flaticon.css" />
+    <!-- Animated Css -->
+    <link rel="stylesheet" href="/assets_tienda/css/animated.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <!-- Google translate -->
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+
+    <style>
+      div > iframe.skiptranslate {
+        display: none !important;
+      }
+
+      body {
+        top: 0px !important;
+      }
+
+      .long-text {
+        width: 100%;
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+
+      .photo-prod {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 250px;
+        /* Altura fija para el contenedor */
+        width: 100%;
+        /* Ancho ajustable según el contenedor padre */
+        overflow: hidden;
+        /* Oculta cualquier parte desbordante de la imagen */
+      }
+
+      .photo-prod img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: cover;
+        /* Mantiene la proporción y rellena el contenedor */
+      }
+
+      .nuevo-producto a {
+        background-color: rgb(23, 186, 113) !important;
+        color: #fff !important;
+      }
+
+      .img-contenedor-destacados {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 150px;
+        /* Altura fija para el contenedor */
+        width: 100%;
+        /* Ancho ajustable según el contenedor padre */
+        overflow: hidden;
+        /* Oculta cualquier parte desbordante de la imagen */
+      }
+
+      .img-destacados {
+        float: center;
+        object-fit: cover;
+        max-height: 100%;
+        max-width: 100%;
+        height: 120px !important;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100% !important;
+        border-top-left-radius: calc(0.25rem - 1px);
+        border-top-right-radius: calc(0.25rem - 1px);
+      }
+
+      .product-description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+      }
+
+      .secondary-button button {
+        display: inline-block;
+        background: #ffffff;
+        padding: 10px 20px;
+        text-align: center;
+        letter-spacing: 0.5px;
+        font-size: 14px;
+        font-weight: 600;
+        margin: 1px solid #ffffff;
+        border-radius: 5px;
+        text-transform: uppercase;
+        color: #1e1e1e;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+        width: 100%;
+      }
+
+      .input-busqueda::placeholder {
+        color: #e6e6e6;
+        /* Color del placeholder */
+      }
+
+      .pagination-content ul li a {
+        color: #fff !important;
+      }
+
+      .product-card img {
+        object-fit: cover;
+        height: 200px;
+      }
+
+      /*Ocultar */
+
+      /* Ocultar el elemento por defecto */
+      .hidden {
+        display: none;
+      }
+
+      /* Mostrar el elemento en pantallas pequeñas y superiores (≥ 640px) */
+      @media (min-width: 640px) {
+        .sm-block {
+          display: inline;
+        }
+      }
+
+      /* Mostrar el elemento en pantallas medianas y superiores (≥ 768px) */
+      @media (min-width: 768px) {
+        .md-block {
+          display: inline;
+        }
+
+        .md-hidden {
+          display: none;
+        }
+      }
+
+      /* Mostrar el elemento en pantallas grandes y superiores (≥ 1024px) */
+      @media (min-width: 1024px) {
+        .lg-block {
+          display: inline;
+        }
+      }
+
+      /* Mostrar el elemento en pantallas extra grandes y superiores (≥ 1280px) */
+      @media (min-width: 1280px) {
+        .xl-block {
+          display: block;
+        }
+      }
+
+      .image-box {
+        width: 200px;
+        height: 100px;
+        background-color: #fff;
+        /* Fondo blanco */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin: 10px;
+      }
+
+      .image-box img {
+        max-width: 80%;
+        /* Ajusta el tamaño para que quepa dentro del cuadro */
+        max-height: 80%;
+      }
+
+      footer {
+        margin-top: 80px;
+        background-color: #111;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 0px 15px 0px 15px;
+      }
+
+      .tt-menu {
+        background-color: #fff;
+        border: 1px solid #ff0000;
+        max-width: 300px;
+      }
+
+      .tt-suggestion {
+        padding: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+
+      .tt-suggestion:hover {
+        background-color: #ffe5e5;
+      }
+
+      .tt-suggestion img {
+        max-width: 40px;
+        margin-right: 10px;
+      }
+
+      .tt-suggestion .book-title {
+        color: #ff0000;
+      }
+
+      .card__busqueda {
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #fff;
+      }
+
+      .discount-label {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #ea0397;
+        color: #ffffff;
+        font-size: 0.8rem;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-transform: uppercase;
+        z-index: 10;
+      }
+
+      .card__busqueda:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .card__busqueda-img-top {
+        width: 100%;
+        /* Imagen responsive */
+        height: auto;
+        /* Mantiene la proporción */
+        object-fit: cover;
+        /* Recorta la imagen si es necesario */
+        border-bottom: 2px solid #ff007f;
+      }
+
+      /* Estilo del contenido */
+      .card__busqueda-title {
+        font-size: 1.1rem !important;
+        font-weight: bold;
+        word-wrap: break-word;
+        hyphens: auto;
+        line-height: normal;
+      }
+
+      .card__busqueda-price {
+        font-size: 1.2rem !important;
+        font-weight: bold;
+        color: #ff007f;
+      }
+
+      .card__busqueda-price-after-discount {
+        font-size: 1rem;
+        color: #6c757d;
+        text-decoration: line-through;
+      }
+
+      .card__busqueda-category {
+        font-size: 0.9rem !important;
+        color: #6c757d;
+      }
+
+      .card__busqueda-artisan {
+        font-size: 0.6rem !important;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      .card__busqueda-location {
+        font-size: 0.7rem !important;
+        color: #6c757d;
+      }
+
+      /* Botones */
+      .card__busqueda-buttons a,
+      .card__busqueda-buttons button {
+        font-size: 0.9rem !important;
+        border-radius: 20px;
+      }
+
+      .btn-primary {
+        background-color: #ff007f;
+        border-color: #ff007f;
+      }
+
+      .btn-primary:hover {
+        background-color: #e60073;
+        border-color: #e60073;
+      }
+
+      .btn-outline-dark:hover {
+        background-color: #f8f9fa;
+      }
+
+      .btn-outline-danger:hover {
+        background-color: rgba(255, 0, 127, 0.1);
+      }
+
+      /* Imagen redonda del artesano */
+      .card__busqueda-artisan-img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border: 2px solid #ff007f;
+        border-radius: 50%;
+      }
+    </style>
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="preloader">
+      <div class="preloader-bounce">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <header
+      class="site-header wow fadeIn"
+      data-wow-duration="1s"
+      id="header"
+    ></header>
+
+    <div class="page-heading wow fadeIn" data-wow-duration="0.5s">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div
+              class="heading-content-bg wow fadeIn"
+              data-wow-delay="0.75s"
+              data-wow-duration="1s"
+            >
+              <div class="row">
+                <div class="heading-content col-md-12">
+                  <p><a href="index.html">Inicio</a> / <em>Búsqueda</em></p>
+                  <h2>Encuentra <em>Artesanías Auténticas</em> y Únicas</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="on-grids wow fadeIn"
+      data-wow-delay="0.5s"
+      data-wow-duration="1s"
+    >
+      <div class="container">
+        <div class="recent-car-content">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="sidebar-widgets">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="sidebar-widget">
+                      <div class="search-content">
+                        <div class="search-heading">
+                          <div class="icon">
+                            <i class="fa fa-search"></i>
+                          </div>
+                          <div class="text-content">
+                            <h2>Búsqueda de artesanías</h2>
+                            <span>Selecciona las opciones de filtro</span>
+                            <a style="color: yellow" href="busqueda.html"
+                              ><i class="fa fa-search"></i> Nueva busqueda</a
+                            >
+                          </div>
+                        </div>
+                        <div class="search-form">
+                          <form id="miFormulario">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <input
+                                  class="input-busqueda"
+                                  name="nombre_producto"
+                                  type="text"
+                                  onfocus="this.value=''"
+                                  placeholder="Nombre, descripción ..."
+                                />
+                              </div>
+
+                              <div class="col-md-12">
+                                <div class="input-select">
+                                  <select
+                                    id="id_categoria"
+                                    name="id_categoria"
+                                    class="input-busqueda"
+                                    name="nombre_producto"
+                                  >
+                                    <option value="-1">Categoria</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="input-select">
+                                  <input
+                                    id="precio_min"
+                                    name="precio_min"
+                                    type="number"
+                                    class="input-busqueda"
+                                    placeholder="Precio Min."
+                                  />
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="input-select">
+                                  <input
+                                    id="precio_max"
+                                    name="precio_max"
+                                    type="number"
+                                    class="input-busqueda"
+                                    placeholder="Precio Max."
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="col-md-12">
+                                <div class="input-select">
+                                  <select id="id_artesano" name="id_artesano">
+                                    <option value="-1">Artesano</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-md-12">
+                                <div class="secondary-button">
+                                  <button id="filterButton" type="submit">
+                                    Buscar <i class="fa fa-search"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <h5 id="lblTotales"></h5>
+                <select
+                  name="order"
+                  id="drpordenamientosbusqueda"
+                  class="form-control w-auto"
+                >
+                  <option value="relevancia">Relevancia</option>
+                  <option value="menor-precio">Menor precio</option>
+                  <option value="mayor-precio">Mayor Precio</option>
+                  <option value="novedades">Novedades</option>
+                  <option value="ofertas">Ofertas</option>
+                </select>
+              </div>
+              <div id="listaProductosNovedades" class="row"></div>
+              <div class="row">
+                <div class="col-md-12" id="paginationContainer">
+                  <!-- <div class="page-numbers">
 									<div class="pagination-content">
 										<ul>
 											<li class="active"><a href="#">1</a></li>
@@ -501,50 +545,39 @@
 										</ul>
 									</div>
 								</div> -->
-							</div>
-						</div>
-					</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-				</div>
-			</div>
-		</div>
-	</div>
+    <div id="footer"></div>
 
+    <script src="assets_tienda/js/jquery-1.11.0.min.js"></script>
 
+    <!-- Slider Pro Js -->
+    <script src="assets_tienda/js/sliderpro.min.js"></script>
 
-	<div id="footer">
+    <!-- Slick Slider Js -->
+    <script src="assets_tienda/js/slick.js"></script>
 
-	</div>
+    <!-- Owl Carousel Js -->
+    <script src="assets_tienda/js/owl.carousel.min.js"></script>
 
+    <!-- Boostrap Js -->
+    <script src="assets_tienda/js/bootstrap.min.js"></script>
 
+    <!-- Boostrap Js -->
+    <script src="assets_tienda/js/wow.animation.js"></script>
 
+    <!-- Custom Js -->
 
-	<script src="assets_tienda/js/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
 
-	<!-- Slider Pro Js -->
-	<script src="assets_tienda/js/sliderpro.min.js"></script>
+    <script type="module" src="../src/tienda/busqueda/index.js"></script>
+  </body>
 
-	<!-- Slick Slider Js -->
-	<script src="assets_tienda/js/slick.js"></script>
-
-	<!-- Owl Carousel Js -->
-	<script src="assets_tienda/js/owl.carousel.min.js"></script>
-
-	<!-- Boostrap Js -->
-	<script src="assets_tienda/js/bootstrap.min.js"></script>
-
-	<!-- Boostrap Js -->
-	<script src="assets_tienda/js/wow.animation.js"></script>
-
-	<!-- Custom Js -->
-
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
-
-	<script type="module" src="../src/tienda/busqueda/index.js"></script>
-
-</body>
-
-<!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:21:58 GMT -->
-
+  <!-- Mirrored from cocotemplates.com/html/cocotemplates/html/acropos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 14:21:58 GMT -->
 </html>
