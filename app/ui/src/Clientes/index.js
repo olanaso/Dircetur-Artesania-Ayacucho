@@ -1,29 +1,27 @@
-import { listarClientes, filtrarClientes, borrarCliente } from './api';
+import { listarClientes, filtrarClientes, borrarCliente } from "./api";
 import { AlertDialog } from "../utils/alert";
 const alertDialog = new AlertDialog();
 
-
-
-import { loadPartials } from '../utils/viewpartials';
-import { hideLoading, llenarinformacionIESTPProg, checkSession } from '../utils/init';
-
+import { loadPartials } from "../utils/viewpartials";
+import {
+  hideLoading,
+  llenarinformacionIESTPProg,
+  checkSession,
+} from "../utils/init";
 
 hideLoading();
 // Uso de la función
 (async function () {
   let partials = [
-    { path: 'partials/shared/header.html', container: 'app-header' },
-    { path: 'partials/shared/menu.html', container: 'app-side' },
-
-
+    { path: "partials/shared/header.html", container: "app-header" },
+    { path: "partials/shared/menu.html", container: "app-side" },
   ];
   try {
     await loadPartials(partials);
-    import('../utils/common')
-
+    import("../utils/common");
 
     // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
-    console.log('Las vistas parciales se han cargado correctamente!');
+    console.log("Las vistas parciales se han cargado correctamente!");
     // Por ejemplo, podrías iniciar tu aplicación aquí.
 
     startApp();
@@ -32,14 +30,13 @@ hideLoading();
   }
 })();
 
-function startApp () {
-  //checkadminsession(); 
+function startApp() {
+  //checkadminsession();
   checkSession();
   setTimeout(function () {
     llenarinformacionIESTPProg();
     //marcarSubMenuSeleccionado();
   }, 500);
-
 }
 const DEFAULT_PAGE_LIMIT = 10;
 let currentPage = 1;
@@ -47,7 +44,7 @@ let totalPages = 0; // Declarar totalPages para que esté accesible globalmente
 
 let currentFilter = {}; // Objeto para almacenar el filtro actual
 
-async function cargarCliente () {
+async function cargarCliente() {
   try {
     let clientes;
 
@@ -58,7 +55,7 @@ async function cargarCliente () {
       const filtro = {
         ...currentFilter,
         page: currentPage,
-        limit: DEFAULT_PAGE_LIMIT
+        limit: DEFAULT_PAGE_LIMIT,
       };
       clientes = await filtrarClientes(filtro);
     }
@@ -67,12 +64,12 @@ async function cargarCliente () {
     totalPages = Math.ceil(clientes.totalItems / DEFAULT_PAGE_LIMIT);
     actualizarControlesPaginacion(totalPages, clientes.totalItems);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
 
 //controles de paginación:
-function actualizarControlesPaginacion (totalPages, totalItems) {
+function actualizarControlesPaginacion(totalPages, totalItems) {
   // Calculamos el rango mostrado actualmente
   const fromItem = (currentPage - 1) * DEFAULT_PAGE_LIMIT + 1;
   let toItem = currentPage * DEFAULT_PAGE_LIMIT;
@@ -81,25 +78,25 @@ function actualizarControlesPaginacion (totalPages, totalItems) {
   }
 
   // Actualizamos la información de paginación
-  const paginationInfo = document.getElementById('paginationInfo');
+  const paginationInfo = document.getElementById("paginationInfo");
   paginationInfo.innerHTML = `Viendo del ${fromItem} a ${toItem} de un total de ${totalItems} resultados`;
 
   // Limpiamos y generamos los controles de paginación
-  const paginationControls = document.getElementById('paginationControls');
-  paginationControls.innerHTML = '';
+  const paginationControls = document.getElementById("paginationControls");
+  paginationControls.innerHTML = "";
 
   // Crear botón Previous
-  const previousBtn = document.createElement('li');
-  previousBtn.className = 'paginate_button page-item previous';
-  previousBtn.id = 'apiCallbacks_previous';
+  const previousBtn = document.createElement("li");
+  previousBtn.className = "paginate_button page-item previous";
+  previousBtn.id = "apiCallbacks_previous";
   if (currentPage === 1) {
-    previousBtn.classList.add('disabled');
+    previousBtn.classList.add("disabled");
   }
-  const previousLink = document.createElement('a');
-  previousLink.className = 'page-link';
-  previousLink.href = '#';
-  previousLink.textContent = 'Anterior';
-  previousLink.addEventListener('click', () => cambiarPagina(currentPage - 1));
+  const previousLink = document.createElement("a");
+  previousLink.className = "page-link";
+  previousLink.href = "#";
+  previousLink.textContent = "Anterior";
+  previousLink.addEventListener("click", () => cambiarPagina(currentPage - 1));
   previousBtn.appendChild(previousLink);
   paginationControls.appendChild(previousBtn);
 
@@ -109,43 +106,43 @@ function actualizarControlesPaginacion (totalPages, totalItems) {
   if (totalPages <= maxVisiblePages) {
     // Si hay pocas páginas, mostrar todas
     for (let i = 1; i <= totalPages; i++) {
-      const pageBtn = document.createElement('li');
-      pageBtn.className = 'paginate_button page-item';
+      const pageBtn = document.createElement("li");
+      pageBtn.className = "paginate_button page-item";
       if (i === currentPage) {
-        pageBtn.classList.add('active');
+        pageBtn.classList.add("active");
       }
-      const pageLink = document.createElement('a');
-      pageLink.className = 'page-link';
-      pageLink.href = '#';
+      const pageLink = document.createElement("a");
+      pageLink.className = "page-link";
+      pageLink.href = "#";
       pageLink.textContent = i;
-      pageLink.addEventListener('click', () => cambiarPagina(i));
+      pageLink.addEventListener("click", () => cambiarPagina(i));
       pageBtn.appendChild(pageLink);
       paginationControls.appendChild(pageBtn);
     }
   } else {
     // Mostrar la primera página
-    const firstPageBtn = document.createElement('li');
-    firstPageBtn.className = 'paginate_button page-item';
+    const firstPageBtn = document.createElement("li");
+    firstPageBtn.className = "paginate_button page-item";
     if (currentPage === 1) {
-      firstPageBtn.classList.add('active');
+      firstPageBtn.classList.add("active");
     }
-    const firstPageLink = document.createElement('a');
-    firstPageLink.className = 'page-link';
-    firstPageLink.href = '#';
+    const firstPageLink = document.createElement("a");
+    firstPageLink.className = "page-link";
+    firstPageLink.href = "#";
     firstPageLink.textContent = 1;
-    firstPageLink.addEventListener('click', () => cambiarPagina(1));
+    firstPageLink.addEventListener("click", () => cambiarPagina(1));
     firstPageBtn.appendChild(firstPageLink);
     paginationControls.appendChild(firstPageBtn);
 
     // Agregar puntos suspensivos al inicio si no se muestra la primera página
     if (currentPage > Math.floor(maxVisiblePages / 2) + 1) {
-      const ellipsisStart = document.createElement('li');
-      ellipsisStart.className = 'paginate_button page-item disabled';
-      ellipsisStart.id = 'apiCallbacks_ellipsis';
-      const ellipsisLinkStart = document.createElement('a');
-      ellipsisLinkStart.className = 'page-link';
-      ellipsisLinkStart.href = '#';
-      ellipsisLinkStart.textContent = '…';
+      const ellipsisStart = document.createElement("li");
+      ellipsisStart.className = "paginate_button page-item disabled";
+      ellipsisStart.id = "apiCallbacks_ellipsis";
+      const ellipsisLinkStart = document.createElement("a");
+      ellipsisLinkStart.className = "page-link";
+      ellipsisLinkStart.href = "#";
+      ellipsisLinkStart.textContent = "…";
       ellipsisStart.appendChild(ellipsisLinkStart);
       paginationControls.appendChild(ellipsisStart);
     }
@@ -155,72 +152,72 @@ function actualizarControlesPaginacion (totalPages, totalItems) {
     let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages - 1);
 
     for (let i = startPage; i <= endPage; i++) {
-      const pageBtn = document.createElement('li');
-      pageBtn.className = 'paginate_button page-item';
+      const pageBtn = document.createElement("li");
+      pageBtn.className = "paginate_button page-item";
       if (i === currentPage) {
-        pageBtn.classList.add('active');
+        pageBtn.classList.add("active");
       }
-      const pageLink = document.createElement('a');
-      pageLink.className = 'page-link';
-      pageLink.href = '#';
+      const pageLink = document.createElement("a");
+      pageLink.className = "page-link";
+      pageLink.href = "#";
       pageLink.textContent = i;
-      pageLink.addEventListener('click', () => cambiarPagina(i));
+      pageLink.addEventListener("click", () => cambiarPagina(i));
       pageBtn.appendChild(pageLink);
       paginationControls.appendChild(pageBtn);
     }
 
     // Agregar puntos suspensivos al final si no se muestra la última página
     if (endPage < totalPages - 1) {
-      const ellipsisEnd = document.createElement('li');
-      ellipsisEnd.className = 'paginate_button page-item disabled';
-      ellipsisEnd.id = 'apiCallbacks_ellipsis';
-      const ellipsisLinkEnd = document.createElement('a');
-      ellipsisLinkEnd.className = 'page-link';
-      ellipsisLinkEnd.href = '#';
-      ellipsisLinkEnd.textContent = '…';
+      const ellipsisEnd = document.createElement("li");
+      ellipsisEnd.className = "paginate_button page-item disabled";
+      ellipsisEnd.id = "apiCallbacks_ellipsis";
+      const ellipsisLinkEnd = document.createElement("a");
+      ellipsisLinkEnd.className = "page-link";
+      ellipsisLinkEnd.href = "#";
+      ellipsisLinkEnd.textContent = "…";
       ellipsisEnd.appendChild(ellipsisLinkEnd);
       paginationControls.appendChild(ellipsisEnd);
     }
 
     // Mostrar la última página
-    const lastPageBtn = document.createElement('li');
-    lastPageBtn.className = 'paginate_button page-item';
+    const lastPageBtn = document.createElement("li");
+    lastPageBtn.className = "paginate_button page-item";
     if (currentPage === totalPages) {
-      lastPageBtn.classList.add('active');
+      lastPageBtn.classList.add("active");
     }
-    const lastPageLink = document.createElement('a');
-    lastPageLink.className = 'page-link';
-    lastPageLink.href = '#';
+    const lastPageLink = document.createElement("a");
+    lastPageLink.className = "page-link";
+    lastPageLink.href = "#";
     lastPageLink.textContent = totalPages;
-    lastPageLink.addEventListener('click', () => cambiarPagina(totalPages));
+    lastPageLink.addEventListener("click", () => cambiarPagina(totalPages));
     lastPageBtn.appendChild(lastPageLink);
     paginationControls.appendChild(lastPageBtn);
   }
 
   // Crear botón Next
-  const nextBtn = document.createElement('li');
-  nextBtn.className = 'paginate_button page-item next';
-  nextBtn.id = 'apiCallbacks_next';
+  const nextBtn = document.createElement("li");
+  nextBtn.className = "paginate_button page-item next";
+  nextBtn.id = "apiCallbacks_next";
   if (currentPage === totalPages) {
-    nextBtn.classList.add('disabled');
+    nextBtn.classList.add("disabled");
   }
-  const nextLink = document.createElement('a');
-  nextLink.className = 'page-link';
-  nextLink.href = '#';
-  nextLink.textContent = 'Siguiente';
-  nextLink.addEventListener('click', () => cambiarPagina(currentPage + 1));
+  const nextLink = document.createElement("a");
+  nextLink.className = "page-link";
+  nextLink.href = "#";
+  nextLink.textContent = "Siguiente";
+  nextLink.addEventListener("click", () => cambiarPagina(currentPage + 1));
   nextBtn.appendChild(nextLink);
   paginationControls.appendChild(nextBtn);
 }
 
-async function cambiarPagina (page) {
+async function cambiarPagina(page) {
   if (page !== currentPage) {
     currentPage = page;
     await cargarCliente();
   }
 }
 
-async function onClickNextPage (event) {
+async function onClickNextPage(event) {
   event.preventDefault();
   if (currentPage < totalPages) {
     currentPage++;
@@ -228,7 +225,7 @@ async function onClickNextPage (event) {
   }
 }
 
-async function onClickPrevPage (event) {
+async function onClickPrevPage(event) {
   event.preventDefault();
   if (currentPage > 1) {
     currentPage--;
@@ -237,11 +234,12 @@ async function onClickPrevPage (event) {
 }
 //fin controles de paginación
 
-function cargarTabla (Clientes) {
-  $('#listaClientes').empty()
-  let filas = ''
+function cargarTabla(Clientes) {
+  $("#listaClientes").empty();
+  let filas = "";
+  console.log(Clientes);
   for (let data of Clientes) {
-    let estado = '';
+    let estado = "";
     if (data.estado) {
       estado = '<span class="badge badge-pill badge-success">Activo</span>';
     } else {
@@ -262,15 +260,20 @@ function cargarTabla (Clientes) {
             </td>
             <td class="border-b border-gray-200 bg-white text-sm">
               <button type="button" class="btn btn-light btn-sm">
-                <a href="/clientes-detalle.html?id=${data.id}"><i class="icon icon-eye2"></i></a>
+                <a href="/clientes-detalle.html?id=${
+                  data.id
+                }"><i class="icon icon-eye2"></i></a>
               </button>
-              <button type="button" class="btn btn-primary btn-sm ml-2" data-id="${data.id}">
+              <button type="button" class="btn btn-primary btn-sm ml-2" data-id="${
+                data.id
+              }">
                 <i class="icon icon-bin"></i>
               </button>
             </td>
-          </tr>`
+          </tr>`;
   }
-  let tabla_resultado = `
+  let tabla_resultado =
+    `
     <table class="table m-0" id="tablaCliente"">
         <thead class="thead-default">
           <tr>
@@ -291,35 +294,34 @@ function cargarTabla (Clientes) {
             </th>
           </tr>
         </thead>
-        <tbody>`+ filas + `
+        <tbody>` +
+    filas +
+    `
           
         </tbody>
-      </table>`
-  $('#listaClientes').append(tabla_resultado)
-  document.querySelectorAll('.btn-primary.btn-sm.ml-2').forEach(button => {
-    button.addEventListener('click', () => {
+      </table>`;
+  $("#listaClientes").append(tabla_resultado);
+  document.querySelectorAll(".btn-primary.btn-sm.ml-2").forEach((button) => {
+    button.addEventListener("click", () => {
       //const id = button.getAttribute('data-id');
-      eliminarCliente(button.getAttribute('data-id'));
+      eliminarCliente(button.getAttribute("data-id"));
     });
   });
 }
 
-
-
-async function eliminarCliente (id) {
+async function eliminarCliente(id) {
   //var respuesta = confirm("¿Estás seguro de que deseas eliminar?");
 
   alertDialog.createAlertDialog(
-    'confirm',
-    'Confirmar Alerta',
-    '¿Estás seguro de que deseas eliminar el slider?',
-    'Cancelar',
-    'Continuar',
+    "confirm",
+    "Confirmar Alerta",
+    "¿Estás seguro de que deseas eliminar el slider?",
+    "Cancelar",
+    "Continuar",
     async () => {
       try {
         const result = await borrarCliente(id);
         if (result) {
-
           console.log("Cliente eliminado exitosamente");
           // Recargar la tabla de Clientes
           await cargarCliente();
@@ -327,38 +329,36 @@ async function eliminarCliente (id) {
           console.error("Error al eliminar la Cliente");
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     }
   );
-
 }
 
 //filtro
-async function filtrarClientesAction () {
-  const btnFiltrar = document.getElementById('filtrar-Cliente');
+async function filtrarClientesAction() {
+  const btnFiltrar = document.getElementById("filtrar-Cliente");
 
-  btnFiltrar.addEventListener('click', async (event) => {
+  btnFiltrar.addEventListener("click", async (event) => {
     event.preventDefault();
-    const nombre = document.getElementById('nombre-Cliente').value;
-    const apellido = document.getElementById('apellido-Cliente').value;
-    const correo = document.getElementById('correo-Cliente').value;
+    const nombre = document.getElementById("nombre-Cliente").value;
+    const apellido = document.getElementById("apellido-Cliente").value;
+    const correo = document.getElementById("correo-Cliente").value;
 
     currentPage = 1;
-
 
     // Construir el objeto de filtro
     currentFilter = {
       nombres: nombre,
       apellidos: apellido,
-      correo: correo
+      correo: correo,
     };
     try {
       // Filtrar pedidos con los parámetros actuales
       const filtro = {
         ...currentFilter,
         page: currentPage,
-        limit: DEFAULT_PAGE_LIMIT
+        limit: DEFAULT_PAGE_LIMIT,
       };
       //console.log("filtro:", filtro)
       const clientesFiltrados = await filtrarClientes(filtro);
@@ -368,24 +368,22 @@ async function filtrarClientesAction () {
       totalPages = Math.ceil(clientesFiltrados.totalItems / DEFAULT_PAGE_LIMIT);
       actualizarControlesPaginacion(totalPages, clientesFiltrados.totalItems);
     } catch (error) {
-      console.error('Error al filtrar pedidos:', error);
+      console.error("Error al filtrar pedidos:", error);
     }
-
   });
 }
 
-
-function limpiarDatos () {
-  const limpiarDatosFiltro = document.getElementById('limpiar-filtro');
-  limpiarDatosFiltro.addEventListener('click', (event) => {
+function limpiarDatos() {
+  const limpiarDatosFiltro = document.getElementById("limpiar-filtro");
+  limpiarDatosFiltro.addEventListener("click", (event) => {
     event.preventDefault();
-    const form = document.getElementById('filtrarCliente');
+    const form = document.getElementById("filtrarCliente");
     form.reset();
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   cargarCliente();
   filtrarClientesAction();
-  limpiarDatos()
+  limpiarDatos();
 });
