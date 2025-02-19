@@ -1,36 +1,34 @@
-const sequelize = require('sequelize');
-const { Op } = require('sequelize');
-const Cliente = require('../models/cliente');
-const Artesano = require('../models/artesano');
-const Producto = require('../models/producto');
+const sequelize = require("sequelize");
+const { Op } = require("sequelize");
+const Cliente = require("../models/cliente");
+const Artesano = require("../models/artesano");
+const Producto = require("../models/producto");
 
+function generateReport(req, res) {
+  const reportType = req.query.reportType;
 
+  if (!reportType) {
+    return res.status(400).json({ error: "Invalid request data" });
+  }
 
-function generateReport (req, res) {
-    const reportType = req.query.reportType;
+  try {
+    let sql = "";
 
-    if (!reportType) {
-        return res.status(400).json({ error: 'Invalid request data' });
-    }
-
-    try {
-        let sql = '';
-
-        switch (reportType) {
-            case 'clientes':
-                sql = `
+    switch (reportType) {
+      case "clientes":
+        sql = `
                     SELECT *
                     FROM cliente;`;
-                break;
+        break;
 
-            case 'artesanos':
-                sql = `
+      case "artesanos":
+        sql = `
                     SELECT *
                     FROM artesano;`;
-                break;
+        break;
 
-            case 'productos':
-                sql = `
+      case "productos":
+        sql = `
                     SELECT 
                         p.*,
                         c.denominacion AS Categoria,
@@ -43,30 +41,35 @@ function generateReport (req, res) {
                     JOIN categoria c ON p.categoria_id = c.id
                     JOIN artesano a ON p.artesano_id = a.id;
                 `;
-                break;
+        break;
 
-            default:
-                return res.status(400).json({ error: 'Invalid report type' });
-        }
+      case "ventas":
+        sql = `
+                SELECT *
+                FROM pedido;
+                `;
+        break;
 
-        Cliente.sequelize.query(sql, {
-            type: Cliente.sequelize.QueryTypes.SELECT
-        })
-            .then(resultset => {
-                res.status(200).json(resultset);
-            })
-            .catch(error => {
-                res.status(400).send(error);
-            });
-        //const [results, metadata] = await Cliente.sequelize.query(sql, { type: Cliente.sequelize.QueryTypes.SELECT });
-
-        //return res.status(200).json(results);
-    } catch (error) {
-        console.error('Error generating report:', error);
-        return res.status(500).json({ error: 'Internal server error' });
+      default:
+        return res.status(400).json({ error: "Invalid report type" });
     }
-};
+
+    Cliente.sequelize
+      .query(sql, {
+        type: Cliente.sequelize.QueryTypes.SELECT,
+      })
+      .then((resultset) => {
+        res.status(200).json(resultset);
+      })
+      .catch((error) => {
+        res.status(400).send(error);
+      });
+  } catch (error) {
+    console.error("Error generating report:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
 
 module.exports = {
-    generateReport
+  generateReport,
 };

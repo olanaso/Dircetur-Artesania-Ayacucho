@@ -1,49 +1,45 @@
-import { reporteGeneral } from './api'
+import { reporteGeneral } from "./api";
 
-
-import { loadPartials } from '../utils/viewpartials';
-import { createXLS } from '../utils/exportexcel';
-import { hideLoading, llenarinformacionIESTPProg, checkSession } from '../utils/init';
-import { showToast } from '../utils/toast';
-
+import { loadPartials } from "../utils/viewpartials";
+import { createXLS } from "../utils/exportexcel";
+import {
+  hideLoading,
+  llenarinformacionIESTPProg,
+  checkSession,
+} from "../utils/init";
+import { showToast } from "../utils/toast";
 
 hideLoading();
 // Uso de la función
 (async function () {
-    let partials = [
-        { path: 'partials/shared/header.html', container: 'app-header' },
-        { path: 'partials/shared/menu.html', container: 'app-side' },
+  let partials = [
+    { path: "partials/shared/header.html", container: "app-header" },
+    { path: "partials/shared/menu.html", container: "app-side" },
+  ];
+  try {
+    await loadPartials(partials);
+    import("../utils/common");
 
+    // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
+    console.log("Las vistas parciales se han cargado correctamente!");
+    // Por ejemplo, podrías iniciar tu aplicación aquí.
 
-    ];
-    try {
-        await loadPartials(partials);
-        import('../utils/common')
-
-
-        // Aquí coloca el código que deseas ejecutar después de que todas las vistas parciales se hayan cargado.
-        console.log('Las vistas parciales se han cargado correctamente!');
-        // Por ejemplo, podrías iniciar tu aplicación aquí.
-
-        startApp();
-    } catch (e) {
-        console.error(e);
-    }
+    startApp();
+  } catch (e) {
+    console.error(e);
+  }
 })();
 
-function startApp () {
-    checkSession();
-    setTimeout(function () {
-        llenarinformacionIESTPProg();
-    }, 500);
-
+function startApp() {
+  checkSession();
+  setTimeout(function () {
+    llenarinformacionIESTPProg();
+  }, 500);
 }
 
-
-
 /* (en caso de querer personalizar campos de reportes en general)*/
-document.getElementById('reportType').addEventListener('change', function () {
-    /*const reportType = this.value;
+document.getElementById("reportType").addEventListener("change", function () {
+  /*const reportType = this.value;
     const checkboxContainer = document.getElementById('checkboxContainer');
     checkboxContainer.innerHTML = ''; // Clear previous checkboxes
 
@@ -99,7 +95,6 @@ document.getElementById('reportType').addEventListener('change', function () {
     }*/
 });
 
-
 /*document.getElementById('btn-reporte').addEventListener('click', async function(event) {
     event.preventDefault()
     const selectedReportType = document.getElementById('reportType').value;
@@ -115,20 +110,18 @@ document.getElementById('reportType').addEventListener('change', function () {
     }
 });*/
 
+document
+  .getElementById("btn-exportarexcel")
+  .addEventListener("click", async function (event) {
+    event.preventDefault();
 
-
-
-document.getElementById('btn-exportarexcel').addEventListener('click', async function (event) {
-    event.preventDefault()
-
-
-    const selectedReportType = document.getElementById('reportType').value;
+    const selectedReportType = document.getElementById("reportType").value;
+    console.log({ selectedReportType });
 
     if (selectedReportType == 0) {
-        showToast('Escoge el tipo de reporte');
-        return;
+      showToast("Escoge el tipo de reporte");
+      return;
     }
-
 
     /*const selectedAttributes = Array.from(document.querySelectorAll('#checkboxContainer input:checked')).map(input => input.value);
 
@@ -144,59 +137,80 @@ document.getElementById('btn-exportarexcel').addEventListener('click', async fun
        
    } */
     switch (selectedReportType) {
-        case 'productos':
-            const response1 = await reporteGeneral(selectedReportType);
-            createXLS(response1, "productos", "select artesano_id as id, nombres_es as nombre, resumen_es as resumen, descripcion_es as descripcion, cualidades_es as cualidades,  palabra_clave_es as palabraclave, numero_piezas_es as numero_piezas, alto, ancho, materiales_es as materiales, precio, peso, tecnicas_es as tecnicas,  cantidad, cantidad_minima, restar_stock, tipo_estado, fecha_disponible, igv, precios_envio, precio_local, precio_nacional, precio_extranjero, tiempo_elaboracion, tiempo_envio, preventas from ")
+      case "productos":
+        const response1 = await reporteGeneral(selectedReportType);
+        createXLS(
+          response1,
+          "productos",
+          "select artesano_id as id, nombres_es as nombre, resumen_es as resumen, descripcion_es as descripcion, cualidades_es as cualidades,  palabra_clave_es as palabraclave, numero_piezas_es as numero_piezas, alto, ancho, materiales_es as materiales, precio, peso, tecnicas_es as tecnicas,  cantidad, cantidad_minima, restar_stock, tipo_estado, fecha_disponible, igv, precios_envio, precio_local, precio_nacional, precio_extranjero, tiempo_elaboracion, tiempo_envio, preventas from "
+        );
 
-            showToast('Generando reporte');
-            break;
-        case 'artesanos':
-            const response2 = await reporteGeneral(selectedReportType);
-            createXLS(response2, "artesanos", "select dni, ruc, nombres, apellidos, correo, celular, telefonos, ubigeo, lugar_nacimiento, lengua_materna,  estado from ")
+        showToast("Generando reporte");
+        break;
+      case "artesanos":
+        const response2 = await reporteGeneral(selectedReportType);
+        createXLS(
+          response2,
+          "artesanos",
+          "select dni, ruc, nombres, apellidos, correo, celular, telefonos, ubigeo, lugar_nacimiento, lengua_materna,  estado from "
+        );
 
-            showToast('Generando reporte');
-            break;
-        case 'clientes':
-            const response3 = await reporteGeneral(selectedReportType);
-            createXLS(response3, "clientes", "select nombres, apellidos, correo, telefono, direccion, pais, region, ciudad, tipo_documento, numero_documento, direccion_envio, estado from ")
+        showToast("Generando reporte");
+        break;
+      case "clientes":
+        const response3 = await reporteGeneral(selectedReportType);
+        createXLS(
+          response3,
+          "clientes",
+          "select nombres, apellidos, correo, telefono, direccion, pais, region, ciudad, tipo_documento, numero_documento, direccion_envio, estado from "
+        );
 
-            showToast('Generando reporte');
-            break;
-        default:
-            break;
+        showToast("Generando reporte");
+        break;
+
+      case "ventas":
+        const responseVentas = await reporteGeneral(selectedReportType);
+        console.log(responseVentas);
+        createXLS(
+          responseVentas,
+          "ventas",
+          "select num_pedido, artesano_id, cliente_id, fecha_pedido, estado, list_productos, list_atencion, createdAt, updatedAt from "
+        );
+        showToast("Generando reporte");
+        break;
+      default:
+        break;
     }
+  });
 
+function generateTable(data, attributes) {
+  const tableContainer = document.getElementById("tablaReportes");
+  tableContainer.innerHTML = ""; // Clear previous table
 
-});
+  const table = document.createElement("table");
+  table.classList.add("table", "table-striped");
 
-function generateTable (data, attributes) {
-    const tableContainer = document.getElementById('tablaReportes');
-    tableContainer.innerHTML = ''; // Clear previous table
+  const thead = document.createElement("thead");
+  const headerRow = document.createElement("tr");
+  attributes.forEach((attr) => {
+    const th = document.createElement("th");
+    th.innerText = attr;
+    headerRow.appendChild(th);
+  });
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
 
-    const table = document.createElement('table');
-    table.classList.add('table', 'table-striped');
-
-    const thead = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    attributes.forEach(attr => {
-        const th = document.createElement('th');
-        th.innerText = attr;
-        headerRow.appendChild(th);
+  const tbody = document.createElement("tbody");
+  data.forEach((item) => {
+    const row = document.createElement("tr");
+    attributes.forEach((attr) => {
+      const td = document.createElement("td");
+      td.innerText = item[attr] !== null ? item[attr] : "";
+      row.appendChild(td);
     });
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
+    tbody.appendChild(row);
+  });
+  table.appendChild(tbody);
 
-    const tbody = document.createElement('tbody');
-    data.forEach(item => {
-        const row = document.createElement('tr');
-        attributes.forEach(attr => {
-            const td = document.createElement('td');
-            td.innerText = item[attr] !== null ? item[attr] : '';
-            row.appendChild(td);
-        });
-        tbody.appendChild(row);
-    });
-    table.appendChild(tbody);
-
-    tableContainer.appendChild(table);
+  tableContainer.appendChild(table);
 }
