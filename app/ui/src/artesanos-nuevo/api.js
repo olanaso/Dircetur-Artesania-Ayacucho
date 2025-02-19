@@ -1,35 +1,33 @@
-import { baseUrl, baseUrldni, getDataFromLocalStorage } from '../utils/config';
+import { baseUrl, baseUrldni, getDataFromLocalStorage } from "../utils/config";
 
-export async function getprogramasbyIESTP (iestpid) {
+export async function getprogramasbyIESTP(iestpid) {
   try {
-
     const myHeaders = new Headers();
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      redirect: 'follow'
+      redirect: "follow",
     };
 
-    const response = await fetch(baseUrl + "/api/listarProgramasIESTP?iestpid=" + iestpid, requestOptions);
+    const response = await fetch(
+      baseUrl + "/api/listarProgramasIESTP?iestpid=" + iestpid,
+      requestOptions
+    );
     const result = await response.json();
 
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
   }
-
 }
 
-
-
-export async function buscarDNI (dni) {
+export async function buscarDNI(dni) {
   try {
-
     const myHeaders = new Headers();
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      redirect: 'follow'
+      redirect: "follow",
     };
 
     const response = await fetch(baseUrldni + "/dni/" + dni, requestOptions);
@@ -37,16 +35,11 @@ export async function buscarDNI (dni) {
 
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
   }
-
 }
 
-
-
-
-export async function buscarArtesano (filtro) {
-
+export async function buscarArtesano(filtro) {
   try {
     const params = new URLSearchParams(filtro);
     const response = await fetch(baseUrl + `/artesanos?${params}`);
@@ -57,8 +50,7 @@ export async function buscarArtesano (filtro) {
   }
 }
 
-
-export async function guardarArtesano (artesano) {
+export async function guardarArtesano(artesano) {
   if (artesano.artesanoId != 0) {
     artesano.id = artesano.artesanoId;
   }
@@ -80,10 +72,7 @@ export async function guardarArtesano (artesano) {
   }
 }
 
-
-
-export async function guardarArtesanoUsuario (artesano, usuario) {
-
+export async function guardarArtesanoUsuario(artesano, usuario) {
   const settings = {
     method: "POST",
     headers: {
@@ -93,16 +82,18 @@ export async function guardarArtesanoUsuario (artesano, usuario) {
   };
 
   try {
-
-    const response = await fetch(baseUrl + "/artesano/saveusuarioartesano/", settings);
+    const response = await fetch(
+      baseUrl + "/artesano/saveusuarioartesano/",
+      settings
+    );
     const data = await response.json();
     return data; // Ahora data contiene el ID del objeto creado y otros datos
-
   } catch (error) {
-    alert('Ocurrio un error en el registro, verifica si el usuario esta registrado')
+    alert(
+      "Ocurrio un error en el registro, verifica si el usuario con ese DNI ya esta registrado como CLIENTE o ARTESANO"
+    );
     console.error("Error:", error);
     location.reload();
-
   }
 }
 //comprobar en donde se usa y borrar
@@ -128,15 +119,13 @@ export async function guardarArtesanoUsuario (artesano, usuario) {
 //   }
 // }
 
-
-export async function geteditarArtesano (id) {
+export async function geteditarArtesano(id) {
   try {
-
     const myHeaders = new Headers();
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      redirect: 'follow'
+      redirect: "follow",
     };
 
     const response = await fetch(baseUrl + "/artesano/" + id, requestOptions);
@@ -144,19 +133,17 @@ export async function geteditarArtesano (id) {
 
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
   }
-
 }
 
-export async function llenardepartamento () {
+export async function llenardepartamento() {
   try {
-
     const myHeaders = new Headers();
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      redirect: 'follow'
+      redirect: "follow",
     };
 
     const response = await fetch(baseUrl + "/departamento", requestOptions);
@@ -164,61 +151,59 @@ export async function llenardepartamento () {
 
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
   }
-
 }
 
-export async function llenarprovincia (iddepartamento) {
+export async function llenarprovincia(iddepartamento) {
   try {
-
     const myHeaders = new Headers();
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      redirect: 'follow'
+      redirect: "follow",
     };
 
-    const response = await fetch(baseUrl + "/ubigeo-provincias/" + iddepartamento, requestOptions);
+    const response = await fetch(
+      baseUrl + "/ubigeo-provincias/" + iddepartamento,
+      requestOptions
+    );
     const result = await response.json();
 
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
   }
-
 }
 
-export async function llenardistrito (idprovincia) {
+export async function llenardistrito(idprovincia) {
   try {
-
     const myHeaders = new Headers();
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      redirect: 'follow'
+      redirect: "follow",
     };
 
-    const response = await fetch(baseUrl + "/ubigeo-distritos/" + idprovincia, requestOptions);
+    const response = await fetch(
+      baseUrl + "/ubigeo-distritos/" + idprovincia,
+      requestOptions
+    );
     const result = await response.json();
 
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
   }
-
 }
 
-
-
-export async function geteditarLogin (id) {
+export async function geteditarLogin(id) {
   try {
-
     const myHeaders = new Headers();
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      redirect: 'follow'
+      redirect: "follow",
     };
 
     const response = await fetch(baseUrl + "/usuario/" + id, requestOptions);
@@ -226,28 +211,17 @@ export async function geteditarLogin (id) {
 
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
   }
-
 }
 
-
-
-
-
-
-
-
-
-
-export async function getusuariocapacitacion (dni) {
+export async function getusuariocapacitacion(dni) {
   try {
-
     const myHeaders = new Headers();
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      redirect: 'follow'
+      redirect: "follow",
     };
 
     const response = await fetch(baseUrl + "/api/nota/" + dni, requestOptions);
@@ -255,12 +229,11 @@ export async function getusuariocapacitacion (dni) {
 
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
   }
-
 }
 
-export async function deleteUserCapacitacion (usuario) {
+export async function deleteUserCapacitacion(usuario) {
   const settings = {
     method: "DELETE",
     headers: {
@@ -272,17 +245,13 @@ export async function deleteUserCapacitacion (usuario) {
   try {
     const response = await fetch(baseUrl + "/api/nota", settings);
     const data = await response.json();
-    return data
+    return data;
   } catch (error) {
     console.error("Error:", error);
   }
 }
 
-
-
-
-
-export async function nuevoUserCapacitacion (usuario) {
+export async function nuevoUserCapacitacion(usuario) {
   if (usuario.programaid == 0) {
     usuario.programaid = null;
   }
@@ -298,7 +267,7 @@ export async function nuevoUserCapacitacion (usuario) {
   try {
     const response = await fetch(baseUrl + "/api/nota", settings);
     const data = await response.json();
-    return data
+    return data;
   } catch (error) {
     console.error("Error:", error);
   }
