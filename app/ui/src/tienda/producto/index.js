@@ -1,129 +1,139 @@
-
-
 import { loadPartials } from "../../utils/viewpartials.js";
-import { getPortadaBusqueda, busquedaProductos, listarComentarios, nuevoComentario, obtenerPuntuacion, enviarPuntuacion, postIndicadores } from './api';
-import { custom } from '../utils/common.js';
+import {
+  getPortadaBusqueda,
+  busquedaProductos,
+  listarComentarios,
+  nuevoComentario,
+  obtenerPuntuacion,
+  enviarPuntuacion,
+  postIndicadores,
+} from "./api";
+import { custom } from "../utils/common.js";
 import { obtenerProducto } from "../producto/api.js";
 
-
 (async function () {
-    let partials = [
-        { path: '../partials/tienda/header.html', container: 'header' },
-        { path: '../partials/tienda/footer.html', container: 'footer' },
-    ];
-    try {
+  let partials = [
+    { path: "../partials/tienda/header.html", container: "header" },
+    { path: "../partials/tienda/footer.html", container: "footer" },
+  ];
+  try {
+    await loadPartials(partials);
+    custom();
+    console.log("Las vistas parciales se han cargado correctamente!");
 
-        await loadPartials(partials);
-        custom()
-        console.log('Las vistas parciales se han cargado correctamente!');
-
-        startApp();
-    } catch (e) {
-        console.error(e);
-    }
+    startApp();
+  } catch (e) {
+    console.error(e);
+  }
 })();
 
-
-function startApp () {
-    createMenuMobil()
-    //createSlidersProd()
-    // cargarDataPortada();
-    // rellenarFormulario();
-    // realizarBusqueda();
-    obtenerUrlProducto()
+function startApp() {
+  createMenuMobil();
+  //createSlidersProd()
+  // cargarDataPortada();
+  // rellenarFormulario();
+  // realizarBusqueda();
+  obtenerUrlProducto();
 }
 
 const setearPuntuacion = async (productoid) => {
+  let puntuacion = await obtenerPuntuacion(productoid);
+  puntuacion = puntuacion > 5 ? 5 : puntuacion;
+  puntuacion = puntuacion < 0 ? 0 : puntuacion;
 
-    let puntuacion = await obtenerPuntuacion(productoid);
-    puntuacion = puntuacion > 5 ? 5 : puntuacion;
-    puntuacion = puntuacion < 0 ? 0 : puntuacion;
+  const estrella = document.querySelector(
+    `input[name="rate"][value="${puntuacion}"]`
+  );
 
-    const estrella = document.querySelector(`input[name="rate"][value="${puntuacion}"]`);
-
-    if (estrella) {
-        estrella.checked = true;
-    }
-}
+  if (estrella) {
+    estrella.checked = true;
+  }
+};
 
 const enviarCalificacion = async (productoId) => {
-    document.querySelectorAll('input[name="rate"]').forEach(star => {
-        star.addEventListener('change', async () => {
-            const idCliente = localStorage.getItem('idCliente');
+  document.querySelectorAll('input[name="rate"]').forEach((star) => {
+    star.addEventListener("change", async () => {
+      const idCliente = localStorage.getItem("idCliente");
 
-            if (!idCliente) {
-                star.checked = false;
-                setearPuntuacion(productoId);
-                alert('Debes iniciar sesión para poder calificar el producto.');
-                return;
-            }
+      if (!idCliente) {
+        star.checked = false;
+        setearPuntuacion(productoId);
+        alert("Debes iniciar sesión para poder calificar el producto.");
+        return;
+      }
 
-            const valor = star.value;
+      const valor = star.value;
 
-            const data = {
-                productoid: productoId,
-                valor: parseInt(valor)
-            };
+      const data = {
+        productoid: productoId,
+        valor: parseInt(valor),
+      };
 
-            const resp = await enviarPuntuacion(data);
+      const resp = await enviarPuntuacion(data);
 
-            const ratingContainer = document.querySelector('.rating-container');
-            const mensajeElement = document.createElement('p');
-            mensajeElement.style.color = resp ? '#4caf50' : '#f44336';
-            mensajeElement.style.fontWeight = 'bold';
+      const ratingContainer = document.querySelector(".rating-container");
+      const mensajeElement = document.createElement("p");
+      mensajeElement.style.color = resp ? "#4caf50" : "#f44336";
+      mensajeElement.style.fontWeight = "bold";
 
-            if (resp) {
-                mensajeElement.textContent = '¡Gracias por tu calificación!';
-                setearPuntuacion(productoId);
-            } else {
-                mensajeElement.textContent = 'Ocurrió un error al enviar tu calificación.';
-            }
+      if (resp) {
+        mensajeElement.textContent = "¡Gracias por tu calificación!";
+        setearPuntuacion(productoId);
+      } else {
+        mensajeElement.textContent =
+          "Ocurrió un error al enviar tu calificación.";
+      }
 
-            ratingContainer.appendChild(mensajeElement);
+      ratingContainer.appendChild(mensajeElement);
 
-            setTimeout(() => {
-                mensajeElement.remove();
-            }, 3000);
-        });
+      setTimeout(() => {
+        mensajeElement.remove();
+      }, 3000);
     });
-}
+  });
+};
 
 const obtenerComentarios = async (id) => {
-    const commentsList = document.querySelector('.comments-list');
+  const commentsList = document.querySelector(".comments-list");
 
-    try {
-        commentsList.innerHTML = '';
+  try {
+    commentsList.innerHTML = "";
 
-        const comentarios = await listarComentarios(id);
+    const comentarios = await listarComentarios(id);
 
-        if (!comentarios || comentarios.length === 0) {
-            commentsList.innerHTML = '<div id="noComentarios" style="text-align: center; padding: 20px; color: #666; font-size: 16px; font-style: italic; border: 1px dashed #ccc; border-radius: 8px; margin: 10px 0;">No hay comentarios disponibles para este producto.</div>';
-            return;
-        }
+    if (!comentarios || comentarios.length === 0) {
+      commentsList.innerHTML =
+        '<div id="noComentarios" style="text-align: center; padding: 20px; color: #666; font-size: 16px; font-style: italic; border: 1px dashed #ccc; border-radius: 8px; margin: 10px 0;">No hay comentarios disponibles para este producto.</div>';
+      return;
+    }
 
-        const comentariosOrdenados = comentarios.sort((a, b) =>
-            new Date(b.createdAt) - new Date(a.createdAt)
-        );
+    const comentariosOrdenados = comentarios.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
 
-        const fragment = document.createDocumentFragment();
+    const fragment = document.createDocumentFragment();
 
-        comentariosOrdenados.forEach(comentario => {
-            const newCommentElement = document.createElement('div');
-            newCommentElement.classList.add('comment', 'fadeInUp');
+    comentariosOrdenados.forEach((comentario) => {
+      const newCommentElement = document.createElement("div");
+      newCommentElement.classList.add("comment", "fadeInUp");
 
-            const fecha = new Date(comentario.createdAt);
-            const fechaFormateada = fecha.toLocaleDateString('es-ES', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
+      const fecha = new Date(comentario.createdAt);
+      const fechaFormateada = fecha.toLocaleDateString("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
 
-            const nombres = comentario.cliente ? comentario.cliente.nombres ?? 'User' : 'User';
-            const apellidos = comentario.cliente ? comentario.cliente.apellidos ?? 'User' : 'User';
+      const nombres = comentario.cliente
+        ? comentario.cliente.nombres ?? "User"
+        : "User";
+      const apellidos = comentario.cliente
+        ? comentario.cliente.apellidos ?? "User"
+        : "User";
 
-            const iniciales = (nombres.charAt(0) + apellidos.charAt(0)).toUpperCase();
+      const iniciales = (nombres.charAt(0) + apellidos.charAt(0)).toUpperCase();
 
-            newCommentElement.innerHTML = `
+      newCommentElement.innerHTML = `
                 <div class="comment-avatar">
                     <div class='avatar-initial'>${iniciales}</div>
                 </div>
@@ -136,87 +146,86 @@ const obtenerComentarios = async (id) => {
                 </div>
             `;
 
-            fragment.appendChild(newCommentElement);
-        });
+      fragment.appendChild(newCommentElement);
+    });
 
-        commentsList.appendChild(fragment);
-
-    } catch (error) {
-        console.error('Error al cargar comentarios:', error);
-        commentsList.innerHTML = '<div class="error-message">Ocurrió un error al cargar los comentarios.</div>';
-    }
-}
+    commentsList.appendChild(fragment);
+  } catch (error) {
+    console.error("Error al cargar comentarios:", error);
+    commentsList.innerHTML =
+      '<div class="error-message">Ocurrió un error al cargar los comentarios.</div>';
+  }
+};
 
 const agregarComentario = async (artesaniaId) => {
+  const commentForm = document.getElementById("comment-form");
+  const newCommentTextarea = document.getElementById("new-comment");
+  const commentsList = document.querySelector(".comments-list");
 
-    const commentForm = document.getElementById('comment-form');
-    const newCommentTextarea = document.getElementById('new-comment');
-    const commentsList = document.querySelector('.comments-list');
+  const loaderComentario = document.getElementById("loaderComentario");
 
-    const loaderComentario = document.getElementById('loaderComentario');
+  commentForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-    commentForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
+    loaderComentario.style.display = "block";
 
-        loaderComentario.style.display = 'block';
+    const idCliente = localStorage.getItem("idCliente");
 
-        const idCliente = localStorage.getItem('idCliente')
+    if (!idCliente || idCliente === "null" || idCliente === "undefined") {
+      loaderComentario.style.display = "none";
+      alert("Debes iniciar sesión para poder comentar.");
+      return;
+    }
 
-        if (!idCliente || idCliente === 'null' || idCliente === 'undefined') {
-            loaderComentario.style.display = 'none';
-            alert('Debes iniciar sesión para poder comentar.');
-            return;
-        }
+    const comentario = newCommentTextarea.value.trim();
 
-        const comentario = newCommentTextarea.value.trim();
+    if (comentario.length === 0) {
+      loaderComentario.style.display = "none";
+      alert("Por favor, escribe un comentario antes de enviarlo.");
+      return;
+    }
 
-        if (comentario.length === 0) {
-            loaderComentario.style.display = 'none';
-            alert('Por favor, escribe un comentario antes de enviarlo.');
-            return;
-        }
+    try {
+      const objComentario = {
+        clienteid: Number(idCliente),
+        productoid: artesaniaId,
+        nropagina: 1,
+        comentario,
+      };
 
-        try {
-            const objComentario = {
-                clienteid: Number(idCliente),
-                productoid: artesaniaId,
-                nropagina: 1,
-                comentario,
-            };
+      const data = await nuevoComentario(objComentario);
 
-            const data = await nuevoComentario(objComentario);
+      if (data === null || data === undefined) {
+        loaderComentario.style.display = "none";
+        alert("Ocurrió un error al enviar el comentario.");
+        return;
+      }
 
-            if (data === null || data === undefined) {
-                loaderComentario.style.display = 'none';
-                alert('Ocurrió un error al enviar el comentario.');
-                return;
-            }
+      // Quita el mensaje de "No hay comentarios"
+      const noComentarios = document.getElementById("noComentarios");
+      if (noComentarios) {
+        noComentarios.remove();
+      }
 
-            // Quita el mensaje de "No hay comentarios"
-            const noComentarios = document.getElementById('noComentarios');
-            if (noComentarios) {
-                noComentarios.remove();
-            }
+      newCommentTextarea.value = "";
 
-            newCommentTextarea.value = '';
+      // agregar el nuevo comentario a la lista
+      const fecha = new Date(data.createdAt);
+      const fechaFormateada = fecha.toLocaleDateString("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
 
-            // agregar el nuevo comentario a la lista
-            const fecha = new Date(data.createdAt);
-            const fechaFormateada = fecha.toLocaleDateString('es-ES', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
+      const nombres = data.cliente.nombres || "";
+      const apellidos = data.cliente.apellidos || "";
 
-            const nombres = data.cliente.nombres || '';
-            const apellidos = data.cliente.apellidos || '';
+      const iniciales = (nombres.charAt(0) + apellidos.charAt(0)).toUpperCase();
 
-            const iniciales = (nombres.charAt(0) + apellidos.charAt(0)).toUpperCase();
+      const newCommentElement = document.createElement("div");
+      newCommentElement.classList.add("comment", "fadeInUp");
 
-            const newCommentElement = document.createElement('div');
-            newCommentElement.classList.add('comment', 'fadeInUp');
-
-            newCommentElement.innerHTML = `
+      newCommentElement.innerHTML = `
                 <div class="comment-avatar">
                     <div class='avatar-initial'>${iniciales}</div>
                 </div>
@@ -229,380 +238,448 @@ const agregarComentario = async (artesaniaId) => {
                 </div>
             `;
 
-            commentsList.prepend(newCommentElement);
-
-        } catch (error) {
-            console.error('Error al enviar comentario:', error);
-            alert('Ocurrió un error al enviar el comentario.');
-        } finally {
-            loaderComentario.style.display = 'none';
-        }
-    });
-
-}
+      commentsList.prepend(newCommentElement);
+    } catch (error) {
+      console.error("Error al enviar comentario:", error);
+      alert("Ocurrió un error al enviar el comentario.");
+    } finally {
+      loaderComentario.style.display = "none";
+    }
+  });
+};
 
 const enviarIndicadores = async (artesania) => {
-    const cliente = JSON.parse(localStorage.getItem('cliente') || '{}');
+  const cliente = JSON.parse(localStorage.getItem("cliente") || "{}");
 
-    let nombreCompleto = null;
+  let nombreCompleto = null;
 
-    if (cliente?.nombres && cliente?.apellidos) {
-        nombreCompleto = cliente?.nombres + ' ' + cliente?.apellidos;
-    } else if (cliente?.nombres) {
-        nombreCompleto = cliente?.nombres;
-    } else if (cliente?.apellidos) {
-        nombreCompleto = cliente?.apellidos;
-    }
+  if (cliente?.nombres && cliente?.apellidos) {
+    nombreCompleto = cliente?.nombres + " " + cliente?.apellidos;
+  } else if (cliente?.nombres) {
+    nombreCompleto = cliente?.nombres;
+  } else if (cliente?.apellidos) {
+    nombreCompleto = cliente?.apellidos;
+  }
 
-    const indicadores = {
-        cliente: nombreCompleto,
-        clienteid: cliente?.id || null,
-        productoid: artesania.id,
-        producto: artesania.nombre_es,
-        fecha_cliente: new Date().toISOString(),
-        url: window.location.href,
-    }
+  const indicadores = {
+    cliente: nombreCompleto,
+    clienteid: cliente?.id || null,
+    productoid: artesania.id,
+    producto: artesania.nombre_es,
+    fecha_cliente: new Date().toISOString(),
+    url: window.location.href,
+  };
 
-    await postIndicadores(indicadores);
+  await postIndicadores(indicadores);
+};
+
+function obtenerUrlProducto() {
+  const queryString = window.location.search;
+
+  // Parsear la cadena de consulta para obtener los parámetros
+  const urlParams = new URLSearchParams(queryString);
+
+  // Obtener el valor del parámetro 'data'
+  const data = urlParams.get("producto");
+
+  // Decodificar y convertir el objeto JSON nuevamente
+  if (data) {
+    const artesaniaenviada = JSON.parse(data);
+    console.log({ artesaniaenviada });
+
+    // Mostrar el objeto en el DOM
+    const artesaniaId = artesaniaenviada.artesania.id;
+
+    enviarIndicadores(artesaniaenviada.artesania);
+    infoProductoById(artesaniaId);
+    obtenerComentarios(artesaniaId);
+    agregarComentario(artesaniaId);
+    setearPuntuacion(artesaniaId);
+    enviarCalificacion(artesaniaId);
+
+    $("#btnagregarcarrito").attr(
+      "href",
+      `carrito-de-compra.html?producto=${artesaniaenviada.artesania.url_carrito}`
+    );
+    //guardarArtesania(artesaniaenviada.artesania.id);
+  } else {
+    console.log("Ningun Objeto recibido");
+  }
+  // generarInterfaz();
 }
 
-function obtenerUrlProducto () {
-    const queryString = window.location.search;
-
-    // Parsear la cadena de consulta para obtener los parámetros
-    const urlParams = new URLSearchParams(queryString);
-
-    // Obtener el valor del parámetro 'data'
-    const data = urlParams.get('producto');
-
-
-    // Decodificar y convertir el objeto JSON nuevamente
-    if (data) {
-        const artesaniaenviada = JSON.parse(data);
-        console.log({ artesaniaenviada });
-
-        // Mostrar el objeto en el DOM
-        const artesaniaId = artesaniaenviada.artesania.id;
-
-        enviarIndicadores(artesaniaenviada.artesania);
-        infoProductoById(artesaniaId)
-        obtenerComentarios(artesaniaId)
-        agregarComentario(artesaniaId)
-        setearPuntuacion(artesaniaId)
-        enviarCalificacion(artesaniaId)
-
-        $('#btnagregarcarrito').attr('href', `carrito-de-compra.html?producto=${artesaniaenviada.artesania.url_carrito}`)
-        //guardarArtesania(artesaniaenviada.artesania.id);
-
-
-    } else {
-        console.log('Ningun Objeto recibido')
-    }
-    // generarInterfaz();
+function getQueryParameter(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
 }
 
-function getQueryParameter (name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
+async function infoProductoById(id) {
+  const producto = await obtenerProducto(id);
+  mostrarInformacion(producto);
 }
 
-async function infoProductoById (id) {
-
-    const producto = await obtenerProducto(id);
-    mostrarInformacion(producto);
+function transformarMaterialesResponseToArray(materiales) {
+  return materiales.split("\n");
+}
+function transformarImagenesSecResponseToArray(imagenes) {
+  // 1er parseo
+  const innerString = JSON.parse(imagenes);
+  // 2do parseo
+  const parsedResponse = JSON.parse(innerString);
+  //map para obtener src
+  const srcArray = parsedResponse.map((item) => item.src);
+  return srcArray;
 }
 
-function transformarMaterialesResponseToArray (materiales) {
-    return materiales.split('\n');
-}
-function transformarImagenesSecResponseToArray (imagenes) {
-    // 1er parseo
-    const innerString = JSON.parse(imagenes);
-    // 2do parseo
-    const parsedResponse = JSON.parse(innerString);
-    //map para obtener src
-    const srcArray = parsedResponse.map(item => item.src);
-    return srcArray;
-
-}
-
-function showMaterials (materiales) {
-    //materiales
-    if (materiales.length > 0) {
-        for (let material of materiales) {
-            $("#producto-materiales").append(`
+function showMaterials(materiales) {
+  //materiales
+  if (materiales.length > 0) {
+    for (let material of materiales) {
+      $("#producto-materiales").append(`
                 <ul>
                 <li><i class="fa fa-check-square"></i><span>${material}</span></li>
                 </ul>
-            `)
-        }
+            `);
     }
-    else {
-        console.log('no hay materiales')
-    }
+  } else {
+    console.log("no hay materiales");
+  }
 }
 
-function showVideos (listaVideos) {
-    //materiales
-    if (listaVideos.length > 0) {
-        for (let material of materiales) {
-            $("#producto-materiales").append(`
+function showVideos(listaVideos) {
+  //materiales
+  if (listaVideos.length > 0) {
+    for (let material of materiales) {
+      $("#producto-materiales").append(`
                 <ul>
                 <li><i class="fa fa-check-square"></i><span>${material}</span></li>
                 </ul>
-            `)
-        }
+            `);
     }
-    else {
-        console.log('no hay materiales')
-    }
+  } else {
+    console.log("no hay materiales");
+  }
 }
 
-function showProductSlider (imagenesSecundarias, imagenPrincial) {
+function showProductSlider(imagenesSecundarias, imagenPrincial) {
+  let imagenes = [imagenPrincial, ...imagenesSecundarias];
+  let sp_slides = ``;
+  let sp_thumbnails = ``;
 
-    let imagenes = [imagenPrincial, ...imagenesSecundarias]
-    let sp_slides = ``
-    let sp_thumbnails = ``
-
-    for (let imagen of imagenes) {
-        sp_slides += `
+  for (let imagen of imagenes) {
+    sp_slides += `
         <div class="sp-slide ">
         <a href="${imagen}" data-fancybox="gallery">
 									<img class="sp-image" src="${imagen}" alt="" onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/200x220.png?text=En proceso de carga';"/>
                                 </a>
 								</div>
-        `
-        sp_thumbnails += `  <a href="${imagen}" data-fancybox="gallery"> <img style="heigth:120;width:180px" class="sp-thumbnail" src="${imagen}" alt="" onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/100x100.png?text=En proceso de carga';" /> </a>`
-    }
+        `;
+    sp_thumbnails += `  <a href="${imagen}" data-fancybox="gallery"> <img style="heigth:120;width:180px" class="sp-thumbnail" src="${imagen}" alt="" onerror="this.src='https://placehold.jp/DEDEDEE/EEEEEE/100x100.png?text=En proceso de carga';" /> </a>`;
+  }
 
-    $('#id-sp-slides').html('');
-    $('#id-sp-thumbnails').html('');
-    $('#id-sp-slides').append(sp_slides);
-    $('#id-sp-thumbnails').append(sp_thumbnails);
+  $("#id-sp-slides").html("");
+  $("#id-sp-thumbnails").html("");
+  $("#id-sp-slides").append(sp_slides);
+  $("#id-sp-thumbnails").append(sp_thumbnails);
 
-    $('#single-car').sliderPro({
-        width: 570,
-        height: 450,
-        fade: true,
-        arrows: true,
-        buttons: false,
-        fullScreen: true,
-        shuffle: true,
-        smallSize: 500,
-        mediumSize: 1000,
-        largeSize: 3000,
-        thumbnailArrows: true,
-        autoplay: false
-    });
+  $("#single-car").sliderPro({
+    width: 570,
+    height: 450,
+    fade: true,
+    arrows: true,
+    buttons: false,
+    fullScreen: true,
+    shuffle: true,
+    smallSize: 500,
+    mediumSize: 1000,
+    largeSize: 3000,
+    thumbnailArrows: true,
+    autoplay: false,
+  });
 
-    console.log('imagenesSecundarias', imagenesSecundarias)
-
+  console.log("imagenesSecundarias", imagenesSecundarias);
 }
-
 
 // Función para generar el HTML de los cuadritos de color
-function generarHtmlColores (colores) {
-    if (colores.length == 0) {
-        return '<span>-</span>';
-    }
-    let html = '';
-    colores.forEach(item => {
-        html += `<div class="cuadro-color" style="background-color: ${item.color.trim()}"></div>`;
-    });
-    return html;
+function generarHtmlColores(colores) {
+  if (colores.length == 0) {
+    return "<span>-</span>";
+  }
+  let html = "";
+  colores.forEach((item) => {
+    html += `<div class="cuadro-color" style="background-color: ${item.color.trim()}"></div>`;
+  });
+  return html;
 }
 //Gestionar las tallas
-function convertirTallasEnString (lista) {
-    // Filtrar elementos con talla no nula ni vacía y extraer solo las tallas
-    const tallas = lista
-        .filter(item => item.talla !== null && item.talla !== '')
-        .map(item => item.talla);
+function convertirTallasEnString(lista) {
+  // Filtrar elementos con talla no nula ni vacía y extraer solo las tallas
+  const tallas = lista
+    .filter((item) => item.talla !== null && item.talla !== "")
+    .map((item) => item.talla);
 
-    // Si no hay tallas válidas, devolver "ninguno"
-    if (tallas.length === 0) {
-        return "Ninguno";
+  // Si no hay tallas válidas, devolver "ninguno"
+  if (tallas.length === 0) {
+    return "Ninguno";
+  }
+
+  // Unir las tallas en un solo string separado por comas
+  return tallas.join(", ");
+}
+
+async function mostrarInformacion(producto) {
+  const listColores = JSON.parse(JSON.parse(producto.lst_colores));
+  const lst_ofertas = producto.lst_ofertas;
+  const lst_otros_costos = JSON.parse(JSON.parse(producto.lst_otros_costos));
+  const lst_tallas = JSON.parse(JSON.parse(producto.lst_talla));
+  const lst_videoenlace = JSON.parse(JSON.parse(producto.lst_videoenlace));
+  const lst_videos = JSON.parse(JSON.parse(producto.lst_videos));
+
+  const colores = generarHtmlColores(listColores);
+  const materiales = transformarMaterialesResponseToArray(
+    producto.materiales_es
+  );
+  const imagenesSecundarias = transformarImagenesSecResponseToArray(
+    producto.lst_imagenes
+  );
+  console.log("imagenPrincipal", producto.imagen_principal);
+
+  $("#producto-nombre").text(`${producto.nombres_es}`);
+  if (producto.lst_ofertas.length > 0) {
+    $("#oferta").show();
+    $("#producto-precio-antiguo").text(
+      ` ${formatearNumero(producto.precio)} PEN ($ ${formatearNumero(
+        producto.precio_usd
+      )} USD ) `
+    );
+    $("#oferta").text(
+      `${formatearNumero(producto.lst_ofertas[0].porcentajeDescuento)}%  DSCTO `
+    );
+    $("#producto-precio-despues-de-oferta").text(
+      ` ${formatearNumero(
+        producto.lst_ofertas[0].precioOfertado
+      )} PEN ($ ${formatearNumero(
+        (producto.precio_usd / producto.precio) *
+          producto.lst_ofertas[0].precioOfertado
+      )} USD )`
+    );
+  } else {
+    $("#oferta").hide();
+    $("#producto-precio").text(
+      ` ${formatearNumero(producto.precio)} PEN ( $ ${formatearNumero(
+        producto.precio_usd
+      )} USD )`
+    );
+  }
+  $("#producto-descripcion").text(`${producto.descripcion_es}`);
+  $("#producto-alto").text(`Alto: ${producto.alto} cm`);
+  $("#producto-ancho").text(`Ancho:${producto.ancho} cm`);
+  $("#producto-tallas").text(`Tallas: ${convertirTallasEnString(lst_tallas)} `);
+
+  $("#contenedor-colores").append(colores);
+  $("#producto-color").text(`${colores == "" ? "No disponible" : colores}`);
+  $("#producto-peso").text(`Peso: ${producto.peso}`);
+  $("#producto-cantidad").text(`Cant. disponible: ${producto.cantidad}`);
+  $("#producto-cualidades").text(`${producto.cualidades_es}`);
+  $("#artesano-celular").text(`${producto.datos_artesano.celular}`);
+  $("#artesano-correo").text(`${producto.datos_artesano.correo}`);
+  $("#artesano-informacion").text(
+    `${producto.datos_artesano.nombres} ${producto.datos_artesano.apellidos} `
+  );
+  $("#artesano-informacion").attr(
+    "href",
+    `artesano.html?id=${producto.artesano_id}`
+  );
+  $("#artesano-img").attr("src", `${producto.datos_artesano.foto1}`);
+
+  $("#producto-tecnicas").text(`${producto.tecnicas_es}`);
+  $("#producto-cualidades_es").text(`${producto.cualidades_es}`);
+  $("#producto-numero_piezas_es").text(`${producto.numero_piezas_es}`);
+
+  $("#producto-preventas").text(
+    `${producto.preventas == 0 || "0" ? "Sujeta a Stock" : "En preventa"}`
+  );
+  $("#producto-tiempo_elaboracion").text(
+    `${
+      producto.tiempo_elaboracion == 0 || "0"
+        ? "Acuerdo con el artesano"
+        : producto.tiempo_elaboracion + " Días"
+    }`
+  );
+  $("#producto-tiempo_envio").text(
+    `${
+      producto.tiempo_envio == 0 || "0"
+        ? "Acuerdo con el artesano"
+        : producto.tiempo_envio + " Días"
+    }`
+  );
+
+  loadProductosDestacados(producto.productosRelacionados);
+
+  showMaterials(materiales);
+  showProductSlider(imagenesSecundarias, producto.imagen_principal);
+  //showVideos(lst_videoenlace);
+
+  // const lstVideos = lst_videos.length > 0 ? lst_videos : lst_videoenlace;
+  // console.log({ lst_videos, lst_videoenlace });
+  const scrVideo = lst_videos.length > 0 ? lst_videos[0].src : "";
+
+  const scrVideoYoutube = lst_videoenlace[0]
+    ? lst_videoenlace[0].src
+    : undefined;
+  console.log({ scrVideoYoutube });
+
+  const videoContainer = document.getElementById("video-container");
+
+  if (scrVideoYoutube) {
+    videoContainer.innerHTML = `
+    <iframe
+      width="560"
+      height="315"
+      src="${getYoutubeEmbedUrl(scrVideoYoutube)}"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>;`;
+  } else {
+    videoContainer.innerHTML = `
+    <div
+      id="no-video-message"
+      class="d-flex align-items-center justify-content-center h-100"
+      style="
+              background-color: #f8f9fa;
+              border: 1px dashed #dee2e6;
+            "
+    >
+      <div class="text-center">
+        <i
+          class="fas fa-video-slash mb-2"
+          style="font-size: 2em; color: #6c757d"
+        ></i>
+        <p class="text-muted">No hay video disponible para este producto</p>
+      </div>
+    </div>`;
+  }
+}
+
+function getYoutubeEmbedUrl(url) {
+  // Handle different YouTube URL formats
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+
+  if (match && match[2].length === 11) {
+    return `https://www.youtube.com/embed/${match[2]}`;
+  }
+
+  return url; // Return original if not matching YouTube format
+}
+
+function createSlidersProd() {
+  $("#single-car").sliderPro({
+    width: 570,
+    height: 450,
+    fade: true,
+    arrows: true,
+    buttons: false,
+    fullScreen: true,
+    shuffle: true,
+    smallSize: 500,
+    mediumSize: 1000,
+    largeSize: 3000,
+    thumbnailArrows: true,
+    autoplay: false,
+  });
+}
+
+function createMenuMobil() {
+  $("#cssmenu").menumaker({
+    title: "Menu",
+    format: "multitoggle",
+  });
+}
+
+function generarURL() {
+  const formulario = $("#miFormulario");
+  const formData = new FormData(formulario[0]);
+  const params = new URLSearchParams();
+
+  formData.forEach((value, key) => {
+    if (value) {
+      // Solo agregar a la URL si el valor no está vacío
+      params.append(key, value);
     }
+  });
 
-    // Unir las tallas en un solo string separado por comas
-    return tallas.join(", ");
-}
+  // Redirige a la misma página con los nuevos parámetros en la URL
+  window.location.href = "?" + params.toString();
 
-
-async function mostrarInformacion (producto) {
-
-    const listColores = JSON.parse(JSON.parse(producto.lst_colores));
-    const lst_ofertas = producto.lst_ofertas;
-    const lst_otros_costos = JSON.parse(JSON.parse(producto.lst_otros_costos));
-    const lst_tallas = JSON.parse(JSON.parse(producto.lst_talla));
-    const lst_videoenlace = JSON.parse(JSON.parse(producto.lst_videoenlace));
-    const lst_videos = JSON.parse(JSON.parse(producto.lst_videos));
-
-    const colores = generarHtmlColores(listColores)
-    const materiales = transformarMaterialesResponseToArray(producto.materiales_es)
-    const imagenesSecundarias = transformarImagenesSecResponseToArray(producto.lst_imagenes)
-    console.log('imagenPrincipal', producto.imagen_principal)
-
-    $("#producto-nombre").text(`${producto.nombres_es}`);
-    if (producto.lst_ofertas.length > 0) {
-        $('#oferta').show();
-        $("#producto-precio-antiguo").text(` ${formatearNumero(producto.precio)} PEN ($ ${formatearNumero(producto.precio_usd)} USD ) `);
-        $("#oferta").text(`${formatearNumero(producto.lst_ofertas[0].porcentajeDescuento)}%  DSCTO `);
-        $("#producto-precio-despues-de-oferta").text(` ${formatearNumero(producto.lst_ofertas[0].precioOfertado)} PEN ($ ${formatearNumero((producto.precio_usd / producto.precio) * producto.lst_ofertas[0].precioOfertado)} USD )`);
-    } else {
-        $('#oferta').hide();
-        $("#producto-precio").text(` ${formatearNumero(producto.precio)} PEN ( $ ${formatearNumero(producto.precio_usd)} USD )`);
-
-    }
-    $("#producto-descripcion").text(`${producto.descripcion_es}`);
-    $("#producto-alto").text(`Alto: ${producto.alto} cm`);
-    $("#producto-ancho").text(`Ancho:${producto.ancho} cm`);
-    $("#producto-tallas").text(`Tallas: ${convertirTallasEnString(lst_tallas)} `);
-
-    $('#contenedor-colores').append(colores);
-    $("#producto-color").text(`${colores == "" ? 'No disponible' : colores}`);
-    $("#producto-peso").text(`Peso: ${producto.peso}`);
-    $("#producto-cantidad").text(`Cant. disponible: ${producto.cantidad}`);
-    $("#producto-cualidades").text(`${producto.cualidades_es}`);
-    $("#artesano-celular").text(`${producto.datos_artesano.celular}`);
-    $("#artesano-correo").text(`${producto.datos_artesano.correo}`);
-    $("#artesano-informacion").text(`${producto.datos_artesano.nombres} ${producto.datos_artesano.apellidos} `);
-    $("#artesano-informacion").attr("href", `artesano.html?id=${producto.artesano_id}`);
-    $("#artesano-img").attr("src", `${producto.datos_artesano.foto1}`);
-
-    $("#producto-tecnicas").text(`${producto.tecnicas_es}`);
-    $("#producto-cualidades_es").text(`${producto.cualidades_es}`);
-    $("#producto-numero_piezas_es").text(`${producto.numero_piezas_es}`);
-
-    $("#producto-preventas").text(`${producto.preventas == 0 || '0' ? 'Sujeta a Stock' : 'En preventa'}`);
-    $("#producto-tiempo_elaboracion").text(`${producto.tiempo_elaboracion == 0 || '0' ? 'Acuerdo con el artesano' : producto.tiempo_elaboracion + ' Días'}`);
-    $("#producto-tiempo_envio").text(`${producto.tiempo_envio == 0 || '0' ? 'Acuerdo con el artesano' : producto.tiempo_envio + ' Días'}`);
-
-
-    loadProductosDestacados(producto.productosRelacionados)
-
-    showMaterials(materiales);
-    showProductSlider(imagenesSecundarias, producto.imagen_principal);
-    //showVideos(lst_videoenlace);
-
-    // const lstVideos = lst_videos.length > 0 ? lst_videos : lst_videoenlace;
-    // console.log({ lst_videos, lst_videoenlace });
-    const scrVideo = lst_videos.length > 0 ? lst_videos[0].src : '';
-
-    $('#videoproducto').attr('src', scrVideo)
-
-}
-
-function createSlidersProd () {
-    $('#single-car').sliderPro({
-        width: 570,
-        height: 450,
-        fade: true,
-        arrows: true,
-        buttons: false,
-        fullScreen: true,
-        shuffle: true,
-        smallSize: 500,
-        mediumSize: 1000,
-        largeSize: 3000,
-        thumbnailArrows: true,
-        autoplay: false
-    });
-
-}
-
-function createMenuMobil () {
-
-    $("#cssmenu").menumaker({
-        title: "Menu",
-        format: "multitoggle"
-    });
-}
-
-function generarURL () {
-
-    const formulario = $('#miFormulario');
-    const formData = new FormData(formulario[0]);
-    const params = new URLSearchParams();
-
-    formData.forEach((value, key) => {
-        if (value) {  // Solo agregar a la URL si el valor no está vacío
-            params.append(key, value);
-        }
-    });
-
-    // Redirige a la misma página con los nuevos parámetros en la URL
-    window.location.href = '?' + params.toString();
-
-    // Previene el submit tradicional
-    return false;
+  // Previene el submit tradicional
+  return false;
 }
 
 // Asigna la función generarURL al evento submit del formulario
-$('#miFormulario').submit(generarURL);
+$("#miFormulario").submit(generarURL);
 
 // Rellena el formulario con los valores de la URL
-function rellenarFormulario () {
-
-    setTimeout(function () {
-        const params = new URLSearchParams(window.location.search);
-
-        params.forEach((value, key) => {
-            const campo = $(`[name=${key}]`);
-
-            if (campo.is('input') || campo.is('select')) {
-                campo.val(value);
-            }
-        });
-    }, 1000)
-
-
-}
-
-// Rellena el formulario con los valores de la URL
-async function realizarBusqueda () {
-
-
+function rellenarFormulario() {
+  setTimeout(function () {
     const params = new URLSearchParams(window.location.search);
 
-    let busqueda = await busquedaProductos(params)
+    params.forEach((value, key) => {
+      const campo = $(`[name=${key}]`);
 
-    loadProductos(busqueda)
-
-
-}
-
-function formatearNumero (numero) {
-    // Convierte el valor a un número si es una cadena
-    let numeroConvertido = parseFloat(numero);
-
-    // Verifica que la conversión fue exitosa
-    if (isNaN(numeroConvertido)) {
-        return numero;
-    }
-
-    return numeroConvertido.toLocaleString('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
+      if (campo.is("input") || campo.is("select")) {
+        campo.val(value);
+      }
     });
+  }, 1000);
 }
 
-function loadProductos (data) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const page = parseInt(urlParams.get('page')) || 1;
-    const itemsPerPage = 10;
-    const totalRows = data.total_filas;
-    const displayedItems = Math.min(page * itemsPerPage, totalRows);
+// Rellena el formulario con los valores de la URL
+async function realizarBusqueda() {
+  const params = new URLSearchParams(window.location.search);
 
-    $('#lblTotales').text(`Resultados: ${displayedItems} de ${totalRows}`);
+  let busqueda = await busquedaProductos(params);
 
-    let htmlPagination = generatePaginationHTML(data.paginas_totales)
-    $('#paginationContainer').append(htmlPagination);
+  loadProductos(busqueda);
+}
 
-    let html = ` `
+function formatearNumero(numero) {
+  // Convierte el valor a un número si es una cadena
+  let numeroConvertido = parseFloat(numero);
 
-    for (let item of data.datos) {
-        //alert(item.imagen)
-        html = html + `
+  // Verifica que la conversión fue exitosa
+  if (isNaN(numeroConvertido)) {
+    return numero;
+  }
+
+  return numeroConvertido.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+function loadProductos(data) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const page = parseInt(urlParams.get("page")) || 1;
+  const itemsPerPage = 10;
+  const totalRows = data.total_filas;
+  const displayedItems = Math.min(page * itemsPerPage, totalRows);
+
+  $("#lblTotales").text(`Resultados: ${displayedItems} de ${totalRows}`);
+
+  let htmlPagination = generatePaginationHTML(data.paginas_totales);
+  $("#paginationContainer").append(htmlPagination);
+
+  let html = ` `;
+
+  for (let item of data.datos) {
+    //alert(item.imagen)
+    html =
+      html +
+      `
             <div class="col-md-6 col-sm-6">
                 <div class="car-item wow fadeIn" data-wow-duration="0.75s">
                     <div class="thumb-content">
@@ -610,22 +687,41 @@ function loadProductos (data) {
                             
                         </div>
                         <div class="thumb-inner photo-prod">
-                            <a href="producto.html?id=${item.id}"><img style="height:250px" src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" alt=""></a>
+                            <a href="producto.html?id=${
+                              item.id
+                            }"><img style="height:250px" src="${
+        item?.imagen_principal || "https://via.placeholder.com/400x200"
+      }" alt=""></a>
                         </div>
                     </div>
                     <div class="down-content">
-                        <a href="producto.html?id=${item.id}" style="color:#000">
-                            <h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item?.nombres_es || ""}</h5>
+                        <a href="producto.html?id=${
+                          item.id
+                        }" style="color:#000">
+                            <h5 title="${
+                              item?.nombres_es || ""
+                            }" class="card-title font-weight-bold product-description">${
+        item?.nombres_es || ""
+      }</h5>
                         </a>
 
-                        <p class="h4 text-danger font-weight-bold">${formatearNumero(item?.precio) || ""} PEN </p>
-                        <p class="card-text text-muted">Categoría: ${item?.categoria}</p>
+                        <p class="h4 text-danger font-weight-bold">${
+                          formatearNumero(item?.precio) || ""
+                        } PEN </p>
+                        <p class="card-text text-muted">Categoría: ${
+                          item?.categoria
+                        }</p>
                         <div class="d-flex align-items-center mt-3" title="Artesano">
                             <img class="rounded-circle mr-2"
-                                src="${item?.foto1 || "https://via.placeholder.com/40"}"
+                                src="${
+                                  item?.foto1 ||
+                                  "https://via.placeholder.com/40"
+                                }"
                                 alt="Jose Mendoza" style="width: 40px; height: 40px;">
                             <span class="text-dark">
-                                <a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a>
+                                <a style: "color:#dedede!important" href="artesano.html?id=${
+                                  item?.artesano_id
+                                }"> ${item?.artesano || ""}</a>
                             </span>
                             
                             <div class="line-dec2"></div>
@@ -633,8 +729,12 @@ function loadProductos (data) {
 
                         <div class="d-flex mt-4">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-light"><a class="" href="producto.html?id=${item.id}">Ver más</a></button>
-                                <button type="button" class="btn btn-light btn-comprar" producto_id="${item.id}">
+                                <button type="button" class="btn btn-light"><a class="" href="producto.html?id=${
+                                  item.id
+                                }">Ver más</a></button>
+                                <button type="button" class="btn btn-light btn-comprar" producto_id="${
+                                  item.id
+                                }">
                                     <svg
                                         width="15" height="15" viewBox="0 0 15 15" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -644,7 +744,9 @@ function loadProductos (data) {
                                     </svg>
                                     Comprar
                                 </button>
-                                <button type="button" class="btn btn-light btn-favoritos" producto_id="${item.id}">
+                                <button type="button" class="btn btn-light btn-favoritos" producto_id="${
+                                  item.id
+                                }">
                                     <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -659,182 +761,194 @@ function loadProductos (data) {
                     </div>
                 </div>
             </div>
-        `
-    }
+        `;
+  }
 
-    $('#listaProductosNovedades').append(html)
+  $("#listaProductosNovedades").append(html);
 }
 
-function generatePaginationHTML (totalPages) {
+function generatePaginationHTML(totalPages) {
+  const maxVisiblePages = 5; // Máximo número de páginas visibles en la paginación
 
+  // Obtener el parámetro `page` de la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentPage = parseInt(urlParams.get("page")) || 1;
 
-    const maxVisiblePages = 5; // Máximo número de páginas visibles en la paginación
+  let paginationHTML =
+    '<div class="page-numbers"><div class="pagination-content"><ul>';
 
-    // Obtener el parámetro `page` de la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const currentPage = parseInt(urlParams.get('page')) || 1;
+  // Botón "Primero"
+  if (currentPage > 1) {
+    paginationHTML += `<li><a href="#" onclick="goToPage(1)">Primero</a></li>`;
+  }
 
-    let paginationHTML = '<div class="page-numbers"><div class="pagination-content"><ul>';
+  // Botón "Anterior"
+  if (currentPage > 1) {
+    paginationHTML += `<li><a href="#" onclick="goToPage(${
+      currentPage - 1
+    })">Anterior</a></li>`;
+  }
 
-    // Botón "Primero"
-    if (currentPage > 1) {
-        paginationHTML += `<li><a href="#" onclick="goToPage(1)">Primero</a></li>`;
+  if (totalPages <= maxVisiblePages) {
+    // Mostrar todas las páginas si el total de páginas es menor o igual al máximo visible
+    for (let i = 1; i <= totalPages; i++) {
+      paginationHTML += generatePageItem(i, currentPage);
+    }
+  } else {
+    // Mostrar la primera página
+    paginationHTML += generatePageItem(1, currentPage);
+
+    if (currentPage > Math.ceil(maxVisiblePages / 2) + 1) {
+      paginationHTML += "<li><span>...</span></li>";
     }
 
-    // Botón "Anterior"
-    if (currentPage > 1) {
-        paginationHTML += `<li><a href="#" onclick="goToPage(${currentPage - 1})">Anterior</a></li>`;
+    // Calcular el rango de páginas a mostrar
+    const startPage = Math.max(
+      2,
+      currentPage - Math.floor(maxVisiblePages / 2)
+    );
+    const endPage = Math.min(
+      totalPages - 1,
+      currentPage + Math.floor(maxVisiblePages / 2)
+    );
+
+    for (let i = startPage; i <= endPage; i++) {
+      paginationHTML += generatePageItem(i, currentPage);
     }
 
-    if (totalPages <= maxVisiblePages) {
-        // Mostrar todas las páginas si el total de páginas es menor o igual al máximo visible
-        for (let i = 1; i <= totalPages; i++) {
-            paginationHTML += generatePageItem(i, currentPage);
-        }
-    } else {
-        // Mostrar la primera página
-        paginationHTML += generatePageItem(1, currentPage);
-
-        if (currentPage > Math.ceil(maxVisiblePages / 2) + 1) {
-            paginationHTML += '<li><span>...</span></li>';
-        }
-
-        // Calcular el rango de páginas a mostrar
-        const startPage = Math.max(2, currentPage - Math.floor(maxVisiblePages / 2));
-        const endPage = Math.min(totalPages - 1, currentPage + Math.floor(maxVisiblePages / 2));
-
-        for (let i = startPage; i <= endPage; i++) {
-            paginationHTML += generatePageItem(i, currentPage);
-        }
-
-        if (currentPage < totalPages - Math.floor(maxVisiblePages / 2)) {
-            paginationHTML += '<li><span>...</span></li>';
-        }
-
-        // Mostrar la última página
-        paginationHTML += generatePageItem(totalPages, currentPage);
+    if (currentPage < totalPages - Math.floor(maxVisiblePages / 2)) {
+      paginationHTML += "<li><span>...</span></li>";
     }
 
-    // Botón "Siguiente"
-    if (currentPage < totalPages) {
-        paginationHTML += `<li><a href="#" onclick="goToPage(${currentPage + 1})">Siguiente</a></li>`;
-    }
+    // Mostrar la última página
+    paginationHTML += generatePageItem(totalPages, currentPage);
+  }
 
-    // Botón "Último"
-    if (currentPage < totalPages) {
-        paginationHTML += `<li><a href="#" onclick="goToPage(${totalPages})">Último</a></li>`;
-    }
+  // Botón "Siguiente"
+  if (currentPage < totalPages) {
+    paginationHTML += `<li><a href="#" onclick="goToPage(${
+      currentPage + 1
+    })">Siguiente</a></li>`;
+  }
 
-    paginationHTML += '</ul></div></div>';
-    return paginationHTML;
+  // Botón "Último"
+  if (currentPage < totalPages) {
+    paginationHTML += `<li><a href="#" onclick="goToPage(${totalPages})">Último</a></li>`;
+  }
 
+  paginationHTML += "</ul></div></div>";
+  return paginationHTML;
 }
 
-function generatePageItem (pageNumber, currentPage) {
-    if (pageNumber === currentPage) {
-        return `<li class="active"><a href="#" onclick="goToPage(${pageNumber})">${pageNumber}</a></li>`;
-    } else {
-        return `<li><a href="#" onclick="goToPage(${pageNumber})">${pageNumber}</a></li>`;
-    }
+function generatePageItem(pageNumber, currentPage) {
+  if (pageNumber === currentPage) {
+    return `<li class="active"><a href="#" onclick="goToPage(${pageNumber})">${pageNumber}</a></li>`;
+  } else {
+    return `<li><a href="#" onclick="goToPage(${pageNumber})">${pageNumber}</a></li>`;
+  }
 }
 
-function goToPage (pageNumber) {
-    let url = new URL(window.location.href);
-    url.searchParams.set('page', pageNumber);
-    window.location.href = url.href;
+function goToPage(pageNumber) {
+  let url = new URL(window.location.href);
+  url.searchParams.set("page", pageNumber);
+  window.location.href = url.href;
 }
-window.goToPage = goToPage
+window.goToPage = goToPage;
 // Llamar a la función para rellenar el formulario al cargar la página
 
-
-async function cargarDataPortada () {
-
-    let resultado = await getPortadaBusqueda()
-    cargarComboCategorias(resultado.listCategorias)
-    cargarComboAertesanos(resultado.listArtesanos)
+async function cargarDataPortada() {
+  let resultado = await getPortadaBusqueda();
+  cargarComboCategorias(resultado.listCategorias);
+  cargarComboAertesanos(resultado.listArtesanos);
 }
 
-function cargarComboCategorias (list) {
-
-    let html = `
+function cargarComboCategorias(list) {
+  let html = `
 <option value="">- TODOS -</option>
     `;
 
-    for (let item of list) {
-        // Escapar los valores para evitar problemas de seguridad
-        const idEscaped = $('<div>').text(item.id).html();
-        const categoriaEscaped = $('<div>').text(item.categoria).html();
+  for (let item of list) {
+    // Escapar los valores para evitar problemas de seguridad
+    const idEscaped = $("<div>").text(item.id).html();
+    const categoriaEscaped = $("<div>").text(item.categoria).html();
 
-        html += `<option value="${idEscaped}">${categoriaEscaped}</option>\n`;
-    }
+    html += `<option value="${idEscaped}">${categoriaEscaped}</option>\n`;
+  }
 
-    // Reemplazar el contenido de #categorias con el nuevo HTML
-    $('#id_categoria').html(html);
-
+  // Reemplazar el contenido de #categorias con el nuevo HTML
+  $("#id_categoria").html(html);
 }
 
-function cargarComboAertesanos (list) {
-    let html = `
+function cargarComboAertesanos(list) {
+  let html = `
 <option value="">- TODOS -</option>
     `;
 
-    for (let item of list) {
-        // Escapar los valores para evitar problemas de seguridad
-        const idEscaped = $('<div>').text(item.id).html();
-        const categoriaEscaped = $('<div>').text(item.artesano).html();
+  for (let item of list) {
+    // Escapar los valores para evitar problemas de seguridad
+    const idEscaped = $("<div>").text(item.id).html();
+    const categoriaEscaped = $("<div>").text(item.artesano).html();
 
-        html += `<option value="${idEscaped}">${categoriaEscaped}</option>\n`;
-    }
+    html += `<option value="${idEscaped}">${categoriaEscaped}</option>\n`;
+  }
 
-    // Reemplazar el contenido de #categorias con el nuevo HTML
-    $('#id_artesano').html(html);
+  // Reemplazar el contenido de #categorias con el nuevo HTML
+  $("#id_artesano").html(html);
 }
 
+function loadProductosDestacados(data) {
+  let html = ` `;
+  for (let item of data) {
+    const artesanoNombres = item.datos_artesano
+      ? item.datos_artesano.nombres
+      : "";
+    const artesanoApellidos = item.datos_artesano
+      ? item.datos_artesano.apellidos
+      : "";
 
+    let artenia_anviar_carrito = {
+      artesano_id: item.artesano_id,
+      id: item.id,
+      categoria_id: item.categoria_id,
+      artesano: artesanoNombres + " " + artesanoApellidos,
+      datos: {
+        imagen_principal: item.imagen_principal,
+        descripcion_es: item.nombres_es,
+        cualidades_es: item.descripcion_es,
+        precio: parseFloat(item.precio),
+      },
+    };
 
-function loadProductosDestacados (data) {
+    let artenia_deseados = {
+      id: item.id + "-" + item.artesano_id,
+      artesania: {
+        id: item.id,
+        nombre_es: item.nombres_es,
+        precio: parseFloat(item.precio),
+        imagen_principal: item.imagen_principal,
+        url_carrito: encodeURIComponent(JSON.stringify(artenia_anviar_carrito)),
+      },
+      artesano: {
+        id: item.artesano_id,
+        nombres: artesanoNombres + " " + artesanoApellidos,
+        foto1: item.datos_artesano ? item.datos_artesano.foto1 : "",
+      },
+    };
 
-    let html = ` `
-    for (let item of data) {
-        const artesanoNombres = item.datos_artesano ? item.datos_artesano.nombres : '';
-        const artesanoApellidos = item.datos_artesano ? item.datos_artesano.apellidos : '';
-
-        let artenia_anviar_carrito = {
-            artesano_id: item.artesano_id,
-            id: item.id,
-            categoria_id: item.categoria_id,
-            artesano: artesanoNombres + ' ' + artesanoApellidos,
-            datos: {
-                imagen_principal: item.imagen_principal,
-                descripcion_es: item.nombres_es,
-                cualidades_es: item.descripcion_es,
-                precio: parseFloat(item.precio)
-            },
-        }
-
-        let artenia_deseados = {
-            id: item.id + '-' + item.artesano_id,
-            artesania: {
-                id: item.id,
-                nombre_es: item.nombres_es,
-                precio: parseFloat(item.precio),
-                imagen_principal: item.imagen_principal,
-                url_carrito: encodeURIComponent(JSON.stringify(artenia_anviar_carrito))
-            },
-            artesano: {
-                id: item.artesano_id,
-                nombres: artesanoNombres + ' ' + artesanoApellidos,
-                foto1: item.datos_artesano ? item.datos_artesano.foto1 : ''
-            }
-        }
-
-        //alert(item.imagen)
-        html = html + `
+    //alert(item.imagen)
+    html =
+      html +
+      `
             <div class="item wow fadeIn card " data-wow-duration="0.75s">
                 <div class="img-contenedor-destacados">
-                <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000">
+                <a href="producto.html?producto=${encodeURIComponent(
+                  JSON.stringify(artenia_deseados)
+                )}" style="color:#000">
                     <img class="img-destacados"
-                        src="${item?.imagen_principal || "https://via.placeholder.com/400x200"}" />
+                        src="${
+                          item?.imagen_principal ||
+                          "https://via.placeholder.com/400x200"
+                        }" />
                         </a>
                 </div>
                 
@@ -845,46 +959,58 @@ function loadProductosDestacados (data) {
                         <span class="badge badge-danger" style="color: #fff;">-15%</span>
                         <span class="text-muted"><s>S/. 1770.00</s></span>
                     </div> -->
-                    <a href="producto.html?producto=${encodeURIComponent(JSON.stringify(artenia_deseados))}" style="color:#000">
-                    <h5 title="${item?.nombres_es || ""}" class="card-title font-weight-bold product-description">${item.nombres_es || "-"}</h5>
+                    <a href="producto.html?producto=${encodeURIComponent(
+                      JSON.stringify(artenia_deseados)
+                    )}" style="color:#000">
+                    <h5 title="${
+                      item?.nombres_es || ""
+                    }" class="card-title font-weight-bold product-description">${
+        item.nombres_es || "-"
+      }</h5>
                     </a>
-                    <p class="h4 text-danger font-weight-bold">${formatearNumero(item?.precio) || ""} PEN</p>
-                    <p class="card-text text-muted">Categoría: ${item?.categoria_producto?.denominacion}</p>
+                    <p class="h4 text-danger font-weight-bold">${
+                      formatearNumero(item?.precio) || ""
+                    } PEN</p>
+                    <p class="card-text text-muted">Categoría: ${
+                      item?.categoria_producto?.denominacion
+                    }</p>
 
 
                     <div class="author-rate">
                         
-                        <h4><a style: "color:#dedede!important" href="artesano.html?id=${item?.artesano_id}"> ${item?.artesano || ""}</a></h4>
+                        <h4><a style: "color:#dedede!important" href="artesano.html?id=${
+                          item?.artesano_id
+                        }"> ${item?.artesano || ""}</a></h4>
                         <div class="line-dec2"></div>
                         
-                        <a href="carrito-de-compra.html?producto=${encodeURIComponent(JSON.stringify(artenia_anviar_carrito))}" title="Ir a carrito de compras">Comprar <i class="fa fa-shopping-cart"></i></a>
+                        <a href="carrito-de-compra.html?producto=${encodeURIComponent(
+                          JSON.stringify(artenia_anviar_carrito)
+                        )}" title="Ir a carrito de compras">Comprar <i class="fa fa-shopping-cart"></i></a>
                     </div>
                 </div>
             </div>
-        `
-    }
+        `;
+  }
 
-    $('#owl-testimonials').append(html)
+  $("#owl-testimonials").append(html);
 
-    $('#owl-testimonials').owlCarousel({
-        pagination: true,
-        paginationNumbers: false,
-        autoplay: true,
-        loop: true,
-        margin: 10,
-        nav: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 2
-            },
-            1000: {
-                items: 3
-            }
-        }
-    })
+  $("#owl-testimonials").owlCarousel({
+    pagination: true,
+    paginationNumbers: false,
+    autoplay: true,
+    loop: true,
+    margin: 10,
+    nav: true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      600: {
+        items: 2,
+      },
+      1000: {
+        items: 3,
+      },
+    },
+  });
 }
-
-
