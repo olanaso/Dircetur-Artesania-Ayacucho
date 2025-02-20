@@ -10,14 +10,17 @@
     </a>
 
     <!-- Barra de búsqueda -->
-    <div class="search-bar mx-auto d-none d-lg-block">
+    <div class="search-bar mx-auto">
       <input
         type="text"
         id="searchInput"
         placeholder="Búscar productos..."
         onkeydown="if (event.key === 'Enter') { window.location.href = 'busqueda.html?nombre_producto=' + encodeURIComponent(this.value); }"
       />
+
       <button
+        title="Buscar"
+        type="button"
         onclick="window.location.href = 'busqueda.html?nombre_producto=' + encodeURIComponent(document.getElementById('searchInput').value);"
       >
         <i class="fas fa-search"></i>
@@ -27,6 +30,8 @@
     <button
       class="navbar-toggler"
       type="button"
+      onclick="document.getElementById('seguimientoPedido').style.cssText = document.getElementById('seguimientoPedido').style.display === 'none' || !document.getElementById('seguimientoPedido').style.display ? 'display: block !important;' : 'display: none !important;'"
+      onclick=""
       data-toggle="collapse"
       data-target="#navbarNav"
       aria-controls="navbarNav"
@@ -210,6 +215,44 @@
       border-color: #f709f3;
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(247, 9, 243, 0.2);
+    }
+
+    @media (max-width: 992px) {
+      .btn-outline-artesania {
+        display: none !important;
+      }
+
+      .search-bar {
+        display: block;
+      }
+
+      .navbar {
+        justify-content: center !important;
+      }
+
+      .navbar-nav {
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar-brand {
+        display: none;
+      }
+
+      .search-bar {
+        margin-left: 0 !important;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .search-bar,
+      .twitter-typeahead,
+      #searchInput,
+      .tt-hint {
+        width: 200px !important;
+      }
     }
   </style>
 </div>
